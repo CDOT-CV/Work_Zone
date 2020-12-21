@@ -1,0 +1,9 @@
+language: python
+python:
+  - "3.6"
+addons:
+  sonarcloud:
+    organization: "cdot-cv"
+    token: ${SONAR_TOKEN}
+script:
+  - sonar-scanner
