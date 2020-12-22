@@ -28,7 +28,7 @@ This guide was written in Python 3.6 or higher version. If you haven’t already
 
 ### Execution
 
-#### Step 1: Run the WZDC script (from Work_Zone/translator/source code/ Folder)
+#### Step 1: Run the WZDX script (from Work_Zone/translator/source code/ Folder)
 
 ```
 python translator.py
