@@ -80,4 +80,103 @@ def wzdx_creator(messages, info):
 
     # Parse Icone Incident to WZDx
 
+    def parse_incident(incident):
+        feature = {}
+
+        feature['type'] = "Feature"
+        properties = {}
+
+        # road_event_id
+        #### Leave this empty, it will be populated by add_ids
+        properties['road_event_id'] = ''
+
+        # Event Type ['work-zone', 'detour']
+        properties['event_type'] = 'work-zone'
+
+        # data_source_id
+        #### Leave this empty, it will be populated by add_ids
+        properties['data_source_id'] = ''
+
+        # start_date
+        properties['start_date'] = incident['starttime']
+
+        # end_date
+        properties['end_date'] = ""
+
+        # start_date_accuracy
+        properties['start_date_accuracy'] = ""
+
+        # end_date_accuracy
+        properties['end_date_accuracy'] = ""
+
+        # beginning_accuracy
+        properties['beginning_accuracy'] = ""
+
+        # ending_accuracy
+        properties['ending_accuracy'] = ""
+
+        # road_name
+        properties['road_name'] = ""
+
+        # direction
+        properties['direction'] = ""
+
+        # vehicle impact
+        properties['vehicle_impact'] = ""
+
+        # Relationship
+        properties['relationship'] = {}
+
+        # lanes
+        properties['lanes'] = []
+
+        # road_name
+        properties['road_number'] = ""
+
+        # beginning_cross_street
+        properties['beginning_cross_street'] = ""
+
+        # beginning_cross_street
+        properties['ending_cross_street'] = ""
+
+        # beginning_milepost
+        properties['beginning_milepost'] = ""
+
+        # ending_milepost
+        properties['ending_milepost'] = ""
+
+        # event status
+        properties['event_status'] = ""
+
+        # event status
+        properties['total_num_lanes'] = 1
+
+        # type_of_work
+        # maintenance, minor-road-defect-repair, roadside-work, overhead-work, below-road-work, barrier-work, surface-work, painting, roadway-relocation, roadway-creation
+        properties['types_of_work'] = []
+
+        # reduced speed limit
+        properties['reduced_speed_limit'] = 25
+
+        # workers present
+        properties['workers_present'] = False
+
+        # restrictions
+        properties['restrictions'] = []
+
+        # description
+        properties['description'] = ""
+
+        # creation_date
+        properties['creation_date'] = ""
+
+        # update_date
+        properties['update_date'] = ""
+
+        feature = {}
+        feature['type'] = "Feature"
+        feature['properties'] = properties
+
+        return feature
+
 
