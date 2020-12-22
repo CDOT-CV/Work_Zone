@@ -8,7 +8,7 @@ import random
 import string
 
 
-# Translator
+# Translator for icone
 def wzdx_creator(messages, info):
     wzd = {}
     wzd['road_event_feed_info'] = {}
