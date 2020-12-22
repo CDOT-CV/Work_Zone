@@ -19,8 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9cca5f16-4c88-438e-8896-128d616bb4cd" name="Default Changelist" comment="Added Road_Event_Feed_Info according to WZDX_object_Diagram of USDOT">
-      <change beforePath="$PROJECT_DIR$/translator.py" beforeDir="false" afterPath="$PROJECT_DIR$/translator/source code/translator.py" afterDir="false" />
+    <list default="true" id="9cca5f16-4c88-438e-8896-128d616bb4cd" name="Default Changelist" comment="created a directory named &quot;translator&quot; and merged the translator.py file into the &quot;source code&quot; directory which is inside &quot;translator&quot; directory.">
+      <change afterPath="$PROJECT_DIR$/docs/icone data Schema" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +48,11 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/translator/source code" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -58,7 +64,7 @@
       <workItem from="1608590021649" duration="546000" />
       <workItem from="1608592839489" duration="144000" />
       <workItem from="1608596227216" duration="1626000" />
-      <workItem from="1608599168063" duration="767000" />
+      <workItem from="1608599168063" duration="1302000" />
     </task>
     <task id="LOCAL-00001" summary="python libraries function i am going to use for my translator">
       <created>1608596565291</created>
@@ -88,7 +94,21 @@
       <option name="project" value="LOCAL" />
       <updated>1608599772250</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="created a directory named &quot;translator&quot;  and merged the translator.py file into the &quot;source code&quot; directory which is inside &quot;translator directory&quot;">
+      <created>1608600243991</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1608600243991</updated>
+    </task>
+    <task id="LOCAL-00006" summary="created a directory named &quot;translator&quot; and merged the translator.py file into the &quot;source code&quot; directory which is inside &quot;translator&quot; directory.">
+      <created>1608600285642</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1608600285642</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -110,16 +130,22 @@
     <MESSAGE value="python libraries function i am going to use for my translator" />
     <MESSAGE value="translator program" />
     <MESSAGE value="Added Road_Event_Feed_Info according to WZDX_object_Diagram of USDOT" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Road_Event_Feed_Info according to WZDX_object_Diagram of USDOT" />
+    <MESSAGE value="created a directory named &quot;translator&quot;  and merged the translator.py file into the &quot;source code&quot; directory which is inside &quot;translator directory&quot;" />
+    <MESSAGE value="created a directory named &quot;translator&quot; and merged the translator.py file into the &quot;source code&quot; directory which is inside &quot;translator&quot; directory." />
+    <option name="LAST_COMMIT_MESSAGE" value="created a directory named &quot;translator&quot; and merged the translator.py file into the &quot;source code&quot; directory which is inside &quot;translator&quot; directory." />
   </component>
   <component name="WindowStateProjectService">
-    <state x="349" y="212" key="Vcs.Push.Dialog.v2" timestamp="1608599869910">
+    <state x="704" y="356" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1608600542156">
       <screen x="0" y="25" width="1680" height="940" />
     </state>
-    <state x="349" y="212" key="Vcs.Push.Dialog.v2/0.25.1680.940@0.25.1680.940" timestamp="1608599869910" />
-    <state x="551" y="393" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1608600082213">
+    <state x="704" y="356" key="#com.intellij.fileTypes.FileTypeChooser/0.25.1680.940@0.25.1680.940" timestamp="1608600542156" />
+    <state x="349" y="212" key="Vcs.Push.Dialog.v2" timestamp="1608600292950">
       <screen x="0" y="25" width="1680" height="940" />
     </state>
-    <state x="551" y="393" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.25.1680.940@0.25.1680.940" timestamp="1608600082213" />
+    <state x="349" y="212" key="Vcs.Push.Dialog.v2/0.25.1680.940@0.25.1680.940" timestamp="1608600292950" />
+    <state x="551" y="393" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1608600272212">
+      <screen x="0" y="25" width="1680" height="940" />
+    </state>
+    <state x="551" y="393" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.25.1680.940@0.25.1680.940" timestamp="1608600272212" />
   </component>
 </project>
