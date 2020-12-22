@@ -39,3 +39,13 @@ def wzdx_creator(messages, info):
     # data_source['lrs_url'] = "basic url"
 
     wzd['road_event_feed_info'] ['data_sources'] = [data_source]
+    wzd['type'] = 'FeatureCollection'
+    nodes = []
+    sub_identifier = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in
+                             range(6))  # Create random 6 character digit/letter string
+    road_event_id = str(uuid.uuid4())
+    ids = {}
+    ids['sub_identifier'] = sub_identifier
+    ids['road_event_id'] = road_event_id
+
+
