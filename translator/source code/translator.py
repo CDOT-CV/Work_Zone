@@ -62,4 +62,22 @@ def wzdx_creator(messages, info):
         # Parse Incident to WZDx Feature
         wzd['features'].append(parse_incident(incident))
 
+        wzd = add_ids(wzd, True)
+        return wzd
+
+    #################### Sample Incident Xml format from icone data####################
+    #   <incident id="U13631714_202012161717">
+    #     <creationtime>2020-12-16T17:17:00Z</creationtime>
+    #     <updatetime>2020-12-16T17:47:00Z</updatetime>
+    #     <type>CONSTRUCTION</type>
+    #     <description>Roadwork - Lane Closed, MERGE LEFT [iCone]</description>
+    #     <location>
+    #       <direction>ONE_DIRECTION</direction>
+    #       <polyline>28.8060608,-96.9916512,28.8060608,-96.9916512</polyline>
+    #     </location>
+    #     <starttime>2020-12-16T17:17:00Z</starttime>
+    #   </incident>
+
+    # Parse Icone Incident to WZDx
+
 
