@@ -20,7 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9cca5f16-4c88-438e-8896-128d616bb4cd" name="Default Changelist" comment="translator program">
-      <change afterPath="$PROJECT_DIR$/translator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/translator.py" beforeDir="false" afterPath="$PROJECT_DIR$/translator.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +58,7 @@
       <workItem from="1608590021649" duration="546000" />
       <workItem from="1608592839489" duration="144000" />
       <workItem from="1608596227216" duration="1626000" />
-      <workItem from="1608599168063" duration="134000" />
+      <workItem from="1608599168063" duration="321000" />
     </task>
     <task id="LOCAL-00001" summary="python libraries function i am going to use for my translator">
       <created>1608596565291</created>
@@ -74,7 +74,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608596861390</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="translator program">
+      <created>1608599362798</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1608599362799</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -98,13 +105,13 @@
     <option name="LAST_COMMIT_MESSAGE" value="translator program" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="349" y="212" key="Vcs.Push.Dialog.v2" timestamp="1608599218068">
+    <state x="349" y="212" key="Vcs.Push.Dialog.v2" timestamp="1608599372015">
       <screen x="0" y="25" width="1680" height="940" />
     </state>
-    <state x="349" y="212" key="Vcs.Push.Dialog.v2/0.25.1680.940@0.25.1680.940" timestamp="1608599218068" />
-    <state x="551" y="393" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1608596852516">
+    <state x="349" y="212" key="Vcs.Push.Dialog.v2/0.25.1680.940@0.25.1680.940" timestamp="1608599372015" />
+    <state x="551" y="393" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1608599355696">
       <screen x="0" y="25" width="1680" height="940" />
     </state>
-    <state x="551" y="393" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.25.1680.940@0.25.1680.940" timestamp="1608596852516" />
+    <state x="551" y="393" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.25.1680.940@0.25.1680.940" timestamp="1608599355696" />
   </component>
 </project>
