@@ -19,8 +19,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9cca5f16-4c88-438e-8896-128d616bb4cd" name="Default Changelist" comment="python libraries function i am going to use for my translator">
-      <change beforePath="$PROJECT_DIR$/icone-translator.py" beforeDir="false" afterPath="$PROJECT_DIR$/icone-translator.py" afterDir="false" />
+    <list default="true" id="9cca5f16-4c88-438e-8896-128d616bb4cd" name="Default Changelist" comment="translator program">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +57,7 @@
       <updated>1608590020175</updated>
       <workItem from="1608590021649" duration="546000" />
       <workItem from="1608592839489" duration="144000" />
-      <workItem from="1608596227216" duration="521000" />
+      <workItem from="1608596227216" duration="1373000" />
     </task>
     <task id="LOCAL-00001" summary="python libraries function i am going to use for my translator">
       <created>1608596565291</created>
@@ -66,7 +66,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608596565291</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="translator program">
+      <created>1608596861390</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1608596861390</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -85,16 +92,17 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="python libraries function i am going to use for my translator" />
-    <option name="LAST_COMMIT_MESSAGE" value="python libraries function i am going to use for my translator" />
+    <MESSAGE value="translator program" />
+    <option name="LAST_COMMIT_MESSAGE" value="translator program" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="349" y="212" key="Vcs.Push.Dialog.v2" timestamp="1608596645625">
+    <state x="349" y="212" key="Vcs.Push.Dialog.v2" timestamp="1608596871482">
       <screen x="0" y="25" width="1680" height="940" />
     </state>
-    <state x="349" y="212" key="Vcs.Push.Dialog.v2/0.25.1680.940@0.25.1680.940" timestamp="1608596645625" />
-    <state x="551" y="393" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1608596726540">
+    <state x="349" y="212" key="Vcs.Push.Dialog.v2/0.25.1680.940@0.25.1680.940" timestamp="1608596871482" />
+    <state x="551" y="393" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1608596852516">
       <screen x="0" y="25" width="1680" height="940" />
     </state>
-    <state x="551" y="393" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.25.1680.940@0.25.1680.940" timestamp="1608596726540" />
+    <state x="551" y="393" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.25.1680.940@0.25.1680.940" timestamp="1608596852516" />
   </component>
 </project>
