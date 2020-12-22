@@ -37,3 +37,5 @@ def wzdx_creator(messages, info):
     data_source['location_method'] = info['metadata']['wz_location_method']
     data_source['lrs_type'] = info['metadata']['lrs_type']
     # data_source['lrs_url'] = "basic url"
+
+    wzd['road_event_feed_info'] ['data_sources'] = [data_source]
