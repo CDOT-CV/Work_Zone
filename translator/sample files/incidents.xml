@@ -1,0 +1,890 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents timestamp="2020-12-16T17:48:02Z">
+  <incident id="1245">
+    <creationtime>2019-11-05T01:22:20Z</creationtime>
+    <updatetime>2020-12-16T17:46:02Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>19-1245: Roadwork between MP 40 and MP 48</description>
+    <location>
+      <street>I-75 N</street>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>37.1571990,-84.1128540,37.1686478,-84.1238971,37.1913000,-84.1458610,37.2067830,-84.1682780,37.2193100,-84.2040740</polyline>
+    </location>
+    <starttime>2020-12-11T16:18:32Z</starttime>
+  </incident>
+  <incident id="1246">
+    <creationtime>2019-11-05T01:32:44Z</creationtime>
+    <updatetime>2020-12-16T17:46:02Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>19-1245: Roadwork between MP 48 and MP 40</description>
+    <location>
+      <street>I-75 S</street>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>37.2066700,-84.1691290,37.2012230,-84.1573460,37.1858150,-84.1404820,37.1645197,-84.1187896,37.1478080,-84.1115880</polyline>
+    </location>
+    <starttime>2020-12-11T16:18:36Z</starttime>
+  </incident>
+  <incident id="1247">
+    <creationtime>2019-11-19T22:43:10Z</creationtime>
+    <updatetime>2020-12-16T17:46:02Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>19-1210: Roadwork between MP 28.9 and MP 33.3</description>
+    <location>
+      <street>I-75 N</street>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>36.9653120,-84.1131840,36.9792380,-84.1104390,37.0071310,-84.1037570</polyline>
+    </location>
+    <starttime>2020-12-11T16:20:28Z</starttime>
+  </incident>
+  <incident id="1248">
+    <creationtime>2019-11-19T22:50:54Z</creationtime>
+    <updatetime>2020-12-16T17:46:02Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>19-1210: Roadwork between MP 28.9 and MP 33.3</description>
+    <location>
+      <street>I-75 S</street>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>37.0498890,-84.0989330,37.0355150,-84.0985540,37.0040920,-84.1051700</polyline>
+    </location>
+    <starttime>2020-12-11T16:18:33Z</starttime>
+  </incident>
+  <incident id="1254">
+    <creationtime>2020-03-09T16:18:10Z</creationtime>
+    <updatetime>2020-12-16T17:46:03Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork I-69 N</description>
+    <location>
+      <street>I-69 N</street>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>39.3873280,-86.4660290,39.3873280,-86.4660290</polyline>
+    </location>
+    <starttime>2020-03-09T17:10:18Z</starttime>
+    <endtime>2020-11-12T07:30:46Z</endtime>
+  </incident>
+  <incident id="1255">
+    <creationtime>2020-04-13T17:12:18Z</creationtime>
+    <updatetime>2020-12-16T17:46:03Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork I-69 N</description>
+    <location>
+      <street>SR-37 SB</street>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>39.4043170,-86.4427720,39.4043170,-86.4427720</polyline>
+    </location>
+    <starttime>2020-04-13T17:16:23Z</starttime>
+  </incident>
+  <incident id="U13631586_202012161235">
+    <creationtime>2020-12-16T12:35:00Z</creationtime>
+    <updatetime>2020-12-16T17:44:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE RIGHT [Trafficade, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>32.2361660,-110.9173264,32.2361660,-110.9173264</polyline>
+    </location>
+    <starttime>2020-12-16T12:35:00Z</starttime>
+  </incident>
+  <incident id="U13631500_202012160344">
+    <creationtime>2020-12-16T03:44:03Z</creationtime>
+    <updatetime>2020-12-16T17:40:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [Triton, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>36.2108683,-115.2499569,36.2108683,-115.2499569</polyline>
+    </location>
+    <starttime>2020-12-16T03:44:03Z</starttime>
+  </incident>
+  <incident id="U11534533_202012160659">
+    <creationtime>2020-12-16T06:59:00Z</creationtime>
+    <updatetime>2020-12-16T17:40:00Z</updatetime>
+    <type>HAZARD</type>
+    <description>Roadwork Active [Triton, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>36.2101504,-115.2603408,36.2101504,-115.2603408</polyline>
+    </location>
+    <starttime>2020-12-16T06:59:00Z</starttime>
+  </incident>
+  <incident id="U13631604_202012161327">
+    <creationtime>2020-12-16T13:27:03Z</creationtime>
+    <updatetime>2020-12-16T17:44:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE LEFT [Trafficade, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>33.4656408,-112.0625362,33.4656408,-112.0625362</polyline>
+    </location>
+    <starttime>2020-12-16T13:27:03Z</starttime>
+  </incident>
+  <incident id="U13631568_202012161743">
+    <creationtime>2020-12-16T17:43:00Z</creationtime>
+    <updatetime>2020-12-16T17:43:00Z</updatetime>
+    <type>HAZARD</type>
+    <description>Caution - DBi Services maintenance crew ahead. [DBi, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>38.7854880,-77.5711744,38.7854880,-77.5711744</polyline>
+    </location>
+    <starttime>2020-12-16T17:43:00Z</starttime>
+  </incident>
+  <incident id="U13631588_202012161723">
+    <creationtime>2020-12-16T17:23:00Z</creationtime>
+    <updatetime>2020-12-16T17:46:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE LEFT [Trafficade, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>35.4474544,-114.2958208,35.4474544,-114.2958208</polyline>
+    </location>
+    <starttime>2020-12-16T17:23:00Z</starttime>
+  </incident>
+  <incident id="U11534530_202012151647">
+    <creationtime>2020-12-15T16:47:00Z</creationtime>
+    <updatetime>2020-12-16T17:27:00Z</updatetime>
+    <type>HAZARD</type>
+    <description>Roadwork Active [Triton, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>36.0601241,-115.0001758,36.0601241,-115.0001758</polyline>
+    </location>
+    <starttime>2020-12-15T16:47:00Z</starttime>
+  </incident>
+  <incident id="U13631595_202012160845">
+    <creationtime>2020-12-16T08:45:03Z</creationtime>
+    <updatetime>2020-12-16T17:18:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE LEFT [Trafficade, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>34.8380671,-114.1450650,34.8380671,-114.1450650</polyline>
+    </location>
+    <starttime>2020-12-16T08:45:03Z</starttime>
+  </incident>
+  <incident id="U13631602_202012161412">
+    <creationtime>2020-12-16T14:12:03Z</creationtime>
+    <updatetime>2020-12-16T17:44:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE LEFT [Trafficade, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>35.2829516,-109.2096300,35.2829516,-109.2096300</polyline>
+    </location>
+    <starttime>2020-12-16T14:12:03Z</starttime>
+  </incident>
+  <incident id="U13631501_202012161154">
+    <creationtime>2020-12-16T11:54:03Z</creationtime>
+    <updatetime>2020-12-16T17:44:31Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE RIGHT [Triton, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>36.3289392,-115.2785884,36.3289392,-115.2785884</polyline>
+    </location>
+    <starttime>2020-12-16T11:54:03Z</starttime>
+  </incident>
+  <incident id="U11534529_202012152131">
+    <creationtime>2020-12-15T21:31:00Z</creationtime>
+    <updatetime>2020-12-16T17:32:00Z</updatetime>
+    <type>HAZARD</type>
+    <description>Roadwork Active [Triton, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>36.2108749,-115.2497288,36.2108749,-115.2497288</polyline>
+    </location>
+    <starttime>2020-12-15T21:31:00Z</starttime>
+  </incident>
+  <incident id="U13631728_202012161721">
+    <creationtime>2020-12-16T17:21:00Z</creationtime>
+    <updatetime>2020-12-16T17:46:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE RIGHT [DBi, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>38.9068464,-78.0077664,38.9068464,-78.0077664</polyline>
+    </location>
+    <starttime>2020-12-16T17:21:00Z</starttime>
+  </incident>
+  <incident id="U13631589_202012161543">
+    <creationtime>2020-12-16T15:43:03Z</creationtime>
+    <updatetime>2020-12-16T17:46:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE RIGHT [Trafficade, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>33.4007534,-112.3061710,33.4007534,-112.3061710</polyline>
+    </location>
+    <starttime>2020-12-16T15:43:03Z</starttime>
+  </incident>
+  <incident id="U13631584_202012161640">
+    <creationtime>2020-12-16T16:40:03Z</creationtime>
+    <updatetime>2020-12-16T17:46:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE LEFT [Trafficade, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>35.1982401,-111.6505770,35.1982401,-111.6505770</polyline>
+    </location>
+    <starttime>2020-12-16T16:40:03Z</starttime>
+  </incident>
+  <incident id="U11534610_202012161743">
+    <creationtime>2020-12-16T17:43:00Z</creationtime>
+    <updatetime>2020-12-16T17:43:00Z</updatetime>
+    <type>HAZARD</type>
+    <description>Roadwork Active [NW Barricade, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>47.5444992,-122.3868672,47.5444992,-122.3868672</polyline>
+    </location>
+    <starttime>2020-12-16T17:43:00Z</starttime>
+  </incident>
+  <incident id="U13631760_202012161357">
+    <creationtime>2020-12-16T13:57:00Z</creationtime>
+    <updatetime>2020-12-16T17:47:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE RIGHT [Triton, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>36.0709585,-115.2899002,36.0709585,-115.2899002</polyline>
+    </location>
+    <starttime>2020-12-16T13:57:00Z</starttime>
+  </incident>
+  <incident id="U11534631_202012161645">
+    <creationtime>2020-12-16T16:45:00Z</creationtime>
+    <updatetime>2020-12-16T17:45:00Z</updatetime>
+    <type>HAZARD</type>
+    <description>Roadwork Active [Triton, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>36.0633871,-115.0038626,36.0633871,-115.0038626</polyline>
+    </location>
+    <starttime>2020-12-16T16:45:00Z</starttime>
+  </incident>
+  <incident id="U13631603_202012161557">
+    <creationtime>2020-12-16T15:57:03Z</creationtime>
+    <updatetime>2020-12-16T17:45:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE LEFT [Trafficade, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>32.1919406,-110.8023366,32.1919406,-110.8023366</polyline>
+    </location>
+    <starttime>2020-12-16T15:57:03Z</starttime>
+  </incident>
+  <incident id="U11534632_202012161632">
+    <creationtime>2020-12-16T16:32:00Z</creationtime>
+    <updatetime>2020-12-16T17:47:00Z</updatetime>
+    <type>HAZARD</type>
+    <description>Roadwork Active [Triton, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>36.2108198,-115.2507352,36.2108198,-115.2507352</polyline>
+    </location>
+    <starttime>2020-12-16T16:32:00Z</starttime>
+  </incident>
+  <incident id="U13631581_202012160936">
+    <creationtime>2020-12-16T09:36:03Z</creationtime>
+    <updatetime>2020-12-16T17:44:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE RIGHT [Trafficade, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>32.2944205,-111.0114494,32.2944205,-111.0114494</polyline>
+    </location>
+    <starttime>2020-12-16T09:36:03Z</starttime>
+  </incident>
+  <incident id="U13631596_202012161618">
+    <creationtime>2020-12-16T16:18:03Z</creationtime>
+    <updatetime>2020-12-16T17:44:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE LEFT [Trafficade, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>35.2826426,-109.2212527,35.2826426,-109.2212527</polyline>
+    </location>
+    <starttime>2020-12-16T16:18:03Z</starttime>
+  </incident>
+  <incident id="U13631499_202012160456">
+    <creationtime>2020-12-16T04:56:03Z</creationtime>
+    <updatetime>2020-12-16T17:44:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE RIGHT [Triton, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>36.2763579,-115.1235547,36.2763579,-115.1235547</polyline>
+    </location>
+    <starttime>2020-12-16T04:56:03Z</starttime>
+  </incident>
+  <incident id="U13631607_202012161428">
+    <creationtime>2020-12-16T14:28:00Z</creationtime>
+    <updatetime>2020-12-16T17:46:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE RIGHT [Trafficade, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>32.2942589,-111.0217677,32.2942589,-111.0217677</polyline>
+    </location>
+    <starttime>2020-12-16T14:28:00Z</starttime>
+  </incident>
+  <incident id="U13631574_202012161450">
+    <creationtime>2020-12-16T14:50:03Z</creationtime>
+    <updatetime>2020-12-16T17:46:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE LEFT [Trafficade, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>33.8635538,-112.3210715,33.8635538,-112.3210715</polyline>
+    </location>
+    <starttime>2020-12-16T14:50:03Z</starttime>
+  </incident>
+  <incident id="U13631824_202012161727">
+    <creationtime>2020-12-16T17:27:00Z</creationtime>
+    <updatetime>2020-12-16T17:43:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [NW Barricade, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>48.8271552,-118.5919189,48.8271552,-118.5919189</polyline>
+    </location>
+    <starttime>2020-12-16T17:27:00Z</starttime>
+  </incident>
+  <incident id="U13631577_202012161402">
+    <creationtime>2020-12-16T14:02:03Z</creationtime>
+    <updatetime>2020-12-16T17:45:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE RIGHT [Trafficade, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>32.2203336,-110.9709490,32.2203336,-110.9709490</polyline>
+    </location>
+    <starttime>2020-12-16T14:02:03Z</starttime>
+  </incident>
+  <incident id="U13631566_202012152152">
+    <creationtime>2020-12-15T21:52:00Z</creationtime>
+    <updatetime>2020-12-16T17:45:00Z</updatetime>
+    <type>HAZARD</type>
+    <description>DBi Services maintenance crew ahead. [DBi, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>38.7854391,-77.5717180,38.7854391,-77.5717180</polyline>
+    </location>
+    <starttime>2020-12-15T21:52:00Z</starttime>
+  </incident>
+  <incident id="U11534532_202012161634">
+    <creationtime>2020-12-16T16:34:00Z</creationtime>
+    <updatetime>2020-12-16T17:31:00Z</updatetime>
+    <type>HAZARD</type>
+    <description>Roadwork Active [Triton, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>36.3027984,-115.2907584,36.3027984,-115.2907584</polyline>
+    </location>
+    <starttime>2020-12-16T16:34:00Z</starttime>
+  </incident>
+  <incident id="U13631570_202012120521">
+    <creationtime>2020-12-12T05:21:00Z</creationtime>
+    <updatetime>2020-12-16T17:46:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE RIGHT [Established Traffic, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>40.0593238,-77.4828346,40.0593238,-77.4828346</polyline>
+    </location>
+    <starttime>2020-12-12T05:21:00Z</starttime>
+  </incident>
+  <incident id="U11534450_202012160721">
+    <creationtime>2020-12-16T07:21:00Z</creationtime>
+    <updatetime>2020-12-16T17:40:00Z</updatetime>
+    <type>HAZARD</type>
+    <description>Roadwork Active [Triton, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>36.0632235,-115.0081376,36.0632235,-115.0081376</polyline>
+    </location>
+    <starttime>2020-12-16T07:21:00Z</starttime>
+  </incident>
+  <incident id="U13631601_202012161731">
+    <creationtime>2020-12-16T17:31:03Z</creationtime>
+    <updatetime>2020-12-16T17:44:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE RIGHT [Trafficade, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>32.3125762,-111.0448721,32.3125762,-111.0448721</polyline>
+    </location>
+    <starttime>2020-12-16T17:31:03Z</starttime>
+  </incident>
+  <incident id="U11534608_202012152227">
+    <creationtime>2020-12-15T22:27:00Z</creationtime>
+    <updatetime>2020-12-16T17:40:59Z</updatetime>
+    <type>HAZARD</type>
+    <description>Roadwork Active [Triton, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>36.2996405,-115.2888194,36.2996405,-115.2888194</polyline>
+    </location>
+    <starttime>2020-12-15T22:27:00Z</starttime>
+  </incident>
+  <incident id="U13631612_202012161739">
+    <creationtime>2020-12-16T17:39:00Z</creationtime>
+    <updatetime>2020-12-16T17:39:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE LEFT [Trafficade, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>31.9639296,-110.7216384,31.9639296,-110.7216384</polyline>
+    </location>
+    <starttime>2020-12-16T17:39:00Z</starttime>
+  </incident>
+  <incident id="U13631694_202012161645">
+    <creationtime>2020-12-16T16:45:00Z</creationtime>
+    <updatetime>2020-12-16T17:45:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE LEFT OR RIGHT [WSDOT, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>45.6527669,-122.6700501,45.6527669,-122.6700501</polyline>
+    </location>
+    <starttime>2020-12-16T16:45:00Z</starttime>
+  </incident>
+  <incident id="U13631590_202012161558">
+    <creationtime>2020-12-16T15:58:03Z</creationtime>
+    <updatetime>2020-12-16T17:46:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE LEFT [Trafficade, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>33.3483862,-111.6355672,33.3483862,-111.6355672</polyline>
+    </location>
+    <starttime>2020-12-16T15:58:03Z</starttime>
+  </incident>
+  <incident id="U13631725_202012161449">
+    <creationtime>2020-12-16T14:49:00Z</creationtime>
+    <updatetime>2020-12-16T17:43:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [DBi, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>31.9325040,-81.3323578,31.9325040,-81.3323578</polyline>
+    </location>
+    <starttime>2020-12-16T14:49:00Z</starttime>
+  </incident>
+  <incident id="U13631493_202012161454">
+    <creationtime>2020-12-16T14:54:00Z</creationtime>
+    <updatetime>2020-12-16T17:42:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE LEFT [Triton, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>36.3002016,-115.2890411,36.3002016,-115.2890411</polyline>
+    </location>
+    <starttime>2020-12-16T14:54:00Z</starttime>
+  </incident>
+  <incident id="U11534525_202012161743">
+    <creationtime>2020-12-16T17:43:00Z</creationtime>
+    <updatetime>2020-12-16T17:43:00Z</updatetime>
+    <type>HAZARD</type>
+    <description>Roadwork Active [Triton, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>36.2978656,-115.2893568,36.2978656,-115.2893568</polyline>
+    </location>
+    <starttime>2020-12-16T17:43:00Z</starttime>
+  </incident>
+  <incident id="U11534609_202012161723">
+    <creationtime>2020-12-16T17:23:00Z</creationtime>
+    <updatetime>2020-12-16T17:43:00Z</updatetime>
+    <type>HAZARD</type>
+    <description>Roadwork Active [Triton, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>36.3021651,-115.2904550,36.3021651,-115.2904550</polyline>
+    </location>
+    <starttime>2020-12-16T17:23:00Z</starttime>
+  </incident>
+  <incident id="U13631699_202012161720">
+    <creationtime>2020-12-16T17:20:04Z</creationtime>
+    <updatetime>2020-12-16T17:45:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>27.6935765,-97.4536107,27.6935765,-97.4536107</polyline>
+    </location>
+    <starttime>2020-12-16T17:20:04Z</starttime>
+  </incident>
+  <incident id="U13631988_202012161335">
+    <creationtime>2020-12-16T13:35:13Z</creationtime>
+    <updatetime>2020-12-16T17:45:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>25.0612036,-80.4755928,25.0612036,-80.4755928</polyline>
+    </location>
+    <starttime>2020-12-16T13:35:13Z</starttime>
+  </incident>
+  <incident id="U13631689_202012161545">
+    <creationtime>2020-12-16T15:45:00Z</creationtime>
+    <updatetime>2020-12-16T17:46:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE LEFT OR RIGHT [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>43.0486971,-88.2116032,43.0486971,-88.2116032</polyline>
+    </location>
+    <starttime>2020-12-16T15:45:00Z</starttime>
+  </incident>
+  <incident id="U13631956_202012161336">
+    <creationtime>2020-12-16T13:36:19Z</creationtime>
+    <updatetime>2020-12-16T17:47:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE RIGHT [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>40.6749115,-95.8268275,40.6749115,-95.8268275</polyline>
+    </location>
+    <starttime>2020-12-16T13:36:19Z</starttime>
+  </incident>
+  <incident id="U13631856_202012161337">
+    <creationtime>2020-12-16T13:37:59Z</creationtime>
+    <updatetime>2020-12-16T17:47:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE RIGHT [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>42.6248511,-96.2924535,42.6248511,-96.2924535</polyline>
+    </location>
+    <starttime>2020-12-16T13:37:59Z</starttime>
+  </incident>
+  <incident id="U13631751_202012161636">
+    <creationtime>2020-12-16T16:36:00Z</creationtime>
+    <updatetime>2020-12-16T17:46:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>36.7826408,-76.2970576,36.7826408,-76.2970576</polyline>
+    </location>
+    <starttime>2020-12-16T16:36:00Z</starttime>
+  </incident>
+  <incident id="U13631746_202012161649">
+    <creationtime>2020-12-16T16:49:00Z</creationtime>
+    <updatetime>2020-12-16T17:45:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>36.7826924,-76.2970232,36.7826924,-76.2970232</polyline>
+    </location>
+    <starttime>2020-12-16T16:49:00Z</starttime>
+  </incident>
+  <incident id="U13631716_202012161412">
+    <creationtime>2020-12-16T14:12:00Z</creationtime>
+    <updatetime>2020-12-16T17:46:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>40.7603885,-73.1998357,40.7603885,-73.1998357</polyline>
+    </location>
+    <starttime>2020-12-16T14:12:00Z</starttime>
+  </incident>
+  <incident id="U13631768_202012161741">
+    <creationtime>2020-12-16T17:41:00Z</creationtime>
+    <updatetime>2020-12-16T17:46:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE LEFT [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>40.3355520,-75.3825408,40.3355520,-75.3825408</polyline>
+    </location>
+    <starttime>2020-12-16T17:41:00Z</starttime>
+  </incident>
+  <incident id="U13631762_202012161747">
+    <creationtime>2020-12-16T17:47:00Z</creationtime>
+    <updatetime>2020-12-16T17:47:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>27.4465843,-80.3804380,27.4465843,-80.3804380</polyline>
+    </location>
+    <starttime>2020-12-16T17:47:00Z</starttime>
+  </incident>
+  <incident id="U13632109_202012161341">
+    <creationtime>2020-12-16T13:41:38Z</creationtime>
+    <updatetime>2020-12-16T17:45:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE LEFT [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>40.7266298,-113.2776530,40.7266298,-113.2776530</polyline>
+    </location>
+    <starttime>2020-12-16T13:41:38Z</starttime>
+  </incident>
+  <incident id="U13631684_202012161746">
+    <creationtime>2020-12-16T17:46:00Z</creationtime>
+    <updatetime>2020-12-16T17:46:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>32.8433952,-96.3776768,32.8433952,-96.3776768</polyline>
+    </location>
+    <starttime>2020-12-16T17:46:00Z</starttime>
+  </incident>
+  <incident id="U13631930_202012161340">
+    <creationtime>2020-12-16T13:40:35Z</creationtime>
+    <updatetime>2020-12-16T17:44:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE RIGHT [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>41.7152064,-93.4273420,41.7152064,-93.4273420</polyline>
+    </location>
+    <starttime>2020-12-16T13:40:35Z</starttime>
+  </incident>
+  <incident id="U11534480_202012161746">
+    <creationtime>2020-12-16T17:46:00Z</creationtime>
+    <updatetime>2020-12-16T17:46:07Z</updatetime>
+    <type>HAZARD</type>
+    <description>Road Ranger Emergency Personnel On-Scene  Move over – Use Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>28.5366784,-81.3785856,28.5366784,-81.3785856</polyline>
+    </location>
+    <starttime>2020-12-16T17:46:00Z</starttime>
+  </incident>
+  <incident id="U13631708_202012161401">
+    <creationtime>2020-12-16T14:01:00Z</creationtime>
+    <updatetime>2020-12-16T17:44:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE RIGHT [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>32.9941606,-96.9660713,32.9941606,-96.9660713</polyline>
+    </location>
+    <starttime>2020-12-16T14:01:00Z</starttime>
+  </incident>
+  <incident id="U13631503_202012161650">
+    <creationtime>2020-12-16T16:50:00Z</creationtime>
+    <updatetime>2020-12-16T17:45:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE LEFT OR RIGHT [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>43.6471029,-79.3897984,43.6471029,-79.3897984</polyline>
+    </location>
+    <starttime>2020-12-16T16:50:00Z</starttime>
+  </incident>
+  <incident id="U13631742_202012161742">
+    <creationtime>2020-12-16T17:42:04Z</creationtime>
+    <updatetime>2020-12-16T17:45:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>42.6798560,-71.4550144,42.6798560,-71.4550144</polyline>
+    </location>
+    <starttime>2020-12-16T17:42:04Z</starttime>
+  </incident>
+  <incident id="U13631671_202012161742">
+    <creationtime>2020-12-16T17:42:00Z</creationtime>
+    <updatetime>2020-12-16T17:47:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>40.3538080,-75.3926848,40.3538080,-75.3926848</polyline>
+    </location>
+    <starttime>2020-12-16T17:42:00Z</starttime>
+  </incident>
+  <incident id="U13631929_202012161435">
+    <creationtime>2020-12-16T14:35:00Z</creationtime>
+    <updatetime>2020-12-16T17:43:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE RIGHT [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>41.8108564,-91.4939625,41.8108564,-91.4939625</polyline>
+    </location>
+    <starttime>2020-12-16T14:35:00Z</starttime>
+  </incident>
+  <incident id="U13631854_202012161545">
+    <creationtime>2020-12-16T15:45:00Z</creationtime>
+    <updatetime>2020-12-16T17:45:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE LEFT [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>41.5507243,-93.6448896,41.5507243,-93.6448896</polyline>
+    </location>
+    <starttime>2020-12-16T15:45:00Z</starttime>
+  </incident>
+  <incident id="U13631952_202012161335">
+    <creationtime>2020-12-16T13:35:41Z</creationtime>
+    <updatetime>2020-12-16T17:46:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE RIGHT [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>41.7027168,-93.4428054,41.7027168,-93.4428054</polyline>
+    </location>
+    <starttime>2020-12-16T13:35:41Z</starttime>
+  </incident>
+  <incident id="U13631959_202012161652">
+    <creationtime>2020-12-16T16:52:34Z</creationtime>
+    <updatetime>2020-12-16T17:43:38Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE LEFT [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>42.4898718,-96.4016782,42.4898718,-96.4016782</polyline>
+    </location>
+    <starttime>2020-12-16T16:52:34Z</starttime>
+  </incident>
+  <incident id="U13631677_202012161336">
+    <creationtime>2020-12-16T13:36:32Z</creationtime>
+    <updatetime>2020-12-16T17:46:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE RIGHT [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>28.0373888,-97.7480269,28.0373888,-97.7480269</polyline>
+    </location>
+    <starttime>2020-12-16T13:36:32Z</starttime>
+  </incident>
+  <incident id="U13631712_202012161521">
+    <creationtime>2020-12-16T15:21:00Z</creationtime>
+    <updatetime>2020-12-16T17:43:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>32.6973040,-97.9718048,32.6973040,-97.9718048</polyline>
+    </location>
+    <starttime>2020-12-16T15:21:00Z</starttime>
+  </incident>
+  <incident id="U13631750_202012161742">
+    <creationtime>2020-12-16T17:42:00Z</creationtime>
+    <updatetime>2020-12-16T17:47:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>36.7855872,-76.2550976,36.7855872,-76.2550976</polyline>
+    </location>
+    <starttime>2020-12-16T17:42:00Z</starttime>
+  </incident>
+  <incident id="U13631972_202012161732">
+    <creationtime>2020-12-16T17:32:00Z</creationtime>
+    <updatetime>2020-12-16T17:47:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>25.1165936,-80.4200384,25.1165936,-80.4200384</polyline>
+    </location>
+    <starttime>2020-12-16T17:32:00Z</starttime>
+  </incident>
+  <incident id="U13631752_202012161714">
+    <creationtime>2020-12-16T17:14:00Z</creationtime>
+    <updatetime>2020-12-16T17:43:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>36.7824608,-76.2968960,36.7824608,-76.2968960</polyline>
+    </location>
+    <starttime>2020-12-16T17:14:00Z</starttime>
+  </incident>
+  <incident id="U13631780_202012161544">
+    <creationtime>2020-12-16T15:44:00Z</creationtime>
+    <updatetime>2020-12-16T17:44:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>27.8044955,-97.4982645,27.8044955,-97.4982645</polyline>
+    </location>
+    <starttime>2020-12-16T15:44:00Z</starttime>
+  </incident>
+  <incident id="U13631958_202012160631">
+    <creationtime>2020-12-16T06:31:00Z</creationtime>
+    <updatetime>2020-12-16T17:47:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>42.5014131,-92.3895749,42.5014131,-92.3895749</polyline>
+    </location>
+    <starttime>2020-12-16T06:31:00Z</starttime>
+  </incident>
+  <incident id="U13631767_202012161337">
+    <creationtime>2020-12-16T13:37:10Z</creationtime>
+    <updatetime>2020-12-16T17:44:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>40.1340760,-76.2125903,40.1340760,-76.2125903</polyline>
+    </location>
+    <starttime>2020-12-16T13:37:10Z</starttime>
+  </incident>
+  <incident id="U13631702_202012161336">
+    <creationtime>2020-12-16T13:36:15Z</creationtime>
+    <updatetime>2020-12-16T17:47:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>32.4303489,-100.5563896,32.4303489,-100.5563896</polyline>
+    </location>
+    <starttime>2020-12-16T13:36:15Z</starttime>
+  </incident>
+  <incident id="U13631822_202012161408">
+    <creationtime>2020-12-16T14:08:00Z</creationtime>
+    <updatetime>2020-12-16T17:47:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>26.3506613,-98.1494181,26.3506613,-98.1494181</polyline>
+    </location>
+    <starttime>2020-12-16T14:08:00Z</starttime>
+  </incident>
+  <incident id="U13632173_202012161338">
+    <creationtime>2020-12-16T13:38:32Z</creationtime>
+    <updatetime>2020-12-16T17:44:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE RIGHT [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>38.7707190,-90.2395441,38.7707190,-90.2395441</polyline>
+    </location>
+    <starttime>2020-12-16T13:38:32Z</starttime>
+  </incident>
+  <incident id="U13631714_202012161717">
+    <creationtime>2020-12-16T17:17:00Z</creationtime>
+    <updatetime>2020-12-16T17:47:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE LEFT [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>28.8060608,-96.9916512,28.8060608,-96.9916512</polyline>
+    </location>
+    <starttime>2020-12-16T17:17:00Z</starttime>
+  </incident>
+  <incident id="U11534569_202012161745">
+    <creationtime>2020-12-16T17:45:00Z</creationtime>
+    <updatetime>2020-12-16T17:45:00Z</updatetime>
+    <type>HAZARD</type>
+    <description>Roadwork Active [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>28.5369248,-81.3701184,28.5369248,-81.3701184</polyline>
+    </location>
+    <starttime>2020-12-16T17:45:00Z</starttime>
+  </incident>
+</incidents>
