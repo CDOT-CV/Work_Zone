@@ -48,4 +48,18 @@ def wzdx_creator(messages, info):
     ids['sub_identifier'] = sub_identifier
     ids['road_event_id'] = road_event_id
 
+    wzd['features'] = []
+    print(messages)
+    print("")
+    print("")
+    print("")
+    print("")
+    print("")
+    for incident in messages['incidents']['incident']:
+        print(incident)
+        print("")
+        print("")
+        # Parse Incident to WZDx Feature
+        wzd['features'].append(parse_incident(incident))
+
 
