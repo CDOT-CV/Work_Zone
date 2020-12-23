@@ -225,3 +225,21 @@ with open('incidents.xml', encoding='utf-8-sig') as frsm:
 
     info = {}
 
+    #### Consider whether this id needs to be hardcoded or generated
+    info['feed_info_id'] = "feed_info_id"
+
+    #### This information is required, might want to hardcode
+    info['metadata'] = {}
+    info['metadata']['wz_location_method'] = "wz_location_method"
+    info['metadata']['lrs_type'] = "lrs_type"
+    info['metadata']['location_verify_method'] = "location_verify_method"
+    info['metadata']['datafeed_frequency_update'] = 86400
+    info['metadata']['timestamp_metadata_update'] = "timestamp_metadata_update"
+    info['metadata']['contact_name'] = "contact_name"
+    info['metadata']['contact_email'] = "contact_email"
+    info['metadata']['issuing_organization'] = "issuing_organization"
+
+    wzdx = wzdx_creator(icone_obj, info)
+    with open('icone_to_wzdx.geojson', 'w') as fwzdx:
+        fwzdx.write(json.dumps(wzdx, indent=2))
+
