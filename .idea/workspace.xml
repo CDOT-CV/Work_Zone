@@ -19,7 +19,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9cca5f16-4c88-438e-8896-128d616bb4cd" name="Default Changelist" comment="commented sample xml icone data format inside the program">
+    <list default="true" id="9cca5f16-4c88-438e-8896-128d616bb4cd" name="Default Changelist" comment="parse icone incident to WZDX">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/translator/source code/translator.py" beforeDir="false" afterPath="$PROJECT_DIR$/translator/source code/translator.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -68,7 +69,7 @@
       <workItem from="1608592839489" duration="144000" />
       <workItem from="1608596227216" duration="1626000" />
       <workItem from="1608599168063" duration="1518000" />
-      <workItem from="1608657860018" duration="3237000" />
+      <workItem from="1608657860018" duration="3917000" />
     </task>
     <task id="LOCAL-00001" summary="python libraries function i am going to use for my translator">
       <created>1608596565291</created>
@@ -168,7 +169,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608665513624</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="parse icone incident to WZDX">
+      <created>1608665939582</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1608665939582</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -199,20 +207,21 @@
     <MESSAGE value="code for creating random 6 character digit/letter string" />
     <MESSAGE value="program just for showing blank messages fot testing purpose" />
     <MESSAGE value="commented sample xml icone data format inside the program" />
-    <option name="LAST_COMMIT_MESSAGE" value="commented sample xml icone data format inside the program" />
+    <MESSAGE value="parse icone incident to WZDX" />
+    <option name="LAST_COMMIT_MESSAGE" value="parse icone incident to WZDX" />
   </component>
   <component name="WindowStateProjectService">
     <state x="704" y="356" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1608600542156">
       <screen x="0" y="25" width="1680" height="940" />
     </state>
     <state x="704" y="356" key="#com.intellij.fileTypes.FileTypeChooser/0.25.1680.940@0.25.1680.940" timestamp="1608600542156" />
-    <state x="349" y="212" key="Vcs.Push.Dialog.v2" timestamp="1608665523876">
+    <state x="349" y="212" key="Vcs.Push.Dialog.v2" timestamp="1608665952965">
       <screen x="0" y="25" width="1680" height="940" />
     </state>
-    <state x="349" y="212" key="Vcs.Push.Dialog.v2/0.25.1680.940@0.25.1680.940" timestamp="1608665523876" />
-    <state x="551" y="393" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1608665518882">
+    <state x="349" y="212" key="Vcs.Push.Dialog.v2/0.25.1680.940@0.25.1680.940" timestamp="1608665952965" />
+    <state x="551" y="393" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1608665912574">
       <screen x="0" y="25" width="1680" height="940" />
     </state>
-    <state x="551" y="393" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.25.1680.940@0.25.1680.940" timestamp="1608665518882" />
+    <state x="551" y="393" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.25.1680.940@0.25.1680.940" timestamp="1608665912574" />
   </component>
 </project>

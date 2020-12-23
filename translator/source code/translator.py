@@ -179,4 +179,43 @@ def wzdx_creator(messages, info):
 
         return feature
 
+# Add ids to message
+#### This function may fail if some optional fields are not present (lanes, types_of_work, relationship, ...)
+def add_ids(message, add_ids):
+    if add_ids:
+        feed_info_id = message['road_event_feed_info']['feed_info_id']
+        data_source_id = message['road_event_feed_info']['data_sources'][0]['data_source_id']
+
+        road_event_length = len(message['features'])
+        road_event_ids = []
+        for i in range(road_event_length):
+            road_event_ids.append(str(uuid.uuid4()))
+
+        for i in range(road_event_length):
+            feature = message['features'][i]
+            road_event_id = road_event_ids[i]
+            feature['properties']['road_event_id'] = road_event_id
+            # feature['properties']['feed_info_id'] = feed_info_id
+            feature['properties']['data_source_id'] = data_source_id
+            # feature['properties']['relationship'] = {}
+            feature['properties']['relationship']['relationship_id'] = str(uuid.uuid4())
+            feature['properties']['relationship']['road_event_id'] = road_event_id
+            #### Relationship logic invalid. It assumes that each feature is part of the same work zone
+            # if i == 0: feature['properties']['relationship']['first'] = road_event_ids
+            # else: feature['properties']['relationship']['next'] = road_event_ids
+
+            for lane in feature['properties']['lanes']:
+                lane_id = str(uuid.uuid4())
+                lane['lane_id'] = lane_id
+                lane['road_event_id'] = road_event_id
+                for lane_restriction in lane.get('restrictions', []):
+                    lane_restriction_id = str(uuid.uuid4())
+                    lane_restriction['lane_restriction_id'] = lane_restriction_id
+                    lane_restriction['lane_id'] = lane_id
+            for types_of_work in feature['properties']['types_of_work']:
+                types_of_work_id = str(uuid.uuid4())
+                types_of_work['types_of_work_id'] = types_of_work_id
+                types_of_work['road_event_id'] = road_event_id
+    return message
+
 
