@@ -1,4 +1,3 @@
-
 import xmltodict
 import xml.etree.ElementTree as ET
 import json
@@ -8,7 +7,7 @@ import random
 import string
 
 
-# Translator for icone
+# Translator
 def wzdx_creator(messages, info):
     wzd = {}
     wzd['road_event_feed_info'] = {}
@@ -22,7 +21,6 @@ def wzdx_creator(messages, info):
         wzd['road_event_feed_info']['update_frequency'] = info['metadata'][
             'datafeed_frequency_update']  # Verify data type
     wzd['road_event_feed_info']['version'] = '3.0'
-
 
     data_source = {}
     data_source['data_source_id'] = str(uuid.uuid4())
@@ -38,7 +36,8 @@ def wzdx_creator(messages, info):
     data_source['lrs_type'] = info['metadata']['lrs_type']
     # data_source['lrs_url'] = "basic url"
 
-    wzd['road_event_feed_info'] ['data_sources'] = [data_source]
+    wzd['road_event_feed_info']['data_sources'] = [data_source]
+
     wzd['type'] = 'FeatureCollection'
     nodes = []
     sub_identifier = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in
@@ -62,122 +61,131 @@ def wzdx_creator(messages, info):
         # Parse Incident to WZDx Feature
         wzd['features'].append(parse_incident(incident))
 
-        wzd = add_ids(wzd, True)
-        return wzd
 
-    #################### Sample Incident Xml format from icone data####################
-    #   <incident id="U13631714_202012161717">
-    #     <creationtime>2020-12-16T17:17:00Z</creationtime>
-    #     <updatetime>2020-12-16T17:47:00Z</updatetime>
-    #     <type>CONSTRUCTION</type>
-    #     <description>Roadwork - Lane Closed, MERGE LEFT [iCone]</description>
-    #     <location>
-    #       <direction>ONE_DIRECTION</direction>
-    #       <polyline>28.8060608,-96.9916512,28.8060608,-96.9916512</polyline>
-    #     </location>
-    #     <starttime>2020-12-16T17:17:00Z</starttime>
-    #   </incident>
 
-    # Parse Icone Incident to WZDx
+    wzd = add_ids(wzd, True)
+    return wzd
 
-    def parse_incident(incident):
-        feature = {}
 
-        feature['type'] = "Feature"
-        properties = {}
+#################### Sample Incident ####################
+#   <incident id="U13631714_202012161717">
+#     <creationtime>2020-12-16T17:17:00Z</creationtime>
+#     <updatetime>2020-12-16T17:47:00Z</updatetime>
+#     <type>CONSTRUCTION</type>
+#     <description>Roadwork - Lane Closed, MERGE LEFT [iCone]</description>
+#     <location>
+#       <direction>ONE_DIRECTION</direction>
+#       <polyline>28.8060608,-96.9916512,28.8060608,-96.9916512</polyline>
+#     </location>
+#     <starttime>2020-12-16T17:17:00Z</starttime>
+#   </incident>
 
-        # road_event_id
-        #### Leave this empty, it will be populated by add_ids
-        properties['road_event_id'] = ''
+# Parse Icone Incident to WZDx
+def parse_incident(incident):
+    feature = {}
 
-        # Event Type ['work-zone', 'detour']
-        properties['event_type'] = 'work-zone'
+    feature['type'] = "Feature"
+    properties = {}
 
-        # data_source_id
-        #### Leave this empty, it will be populated by add_ids
-        properties['data_source_id'] = ''
+    #### I included a skeleton of the message, fill out all required fields and as many optional fields as you can. Below is a link to the spec page for a road event
+    #### https://github.com/usdot-jpo-ode/jpo-wzdx/blob/master/spec-content/objects/RoadEvent.md
 
-        # start_date
-        properties['start_date'] = incident['starttime']
+    # road_event_id
+    #### Leave this empty, it will be populated by add_ids
+    properties['road_event_id'] = ''
 
-        # end_date
-        properties['end_date'] = ""
+    # Event Type ['work-zone', 'detour']
+    properties['event_type'] = 'work-zone'
 
-        # start_date_accuracy
-        properties['start_date_accuracy'] = ""
+    # data_source_id
+    #### Leave this empty, it will be populated by add_ids
+    properties['data_source_id'] = ''
 
-        # end_date_accuracy
-        properties['end_date_accuracy'] = ""
+    # start_date
+    properties['start_date'] = incident['starttime']
 
-        # beginning_accuracy
-        properties['beginning_accuracy'] = ""
+    # end_date
+    properties['end_date'] = ""
 
-        # ending_accuracy
-        properties['ending_accuracy'] = ""
+    # start_date_accuracy
+    properties['start_date_accuracy'] = ""
 
-        # road_name
-        properties['road_name'] = ""
+    # end_date_accuracy
+    properties['end_date_accuracy'] = ""
 
-        # direction
-        properties['direction'] = ""
+    # beginning_accuracy
+    properties['beginning_accuracy'] = ""
 
-        # vehicle impact
-        properties['vehicle_impact'] = ""
+    # ending_accuracy
+    properties['ending_accuracy'] = ""
 
-        # Relationship
-        properties['relationship'] = {}
+    # road_name
+    properties['road_name'] = ""
 
-        # lanes
-        properties['lanes'] = []
+    # direction
+    properties['direction'] = incident['location']
 
-        # road_name
-        properties['road_number'] = ""
+    # vehicle impact
+    properties['vehicle_impact'] = ""
 
-        # beginning_cross_street
-        properties['beginning_cross_street'] = ""
+    # Relationship
+    properties['relationship'] = {}
 
-        # beginning_cross_street
-        properties['ending_cross_street'] = ""
+    # lanes
+    properties['lanes'] = []
 
-        # beginning_milepost
-        properties['beginning_milepost'] = ""
+    # road_name
+    properties['road_number'] = ""
 
-        # ending_milepost
-        properties['ending_milepost'] = ""
+    # beginning_cross_street
+    properties['beginning_cross_street'] = ""
 
-        # event status
-        properties['event_status'] = ""
+    # beginning_cross_street
+    properties['ending_cross_street'] = ""
 
-        # event status
-        properties['total_num_lanes'] = 1
+    # beginning_milepost
+    properties['beginning_milepost'] = ""
 
-        # type_of_work
-        # maintenance, minor-road-defect-repair, roadside-work, overhead-work, below-road-work, barrier-work, surface-work, painting, roadway-relocation, roadway-creation
-        properties['types_of_work'] = []
+    # ending_milepost
+    properties['ending_milepost'] = ""
 
-        # reduced speed limit
-        properties['reduced_speed_limit'] = 25
+    # event status
+    properties['event_status'] = ""
 
-        # workers present
-        properties['workers_present'] = False
+    # event status
+    properties['total_num_lanes'] = 1
 
-        # restrictions
-        properties['restrictions'] = []
+    # type_of_work
+    # maintenance, minor-road-defect-repair, roadside-work, overhead-work, below-road-work, barrier-work, surface-work, painting, roadway-relocation, roadway-creation
+    properties['types_of_work'] = []
 
-        # description
-        properties['description'] = ""
+    # reduced speed limit
+    properties['reduced_speed_limit'] = 25
 
-        # creation_date
-        properties['creation_date'] = ""
+    # workers present
+    properties['workers_present'] = False
 
-        # update_date
-        properties['update_date'] = ""
+    # restrictions
+    properties['restrictions'] = []
 
-        feature = {}
-        feature['type'] = "Feature"
-        feature['properties'] = properties
+    # description
+    properties['description']= incident['description']
 
-        return feature
+    # creation_date
+    properties['creation_date'] = incident['creationtime']
+
+    # update_date
+    properties['update_date'] = incident['updatetime']
+
+    feature = {}
+    feature['type'] = "Feature"
+    feature['properties'] = properties
+
+    return feature
+
+
+
+
 
 # Add ids to message
 #### This function may fail if some optional fields are not present (lanes, types_of_work, relationship, ...)
@@ -217,6 +225,8 @@ def add_ids(message, add_ids):
                 types_of_work['types_of_work_id'] = types_of_work_id
                 types_of_work['road_event_id'] = road_event_id
     return message
+
+
 # Added encoding argument because of weird character at start of incidents.xml file
 with open('incidents.xml', encoding='utf-8-sig') as frsm:
     # Read
@@ -242,4 +252,3 @@ with open('incidents.xml', encoding='utf-8-sig') as frsm:
     wzdx = wzdx_creator(icone_obj, info)
     with open('icone_to_wzdx.geojson', 'w') as fwzdx:
         fwzdx.write(json.dumps(wzdx, indent=2))
-
