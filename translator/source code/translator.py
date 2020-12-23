@@ -217,5 +217,11 @@ def add_ids(message, add_ids):
                 types_of_work['types_of_work_id'] = types_of_work_id
                 types_of_work['road_event_id'] = road_event_id
     return message
+# Added encoding argument because of weird character at start of incidents.xml file
+with open('incidents.xml', encoding='utf-8-sig') as frsm:
+    # Read
+    xmlSTRING = frsm.read()
+    icone_obj = xmltodict.parse(xmlSTRING)
 
+    info = {}
 
