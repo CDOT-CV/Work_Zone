@@ -19,7 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9cca5f16-4c88-438e-8896-128d616bb4cd" name="Default Changelist" comment="added icon_to_wzdx.geojson file to source code where it is going to display all the messages">
+    <list default="true" id="9cca5f16-4c88-438e-8896-128d616bb4cd" name="Default Changelist" comment="updated code">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/translator/source code/translator.py" beforeDir="false" afterPath="$PROJECT_DIR$/translator/source code/translator.py" afterDir="false" />
     </list>
@@ -70,7 +70,8 @@
       <workItem from="1608596227216" duration="1626000" />
       <workItem from="1608599168063" duration="1518000" />
       <workItem from="1608657860018" duration="4805000" />
-      <workItem from="1608741874012" duration="92000" />
+      <workItem from="1608741874012" duration="630000" />
+      <workItem from="1608754190486" duration="618000" />
     </task>
     <task id="LOCAL-00001" summary="python libraries function i am going to use for my translator">
       <created>1608596565291</created>
@@ -198,7 +199,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608702491923</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="updated code">
+      <created>1608741985997</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1608741985997</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -233,7 +241,8 @@
     <MESSAGE value="relationship logic" />
     <MESSAGE value="Added encoding argument because of weird character at start of incidents.xml file" />
     <MESSAGE value="added icon_to_wzdx.geojson file to source code where it is going to display all the messages" />
-    <option name="LAST_COMMIT_MESSAGE" value="added icon_to_wzdx.geojson file to source code where it is going to display all the messages" />
+    <MESSAGE value="updated code" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated code" />
   </component>
   <component name="WindowStateProjectService">
     <state x="378" y="205" width="1071" height="706" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1608702575593">
@@ -244,13 +253,13 @@
       <screen x="0" y="25" width="1680" height="940" />
     </state>
     <state x="704" y="356" key="#com.intellij.fileTypes.FileTypeChooser/0.25.1680.940@0.25.1680.940" timestamp="1608600542156" />
-    <state x="349" y="212" key="Vcs.Push.Dialog.v2" timestamp="1608702497190">
+    <state x="349" y="212" key="Vcs.Push.Dialog.v2" timestamp="1608741994361">
       <screen x="0" y="25" width="1680" height="940" />
     </state>
-    <state x="349" y="212" key="Vcs.Push.Dialog.v2/0.25.1680.940@0.25.1680.940" timestamp="1608702497190" />
-    <state x="551" y="393" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1608702441126">
+    <state x="349" y="212" key="Vcs.Push.Dialog.v2/0.25.1680.940@0.25.1680.940" timestamp="1608741994361" />
+    <state x="551" y="393" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1608741970642">
       <screen x="0" y="25" width="1680" height="940" />
     </state>
-    <state x="551" y="393" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.25.1680.940@0.25.1680.940" timestamp="1608702441126" />
+    <state x="551" y="393" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.25.1680.940@0.25.1680.940" timestamp="1608741970642" />
   </component>
 </project>

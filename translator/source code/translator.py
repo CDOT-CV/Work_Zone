@@ -82,10 +82,27 @@ def wzdx_creator(messages, info):
 
 # Parse Icone Incident to WZDx
 def parse_incident(incident):
+
+
+
     feature = {}
+    geometry ={}
+    geometry['type'] = "LineString"
+    geometry['coordinates']= []
+
+
+    polyline= incident['location']['polyline'].split(',')
+    for i in  range(0,len(polyline),2) :
+        geometry['coordinates'].append([float(polyline[i+1]),float(polyline[i])])
+
+
+
+
 
     feature['type'] = "Feature"
     properties = {}
+
+
 
     #### I included a skeleton of the message, fill out all required fields and as many optional fields as you can. Below is a link to the spec page for a road event
     #### https://github.com/usdot-jpo-ode/jpo-wzdx/blob/master/spec-content/objects/RoadEvent.md
@@ -105,28 +122,43 @@ def parse_incident(incident):
     properties['start_date'] = incident['starttime']
 
     # end_date
-    properties['end_date'] = ""
+    properties['end_date'] = incident.get('endtime','')
 
     # start_date_accuracy
-    properties['start_date_accuracy'] = ""
+    properties['start_date_accuracy'] = "estimated"
 
     # end_date_accuracy
-    properties['end_date_accuracy'] = ""
+    properties['end_date_accuracy'] = "estimated"
 
     # beginning_accuracy
-    properties['beginning_accuracy'] = ""
+    properties['beginning_accuracy'] = "estimated"
 
     # ending_accuracy
-    properties['ending_accuracy'] = ""
+    properties['ending_accuracy'] = "estimated"
 
     # road_name
-    properties['road_name'] = ""
+    properties['road_name'] = incident['location'].get('street','')
 
     # direction
-    properties['direction'] = incident['location']
+    direction = ''
+    long_dif = geometry['coordinates'][-1][0] - geometry['coordinates'][0][0]
+    lat_dif = geometry['coordinates'][-1][1] - geometry['coordinates'][0][1]
+    if abs(long_dif) > abs(lat_dif):
+        if long_dif > 0:
+            direction = 'eastbound'
+        else:
+            direction = 'westbound'
+    elif lat_dif > 0:
+        direction = 'northbound'
+    else:
+        direction = 'southbound'
+    properties['direction'] = direction
 
     # vehicle impact
-    properties['vehicle_impact'] = ""
+    vehicle_impact = 'all-lanes-open'
+    if 'lane closed' in incident['description'].lower() :
+        vehicle_impact = 'some-lanes-closed'
+    properties['vehicle_impact'] = vehicle_impact
 
     # Relationship
     properties['relationship'] = {}
@@ -136,6 +168,8 @@ def parse_incident(incident):
 
     # road_name
     properties['road_number'] = ""
+
+
 
     # beginning_cross_street
     properties['beginning_cross_street'] = ""
@@ -150,7 +184,18 @@ def parse_incident(incident):
     properties['ending_milepost'] = ""
 
     # event status
-    properties['event_status'] = ""
+    start_time=datetime.strptime(incident['starttime'],"%Y-%m-%dT%H:%M:%SZ")
+
+    event_status="active"
+    if datetime.now() < start_time :
+        event_status="planned" #if < 2 to 3 weeks make it pending instead of planned
+    elif 'endtime' in incident  :
+        end_time = datetime.strptime(incident.get('endtime', ''), "%Y-%m-%dT%H:%M:%SZ")
+
+        if end_time < datetime.now() :
+            event_status = "completed"
+
+    properties['event_status'] = event_status
 
     # event status
     properties['total_num_lanes'] = 1
@@ -180,8 +225,10 @@ def parse_incident(incident):
     feature = {}
     feature['type'] = "Feature"
     feature['properties'] = properties
+    feature['geometry']= geometry
 
     return feature
+
 
 
 
@@ -228,7 +275,7 @@ def add_ids(message, add_ids):
 
 
 # Added encoding argument because of weird character at start of incidents.xml file
-with open('incidents.xml', encoding='utf-8-sig') as frsm:
+with open('/Users/abi/Desktop/python/incidents.xml', encoding='utf-8-sig') as frsm:
     # Read
     xmlSTRING = frsm.read()
     icone_obj = xmltodict.parse(xmlSTRING)
@@ -250,5 +297,5 @@ with open('incidents.xml', encoding='utf-8-sig') as frsm:
     info['metadata']['issuing_organization'] = "issuing_organization"
 
     wzdx = wzdx_creator(icone_obj, info)
-    with open('icone_to_wzdx.geojson', 'w') as fwzdx:
+    with open('icone_to_wzdx_test.geojson', 'w') as fwzdx:
         fwzdx.write(json.dumps(wzdx, indent=2))
