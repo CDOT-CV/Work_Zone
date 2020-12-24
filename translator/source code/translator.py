@@ -297,5 +297,5 @@ with open('/Users/abi/Desktop/python/incidents.xml', encoding='utf-8-sig') as fr
     info['metadata']['issuing_organization'] = "issuing_organization"
 
     wzdx = wzdx_creator(icone_obj, info)
-    with open('icone_to_wzdx_test.geojson', 'w') as fwzdx:
+    with open('icone_to_wzdx.geojson', 'w') as fwzdx:
         fwzdx.write(json.dumps(wzdx, indent=2))
