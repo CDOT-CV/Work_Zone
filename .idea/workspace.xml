@@ -19,9 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9cca5f16-4c88-438e-8896-128d616bb4cd" name="Default Changelist" comment="added assets xml descriptions.txt file in docs">
-      <change afterPath="$PROJECT_DIR$/docs/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="9cca5f16-4c88-438e-8896-128d616bb4cd" name="Default Changelist" comment="updated README.md in sample file directory">
+      <change beforePath="$PROJECT_DIR$/translator/sample files/icone_to_wzdx_test.geojson" beforeDir="false" afterPath="$PROJECT_DIR$/translator/sample files/Output Message/icone_to_wzdx_test.geojson" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/translator/sample files/incidents_extended.xml" beforeDir="false" afterPath="$PROJECT_DIR$/translator/sample files/Icone Data/incidents_extended.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,6 +55,9 @@
       <recent name="$PROJECT_DIR$/docs" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/translator/sample files/Output Message" />
+      <recent name="$PROJECT_DIR$/translator/sample files/Icone Data" />
+      <recent name="$PROJECT_DIR$/translator/sample files" />
       <recent name="$PROJECT_DIR$/translator/source code" />
     </key>
   </component>
@@ -79,7 +82,7 @@
       <workItem from="1609176020430" duration="283000" />
       <workItem from="1609176359429" duration="231000" />
       <workItem from="1609176605967" duration="2000" />
-      <workItem from="1609257064440" duration="2653000" />
+      <workItem from="1609257064440" duration="2994000" />
     </task>
     <task id="LOCAL-00001" summary="python libraries function i am going to use for my translator">
       <created>1608596565291</created>
@@ -242,7 +245,21 @@
       <option name="project" value="LOCAL" />
       <updated>1609262099488</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="updated README.md in sample file directory">
+      <created>1609264005678</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1609264005678</updated>
+    </task>
+    <task id="LOCAL-00025" summary="updated README.md in sample file directory">
+      <created>1609264111974</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1609264111974</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -281,6 +298,7 @@
     <MESSAGE value="updated geojson file" />
     <MESSAGE value="updated sample geojson file" />
     <MESSAGE value="added assets xml descriptions.txt file in docs" />
-    <option name="LAST_COMMIT_MESSAGE" value="added assets xml descriptions.txt file in docs" />
+    <MESSAGE value="updated README.md in sample file directory" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated README.md in sample file directory" />
   </component>
 </project>
