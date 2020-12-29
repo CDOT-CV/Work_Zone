@@ -298,32 +298,32 @@ def add_ids(message, add_ids):
                 types_of_work['road_event_id'] = road_event_id
     return message
 
-
-# Added encoding argument because of weird character at start of incidents.xml file
-with open('translator/sample files/icone data/incidents_extended.xml', encoding='utf-8-sig') as frsm:
-    # Read
-    xmlSTRING = frsm.read()
-    icone_obj = xmltodict.parse(xmlSTRING)
-
-    info = {}
-
-    #### Consider whether this id needs to be hardcoded or generated
-    info['feed_info_id'] = "feed_info_id"
-
-    #### This information is required, might want to hardcode
-    info['metadata'] = {}
-    info['metadata']['wz_location_method'] = "wz_location_method"
-    info['metadata']['lrs_type'] = "lrs_type"
-    info['metadata']['location_verify_method'] = "location_verify_method"
-    info['metadata']['datafeed_frequency_update'] = 86400
-    info['metadata']['timestamp_metadata_update'] = "timestamp_metadata_update"
-    info['metadata']['contact_name'] = "contact_name"
-    info['metadata']['contact_email'] = "contact_email"
-    info['metadata']['issuing_organization'] = "issuing_organization"
-
-    wzdx = wzdx_creator(icone_obj, info)
-    with open('icone_to_wzdx_test.geojson', 'w') as fwzdx:
-        fwzdx.write(json.dumps(wzdx, indent=2))
+#
+# # Added encoding argument because of weird character at start of incidents.xml file
+# with open('translator/sample files/icone data/incidents_extended.xml', encoding='utf-8-sig') as frsm:
+#     # Read
+#     xmlSTRING = frsm.read()
+#     icone_obj = xmltodict.parse(xmlSTRING)
+#
+#     info = {}
+#
+#     #### Consider whether this id needs to be hardcoded or generated
+#     info['feed_info_id'] = "feed_info_id"
+#
+#     #### This information is required, might want to hardcode
+#     info['metadata'] = {}
+#     info['metadata']['wz_location_method'] = "wz_location_method"
+#     info['metadata']['lrs_type'] = "lrs_type"
+#     info['metadata']['location_verify_method'] = "location_verify_method"
+#     info['metadata']['datafeed_frequency_update'] = 86400
+#     info['metadata']['timestamp_metadata_update'] = "timestamp_metadata_update"
+#     info['metadata']['contact_name'] = "contact_name"
+#     info['metadata']['contact_email'] = "contact_email"
+#     info['metadata']['issuing_organization'] = "issuing_organization"
+#
+#     wzdx = wzdx_creator(icone_obj, info)
+#     with open('icone_to_wzdx_test.geojson', 'w') as fwzdx:
+#         fwzdx.write(json.dumps(wzdx, indent=2))
 
 
 #Unit testing code
