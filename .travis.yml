@@ -9,7 +9,7 @@ addons:
 
 script:
   - coverage erase
-  - coverage run -m pytest "'translator/source code/translator.py' -i 'translator/sample files/Icone Data/incidents_extended.xml'"
+  - coverage run -m pytest 'translator/source code/translator.py'
   - coverage xml -i
   - sonar-scanner
 
