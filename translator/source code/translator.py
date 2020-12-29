@@ -5,6 +5,7 @@ from datetime import datetime
 import uuid
 import random
 import string
+import pytest
 
 
 # Translator
@@ -80,20 +81,57 @@ def wzdx_creator(messages, info):
 #     <starttime>2020-12-16T17:17:00Z</starttime>
 #   </incident>
 
+
+
+#function to calculate vehicle impact
+def get_vehicle_impact(description):
+    vehicle_impact = 'all-lanes-open'
+    if 'lane closed' in description.lower():
+        vehicle_impact = 'some-lanes-closed'
+        return vehicle_impact
+
+
+
+#function to parse polyline to geometry line string
+def parse_polyline(polylinestring):
+    polyline =polylinestring.split(',')
+    coordinates = []
+    for i in range(0, len(polyline), 2):
+        coordinates.append([float(polyline[i + 1]), float(polyline[i])])
+    return coordinates
+
+#function to get road direction by using geometry coordinates
+def get_road_direction(coordinates):
+    long_dif = coordinates[-1][0] - coordinates[0][0]
+    lat_dif = coordinates[-1][1] - coordinates[0][1]
+    if abs(long_dif) > abs(lat_dif):
+        if long_dif > 0:
+            direction = 'eastbound'
+        else:
+            direction = 'westbound'
+    elif lat_dif > 0:
+        direction = 'northbound'
+    else:
+        direction = 'southbound'
+
+    return direction
+
+#function to get event status
+
+
+
 # Parse Icone Incident to WZDx
 def parse_incident(incident):
+
 
 
 
     feature = {}
     geometry ={}
     geometry['type'] = "LineString"
-    geometry['coordinates']= []
+    geometry['coordinates']= parse_polyline(incident['location']['polyline'])
 
 
-    polyline= incident['location']['polyline'].split(',')
-    for i in  range(0,len(polyline),2) :
-        geometry['coordinates'].append([float(polyline[i+1]),float(polyline[i])])
 
 
 
@@ -141,24 +179,11 @@ def parse_incident(incident):
 
     # direction
     direction = ''
-    long_dif = geometry['coordinates'][-1][0] - geometry['coordinates'][0][0]
-    lat_dif = geometry['coordinates'][-1][1] - geometry['coordinates'][0][1]
-    if abs(long_dif) > abs(lat_dif):
-        if long_dif > 0:
-            direction = 'eastbound'
-        else:
-            direction = 'westbound'
-    elif lat_dif > 0:
-        direction = 'northbound'
-    else:
-        direction = 'southbound'
-    properties['direction'] = direction
+    properties['direction'] = get_road_direction(geometry['coordinates'])
 
     # vehicle impact
-    vehicle_impact = 'all-lanes-open'
-    if 'lane closed' in incident['description'].lower() :
-        vehicle_impact = 'some-lanes-closed'
-    properties['vehicle_impact'] = vehicle_impact
+
+    properties['vehicle_impact'] = get_vehicle_impact(incident['description'])
 
     # Relationship
     properties['relationship'] = {}
@@ -275,7 +300,7 @@ def add_ids(message, add_ids):
 
 
 # Added encoding argument because of weird character at start of incidents.xml file
-with open('incidents_extended.xml', encoding='utf-8-sig') as frsm:
+with open('../sample files/icone data/incidents_extended.xml', encoding='utf-8-sig') as frsm:
     # Read
     xmlSTRING = frsm.read()
     icone_obj = xmltodict.parse(xmlSTRING)
@@ -299,3 +324,114 @@ with open('incidents_extended.xml', encoding='utf-8-sig') as frsm:
     wzdx = wzdx_creator(icone_obj, info)
     with open('icone_to_wzdx_test.geojson', 'w') as fwzdx:
         fwzdx.write(json.dumps(wzdx, indent=2))
+
+
+#Unit testing code
+
+
+def test_parse_incident() :
+    test_var=""" <incident id="U13631595_202012160845">
+    <creationtime>2020-12-16T08:45:03Z</creationtime>
+    <updatetime>2020-12-16T17:18:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE LEFT [Trafficade, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>34.8380671,-114.1450650,34.8380671,-114.1450650</polyline>
+    </location>
+    <starttime>2020-12-16T08:45:03Z</starttime>
+    </incident> """
+
+    icone_obj = xmltodict.parse(test_var)
+    test_feature = parse_incident(icone_obj['incident'])
+    valid_feature = {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "",
+        "event_type": "work-zone",
+        "data_source_id": "",
+        "start_date": "2020-12-16T08:45:03Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": "some-lanes-closed",
+        "relationship": {
+
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": False,
+        "restrictions": [],
+        "description": "Roadwork - Lane Closed, MERGE LEFT [Trafficade, iCone]",
+        "creation_date": "2020-12-16T08:45:03Z",
+        "update_date": "2020-12-16T17:18:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -114.145065,
+            34.8380671
+          ],
+          [
+            -114.145065,
+            34.8380671
+          ]
+        ]
+      }
+    }
+
+    assert test_feature == valid_feature
+
+
+def test_parse_polyline() :
+    test_polyline= "34.8380671,-114.1450650,34.8380671,-114.1450650"
+    test_coordinates=parse_polyline(test_polyline)
+    valid_coordinates= [
+          [
+            -114.145065,
+            34.8380671
+          ],
+          [
+            -114.145065,
+            34.8380671
+          ]
+        ]
+    assert  test_coordinates == valid_coordinates
+
+
+def test_get_road_direction():
+    test_coordinates = [
+          [
+            -114.145065,
+            34.8380671
+          ],
+          [
+            -114.145065,
+            34.8380671
+          ]
+        ]
+    test_direction=get_road_direction(test_coordinates)
+    valid_direction= "southbound"
+
+    assert test_direction==valid_direction
+
+
+def test_get_vehicle_impact():
+    test_description= "Roadwork - Lane Closed, MERGE LEFT [Trafficade, iCone]"
+    test_vehicle_impact=get_vehicle_impact(test_description)
+    valid_vehicle_impact = "some-lanes-closed"
+
+    assert test_vehicle_impact==valid_vehicle_impact
