@@ -5,8 +5,10 @@ addons:
   sonarcloud:
     organization: "cdot-cv"
     token: ${SONAR_TOKEN}
-script:
-  - coverage erase
-  - coverage run -m pytest 'translator/source code/translator.py'
-  - coverage xml -i
-  - sonar-scanner
+
+    ls
+#script:
+#  - coverage erase
+#  - coverage run -m pytest 'translator/source code/translator.py'
+#  - coverage xml -i
+#  - sonar-scanner
