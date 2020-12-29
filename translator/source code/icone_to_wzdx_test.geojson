@@ -1,0 +1,4608 @@
+{
+  "road_event_feed_info": {
+    "feed_info_id": "feed_info_id",
+    "update_date": "2020-12-29T12:21:57Z",
+    "publisher": "CDOT ",
+    "contact_name": "Abinash Konersman",
+    "contact_email": "abinash.konersman@state.co.us",
+    "update_frequency": 86400,
+    "version": "3.0",
+    "data_sources": [
+      {
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "feed_info_id": "feed_info_id",
+        "organization_name": "issuing_organization",
+        "contact_name": "contact_name",
+        "contact_email": "contact_email",
+        "update_frequency": 86400,
+        "update_date": "2020-12-29T12:21:57Z",
+        "location_verify_method": "location_verify_method",
+        "location_method": "wz_location_method",
+        "lrs_type": "lrs_type"
+      }
+    ]
+  },
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "84ab28e1-a041-4636-a476-3a2bc6054d39",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-02-14T17:08:16Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "I-75 N",
+        "direction": "westbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "26c8d006-d956-41a5-ac1c-6306d438ecda",
+          "road_event_id": "84ab28e1-a041-4636-a476-3a2bc6054d39"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "19-1245: Roadwork between MP 40 and MP 48",
+        "creation_date": "2019-11-05T01:22:20Z",
+        "update_date": "2020-08-21T15:52:02Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -84.112854,
+            37.157199
+          ],
+          [
+            -84.1238971,
+            37.1686478
+          ],
+          [
+            -84.145861,
+            37.1913
+          ],
+          [
+            -84.175297,
+            37.209348
+          ],
+          [
+            -84.201303,
+            37.216837
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "c186721a-e9a7-4aa2-a617-a3fcdfc3aa5c",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2019-11-22T23:02:21Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "I-75 S",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "a29c46a3-52fd-4b28-ad4f-50a5c328ebfd",
+          "road_event_id": "c186721a-e9a7-4aa2-a617-a3fcdfc3aa5c"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "19-1245: Roadwork between MP 48 and MP 40",
+        "creation_date": "2019-11-05T01:32:44Z",
+        "update_date": "2020-08-21T15:52:02Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -84.169129,
+            37.20667
+          ],
+          [
+            -84.157346,
+            37.201223
+          ],
+          [
+            -84.140482,
+            37.185815
+          ],
+          [
+            -84.121425,
+            37.166345
+          ],
+          [
+            -84.111588,
+            37.147808
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "19d45c31-8a39-474d-9692-8b0ddd53d828",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2019-11-20T21:56:19Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "I-75 N",
+        "direction": "northbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "0b926127-d250-4c7c-ab35-a5b0da0e8202",
+          "road_event_id": "19d45c31-8a39-474d-9692-8b0ddd53d828"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "19-1210: Roadwork between MP 28.9 and MP 33.3",
+        "creation_date": "2019-11-19T22:43:10Z",
+        "update_date": "2020-08-21T15:52:02Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -84.113184,
+            36.965312
+          ],
+          [
+            -84.110439,
+            36.979238
+          ],
+          [
+            -84.103757,
+            37.007131
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "2fe2959a-6b73-48f8-a3fc-4f49a8a1e51b",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2019-11-20T21:56:22Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "I-75 S",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "d62da9dc-7371-4f17-93ba-35d4a206d23d",
+          "road_event_id": "2fe2959a-6b73-48f8-a3fc-4f49a8a1e51b"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "19-1210: Roadwork between MP 28.9 and MP 33.3",
+        "creation_date": "2019-11-19T22:50:54Z",
+        "update_date": "2020-08-21T15:52:03Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -84.098933,
+            37.049889
+          ],
+          [
+            -84.098554,
+            37.035515
+          ],
+          [
+            -84.10517,
+            37.004092
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "2d5848f9-f6f9-48af-a010-bf43273f1844",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2019-11-26T16:30:16Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "I-75 S",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "b70a38a7-4090-4c0d-8db9-f6cd43a82af5",
+          "road_event_id": "2d5848f9-f6f9-48af-a010-bf43273f1844"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "18-1001: Roadwork between MP 54 and MP 59",
+        "creation_date": "2019-11-19T23:12:39Z",
+        "update_date": "2020-08-21T15:52:02Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -84.306549,
+            37.338256
+          ],
+          [
+            -84.306481,
+            37.338416
+          ],
+          [
+            -84.303585,
+            37.328765
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "17172727-b68f-4b78-8061-6bb9ce43ef42",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-02-14T17:50:18Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "I-75 N",
+        "direction": "northbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "6b313f5f-1cda-44d3-84ef-6ecba53bf1a8",
+          "road_event_id": "17172727-b68f-4b78-8061-6bb9ce43ef42"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "18-1001: Roadwork between MP 54 and MP 59",
+        "creation_date": "2019-11-20T04:20:30Z",
+        "update_date": "2020-08-21T15:52:03Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -84.250244,
+            37.264908
+          ],
+          [
+            -84.255334,
+            37.278209
+          ],
+          [
+            -84.263218,
+            37.285597
+          ],
+          [
+            -84.285754,
+            37.305551
+          ],
+          [
+            -84.307316,
+            37.357947
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "9f2aa72c-a596-44f2-b176-f3d02101f312",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-03-09T17:10:18Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "I-69 N",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "78367040-d829-4aca-9fc3-5d3c982b690d",
+          "road_event_id": "9f2aa72c-a596-44f2-b176-f3d02101f312"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork I-69 N",
+        "creation_date": "2020-03-09T16:18:10Z",
+        "update_date": "2020-08-21T15:52:03Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -86.466029,
+            39.387328
+          ],
+          [
+            -86.466029,
+            39.387328
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "cf2cceb1-4279-45e4-a082-8286f929e9fa",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-04-13T17:16:23Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "SR-37 SB",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "8c9b1755-c584-44f2-a7ee-9b39ccc5ef3f",
+          "road_event_id": "cf2cceb1-4279-45e4-a082-8286f929e9fa"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork I-69 N",
+        "creation_date": "2020-04-13T17:12:18Z",
+        "update_date": "2020-08-21T15:52:04Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -86.442772,
+            39.404317
+          ],
+          [
+            -86.442772,
+            39.404317
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "29e93d41-eddc-4e0a-b07b-d40e9d1d4584",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-06-12T19:36:31Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "I-480 E",
+        "direction": "eastbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "3c78ac0b-054c-42bf-8cbe-c8794df28b87",
+          "road_event_id": "29e93d41-eddc-4e0a-b07b-d40e9d1d4584"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "20-0006: Roadwork I-480 E",
+        "creation_date": "2020-06-12T19:03:27Z",
+        "update_date": "2020-08-21T15:52:04Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -81.97075,
+            41.388326
+          ],
+          [
+            -81.94554,
+            41.395692
+          ],
+          [
+            -81.921577,
+            41.404223
+          ],
+          [
+            -81.892403,
+            41.415454
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "8bfca7cc-a67e-44b5-af0b-ef4ba54912b0",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-06-12T19:36:33Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "I-480 W",
+        "direction": "westbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "30941717-f148-40df-a943-48458b7d7b7a",
+          "road_event_id": "8bfca7cc-a67e-44b5-af0b-ef4ba54912b0"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "20-0006: Roadwork I-480 W",
+        "creation_date": "2020-06-12T19:05:34Z",
+        "update_date": "2020-08-21T15:52:04Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -81.862112,
+            41.424992
+          ],
+          [
+            -81.862112,
+            41.424992
+          ],
+          [
+            -81.898686,
+            41.414105
+          ],
+          [
+            -81.92174,
+            41.40456
+          ],
+          [
+            -81.92174,
+            41.40456
+          ],
+          [
+            -81.947409,
+            41.395362
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "74a40169-8e4f-4658-a35c-36e5083eca25",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T06:27:00Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "5d8f2b5a-1e42-44b4-b476-5bd9ce59bc73",
+          "road_event_id": "74a40169-8e4f-4658-a35c-36e5083eca25"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork Active [Triton, iCone]",
+        "creation_date": "2020-08-21T06:27:00Z",
+        "update_date": "2020-08-21T15:42:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -115.1884641,
+            36.0746052
+          ],
+          [
+            -115.1884641,
+            36.0746052
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "08bc4ade-4b5d-4981-813e-714301348347",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T15:32:00Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": "some-lanes-closed",
+        "relationship": {
+          "relationship_id": "c58853f3-e91d-40cb-a6a0-23aa274a3dd3",
+          "road_event_id": "08bc4ade-4b5d-4981-813e-714301348347"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Lane Closed, MERGE LEFT [Trafficade, iCone]",
+        "creation_date": "2020-08-21T15:32:00Z",
+        "update_date": "2020-08-21T15:47:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -112.2898304,
+            33.443232
+          ],
+          [
+            -112.2898304,
+            33.443232
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "f2eadd6e-a552-4e90-af55-a20a8fd09efe",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-18T22:40:00Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "d098d749-6007-424d-9db4-7742bb332e60",
+          "road_event_id": "f2eadd6e-a552-4e90-af55-a20a8fd09efe"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork Active [Triton, iCone]",
+        "creation_date": "2020-08-18T22:40:00Z",
+        "update_date": "2020-08-21T15:35:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -115.1885339,
+            36.074662
+          ],
+          [
+            -115.1885339,
+            36.074662
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "488b976b-841e-498f-9abc-cc4dce8c26ff",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T14:58:03Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": "some-lanes-closed",
+        "relationship": {
+          "relationship_id": "32c4b427-b8d7-4603-9a5c-fc98a1cde9df",
+          "road_event_id": "488b976b-841e-498f-9abc-cc4dce8c26ff"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Lane Closed, MERGE LEFT [Established Traffic, iCone]",
+        "creation_date": "2020-08-21T14:58:03Z",
+        "update_date": "2020-08-21T15:49:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -77.0846728,
+            41.6631429
+          ],
+          [
+            -77.0846728,
+            41.6631429
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "0e459465-08ed-4016-b337-f8b06425d1e7",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T11:58:03Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": "some-lanes-closed",
+        "relationship": {
+          "relationship_id": "f5c56380-3176-482c-b36b-603698ac8c57",
+          "road_event_id": "0e459465-08ed-4016-b337-f8b06425d1e7"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Lane Closed, MERGE LEFT [Trafficade, iCone]",
+        "creation_date": "2020-08-21T11:58:03Z",
+        "update_date": "2020-08-21T15:51:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -112.0937664,
+            33.3776531
+          ],
+          [
+            -112.0937664,
+            33.3776531
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "c5c14656-531f-4825-8514-742e1bc93648",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-20T15:50:00Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "2e4cd182-141f-4c4f-a571-76a01f7fbcd4",
+          "road_event_id": "c5c14656-531f-4825-8514-742e1bc93648"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork Traffic Monitoring Device [Triton, iCone]",
+        "creation_date": "2020-08-20T15:50:00Z",
+        "update_date": "2020-08-21T15:47:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -115.1885475,
+            36.0746813
+          ],
+          [
+            -115.1885475,
+            36.0746813
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "1c6a1a0c-f827-404f-bbf9-b885533e7264",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T14:09:00Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": "some-lanes-closed",
+        "relationship": {
+          "relationship_id": "2d982253-5bee-41a4-a230-1d9d34f44340",
+          "road_event_id": "1c6a1a0c-f827-404f-bbf9-b885533e7264"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Lane Closed, MERGE LEFT [Trafficade, iCone]",
+        "creation_date": "2020-08-21T14:09:00Z",
+        "update_date": "2020-08-21T15:53:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -111.8873958,
+            33.4513971
+          ],
+          [
+            -111.8873958,
+            33.4513971
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "e5d61a00-3d86-4141-ae8c-8c5644ba6591",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-19T07:15:00Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "0d6d757e-b280-472b-8eaf-87d768fca862",
+          "road_event_id": "e5d61a00-3d86-4141-ae8c-8c5644ba6591"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork Active [Triton, iCone]",
+        "creation_date": "2020-08-19T07:15:00Z",
+        "update_date": "2020-08-21T15:41:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -115.1885328,
+            36.0746413
+          ],
+          [
+            -115.1885328,
+            36.0746413
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "6be35140-e57b-42cf-851f-4e9acbfe85ef",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T12:17:03Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": "some-lanes-closed",
+        "relationship": {
+          "relationship_id": "ee78b4a2-e4af-43c5-93c8-23f49648da7f",
+          "road_event_id": "6be35140-e57b-42cf-851f-4e9acbfe85ef"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Lane Closed, MERGE RIGHT [Trafficade, iCone]",
+        "creation_date": "2020-08-21T12:17:03Z",
+        "update_date": "2020-08-21T15:50:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -111.6003288,
+            35.2079376
+          ],
+          [
+            -111.6003288,
+            35.2079376
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "187203aa-2784-447a-b274-3e240b0d328b",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T14:27:00Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "014dea36-3916-4dec-8805-5a52b25ef1e7",
+          "road_event_id": "187203aa-2784-447a-b274-3e240b0d328b"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork Active [Site-Safe, iCone]",
+        "creation_date": "2020-08-21T14:27:00Z",
+        "update_date": "2020-08-21T15:53:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -85.737568,
+            39.8217943
+          ],
+          [
+            -85.737568,
+            39.8217943
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "3e18794a-0427-4c5b-89dc-f5dc365828e3",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T11:56:03Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": "some-lanes-closed",
+        "relationship": {
+          "relationship_id": "faa6ed32-a670-4e43-bcc7-febe05c6efdc",
+          "road_event_id": "3e18794a-0427-4c5b-89dc-f5dc365828e3"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Lane Closed, MERGE RIGHT [Trafficade, iCone]",
+        "creation_date": "2020-08-21T11:56:03Z",
+        "update_date": "2020-08-21T15:52:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -111.9274629,
+            33.531457
+          ],
+          [
+            -111.9274629,
+            33.531457
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "d3702c02-2434-429d-91bf-c3cd56aa26d0",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T08:29:03Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": "some-lanes-closed",
+        "relationship": {
+          "relationship_id": "ac59b38a-5c47-4f52-8b99-bc7f57fc48ef",
+          "road_event_id": "d3702c02-2434-429d-91bf-c3cd56aa26d0"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Lane Closed, MERGE LEFT [Trafficade, iCone]",
+        "creation_date": "2020-08-21T08:29:03Z",
+        "update_date": "2020-08-21T15:51:05Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -112.8960106,
+            35.3196785
+          ],
+          [
+            -112.8960106,
+            35.3196785
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "ef437e1d-8ee0-4bc3-b721-c3f7f064e70f",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T15:49:00Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "808b2294-041c-4495-b539-9872480b2040",
+          "road_event_id": "ef437e1d-8ee0-4bc3-b721-c3f7f064e70f"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Road Ranger Emergency Personnel On-Scene. Move over - Caution [DBi, iCone]",
+        "creation_date": "2020-08-21T15:49:00Z",
+        "update_date": "2020-08-21T15:49:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -81.3972224,
+            28.5104992
+          ],
+          [
+            -81.3972224,
+            28.5104992
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "17081095-a743-402b-b8b5-71ff0acf6820",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T15:52:00Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "d3050e8d-c511-4f15-8e30-78240eba5d22",
+          "road_event_id": "17081095-a743-402b-b8b5-71ff0acf6820"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Road painting in progress - MERGE LEFT OR RIGHT [Region of Durham, iCone]",
+        "creation_date": "2020-08-21T15:52:00Z",
+        "update_date": "2020-08-21T15:52:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -78.5016,
+            43.9590848
+          ],
+          [
+            -78.5016,
+            43.9590848
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "db9029e4-8af0-4d55-9c98-6244b8a82554",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-12T13:21:00Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": "some-lanes-closed",
+        "relationship": {
+          "relationship_id": "c0c51109-4f2a-455e-a94c-06805b9bf447",
+          "road_event_id": "db9029e4-8af0-4d55-9c98-6244b8a82554"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Lane Closed, MERGE RIGHT [Triton, iCone]",
+        "creation_date": "2020-08-12T13:21:00Z",
+        "update_date": "2020-08-21T15:53:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -115.0498806,
+            36.2738391
+          ],
+          [
+            -115.0498806,
+            36.2738391
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "fc9fa4fa-0ae8-40fd-a1a4-4043e6640220",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-20T15:55:00Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "304539b2-73a9-4a72-b574-d08294971926",
+          "road_event_id": "fc9fa4fa-0ae8-40fd-a1a4-4043e6640220"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork Active [Triton, iCone]",
+        "creation_date": "2020-08-20T15:55:00Z",
+        "update_date": "2020-08-21T15:28:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -115.1884969,
+            36.0746428
+          ],
+          [
+            -115.1884969,
+            36.0746428
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "0ec636e3-984b-4bdc-8a67-4324b7d4964c",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T13:36:29Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "78faa7e7-ebe6-4812-bb9f-022eca8f5215",
+          "road_event_id": "0ec636e3-984b-4bdc-8a67-4324b7d4964c"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Caution [Triton, iCone]",
+        "creation_date": "2020-08-21T13:36:29Z",
+        "update_date": "2020-08-21T15:53:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -115.0638171,
+            36.101513
+          ],
+          [
+            -115.0638171,
+            36.101513
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "51650084-82c8-4af5-a694-bc6cbc95b95c",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-19T00:07:00Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "6f49c71a-818b-42ba-bdb8-8f3665e34081",
+          "road_event_id": "51650084-82c8-4af5-a694-bc6cbc95b95c"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork Active [Triton, iCone]",
+        "creation_date": "2020-08-19T00:07:00Z",
+        "update_date": "2020-08-21T15:49:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -115.1885399,
+            36.0746337
+          ],
+          [
+            -115.1885399,
+            36.0746337
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "0fe000dd-0929-42a6-94de-fe8ef548f7e6",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T13:41:03Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": "some-lanes-closed",
+        "relationship": {
+          "relationship_id": "32aa1324-c268-4f3b-bced-193a127bb908",
+          "road_event_id": "0fe000dd-0929-42a6-94de-fe8ef548f7e6"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Lane Closed, MERGE RIGHT [Trafficade, iCone]",
+        "creation_date": "2020-08-21T13:41:03Z",
+        "update_date": "2020-08-21T15:52:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -112.2549491,
+            33.5074398
+          ],
+          [
+            -112.2549491,
+            33.5074398
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "2fa6af88-8761-4bac-81ff-6a990faa2e57",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T15:49:00Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "bbb4c52e-7154-40a9-b574-09e25c0f8d3c",
+          "road_event_id": "2fa6af88-8761-4bac-81ff-6a990faa2e57"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Road Ranger Emergency Personnel On-Scene. Move over - MERGE LEFT [DBi, iCone]",
+        "creation_date": "2020-08-21T15:49:00Z",
+        "update_date": "2020-08-21T15:49:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -81.3884352,
+            28.5169568
+          ],
+          [
+            -81.3884352,
+            28.5169568
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "198f0800-ee4b-4466-8d83-0542e75fe365",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T14:20:00Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "2f3e6a6b-d530-47d9-aa8a-345a0715a173",
+          "road_event_id": "198f0800-ee4b-4466-8d83-0542e75fe365"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork Active [Site-Safe, iCone]",
+        "creation_date": "2020-08-21T14:20:00Z",
+        "update_date": "2020-08-21T15:49:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -85.383037,
+            39.8526969
+          ],
+          [
+            -85.383037,
+            39.8526969
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "bc1676aa-643b-4046-95af-b365a05c4221",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-20T17:49:00Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "cf7e7e2b-51fc-4bec-9854-1926fcff31ea",
+          "road_event_id": "bc1676aa-643b-4046-95af-b365a05c4221"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork Active [Triton, iCone]",
+        "creation_date": "2020-08-20T17:49:00Z",
+        "update_date": "2020-08-21T15:32:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -115.1885454,
+            36.0746585
+          ],
+          [
+            -115.1885454,
+            36.0746585
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "2da9a7da-541f-4634-b2e5-c943f006d8a7",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T15:08:03Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": "some-lanes-closed",
+        "relationship": {
+          "relationship_id": "23763f66-da72-4286-9ac7-04248278fe3a",
+          "road_event_id": "2da9a7da-541f-4634-b2e5-c943f006d8a7"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Lane Closed, MERGE RIGHT [Trafficade, iCone]",
+        "creation_date": "2020-08-21T15:08:03Z",
+        "update_date": "2020-08-21T15:50:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -111.0116477,
+            32.2944138
+          ],
+          [
+            -111.0116477,
+            32.2944138
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "1833ab27-d58e-423b-85fa-f0360b2e52a2",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-19T00:05:00Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "6d2de04a-c7d0-459c-b1b2-a108d3e5605c",
+          "road_event_id": "1833ab27-d58e-423b-85fa-f0360b2e52a2"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork Active [Triton, iCone]",
+        "creation_date": "2020-08-19T00:05:00Z",
+        "update_date": "2020-08-21T14:01:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -115.188525,
+            36.0746472
+          ],
+          [
+            -115.188525,
+            36.0746472
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "0983d93b-1ad7-4f18-b42f-d71f5f920747",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T08:41:03Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": "some-lanes-closed",
+        "relationship": {
+          "relationship_id": "fb2cb230-f1f3-4339-875e-c1ebbd5e1da0",
+          "road_event_id": "0983d93b-1ad7-4f18-b42f-d71f5f920747"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Lane Closed, MERGE RIGHT [Trafficade, iCone]",
+        "creation_date": "2020-08-21T08:41:03Z",
+        "update_date": "2020-08-21T15:48:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -111.0217466,
+            32.2942667
+          ],
+          [
+            -111.0217466,
+            32.2942667
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "94cbc41d-5982-4959-8855-84777aed8eea",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T06:33:03Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": "some-lanes-closed",
+        "relationship": {
+          "relationship_id": "e6b06e96-d0c9-4702-937e-e17798c426ca",
+          "road_event_id": "94cbc41d-5982-4959-8855-84777aed8eea"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Lane Closed, MERGE LEFT [Trafficade, iCone]",
+        "creation_date": "2020-08-21T06:33:03Z",
+        "update_date": "2020-08-21T15:49:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -111.9351967,
+            33.5312042
+          ],
+          [
+            -111.9351967,
+            33.5312042
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "603a0233-d006-4d1f-b638-711f51412097",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T13:37:31Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "0e80a927-316e-4cf3-9346-fa07b8012f9f",
+          "road_event_id": "603a0233-d006-4d1f-b638-711f51412097"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Caution [NW Barricade, iCone]",
+        "creation_date": "2020-08-21T13:37:31Z",
+        "update_date": "2020-08-21T15:53:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -120.4736768,
+            46.5819768
+          ],
+          [
+            -120.4736768,
+            46.5819768
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "8c0b8b08-b0cb-41a3-b67e-c32f5ecda9e6",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T04:44:00Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "260a438e-17c6-45ec-84e6-c1de15b87c94",
+          "road_event_id": "8c0b8b08-b0cb-41a3-b67e-c32f5ecda9e6"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork Active [Site-Safe, iCone]",
+        "creation_date": "2020-08-21T04:44:00Z",
+        "update_date": "2020-08-21T15:53:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -84.8943808,
+            39.8718253
+          ],
+          [
+            -84.8943808,
+            39.8718253
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "9a041477-1c66-4c2d-accd-db56eaa8c479",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T12:12:00Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": "some-lanes-closed",
+        "relationship": {
+          "relationship_id": "9b540375-dbce-40cc-8130-7d1e69aa32d2",
+          "road_event_id": "9a041477-1c66-4c2d-accd-db56eaa8c479"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Lane Closed, MERGE RIGHT [Trafficade, iCone]",
+        "creation_date": "2020-08-21T12:12:00Z",
+        "update_date": "2020-08-21T15:53:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -110.970958,
+            32.2203686
+          ],
+          [
+            -110.970958,
+            32.2203686
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "e3e9a1be-b45e-4b95-8ed3-a7d756178713",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T15:15:00Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "efba566e-9f42-42a8-8b26-349943d9be46",
+          "road_event_id": "e3e9a1be-b45e-4b95-8ed3-a7d756178713"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Road Ranger Emergency Personnel On-Scene. Move over - Caution [DBi, iCone]",
+        "creation_date": "2020-08-21T15:15:00Z",
+        "update_date": "2020-08-21T15:50:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -81.3864896,
+            28.628968
+          ],
+          [
+            -81.3864896,
+            28.628968
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "a9662f7c-bc12-41ce-a95e-8ac90bc906ba",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-20T15:48:00Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "eda339ac-ff11-4456-a037-282ea1fe56f6",
+          "road_event_id": "a9662f7c-bc12-41ce-a95e-8ac90bc906ba"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork Active [Triton, iCone]",
+        "creation_date": "2020-08-20T15:48:00Z",
+        "update_date": "2020-08-21T15:50:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -115.1885102,
+            36.0746524
+          ],
+          [
+            -115.1885102,
+            36.0746524
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "22a8f51b-1638-4a05-8b2c-7a66b49dfba0",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T13:36:30Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "5704fc6c-a5ec-41ed-94e4-e687b8fa206b",
+          "road_event_id": "22a8f51b-1638-4a05-8b2c-7a66b49dfba0"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Caution [Spartan Barricading, iCone]",
+        "creation_date": "2020-08-21T13:36:30Z",
+        "update_date": "2020-08-21T15:51:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -84.5099067,
+            42.7288832
+          ],
+          [
+            -84.5099067,
+            42.7288832
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "86448102-9b79-47e2-af88-5fa464be46c7",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-20T08:28:00Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "cc788f50-d1a9-4618-bfad-d5ced1f306f8",
+          "road_event_id": "86448102-9b79-47e2-af88-5fa464be46c7"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork Active [Triton, iCone]",
+        "creation_date": "2020-08-20T08:28:00Z",
+        "update_date": "2020-08-21T15:47:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -115.1884839,
+            36.0746259
+          ],
+          [
+            -115.1884839,
+            36.0746259
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "8e5cc6e3-aaa8-4e74-a3fc-67c80c154133",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T06:13:03Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": "some-lanes-closed",
+        "relationship": {
+          "relationship_id": "10263d8b-b64a-4c1d-b629-bbe2dd9af73f",
+          "road_event_id": "8e5cc6e3-aaa8-4e74-a3fc-67c80c154133"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Lane Closed, MERGE RIGHT [Trafficade, iCone]",
+        "creation_date": "2020-08-21T06:13:03Z",
+        "update_date": "2020-08-21T15:52:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -111.0448803,
+            32.3125837
+          ],
+          [
+            -111.0448803,
+            32.3125837
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "091337d9-f468-4164-88f5-e42c62011ba3",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T04:19:00Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "150580e6-c75b-4e49-be77-41be0d9cc163",
+          "road_event_id": "091337d9-f468-4164-88f5-e42c62011ba3"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork Active [Triton, iCone]",
+        "creation_date": "2020-08-21T04:19:00Z",
+        "update_date": "2020-08-21T15:49:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -115.0577827,
+            36.2755814
+          ],
+          [
+            -115.0577827,
+            36.2755814
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "527dddf3-4811-486f-85d3-ca4d6ba7203f",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T15:01:00Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": "some-lanes-closed",
+        "relationship": {
+          "relationship_id": "95685043-dd1c-4fb1-b62a-83c6b6221801",
+          "road_event_id": "527dddf3-4811-486f-85d3-ca4d6ba7203f"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Lane Closed, MERGE LEFT OR RIGHT [WSDOT, iCone]",
+        "creation_date": "2020-08-21T15:01:00Z",
+        "update_date": "2020-08-21T15:48:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -122.6699264,
+            45.6526261
+          ],
+          [
+            -122.6699264,
+            45.6526261
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "4869260d-527a-497c-8337-2b108a0c2aa6",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-18T22:06:00Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "36b98d28-47dd-4aac-b639-aea1326a8029",
+          "road_event_id": "4869260d-527a-497c-8337-2b108a0c2aa6"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork Active [Triton, iCone]",
+        "creation_date": "2020-08-18T22:06:00Z",
+        "update_date": "2020-08-21T15:47:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -115.1885086,
+            36.0746435
+          ],
+          [
+            -115.1885086,
+            36.0746435
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "7627c9e5-d2e1-4b4d-9318-2473dd5899b2",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T15:53:10Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "72ea065b-2764-40de-b922-6ed07ce90752",
+          "road_event_id": "7627c9e5-d2e1-4b4d-9318-2473dd5899b2"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Caution [iCone]",
+        "creation_date": "2020-08-21T15:53:10Z",
+        "update_date": "2020-08-21T15:53:10Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -97.4612373,
+            27.7898426
+          ],
+          [
+            -97.4612373,
+            27.7898426
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "18289daa-a30f-4065-b0c3-e89cb4539efa",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T15:51:05Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "5e18b28b-cf5e-4329-9a50-1315aef2397f",
+          "road_event_id": "18289daa-a30f-4065-b0c3-e89cb4539efa"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Caution [iCone]",
+        "creation_date": "2020-08-21T15:51:05Z",
+        "update_date": "2020-08-21T15:53:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -96.8946117,
+            33.2188101
+          ],
+          [
+            -96.8946117,
+            33.2188101
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "00390b90-5457-40e6-91a5-3508c00be8a7",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T15:53:00Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "772835a1-4dc8-4339-ada3-cd3143e26c6d",
+          "road_event_id": "00390b90-5457-40e6-91a5-3508c00be8a7"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Caution [iCone]",
+        "creation_date": "2020-08-21T15:53:00Z",
+        "update_date": "2020-08-21T15:53:02Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -76.9250321,
+            41.0757651
+          ],
+          [
+            -76.9250321,
+            41.0757651
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "b956af5d-7150-471c-8244-2f9481ab7d4e",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T11:03:15Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "d4d0bd78-432f-4a21-a90b-ff263d28d118",
+          "road_event_id": "b956af5d-7150-471c-8244-2f9481ab7d4e"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Caution [iCone]",
+        "creation_date": "2020-08-21T11:03:15Z",
+        "update_date": "2020-08-21T15:49:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -75.580496,
+            38.4337924
+          ],
+          [
+            -75.580496,
+            38.4337924
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "e481b813-40c9-40e3-a4fd-68176b8f01d4",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T13:36:25Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": "some-lanes-closed",
+        "relationship": {
+          "relationship_id": "a3300aee-c9bc-4fac-90b3-206b38b302ca",
+          "road_event_id": "e481b813-40c9-40e3-a4fd-68176b8f01d4"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Lane Closed, MERGE RIGHT [iCone]",
+        "creation_date": "2020-08-21T13:36:25Z",
+        "update_date": "2020-08-21T15:49:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -91.6687019,
+            42.0287324
+          ],
+          [
+            -91.6687019,
+            42.0287324
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "89a10600-1d41-4872-904f-f6e2ced5aa89",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T13:35:51Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": "some-lanes-closed",
+        "relationship": {
+          "relationship_id": "1d1662b2-fc3d-4c10-b4e4-5306fae4d06d",
+          "road_event_id": "89a10600-1d41-4872-904f-f6e2ced5aa89"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Lane Closed, MERGE LEFT [iCone]",
+        "creation_date": "2020-08-21T13:35:51Z",
+        "update_date": "2020-08-21T15:51:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.7921826,
+            42.0270677
+          ],
+          [
+            -93.7921826,
+            42.0270677
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "0b30451d-461f-4ecd-af0d-f23c216cba6d",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T15:29:05Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "d4ba8e71-d262-42d1-a79e-4ea0ffda52ab",
+          "road_event_id": "0b30451d-461f-4ecd-af0d-f23c216cba6d"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Caution [iCone]",
+        "creation_date": "2020-08-21T15:29:05Z",
+        "update_date": "2020-08-21T15:51:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -97.6547666,
+            30.451951
+          ],
+          [
+            -97.6547666,
+            30.451951
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "4c2f7377-7962-4151-ae82-2c33d5ffc4c4",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T11:31:26Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": "some-lanes-closed",
+        "relationship": {
+          "relationship_id": "acb3e4e1-3d6e-4fe7-ba32-1b78b86b0dae",
+          "road_event_id": "4c2f7377-7962-4151-ae82-2c33d5ffc4c4"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Lane Closed, MERGE LEFT [iCone]",
+        "creation_date": "2020-08-21T11:31:26Z",
+        "update_date": "2020-08-21T15:53:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -96.3666878,
+            42.4453657
+          ],
+          [
+            -96.3666878,
+            42.4453657
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "6ffa4a16-a211-4cb4-9880-57ff79ece885",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T10:41:03Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": "some-lanes-closed",
+        "relationship": {
+          "relationship_id": "9c3916c9-4231-4d22-b055-b4ea01469f04",
+          "road_event_id": "6ffa4a16-a211-4cb4-9880-57ff79ece885"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Lane Closed, MERGE RIGHT [iCone]",
+        "creation_date": "2020-08-21T10:41:03Z",
+        "update_date": "2020-08-21T15:49:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.70336,
+            41.5852514
+          ],
+          [
+            -93.70336,
+            41.5852514
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "e334b638-9657-4ef4-88fc-3f30c50e6328",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T13:38:22Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "bc8eac18-9de5-45ce-9253-79cbab6a5aa7",
+          "road_event_id": "e334b638-9657-4ef4-88fc-3f30c50e6328"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Caution [iCone]",
+        "creation_date": "2020-08-21T13:38:22Z",
+        "update_date": "2020-08-21T15:50:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -71.052304,
+            41.8854771
+          ],
+          [
+            -71.052304,
+            41.8854771
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "ae3c7f93-81a4-496f-a412-115b4e4b0da1",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T15:47:05Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "7b007005-646c-4f98-8ff7-bae970c5aea4",
+          "road_event_id": "ae3c7f93-81a4-496f-a412-115b4e4b0da1"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Caution [iCone]",
+        "creation_date": "2020-08-21T15:47:05Z",
+        "update_date": "2020-08-21T15:49:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -98.0125724,
+            29.8011708
+          ],
+          [
+            -98.0125724,
+            29.8011708
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "f2bfe731-c6ee-4eb1-bb9a-6cb63fe0f7c0",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-19T16:39:08Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": "some-lanes-closed",
+        "relationship": {
+          "relationship_id": "a68b8583-234c-4d5e-86e4-0d5e8c6a2b07",
+          "road_event_id": "f2bfe731-c6ee-4eb1-bb9a-6cb63fe0f7c0"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Lane Closed, MERGE RIGHT [iCone]",
+        "creation_date": "2020-08-19T16:39:08Z",
+        "update_date": "2020-08-21T15:52:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -86.409671,
+            42.1192071
+          ],
+          [
+            -86.409671,
+            42.1192071
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "771b6e8d-9add-4907-b30c-8e13e0b211b0",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T15:53:00Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "6558857a-8cd6-47a0-931b-0bad6adf1115",
+          "road_event_id": "771b6e8d-9add-4907-b30c-8e13e0b211b0"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Caution [iCone]",
+        "creation_date": "2020-08-21T15:53:00Z",
+        "update_date": "2020-08-21T15:53:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -98.1495207,
+            26.3506979
+          ],
+          [
+            -98.1495207,
+            26.3506979
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "f5324b9d-7e2c-4115-8a75-faaa7a452218",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T13:36:03Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": "some-lanes-closed",
+        "relationship": {
+          "relationship_id": "1d386e79-7358-43c9-941e-057efc665b69",
+          "road_event_id": "f5324b9d-7e2c-4115-8a75-faaa7a452218"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Lane Closed, MERGE RIGHT [iCone]",
+        "creation_date": "2020-08-21T13:36:03Z",
+        "update_date": "2020-08-21T15:50:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.3920845,
+            42.0078588
+          ],
+          [
+            -93.3920845,
+            42.0078588
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "55f4c484-6824-419b-803f-c5bd1a1a816d",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T15:53:14Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "8ef3f613-4e24-4643-a2dc-8f66d0438602",
+          "road_event_id": "55f4c484-6824-419b-803f-c5bd1a1a816d"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Caution [iCone]",
+        "creation_date": "2020-08-21T15:53:14Z",
+        "update_date": "2020-08-21T15:53:14Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -96.8946367,
+            33.2184825
+          ],
+          [
+            -96.8946367,
+            33.2184825
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "135dab74-2f32-4f72-92e7-220a8015f09c",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T15:46:00Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "d6a7e277-fbe2-4da8-9d68-7ceda35008a7",
+          "road_event_id": "135dab74-2f32-4f72-92e7-220a8015f09c"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Caution [iCone]",
+        "creation_date": "2020-08-21T15:46:00Z",
+        "update_date": "2020-08-21T15:51:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -97.179392,
+            32.8010816
+          ],
+          [
+            -97.179392,
+            32.8010816
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "d51c14ea-48f6-4753-a0ce-e478a79da25d",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T15:53:05Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "410d4924-57b3-4c58-9ef7-dfdba107f491",
+          "road_event_id": "d51c14ea-48f6-4753-a0ce-e478a79da25d"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Caution [iCone]",
+        "creation_date": "2020-08-21T15:53:05Z",
+        "update_date": "2020-08-21T15:53:05Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -79.9056099,
+            40.6203366
+          ],
+          [
+            -79.9056099,
+            40.6203366
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "5b7187ac-cb9b-4082-b910-d4d576f68af3",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T13:38:06Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": "some-lanes-closed",
+        "relationship": {
+          "relationship_id": "8f662720-8c57-4339-a791-27e5d5f063bf",
+          "road_event_id": "5b7187ac-cb9b-4082-b910-d4d576f68af3"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Lane Closed, MERGE LEFT [iCone]",
+        "creation_date": "2020-08-21T13:38:06Z",
+        "update_date": "2020-08-21T15:48:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.7614398,
+            41.6292748
+          ],
+          [
+            -93.7614398,
+            41.6292748
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "a8536cdd-932b-4f42-952a-2e88ac8027a2",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T15:13:00Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": "some-lanes-closed",
+        "relationship": {
+          "relationship_id": "8010f111-a58a-4b26-aca9-6bd6c5d6f2c2",
+          "road_event_id": "a8536cdd-932b-4f42-952a-2e88ac8027a2"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Lane Closed, MERGE LEFT [iCone]",
+        "creation_date": "2020-08-21T15:13:00Z",
+        "update_date": "2020-08-21T15:53:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -96.9803296,
+            32.8906256
+          ],
+          [
+            -96.9803296,
+            32.8906256
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "f9bbc8c3-ebc7-4e4a-93de-5fb663d8e5fd",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T13:42:00Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": "some-lanes-closed",
+        "relationship": {
+          "relationship_id": "ffad35a6-c54a-41ed-95de-9053df690054",
+          "road_event_id": "f9bbc8c3-ebc7-4e4a-93de-5fb663d8e5fd"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Lane Closed, MERGE LEFT [iCone]",
+        "creation_date": "2020-08-21T13:42:00Z",
+        "update_date": "2020-08-21T15:50:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.7036736,
+            41.5890638
+          ],
+          [
+            -93.7036736,
+            41.5890638
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "bef38311-69c4-439e-be8e-22c89b4b4517",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T15:53:00Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "806a6c9a-f091-4c48-a92e-13d196bb9df2",
+          "road_event_id": "bef38311-69c4-439e-be8e-22c89b4b4517"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Caution [iCone]",
+        "creation_date": "2020-08-21T15:53:00Z",
+        "update_date": "2020-08-21T15:53:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -97.3324512,
+            32.8400602
+          ],
+          [
+            -97.3324512,
+            32.8400602
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "faa7e019-4e3d-4cbe-9269-51bb61b967c5",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T15:52:05Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "6994b82d-7d5a-477e-89ea-a61c809a85a1",
+          "road_event_id": "faa7e019-4e3d-4cbe-9269-51bb61b967c5"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Caution [iCone]",
+        "creation_date": "2020-08-21T15:52:05Z",
+        "update_date": "2020-08-21T15:53:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -71.0539498,
+            42.1275442
+          ],
+          [
+            -71.0539498,
+            42.1275442
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "09532de5-a274-47eb-bf16-9626f4c5ec75",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T11:31:19Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": "some-lanes-closed",
+        "relationship": {
+          "relationship_id": "26cdb624-3db4-43df-8778-a23706618865",
+          "road_event_id": "09532de5-a274-47eb-bf16-9626f4c5ec75"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Lane Closed, MERGE RIGHT [iCone]",
+        "creation_date": "2020-08-21T11:31:19Z",
+        "update_date": "2020-08-21T15:49:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.8925854,
+            41.6150336
+          ],
+          [
+            -93.8925854,
+            41.6150336
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "e56e8f20-94c5-4f80-ab8a-c95575719998",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T13:36:10Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "aa1f242d-b80d-4ddc-b683-eabcc7a53912",
+          "road_event_id": "e56e8f20-94c5-4f80-ab8a-c95575719998"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Caution [iCone]",
+        "creation_date": "2020-08-21T13:36:10Z",
+        "update_date": "2020-08-21T15:52:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -97.3324427,
+            32.8400887
+          ],
+          [
+            -97.3324427,
+            32.8400887
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "50090aad-41fd-4b12-8da7-57e52c0a935a",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T13:35:37Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": "some-lanes-closed",
+        "relationship": {
+          "relationship_id": "259163cf-b9be-4ba5-a23d-f1b9f5ec5169",
+          "road_event_id": "50090aad-41fd-4b12-8da7-57e52c0a935a"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Lane Closed, MERGE RIGHT [iCone]",
+        "creation_date": "2020-08-21T13:35:37Z",
+        "update_date": "2020-08-21T15:52:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.4892328,
+            42.0086334
+          ],
+          [
+            -93.4892328,
+            42.0086334
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "5cf68d7d-3f7b-4037-b2ea-f24898b66f02",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T15:36:00Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "431a04e9-d034-4d12-ba45-0e9df26f2a90",
+          "road_event_id": "5cf68d7d-3f7b-4037-b2ea-f24898b66f02"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Caution [iCone]",
+        "creation_date": "2020-08-21T15:36:00Z",
+        "update_date": "2020-08-21T15:52:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -76.8350748,
+            41.0546852
+          ],
+          [
+            -76.8350748,
+            41.0546852
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "6ffe4068-3c3a-408d-a30d-38b81e605d20",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T12:08:03Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "54c057ff-4fd4-4c84-841f-98e6b672ad9e",
+          "road_event_id": "6ffe4068-3c3a-408d-a30d-38b81e605d20"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Caution [iCone]",
+        "creation_date": "2020-08-21T12:08:03Z",
+        "update_date": "2020-08-21T15:49:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -75.3878653,
+            40.5193099
+          ],
+          [
+            -75.3878653,
+            40.5193099
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "6f547759-4f8a-4f1b-a488-9790366870c3",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T13:37:16Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": "some-lanes-closed",
+        "relationship": {
+          "relationship_id": "9fafabd8-e3bd-48c2-89e7-b4db22caa351",
+          "road_event_id": "6f547759-4f8a-4f1b-a488-9790366870c3"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Lane Closed, MERGE RIGHT [iCone]",
+        "creation_date": "2020-08-21T13:37:16Z",
+        "update_date": "2020-08-21T15:52:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -91.7241565,
+            41.940594
+          ],
+          [
+            -91.7241565,
+            41.940594
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "06f52004-b928-4fd2-902e-8323e24432d1",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T06:23:00Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": "some-lanes-closed",
+        "relationship": {
+          "relationship_id": "8e0207a1-f110-4b91-9ff5-fe70449cc2bd",
+          "road_event_id": "06f52004-b928-4fd2-902e-8323e24432d1"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Lane Closed, MERGE LEFT [iCone]",
+        "creation_date": "2020-08-21T06:23:00Z",
+        "update_date": "2020-08-21T15:50:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.7166704,
+            41.6294162
+          ],
+          [
+            -93.7166704,
+            41.6294162
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "3d110487-e3a7-4138-9748-2c3521ce4a99",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T14:39:00Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": "some-lanes-closed",
+        "relationship": {
+          "relationship_id": "e732f242-cecb-4de3-a38e-544feee36a63",
+          "road_event_id": "3d110487-e3a7-4138-9748-2c3521ce4a99"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Lane Closed, MERGE LEFT [iCone]",
+        "creation_date": "2020-08-21T14:39:00Z",
+        "update_date": "2020-08-21T15:48:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.3040144,
+            41.6011096
+          ],
+          [
+            -93.3040144,
+            41.6011096
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "9631112b-3231-4d0b-a540-349ab8e28640",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T13:39:01Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "f87d9503-fb9a-4e81-bc8b-c8289ee44e16",
+          "road_event_id": "9631112b-3231-4d0b-a540-349ab8e28640"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Caution [iCone]",
+        "creation_date": "2020-08-21T13:39:01Z",
+        "update_date": "2020-08-21T15:53:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -75.3865924,
+            40.5195445
+          ],
+          [
+            -75.3865924,
+            40.5195445
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "3a94618d-e52c-49f0-8b06-2bb5258f054e",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T15:51:05Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "508c81c9-5c5a-409d-ae5b-7adfbac58ef4",
+          "road_event_id": "3a94618d-e52c-49f0-8b06-2bb5258f054e"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Caution [iCone]",
+        "creation_date": "2020-08-21T15:51:05Z",
+        "update_date": "2020-08-21T15:53:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -78.2440789,
+            39.9941287
+          ],
+          [
+            -78.2440789,
+            39.9941287
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "4f8664cc-8752-4ab5-bdd8-931c8c52e2ca",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T15:53:01Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "a1a53629-93ed-485c-843c-827129a45447",
+          "road_event_id": "4f8664cc-8752-4ab5-bdd8-931c8c52e2ca"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Caution [iCone]",
+        "creation_date": "2020-08-21T15:53:01Z",
+        "update_date": "2020-08-21T15:53:01Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -76.8448176,
+            38.8520723
+          ],
+          [
+            -76.8448176,
+            38.8520723
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "2908699b-817b-420b-98a7-9814572105fe",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T15:53:11Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "0c58573e-22db-4911-8b67-db8b6a8a25b9",
+          "road_event_id": "2908699b-817b-420b-98a7-9814572105fe"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Caution [iCone]",
+        "creation_date": "2020-08-21T15:53:11Z",
+        "update_date": "2020-08-21T15:53:11Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -77.1076752,
+            41.5875337
+          ],
+          [
+            -77.1076752,
+            41.5875337
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "7980cfbb-4af8-40cf-b4ce-63b5dcba244b",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T15:49:05Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "a4f44cd5-4d9e-4b93-9a5b-047ccdf09f21",
+          "road_event_id": "7980cfbb-4af8-40cf-b4ce-63b5dcba244b"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Caution [iCone]",
+        "creation_date": "2020-08-21T15:49:05Z",
+        "update_date": "2020-08-21T15:53:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -98.5841464,
+            29.586662
+          ],
+          [
+            -98.5841464,
+            29.586662
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "26aadb6a-d606-46cf-a252-7b2db4ca1ae4",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T10:52:00Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "e9d8f2c0-d277-4303-95d1-6ac925cb57ca",
+          "road_event_id": "26aadb6a-d606-46cf-a252-7b2db4ca1ae4"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "NYSDOT Workzone - Flag Person! [iCone]",
+        "creation_date": "2020-08-21T10:52:00Z",
+        "update_date": "2020-08-21T15:12:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -76.7695401,
+            42.7740391
+          ],
+          [
+            -76.7695401,
+            42.7740391
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "eae9ce35-20eb-45af-8e58-d9266d5c659e",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T15:53:00Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "380f3837-caad-4748-938d-99560a9a9a7a",
+          "road_event_id": "eae9ce35-20eb-45af-8e58-d9266d5c659e"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Caution [iCone]",
+        "creation_date": "2020-08-21T15:53:00Z",
+        "update_date": "2020-08-21T15:53:01Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -98.012403,
+            29.8006975
+          ],
+          [
+            -98.012403,
+            29.8006975
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "89f958d7-e446-4c51-9818-04a9c3c6eab2",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T13:43:43Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": "some-lanes-closed",
+        "relationship": {
+          "relationship_id": "15b8b9b5-95ee-4fd9-9077-5bc51370596e",
+          "road_event_id": "89f958d7-e446-4c51-9818-04a9c3c6eab2"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Lane Closed, MERGE LEFT [iCone]",
+        "creation_date": "2020-08-21T13:43:43Z",
+        "update_date": "2020-08-21T15:50:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -95.8872086,
+            41.0730222
+          ],
+          [
+            -95.8872086,
+            41.0730222
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "728c133a-f0e3-4a72-8a69-1c1023674d52",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T15:34:05Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "a56a3413-2a78-4552-9c26-6c78810d2367",
+          "road_event_id": "728c133a-f0e3-4a72-8a69-1c1023674d52"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Caution [iCone]",
+        "creation_date": "2020-08-21T15:34:05Z",
+        "update_date": "2020-08-21T15:50:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -97.0181595,
+            32.8497023
+          ],
+          [
+            -97.0181595,
+            32.8497023
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "3fef0a72-4f3a-4d17-984f-2e2ee6d338c9",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T13:36:12Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "51dc04c4-27e5-40ee-9d80-78463234dd14",
+          "road_event_id": "3fef0a72-4f3a-4d17-984f-2e2ee6d338c9"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Caution [iCone]",
+        "creation_date": "2020-08-21T13:36:12Z",
+        "update_date": "2020-08-21T15:49:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -79.9070365,
+            37.2993796
+          ],
+          [
+            -79.9070365,
+            37.2993796
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "a6a4ba22-af33-4596-b2a7-d1adb9d46927",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T14:59:05Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "589b183f-e657-469f-8be1-419def328bd8",
+          "road_event_id": "a6a4ba22-af33-4596-b2a7-d1adb9d46927"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Caution [iCone]",
+        "creation_date": "2020-08-21T14:59:05Z",
+        "update_date": "2020-08-21T15:50:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -97.498187,
+            27.8045437
+          ],
+          [
+            -97.498187,
+            27.8045437
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "6c800204-8a9d-42c2-a365-0f7d5fac77d0",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T15:21:00Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "064336b2-3420-4047-9c7e-44336c6d5e41",
+          "road_event_id": "6c800204-8a9d-42c2-a365-0f7d5fac77d0"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Caution [iCone]",
+        "creation_date": "2020-08-21T15:21:00Z",
+        "update_date": "2020-08-21T15:52:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -97.4981312,
+            27.8052048
+          ],
+          [
+            -97.4981312,
+            27.8052048
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "9191a406-3915-44a7-9519-4addb082b686",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T12:19:00Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": null,
+        "relationship": {
+          "relationship_id": "7579ac93-d7be-46c6-b5a9-5dc38185cf6a",
+          "road_event_id": "9191a406-3915-44a7-9519-4addb082b686"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Caution [iCone]",
+        "creation_date": "2020-08-21T12:19:00Z",
+        "update_date": "2020-08-21T15:51:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -98.1494196,
+            26.3507165
+          ],
+          [
+            -98.1494196,
+            26.3507165
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "322cb0c3-9c60-447b-8abd-24c1ced60f0d",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T13:36:07Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": "some-lanes-closed",
+        "relationship": {
+          "relationship_id": "c6d84aae-912c-4d8f-945e-6f85f5cf37fd",
+          "road_event_id": "322cb0c3-9c60-447b-8abd-24c1ced60f0d"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Lane Closed, MERGE RIGHT [iCone]",
+        "creation_date": "2020-08-21T13:36:07Z",
+        "update_date": "2020-08-21T15:51:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -94.0127539,
+            41.6143952
+          ],
+          [
+            -94.0127539,
+            41.6143952
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": "cd6a8f7b-b645-488d-80f9-da5e09adf8df",
+        "event_type": "work-zone",
+        "data_source_id": "501cf167-982e-4cdf-bd0c-4dc652eb44d7",
+        "start_date": "2020-08-21T13:39:14Z",
+        "end_date": "",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "road_name": "",
+        "direction": "southbound",
+        "vehicle_impact": "some-lanes-closed",
+        "relationship": {
+          "relationship_id": "08d61561-4344-46b3-afbe-672df64529a8",
+          "road_event_id": "cd6a8f7b-b645-488d-80f9-da5e09adf8df"
+        },
+        "lanes": [],
+        "road_number": "",
+        "beginning_cross_street": "",
+        "ending_cross_street": "",
+        "beginning_milepost": "",
+        "ending_milepost": "",
+        "event_status": "active",
+        "total_num_lanes": 1,
+        "types_of_work": [],
+        "reduced_speed_limit": 25,
+        "workers_present": false,
+        "restrictions": [],
+        "description": "Roadwork - Lane Closed, MERGE LEFT [iCone]",
+        "creation_date": "2020-08-21T13:39:14Z",
+        "update_date": "2020-08-21T15:51:00Z"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -96.9814929,
+            28.8090234
+          ],
+          [
+            -96.9814929,
+            28.8090234
+          ]
+        ]
+      }
+    }
+  ]
+}
