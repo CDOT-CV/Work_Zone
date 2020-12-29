@@ -10,7 +10,7 @@ Work zone code and documentation for WZDx, iCone, etc.
 
 ## Project Description
 
-This project is an open source, proof of concept work zone data Exchange . The purpose of this tool is to  build a translator from iCone data to the WZDx message (3.0) and identify additional required data by WZDx that can be populated by other CDOT Work Zone resources.Basically,in this project ,we run the python script to parse the icone data xml file which genrates wzdx 3.0 messages in a geojson file.
+This project is an open source, proof of concept for Work Zone Data Exchange message creation from CDOT data to include iCone. The purpose of this tool is to  build a translator from CDOT work zone data and iCone data to the WZDx message (3.0). The message will contain required data by WZDx that can be populated by iCone and other CDOT Work Zone resources. Basically, in this project, we run a python script to parse data from the iCone xml file and other CDOT data which genrates WXDx 3.0 messages in a geojson format.
 
 ## Prerequisites
 
@@ -22,7 +22,7 @@ Requires:
   
 ## Environment Setup
 
-This guide was written in Python 3.6 or higher version. If you haven’t already, download Python and Pip. Next, you’ll need to install several packages that we’ll use throughout this tutorial. You can do this by opening terminal or command prompt on your operating system:
+This code requires Python 3.6 or a higher version. If you haven’t already, download Python and Pip. Next, you’ll need to install several packages that we’ll use throughout this tutorial. You can do this by opening terminal or command prompt on your operating system:
 
 
 ### Execution
