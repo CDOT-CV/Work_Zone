@@ -19,10 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9cca5f16-4c88-438e-8896-128d616bb4cd" name="Default Changelist" comment="updated geojson file">
-      <change beforePath="$PROJECT_DIR$/.idea/Work_Zone.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Work_Zone.iml" afterDir="false" />
+    <list default="true" id="9cca5f16-4c88-438e-8896-128d616bb4cd" name="Default Changelist" comment="updated sample geojson file">
+      <change afterPath="$PROJECT_DIR$/docs/assets xml descriptions.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/translator/sample files/icone_to_wzdx_test.geojson" beforeDir="false" afterPath="$PROJECT_DIR$/translator/sample files/icone_to_wzdx_test.geojson" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +79,7 @@
       <workItem from="1609176020430" duration="283000" />
       <workItem from="1609176359429" duration="231000" />
       <workItem from="1609176605967" duration="2000" />
-      <workItem from="1609257064440" duration="115000" />
+      <workItem from="1609257064440" duration="810000" />
     </task>
     <task id="LOCAL-00001" summary="python libraries function i am going to use for my translator">
       <created>1608596565291</created>
@@ -229,7 +228,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608772084139</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="updated sample geojson file">
+      <created>1609257243913</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1609257243913</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -266,6 +272,7 @@
     <MESSAGE value="added icon_to_wzdx.geojson file to source code where it is going to display all the messages" />
     <MESSAGE value="updated code" />
     <MESSAGE value="updated geojson file" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated geojson file" />
+    <MESSAGE value="updated sample geojson file" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated sample geojson file" />
   </component>
 </project>
