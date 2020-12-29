@@ -6,9 +6,11 @@ addons:
     organization: "cdot-cv"
     token: ${SONAR_TOKEN}
 
-    ls
-#script:
-#  - coverage erase
-#  - coverage run -m pytest 'translator/source code/translator.py'
-#  - coverage xml -i
-#  - sonar-scanner
+
+script:
+  - ls
+  - coverage erase
+  - coverage run -m pytest 'translator/source code/translator.py'
+  - coverage xml -i
+  - sonar-scanner
+
