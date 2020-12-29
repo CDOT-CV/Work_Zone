@@ -275,7 +275,7 @@ def add_ids(message, add_ids):
 
 
 # Added encoding argument because of weird character at start of incidents.xml file
-with open('/Users/abi/Desktop/python/incidents.xml', encoding='utf-8-sig') as frsm:
+with open('incidents_extended.xml', encoding='utf-8-sig') as frsm:
     # Read
     xmlSTRING = frsm.read()
     icone_obj = xmltodict.parse(xmlSTRING)
@@ -297,5 +297,5 @@ with open('/Users/abi/Desktop/python/incidents.xml', encoding='utf-8-sig') as fr
     info['metadata']['issuing_organization'] = "issuing_organization"
 
     wzdx = wzdx_creator(icone_obj, info)
-    with open('icone_to_wzdx.geojson', 'w') as fwzdx:
+    with open('icone_to_wzdx_test.geojson', 'w') as fwzdx:
         fwzdx.write(json.dumps(wzdx, indent=2))
