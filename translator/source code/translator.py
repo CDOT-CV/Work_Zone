@@ -300,7 +300,7 @@ def add_ids(message, add_ids):
 
 
 # Added encoding argument because of weird character at start of incidents.xml file
-with open('../sample files/icone data/incidents_extended.xml', encoding='utf-8-sig') as frsm:
+with open('translator/sample files/icone data/incidents_extended.xml', encoding='utf-8-sig') as frsm:
     # Read
     xmlSTRING = frsm.read()
     icone_obj = xmltodict.parse(xmlSTRING)
