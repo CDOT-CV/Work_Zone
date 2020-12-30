@@ -30,7 +30,7 @@ This code requires Python 3.6 or a higher version. If you haven’t already, dow
 #### Step 1: Run the translator script (from Work_Zone/translator/source code/Folder)
 
 ```
-python translator.py
+python icone_translator.py -i inputfile.xml -o outputfile.geojson
 ```
 
 
