@@ -7,6 +7,8 @@ import random
 import string
 import pytest
 import sys,getopt
+from jsonschema import validate
+
 
 
 # Translator
@@ -50,16 +52,16 @@ def wzdx_creator(messages, info):
     ids['road_event_id'] = road_event_id
 
     wzd['features'] = []
-    print(messages)
-    print("")
-    print("")
-    print("")
-    print("")
-    print("")
+    # print(messages)
+    # print("")
+    # print("")
+    # print("")
+    # print("")
+    # print("")
     for incident in messages['incidents']['incident']:
-        print(incident)
-        print("")
-        print("")
+        # print(incident)
+        # print("")
+        # print("")
         # Parse Incident to WZDx Feature
         wzd['features'].append(parse_incident(incident))
 
@@ -89,7 +91,7 @@ def get_vehicle_impact(description):
     vehicle_impact = 'all-lanes-open'
     if 'lane closed' in description.lower():
         vehicle_impact = 'some-lanes-closed'
-        return vehicle_impact
+    return vehicle_impact
 
 
 
@@ -134,6 +136,7 @@ def get_event_status(start_time_string,end_time_string):
 
 # Parse Icone Incident to WZDx
 def parse_incident(incident):
+
 
 
 
@@ -214,11 +217,11 @@ def parse_incident(incident):
     # beginning_cross_street
     properties['ending_cross_street'] = ""
 
-    # beginning_milepost
-    properties['beginning_milepost'] = ""
-
-    # ending_milepost
-    properties['ending_milepost'] = ""
+    # # beginning_milepost
+    # properties['beginning_milepost'] = ""
+    #
+    # # ending_milepost
+    # properties['ending_milepost'] = ""
 
     # event status
     start_time=datetime.strptime(incident['starttime'],"%Y-%m-%dT%H:%M:%SZ")
@@ -308,18 +311,18 @@ def parse_arguments(argv):
     try:
       opts, args = getopt.getopt(argv,"hi:o:",["ifile=","ofile="])
     except getopt.GetoptError:
-      print ('test.py -i <inputfile> -o <outputfile>')
+     # print ('test.py -i <inputfile> -o <outputfile>')
       sys.exit(2)
     for opt, arg in opts:
       if opt == '-h':
-         print ('test.py -i <inputfile> -o <outputfile>')
+       #  print ('test.py -i <inputfile> -o <outputfile>')
          sys.exit()
       elif opt in ("-i", "--ifile"):
          inputfile = arg
       elif opt in ("-o", "--ofile"):
          outputfile = arg
-    print ('Input file is "', inputfile)
-    print ('Output file is "', outputfile)
+   # print ('Input file is "', inputfile)
+   # print ('Output file is "', outputfile)
     return inputfile,outputfile
 
 inputfile,outputfile=parse_arguments(sys.argv[1:])
@@ -349,6 +352,8 @@ if  inputfile :
 
 
         wzdx = wzdx_creator(icone_obj, info)
+        wzdx_schema=open('wzdx_v3.0_feed.json')
+        validate(instance=wzdx, schema=wzdx_schema)
         with open(outputfile, 'w') as fwzdx:
             fwzdx.write(json.dumps(wzdx, indent=2))
 

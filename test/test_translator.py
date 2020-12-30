@@ -2,6 +2,8 @@ import sys
 sys.path.append("..")
 from translator.source_code import icone_translator
 import xmltodict
+import json
+from jsonschema import validate
 from datetime import datetime
 
 
@@ -46,8 +48,6 @@ def test_parse_incident() :
         "road_number": "",
         "beginning_cross_street": "",
         "ending_cross_street": "",
-        "beginning_milepost": "",
-        "ending_milepost": "",
         "event_status": "active",
         "total_num_lanes": 1,
         "types_of_work": [],
@@ -123,6 +123,33 @@ def test_get_event_status():
     valid_event_status= "active"
 
     assert  test_event_status==valid_event_status
+
+def test_wzdx_creator() :
+    wzdx_schema = json.loads(open('translator/source_code/wzdx_v3.0_feed.json').read())
+    icone_data =open('translator/sample files/Icone Data/incidents_extended.xml').read()
+
+
+    icone_obj = xmltodict.parse(icone_data)
+
+    info={}
+    info['feed_info_id'] = "feed_info_id"
+
+    #### This information is required, might want to hardcode
+    info['metadata'] = {}
+    info['metadata']['wz_location_method'] = "channel-device-method"
+    info['metadata']['lrs_type'] = "lrs_type"
+    info['metadata']['location_verify_method'] = "location_verify_method"
+    info['metadata']['datafeed_frequency_update'] = 86400
+    info['metadata']['timestamp_metadata_update'] = "timestamp_metadata_update"
+    info['metadata']['contact_name'] = "contact_name"
+    info['metadata']['contact_email'] = "contact_email"
+    info['metadata']['issuing_organization'] = "issuing_organization"
+    test_wzdx=icone_translator.wzdx_creator(icone_obj,info)
+
+    validate(instance=test_wzdx,schema=wzdx_schema)
+
+
+
 
 
 
