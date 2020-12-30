@@ -118,7 +118,18 @@ def get_road_direction(coordinates):
     return direction
 
 #function to get event status
+def get_event_status(start_time_string,end_time_string):
+    start_time = datetime.strptime(start_time_string, "%Y-%m-%dT%H:%M:%SZ")
 
+    event_status = "active"
+    if datetime.now() < start_time:
+        event_status = "planned"  # if < 2 to 3 weeks make it pending instead of planned
+    elif end_time_string:
+        end_time = datetime.strptime(end_time_string, "%Y-%m-%dT%H:%M:%SZ")
+
+        if end_time < datetime.now():
+            event_status = "completed"
+    return event_status
 
 
 # Parse Icone Incident to WZDx
@@ -212,16 +223,8 @@ def parse_incident(incident):
     # event status
     start_time=datetime.strptime(incident['starttime'],"%Y-%m-%dT%H:%M:%SZ")
 
-    event_status="active"
-    if datetime.now() < start_time :
-        event_status="planned" #if < 2 to 3 weeks make it pending instead of planned
-    elif 'endtime' in incident  :
-        end_time = datetime.strptime(incident.get('endtime', ''), "%Y-%m-%dT%H:%M:%SZ")
 
-        if end_time < datetime.now() :
-            event_status = "completed"
-
-    properties['event_status'] = event_status
+    properties['event_status'] =get_event_status(incident['starttime'], incident.get('endtime'))
 
     # event status
     properties['total_num_lanes'] = 1
@@ -350,112 +353,3 @@ if  inputfile :
             fwzdx.write(json.dumps(wzdx, indent=2))
 
 
-#Unit testing code
-
-
-def test_parse_incident() :
-    test_var=""" <incident id="U13631595_202012160845">
-    <creationtime>2020-12-16T08:45:03Z</creationtime>
-    <updatetime>2020-12-16T17:18:00Z</updatetime>
-    <type>CONSTRUCTION</type>
-    <description>Roadwork - Lane Closed, MERGE LEFT [Trafficade, iCone]</description>
-    <location>
-      <direction>ONE_DIRECTION</direction>
-      <polyline>34.8380671,-114.1450650,34.8380671,-114.1450650</polyline>
-    </location>
-    <starttime>2020-12-16T08:45:03Z</starttime>
-    </incident> """
-
-    icone_obj = xmltodict.parse(test_var)
-    test_feature = parse_incident(icone_obj['incident'])
-    valid_feature = {
-      "type": "Feature",
-      "properties": {
-        "road_event_id": "",
-        "event_type": "work-zone",
-        "data_source_id": "",
-        "start_date": "2020-12-16T08:45:03Z",
-        "end_date": "",
-        "start_date_accuracy": "estimated",
-        "end_date_accuracy": "estimated",
-        "beginning_accuracy": "estimated",
-        "ending_accuracy": "estimated",
-        "road_name": "",
-        "direction": "southbound",
-        "vehicle_impact": "some-lanes-closed",
-        "relationship": {
-
-        },
-        "lanes": [],
-        "road_number": "",
-        "beginning_cross_street": "",
-        "ending_cross_street": "",
-        "beginning_milepost": "",
-        "ending_milepost": "",
-        "event_status": "active",
-        "total_num_lanes": 1,
-        "types_of_work": [],
-        "reduced_speed_limit": 25,
-        "workers_present": False,
-        "restrictions": [],
-        "description": "Roadwork - Lane Closed, MERGE LEFT [Trafficade, iCone]",
-        "creation_date": "2020-12-16T08:45:03Z",
-        "update_date": "2020-12-16T17:18:00Z"
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [
-            -114.145065,
-            34.8380671
-          ],
-          [
-            -114.145065,
-            34.8380671
-          ]
-        ]
-      }
-    }
-
-    assert test_feature == valid_feature
-
-
-def test_parse_polyline() :
-    test_polyline= "34.8380671,-114.1450650,34.8380671,-114.1450650"
-    test_coordinates=parse_polyline(test_polyline)
-    valid_coordinates= [
-          [
-            -114.145065,
-            34.8380671
-          ],
-          [
-            -114.145065,
-            34.8380671
-          ]
-        ]
-    assert  test_coordinates == valid_coordinates
-
-
-def test_get_road_direction():
-    test_coordinates = [
-          [
-            -114.145065,
-            34.8380671
-          ],
-          [
-            -114.145065,
-            34.8380671
-          ]
-        ]
-    test_direction=get_road_direction(test_coordinates)
-    valid_direction= "southbound"
-
-    assert test_direction==valid_direction
-
-
-def test_get_vehicle_impact():
-    test_description= "Roadwork - Lane Closed, MERGE LEFT [Trafficade, iCone]"
-    test_vehicle_impact=get_vehicle_impact(test_description)
-    valid_vehicle_impact = "some-lanes-closed"
-
-    assert test_vehicle_impact==valid_vehicle_impact
