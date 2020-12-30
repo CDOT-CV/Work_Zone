@@ -19,8 +19,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9cca5f16-4c88-438e-8896-128d616bb4cd" name="Default Changelist" comment="commit test 2">
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+    <list default="true" id="9cca5f16-4c88-438e-8896-128d616bb4cd" name="Default Changelist" comment="commit test 3">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/wzdx_object_diagram.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/translator/docs/wzdx_object_diagram.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/icone_to_wzdx_test.geojson" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.geojson" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wzdx_translated_output_message.geojson" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,11 +63,11 @@
       <recent name="$PROJECT_DIR$/docs" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/translator" />
       <recent name="$PROJECT_DIR$/translator/source_code" />
       <recent name="$PROJECT_DIR$/translator/sourcecode" />
       <recent name="$PROJECT_DIR$/translator/sample files/Output Message" />
       <recent name="$PROJECT_DIR$/translator/sample files/Icone Data" />
-      <recent name="$PROJECT_DIR$/translator/sample files" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -87,7 +92,7 @@
       <workItem from="1609176359429" duration="231000" />
       <workItem from="1609176605967" duration="2000" />
       <workItem from="1609257064440" duration="14109000" />
-      <workItem from="1609346885434" duration="6646000" />
+      <workItem from="1609346885434" duration="7334000" />
     </task>
     <task id="LOCAL-00001" summary="python libraries function i am going to use for my translator">
       <created>1608596565291</created>
@@ -369,7 +374,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609358445637</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="commit test 3">
+      <created>1609358721513</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1609358721513</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -389,7 +401,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="added incidents_extended.xml file" />
     <MESSAGE value="code for creating random 6 character digit/letter string" />
     <MESSAGE value="program just for showing blank messages fot testing purpose" />
     <MESSAGE value="commented sample xml icone data format inside the program" />
@@ -414,6 +425,7 @@
     <MESSAGE value="commit" />
     <MESSAGE value="commit test" />
     <MESSAGE value="commit test 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit test 2" />
+    <MESSAGE value="commit test 3" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit test 3" />
   </component>
 </project>
