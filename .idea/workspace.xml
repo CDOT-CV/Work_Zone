@@ -19,13 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9cca5f16-4c88-438e-8896-128d616bb4cd" name="Default Changelist" comment="commit test 3">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="9cca5f16-4c88-438e-8896-128d616bb4cd" name="Default Changelist" comment="commit">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/wzdx_object_diagram.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/translator/docs/wzdx_object_diagram.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/icone_to_wzdx_test.geojson" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.geojson" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wzdx_translated_output_message.geojson" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,11 +59,11 @@
       <recent name="$PROJECT_DIR$/docs" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/translator/docs" />
       <recent name="$PROJECT_DIR$/translator" />
       <recent name="$PROJECT_DIR$/translator/source_code" />
       <recent name="$PROJECT_DIR$/translator/sourcecode" />
       <recent name="$PROJECT_DIR$/translator/sample files/Output Message" />
-      <recent name="$PROJECT_DIR$/translator/sample files/Icone Data" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -92,7 +88,8 @@
       <workItem from="1609176359429" duration="231000" />
       <workItem from="1609176605967" duration="2000" />
       <workItem from="1609257064440" duration="14109000" />
-      <workItem from="1609346885434" duration="7334000" />
+      <workItem from="1609346885434" duration="7859000" />
+      <workItem from="1609361796527" duration="51000" />
     </task>
     <task id="LOCAL-00001" summary="python libraries function i am going to use for my translator">
       <created>1608596565291</created>
@@ -381,7 +378,28 @@
       <option name="project" value="LOCAL" />
       <updated>1609358721513</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="changed file structure">
+      <created>1609360892809</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1609360892809</updated>
+    </task>
+    <task id="LOCAL-00043" summary="commit">
+      <created>1609361091390</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1609361091390</updated>
+    </task>
+    <task id="LOCAL-00044" summary="commit">
+      <created>1609361162836</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1609361162836</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -401,7 +419,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="code for creating random 6 character digit/letter string" />
     <MESSAGE value="program just for showing blank messages fot testing purpose" />
     <MESSAGE value="commented sample xml icone data format inside the program" />
     <MESSAGE value="parse icone incident to WZDX" />
@@ -422,10 +439,11 @@
     <MESSAGE value="final" />
     <MESSAGE value="second" />
     <MESSAGE value="test" />
-    <MESSAGE value="commit" />
     <MESSAGE value="commit test" />
     <MESSAGE value="commit test 2" />
     <MESSAGE value="commit test 3" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit test 3" />
+    <MESSAGE value="changed file structure" />
+    <MESSAGE value="commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit" />
   </component>
 </project>
