@@ -1,0 +1,1766 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents timestamp="2020-08-21T15:54:01Z">
+  <incident id="1245">
+    <creationtime>2019-11-05T01:22:20Z</creationtime>
+    <updatetime>2020-08-21T15:52:02Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>19-1245: Roadwork between MP 40 and MP 48</description>
+    <location>
+      <street>I-75 N</street>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>37.1571990,-84.1128540,37.1686478,-84.1238971,37.1913000,-84.1458610,37.2093480,-84.1752970,37.2168370,-84.2013030</polyline>
+    </location>
+    <starttime>2020-02-14T17:08:16Z</starttime>
+    <sensor type="iCone" id="NB 1 - MP 48.7" latitude="37.2168370" longitude="-84.2013030" />
+    <sensor type="iCone" id="NB 2 - MP 46.1" latitude="37.2093480" longitude="-84.1752970" />
+    <sensor type="iCone" id="NB 3 - MP 44.3" latitude="37.1913000" longitude="-84.1458610" />
+    <sensor type="iCone" id="NB 4 - MP 42.5" latitude="37.1686478" longitude="-84.1238971">
+      <radar devID="1738" intervalEnd="2020-08-21T15:45:00Z" numReads="58" avgSpeed="65.69" stDevSpeed="5.4874" />
+      <radar devID="1738" intervalEnd="2020-08-21T15:50:00Z" numReads="38" avgSpeed="68.55" stDevSpeed="6.5362" />
+      <radar devID="1738" intervalEnd="2020-08-21T15:55:00Z" numReads="34" avgSpeed="61.76" stDevSpeed="7.5638" />
+    </sensor>
+    <sensor type="iCone" id="NB 5 - MP 41.5" latitude="37.1571990" longitude="-84.1128540">
+      <radar devID="1652" intervalEnd="2020-08-21T15:45:00Z" latitude="37.1571584" longitude="-84.1128100" numReads="53" avgSpeed="65.61" stDevSpeed="7.0067" />
+      <radar devID="1652" intervalEnd="2020-08-21T15:50:00Z" latitude="37.1571584" longitude="-84.1128100" numReads="33" avgSpeed="67.35" stDevSpeed="5.7486" />
+      <radar devID="1652" intervalEnd="2020-08-21T15:55:00Z" latitude="37.1571584" longitude="-84.1128100" numReads="37" avgSpeed="64.93" stDevSpeed="7.6484" />
+    </sensor>
+    <sensor type="iCone" id="NB 6 - MP 40.2" latitude="37.1392040" longitude="-84.1095680">
+      <radar devID="1746" intervalEnd="2020-08-21T15:45:00Z" latitude="37.1392918" longitude="-84.1094934" numReads="36" avgSpeed="60.69" stDevSpeed="8.4259" />
+      <radar devID="1746" intervalEnd="2020-08-21T15:50:00Z" latitude="37.1392918" longitude="-84.1094934" numReads="20" avgSpeed="61.50" stDevSpeed="8.0799" />
+      <radar devID="1746" intervalEnd="2020-08-21T15:55:00Z" latitude="37.1392918" longitude="-84.1094934" numReads="19" avgSpeed="60.92" stDevSpeed="9.4728" />
+    </sensor>
+    <sensor type="iCone" id="NB 7 - MP 39.4" latitude="37.1278140" longitude="-84.1071670">
+      <radar devID="1729" intervalEnd="2020-08-21T15:40:00Z" latitude="37.1277596" longitude="-84.1071477" numReads="18" avgSpeed="66.67" stDevSpeed="5.0124" />
+      <radar devID="1729" intervalEnd="2020-08-21T15:45:00Z" latitude="37.1277621" longitude="-84.1071502" numReads="34" avgSpeed="67.50" stDevSpeed="5.4530" />
+      <radar devID="1729" intervalEnd="2020-08-21T15:50:00Z" latitude="37.1277616" longitude="-84.1071522" numReads="40" avgSpeed="68.25" stDevSpeed="6.2964" />
+      <radar devID="1729" intervalEnd="2020-08-21T15:55:00Z" latitude="37.1277617" longitude="-84.1071526" numReads="17" avgSpeed="68.97" stDevSpeed="7.0926" />
+    </sensor>
+    <sensor type="iCone" id="NB 8 - MP 38.2" latitude="37.1110090" longitude="-84.1019720" />
+    <display type="PCMS" id="I-75 NB - MP 42" latitude="37.1641000" longitude="-84.1176000">
+      <message verified="2020-08-21T15:44:19Z" latitude="37.1641920" longitude="-84.1175260" text=" ROADWORK / NEXT / 6 MILES // 22 MILES / OF WORK / MP 40-62" />
+    </display>
+    <display type="PCMS" id="I-75 NB - MP 40" latitude="37.1341260" longitude="-84.1085480">
+      <message verified="2020-08-21T15:48:17Z" text=" ROADWORK / 2 MILES / AHEAD // 22 MILES / OF WORK / MP 40-62" />
+    </display>
+    <display type="PCMS" id="I-75 NB - MP 35" latitude="37.0646870" longitude="-84.0980500">
+      <message verified="2020-08-21T15:48:16Z" latitude="37.0647220" longitude="-84.0980650" text=" ROADWORK / 6 MILES / AHEAD // 22 MILES / OF WORK / MP 40-62" />
+    </display>
+  </incident>
+  <incident id="1246">
+    <creationtime>2019-11-05T01:32:44Z</creationtime>
+    <updatetime>2020-08-21T15:52:02Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>19-1245: Roadwork between MP 48 and MP 40</description>
+    <location>
+      <street>I-75 S</street>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>37.2066700,-84.1691290,37.2012230,-84.1573460,37.1858150,-84.1404820,37.1663450,-84.1214250,37.1478080,-84.1115880</polyline>
+    </location>
+    <starttime>2019-11-22T23:02:21Z</starttime>
+    <sensor type="iCone" id="SB 1 - MP 40.8" latitude="37.1478080" longitude="-84.1115880" />
+    <sensor type="iCone" id="SB 2 - MP 42.1" latitude="37.1663450" longitude="-84.1214250">
+      <radar devID="1614" intervalEnd="2020-08-21T15:45:00Z" latitude="37.1663422" longitude="-84.1214254" numReads="67" avgSpeed="67.43" stDevSpeed="6.5561" />
+      <radar devID="1614" intervalEnd="2020-08-21T15:50:00Z" latitude="37.1663422" longitude="-84.1214254" numReads="48" avgSpeed="68.54" stDevSpeed="6.2738" />
+      <radar devID="1614" intervalEnd="2020-08-21T15:55:00Z" latitude="37.1663422" longitude="-84.1214254" numReads="38" avgSpeed="66.84" stDevSpeed="6.4339" />
+    </sensor>
+    <sensor type="iCone" id="SB 3 - MP 44.0" latitude="37.1858150" longitude="-84.1404820">
+      <radar devID="1740" intervalEnd="2020-08-21T15:40:00Z" latitude="37.1857562" longitude="-84.1404956" numReads="9" avgSpeed="61.39" stDevSpeed="6.3463" />
+      <radar devID="1740" intervalEnd="2020-08-21T15:45:00Z" latitude="37.1857562" longitude="-84.1404956" numReads="68" avgSpeed="65.51" stDevSpeed="6.5987" />
+      <radar devID="1740" intervalEnd="2020-08-21T15:50:00Z" latitude="37.1857562" longitude="-84.1404956" numReads="33" avgSpeed="66.59" stDevSpeed="6.6288" />
+    </sensor>
+    <sensor type="iCone" id="SB 4 - MP 45.7" latitude="37.2012230" longitude="-84.1573460">
+      <radar devID="1724" intervalEnd="2020-08-21T15:40:00Z" latitude="37.2012256" longitude="-84.1573747" numReads="21" avgSpeed="64.64" stDevSpeed="5.6432" />
+      <radar devID="1724" intervalEnd="2020-08-21T15:45:00Z" latitude="37.2012256" longitude="-84.1573747" numReads="38" avgSpeed="69.21" stDevSpeed="6.9488" />
+      <radar devID="1724" intervalEnd="2020-08-21T15:50:00Z" latitude="37.2012256" longitude="-84.1573747" numReads="62" avgSpeed="64.11" stDevSpeed="9.0186" />
+      <radar devID="1724" intervalEnd="2020-08-21T15:55:00Z" latitude="37.2012256" longitude="-84.1573747" numReads="17" avgSpeed="66.91" stDevSpeed="5.3667" />
+    </sensor>
+    <sensor type="iCone" id="SB 5 - MP 47.5" latitude="37.2066700" longitude="-84.1691290">
+      <radar devID="1735" intervalEnd="2020-08-21T15:45:00Z" latitude="37.2066724" longitude="-84.1691283" numReads="70" avgSpeed="67.00" stDevSpeed="6.2133" />
+      <radar devID="1735" intervalEnd="2020-08-21T15:50:00Z" latitude="37.2066724" longitude="-84.1691283" numReads="42" avgSpeed="64.05" stDevSpeed="7.6332" />
+      <radar devID="1735" intervalEnd="2020-08-21T15:55:00Z" latitude="37.2066724" longitude="-84.1691283" numReads="45" avgSpeed="62.17" stDevSpeed="6.7055" />
+    </sensor>
+    <sensor type="iCone" id="SB 6 - MP 48.5" latitude="37.2193130" longitude="-84.2046600" />
+    <sensor type="iCone" id="SB 7 - MP 49.5" latitude="37.2299854" longitude="-84.2221508">
+      <radar devID="1719" intervalEnd="2020-08-21T15:40:00Z" numReads="19" avgSpeed="67.24" stDevSpeed="4.9229" />
+      <radar devID="1719" intervalEnd="2020-08-21T15:45:00Z" numReads="38" avgSpeed="65.00" stDevSpeed="10.7934" />
+      <radar devID="1719" intervalEnd="2020-08-21T15:50:00Z" numReads="62" avgSpeed="62.82" stDevSpeed="9.7647" />
+      <radar devID="1719" intervalEnd="2020-08-21T15:55:00Z" numReads="41" avgSpeed="59.57" stDevSpeed="8.8250" />
+    </sensor>
+    <sensor type="iCone" id="SB 8 - MP 50.5" latitude="37.2378880" longitude="-84.2359180" />
+    <display type="PCMS" id="I-75 SB - MP 50" latitude="37.2339700" longitude="-84.2290798">
+      <message verified="2020-08-21T15:42:27Z" text=" ROADWORK / 4 MILES / AHEAD // 19 MILES / OF WORK / MP 48-29" />
+      <message verified="2020-08-21T15:52:27Z" text=" ROADWORK / 4 MILES / AHEAD // 19 MILES / OF WORK / MP 48-29" />
+    </display>
+    <display type="PCMS" id="I-75 SB - MP 46" latitude="37.2059920" longitude="-84.1672690">
+      <message verified="2020-08-21T15:48:32Z" latitude="37.2060070" longitude="-84.1673050" text=" ROADWORK / NEXT / 5 MILES // 19 MILES / OF WORK / MP 48-29" />
+    </display>
+  </incident>
+  <incident id="1247">
+    <creationtime>2019-11-19T22:43:10Z</creationtime>
+    <updatetime>2020-08-21T15:52:02Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>19-1210: Roadwork between MP 28.9 and MP 33.3</description>
+    <location>
+      <street>I-75 N</street>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>36.9653120,-84.1131840,36.9792380,-84.1104390,37.0071310,-84.1037570</polyline>
+    </location>
+    <starttime>2019-11-20T21:56:19Z</starttime>
+    <sensor type="iCone" id="NB 1 - MM 31.0" latitude="37.0071310" longitude="-84.1037570" />
+    <sensor type="iCone" id="NB 2 - MM 29.0" latitude="36.9792380" longitude="-84.1104390">
+      <radar devID="1615" intervalEnd="2020-08-21T15:45:00Z" latitude="36.9792019" longitude="-84.1104339" numReads="45" avgSpeed="68.28" stDevSpeed="5.7528" />
+      <radar devID="1615" intervalEnd="2020-08-21T15:50:00Z" latitude="36.9792019" longitude="-84.1104339" numReads="39" avgSpeed="68.01" stDevSpeed="8.6001" />
+      <radar devID="1615" intervalEnd="2020-08-21T15:55:00Z" latitude="36.9792019" longitude="-84.1104339" numReads="34" avgSpeed="65.00" stDevSpeed="10.2155" />
+    </sensor>
+    <sensor type="iCone" id="NB 3 - MM 28.0" latitude="36.9653120" longitude="-84.1131840" />
+    <sensor type="iCone" id="NB 4 - MM 27.5" latitude="36.9573940" longitude="-84.1180350">
+      <radar devID="1726" intervalEnd="2020-08-21T15:45:00Z" latitude="36.9573927" longitude="-84.1180164" numReads="48" avgSpeed="68.85" stDevSpeed="6.4229" />
+      <radar devID="1726" intervalEnd="2020-08-21T15:50:00Z" latitude="36.9573927" longitude="-84.1180164" numReads="34" avgSpeed="67.79" stDevSpeed="6.8050" />
+      <radar devID="1726" intervalEnd="2020-08-21T15:55:00Z" latitude="36.9573927" longitude="-84.1180164" numReads="33" avgSpeed="68.86" stDevSpeed="5.7200" />
+    </sensor>
+    <sensor type="iCone" id="NB 5 - MM 26.5" latitude="36.9450500" longitude="-84.1229640">
+      <radar devID="1613" intervalEnd="2020-08-21T15:40:00Z" numReads="22" avgSpeed="72.27" stDevSpeed="4.2541" />
+      <radar devID="1613" intervalEnd="2020-08-21T15:45:00Z" numReads="36" avgSpeed="73.06" stDevSpeed="6.2469" />
+      <radar devID="1613" intervalEnd="2020-08-21T15:50:00Z" numReads="56" avgSpeed="70.27" stDevSpeed="6.7166" />
+      <radar devID="1613" intervalEnd="2020-08-21T15:55:00Z" numReads="21" avgSpeed="66.55" stDevSpeed="8.6291" />
+    </sensor>
+    <sensor type="iCone" id="NB 6 - MM 25.5" latitude="36.9306000" longitude="-84.1263760" />
+    <display type="PCMS" id="Exit 29 - Cumberland Pkwy WB" latitude="36.9756000" longitude="-84.1041000">
+      <message verified="2020-08-21T15:44:18Z" latitude="36.9755620" longitude="-84.1039880" text=" ROADWORK / I-75 NB / MP 29-33" />
+    </display>
+    <display type="PCMS" id="I-75 NB - MP 24" latitude="36.9044000" longitude="-84.1327000">
+      <message verified="2020-08-21T15:42:36Z" latitude="36.9046460" longitude="-84.1327240" text=" ROADWORK / 5 MILES / AHEAD // 33 MILES / OF WORK / MP 29-62" />
+      <message verified="2020-08-21T15:52:28Z" latitude="36.9046760" longitude="-84.1327420" text=" ROADWORK / 5 MILES / AHEAD // 33 MILES / OF WORK / MP 29-62" />
+    </display>
+    <display type="PCMS" id="Exit 29 - KY-770 EB" latitude="36.9746200" longitude="-84.1307710">
+      <message verified="2020-08-21T15:44:19Z" latitude="36.9745740" longitude="-84.1292010" text=" ROADWORK / I-75 NB / MP 29-33" />
+    </display>
+    <display type="PCMS" id="I-75 NB - MP 26" latitude="36.9388990" longitude="-84.1243900">
+      <message verified="2020-08-21T15:42:36Z" latitude="36.9388720" longitude="-84.1243680" text=" ROADWORK / NEXT / 4 MILES // 33 MILES / OF WORK / MP 29-62" />
+      <message verified="2020-08-21T15:52:28Z" latitude="36.9388720" longitude="-84.1243680" text=" ROADWORK / NEXT / 4 MILES // 33 MILES / OF WORK / MP 29-62" />
+    </display>
+    <display type="PCMS" id="Exit 25 - US25 WB" latitude="36.9182000" longitude="-84.1209000">
+      <message verified="2020-08-21T15:46:24Z" text=" ROADWORK / I-75 NB / MP 29-33" />
+    </display>
+    <display type="PCMS" id="Exit 25 - US25 EB" latitude="36.9115000" longitude="-84.1472000">
+      <message verified="2020-08-21T15:44:22Z" text=" ROADWORK / I-75 NB / MP 29-33" />
+    </display>
+  </incident>
+  <incident id="1248">
+    <creationtime>2019-11-19T22:50:54Z</creationtime>
+    <updatetime>2020-08-21T15:52:03Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>19-1210: Roadwork between MP 28.9 and MP 33.3</description>
+    <location>
+      <street>I-75 S</street>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>37.0498890,-84.0989330,37.0355150,-84.0985540,37.0040920,-84.1051700</polyline>
+    </location>
+    <starttime>2019-11-20T21:56:22Z</starttime>
+    <sensor type="iCone" id="SB 1 - MP 31.0" latitude="37.0040920" longitude="-84.1051700">
+      <radar devID="1635" intervalEnd="2020-08-21T15:40:00Z" latitude="37.0040960" longitude="-84.1051652" numReads="23" avgSpeed="59.46" stDevSpeed="7.2019" />
+      <radar devID="1635" intervalEnd="2020-08-21T15:45:00Z" latitude="37.0040960" longitude="-84.1051652" numReads="42" avgSpeed="62.62" stDevSpeed="6.0260" />
+      <radar devID="1635" intervalEnd="2020-08-21T15:50:00Z" latitude="37.0040960" longitude="-84.1051652" numReads="71" avgSpeed="62.15" stDevSpeed="6.7297" />
+      <radar devID="1635" intervalEnd="2020-08-21T15:55:00Z" latitude="37.0040960" longitude="-84.1051652" numReads="45" avgSpeed="61.39" stDevSpeed="5.6462" />
+    </sensor>
+    <sensor type="iCone" id="SB 2 - MP 33.0" latitude="37.0355150" longitude="-84.0985540">
+      <radar devID="1670" intervalEnd="2020-08-21T15:45:00Z" numReads="69" avgSpeed="62.36" stDevSpeed="6.1917" />
+      <radar devID="1670" intervalEnd="2020-08-21T15:50:00Z" numReads="50" avgSpeed="60.30" stDevSpeed="11.3443" />
+      <radar devID="1670" intervalEnd="2020-08-21T15:55:00Z" numReads="42" avgSpeed="63.81" stDevSpeed="8.6500" />
+    </sensor>
+    <sensor type="iCone" id="SB 3 - MP 34.0" latitude="37.0498890" longitude="-84.0989330">
+      <radar devID="1651" intervalEnd="2020-08-21T15:40:00Z" latitude="37.0498961" longitude="-84.0989384" numReads="18" avgSpeed="61.94" stDevSpeed="12.6234" />
+      <radar devID="1651" intervalEnd="2020-08-21T15:45:00Z" latitude="37.0498961" longitude="-84.0989384" numReads="38" avgSpeed="66.97" stDevSpeed="7.7326" />
+      <radar devID="1651" intervalEnd="2020-08-21T15:50:00Z" latitude="37.0498961" longitude="-84.0989384" numReads="60" avgSpeed="66.83" stDevSpeed="6.4447" />
+      <radar devID="1651" intervalEnd="2020-08-21T15:55:00Z" latitude="37.0498961" longitude="-84.0989384" numReads="21" avgSpeed="69.40" stDevSpeed="6.0504" />
+    </sensor>
+    <sensor type="iCone" id="SB 4 - MP 34.5" latitude="37.0566312" longitude="-84.0983559" />
+    <sensor type="iCone" id="SB 5 - MP 35.5" latitude="37.0703230" longitude="-84.0992670">
+      <radar devID="1643" intervalEnd="2020-08-21T15:45:00Z" latitude="37.0702906" longitude="-84.0992513" numReads="59" avgSpeed="70.21" stDevSpeed="6.2215" />
+      <radar devID="1643" intervalEnd="2020-08-21T15:50:00Z" latitude="37.0702906" longitude="-84.0992513" numReads="37" avgSpeed="69.66" stDevSpeed="6.0143" />
+      <radar devID="1643" intervalEnd="2020-08-21T15:55:00Z" latitude="37.0702906" longitude="-84.0992513" numReads="38" avgSpeed="70.53" stDevSpeed="5.4521" />
+    </sensor>
+    <sensor type="iCone" id="SB 6 - MP 36.5" latitude="37.0846350" longitude="-84.0998270" />
+    <display type="PCMS" id="I-75 SB - MP 35" latitude="37.0636000" longitude="-84.0987000">
+      <message verified="2020-08-21T15:44:23Z" latitude="37.0635800" longitude="-84.0986300" text=" ROADWORK / NEXT / 6 MILES" />
+    </display>
+    <display type="PCMS" id="I-75 SB - MP 39" latitude="37.1207000" longitude="-84.1063000">
+      <message verified="2020-08-21T15:44:16Z" latitude="37.1207980" longitude="-84.1062290" text=" ROADWORK / 5 MILES / AHEAD" />
+    </display>
+  </incident>
+  <incident id="1249">
+    <creationtime>2019-11-19T23:12:39Z</creationtime>
+    <updatetime>2020-08-21T15:52:02Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>18-1001: Roadwork between MP 54 and MP 59</description>
+    <location>
+      <street>I-75 S</street>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>37.3382560,-84.3065490,37.3384160,-84.3064810,37.3287650,-84.3035850</polyline>
+    </location>
+    <starttime>2019-11-26T16:30:16Z</starttime>
+    <sensor type="iCone" id="SB 1 - MP 58.0" latitude="37.3287650" longitude="-84.3035850">
+      <radar devID="1737" intervalEnd="2020-08-21T15:40:00Z" latitude="37.3288021" longitude="-84.3035994" numReads="7" avgSpeed="56.07" stDevSpeed="6.0989" />
+      <radar devID="1737" intervalEnd="2020-08-21T15:45:00Z" latitude="37.3288021" longitude="-84.3035994" numReads="44" avgSpeed="56.25" stDevSpeed="5.2086" />
+      <radar devID="1737" intervalEnd="2020-08-21T15:50:00Z" latitude="37.3288021" longitude="-84.3035994" numReads="44" avgSpeed="53.98" stDevSpeed="7.6087" />
+    </sensor>
+    <sensor type="iCone" id="SB 1.5L- MP 58.5" latitude="37.3384160" longitude="-84.3064810">
+      <radar devID="1657" intervalEnd="2020-08-21T15:45:00Z" numReads="64" avgSpeed="66.09" stDevSpeed="6.4147" />
+      <radar devID="1657" intervalEnd="2020-08-21T15:50:00Z" numReads="47" avgSpeed="65.37" stDevSpeed="6.0641" />
+      <radar devID="1657" intervalEnd="2020-08-21T15:55:00Z" numReads="40" avgSpeed="66.38" stDevSpeed="4.6491" />
+    </sensor>
+    <sensor type="iCone" id="SB 1.5R- MP 58.5" latitude="37.3382560" longitude="-84.3065490">
+      <radar devID="1624" intervalEnd="2020-08-21T15:45:00Z" numReads="71" avgSpeed="63.13" stDevSpeed="5.5432" />
+      <radar devID="1624" intervalEnd="2020-08-21T15:50:00Z" numReads="42" avgSpeed="59.29" stDevSpeed="6.0596" />
+      <radar devID="1624" intervalEnd="2020-08-21T15:55:00Z" numReads="40" avgSpeed="61.13" stDevSpeed="5.7026" />
+    </sensor>
+    <sensor type="iCone" id="SB 2 - MP 59.0" latitude="37.3444950" longitude="-84.3083370">
+      <radar devID="1754" intervalEnd="2020-08-21T15:40:00Z" latitude="37.3444767" longitude="-84.3084384" numReads="11" avgSpeed="52.50" stDevSpeed="7.2744" />
+      <radar devID="1754" intervalEnd="2020-08-21T15:45:00Z" latitude="37.3444767" longitude="-84.3084384" numReads="25" avgSpeed="53.10" stDevSpeed="11.1168" />
+      <radar devID="1754" intervalEnd="2020-08-21T15:50:00Z" latitude="37.3444767" longitude="-84.3084384" numReads="32" avgSpeed="50.47" stDevSpeed="7.9886" />
+      <radar devID="1754" intervalEnd="2020-08-21T15:55:00Z" latitude="37.3444767" longitude="-84.3084384" numReads="12" avgSpeed="50.42" stDevSpeed="4.2645" />
+    </sensor>
+    <sensor type="iCone" id="SB 3 - MP 61.0" latitude="37.3682887" longitude="-84.3151565">
+      <radar devID="1750" intervalEnd="2020-08-21T15:40:00Z" latitude="37.3681706" longitude="-84.3148920" numReads="22" avgSpeed="67.95" stDevSpeed="6.7318" />
+      <radar devID="1750" intervalEnd="2020-08-21T15:45:00Z" latitude="37.3681706" longitude="-84.3148920" numReads="42" avgSpeed="68.10" stDevSpeed="6.7620" />
+      <radar devID="1750" intervalEnd="2020-08-21T15:50:00Z" latitude="37.3681706" longitude="-84.3148920" numReads="63" avgSpeed="67.10" stDevSpeed="8.5534" />
+      <radar devID="1750" intervalEnd="2020-08-21T15:55:00Z" latitude="37.3681706" longitude="-84.3148920" numReads="23" avgSpeed="68.37" stDevSpeed="7.0287" />
+    </sensor>
+    <sensor type="iCone" id="SB 4 - MP 61.5" latitude="37.3732510" longitude="-84.3227240">
+      <radar devID="1747" intervalEnd="2020-08-21T15:45:00Z" latitude="37.3732356" longitude="-84.3227046" numReads="47" avgSpeed="63.88" stDevSpeed="5.2937" />
+      <radar devID="1747" intervalEnd="2020-08-21T15:50:00Z" latitude="37.3732356" longitude="-84.3227046" numReads="32" avgSpeed="64.38" stDevSpeed="6.0182" />
+      <radar devID="1747" intervalEnd="2020-08-21T15:55:00Z" latitude="37.3732356" longitude="-84.3227046" numReads="30" avgSpeed="63.83" stDevSpeed="6.1203" />
+    </sensor>
+    <sensor type="iCone" id="SB 5 - MP 62.4" latitude="37.3826830" longitude="-84.3348950" />
+    <sensor type="iCone" id="SB 6 - MP 63.5" latitude="37.3984690" longitude="-84.3384120">
+      <radar devID="1759" intervalEnd="2020-08-21T15:40:00Z" latitude="37.3984110" longitude="-84.3384170" numReads="16" avgSpeed="74.38" stDevSpeed="6.3897" />
+      <radar devID="1759" intervalEnd="2020-08-21T15:45:00Z" latitude="37.3984110" longitude="-84.3384170" numReads="36" avgSpeed="71.11" stDevSpeed="6.8818" />
+      <radar devID="1759" intervalEnd="2020-08-21T15:50:00Z" latitude="37.3984110" longitude="-84.3384170" numReads="51" avgSpeed="72.11" stDevSpeed="5.0752" />
+      <radar devID="1759" intervalEnd="2020-08-21T15:55:00Z" latitude="37.3984110" longitude="-84.3384170" numReads="17" avgSpeed="74.85" stDevSpeed="5.4343" />
+    </sensor>
+    <sensor type="iCone" id="SB 7 - MP 64.5" latitude="37.4124700" longitude="-84.3409130" />
+    <display type="PCMS" id="Exit 59 - US25 EB" latitude="37.3477000" longitude="-84.3201000">
+      <message verified="2020-08-21T15:44:24Z" latitude="37.3475380" longitude="-84.3202990" text=" ROADWORK / I-75 SB / MP 62-54" />
+    </display>
+    <display type="PCMS" id="Exit 59 - US25 WB" latitude="37.3407000" longitude="-84.3026000">
+      <message verified="2020-08-21T15:48:35Z" latitude="37.3406180" longitude="-84.3026650" text=" ROADWORK / I-75 SB / MP 62-54" />
+    </display>
+    <display type="PCMS" id="I-75 SB - MP 63" latitude="37.4228650" longitude="-84.3491160">
+      <message verified="2020-08-21T15:48:34Z" text=" ROADWORK / 7 MILES / AHEAD // 33 MILES / OF WORK / MP 62-29" />
+    </display>
+  </incident>
+  <incident id="1250">
+    <creationtime>2019-11-20T04:20:30Z</creationtime>
+    <updatetime>2020-08-21T15:52:03Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>18-1001: Roadwork between MP 54 and MP 59</description>
+    <location>
+      <street>I-75 N</street>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>37.2649080,-84.2502440,37.2782090,-84.2553340,37.2855970,-84.2632180,37.3055510,-84.2857540,37.3579470,-84.3073160</polyline>
+    </location>
+    <starttime>2020-02-14T17:50:18Z</starttime>
+    <sensor type="iCone" id="NB 1 - MM 60.0" latitude="37.3579470" longitude="-84.3073160">
+      <radar devID="1700" intervalEnd="2020-08-21T15:45:00Z" latitude="37.3577991" longitude="-84.3074831" numReads="67" avgSpeed="65.41" stDevSpeed="6.3007" />
+      <radar devID="1700" intervalEnd="2020-08-21T15:50:00Z" latitude="37.3577991" longitude="-84.3074831" numReads="47" avgSpeed="67.93" stDevSpeed="6.9084" />
+      <radar devID="1700" intervalEnd="2020-08-21T15:55:00Z" latitude="37.3577991" longitude="-84.3074831" numReads="46" avgSpeed="67.93" stDevSpeed="6.3199" />
+    </sensor>
+    <sensor type="iCone" id="NB 3 - MM 56.0" latitude="37.3055510" longitude="-84.2857540">
+      <radar devID="1761" intervalEnd="2020-08-21T15:45:00Z" numReads="60" avgSpeed="63.17" stDevSpeed="10.6170" />
+      <radar devID="1761" intervalEnd="2020-08-21T15:50:00Z" numReads="40" avgSpeed="63.88" stDevSpeed="5.4724" />
+      <radar devID="1761" intervalEnd="2020-08-21T15:55:00Z" numReads="38" avgSpeed="65.00" stDevSpeed="6.7991" />
+    </sensor>
+    <sensor type="iCone" id="NB 4 - MM 54.0" latitude="37.2855970" longitude="-84.2632180" />
+    <sensor type="iCone" id="NB 5 - MM 53.5" latitude="37.2782090" longitude="-84.2553340">
+      <radar devID="1648" intervalEnd="2020-08-21T15:45:00Z" latitude="37.2782358" longitude="-84.2553254" numReads="44" avgSpeed="63.75" stDevSpeed="10.0192" />
+      <radar devID="1648" intervalEnd="2020-08-21T15:50:00Z" latitude="37.2782358" longitude="-84.2553254" numReads="29" avgSpeed="64.74" stDevSpeed="8.6003" />
+      <radar devID="1648" intervalEnd="2020-08-21T15:55:00Z" latitude="37.2782358" longitude="-84.2553254" numReads="33" avgSpeed="60.08" stDevSpeed="13.0378" />
+    </sensor>
+    <sensor type="iCone" id="NB 6 - MM 52.5" latitude="37.2649080" longitude="-84.2502440" />
+    <sensor type="iCone" id="NB 7 - MM 51.5" latitude="37.2504080" longitude="-84.2470300">
+      <radar devID="1731" intervalEnd="2020-08-21T15:40:00Z" numReads="16" avgSpeed="67.50" stDevSpeed="6.4226" />
+      <radar devID="1731" intervalEnd="2020-08-21T15:45:00Z" numReads="37" avgSpeed="66.15" stDevSpeed="6.9868" />
+      <radar devID="1731" intervalEnd="2020-08-21T15:50:00Z" numReads="60" avgSpeed="71.00" stDevSpeed="5.2756" />
+      <radar devID="1731" intervalEnd="2020-08-21T15:55:00Z" numReads="37" avgSpeed="69.80" stDevSpeed="5.5396" />
+    </sensor>
+    <display type="PCMS" id="I-75 NB - MP 48.3" latitude="37.2182000" longitude="-84.2027000">
+      <message verified="2020-08-21T15:48:25Z" latitude="37.2178100" longitude="-84.2024390" text=" ROADWORK / 5 MILES / AHEAD" />
+    </display>
+    <display type="PCMS" id="I-75 NB - MP 52.5" latitude="37.2590000" longitude="-84.2491000">
+      <message verified="2020-08-21T15:48:25Z" latitude="37.2577710" longitude="-84.2488130" text=" ROADWORK / 1 MILE / AHEAD" />
+    </display>
+  </incident>
+  <incident id="1254">
+    <creationtime>2020-03-09T16:18:10Z</creationtime>
+    <updatetime>2020-08-21T15:52:03Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork I-69 N</description>
+    <location>
+      <street>I-69 N</street>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>39.3873280,-86.4660290,39.3873280,-86.4660290</polyline>
+    </location>
+    <starttime>2020-03-09T17:10:18Z</starttime>
+    <sensor type="iCone" id="1" latitude="39.3873280" longitude="-86.4660290">
+      <radar devID="1579" intervalEnd="2020-08-21T15:45:00Z" numReads="42" avgSpeed="61.43" stDevSpeed="7.3105" />
+      <radar devID="1579" intervalEnd="2020-08-21T15:50:00Z" numReads="35" avgSpeed="65.07" stDevSpeed="6.9612" />
+      <radar devID="1579" intervalEnd="2020-08-21T15:55:00Z" numReads="37" avgSpeed="62.77" stDevSpeed="8.4528" />
+    </sensor>
+    <sensor type="iCone" id="2" latitude="39.3813540" longitude="-86.4708930">
+      <radar devID="1585" intervalEnd="2020-08-21T15:45:00Z" latitude="39.3813898" longitude="-86.4710375" numReads="42" avgSpeed="64.05" stDevSpeed="6.1265" />
+      <radar devID="1585" intervalEnd="2020-08-21T15:50:00Z" latitude="39.3813898" longitude="-86.4710375" numReads="28" avgSpeed="67.86" stDevSpeed="4.8694" />
+      <radar devID="1585" intervalEnd="2020-08-21T15:55:00Z" latitude="39.3813898" longitude="-86.4710375" numReads="34" avgSpeed="67.21" stDevSpeed="7.3406" />
+    </sensor>
+    <sensor type="iCone" id="3" latitude="39.3756860" longitude="-86.4768030">
+      <radar devID="1332" intervalEnd="2020-08-21T15:40:00Z" latitude="39.3757951" longitude="-86.4766968" numReads="19" avgSpeed="61.45" stDevSpeed="12.6741" />
+      <radar devID="1332" intervalEnd="2020-08-21T15:45:00Z" latitude="39.3757951" longitude="-86.4766968" numReads="38" avgSpeed="65.13" stDevSpeed="10.7299" />
+      <radar devID="1332" intervalEnd="2020-08-21T15:50:00Z" latitude="39.3757951" longitude="-86.4766968" numReads="60" avgSpeed="66.33" stDevSpeed="9.6071" />
+      <radar devID="1332" intervalEnd="2020-08-21T15:55:00Z" latitude="39.3757951" longitude="-86.4766968" numReads="22" avgSpeed="70.00" stDevSpeed="6.1480" />
+    </sensor>
+    <sensor type="iCone" id="4" latitude="39.3701770" longitude="-86.4825760">
+      <radar devID="1586" intervalEnd="2020-08-21T15:45:00Z" latitude="39.3701679" longitude="-86.4826037" numReads="33" avgSpeed="67.20" stDevSpeed="8.5336" />
+      <radar devID="1586" intervalEnd="2020-08-21T15:50:00Z" latitude="39.3701679" longitude="-86.4826037" numReads="25" avgSpeed="64.70" stDevSpeed="9.5830" />
+      <radar devID="1586" intervalEnd="2020-08-21T15:55:00Z" latitude="39.3701679" longitude="-86.4826037" numReads="26" avgSpeed="68.46" stDevSpeed="5.2871" />
+    </sensor>
+    <sensor type="iCone" id="5" latitude="39.3641180" longitude="-86.4875500">
+      <radar devID="1590" intervalEnd="2020-08-21T15:45:00Z" latitude="39.3641775" longitude="-86.4876994" numReads="42" avgSpeed="68.81" stDevSpeed="6.9277" />
+      <radar devID="1590" intervalEnd="2020-08-21T15:50:00Z" latitude="39.3641775" longitude="-86.4876994" numReads="31" avgSpeed="70.89" stDevSpeed="6.3424" />
+      <radar devID="1590" intervalEnd="2020-08-21T15:55:00Z" latitude="39.3641775" longitude="-86.4876994" numReads="23" avgSpeed="72.50" stDevSpeed="5.4530" />
+    </sensor>
+    <sensor type="iCone" id="6" latitude="39.3577930" longitude="-86.4919440">
+      <radar devID="1376" intervalEnd="2020-08-21T15:45:00Z" latitude="39.3577796" longitude="-86.4919538" numReads="1" avgSpeed="67.50" stDevSpeed="0.0000" />
+      <radar devID="1376" intervalEnd="2020-08-21T15:50:00Z" latitude="39.3577796" longitude="-86.4919538" numReads="2" avgSpeed="70.00" stDevSpeed="3.2275" />
+      <radar devID="1376" intervalEnd="2020-08-21T15:55:00Z" latitude="39.3577796" longitude="-86.4919538" numReads="0" avgSpeed="0.00" stDevSpeed="0.0000" />
+    </sensor>
+    <sensor type="iCone" id="7" latitude="39.3514840" longitude="-86.4966760">
+      <radar devID="1338" intervalEnd="2020-08-21T15:40:00Z" latitude="39.3515951" longitude="-86.4965953" numReads="18" avgSpeed="63.06" stDevSpeed="10.3155" />
+      <radar devID="1338" intervalEnd="2020-08-21T15:45:00Z" latitude="39.3515951" longitude="-86.4965953" numReads="35" avgSpeed="63.21" stDevSpeed="9.0524" />
+      <radar devID="1338" intervalEnd="2020-08-21T15:50:00Z" latitude="39.3515951" longitude="-86.4965953" numReads="65" avgSpeed="63.96" stDevSpeed="8.1035" />
+      <radar devID="1338" intervalEnd="2020-08-21T15:55:00Z" latitude="39.3515951" longitude="-86.4965953" numReads="18" avgSpeed="65.56" stDevSpeed="8.8166" />
+    </sensor>
+    <sensor type="iCone" id="8" latitude="39.3462690" longitude="-86.5028140">
+      <radar devID="1329" intervalEnd="2020-08-21T15:40:00Z" latitude="39.3462596" longitude="-86.5028011" numReads="1" avgSpeed="52.50" stDevSpeed="0.0000" />
+      <radar devID="1329" intervalEnd="2020-08-21T15:45:00Z" latitude="39.3462596" longitude="-86.5028011" numReads="3" avgSpeed="55.83" stDevSpeed="2.5003" />
+      <radar devID="1329" intervalEnd="2020-08-21T15:50:00Z" latitude="39.3462596" longitude="-86.5028011" numReads="7" avgSpeed="58.21" stDevSpeed="3.1332" />
+      <radar devID="1329" intervalEnd="2020-08-21T15:55:00Z" latitude="39.3462596" longitude="-86.5028011" numReads="3" avgSpeed="55.83" stDevSpeed="5.5903" />
+    </sensor>
+    <display type="PCMS" id="PCMS 1" latitude="39.3641223" longitude="-86.4875641">
+      <message verified="2020-08-21T15:40:22Z" text=" ROAD / WORK / 2 MILES" />
+      <message verified="2020-08-21T15:50:28Z" text=" ROAD / WORK / 2 MILES" />
+    </display>
+    <display type="PCMS" id="PCMS 2" latitude="39.3401356" longitude="-86.5078477">
+      <message verified="2020-08-21T15:46:39Z" text=" SLOW / TRAFFIC / AHEAD" />
+      <message verified="2020-08-21T15:46:59Z" text=" ROAD / WORK / 4 MILES" />
+    </display>
+  </incident>
+  <incident id="1255">
+    <creationtime>2020-04-13T17:12:18Z</creationtime>
+    <updatetime>2020-08-21T15:52:04Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork I-69 N</description>
+    <location>
+      <street>SR-37 SB</street>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>39.4043170,-86.4427720,39.4043170,-86.4427720</polyline>
+    </location>
+    <starttime>2020-04-13T17:16:23Z</starttime>
+    <sensor type="iCone" id="1" latitude="39.4043170" longitude="-86.4427720">
+      <radar devID="1753" intervalEnd="2020-08-21T15:40:00Z" latitude="39.4042106" longitude="-86.4426574" numReads="14" avgSpeed="47.14" stDevSpeed="8.5311" />
+      <radar devID="1753" intervalEnd="2020-08-21T15:45:00Z" latitude="39.4042106" longitude="-86.4426574" numReads="32" avgSpeed="49.38" stDevSpeed="7.7725" />
+      <radar devID="1753" intervalEnd="2020-08-21T15:50:00Z" latitude="39.4042106" longitude="-86.4426574" numReads="35" avgSpeed="52.50" stDevSpeed="5.3665" />
+      <radar devID="1753" intervalEnd="2020-08-21T15:55:00Z" latitude="39.4042106" longitude="-86.4426574" numReads="21" avgSpeed="43.69" stDevSpeed="9.0930" />
+    </sensor>
+    <sensor type="iCone" id="2" latitude="39.4061770" longitude="-86.4338860">
+      <radar devID="1701" intervalEnd="2020-08-21T15:45:00Z" latitude="39.4061679" longitude="-86.4338739" numReads="47" avgSpeed="45.16" stDevSpeed="7.5856" />
+      <radar devID="1701" intervalEnd="2020-08-21T15:50:00Z" latitude="39.4061679" longitude="-86.4338739" numReads="26" avgSpeed="48.85" stDevSpeed="10.7252" />
+      <radar devID="1701" intervalEnd="2020-08-21T15:55:00Z" latitude="39.4061679" longitude="-86.4338739" numReads="30" avgSpeed="46.00" stDevSpeed="8.2985" />
+    </sensor>
+    <sensor type="iCone" id="3" latitude="39.4081180" longitude="-86.4248780">
+      <radar devID="1733" intervalEnd="2020-08-21T15:40:00Z" latitude="39.4079823" longitude="-86.4251885" numReads="8" avgSpeed="40.63" stDevSpeed="6.8901" />
+      <radar devID="1733" intervalEnd="2020-08-21T15:45:00Z" latitude="39.4079823" longitude="-86.4251885" numReads="26" avgSpeed="44.23" stDevSpeed="8.3545" />
+      <radar devID="1733" intervalEnd="2020-08-21T15:50:00Z" latitude="39.4079823" longitude="-86.4251885" numReads="28" avgSpeed="42.68" stDevSpeed="8.0916" />
+      <radar devID="1733" intervalEnd="2020-08-21T15:55:00Z" latitude="39.4079823" longitude="-86.4251885" numReads="17" avgSpeed="45.15" stDevSpeed="8.1873" />
+    </sensor>
+    <sensor type="iCone" id="4" latitude="39.4127760" longitude="-86.4176810">
+      <radar devID="1752" intervalEnd="2020-08-21T15:45:00Z" latitude="39.4127716" longitude="-86.4176710" numReads="47" avgSpeed="56.54" stDevSpeed="7.3514" />
+      <radar devID="1752" intervalEnd="2020-08-21T15:50:00Z" latitude="39.4127716" longitude="-86.4176710" numReads="28" avgSpeed="54.46" stDevSpeed="6.1182" />
+      <radar devID="1752" intervalEnd="2020-08-21T15:55:00Z" latitude="39.4127716" longitude="-86.4176710" numReads="32" avgSpeed="57.03" stDevSpeed="7.5206" />
+    </sensor>
+    <sensor type="iCone" id="5" latitude="39.4179950" longitude="-86.4112200">
+      <radar devID="1619" intervalEnd="2020-08-21T15:40:00Z" latitude="39.4180178" longitude="-86.4111872" numReads="8" avgSpeed="52.50" stDevSpeed="7.8868" />
+      <radar devID="1619" intervalEnd="2020-08-21T15:45:00Z" latitude="39.4180178" longitude="-86.4111872" numReads="47" avgSpeed="49.20" stDevSpeed="9.5758" />
+      <radar devID="1619" intervalEnd="2020-08-21T15:50:00Z" latitude="39.4180178" longitude="-86.4111872" numReads="54" avgSpeed="50.56" stDevSpeed="8.0215" />
+      <radar devID="1619" intervalEnd="2020-08-21T15:55:00Z" latitude="39.4180178" longitude="-86.4111872" numReads="14" avgSpeed="52.14" stDevSpeed="6.7718" />
+    </sensor>
+    <sensor type="iCone" id="6" latitude="39.4232560" longitude="-86.4047460">
+      <radar devID="1605" intervalEnd="2020-08-21T15:40:00Z" latitude="39.4232033" longitude="-86.4047186" numReads="9" avgSpeed="47.50" stDevSpeed="6.4550" />
+      <radar devID="1605" intervalEnd="2020-08-21T15:45:00Z" latitude="39.4232033" longitude="-86.4047186" numReads="15" avgSpeed="45.83" stDevSpeed="8.4692" />
+      <radar devID="1605" intervalEnd="2020-08-21T15:50:00Z" latitude="39.4232033" longitude="-86.4047186" numReads="26" avgSpeed="46.15" stDevSpeed="5.9186" />
+      <radar devID="1605" intervalEnd="2020-08-21T15:55:00Z" latitude="39.4232033" longitude="-86.4047186" numReads="12" avgSpeed="47.92" stDevSpeed="6.0306" />
+    </sensor>
+    <sensor type="iCone" id="7" latitude="39.4283660" longitude="-86.3983970">
+      <radar devID="1742" intervalEnd="2020-08-21T15:40:00Z" latitude="39.4282923" longitude="-86.3984726" numReads="5" avgSpeed="48.50" stDevSpeed="8.0881" />
+      <radar devID="1742" intervalEnd="2020-08-21T15:45:00Z" latitude="39.4282923" longitude="-86.3984726" numReads="46" avgSpeed="50.98" stDevSpeed="4.9435" />
+      <radar devID="1742" intervalEnd="2020-08-21T15:50:00Z" latitude="39.4282923" longitude="-86.3984726" numReads="44" avgSpeed="51.25" stDevSpeed="6.9325" />
+      <radar devID="1742" intervalEnd="2020-08-21T15:55:00Z" latitude="39.4282923" longitude="-86.3984726" numReads="42" avgSpeed="51.07" stDevSpeed="5.9030" />
+    </sensor>
+    <sensor type="iCone" id="8" latitude="39.4339000" longitude="-86.3916350">
+      <radar devID="1751" intervalEnd="2020-08-21T15:40:00Z" latitude="39.4338540" longitude="-86.3915532" numReads="10" avgSpeed="56.00" stDevSpeed="10.9735" />
+      <radar devID="1751" intervalEnd="2020-08-21T15:45:00Z" latitude="39.4338540" longitude="-86.3915532" numReads="48" avgSpeed="55.73" stDevSpeed="7.8908" />
+      <radar devID="1751" intervalEnd="2020-08-21T15:50:00Z" latitude="39.4338540" longitude="-86.3915532" numReads="53" avgSpeed="57.31" stDevSpeed="7.1924" />
+      <radar devID="1751" intervalEnd="2020-08-21T15:55:00Z" latitude="39.4338540" longitude="-86.3915532" numReads="45" avgSpeed="56.39" stDevSpeed="8.0519" />
+    </sensor>
+    <display type="PCMS" id="PCMS 1" latitude="39.4181034" longitude="-86.4110796">
+      <message verified="2020-08-21T15:48:37Z" longitude="0.0000000" text=" SLOW / TRAFFIC / AHEAD" />
+    </display>
+    <display type="PCMS" id="PCMS 2" latitude="39.4400385" longitude="-86.3876039">
+      <message verified="2020-08-21T15:48:33Z" text=" SLOW / TRAFFIC / 2 MILES" />
+    </display>
+  </incident>
+  <incident id="1257">
+    <creationtime>2020-06-12T19:03:27Z</creationtime>
+    <updatetime>2020-08-21T15:52:04Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>20-0006: Roadwork I-480 E</description>
+    <location>
+      <street>I-480 E</street>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>41.3883260,-81.9707500,41.3956920,-81.9455400,41.4042230,-81.9215770,41.4154540,-81.8924030</polyline>
+    </location>
+    <starttime>2020-06-12T19:36:31Z</starttime>
+    <sensor type="iCone" id="#1" latitude="41.4154540" longitude="-81.8924030">
+      <radar devID="1610" intervalEnd="2020-08-21T15:45:00Z" latitude="41.4154686" longitude="-81.8924068" numReads="66" avgSpeed="64.70" stDevSpeed="4.7572" />
+      <radar devID="1610" intervalEnd="2020-08-21T15:50:00Z" latitude="41.4154686" longitude="-81.8924068" numReads="39" avgSpeed="61.60" stDevSpeed="6.1010" />
+      <radar devID="1610" intervalEnd="2020-08-21T15:55:00Z" latitude="41.4154686" longitude="-81.8924068" numReads="40" avgSpeed="64.88" stDevSpeed="5.2329" />
+    </sensor>
+    <sensor type="iCone" id="#2" latitude="41.4042230" longitude="-81.9215770">
+      <radar devID="1618" intervalEnd="2020-08-21T15:40:00Z" numReads="0" avgSpeed="0.00" stDevSpeed="0.0000" />
+      <radar devID="1618" intervalEnd="2020-08-21T15:45:00Z" numReads="0" avgSpeed="0.00" stDevSpeed="0.0000" />
+      <radar devID="1618" intervalEnd="2020-08-21T15:50:00Z" numReads="0" avgSpeed="0.00" stDevSpeed="0.0000" />
+      <radar devID="1618" intervalEnd="2020-08-21T15:55:00Z" numReads="0" avgSpeed="0.00" stDevSpeed="0.0000" />
+    </sensor>
+    <sensor type="iCone" id="#3" latitude="41.3956920" longitude="-81.9455400">
+      <radar devID="1543" intervalEnd="2020-08-21T15:40:00Z" latitude="41.3956818" longitude="-81.9455232" numReads="15" avgSpeed="64.50" stDevSpeed="5.4171" />
+      <radar devID="1543" intervalEnd="2020-08-21T15:45:00Z" latitude="41.3956818" longitude="-81.9455232" numReads="28" avgSpeed="63.39" stDevSpeed="3.5817" />
+      <radar devID="1543" intervalEnd="2020-08-21T15:50:00Z" latitude="41.3956818" longitude="-81.9455232" numReads="48" avgSpeed="63.75" stDevSpeed="5.0042" />
+      <radar devID="1543" intervalEnd="2020-08-21T15:55:00Z" latitude="41.3956818" longitude="-81.9455232" numReads="12" avgSpeed="60.00" stDevSpeed="8.5391" />
+    </sensor>
+    <sensor type="iCone" id="#4" latitude="41.3883260" longitude="-81.9707500">
+      <radar devID="1645" intervalEnd="2020-08-21T15:40:00Z" latitude="41.3883258" longitude="-81.9707325" numReads="22" avgSpeed="64.32" stDevSpeed="6.1080" />
+      <radar devID="1645" intervalEnd="2020-08-21T15:45:00Z" latitude="41.3883258" longitude="-81.9707325" numReads="43" avgSpeed="63.66" stDevSpeed="5.1282" />
+      <radar devID="1645" intervalEnd="2020-08-21T15:50:00Z" latitude="41.3883258" longitude="-81.9707325" numReads="59" avgSpeed="63.52" stDevSpeed="7.9526" />
+      <radar devID="1645" intervalEnd="2020-08-21T15:55:00Z" latitude="41.3883258" longitude="-81.9707325" numReads="18" avgSpeed="62.22" stDevSpeed="11.9760" />
+    </sensor>
+    <display type="PCMS" id="PCMS 1" latitude="41.3861690" longitude="-81.9805130">
+      <message verified="2020-08-21T15:40:19Z" latitude="41.3860380" longitude="-81.9805650" text=" ROAD / WORK / AHEAD // NIGHTLY / LANE / CLOSURES" />
+      <message verified="2020-08-21T15:50:15Z" latitude="41.3860380" longitude="-81.9805650" text=" ROAD / WORK / AHEAD // NIGHTLY / LANE / CLOSURES" />
+    </display>
+  </incident>
+  <incident id="1258">
+    <creationtime>2020-06-12T19:05:34Z</creationtime>
+    <updatetime>2020-08-21T15:52:04Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>20-0006: Roadwork I-480 W</description>
+    <location>
+      <street>I-480 W</street>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>41.4249920,-81.8621120,41.4249920,-81.8621120,41.4141050,-81.8986860,41.4045600,-81.9217400,41.4045600,-81.9217400,41.3953620,-81.9474090</polyline>
+    </location>
+    <starttime>2020-06-12T19:36:33Z</starttime>
+    <sensor type="iCone" id="#1" latitude="41.3953620" longitude="-81.9474090">
+      <radar devID="1623" intervalEnd="2020-08-21T15:40:00Z" latitude="41.3953825" longitude="-81.9474346" numReads="11" avgSpeed="62.50" stDevSpeed="5.7373" />
+      <radar devID="1623" intervalEnd="2020-08-21T15:45:00Z" latitude="41.3953825" longitude="-81.9474346" numReads="21" avgSpeed="58.69" stDevSpeed="5.0182" />
+      <radar devID="1623" intervalEnd="2020-08-21T15:50:00Z" latitude="41.3953825" longitude="-81.9474346" numReads="23" avgSpeed="61.63" stDevSpeed="2.9143" />
+      <radar devID="1623" intervalEnd="2020-08-21T15:55:00Z" latitude="41.3953825" longitude="-81.9474346" numReads="25" avgSpeed="58.70" stDevSpeed="4.1533" />
+    </sensor>
+    <sensor type="iCone" id="#2" latitude="41.4045600" longitude="-81.9217400">
+      <radar devID="1604" intervalEnd="2020-08-21T15:45:00Z" latitude="41.4045623" longitude="-81.9217581" numReads="2" avgSpeed="60.00" stDevSpeed="3.2275" />
+      <radar devID="1604" intervalEnd="2020-08-21T15:50:00Z" latitude="41.4045623" longitude="-81.9217581" numReads="0" avgSpeed="0.00" stDevSpeed="0.0000" />
+      <radar devID="1604" intervalEnd="2020-08-21T15:55:00Z" latitude="41.4045623" longitude="-81.9217581" numReads="1" avgSpeed="52.50" stDevSpeed="0.0000" />
+      <radar devID="1618" intervalEnd="2020-08-21T15:40:00Z" numReads="0" avgSpeed="0.00" stDevSpeed="0.0000" />
+      <radar devID="1618" intervalEnd="2020-08-21T15:45:00Z" numReads="0" avgSpeed="0.00" stDevSpeed="0.0000" />
+      <radar devID="1618" intervalEnd="2020-08-21T15:50:00Z" numReads="0" avgSpeed="0.00" stDevSpeed="0.0000" />
+      <radar devID="1618" intervalEnd="2020-08-21T15:55:00Z" numReads="0" avgSpeed="0.00" stDevSpeed="0.0000" />
+    </sensor>
+    <sensor type="iCone" id="#3" latitude="41.4141050" longitude="-81.8986860">
+      <radar devID="1654" intervalEnd="2020-08-21T15:45:00Z" latitude="41.4141239" longitude="-81.8987298" numReads="52" avgSpeed="59.04" stDevSpeed="7.6959" />
+      <radar devID="1654" intervalEnd="2020-08-21T15:50:00Z" latitude="41.4141239" longitude="-81.8987298" numReads="38" avgSpeed="59.47" stDevSpeed="5.0667" />
+      <radar devID="1654" intervalEnd="2020-08-21T15:55:00Z" latitude="41.4141239" longitude="-81.8987298" numReads="39" avgSpeed="60.19" stDevSpeed="7.0024" />
+    </sensor>
+    <sensor type="iCone" id="#4" latitude="41.4249920" longitude="-81.8621120">
+      <radar devID="1673" intervalEnd="2020-08-21T15:45:00Z" numReads="72" avgSpeed="64.31" stDevSpeed="5.1970" />
+      <radar devID="1673" intervalEnd="2020-08-21T15:50:00Z" numReads="51" avgSpeed="61.62" stDevSpeed="6.6797" />
+      <radar devID="1673" intervalEnd="2020-08-21T15:55:00Z" numReads="53" avgSpeed="64.01" stDevSpeed="4.6428" />
+    </sensor>
+    <display type="PCMS" id="PCMS 1" latitude="41.4203770" longitude="-81.8314710">
+      <message verified="2020-08-21T15:40:24Z" latitude="41.4201540" longitude="-81.8316400" text=" ROAD / WORK / AHEAD // NIGHTLY / LANE / CLOSURES" />
+      <message verified="2020-08-21T15:50:15Z" latitude="41.4201540" longitude="-81.8316400" text=" ROAD / WORK / AHEAD // NIGHTLY / LANE / CLOSURES" />
+    </display>
+  </incident>
+  <incident id="U11534528_202008210627">
+    <creationtime>2020-08-21T06:27:00Z</creationtime>
+    <updatetime>2020-08-21T15:42:00Z</updatetime>
+    <type>HAZARD</type>
+    <description>Roadwork Active [Triton, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>36.0746052,-115.1884641,36.0746052,-115.1884641</polyline>
+    </location>
+    <starttime>2020-08-21T06:27:00Z</starttime>
+    <marker type="iPin" id="11534528" latitude="36.0746052" longitude="-115.1884641" description="End">
+      <status type="iPin" starttime="2020-02-22T17:45:22Z" verified="2020-08-21T15:42:00Z" state="ACTIVE" />
+    </marker>
+  </incident>
+  <incident id="U13631593_202008211532">
+    <creationtime>2020-08-21T15:32:00Z</creationtime>
+    <updatetime>2020-08-21T15:47:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE LEFT [Trafficade, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>33.4432320,-112.2898304,33.4432320,-112.2898304</polyline>
+    </location>
+    <starttime>2020-08-21T15:32:00Z</starttime>
+    <display type="AB" id="13631593" latitude="33.4432320" longitude="-112.2898304">
+      <message verified="2020-08-21T15:47:00Z" indicator="Merge Left" latitude="33.4432320" longitude="-112.2898304" />
+      <status type="Arrow Panel" starttime="2020-08-21T12:11:03Z" verified="2020-08-21T15:47:00Z" state="Left Chevron" />
+      <status type="Display Down" starttime="2019-05-29T11:48:00Z" verified="2020-08-21T15:47:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U11534533_202008182240">
+    <creationtime>2020-08-18T22:40:00Z</creationtime>
+    <updatetime>2020-08-21T15:35:00Z</updatetime>
+    <type>HAZARD</type>
+    <description>Roadwork Active [Triton, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>36.0746620,-115.1885339,36.0746620,-115.1885339</polyline>
+    </location>
+    <starttime>2020-08-18T22:40:00Z</starttime>
+    <marker type="iPin" id="11534533" latitude="36.0746620" longitude="-115.1885339">
+      <status type="iPin" starttime="2019-10-17T02:55:01Z" verified="2020-08-21T15:35:00Z" state="ACTIVE" />
+    </marker>
+  </incident>
+  <incident id="U13631489_202008211458">
+    <creationtime>2020-08-21T14:58:03Z</creationtime>
+    <updatetime>2020-08-21T15:49:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE LEFT [Established Traffic, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>41.6631429,-77.0846728,41.6631429,-77.0846728</polyline>
+    </location>
+    <starttime>2020-08-21T14:58:03Z</starttime>
+    <display type="AB" id="13631489" latitude="41.6631429" longitude="-77.0846728">
+      <message verified="2020-08-21T15:49:00Z" indicator="Merge Left" latitude="41.6630976" longitude="-77.0847040" />
+      <status type="Arrow Panel" starttime="2020-08-21T14:58:03Z" verified="2020-08-21T15:49:00Z" state="Left Arrow" />
+    </display>
+  </incident>
+  <incident id="U13631604_202008211158">
+    <creationtime>2020-08-21T11:58:03Z</creationtime>
+    <updatetime>2020-08-21T15:51:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE LEFT [Trafficade, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>33.3776531,-112.0937664,33.3776531,-112.0937664</polyline>
+    </location>
+    <starttime>2020-08-21T11:58:03Z</starttime>
+    <display type="AB" id="13631604" latitude="33.3776531" longitude="-112.0937664">
+      <message verified="2020-08-21T15:51:00Z" indicator="Merge Left" latitude="33.3775904" longitude="-112.0936832" />
+      <status type="Arrow Panel" starttime="2020-08-21T11:58:03Z" verified="2020-08-21T15:51:00Z" state="Left Chevron" />
+      <status type="Display Down" starttime="2019-09-11T18:30:07Z" verified="2020-08-21T15:51:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U1830_202008201550">
+    <creationtime>2020-08-20T15:50:00Z</creationtime>
+    <updatetime>2020-08-21T15:47:00Z</updatetime>
+    <type>HAZARD</type>
+    <description>Roadwork Traffic Monitoring Device [Triton, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>36.0746813,-115.1885475,36.0746813,-115.1885475</polyline>
+    </location>
+    <starttime>2020-08-20T15:50:00Z</starttime>
+    <marker type="iCone" latitude="36.0746813" longitude="-115.1885475" />
+  </incident>
+  <incident id="U13631606_202008211409">
+    <creationtime>2020-08-21T14:09:00Z</creationtime>
+    <updatetime>2020-08-21T15:53:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE LEFT [Trafficade, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>33.4513971,-111.8873958,33.4513971,-111.8873958</polyline>
+    </location>
+    <starttime>2020-08-21T14:09:00Z</starttime>
+    <display type="AB" id="13631606" latitude="33.4513971" longitude="-111.8873958">
+      <message verified="2020-08-21T15:53:00Z" indicator="Merge Left" latitude="33.4514048" longitude="-111.8874112" />
+      <status type="Arrow Panel" starttime="2020-08-21T13:45:03Z" verified="2020-08-21T15:53:00Z" state="Left Chevron" />
+      <status type="Display Down" starttime="2020-07-23T11:44:00Z" verified="2020-08-21T15:53:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U11534471_202008190715">
+    <creationtime>2020-08-19T07:15:00Z</creationtime>
+    <updatetime>2020-08-21T15:41:00Z</updatetime>
+    <type>HAZARD</type>
+    <description>Roadwork Active [Triton, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>36.0746413,-115.1885328,36.0746413,-115.1885328</polyline>
+    </location>
+    <starttime>2020-08-19T07:15:00Z</starttime>
+    <marker type="Baton" id="11534471" latitude="36.0746413" longitude="-115.1885328">
+      <status type="Baton" starttime="2020-08-19T02:04:00Z" verified="2020-08-21T15:41:00Z" state="ACTIVE" />
+    </marker>
+  </incident>
+  <incident id="U13631588_202008211217">
+    <creationtime>2020-08-21T12:17:03Z</creationtime>
+    <updatetime>2020-08-21T15:50:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE RIGHT [Trafficade, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>35.2079376,-111.6003288,35.2079376,-111.6003288</polyline>
+    </location>
+    <starttime>2020-08-21T12:17:03Z</starttime>
+    <display type="AB" id="13631588" latitude="35.2079376" longitude="-111.6003288">
+      <message verified="2020-08-21T15:50:00Z" indicator="Merge Right" latitude="35.2079136" longitude="-111.6002816" />
+      <status type="Arrow Panel" starttime="2020-08-21T12:17:03Z" verified="2020-08-21T15:50:00Z" state="Right Chevron" />
+      <status type="Display Down" starttime="2020-08-18T11:46:00Z" verified="2020-08-21T15:50:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U11534611_202008211427">
+    <creationtime>2020-08-21T14:27:00Z</creationtime>
+    <updatetime>2020-08-21T15:53:00Z</updatetime>
+    <type>HAZARD</type>
+    <description>Roadwork Active [Site-Safe, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>39.8217943,-85.7375680,39.8217943,-85.7375680</polyline>
+    </location>
+    <starttime>2020-08-21T14:27:00Z</starttime>
+    <marker type="Truck Beacon" id="11534611" latitude="39.8217943" longitude="-85.7375680">
+      <status type="Truck Beacon" starttime="2020-08-21T13:05:00Z" verified="2020-08-21T15:53:00Z" state="ACTIVE" />
+    </marker>
+  </incident>
+  <incident id="U13631595_202008211156">
+    <creationtime>2020-08-21T11:56:03Z</creationtime>
+    <updatetime>2020-08-21T15:52:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE RIGHT [Trafficade, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>33.5314570,-111.9274629,33.5314570,-111.9274629</polyline>
+    </location>
+    <starttime>2020-08-21T11:56:03Z</starttime>
+    <display type="AB" id="13631595" latitude="33.5314570" longitude="-111.9274629">
+      <message verified="2020-08-21T15:52:00Z" indicator="Merge Right" latitude="33.5315552" longitude="-111.9274880" />
+      <status type="Arrow Panel" starttime="2020-08-21T11:56:03Z" verified="2020-08-21T15:52:00Z" state="Right Arrow" />
+      <status type="Display Down" starttime="2020-03-23T22:51:00Z" verified="2020-08-21T15:52:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631575_202008210829">
+    <creationtime>2020-08-21T08:29:03Z</creationtime>
+    <updatetime>2020-08-21T15:51:05Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE LEFT [Trafficade, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>35.3196785,-112.8960106,35.3196785,-112.8960106</polyline>
+    </location>
+    <starttime>2020-08-21T08:29:03Z</starttime>
+    <display type="AB" id="13631575" latitude="35.3196785" longitude="-112.8960106">
+      <message verified="2020-08-21T15:51:05Z" indicator="Merge Left" latitude="35.3197056" longitude="-112.8959744" />
+      <status type="Arrow Panel" starttime="2020-08-21T08:29:03Z" verified="2020-08-21T15:51:05Z" state="Left Chevron" />
+      <status type="Display Down" starttime="2020-02-24T19:01:05Z" verified="2020-08-21T15:51:05Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631642_202008211549">
+    <creationtime>2020-08-21T15:49:00Z</creationtime>
+    <updatetime>2020-08-21T15:49:00Z</updatetime>
+    <type>HAZARD</type>
+    <description>Road Ranger Emergency Personnel On-Scene. Move over - Caution [DBi, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>28.5104992,-81.3972224,28.5104992,-81.3972224</polyline>
+    </location>
+    <starttime>2020-08-21T15:49:00Z</starttime>
+    <display type="AB" id="13631642" latitude="28.5104992" longitude="-81.3972224">
+      <message verified="2020-08-21T15:49:00Z" indicator="Caution" latitude="28.5104992" longitude="-81.3972224" />
+      <status type="Arrow Panel" starttime="2020-08-21T15:48:15Z" verified="2020-08-21T15:49:00Z" state="Caution - Diamonds" />
+      <status type="Display Down" starttime="2020-08-21T15:48:00Z" verified="2020-08-21T15:49:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631696_202008211552">
+    <creationtime>2020-08-21T15:52:00Z</creationtime>
+    <updatetime>2020-08-21T15:52:00Z</updatetime>
+    <type>HAZARD</type>
+    <description>Road painting in progress - MERGE LEFT OR RIGHT [Region of Durham, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>43.9590848,-78.5016000,43.9590848,-78.5016000</polyline>
+    </location>
+    <starttime>2020-08-21T15:52:00Z</starttime>
+    <display type="AB" id="13631696" latitude="43.9590848" longitude="-78.5016000">
+      <message verified="2020-08-21T15:52:00Z" latitude="43.9590848" longitude="-78.5016000" />
+      <status type="Arrow Panel" starttime="2020-08-21T14:11:00Z" verified="2020-08-21T15:52:00Z" state="Double Arrow" />
+    </display>
+  </incident>
+  <incident id="U13631498_202008121321">
+    <creationtime>2020-08-12T13:21:00Z</creationtime>
+    <updatetime>2020-08-21T15:53:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE RIGHT [Triton, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>36.2738391,-115.0498806,36.2738391,-115.0498806</polyline>
+    </location>
+    <starttime>2020-08-12T13:21:00Z</starttime>
+    <display type="AB" id="13631498" latitude="36.2738391" longitude="-115.0498806">
+      <message verified="2020-08-21T15:53:00Z" indicator="Merge Right" latitude="36.2738240" longitude="-115.0498944" />
+      <status type="Arrow Panel" starttime="2020-08-12T13:21:00Z" verified="2020-08-21T15:53:00Z" state="Right Chevron" />
+    </display>
+  </incident>
+  <incident id="U11534531_202008201555">
+    <creationtime>2020-08-20T15:55:00Z</creationtime>
+    <updatetime>2020-08-21T15:28:00Z</updatetime>
+    <type>HAZARD</type>
+    <description>Roadwork Active [Triton, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>36.0746428,-115.1884969,36.0746428,-115.1884969</polyline>
+    </location>
+    <starttime>2020-08-20T15:55:00Z</starttime>
+    <marker type="iPin" id="11534531" latitude="36.0746428" longitude="-115.1884969" description="End">
+      <status type="iPin" starttime="2019-12-03T19:55:11Z" verified="2020-08-21T15:28:00Z" state="ACTIVE" />
+    </marker>
+  </incident>
+  <incident id="U13631760_202008211336">
+    <creationtime>2020-08-21T13:36:29Z</creationtime>
+    <updatetime>2020-08-21T15:53:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [Triton, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>36.1015130,-115.0638171,36.1015130,-115.0638171</polyline>
+    </location>
+    <starttime>2020-08-21T13:36:29Z</starttime>
+    <display type="AB" id="13631760" latitude="36.1015130" longitude="-115.0638171">
+      <message verified="2020-08-21T15:53:00Z" indicator="Caution" latitude="36.1015904" longitude="-115.0638848" />
+      <status type="Arrow Panel" starttime="2020-08-21T13:36:29Z" verified="2020-08-21T15:53:00Z" state="Caution - Corners" />
+      <status type="Display Down" starttime="2019-10-28T19:31:00Z" verified="2020-08-21T15:53:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U11534521_202008190007">
+    <creationtime>2020-08-19T00:07:00Z</creationtime>
+    <updatetime>2020-08-21T15:49:00Z</updatetime>
+    <type>HAZARD</type>
+    <description>Roadwork Active [Triton, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>36.0746337,-115.1885399,36.0746337,-115.1885399</polyline>
+    </location>
+    <starttime>2020-08-19T00:07:00Z</starttime>
+    <marker type="iPin" id="11534521" latitude="36.0746337" longitude="-115.1885399">
+      <status type="iPin" starttime="2020-01-23T03:13:46Z" verified="2020-08-21T15:49:00Z" state="ACTIVE" />
+    </marker>
+  </incident>
+  <incident id="U13631580_202008211341">
+    <creationtime>2020-08-21T13:41:03Z</creationtime>
+    <updatetime>2020-08-21T15:52:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE RIGHT [Trafficade, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>33.5074398,-112.2549491,33.5074398,-112.2549491</polyline>
+    </location>
+    <starttime>2020-08-21T13:41:03Z</starttime>
+    <display type="AB" id="13631580" latitude="33.5074398" longitude="-112.2549491">
+      <message verified="2020-08-21T15:52:00Z" indicator="Merge Right" latitude="33.5074432" longitude="-112.2548864" />
+      <status type="Arrow Panel" starttime="2020-08-21T13:41:03Z" verified="2020-08-21T15:52:00Z" state="Right Chevron" />
+      <status type="Display Down" starttime="2020-08-21T09:32:00Z" verified="2020-08-21T15:52:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631636_202008211549">
+    <creationtime>2020-08-21T15:49:00Z</creationtime>
+    <updatetime>2020-08-21T15:49:00Z</updatetime>
+    <type>HAZARD</type>
+    <description>Road Ranger Emergency Personnel On-Scene. Move over - MERGE LEFT [DBi, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>28.5169568,-81.3884352,28.5169568,-81.3884352</polyline>
+    </location>
+    <starttime>2020-08-21T15:49:00Z</starttime>
+    <display type="AB" id="13631636" latitude="28.5169568" longitude="-81.3884352">
+      <message verified="2020-08-21T15:49:00Z" indicator="Merge Left" latitude="28.5169568" longitude="-81.3884352" />
+      <status type="Arrow Panel" starttime="2020-08-21T14:48:00Z" verified="2020-08-21T15:49:00Z" state="Left Chevron" />
+      <status type="Display Down" starttime="2020-02-29T13:19:14Z" verified="2020-08-21T15:49:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U11534619_202008211420">
+    <creationtime>2020-08-21T14:20:00Z</creationtime>
+    <updatetime>2020-08-21T15:49:00Z</updatetime>
+    <type>HAZARD</type>
+    <description>Roadwork Active [Site-Safe, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>39.8526969,-85.3830370,39.8526969,-85.3830370</polyline>
+    </location>
+    <starttime>2020-08-21T14:20:00Z</starttime>
+    <marker type="Truck Beacon" id="11534619" latitude="39.8526969" longitude="-85.3830370">
+      <status type="Truck Beacon" starttime="2020-08-21T14:07:00Z" verified="2020-08-21T15:49:00Z" state="ACTIVE" />
+    </marker>
+  </incident>
+  <incident id="U11534527_202008201749">
+    <creationtime>2020-08-20T17:49:00Z</creationtime>
+    <updatetime>2020-08-21T15:32:00Z</updatetime>
+    <type>HAZARD</type>
+    <description>Roadwork Active [Triton, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>36.0746585,-115.1885454,36.0746585,-115.1885454</polyline>
+    </location>
+    <starttime>2020-08-20T17:49:00Z</starttime>
+    <marker type="iPin" id="11534527" latitude="36.0746585" longitude="-115.1885454" description="End">
+      <status type="iPin" starttime="2019-12-13T15:38:00Z" verified="2020-08-21T15:32:00Z" state="ACTIVE" />
+    </marker>
+  </incident>
+  <incident id="U13631581_202008211508">
+    <creationtime>2020-08-21T15:08:03Z</creationtime>
+    <updatetime>2020-08-21T15:50:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE RIGHT [Trafficade, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>32.2944138,-111.0116477,32.2944138,-111.0116477</polyline>
+    </location>
+    <starttime>2020-08-21T15:08:03Z</starttime>
+    <display type="AB" id="13631581" latitude="32.2944138" longitude="-111.0116477">
+      <message verified="2020-08-21T15:50:00Z" indicator="Merge Right" latitude="32.2944032" longitude="-111.0116608" />
+      <status type="Arrow Panel" starttime="2020-08-21T15:08:03Z" verified="2020-08-21T15:50:00Z" state="Right Chevron" />
+      <status type="Display Down" starttime="2020-07-23T09:56:00Z" verified="2020-08-21T15:50:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U11534472_202008190005">
+    <creationtime>2020-08-19T00:05:00Z</creationtime>
+    <updatetime>2020-08-21T14:01:00Z</updatetime>
+    <type>HAZARD</type>
+    <description>Roadwork Active [Triton, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>36.0746472,-115.1885250,36.0746472,-115.1885250</polyline>
+    </location>
+    <starttime>2020-08-19T00:05:00Z</starttime>
+    <marker type="Baton" id="11534472" latitude="36.0746472" longitude="-115.1885250">
+      <status type="Baton" starttime="2020-08-19T00:04:00Z" verified="2020-08-21T14:01:00Z" state="ACTIVE" />
+    </marker>
+  </incident>
+  <incident id="U13631607_202008210841">
+    <creationtime>2020-08-21T08:41:03Z</creationtime>
+    <updatetime>2020-08-21T15:48:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE RIGHT [Trafficade, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>32.2942667,-111.0217466,32.2942667,-111.0217466</polyline>
+    </location>
+    <starttime>2020-08-21T08:41:03Z</starttime>
+    <display type="AB" id="13631607" latitude="32.2942667" longitude="-111.0217466">
+      <message verified="2020-08-21T15:53:00Z" indicator="Merge Right" latitude="32.2940704" longitude="-111.0220160" />
+      <status type="Arrow Panel" starttime="2020-08-21T08:41:03Z" verified="2020-08-21T15:53:00Z" state="Right Chevron" />
+      <status type="Display Down" starttime="2020-06-22T17:05:00Z" verified="2020-08-21T15:53:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631574_202008210633">
+    <creationtime>2020-08-21T06:33:03Z</creationtime>
+    <updatetime>2020-08-21T15:49:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE LEFT [Trafficade, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>33.5312042,-111.9351967,33.5312042,-111.9351967</polyline>
+    </location>
+    <starttime>2020-08-21T06:33:03Z</starttime>
+    <display type="AB" id="13631574" latitude="33.5312042" longitude="-111.9351967">
+      <message verified="2020-08-21T15:49:00Z" indicator="Merge Left" latitude="33.5311936" longitude="-111.9351424" />
+      <status type="Arrow Panel" starttime="2020-08-21T06:33:03Z" verified="2020-08-21T15:49:00Z" state="Left Arrow" />
+      <status type="Display Down" starttime="2020-02-26T22:52:00Z" verified="2020-08-21T15:49:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631824_202008211337">
+    <creationtime>2020-08-21T13:37:31Z</creationtime>
+    <updatetime>2020-08-21T15:53:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [NW Barricade, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>46.5819768,-120.4736768,46.5819768,-120.4736768</polyline>
+    </location>
+    <starttime>2020-08-21T13:37:31Z</starttime>
+    <display type="AB" id="13631824" latitude="46.5819768" longitude="-120.4736768">
+      <message verified="2020-08-21T15:53:00Z" indicator="Caution" latitude="46.5819136" longitude="-120.4736512" />
+      <status type="Arrow Panel" starttime="2020-08-21T13:37:31Z" verified="2020-08-21T15:53:00Z" state="Caution - Bar" />
+      <status type="Display Down" starttime="2020-01-21T18:50:00Z" verified="2020-08-21T15:53:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U11534617_202008210444">
+    <creationtime>2020-08-21T04:44:00Z</creationtime>
+    <updatetime>2020-08-21T15:53:00Z</updatetime>
+    <type>HAZARD</type>
+    <description>Roadwork Active [Site-Safe, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>39.8718253,-84.8943808,39.8718253,-84.8943808</polyline>
+    </location>
+    <starttime>2020-08-21T04:44:00Z</starttime>
+    <marker type="Truck Beacon" id="11534617" latitude="39.8718253" longitude="-84.8943808">
+      <status type="Truck Beacon" starttime="2020-08-21T02:12:00Z" verified="2020-08-21T15:53:00Z" state="ACTIVE" />
+    </marker>
+  </incident>
+  <incident id="U13631577_202008211212">
+    <creationtime>2020-08-21T12:12:00Z</creationtime>
+    <updatetime>2020-08-21T15:53:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE RIGHT [Trafficade, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>32.2203686,-110.9709580,32.2203686,-110.9709580</polyline>
+    </location>
+    <starttime>2020-08-21T12:12:00Z</starttime>
+    <display type="AB" id="13631577" latitude="32.2203686" longitude="-110.9709580">
+      <message verified="2020-08-21T15:53:00Z" indicator="Merge Right" latitude="32.2203904" longitude="-110.9709568" />
+      <status type="Arrow Panel" starttime="2020-08-21T09:08:36Z" verified="2020-08-21T15:53:00Z" state="Right Chevron" />
+      <status type="Display Down" starttime="2020-07-23T16:12:17Z" verified="2020-08-21T15:53:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631637_202008211515">
+    <creationtime>2020-08-21T15:15:00Z</creationtime>
+    <updatetime>2020-08-21T15:50:00Z</updatetime>
+    <type>HAZARD</type>
+    <description>Road Ranger Emergency Personnel On-Scene. Move over - Caution [DBi, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>28.6289680,-81.3864896,28.6289680,-81.3864896</polyline>
+    </location>
+    <starttime>2020-08-21T15:15:00Z</starttime>
+    <display type="AB" id="13631637" latitude="28.6289680" longitude="-81.3864896">
+      <message verified="2020-08-21T15:50:00Z" indicator="Caution" latitude="28.6290272" longitude="-81.3865024" />
+      <status type="Arrow Panel" starttime="2020-08-21T15:14:13Z" verified="2020-08-21T15:50:00Z" state="Caution - Diamonds" />
+    </display>
+  </incident>
+  <incident id="U11534532_202008201548">
+    <creationtime>2020-08-20T15:48:00Z</creationtime>
+    <updatetime>2020-08-21T15:50:00Z</updatetime>
+    <type>HAZARD</type>
+    <description>Roadwork Active [Triton, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>36.0746524,-115.1885102,36.0746524,-115.1885102</polyline>
+    </location>
+    <starttime>2020-08-20T15:48:00Z</starttime>
+    <marker type="iPin" id="11534532" latitude="36.0746524" longitude="-115.1885102" description="End">
+      <status type="iPin" starttime="2020-04-03T15:32:08Z" verified="2020-08-21T15:50:00Z" state="ACTIVE" />
+    </marker>
+  </incident>
+  <incident id="U13631849_202008211336">
+    <creationtime>2020-08-21T13:36:30Z</creationtime>
+    <updatetime>2020-08-21T15:51:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [Spartan Barricading, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>42.7288832,-84.5099067,42.7288832,-84.5099067</polyline>
+    </location>
+    <starttime>2020-08-21T13:36:30Z</starttime>
+    <display type="AB" id="13631849" latitude="42.7288832" longitude="-84.5099067">
+      <message verified="2020-08-21T15:51:00Z" indicator="Caution" latitude="42.7288704" longitude="-84.5099136" />
+      <status type="Arrow Panel" starttime="2020-08-21T13:36:30Z" verified="2020-08-21T15:51:00Z" state="Caution - Bar" />
+      <status type="Display Down" starttime="2020-08-02T16:25:18Z" verified="2020-08-21T15:51:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U11534450_202008200828">
+    <creationtime>2020-08-20T08:28:00Z</creationtime>
+    <updatetime>2020-08-21T15:47:00Z</updatetime>
+    <type>HAZARD</type>
+    <description>Roadwork Active [Triton, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>36.0746259,-115.1884839,36.0746259,-115.1884839</polyline>
+    </location>
+    <starttime>2020-08-20T08:28:00Z</starttime>
+    <marker type="iPin" id="11534450" latitude="36.0746259" longitude="-115.1884839" description="Beginning">
+      <status type="iPin" starttime="2020-08-18T22:04:43Z" verified="2020-08-21T15:47:00Z" state="ACTIVE" />
+    </marker>
+  </incident>
+  <incident id="U13631601_202008210613">
+    <creationtime>2020-08-21T06:13:03Z</creationtime>
+    <updatetime>2020-08-21T15:52:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE RIGHT [Trafficade, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>32.3125837,-111.0448803,32.3125837,-111.0448803</polyline>
+    </location>
+    <starttime>2020-08-21T06:13:03Z</starttime>
+    <display type="AB" id="13631601" latitude="32.3125837" longitude="-111.0448803">
+      <message verified="2020-08-21T15:52:00Z" indicator="Merge Right" latitude="32.3125760" longitude="-111.0449280" />
+      <status type="Arrow Panel" starttime="2020-08-21T06:13:03Z" verified="2020-08-21T15:52:00Z" state="Right Chevron" />
+      <status type="Display Down" starttime="2020-02-11T12:01:09Z" verified="2020-08-21T15:52:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U11534608_202008210419">
+    <creationtime>2020-08-21T04:19:00Z</creationtime>
+    <updatetime>2020-08-21T15:49:00Z</updatetime>
+    <type>HAZARD</type>
+    <description>Roadwork Active [Triton, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>36.2755814,-115.0577827,36.2755814,-115.0577827</polyline>
+    </location>
+    <starttime>2020-08-21T04:19:00Z</starttime>
+    <marker type="Truck Beacon" id="11534608" latitude="36.2755814" longitude="-115.0577827">
+      <status type="Truck Beacon" starttime="2020-07-24T15:18:10Z" verified="2020-08-21T15:49:00Z" state="ACTIVE" />
+    </marker>
+  </incident>
+  <incident id="U13631694_202008211501">
+    <creationtime>2020-08-21T15:01:00Z</creationtime>
+    <updatetime>2020-08-21T15:48:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE LEFT OR RIGHT [WSDOT, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>45.6526261,-122.6699264,45.6526261,-122.6699264</polyline>
+    </location>
+    <starttime>2020-08-21T15:01:00Z</starttime>
+    <display type="AB" id="13631694" latitude="45.6526261" longitude="-122.6699264">
+      <message verified="2020-08-21T15:53:00Z" latitude="45.6525984" longitude="-122.6699264" />
+      <status type="Arrow Panel" starttime="2020-08-21T13:37:40Z" verified="2020-08-21T15:53:00Z" state="Double Arrow" />
+      <status type="Display Down" starttime="2020-06-23T11:45:00Z" verified="2020-08-21T15:53:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U11534525_202008182206">
+    <creationtime>2020-08-18T22:06:00Z</creationtime>
+    <updatetime>2020-08-21T15:47:00Z</updatetime>
+    <type>HAZARD</type>
+    <description>Roadwork Active [Triton, iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>36.0746435,-115.1885086,36.0746435,-115.1885086</polyline>
+    </location>
+    <starttime>2020-08-18T22:06:00Z</starttime>
+    <marker type="iPin" id="11534525" latitude="36.0746435" longitude="-115.1885086" description="Beginning">
+      <status type="iPin" starttime="2019-12-03T19:57:31Z" verified="2020-08-21T15:47:00Z" state="ACTIVE" />
+    </marker>
+  </incident>
+  <incident id="U13631699_202008211553">
+    <creationtime>2020-08-21T15:53:10Z</creationtime>
+    <updatetime>2020-08-21T15:53:10Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>27.7898426,-97.4612373,27.7898426,-97.4612373</polyline>
+    </location>
+    <starttime>2020-08-21T15:53:10Z</starttime>
+    <display type="AB" id="13631699" latitude="27.7898426" longitude="-97.4612373">
+      <message verified="2020-08-21T15:53:10Z" indicator="Caution" latitude="27.7898240" longitude="-97.4612224" />
+      <status type="Arrow Panel" starttime="2020-08-21T15:53:10Z" verified="2020-08-21T15:53:10Z" state="Caution - Bar" />
+      <status type="Display Down" starttime="2019-09-16T16:25:27Z" verified="2020-08-21T15:53:10Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631683_202008211551">
+    <creationtime>2020-08-21T15:51:05Z</creationtime>
+    <updatetime>2020-08-21T15:53:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>33.2188101,-96.8946117,33.2188101,-96.8946117</polyline>
+    </location>
+    <starttime>2020-08-21T15:51:05Z</starttime>
+    <display type="AB" id="13631683" latitude="33.2188101" longitude="-96.8946117">
+      <message verified="2020-08-21T15:53:05Z" indicator="Caution" latitude="33.2187840" longitude="-96.8946432" />
+      <status type="Arrow Panel" starttime="2020-08-21T15:53:05Z" verified="2020-08-21T15:53:05Z" state="Caution - Bar" />
+    </display>
+  </incident>
+  <incident id="U13631809_202008211553">
+    <creationtime>2020-08-21T15:53:00Z</creationtime>
+    <updatetime>2020-08-21T15:53:02Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>41.0757651,-76.9250321,41.0757651,-76.9250321</polyline>
+    </location>
+    <starttime>2020-08-21T15:53:00Z</starttime>
+    <display type="AB" id="13631809" latitude="41.0757651" longitude="-76.9250321">
+      <message verified="2020-08-21T15:53:02Z" latitude="41.0756256" longitude="-76.9248896" />
+      <status type="Arrow Panel" starttime="2020-08-21T15:53:00Z" verified="2020-08-21T15:53:02Z" state="On" />
+      <status type="Display Down" starttime="2020-01-16T21:42:00Z" verified="2020-08-21T15:53:02Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631670_202008211103">
+    <creationtime>2020-08-21T11:03:15Z</creationtime>
+    <updatetime>2020-08-21T15:49:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>38.4337924,-75.5804960,38.4337924,-75.5804960</polyline>
+    </location>
+    <starttime>2020-08-21T11:03:15Z</starttime>
+    <display type="AB" id="13631670" latitude="38.4337924" longitude="-75.5804960">
+      <message verified="2020-08-21T15:49:00Z" indicator="Caution" latitude="38.4338912" longitude="-75.5804224" />
+      <status type="Arrow Panel" starttime="2020-08-21T11:03:15Z" verified="2020-08-21T15:49:00Z" state="Caution - Bar" />
+    </display>
+  </incident>
+  <incident id="U13631850_202008211336">
+    <creationtime>2020-08-21T13:36:25Z</creationtime>
+    <updatetime>2020-08-21T15:49:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE RIGHT [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>42.0287324,-91.6687019,42.0287324,-91.6687019</polyline>
+    </location>
+    <starttime>2020-08-21T13:36:25Z</starttime>
+    <display type="AB" id="13631850" latitude="42.0287324" longitude="-91.6687019">
+      <message verified="2020-08-21T15:49:00Z" indicator="Merge Right" latitude="42.0287136" longitude="-91.6686336" />
+      <status type="Arrow Panel" starttime="2020-08-21T13:36:25Z" verified="2020-08-21T15:49:00Z" state="Right Chevron" />
+      <status type="Display Down" starttime="2020-08-13T19:56:00Z" verified="2020-08-21T15:49:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631878_202008211335">
+    <creationtime>2020-08-21T13:35:51Z</creationtime>
+    <updatetime>2020-08-21T15:51:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE LEFT [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>42.0270677,-93.7921826,42.0270677,-93.7921826</polyline>
+    </location>
+    <starttime>2020-08-21T13:35:51Z</starttime>
+    <display type="AB" id="13631878" latitude="42.0270677" longitude="-93.7921826">
+      <message verified="2020-08-21T15:51:00Z" indicator="Merge Left" latitude="42.0270208" longitude="-93.7922432" />
+      <status type="Arrow Panel" starttime="2020-08-21T13:35:51Z" verified="2020-08-21T15:51:00Z" state="Left Chevron" />
+      <status type="Display Down" starttime="2020-05-17T15:42:00Z" verified="2020-08-21T15:51:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631707_202008211529">
+    <creationtime>2020-08-21T15:29:05Z</creationtime>
+    <updatetime>2020-08-21T15:51:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>30.4519510,-97.6547666,30.4519510,-97.6547666</polyline>
+    </location>
+    <starttime>2020-08-21T15:29:05Z</starttime>
+    <display type="AB" id="13631707" latitude="30.4519510" longitude="-97.6547666">
+      <message verified="2020-08-21T15:51:00Z" indicator="Caution" latitude="30.4519840" longitude="-97.6547776" />
+      <status type="Arrow Panel" starttime="2020-08-21T15:29:05Z" verified="2020-08-21T15:51:00Z" state="Caution - Bar" />
+      <status type="Display Down" starttime="2019-09-17T15:04:00Z" verified="2020-08-21T15:51:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631856_202008211131">
+    <creationtime>2020-08-21T11:31:26Z</creationtime>
+    <updatetime>2020-08-21T15:53:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE LEFT [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>42.4453657,-96.3666878,42.4453657,-96.3666878</polyline>
+    </location>
+    <starttime>2020-08-21T11:31:26Z</starttime>
+    <display type="AB" id="13631856" latitude="42.4453657" longitude="-96.3666878">
+      <message verified="2020-08-21T15:53:00Z" indicator="Merge Left" latitude="42.4453856" longitude="-96.3666944" />
+      <status type="Arrow Panel" starttime="2020-08-21T11:31:26Z" verified="2020-08-21T15:53:00Z" state="Left Chevron" />
+      <status type="Display Down" starttime="2020-07-30T12:16:10Z" verified="2020-08-21T15:53:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631563_202008211041">
+    <creationtime>2020-08-21T10:41:03Z</creationtime>
+    <updatetime>2020-08-21T15:49:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE RIGHT [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>41.5852514,-93.7033600,41.5852514,-93.7033600</polyline>
+    </location>
+    <starttime>2020-08-21T10:41:03Z</starttime>
+    <display type="AB" id="13631563" latitude="41.5852514" longitude="-93.7033600">
+      <message verified="2020-08-21T15:49:00Z" indicator="Merge Right" latitude="41.5851936" longitude="-93.7032832" />
+      <status type="Arrow Panel" starttime="2020-08-21T10:41:03Z" verified="2020-08-21T15:49:00Z" state="Right Chevron" />
+      <status type="Display Down" starttime="2020-04-30T23:26:06Z" verified="2020-08-21T15:49:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631783_202008211338">
+    <creationtime>2020-08-21T13:38:22Z</creationtime>
+    <updatetime>2020-08-21T15:50:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>41.8854771,-71.0523040,41.8854771,-71.0523040</polyline>
+    </location>
+    <starttime>2020-08-21T13:38:22Z</starttime>
+    <display type="AB" id="13631783" latitude="41.8854771" longitude="-71.0523040">
+      <message verified="2020-08-21T15:50:00Z" indicator="Caution" latitude="41.8854560" longitude="-71.0523008" />
+      <status type="Arrow Panel" starttime="2020-08-21T13:38:22Z" verified="2020-08-21T15:50:00Z" state="Caution - Bar" />
+      <status type="Display Down" starttime="2019-11-21T17:43:00Z" verified="2020-08-21T15:50:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631682_202008211547">
+    <creationtime>2020-08-21T15:47:05Z</creationtime>
+    <updatetime>2020-08-21T15:49:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>29.8011708,-98.0125724,29.8011708,-98.0125724</polyline>
+    </location>
+    <starttime>2020-08-21T15:47:05Z</starttime>
+    <display type="AB" id="13631682" latitude="29.8011708" longitude="-98.0125724">
+      <message verified="2020-08-21T15:49:00Z" indicator="Caution" latitude="29.8011776" longitude="-98.0125760" />
+      <status type="Arrow Panel" starttime="2020-08-21T15:47:05Z" verified="2020-08-21T15:49:00Z" state="Caution - Bar" />
+    </display>
+  </incident>
+  <incident id="U13631514_202008191639">
+    <creationtime>2020-08-19T16:39:08Z</creationtime>
+    <updatetime>2020-08-21T15:52:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE RIGHT [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>42.1192071,-86.4096710,42.1192071,-86.4096710</polyline>
+    </location>
+    <starttime>2020-08-19T16:39:08Z</starttime>
+    <display type="AB" id="13631514" latitude="42.1192071" longitude="-86.4096710">
+      <message verified="2020-08-21T15:52:00Z" indicator="Merge Right" latitude="42.1191840" longitude="-86.4096576" />
+      <status type="Arrow Panel" starttime="2020-08-19T16:39:08Z" verified="2020-08-21T15:52:00Z" state="Right Arrow" />
+    </display>
+  </incident>
+  <incident id="U13631779_202008211553">
+    <creationtime>2020-08-21T15:53:00Z</creationtime>
+    <updatetime>2020-08-21T15:53:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>26.3506979,-98.1495207,26.3506979,-98.1495207</polyline>
+    </location>
+    <starttime>2020-08-21T15:53:00Z</starttime>
+    <display type="AB" id="13631779" latitude="26.3506979" longitude="-98.1495207">
+      <message verified="2020-08-21T15:54:00Z" indicator="Caution" latitude="26.3507216" longitude="-98.1495744" />
+      <status type="Arrow Panel" starttime="2020-08-21T15:53:00Z" verified="2020-08-21T15:54:00Z" state="Caution - Bar" />
+      <status type="Display Down" starttime="2019-11-21T17:45:00Z" verified="2020-08-21T15:54:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631857_202008211336">
+    <creationtime>2020-08-21T13:36:03Z</creationtime>
+    <updatetime>2020-08-21T15:50:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE RIGHT [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>42.0078588,-93.3920845,42.0078588,-93.3920845</polyline>
+    </location>
+    <starttime>2020-08-21T13:36:03Z</starttime>
+    <display type="AB" id="13631857" latitude="42.0078588" longitude="-93.3920845">
+      <message verified="2020-08-21T15:50:00Z" indicator="Merge Right" latitude="42.0080064" longitude="-93.3919936" />
+      <status type="Arrow Panel" starttime="2020-08-21T13:36:03Z" verified="2020-08-21T15:50:00Z" state="Right Chevron" />
+      <status type="Display Down" starttime="2020-08-05T14:38:00Z" verified="2020-08-21T15:50:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631685_202008211553">
+    <creationtime>2020-08-21T15:53:14Z</creationtime>
+    <updatetime>2020-08-21T15:53:14Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>33.2184825,-96.8946367,33.2184825,-96.8946367</polyline>
+    </location>
+    <starttime>2020-08-21T15:53:14Z</starttime>
+    <display type="AB" id="13631685" latitude="33.2184825" longitude="-96.8946367">
+      <message verified="2020-08-21T15:54:00Z" latitude="33.2184416" longitude="-96.8945856" />
+      <status type="Arrow Panel" starttime="2020-08-21T15:54:00Z" verified="2020-08-21T15:54:00Z" state="OFF" />
+    </display>
+  </incident>
+  <incident id="U13631819_202008211546">
+    <creationtime>2020-08-21T15:46:00Z</creationtime>
+    <updatetime>2020-08-21T15:51:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>32.8010816,-97.1793920,32.8010816,-97.1793920</polyline>
+    </location>
+    <starttime>2020-08-21T15:46:00Z</starttime>
+    <display type="AB" id="13631819" latitude="32.8010816" longitude="-97.1793920">
+      <message verified="2020-08-21T15:51:00Z" indicator="Caution" latitude="32.8010816" longitude="-97.1793920" />
+      <status type="Arrow Panel" starttime="2020-08-21T15:45:00Z" verified="2020-08-21T15:51:00Z" state="Caution - Bar" />
+      <status type="Display Down" starttime="2020-01-16T22:28:00Z" verified="2020-08-21T15:51:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631703_202008211553">
+    <creationtime>2020-08-21T15:53:05Z</creationtime>
+    <updatetime>2020-08-21T15:53:05Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>40.6203366,-79.9056099,40.6203366,-79.9056099</polyline>
+    </location>
+    <starttime>2020-08-21T15:53:05Z</starttime>
+    <display type="AB" id="13631703" latitude="40.6203366" longitude="-79.9056099">
+      <message verified="2020-08-21T15:54:00Z" indicator="Caution" latitude="40.6203456" longitude="-79.9055872" />
+      <status type="Arrow Panel" starttime="2020-08-21T15:54:00Z" verified="2020-08-21T15:54:00Z" state="Caution - Bar" />
+      <status type="Display Down" starttime="2019-09-17T15:05:00Z" verified="2020-08-21T15:54:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631948_202008211338">
+    <creationtime>2020-08-21T13:38:06Z</creationtime>
+    <updatetime>2020-08-21T15:48:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE LEFT [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>41.6292748,-93.7614398,41.6292748,-93.7614398</polyline>
+    </location>
+    <starttime>2020-08-21T13:38:06Z</starttime>
+    <display type="AB" id="13631948" latitude="41.6292748" longitude="-93.7614398">
+      <message verified="2020-08-21T15:53:00Z" indicator="Merge Left" latitude="41.6293312" longitude="-93.7614080" />
+      <status type="Arrow Panel" starttime="2020-08-21T13:38:06Z" verified="2020-08-21T15:53:00Z" state="Left Chevron" />
+      <status type="Display Down" starttime="2020-07-17T13:59:00Z" verified="2020-08-21T15:53:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631684_202008211513">
+    <creationtime>2020-08-21T15:13:00Z</creationtime>
+    <updatetime>2020-08-21T15:53:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE LEFT [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>32.8906256,-96.9803296,32.8906256,-96.9803296</polyline>
+    </location>
+    <starttime>2020-08-21T15:13:00Z</starttime>
+    <display type="AB" id="13631684" latitude="32.8906256" longitude="-96.9803296">
+      <message verified="2020-08-21T15:53:00Z" indicator="Merge Left" latitude="32.8906368" longitude="-96.9803136" />
+      <status type="Arrow Panel" starttime="2020-08-21T14:32:00Z" verified="2020-08-21T15:53:00Z" state="Left Arrow" />
+    </display>
+  </incident>
+  <incident id="U13631879_202008211342">
+    <creationtime>2020-08-21T13:42:00Z</creationtime>
+    <updatetime>2020-08-21T15:50:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE LEFT [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>41.5890638,-93.7036736,41.5890638,-93.7036736</polyline>
+    </location>
+    <starttime>2020-08-21T13:42:00Z</starttime>
+    <display type="AB" id="13631879" latitude="41.5890638" longitude="-93.7036736">
+      <message verified="2020-08-21T15:50:00Z" indicator="Merge Left" latitude="41.5890880" longitude="-93.7035008" />
+      <status type="Arrow Panel" starttime="2020-08-21T13:37:47Z" verified="2020-08-21T15:50:00Z" state="Left Chevron" />
+      <status type="Display Down" starttime="2020-07-27T23:32:05Z" verified="2020-08-21T15:50:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631674_202008211553">
+    <creationtime>2020-08-21T15:53:00Z</creationtime>
+    <updatetime>2020-08-21T15:53:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>32.8400602,-97.3324512,32.8400602,-97.3324512</polyline>
+    </location>
+    <starttime>2020-08-21T15:53:00Z</starttime>
+    <display type="AB" id="13631674" latitude="32.8400602" longitude="-97.3324512">
+      <message verified="2020-08-21T15:54:00Z" indicator="Caution" latitude="32.8400384" longitude="-97.3324864" />
+      <status type="Arrow Panel" starttime="2020-08-21T15:54:00Z" verified="2020-08-21T15:54:00Z" state="Caution - Bar" />
+    </display>
+  </incident>
+  <incident id="U13631777_202008211552">
+    <creationtime>2020-08-21T15:52:05Z</creationtime>
+    <updatetime>2020-08-21T15:53:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>42.1275442,-71.0539498,42.1275442,-71.0539498</polyline>
+    </location>
+    <starttime>2020-08-21T15:52:05Z</starttime>
+    <display type="AB" id="13631777" latitude="42.1275442" longitude="-71.0539498">
+      <message verified="2020-08-21T15:53:06Z" indicator="Caution" latitude="42.1275648" longitude="-71.0539776" />
+      <status type="Arrow Panel" starttime="2020-08-21T15:53:06Z" verified="2020-08-21T15:53:06Z" state="Caution - Bar" />
+      <status type="Display Down" starttime="2019-11-21T17:42:00Z" verified="2020-08-21T15:53:06Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631930_202008211131">
+    <creationtime>2020-08-21T11:31:19Z</creationtime>
+    <updatetime>2020-08-21T15:49:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE RIGHT [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>41.6150336,-93.8925854,41.6150336,-93.8925854</polyline>
+    </location>
+    <starttime>2020-08-21T11:31:19Z</starttime>
+    <display type="AB" id="13631930" latitude="41.6150336" longitude="-93.8925854">
+      <message verified="2020-08-21T15:49:00Z" indicator="Merge Right" latitude="41.6148832" longitude="-93.8925504" />
+      <status type="Arrow Panel" starttime="2020-08-21T11:31:19Z" verified="2020-08-21T15:49:00Z" state="Right Chevron" />
+      <status type="Display Down" starttime="2020-06-18T19:10:00Z" verified="2020-08-21T15:49:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631708_202008211336">
+    <creationtime>2020-08-21T13:36:10Z</creationtime>
+    <updatetime>2020-08-21T15:52:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>32.8400887,-97.3324427,32.8400887,-97.3324427</polyline>
+    </location>
+    <starttime>2020-08-21T13:36:10Z</starttime>
+    <display type="AB" id="13631708" latitude="32.8400887" longitude="-97.3324427">
+      <message verified="2020-08-21T15:52:00Z" indicator="Caution" latitude="32.8400992" longitude="-97.3323584" />
+      <status type="Arrow Panel" starttime="2020-08-21T13:36:10Z" verified="2020-08-21T15:52:00Z" state="Caution - Bar" />
+      <status type="Display Down" starttime="2019-09-17T15:08:00Z" verified="2020-08-21T15:52:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631851_202008211335">
+    <creationtime>2020-08-21T13:35:37Z</creationtime>
+    <updatetime>2020-08-21T15:52:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE RIGHT [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>42.0086334,-93.4892328,42.0086334,-93.4892328</polyline>
+    </location>
+    <starttime>2020-08-21T13:35:37Z</starttime>
+    <display type="AB" id="13631851" latitude="42.0086334" longitude="-93.4892328">
+      <message verified="2020-08-21T15:52:00Z" indicator="Merge Right" latitude="42.0086400" longitude="-93.4892032" />
+      <status type="Arrow Panel" starttime="2020-08-21T13:35:37Z" verified="2020-08-21T15:52:00Z" state="Right Chevron" />
+      <status type="Display Down" starttime="2020-03-12T20:17:03Z" verified="2020-08-21T15:52:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631701_202008211536">
+    <creationtime>2020-08-21T15:36:00Z</creationtime>
+    <updatetime>2020-08-21T15:52:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>41.0546852,-76.8350748,41.0546852,-76.8350748</polyline>
+    </location>
+    <starttime>2020-08-21T15:36:00Z</starttime>
+    <display type="AB" id="13631701" latitude="41.0546852" longitude="-76.8350748">
+      <message verified="2020-08-21T15:52:00Z" indicator="Caution" latitude="41.0547360" longitude="-76.8352128" />
+      <status type="Arrow Panel" starttime="2020-08-21T15:36:00Z" verified="2020-08-21T15:52:00Z" state="Caution - Bar" />
+      <status type="Display Down" starttime="2019-09-16T16:25:28Z" verified="2020-08-21T15:52:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631817_202008211208">
+    <creationtime>2020-08-21T12:08:03Z</creationtime>
+    <updatetime>2020-08-21T15:49:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>40.5193099,-75.3878653,40.5193099,-75.3878653</polyline>
+    </location>
+    <starttime>2020-08-21T12:08:03Z</starttime>
+    <display type="AB" id="13631817" latitude="40.5193099" longitude="-75.3878653">
+      <message verified="2020-08-21T15:49:00Z" indicator="Caution" latitude="40.5193248" longitude="-75.3878272" />
+      <status type="Arrow Panel" starttime="2020-08-21T12:08:03Z" verified="2020-08-21T15:49:00Z" state="Caution - Bar" />
+      <status type="Display Down" starttime="2020-01-16T22:28:00Z" verified="2020-08-21T15:49:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631929_202008211337">
+    <creationtime>2020-08-21T13:37:16Z</creationtime>
+    <updatetime>2020-08-21T15:52:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE RIGHT [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>41.9405940,-91.7241565,41.9405940,-91.7241565</polyline>
+    </location>
+    <starttime>2020-08-21T13:37:16Z</starttime>
+    <display type="AB" id="13631929" latitude="41.9405940" longitude="-91.7241565">
+      <message verified="2020-08-21T15:52:00Z" indicator="Merge Right" latitude="41.9406464" longitude="-91.7241280" />
+      <status type="Arrow Panel" starttime="2020-08-21T13:37:16Z" verified="2020-08-21T15:52:00Z" state="Right Chevron" />
+      <status type="Display Down" starttime="2020-07-16T22:56:00Z" verified="2020-08-21T15:52:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631854_202008210623">
+    <creationtime>2020-08-21T06:23:00Z</creationtime>
+    <updatetime>2020-08-21T15:50:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE LEFT [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>41.6294162,-93.7166704,41.6294162,-93.7166704</polyline>
+    </location>
+    <starttime>2020-08-21T06:23:00Z</starttime>
+    <display type="AB" id="13631854" latitude="41.6294162" longitude="-93.7166704">
+      <message verified="2020-08-21T15:50:00Z" indicator="Merge Left" latitude="41.6294464" longitude="-93.7168512" />
+      <status type="Arrow Panel" starttime="2020-08-20T20:02:07Z" verified="2020-08-21T15:50:00Z" state="Left Chevron" />
+      <status type="Display Down" starttime="2020-05-25T10:42:05Z" verified="2020-08-21T15:50:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631931_202008211439">
+    <creationtime>2020-08-21T14:39:00Z</creationtime>
+    <updatetime>2020-08-21T15:48:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE LEFT [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>41.6011096,-93.3040144,41.6011096,-93.3040144</polyline>
+    </location>
+    <starttime>2020-08-21T14:39:00Z</starttime>
+    <display type="AB" id="13631931" latitude="41.6011096" longitude="-93.3040144">
+      <message verified="2020-08-21T15:53:00Z" indicator="Merge Left" latitude="41.6011328" longitude="-93.3039872" />
+      <status type="Arrow Panel" starttime="2020-08-21T13:36:24Z" verified="2020-08-21T15:53:00Z" state="Left Chevron" />
+      <status type="Display Down" starttime="2020-07-27T21:20:08Z" verified="2020-08-21T15:53:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631713_202008211339">
+    <creationtime>2020-08-21T13:39:01Z</creationtime>
+    <updatetime>2020-08-21T15:53:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>40.5195445,-75.3865924,40.5195445,-75.3865924</polyline>
+    </location>
+    <starttime>2020-08-21T13:39:01Z</starttime>
+    <display type="AB" id="13631713" latitude="40.5195445" longitude="-75.3865924">
+      <message verified="2020-08-21T15:53:00Z" indicator="Caution" latitude="40.5195264" longitude="-75.3865408" />
+      <status type="Arrow Panel" starttime="2020-08-21T13:39:01Z" verified="2020-08-21T15:53:00Z" state="Caution - Bar" />
+      <status type="Display Down" starttime="2019-09-25T17:13:00Z" verified="2020-08-21T15:53:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631700_202008211551">
+    <creationtime>2020-08-21T15:51:05Z</creationtime>
+    <updatetime>2020-08-21T15:53:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>39.9941287,-78.2440789,39.9941287,-78.2440789</polyline>
+    </location>
+    <starttime>2020-08-21T15:51:05Z</starttime>
+    <display type="AB" id="13631700" latitude="39.9941287" longitude="-78.2440789">
+      <message verified="2020-08-21T15:53:00Z" indicator="Caution" latitude="39.9944352" longitude="-78.2440512" />
+      <status type="Arrow Panel" starttime="2020-08-21T15:51:05Z" verified="2020-08-21T15:53:00Z" state="Caution - Bar" />
+      <status type="Display Down" starttime="2019-09-16T16:25:28Z" verified="2020-08-21T15:53:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631812_202008211553">
+    <creationtime>2020-08-21T15:53:01Z</creationtime>
+    <updatetime>2020-08-21T15:53:01Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>38.8520723,-76.8448176,38.8520723,-76.8448176</polyline>
+    </location>
+    <starttime>2020-08-21T15:53:01Z</starttime>
+    <display type="AB" id="13631812" latitude="38.8520723" longitude="-76.8448176">
+      <message verified="2020-08-21T15:53:01Z" indicator="Caution" latitude="38.8521856" longitude="-76.8448384" />
+      <status type="Arrow Panel" starttime="2020-08-21T15:53:01Z" verified="2020-08-21T15:53:01Z" state="Caution - Bar" />
+      <status type="Display Down" starttime="2020-01-16T21:34:00Z" verified="2020-08-21T15:53:01Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631816_202008211553">
+    <creationtime>2020-08-21T15:53:11Z</creationtime>
+    <updatetime>2020-08-21T15:53:11Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>41.5875337,-77.1076752,41.5875337,-77.1076752</polyline>
+    </location>
+    <starttime>2020-08-21T15:53:11Z</starttime>
+    <display type="AB" id="13631816" latitude="41.5875337" longitude="-77.1076752">
+      <message verified="2020-08-21T15:54:00Z" indicator="Caution" latitude="41.5875744" longitude="-77.1075520" />
+      <status type="Arrow Panel" starttime="2020-08-21T15:54:00Z" verified="2020-08-21T15:54:00Z" state="Caution - Bar" />
+      <status type="Display Down" starttime="2020-01-16T22:28:00Z" verified="2020-08-21T15:54:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631712_202008211549">
+    <creationtime>2020-08-21T15:49:05Z</creationtime>
+    <updatetime>2020-08-21T15:53:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>29.5866620,-98.5841464,29.5866620,-98.5841464</polyline>
+    </location>
+    <starttime>2020-08-21T15:49:05Z</starttime>
+    <display type="AB" id="13631712" latitude="29.5866620" longitude="-98.5841464">
+      <message verified="2020-08-21T15:53:00Z" indicator="Caution" latitude="29.5866656" longitude="-98.5841344" />
+      <status type="Arrow Panel" starttime="2020-08-21T15:49:05Z" verified="2020-08-21T15:53:00Z" state="Caution - Bar" />
+      <status type="Display Down" starttime="2019-09-25T17:14:00Z" verified="2020-08-21T15:53:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U11534545_202008211052">
+    <creationtime>2020-08-21T10:52:00Z</creationtime>
+    <updatetime>2020-08-21T15:12:00Z</updatetime>
+    <type>HAZARD</type>
+    <description>NYSDOT Workzone - Flag Person! [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>42.7740391,-76.7695401,42.7740391,-76.7695401</polyline>
+    </location>
+    <starttime>2020-08-21T10:52:00Z</starttime>
+    <marker type="Baton" id="11534545" latitude="42.7740391" longitude="-76.7695401">
+      <status type="Baton" starttime="2020-08-21T10:49:00Z" verified="2020-08-21T15:12:00Z" state="ACTIVE" />
+    </marker>
+  </incident>
+  <incident id="U13631710_202008211553">
+    <creationtime>2020-08-21T15:53:00Z</creationtime>
+    <updatetime>2020-08-21T15:53:01Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>29.8006975,-98.0124030,29.8006975,-98.0124030</polyline>
+    </location>
+    <starttime>2020-08-21T15:53:00Z</starttime>
+    <display type="AB" id="13631710" latitude="29.8006975" longitude="-98.0124030">
+      <message verified="2020-08-21T15:54:00Z" latitude="29.8007424" longitude="-98.0123072" />
+      <status type="Arrow Panel" starttime="2020-08-21T15:54:00Z" verified="2020-08-21T15:54:00Z" state="OFF" />
+      <status type="Display Down" starttime="2019-09-25T17:14:00Z" verified="2020-08-21T15:54:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631928_202008211343">
+    <creationtime>2020-08-21T13:43:43Z</creationtime>
+    <updatetime>2020-08-21T15:50:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE LEFT [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>41.0730222,-95.8872086,41.0730222,-95.8872086</polyline>
+    </location>
+    <starttime>2020-08-21T13:43:43Z</starttime>
+    <display type="AB" id="13631928" latitude="41.0730222" longitude="-95.8872086">
+      <message verified="2020-08-21T15:50:00Z" indicator="Merge Left" latitude="41.0730080" longitude="-95.8872064" />
+      <status type="Arrow Panel" starttime="2020-08-21T13:43:43Z" verified="2020-08-21T15:50:00Z" state="Left Chevron" />
+      <status type="Display Down" starttime="2020-08-01T19:04:00Z" verified="2020-08-21T15:50:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631668_202008211534">
+    <creationtime>2020-08-21T15:34:05Z</creationtime>
+    <updatetime>2020-08-21T15:50:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>32.8497023,-97.0181595,32.8497023,-97.0181595</polyline>
+    </location>
+    <starttime>2020-08-21T15:34:05Z</starttime>
+    <display type="AB" id="13631668" latitude="32.8497023" longitude="-97.0181595">
+      <message verified="2020-08-21T15:50:00Z" indicator="Caution" latitude="32.8498432" longitude="-97.0186560" />
+      <status type="Arrow Panel" starttime="2020-08-21T15:34:05Z" verified="2020-08-21T15:50:00Z" state="Caution - Bar" />
+    </display>
+  </incident>
+  <incident id="U13631815_202008211336">
+    <creationtime>2020-08-21T13:36:12Z</creationtime>
+    <updatetime>2020-08-21T15:49:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>37.2993796,-79.9070365,37.2993796,-79.9070365</polyline>
+    </location>
+    <starttime>2020-08-21T13:36:12Z</starttime>
+    <display type="AB" id="13631815" latitude="37.2993796" longitude="-79.9070365">
+      <message verified="2020-08-21T15:49:00Z" indicator="Caution" latitude="37.2993248" longitude="-79.9069760" />
+      <status type="Arrow Panel" starttime="2020-08-21T13:36:12Z" verified="2020-08-21T15:49:00Z" state="Caution - Bar" />
+      <status type="Display Down" starttime="2020-01-16T21:34:00Z" verified="2020-08-21T15:49:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631778_202008211459">
+    <creationtime>2020-08-21T14:59:05Z</creationtime>
+    <updatetime>2020-08-21T15:50:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>27.8045437,-97.4981870,27.8045437,-97.4981870</polyline>
+    </location>
+    <starttime>2020-08-21T14:59:05Z</starttime>
+    <display type="AB" id="13631778" latitude="27.8045437" longitude="-97.4981870">
+      <message verified="2020-08-21T15:50:00Z" indicator="Caution" latitude="27.8043168" longitude="-97.4982080" />
+      <status type="Arrow Panel" starttime="2020-08-21T14:59:05Z" verified="2020-08-21T15:50:00Z" state="Caution - Bar" />
+      <status type="Display Down" starttime="2019-11-21T17:45:00Z" verified="2020-08-21T15:50:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631780_202008211521">
+    <creationtime>2020-08-21T15:21:00Z</creationtime>
+    <updatetime>2020-08-21T15:52:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>27.8052048,-97.4981312,27.8052048,-97.4981312</polyline>
+    </location>
+    <starttime>2020-08-21T15:21:00Z</starttime>
+    <display type="AB" id="13631780" latitude="27.8052048" longitude="-97.4981312">
+      <message verified="2020-08-21T15:52:00Z" indicator="Caution" latitude="27.8051168" longitude="-97.4980544" />
+      <status type="Arrow Panel" starttime="2020-08-21T13:35:22Z" verified="2020-08-21T15:52:00Z" state="Caution - Bar" />
+      <status type="Display Down" starttime="2019-11-21T17:48:00Z" verified="2020-08-21T15:52:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631822_202008211219">
+    <creationtime>2020-08-21T12:19:00Z</creationtime>
+    <updatetime>2020-08-21T15:51:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>26.3507165,-98.1494196,26.3507165,-98.1494196</polyline>
+    </location>
+    <starttime>2020-08-21T12:19:00Z</starttime>
+    <display type="AB" id="13631822" latitude="26.3507165" longitude="-98.1494196">
+      <message verified="2020-08-21T15:51:00Z" indicator="Caution" latitude="26.3507840" longitude="-98.1494208" />
+      <status type="Arrow Panel" starttime="2020-08-20T21:05:46Z" verified="2020-08-21T15:51:00Z" state="Caution - Bar" />
+      <status type="Display Down" starttime="2020-01-16T22:29:00Z" verified="2020-08-21T15:51:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631853_202008211336">
+    <creationtime>2020-08-21T13:36:07Z</creationtime>
+    <updatetime>2020-08-21T15:51:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE RIGHT [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>41.6143952,-94.0127539,41.6143952,-94.0127539</polyline>
+    </location>
+    <starttime>2020-08-21T13:36:07Z</starttime>
+    <display type="AB" id="13631853" latitude="41.6143952" longitude="-94.0127539">
+      <message verified="2020-08-21T15:51:00Z" indicator="Merge Right" latitude="41.6144608" longitude="-94.0128128" />
+      <status type="Arrow Panel" starttime="2020-08-21T13:36:07Z" verified="2020-08-21T15:51:00Z" state="Right Chevron" />
+      <status type="Display Down" starttime="2020-06-22T13:11:21Z" verified="2020-08-21T15:51:00Z" state="Up" />
+    </display>
+  </incident>
+  <incident id="U13631714_202008211339">
+    <creationtime>2020-08-21T13:39:14Z</creationtime>
+    <updatetime>2020-08-21T15:51:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE LEFT [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>28.8090234,-96.9814929,28.8090234,-96.9814929</polyline>
+    </location>
+    <starttime>2020-08-21T13:39:14Z</starttime>
+    <display type="AB" id="13631714" latitude="28.8090234" longitude="-96.9814929">
+      <message verified="2020-08-21T15:51:00Z" indicator="Merge Left" latitude="28.8090464" longitude="-96.9814464" />
+      <status type="Arrow Panel" starttime="2020-08-21T13:39:14Z" verified="2020-08-21T15:51:00Z" state="Left Arrow" />
+      <status type="Display Down" starttime="2020-07-30T14:14:00Z" verified="2020-08-21T15:51:00Z" state="Up" />
+    </display>
+  </incident>
+</incidents>
