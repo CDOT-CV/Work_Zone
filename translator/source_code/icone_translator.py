@@ -335,7 +335,7 @@ def initialize_info() :
 
     #### This information is required, might want to hardcode
     info['metadata'] = {}
-    info['metadata']['wz_location_method'] = "channel_device_method"
+    info['metadata']['wz_location_method'] = "channel-device-method"
     info['metadata']['lrs_type'] = "lrs_type"
     info['metadata']['location_verify_method'] = "location_verify_method"
     info['metadata']['datafeed_frequency_update'] = 86400
