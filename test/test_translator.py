@@ -131,22 +131,33 @@ def test_wzdx_creator() :
 
     icone_obj = xmltodict.parse(icone_data)
 
-    info={}
-    info['feed_info_id'] = "feed_info_id"
-
-    #### This information is required, might want to hardcode
-    info['metadata'] = {}
-    info['metadata']['wz_location_method'] = "channel-device-method"
-    info['metadata']['lrs_type'] = "lrs_type"
-    info['metadata']['location_verify_method'] = "location_verify_method"
-    info['metadata']['datafeed_frequency_update'] = 86400
-    info['metadata']['timestamp_metadata_update'] = "timestamp_metadata_update"
-    info['metadata']['contact_name'] = "contact_name"
-    info['metadata']['contact_email'] = "contact_email"
-    info['metadata']['issuing_organization'] = "issuing_organization"
-    test_wzdx=icone_translator.wzdx_creator(icone_obj,info)
+    # info={}
+    # info['feed_info_id'] = "feed_info_id"
+    #
+    # #### This information is required, might want to hardcode
+    # info['metadata'] = {}
+    # info['metadata']['wz_location_method'] = "channel-device-method"
+    # info['metadata']['lrs_type'] = "lrs_type"
+    # info['metadata']['location_verify_method'] = "location_verify_method"
+    # info['metadata']['datafeed_frequency_update'] = 86400
+    # info['metadata']['timestamp_metadata_update'] = "timestamp_metadata_update"
+    # info['metadata']['contact_name'] = "contact_name"
+    # info['metadata']['contact_email'] = "contact_email"
+    # info['metadata']['issuing_organization'] = "issuing_organization"
+    test_wzdx=icone_translator.wzdx_creator(icone_obj,icone_translator.initialize_info())
 
     validate(instance=test_wzdx,schema=wzdx_schema)
+
+
+def test_parse_arguments():
+    test_input='-i inputfile.xml -o outputfile.geojson'
+    test_argv=test_input.split(' ')
+    test_input,test_output=icone_translator.parse_arguments(test_argv)
+    assert test_output== test_argv[3] and test_input==test_argv[1]
+
+
+
+
 
 
 
