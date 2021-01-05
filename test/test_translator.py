@@ -124,6 +124,21 @@ def test_get_event_status():
 
     assert  test_event_status==valid_event_status
 
+    test_starttime_string = "2030-12-16T08:45:03Z"
+    test_endtime_string = ''
+    test_event_status = icone_translator.get_event_status(test_starttime_string, test_endtime_string)
+    valid_event_status = "planned"
+
+    assert test_event_status == valid_event_status
+
+    test_starttime_string = "2020-12-16T08:45:03Z"
+    test_endtime_string = "2020-12-16T08:45:03Z"
+    test_event_status = icone_translator.get_event_status(test_starttime_string, test_endtime_string)
+    valid_event_status = "completed"
+
+    assert test_event_status == valid_event_status
+
+
 def test_wzdx_creator() :
     wzdx_schema = json.loads(open('translator/source_code/wzdx_v3.0_feed.json').read())
     icone_data =open('translator/sample files/Icone Data/incidents_extended.xml').read()
