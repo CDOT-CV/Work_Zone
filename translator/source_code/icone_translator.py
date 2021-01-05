@@ -6,8 +6,10 @@ import uuid
 import random
 import string
 import pytest
+import os.path
 import sys,getopt
 from jsonschema import validate
+from jsonschema import ValidationError
 
 
 
@@ -345,19 +347,41 @@ def initialize_info() :
     info['metadata']['issuing_organization'] = "issuing_organization"
 
     return info
-
-if  inputfile :
-# Added encoding argument because of weird character at start of incidents.xml file
+def parse_xml(inputfile):
     with open(inputfile, encoding='utf-8-sig') as frsm:
         # Read
         xmlSTRING = frsm.read()
         icone_obj = xmltodict.parse(xmlSTRING)
+        return icone_obj
+
+def validate_write(wzdx_obj,outputfile,location_schema):
+    wzdx_schema = json.loads(open(location_schema).read())
+    try :
+        validate(instance=wzdx_obj, schema=wzdx_schema)
+    except ValidationError as e :
+        print(e)
+        return False
 
 
-        wzdx = wzdx_creator(icone_obj,initialize_info())
-        wzdx_schema=open('wzdx_v3.0_feed.json')
-        validate(instance=wzdx, schema=wzdx_schema)
-        with open(outputfile, 'w') as fwzdx:
-            fwzdx.write(json.dumps(wzdx, indent=2))
+    with open(outputfile, 'w') as fwzdx:
+        fwzdx.write(json.dumps(wzdx_obj, indent=2))
+
+    # if not os.path.exists(outputfile) or os.stat(outputfile).st_size == 0:
+    #     print('Output file creation failed . file does not exist or is empty')
+    #     return False
+    # else:
+    return True
+
+
+
+if  inputfile :
+# Added encoding argument because of weird character at start of incidents.xml file
+
+    icone_obj=parse_xml(inputfile)
+    wzdx = wzdx_creator(icone_obj,initialize_info())
+    if not validate_write(wzdx,outputfile,'../sample files/validation_schema/wzdx_v3.0_feed.json') :
+        print('validation error more messages are printed above')
+
+
 
 
