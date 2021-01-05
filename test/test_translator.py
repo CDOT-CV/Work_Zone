@@ -149,6 +149,14 @@ def test_wzdx_creator() :
     validate(instance=test_wzdx,schema=wzdx_schema)
 
 
+def test_parse_arguments():
+    test_input='-i inputfile.xml -o outputfile.geojson'
+    test_argv=test_input.split(' ')
+    test_input,test_output=icone_translator.parse_arguments(test_argv)
+    assert test_output== test_argv[3] and test_input==test_argv[1]
+
+
+
 
 
 
