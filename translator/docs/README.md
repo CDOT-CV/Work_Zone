@@ -5,6 +5,9 @@ assets xml.txt
 - The assets XML is a report of all current status information for units that are accessible to a given user - generally
 as defined by access on iconetraffic.com.
 
+iCone to WZDx Translator Field Mappings.pdf
+
+- iCone to WZDx Translator Mappings
 
 iCone data schema 
 
