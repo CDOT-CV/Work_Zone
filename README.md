@@ -20,11 +20,17 @@ Requires:
 
 - Python 3.6 (or higher)
   - xmltodict
+  - jsonschema
    
   
 ## Environment Setup
 
 This code requires Python 3.6 or a higher version. If you haven’t already, download Python and Pip. Next, you’ll need to install several packages that we’ll use throughout this tutorial. You can do this by opening terminal or command prompt on your operating system:
+
+```
+pip install -r requirements.txt
+```
+
 
 
 ### Execution
@@ -34,7 +40,14 @@ This code requires Python 3.6 or a higher version. If you haven’t already, dow
 ```
 python icone_translator.py -i inputfile.xml -o outputfile.geojson
 ```
+Example usage:
+```
+python icone_translator.py -i '../sample files/icone data/incidents_extended.xml' 
+```
 
+###Documentation
+
+documentation for iCone to WZDx translator is located here: https://github.com/CDOT-CV/Work_Zone/tree/main/translator/docs
 
 ### Guidelines
 

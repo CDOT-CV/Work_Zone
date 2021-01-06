@@ -381,7 +381,8 @@ if  inputfile :
     wzdx = wzdx_creator(icone_obj,initialize_info())
     if not validate_write(wzdx,outputfile,'../sample files/validation_schema/wzdx_v3.0_feed.json') :
         print('validation error more messages are printed above')
-
+    else :
+        print('huraaah ! your wzdx message is successfully generated and located here: '+str(outputfile))
 
 
 
