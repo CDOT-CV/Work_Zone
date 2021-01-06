@@ -45,7 +45,7 @@ Example usage:
 python icone_translator.py -i '../sample files/icone data/incidents_extended.xml' 
 ```
 
-###Documentation
+### Documentation
 
 documentation for iCone to WZDx translator is located here: https://github.com/CDOT-CV/Work_Zone/tree/main/translator/docs
 
