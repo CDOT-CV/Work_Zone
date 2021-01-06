@@ -20,7 +20,7 @@ def wzdx_creator(messages, info):
     # hardcode
     wzd['road_event_feed_info']['feed_info_id'] = info['feed_info_id']
     wzd['road_event_feed_info']['update_date'] = datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
-    wzd['road_event_feed_info']['publisher'] = 'CDOT '
+    wzd['road_event_feed_info']['publisher'] = 'CDOT'
     wzd['road_event_feed_info']['contact_name'] = 'Abinash Konersman'
     wzd['road_event_feed_info']['contact_email'] = 'abinash.konersman@state.co.us'
     if info['metadata'].get('datafeed_frequency_update', False):
@@ -333,18 +333,18 @@ def initialize_info() :
     info = {}
 
     #### Consider whether this id needs to be hardcoded or generated
-    info['feed_info_id'] = "feed_info_id"
+    info['feed_info_id'] = "104d7746-688c-44ed-b195-2ee948bf9dfa"
 
     #### This information is required, might want to hardcode
     info['metadata'] = {}
     info['metadata']['wz_location_method'] = "channel-device-method"
     info['metadata']['lrs_type'] = "lrs_type"
     info['metadata']['location_verify_method'] = "location_verify_method"
-    info['metadata']['datafeed_frequency_update'] = 86400
-    info['metadata']['timestamp_metadata_update'] = "timestamp_metadata_update"
-    info['metadata']['contact_name'] = "contact_name"
-    info['metadata']['contact_email'] = "contact_email"
-    info['metadata']['issuing_organization'] = "issuing_organization"
+    #info['metadata']['datafeed_frequency_update'] = 86400
+    #info['metadata']['timestamp_metadata_update'] = "timestamp_metadata_update"
+    info['metadata']['contact_name'] = "Abinash Konersman"
+    info['metadata']['contact_email'] = "abinash.konersman@state.co.us"
+    info['metadata']['issuing_organization'] = "CDOT"
 
     return info
 def parse_xml(inputfile):
@@ -381,7 +381,8 @@ if  inputfile :
     wzdx = wzdx_creator(icone_obj,initialize_info())
     if not validate_write(wzdx,outputfile,'../sample files/validation_schema/wzdx_v3.0_feed.json') :
         print('validation error more messages are printed above')
-
+    else :
+        print('huraaah ! your wzdx message is successfully generated and located here: '+str(outputfile))
 
 
 
