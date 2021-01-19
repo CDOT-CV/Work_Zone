@@ -226,7 +226,7 @@ def parse_icone_sensor(sensor):
     icone = {}
     icone['type'] = sensor['@type']
     icone['id'] = sensor['@id']
-    icone['location'] = [sensor['@latitude'], sensor['@longitude']]
+    icone['location'] = [float(sensor['@latitude']), float(sensor['@longitude'])]
 
     if sensor.get('radar', None):
         avg_speed = 0
@@ -249,8 +249,9 @@ def parse_icone_sensor(sensor):
                 std_dev_speed = float(radar['@stDevSpeed'])
 
         radar = {}
-        radar['average_speed'] = avg_speed
-        radar['std_dev_speed'] = std_dev_speed
+
+        radar['average_speed'] = round(avg_speed,2)
+        radar['std_dev_speed'] = round(std_dev_speed,2)
         radar['timestamp'] = sensor['radar'][-1]['@intervalEnd']
         icone['radar'] = radar
     return icone
@@ -261,7 +262,7 @@ def parse_pcms_sensor(sensor):
     pcms['type'] = sensor['@type']
     pcms['id'] = sensor['@id']
     pcms['timestamp'] = sensor['@id']
-    pcms['location'] = [sensor['@latitude'], sensor['@longitude']]
+    pcms['location'] = [float(sensor['@latitude']), float(sensor['@longitude'])]
     if sensor.get('message', None):
         pcms['messages'] = []
         for message in sensor['message']:
