@@ -159,8 +159,6 @@ def get_road_direction(coordinates):
 
 def parse_direction_from_street_name(street):
     # function to parse direction from street name
-    if not street:
-        return None
     street_char = street[-1]
     street_chars = street[-2:]
     if street_char == 'N' or street_chars == 'NB':
@@ -233,6 +231,7 @@ def parse_icone_sensor(sensor):
         std_dev_speed = 0
         num_reads = 0
         for radar in sensor['radar']:
+            timestamp=''
             if not isinstance(radar, str):
                 curr_reads = int(radar['@numReads'])
                 if curr_reads == 0:
@@ -243,16 +242,18 @@ def parse_icone_sensor(sensor):
                 avg_speed = (avg_speed * num_reads + curr_avg_speed * curr_reads) / total_num_reads
                 std_dev_speed = (std_dev_speed * num_reads + curr_dev_speed * curr_reads) / total_num_reads
                 num_reads = total_num_reads
+                timestamp = radar['@intervalEnd']
             else:
                 radar = sensor['radar']
                 avg_speed = float(radar['@avgSpeed'])
                 std_dev_speed = float(radar['@stDevSpeed'])
+                timestamp = radar['@intervalEnd']
 
         radar = {}
 
         radar['average_speed'] = round(avg_speed,2)
         radar['std_dev_speed'] = round(std_dev_speed,2)
-        radar['timestamp'] = sensor['radar'][-1]['@intervalEnd']
+        radar['timestamp']=timestamp
         icone['radar'] = radar
     return icone
 
