@@ -38,11 +38,11 @@ def wzdx_creator(messages, info):
     if info['metadata'].get('datafeed_frequency_update', False):
         data_source['update_frequency'] = info['metadata']['datafeed_frequency_update']
     data_source['update_date'] = datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
-    #data_source['location_verify_method'] = info['metadata']['location_verify_method']
+    # data_source['location_verify_method'] = info['metadata']['location_verify_method']
     data_source['location_method'] = info['metadata']['wz_location_method']
     data_source['lrs_type'] = info['metadata']['lrs_type']
     # data_source['lrs_url'] = "basic url"
-    
+
     # data_source_icone= {}
     # data_source_icone['data_source_id'] = str(uuid.uuid4())
     # data_source_icone['feed_info_id'] = info['feed_info_id']
@@ -56,8 +56,7 @@ def wzdx_creator(messages, info):
     # data_source_icone['location_method'] = info['metadata']['wz_location_method']
     # data_source_icone['lrs_type'] = info['metadata']['lrs_type']
     # # data_source_icone['lrs_url'] = "basic url"
-    
-    
+
     wzd['road_event_feed_info']['data_sources'] = [data_source]
 
     wzd['type'] = 'FeatureCollection'
@@ -81,13 +80,13 @@ def wzdx_creator(messages, info):
         # print("")
         # print("")
         # Parse Incident to WZDx Feature
-        polyline=parse_polyline(incident['location']['polyline'])
-        avg_point = [(polyline[0][0] + polyline[-1][0]) / 2,(polyline[0][1] + polyline[-1][1]) / 2]
+        polyline = parse_polyline(incident['location']['polyline'])
+        avg_point = [(polyline[0][0] + polyline[-1][0]) / 2, (polyline[0][1] + polyline[-1][1]) / 2]
 
-        if is_in_colorado(avg_point) or True :
-            feature=parse_incident(incident)
-            if feature :
-             wzd['features'].append(feature)
+        if is_in_colorado(avg_point) or True:
+            feature = parse_incident(incident)
+            if feature:
+                wzd['features'].append(feature)
 
     wzd = add_ids(wzd, True)
     return wzd
@@ -152,32 +151,30 @@ def get_road_direction(coordinates):
     else:
         direction = 'southbound'
 
-    if lat_dif ==0 and long_dif==0 :
-        direction= None
+    if lat_dif == 0 and long_dif == 0:
+        direction = None
 
     return direction
+
 
 def parse_direction_from_street_name(street):
-    #function to parse direction from street name
-    if not street :
-        return  None
-    street_char=street[-1]
-    street_chars=street[-2:]
-    if street_char == 'N'or street_chars=='NB':
-        direction='northbound'
-    elif street_char =='S' or street_chars=='SB':
-        direction ='southbound'
-    elif street_char =='W'or street_chars=='WB':
-        direction ='westbound'
-    elif street_char =='E'or street_chars=='EB':
-        direction ='eastbound'
+    # function to parse direction from street name
+    if not street:
+        return None
+    street_char = street[-1]
+    street_chars = street[-2:]
+    if street_char == 'N' or street_chars == 'NB':
+        direction = 'northbound'
+    elif street_char == 'S' or street_chars == 'SB':
+        direction = 'southbound'
+    elif street_char == 'W' or street_chars == 'WB':
+        direction = 'westbound'
+    elif street_char == 'E' or street_chars == 'EB':
+        direction = 'eastbound'
     else:
-       direction=None
+        direction = None
 
     return direction
-
-
-
 
 
 # function to get event status
@@ -194,75 +191,90 @@ def get_event_status(start_time_string, end_time_string):
             event_status = "completed"
     return event_status
 
+
 def create_description(incident):
-    description=incident['description']
+    description = incident['description']
 
     if incident.get('sensor'):
         description += '\n sensors: '
         for sensor in incident['sensor']:
-            if sensor['@type'] == 'iCone' :
-                description += '\n' + parse_icone_sensor(sensor)
+            if not isinstance(sensor, str):
+                if sensor['@type'] == 'iCone':
+                    description += '\n' + json.dumps(parse_icone_sensor(sensor), indent=2)
+            else:
+                sensor = incident['sensor']
+                if sensor['@type'] == 'iCone':
+                    description += '\n' + json.dumps(parse_icone_sensor(sensor), indent=2)
+
     if incident.get('display'):
         description += '\n displays: '
         for display in incident['display']:
-            if display['@type']== 'PCMS' :
-                description += '\n' + parse_pcms_sensor(display)  #add baton,ab,truck beacon,ipin,signal
+            if not isinstance(display, str):
+                if display['@type'] == 'PCMS':
+                    description += '\n' + json.dumps(parse_pcms_sensor(display),
+                                                     indent=2)  # add baton,ab,truck beacon,ipin,signal
+            else:
+                display = incident['display']
+                if display['@type'] == 'PCMS':
+                    description += '\n' + json.dumps(parse_pcms_sensor(display),
+                                                     indent=2)  # add baton,ab,truck beacon,ipin,signal
 
-    return  description
+    return description
 
-        
+
 def parse_icone_sensor(sensor):
-    description={}
-    description['type']=sensor['@type']
-    description['id'] = sensor['@id']
-    description['location'] = [sensor['@latitude'],sensor['@longitude']]
+    icone = {}
+    icone['type'] = sensor['@type']
+    icone['id'] = sensor['@id']
+    icone['location'] = [sensor['@latitude'], sensor['@longitude']]
 
     if sensor.get('radar', None):
-        avg_speed=0
-        std_dev_speed=0
-        num_reads=0
+        avg_speed = 0
+        std_dev_speed = 0
+        num_reads = 0
         for radar in sensor['radar']:
-            curr_reads=int(radar['@numReads'])
-            if curr_reads==0 :
-                continue
-            curr_avg_speed=float(radar['@avgSpeed'])
-            curr_dev_speed=float(radar['@stDevSpeed'])
-            total_num_reads=num_reads + curr_reads
-            avg_speed=(avg_speed*num_reads+curr_avg_speed*curr_reads)/total_num_reads
-            std_dev_speed=(std_dev_speed*num_reads+curr_dev_speed*curr_reads)/total_num_reads
-            num_reads=total_num_reads
-            
-        radar={}
-        radar['average_speed']=avg_speed
+            if not isinstance(radar, str):
+                curr_reads = int(radar['@numReads'])
+                if curr_reads == 0:
+                    continue
+                curr_avg_speed = float(radar['@avgSpeed'])
+                curr_dev_speed = float(radar['@stDevSpeed'])
+                total_num_reads = num_reads + curr_reads
+                avg_speed = (avg_speed * num_reads + curr_avg_speed * curr_reads) / total_num_reads
+                std_dev_speed = (std_dev_speed * num_reads + curr_dev_speed * curr_reads) / total_num_reads
+                num_reads = total_num_reads
+            else:
+                radar = sensor['radar']
+                avg_speed = float(radar['@avgSpeed'])
+                std_dev_speed = float(radar['@stDevSpeed'])
+
+        radar = {}
+        radar['average_speed'] = avg_speed
         radar['std_dev_speed'] = std_dev_speed
         radar['timestamp'] = sensor['radar'][-1]['@intervalEnd']
-        description['radar']=radar
-    return json.dumps(description, indent=2)
+        icone['radar'] = radar
+    return icone
+
 
 def parse_pcms_sensor(sensor):
-    pcms={}
+    pcms = {}
     pcms['type'] = sensor['@type']
     pcms['id'] = sensor['@id']
+    pcms['timestamp'] = sensor['@id']
     pcms['location'] = [sensor['@latitude'], sensor['@longitude']]
     if sensor.get('message', None):
         pcms['messages'] = []
-        print(sensor)
         for message in sensor['message']:
-            print(message)
-            pcms['messages'].append(message['@text'])
-            return pcms
-
-
-
-
-
-
-            
-        
-    
-        
-    
-
+            if not isinstance(message, str):
+                pcms['timestamp'] = message['@verified']
+                if message['@text'] not in pcms['messages']:
+                    pcms['messages'].append(message['@text'])
+            else:
+                message = sensor['message']
+                pcms['timestamp'] = message['@verified']
+                if message['@text'] not in pcms['messages']:
+                    pcms['messages'].append(message['@text'])
+    return pcms
 
 
 # Parse Icone Incident to WZDx
@@ -308,16 +320,16 @@ def parse_incident(incident):
     properties['ending_accuracy'] = "estimated"
 
     # road_name
-    road_name=incident['location'].get('street', '')
-    if not road_name :
+    road_name = incident['location'].get('street', '')
+    if not road_name:
         return None
     properties['road_name'] = incident['location'].get('street', '')
 
     # direction
-    direction=parse_direction_from_street_name(incident['location'].get('street', ''))
-    if not direction :
-        direction=get_road_direction(geometry['coordinates'])
-        if not direction :
+    direction = parse_direction_from_street_name(incident['location'].get('street', ''))
+    if not direction:
+        direction = get_road_direction(geometry['coordinates'])
+        if not direction:
             return None
 
     properties['direction'] = direction
@@ -459,10 +471,10 @@ def initialize_info():
     info['metadata'] = {}
     info['metadata']['wz_location_method'] = "channel-device-method"
     info['metadata']['lrs_type'] = "lrs_type"
-    #info['metadata']['location_verify_method'] = "location_verify_method"
+    # info['metadata']['location_verify_method'] = "location_verify_method"
     # info['metadata']['datafeed_frequency_update'] = 86400
     # info['metadata']['timestamp_metadata_update'] = "timestamp_metadata_update"
-    info['metadata']['contact_name'] = "Abinash Konersman" #we can consider to add a representive name from iCone
+    info['metadata']['contact_name'] = "Abinash Konersman"  # we can consider to add a representive name from iCone
     info['metadata']['contact_email'] = "abinash.konersman@state.co.us"
     info['metadata']['issuing_organization'] = "iCone"
 

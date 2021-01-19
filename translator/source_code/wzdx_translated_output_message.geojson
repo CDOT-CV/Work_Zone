@@ -1,19 +1,19 @@
 {
   "road_event_feed_info": {
     "feed_info_id": "104d7746-688c-44ed-b195-2ee948bf9dfa",
-    "update_date": "2021-01-19T11:24:24Z",
+    "update_date": "2021-01-19T12:07:11Z",
     "publisher": "CDOT",
     "contact_name": "Abinash Konersman",
     "contact_email": "abinash.konersman@state.co.us",
     "version": "3.0",
     "data_sources": [
       {
-        "data_source_id": "fd246c88-112e-4fa4-97a3-5ffc21a92e5a",
+        "data_source_id": "29816190-1c80-4882-aeba-0daf67300a97",
         "feed_info_id": "104d7746-688c-44ed-b195-2ee948bf9dfa",
         "organization_name": "iCone",
         "contact_name": "Abinash Konersman",
         "contact_email": "abinash.konersman@state.co.us",
-        "update_date": "2021-01-19T11:24:24Z",
+        "update_date": "2021-01-19T12:07:11Z",
         "location_method": "channel-device-method",
         "lrs_type": "lrs_type"
       }
@@ -24,9 +24,9 @@
     {
       "type": "Feature",
       "properties": {
-        "road_event_id": "28945c26-4986-4207-9a96-387fc61d2fce",
+        "road_event_id": "f6f71a52-65bf-4e17-9863-80a2b14cbd07",
         "event_type": "work-zone",
-        "data_source_id": "fd246c88-112e-4fa4-97a3-5ffc21a92e5a",
+        "data_source_id": "29816190-1c80-4882-aeba-0daf67300a97",
         "start_date": "2020-02-14T17:08:16Z",
         "end_date": "",
         "start_date_accuracy": "estimated",
@@ -37,8 +37,8 @@
         "direction": "northbound",
         "vehicle_impact": "all-lanes-open",
         "relationship": {
-          "relationship_id": "4cab2154-4d8a-45bc-aad2-4c6d5c1cdd45",
-          "road_event_id": "28945c26-4986-4207-9a96-387fc61d2fce"
+          "relationship_id": "aaad7bf1-563f-43a3-a177-8d9e8a89b2de",
+          "road_event_id": "f6f71a52-65bf-4e17-9863-80a2b14cbd07"
         },
         "lanes": [],
         "road_number": "",
@@ -50,7 +50,7 @@
         "reduced_speed_limit": 25,
         "workers_present": false,
         "restrictions": [],
-        "description": "19-1245: Roadwork between MP 40 and MP 48\nsensors: \n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 1 - MP 48.7\",\n  \"location\": [\n    \"37.2168370\",\n    \"-84.2013030\"\n  ]\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 2 - MP 46.1\",\n  \"location\": [\n    \"37.2093480\",\n    \"-84.1752970\"\n  ]\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 3 - MP 44.3\",\n  \"location\": [\n    \"37.1913000\",\n    \"-84.1458610\"\n  ]\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 4 - MP 42.5\",\n  \"location\": [\n    \"37.1686478\",\n    \"-84.1238971\"\n  ],\n  \"radar\": {\n    \"average_speed\": 65.49815384615385,\n    \"std_dev_speed\": 6.33703076923077,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 5 - MP 41.5\",\n  \"location\": [\n    \"37.1571990\",\n    \"-84.1128540\"\n  ],\n  \"radar\": {\n    \"average_speed\": 65.87227642276422,\n    \"std_dev_speed\": 6.862192682926829,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 6 - MP 40.2\",\n  \"location\": [\n    \"37.1392040\",\n    \"-84.1095680\"\n  ],\n  \"radar\": {\n    \"average_speed\": 60.96426666666666,\n    \"std_dev_speed\": 8.598848,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 7 - MP 39.4\",\n  \"location\": [\n    \"37.1278140\",\n    \"-84.1071670\"\n  ],\n  \"radar\": {\n    \"average_speed\": 67.86743119266055,\n    \"std_dev_speed\": 5.9454623853211,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 8 - MP 38.2\",\n  \"location\": [\n    \"37.1110090\",\n    \"-84.1019720\"\n  ]\n}",
+        "description": "19-1245: Roadwork between MP 40 and MP 48\n sensors: \n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 1 - MP 48.7\",\n  \"location\": [\n    \"37.2168370\",\n    \"-84.2013030\"\n  ]\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 2 - MP 46.1\",\n  \"location\": [\n    \"37.2093480\",\n    \"-84.1752970\"\n  ]\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 3 - MP 44.3\",\n  \"location\": [\n    \"37.1913000\",\n    \"-84.1458610\"\n  ]\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 4 - MP 42.5\",\n  \"location\": [\n    \"37.1686478\",\n    \"-84.1238971\"\n  ],\n  \"radar\": {\n    \"average_speed\": 65.49815384615385,\n    \"std_dev_speed\": 6.33703076923077,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 5 - MP 41.5\",\n  \"location\": [\n    \"37.1571990\",\n    \"-84.1128540\"\n  ],\n  \"radar\": {\n    \"average_speed\": 65.87227642276422,\n    \"std_dev_speed\": 6.862192682926829,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 6 - MP 40.2\",\n  \"location\": [\n    \"37.1392040\",\n    \"-84.1095680\"\n  ],\n  \"radar\": {\n    \"average_speed\": 60.96426666666666,\n    \"std_dev_speed\": 8.598848,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 7 - MP 39.4\",\n  \"location\": [\n    \"37.1278140\",\n    \"-84.1071670\"\n  ],\n  \"radar\": {\n    \"average_speed\": 67.86743119266055,\n    \"std_dev_speed\": 5.9454623853211,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 8 - MP 38.2\",\n  \"location\": [\n    \"37.1110090\",\n    \"-84.1019720\"\n  ]\n}\n displays: \n{\n  \"type\": \"PCMS\",\n  \"id\": \"I-75 NB - MP 42\",\n  \"timestamp\": \"2020-08-21T15:44:19Z\",\n  \"location\": [\n    \"37.1641000\",\n    \"-84.1176000\"\n  ],\n  \"messages\": [\n    \" ROADWORK / NEXT / 6 MILES // 22 MILES / OF WORK / MP 40-62\"\n  ]\n}\n{\n  \"type\": \"PCMS\",\n  \"id\": \"I-75 NB - MP 40\",\n  \"timestamp\": \"2020-08-21T15:48:17Z\",\n  \"location\": [\n    \"37.1341260\",\n    \"-84.1085480\"\n  ],\n  \"messages\": [\n    \" ROADWORK / 2 MILES / AHEAD // 22 MILES / OF WORK / MP 40-62\"\n  ]\n}\n{\n  \"type\": \"PCMS\",\n  \"id\": \"I-75 NB - MP 35\",\n  \"timestamp\": \"2020-08-21T15:48:16Z\",\n  \"location\": [\n    \"37.0646870\",\n    \"-84.0980500\"\n  ],\n  \"messages\": [\n    \" ROADWORK / 6 MILES / AHEAD // 22 MILES / OF WORK / MP 40-62\"\n  ]\n}",
         "creation_date": "2019-11-05T01:22:20Z",
         "update_date": "2020-08-21T15:52:02Z"
       },
@@ -83,9 +83,9 @@
     {
       "type": "Feature",
       "properties": {
-        "road_event_id": "118505f0-4422-484c-9e22-d7dc44356578",
+        "road_event_id": "d70b05f1-2f09-4f78-9504-f8cfe71db373",
         "event_type": "work-zone",
-        "data_source_id": "fd246c88-112e-4fa4-97a3-5ffc21a92e5a",
+        "data_source_id": "29816190-1c80-4882-aeba-0daf67300a97",
         "start_date": "2019-11-22T23:02:21Z",
         "end_date": "",
         "start_date_accuracy": "estimated",
@@ -96,8 +96,8 @@
         "direction": "southbound",
         "vehicle_impact": "all-lanes-open",
         "relationship": {
-          "relationship_id": "ee7e286c-4d2b-4c05-8d63-9768a38d5333",
-          "road_event_id": "118505f0-4422-484c-9e22-d7dc44356578"
+          "relationship_id": "85ed19e5-a614-4c94-836b-699c33333c3c",
+          "road_event_id": "d70b05f1-2f09-4f78-9504-f8cfe71db373"
         },
         "lanes": [],
         "road_number": "",
@@ -109,7 +109,7 @@
         "reduced_speed_limit": 25,
         "workers_present": false,
         "restrictions": [],
-        "description": "19-1245: Roadwork between MP 48 and MP 40\nsensors: \n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 1 - MP 40.8\",\n  \"location\": [\n    \"37.1478080\",\n    \"-84.1115880\"\n  ]\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 2 - MP 42.1\",\n  \"location\": [\n    \"37.1663450\",\n    \"-84.1214250\"\n  ],\n  \"radar\": {\n    \"average_speed\": 67.63169934640524,\n    \"std_dev_speed\": 6.437184967320261,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 3 - MP 44.0\",\n  \"location\": [\n    \"37.1858150\",\n    \"-84.1404820\"\n  ],\n  \"radar\": {\n    \"average_speed\": 65.4969090909091,\n    \"std_dev_speed\": 6.587079090909091,\n    \"timestamp\": \"2020-08-21T15:50:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 4 - MP 45.7\",\n  \"location\": [\n    \"37.2012230\",\n    \"-84.1573460\"\n  ],\n  \"radar\": {\n    \"average_speed\": 65.93992753623188,\n    \"std_dev_speed\": 7.485135507246376,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 5 - MP 47.5\",\n  \"location\": [\n    \"37.2066700\",\n    \"-84.1691290\"\n  ],\n  \"radar\": {\n    \"average_speed\": 64.82643312101911,\n    \"std_dev_speed\": 6.73422229299363,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 6 - MP 48.5\",\n  \"location\": [\n    \"37.2193130\",\n    \"-84.2046600\"\n  ]\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 7 - MP 49.5\",\n  \"location\": [\n    \"37.2299854\",\n    \"-84.2221508\"\n  ],\n  \"radar\": {\n    \"average_speed\": 63.029812500000006,\n    \"std_dev_speed\": 9.193254374999999,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 8 - MP 50.5\",\n  \"location\": [\n    \"37.2378880\",\n    \"-84.2359180\"\n  ]\n}",
+        "description": "19-1245: Roadwork between MP 48 and MP 40\n sensors: \n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 1 - MP 40.8\",\n  \"location\": [\n    \"37.1478080\",\n    \"-84.1115880\"\n  ]\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 2 - MP 42.1\",\n  \"location\": [\n    \"37.1663450\",\n    \"-84.1214250\"\n  ],\n  \"radar\": {\n    \"average_speed\": 67.63169934640524,\n    \"std_dev_speed\": 6.437184967320261,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 3 - MP 44.0\",\n  \"location\": [\n    \"37.1858150\",\n    \"-84.1404820\"\n  ],\n  \"radar\": {\n    \"average_speed\": 65.4969090909091,\n    \"std_dev_speed\": 6.587079090909091,\n    \"timestamp\": \"2020-08-21T15:50:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 4 - MP 45.7\",\n  \"location\": [\n    \"37.2012230\",\n    \"-84.1573460\"\n  ],\n  \"radar\": {\n    \"average_speed\": 65.93992753623188,\n    \"std_dev_speed\": 7.485135507246376,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 5 - MP 47.5\",\n  \"location\": [\n    \"37.2066700\",\n    \"-84.1691290\"\n  ],\n  \"radar\": {\n    \"average_speed\": 64.82643312101911,\n    \"std_dev_speed\": 6.73422229299363,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 6 - MP 48.5\",\n  \"location\": [\n    \"37.2193130\",\n    \"-84.2046600\"\n  ]\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 7 - MP 49.5\",\n  \"location\": [\n    \"37.2299854\",\n    \"-84.2221508\"\n  ],\n  \"radar\": {\n    \"average_speed\": 63.029812500000006,\n    \"std_dev_speed\": 9.193254374999999,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 8 - MP 50.5\",\n  \"location\": [\n    \"37.2378880\",\n    \"-84.2359180\"\n  ]\n}\n displays: \n{\n  \"type\": \"PCMS\",\n  \"id\": \"I-75 SB - MP 50\",\n  \"timestamp\": \"2020-08-21T15:52:27Z\",\n  \"location\": [\n    \"37.2339700\",\n    \"-84.2290798\"\n  ],\n  \"messages\": [\n    \" ROADWORK / 4 MILES / AHEAD // 19 MILES / OF WORK / MP 48-29\"\n  ]\n}\n{\n  \"type\": \"PCMS\",\n  \"id\": \"I-75 SB - MP 46\",\n  \"timestamp\": \"2020-08-21T15:48:32Z\",\n  \"location\": [\n    \"37.2059920\",\n    \"-84.1672690\"\n  ],\n  \"messages\": [\n    \" ROADWORK / NEXT / 5 MILES // 19 MILES / OF WORK / MP 48-29\"\n  ]\n}",
         "creation_date": "2019-11-05T01:32:44Z",
         "update_date": "2020-08-21T15:52:02Z"
       },
@@ -142,9 +142,9 @@
     {
       "type": "Feature",
       "properties": {
-        "road_event_id": "ca28d75a-a69b-4714-ab04-88c0470a2cd2",
+        "road_event_id": "51235592-399a-44ed-b65c-0ad19926c275",
         "event_type": "work-zone",
-        "data_source_id": "fd246c88-112e-4fa4-97a3-5ffc21a92e5a",
+        "data_source_id": "29816190-1c80-4882-aeba-0daf67300a97",
         "start_date": "2019-11-20T21:56:19Z",
         "end_date": "",
         "start_date_accuracy": "estimated",
@@ -155,8 +155,8 @@
         "direction": "northbound",
         "vehicle_impact": "all-lanes-open",
         "relationship": {
-          "relationship_id": "98619d39-74ed-439b-9891-391392398ede",
-          "road_event_id": "ca28d75a-a69b-4714-ab04-88c0470a2cd2"
+          "relationship_id": "be7b2508-49c8-4313-ab0a-5f78a23b8efb",
+          "road_event_id": "51235592-399a-44ed-b65c-0ad19926c275"
         },
         "lanes": [],
         "road_number": "",
@@ -168,7 +168,7 @@
         "reduced_speed_limit": 25,
         "workers_present": false,
         "restrictions": [],
-        "description": "19-1210: Roadwork between MP 28.9 and MP 33.3\nsensors: \n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 1 - MM 31.0\",\n  \"location\": [\n    \"37.0071310\",\n    \"-84.1037570\"\n  ]\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 2 - MM 29.0\",\n  \"location\": [\n    \"36.9792380\",\n    \"-84.1104390\"\n  ],\n  \"radar\": {\n    \"average_speed\": 67.2456779661017,\n    \"std_dev_speed\": 7.979719491525423,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 3 - MM 28.0\",\n  \"location\": [\n    \"36.9653120\",\n    \"-84.1131840\"\n  ]\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 4 - MM 27.5\",\n  \"location\": [\n    \"36.9573940\",\n    \"-84.1180350\"\n  ],\n  \"radar\": {\n    \"average_speed\": 68.53947826086956,\n    \"std_dev_speed\": 6.33416695652174,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 5 - MM 26.5\",\n  \"location\": [\n    \"36.9450500\",\n    \"-84.1229640\"\n  ],\n  \"radar\": {\n    \"average_speed\": 70.76125925925926,\n    \"std_dev_speed\": 6.4875503703703705,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 6 - MM 25.5\",\n  \"location\": [\n    \"36.9306000\",\n    \"-84.1263760\"\n  ]\n}",
+        "description": "19-1210: Roadwork between MP 28.9 and MP 33.3\n sensors: \n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 1 - MM 31.0\",\n  \"location\": [\n    \"37.0071310\",\n    \"-84.1037570\"\n  ]\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 2 - MM 29.0\",\n  \"location\": [\n    \"36.9792380\",\n    \"-84.1104390\"\n  ],\n  \"radar\": {\n    \"average_speed\": 67.2456779661017,\n    \"std_dev_speed\": 7.979719491525423,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 3 - MM 28.0\",\n  \"location\": [\n    \"36.9653120\",\n    \"-84.1131840\"\n  ]\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 4 - MM 27.5\",\n  \"location\": [\n    \"36.9573940\",\n    \"-84.1180350\"\n  ],\n  \"radar\": {\n    \"average_speed\": 68.53947826086956,\n    \"std_dev_speed\": 6.33416695652174,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 5 - MM 26.5\",\n  \"location\": [\n    \"36.9450500\",\n    \"-84.1229640\"\n  ],\n  \"radar\": {\n    \"average_speed\": 70.76125925925926,\n    \"std_dev_speed\": 6.4875503703703705,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 6 - MM 25.5\",\n  \"location\": [\n    \"36.9306000\",\n    \"-84.1263760\"\n  ]\n}\n displays: \n{\n  \"type\": \"PCMS\",\n  \"id\": \"Exit 29 - Cumberland Pkwy WB\",\n  \"timestamp\": \"2020-08-21T15:44:18Z\",\n  \"location\": [\n    \"36.9756000\",\n    \"-84.1041000\"\n  ],\n  \"messages\": [\n    \" ROADWORK / I-75 NB / MP 29-33\"\n  ]\n}\n{\n  \"type\": \"PCMS\",\n  \"id\": \"I-75 NB - MP 24\",\n  \"timestamp\": \"2020-08-21T15:52:28Z\",\n  \"location\": [\n    \"36.9044000\",\n    \"-84.1327000\"\n  ],\n  \"messages\": [\n    \" ROADWORK / 5 MILES / AHEAD // 33 MILES / OF WORK / MP 29-62\"\n  ]\n}\n{\n  \"type\": \"PCMS\",\n  \"id\": \"Exit 29 - KY-770 EB\",\n  \"timestamp\": \"2020-08-21T15:44:19Z\",\n  \"location\": [\n    \"36.9746200\",\n    \"-84.1307710\"\n  ],\n  \"messages\": [\n    \" ROADWORK / I-75 NB / MP 29-33\"\n  ]\n}\n{\n  \"type\": \"PCMS\",\n  \"id\": \"I-75 NB - MP 26\",\n  \"timestamp\": \"2020-08-21T15:52:28Z\",\n  \"location\": [\n    \"36.9388990\",\n    \"-84.1243900\"\n  ],\n  \"messages\": [\n    \" ROADWORK / NEXT / 4 MILES // 33 MILES / OF WORK / MP 29-62\"\n  ]\n}\n{\n  \"type\": \"PCMS\",\n  \"id\": \"Exit 25 - US25 WB\",\n  \"timestamp\": \"2020-08-21T15:46:24Z\",\n  \"location\": [\n    \"36.9182000\",\n    \"-84.1209000\"\n  ],\n  \"messages\": [\n    \" ROADWORK / I-75 NB / MP 29-33\"\n  ]\n}\n{\n  \"type\": \"PCMS\",\n  \"id\": \"Exit 25 - US25 EB\",\n  \"timestamp\": \"2020-08-21T15:44:22Z\",\n  \"location\": [\n    \"36.9115000\",\n    \"-84.1472000\"\n  ],\n  \"messages\": [\n    \" ROADWORK / I-75 NB / MP 29-33\"\n  ]\n}",
         "creation_date": "2019-11-19T22:43:10Z",
         "update_date": "2020-08-21T15:52:02Z"
       },
@@ -193,9 +193,9 @@
     {
       "type": "Feature",
       "properties": {
-        "road_event_id": "573bd405-f5af-43a0-946e-7112f4dd9e64",
+        "road_event_id": "3b3f8c59-a101-467b-a41b-c150d5a51283",
         "event_type": "work-zone",
-        "data_source_id": "fd246c88-112e-4fa4-97a3-5ffc21a92e5a",
+        "data_source_id": "29816190-1c80-4882-aeba-0daf67300a97",
         "start_date": "2019-11-20T21:56:22Z",
         "end_date": "",
         "start_date_accuracy": "estimated",
@@ -206,8 +206,8 @@
         "direction": "southbound",
         "vehicle_impact": "all-lanes-open",
         "relationship": {
-          "relationship_id": "9fe814d6-05de-481a-8e9d-3800dabe3f82",
-          "road_event_id": "573bd405-f5af-43a0-946e-7112f4dd9e64"
+          "relationship_id": "aa98600a-20e2-4fcd-adf3-5dc017cea7c9",
+          "road_event_id": "3b3f8c59-a101-467b-a41b-c150d5a51283"
         },
         "lanes": [],
         "road_number": "",
@@ -219,7 +219,7 @@
         "reduced_speed_limit": 25,
         "workers_present": false,
         "restrictions": [],
-        "description": "19-1210: Roadwork between MP 28.9 and MP 33.3\nsensors: \n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 1 - MP 31.0\",\n  \"location\": [\n    \"37.0040920\",\n    \"-84.1051700\"\n  ],\n  \"radar\": {\n    \"average_speed\": 61.728287292817676,\n    \"std_dev_speed\": 6.357035359116022,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 2 - MP 33.0\",\n  \"location\": [\n    \"37.0355150\",\n    \"-84.0985540\"\n  ],\n  \"radar\": {\n    \"average_speed\": 62.09850931677019,\n    \"std_dev_speed\": 8.43318198757764,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 3 - MP 34.0\",\n  \"location\": [\n    \"37.0498890\",\n    \"-84.0989330\"\n  ],\n  \"radar\": {\n    \"average_speed\": 66.62029197080291,\n    \"std_dev_speed\": 7.553287591240875,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 4 - MP 34.5\",\n  \"location\": [\n    \"37.0566312\",\n    \"-84.0983559\"\n  ]\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 5 - MP 35.5\",\n  \"location\": [\n    \"37.0703230\",\n    \"-84.0992670\"\n  ],\n  \"radar\": {\n    \"average_speed\": 70.14888059701492,\n    \"std_dev_speed\": 5.9461,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 6 - MP 36.5\",\n  \"location\": [\n    \"37.0846350\",\n    \"-84.0998270\"\n  ]\n}",
+        "description": "19-1210: Roadwork between MP 28.9 and MP 33.3\n sensors: \n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 1 - MP 31.0\",\n  \"location\": [\n    \"37.0040920\",\n    \"-84.1051700\"\n  ],\n  \"radar\": {\n    \"average_speed\": 61.728287292817676,\n    \"std_dev_speed\": 6.357035359116022,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 2 - MP 33.0\",\n  \"location\": [\n    \"37.0355150\",\n    \"-84.0985540\"\n  ],\n  \"radar\": {\n    \"average_speed\": 62.09850931677019,\n    \"std_dev_speed\": 8.43318198757764,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 3 - MP 34.0\",\n  \"location\": [\n    \"37.0498890\",\n    \"-84.0989330\"\n  ],\n  \"radar\": {\n    \"average_speed\": 66.62029197080291,\n    \"std_dev_speed\": 7.553287591240875,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 4 - MP 34.5\",\n  \"location\": [\n    \"37.0566312\",\n    \"-84.0983559\"\n  ]\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 5 - MP 35.5\",\n  \"location\": [\n    \"37.0703230\",\n    \"-84.0992670\"\n  ],\n  \"radar\": {\n    \"average_speed\": 70.14888059701492,\n    \"std_dev_speed\": 5.9461,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 6 - MP 36.5\",\n  \"location\": [\n    \"37.0846350\",\n    \"-84.0998270\"\n  ]\n}\n displays: \n{\n  \"type\": \"PCMS\",\n  \"id\": \"I-75 SB - MP 35\",\n  \"timestamp\": \"2020-08-21T15:44:23Z\",\n  \"location\": [\n    \"37.0636000\",\n    \"-84.0987000\"\n  ],\n  \"messages\": [\n    \" ROADWORK / NEXT / 6 MILES\"\n  ]\n}\n{\n  \"type\": \"PCMS\",\n  \"id\": \"I-75 SB - MP 39\",\n  \"timestamp\": \"2020-08-21T15:44:16Z\",\n  \"location\": [\n    \"37.1207000\",\n    \"-84.1063000\"\n  ],\n  \"messages\": [\n    \" ROADWORK / 5 MILES / AHEAD\"\n  ]\n}",
         "creation_date": "2019-11-19T22:50:54Z",
         "update_date": "2020-08-21T15:52:03Z"
       },
@@ -244,9 +244,9 @@
     {
       "type": "Feature",
       "properties": {
-        "road_event_id": "57480be1-a0d9-4ebd-b61e-ff8f873e9ed6",
+        "road_event_id": "3d9248de-5124-4f8a-a93c-d41da0badad5",
         "event_type": "work-zone",
-        "data_source_id": "fd246c88-112e-4fa4-97a3-5ffc21a92e5a",
+        "data_source_id": "29816190-1c80-4882-aeba-0daf67300a97",
         "start_date": "2019-11-26T16:30:16Z",
         "end_date": "",
         "start_date_accuracy": "estimated",
@@ -257,8 +257,8 @@
         "direction": "southbound",
         "vehicle_impact": "all-lanes-open",
         "relationship": {
-          "relationship_id": "dca413c3-3257-45d0-bd90-3f9c6e982fc9",
-          "road_event_id": "57480be1-a0d9-4ebd-b61e-ff8f873e9ed6"
+          "relationship_id": "0432469a-1210-4e38-9588-56de19ae38c3",
+          "road_event_id": "3d9248de-5124-4f8a-a93c-d41da0badad5"
         },
         "lanes": [],
         "road_number": "",
@@ -270,7 +270,7 @@
         "reduced_speed_limit": 25,
         "workers_present": false,
         "restrictions": [],
-        "description": "18-1001: Roadwork between MP 54 and MP 59\nsensors: \n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 1 - MP 58.0\",\n  \"location\": [\n    \"37.3287650\",\n    \"-84.3035850\"\n  ],\n  \"radar\": {\n    \"average_speed\": 55.18536842105263,\n    \"std_dev_speed\": 6.3858263157894735,\n    \"timestamp\": \"2020-08-21T15:50:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 1.5L- MP 58.5\",\n  \"location\": [\n    \"37.3384160\",\n    \"-84.3064810\"\n  ],\n  \"radar\": {\n    \"average_speed\": 65.94271523178807,\n    \"std_dev_speed\": 5.837864238410596,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 1.5R- MP 58.5\",\n  \"location\": [\n    \"37.3382560\",\n    \"-84.3065490\"\n  ],\n  \"radar\": {\n    \"average_speed\": 61.553006535947716,\n    \"std_dev_speed\": 5.726630065359477,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 2 - MP 59.0\",\n  \"location\": [\n    \"37.3444950\",\n    \"-84.3083370\"\n  ],\n  \"radar\": {\n    \"average_speed\": 51.5635,\n    \"std_dev_speed\": 8.309344999999999,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 3 - MP 61.0\",\n  \"location\": [\n    \"37.3682887\",\n    \"-84.3151565\"\n  ],\n  \"radar\": {\n    \"average_speed\": 67.6994,\n    \"std_dev_speed\": 7.550852666666667,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 4 - MP 61.5\",\n  \"location\": [\n    \"37.3732510\",\n    \"-84.3227240\"\n  ],\n  \"radar\": {\n    \"average_speed\": 64.01302752293579,\n    \"std_dev_speed\": 5.733901834862385,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 5 - MP 62.4\",\n  \"location\": [\n    \"37.3826830\",\n    \"-84.3348950\"\n  ]\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 6 - MP 63.5\",\n  \"location\": [\n    \"37.3984690\",\n    \"-84.3384120\"\n  ],\n  \"radar\": {\n    \"average_speed\": 72.50083333333332,\n    \"std_dev_speed\": 5.843319166666666,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 7 - MP 64.5\",\n  \"location\": [\n    \"37.4124700\",\n    \"-84.3409130\"\n  ]\n}",
+        "description": "18-1001: Roadwork between MP 54 and MP 59\n sensors: \n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 1 - MP 58.0\",\n  \"location\": [\n    \"37.3287650\",\n    \"-84.3035850\"\n  ],\n  \"radar\": {\n    \"average_speed\": 55.18536842105263,\n    \"std_dev_speed\": 6.3858263157894735,\n    \"timestamp\": \"2020-08-21T15:50:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 1.5L- MP 58.5\",\n  \"location\": [\n    \"37.3384160\",\n    \"-84.3064810\"\n  ],\n  \"radar\": {\n    \"average_speed\": 65.94271523178807,\n    \"std_dev_speed\": 5.837864238410596,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 1.5R- MP 58.5\",\n  \"location\": [\n    \"37.3382560\",\n    \"-84.3065490\"\n  ],\n  \"radar\": {\n    \"average_speed\": 61.553006535947716,\n    \"std_dev_speed\": 5.726630065359477,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 2 - MP 59.0\",\n  \"location\": [\n    \"37.3444950\",\n    \"-84.3083370\"\n  ],\n  \"radar\": {\n    \"average_speed\": 51.5635,\n    \"std_dev_speed\": 8.309344999999999,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 3 - MP 61.0\",\n  \"location\": [\n    \"37.3682887\",\n    \"-84.3151565\"\n  ],\n  \"radar\": {\n    \"average_speed\": 67.6994,\n    \"std_dev_speed\": 7.550852666666667,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 4 - MP 61.5\",\n  \"location\": [\n    \"37.3732510\",\n    \"-84.3227240\"\n  ],\n  \"radar\": {\n    \"average_speed\": 64.01302752293579,\n    \"std_dev_speed\": 5.733901834862385,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 5 - MP 62.4\",\n  \"location\": [\n    \"37.3826830\",\n    \"-84.3348950\"\n  ]\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 6 - MP 63.5\",\n  \"location\": [\n    \"37.3984690\",\n    \"-84.3384120\"\n  ],\n  \"radar\": {\n    \"average_speed\": 72.50083333333332,\n    \"std_dev_speed\": 5.843319166666666,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 7 - MP 64.5\",\n  \"location\": [\n    \"37.4124700\",\n    \"-84.3409130\"\n  ]\n}\n displays: \n{\n  \"type\": \"PCMS\",\n  \"id\": \"Exit 59 - US25 EB\",\n  \"timestamp\": \"2020-08-21T15:44:24Z\",\n  \"location\": [\n    \"37.3477000\",\n    \"-84.3201000\"\n  ],\n  \"messages\": [\n    \" ROADWORK / I-75 SB / MP 62-54\"\n  ]\n}\n{\n  \"type\": \"PCMS\",\n  \"id\": \"Exit 59 - US25 WB\",\n  \"timestamp\": \"2020-08-21T15:48:35Z\",\n  \"location\": [\n    \"37.3407000\",\n    \"-84.3026000\"\n  ],\n  \"messages\": [\n    \" ROADWORK / I-75 SB / MP 62-54\"\n  ]\n}\n{\n  \"type\": \"PCMS\",\n  \"id\": \"I-75 SB - MP 63\",\n  \"timestamp\": \"2020-08-21T15:48:34Z\",\n  \"location\": [\n    \"37.4228650\",\n    \"-84.3491160\"\n  ],\n  \"messages\": [\n    \" ROADWORK / 7 MILES / AHEAD // 33 MILES / OF WORK / MP 62-29\"\n  ]\n}",
         "creation_date": "2019-11-19T23:12:39Z",
         "update_date": "2020-08-21T15:52:02Z"
       },
@@ -295,9 +295,9 @@
     {
       "type": "Feature",
       "properties": {
-        "road_event_id": "0e64751c-6824-4233-b248-019c2f233233",
+        "road_event_id": "2e8b73af-8c83-477b-87d0-54791b67072a",
         "event_type": "work-zone",
-        "data_source_id": "fd246c88-112e-4fa4-97a3-5ffc21a92e5a",
+        "data_source_id": "29816190-1c80-4882-aeba-0daf67300a97",
         "start_date": "2020-02-14T17:50:18Z",
         "end_date": "",
         "start_date_accuracy": "estimated",
@@ -308,8 +308,8 @@
         "direction": "northbound",
         "vehicle_impact": "all-lanes-open",
         "relationship": {
-          "relationship_id": "496dab88-7059-4eb2-a716-18c0ce02ea0a",
-          "road_event_id": "0e64751c-6824-4233-b248-019c2f233233"
+          "relationship_id": "626ebc76-3936-4310-95c2-6318f9310755",
+          "road_event_id": "2e8b73af-8c83-477b-87d0-54791b67072a"
         },
         "lanes": [],
         "road_number": "",
@@ -321,7 +321,7 @@
         "reduced_speed_limit": 25,
         "workers_present": false,
         "restrictions": [],
-        "description": "18-1001: Roadwork between MP 54 and MP 59\nsensors: \n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 1 - MM 60.0\",\n  \"location\": [\n    \"37.3579470\",\n    \"-84.3073160\"\n  ],\n  \"radar\": {\n    \"average_speed\": 66.87475,\n    \"std_dev_speed\": 6.484731875,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 3 - MM 56.0\",\n  \"location\": [\n    \"37.3055510\",\n    \"-84.2857540\"\n  ],\n  \"radar\": {\n    \"average_speed\": 63.87971014492755,\n    \"std_dev_speed\": 8.07450579710145,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 4 - MM 54.0\",\n  \"location\": [\n    \"37.2855970\",\n    \"-84.2632180\"\n  ]\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 5 - MM 53.5\",\n  \"location\": [\n    \"37.2782090\",\n    \"-84.2553340\"\n  ],\n  \"radar\": {\n    \"average_speed\": 62.87830188679246,\n    \"std_dev_speed\": 10.57076320754717,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 6 - MM 52.5\",\n  \"location\": [\n    \"37.2649080\",\n    \"-84.2502440\"\n  ]\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 7 - MM 51.5\",\n  \"location\": [\n    \"37.2504080\",\n    \"-84.2470300\"\n  ],\n  \"radar\": {\n    \"average_speed\": 69.13433333333334,\n    \"std_dev_speed\": 5.885162666666666,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}",
+        "description": "18-1001: Roadwork between MP 54 and MP 59\n sensors: \n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 1 - MM 60.0\",\n  \"location\": [\n    \"37.3579470\",\n    \"-84.3073160\"\n  ],\n  \"radar\": {\n    \"average_speed\": 66.87475,\n    \"std_dev_speed\": 6.484731875,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 3 - MM 56.0\",\n  \"location\": [\n    \"37.3055510\",\n    \"-84.2857540\"\n  ],\n  \"radar\": {\n    \"average_speed\": 63.87971014492755,\n    \"std_dev_speed\": 8.07450579710145,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 4 - MM 54.0\",\n  \"location\": [\n    \"37.2855970\",\n    \"-84.2632180\"\n  ]\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 5 - MM 53.5\",\n  \"location\": [\n    \"37.2782090\",\n    \"-84.2553340\"\n  ],\n  \"radar\": {\n    \"average_speed\": 62.87830188679246,\n    \"std_dev_speed\": 10.57076320754717,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 6 - MM 52.5\",\n  \"location\": [\n    \"37.2649080\",\n    \"-84.2502440\"\n  ]\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"NB 7 - MM 51.5\",\n  \"location\": [\n    \"37.2504080\",\n    \"-84.2470300\"\n  ],\n  \"radar\": {\n    \"average_speed\": 69.13433333333334,\n    \"std_dev_speed\": 5.885162666666666,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n displays: \n{\n  \"type\": \"PCMS\",\n  \"id\": \"I-75 NB - MP 48.3\",\n  \"timestamp\": \"2020-08-21T15:48:25Z\",\n  \"location\": [\n    \"37.2182000\",\n    \"-84.2027000\"\n  ],\n  \"messages\": [\n    \" ROADWORK / 5 MILES / AHEAD\"\n  ]\n}\n{\n  \"type\": \"PCMS\",\n  \"id\": \"I-75 NB - MP 52.5\",\n  \"timestamp\": \"2020-08-21T15:48:25Z\",\n  \"location\": [\n    \"37.2590000\",\n    \"-84.2491000\"\n  ],\n  \"messages\": [\n    \" ROADWORK / 1 MILE / AHEAD\"\n  ]\n}",
         "creation_date": "2019-11-20T04:20:30Z",
         "update_date": "2020-08-21T15:52:03Z"
       },
@@ -354,9 +354,9 @@
     {
       "type": "Feature",
       "properties": {
-        "road_event_id": "e263816f-9094-4480-a519-c8370d34b721",
+        "road_event_id": "c5d34372-0dce-4fe9-801f-fc3bb02009be",
         "event_type": "work-zone",
-        "data_source_id": "fd246c88-112e-4fa4-97a3-5ffc21a92e5a",
+        "data_source_id": "29816190-1c80-4882-aeba-0daf67300a97",
         "start_date": "2020-03-09T17:10:18Z",
         "end_date": "",
         "start_date_accuracy": "estimated",
@@ -367,8 +367,8 @@
         "direction": "northbound",
         "vehicle_impact": "all-lanes-open",
         "relationship": {
-          "relationship_id": "ea4bc3f3-c997-461d-949d-4242a9af6500",
-          "road_event_id": "e263816f-9094-4480-a519-c8370d34b721"
+          "relationship_id": "02d4c4fa-f4d4-4db7-9448-e89a2a1d9271",
+          "road_event_id": "c5d34372-0dce-4fe9-801f-fc3bb02009be"
         },
         "lanes": [],
         "road_number": "",
@@ -380,7 +380,7 @@
         "reduced_speed_limit": 25,
         "workers_present": false,
         "restrictions": [],
-        "description": "Roadwork I-69 N\nsensors: \n{\n  \"type\": \"iCone\",\n  \"id\": \"1\",\n  \"location\": [\n    \"39.3873280\",\n    \"-86.4660290\"\n  ],\n  \"radar\": {\n    \"average_speed\": 62.98245614035088,\n    \"std_dev_speed\": 7.574005263157895,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"2\",\n  \"location\": [\n    \"39.3813540\",\n    \"-86.4708930\"\n  ],\n  \"radar\": {\n    \"average_speed\": 66.10884615384614,\n    \"std_dev_speed\": 6.1849673076923075,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"3\",\n  \"location\": [\n    \"39.3756860\",\n    \"-86.4768030\"\n  ],\n  \"radar\": {\n    \"average_speed\": 65.91575539568346,\n    \"std_dev_speed\": 9.78579928057554,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"4\",\n  \"location\": [\n    \"39.3701770\",\n    \"-86.4825760\"\n  ],\n  \"radar\": {\n    \"average_speed\": 66.84595238095237,\n    \"std_dev_speed\": 7.841052380952381,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"5\",\n  \"location\": [\n    \"39.3641180\",\n    \"-86.4875500\"\n  ],\n  \"radar\": {\n    \"average_speed\": 70.36572916666667,\n    \"std_dev_speed\": 6.385383333333333,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"6\",\n  \"location\": [\n    \"39.3577930\",\n    \"-86.4919440\"\n  ],\n  \"radar\": {\n    \"average_speed\": 69.16666666666667,\n    \"std_dev_speed\": 2.151666666666667,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"7\",\n  \"location\": [\n    \"39.3514840\",\n    \"-86.4966760\"\n  ],\n  \"radar\": {\n    \"average_speed\": 63.859632352941176,\n    \"std_dev_speed\": 8.734847794117647,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"8\",\n  \"location\": [\n    \"39.3462690\",\n    \"-86.5028140\"\n  ],\n  \"radar\": {\n    \"average_speed\": 56.78214285714286,\n    \"std_dev_speed\": 3.3003,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}",
+        "description": "Roadwork I-69 N\n sensors: \n{\n  \"type\": \"iCone\",\n  \"id\": \"1\",\n  \"location\": [\n    \"39.3873280\",\n    \"-86.4660290\"\n  ],\n  \"radar\": {\n    \"average_speed\": 62.98245614035088,\n    \"std_dev_speed\": 7.574005263157895,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"2\",\n  \"location\": [\n    \"39.3813540\",\n    \"-86.4708930\"\n  ],\n  \"radar\": {\n    \"average_speed\": 66.10884615384614,\n    \"std_dev_speed\": 6.1849673076923075,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"3\",\n  \"location\": [\n    \"39.3756860\",\n    \"-86.4768030\"\n  ],\n  \"radar\": {\n    \"average_speed\": 65.91575539568346,\n    \"std_dev_speed\": 9.78579928057554,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"4\",\n  \"location\": [\n    \"39.3701770\",\n    \"-86.4825760\"\n  ],\n  \"radar\": {\n    \"average_speed\": 66.84595238095237,\n    \"std_dev_speed\": 7.841052380952381,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"5\",\n  \"location\": [\n    \"39.3641180\",\n    \"-86.4875500\"\n  ],\n  \"radar\": {\n    \"average_speed\": 70.36572916666667,\n    \"std_dev_speed\": 6.385383333333333,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"6\",\n  \"location\": [\n    \"39.3577930\",\n    \"-86.4919440\"\n  ],\n  \"radar\": {\n    \"average_speed\": 69.16666666666667,\n    \"std_dev_speed\": 2.151666666666667,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"7\",\n  \"location\": [\n    \"39.3514840\",\n    \"-86.4966760\"\n  ],\n  \"radar\": {\n    \"average_speed\": 63.859632352941176,\n    \"std_dev_speed\": 8.734847794117647,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"8\",\n  \"location\": [\n    \"39.3462690\",\n    \"-86.5028140\"\n  ],\n  \"radar\": {\n    \"average_speed\": 56.78214285714286,\n    \"std_dev_speed\": 3.3003,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n displays: \n{\n  \"type\": \"PCMS\",\n  \"id\": \"PCMS 1\",\n  \"timestamp\": \"2020-08-21T15:50:28Z\",\n  \"location\": [\n    \"39.3641223\",\n    \"-86.4875641\"\n  ],\n  \"messages\": [\n    \" ROAD / WORK / 2 MILES\"\n  ]\n}\n{\n  \"type\": \"PCMS\",\n  \"id\": \"PCMS 2\",\n  \"timestamp\": \"2020-08-21T15:46:59Z\",\n  \"location\": [\n    \"39.3401356\",\n    \"-86.5078477\"\n  ],\n  \"messages\": [\n    \" SLOW / TRAFFIC / AHEAD\",\n    \" ROAD / WORK / 4 MILES\"\n  ]\n}",
         "creation_date": "2020-03-09T16:18:10Z",
         "update_date": "2020-08-21T15:52:03Z"
       },
@@ -401,9 +401,9 @@
     {
       "type": "Feature",
       "properties": {
-        "road_event_id": "4f9d5859-a819-4a6f-b648-4afeffef973a",
+        "road_event_id": "86187277-480d-4439-af05-33f0b3438cda",
         "event_type": "work-zone",
-        "data_source_id": "fd246c88-112e-4fa4-97a3-5ffc21a92e5a",
+        "data_source_id": "29816190-1c80-4882-aeba-0daf67300a97",
         "start_date": "2020-04-13T17:16:23Z",
         "end_date": "",
         "start_date_accuracy": "estimated",
@@ -414,8 +414,8 @@
         "direction": "southbound",
         "vehicle_impact": "all-lanes-open",
         "relationship": {
-          "relationship_id": "16215be1-b6f0-46b8-ada9-c1f6dca5ffac",
-          "road_event_id": "4f9d5859-a819-4a6f-b648-4afeffef973a"
+          "relationship_id": "a2ca9a88-bc81-46f5-82e5-04335149d339",
+          "road_event_id": "86187277-480d-4439-af05-33f0b3438cda"
         },
         "lanes": [],
         "road_number": "",
@@ -427,7 +427,7 @@
         "reduced_speed_limit": 25,
         "workers_present": false,
         "restrictions": [],
-        "description": "Roadwork I-69 N\nsensors: \n{\n  \"type\": \"iCone\",\n  \"id\": \"1\",\n  \"location\": [\n    \"39.4043170\",\n    \"-86.4427720\"\n  ],\n  \"radar\": {\n    \"average_speed\": 48.971666666666664,\n    \"std_dev_speed\": 7.322900980392157,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"2\",\n  \"location\": [\n    \"39.4061770\",\n    \"-86.4338860\"\n  ],\n  \"radar\": {\n    \"average_speed\": 46.33611650485437,\n    \"std_dev_speed\": 8.585761165048545,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"3\",\n  \"location\": [\n    \"39.4081180\",\n    \"-86.4248780\"\n  ],\n  \"radar\": {\n    \"average_speed\": 43.514050632911385,\n    \"std_dev_speed\": 8.077046835443038,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"4\",\n  \"location\": [\n    \"39.4127760\",\n    \"-86.4176810\"\n  ],\n  \"radar\": {\n    \"average_speed\": 56.14224299065421,\n    \"std_dev_speed\": 7.079295327102804,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"5\",\n  \"location\": [\n    \"39.4179950\",\n    \"-86.4112200\"\n  ],\n  \"radar\": {\n    \"average_speed\": 50.34634146341464,\n    \"std_dev_speed\": 8.4644162601626,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"6\",\n  \"location\": [\n    \"39.4232560\",\n    \"-86.4047460\"\n  ],\n  \"radar\": {\n    \"average_speed\": 46.611129032258056,\n    \"std_dev_speed\": 6.635222580645162,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"7\",\n  \"location\": [\n    \"39.4283660\",\n    \"-86.3983970\"\n  ],\n  \"radar\": {\n    \"average_speed\": 51.00379562043796,\n    \"std_dev_speed\": 5.991222627737225,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"8\",\n  \"location\": [\n    \"39.4339000\",\n    \"-86.3916350\"\n  ],\n  \"radar\": {\n    \"average_speed\": 56.474487179487184,\n    \"std_dev_speed\": 7.897603205128205,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}",
+        "description": "Roadwork I-69 N\n sensors: \n{\n  \"type\": \"iCone\",\n  \"id\": \"1\",\n  \"location\": [\n    \"39.4043170\",\n    \"-86.4427720\"\n  ],\n  \"radar\": {\n    \"average_speed\": 48.971666666666664,\n    \"std_dev_speed\": 7.322900980392157,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"2\",\n  \"location\": [\n    \"39.4061770\",\n    \"-86.4338860\"\n  ],\n  \"radar\": {\n    \"average_speed\": 46.33611650485437,\n    \"std_dev_speed\": 8.585761165048545,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"3\",\n  \"location\": [\n    \"39.4081180\",\n    \"-86.4248780\"\n  ],\n  \"radar\": {\n    \"average_speed\": 43.514050632911385,\n    \"std_dev_speed\": 8.077046835443038,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"4\",\n  \"location\": [\n    \"39.4127760\",\n    \"-86.4176810\"\n  ],\n  \"radar\": {\n    \"average_speed\": 56.14224299065421,\n    \"std_dev_speed\": 7.079295327102804,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"5\",\n  \"location\": [\n    \"39.4179950\",\n    \"-86.4112200\"\n  ],\n  \"radar\": {\n    \"average_speed\": 50.34634146341464,\n    \"std_dev_speed\": 8.4644162601626,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"6\",\n  \"location\": [\n    \"39.4232560\",\n    \"-86.4047460\"\n  ],\n  \"radar\": {\n    \"average_speed\": 46.611129032258056,\n    \"std_dev_speed\": 6.635222580645162,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"7\",\n  \"location\": [\n    \"39.4283660\",\n    \"-86.3983970\"\n  ],\n  \"radar\": {\n    \"average_speed\": 51.00379562043796,\n    \"std_dev_speed\": 5.991222627737225,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"8\",\n  \"location\": [\n    \"39.4339000\",\n    \"-86.3916350\"\n  ],\n  \"radar\": {\n    \"average_speed\": 56.474487179487184,\n    \"std_dev_speed\": 7.897603205128205,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n displays: \n{\n  \"type\": \"PCMS\",\n  \"id\": \"PCMS 1\",\n  \"timestamp\": \"2020-08-21T15:48:37Z\",\n  \"location\": [\n    \"39.4181034\",\n    \"-86.4110796\"\n  ],\n  \"messages\": [\n    \" SLOW / TRAFFIC / AHEAD\"\n  ]\n}\n{\n  \"type\": \"PCMS\",\n  \"id\": \"PCMS 2\",\n  \"timestamp\": \"2020-08-21T15:48:33Z\",\n  \"location\": [\n    \"39.4400385\",\n    \"-86.3876039\"\n  ],\n  \"messages\": [\n    \" SLOW / TRAFFIC / 2 MILES\"\n  ]\n}",
         "creation_date": "2020-04-13T17:12:18Z",
         "update_date": "2020-08-21T15:52:04Z"
       },
@@ -448,9 +448,9 @@
     {
       "type": "Feature",
       "properties": {
-        "road_event_id": "f8e19256-6fb0-4e01-8586-8c41b6958d31",
+        "road_event_id": "d77b3a32-6e29-4fbf-85db-9079f2cd5fb7",
         "event_type": "work-zone",
-        "data_source_id": "fd246c88-112e-4fa4-97a3-5ffc21a92e5a",
+        "data_source_id": "29816190-1c80-4882-aeba-0daf67300a97",
         "start_date": "2020-06-12T19:36:31Z",
         "end_date": "",
         "start_date_accuracy": "estimated",
@@ -461,8 +461,8 @@
         "direction": "eastbound",
         "vehicle_impact": "all-lanes-open",
         "relationship": {
-          "relationship_id": "6da2554d-c703-448f-a7c6-83bb55638737",
-          "road_event_id": "f8e19256-6fb0-4e01-8586-8c41b6958d31"
+          "relationship_id": "d02d7fc3-c7f6-4e1b-aa35-7f54edb0074a",
+          "road_event_id": "d77b3a32-6e29-4fbf-85db-9079f2cd5fb7"
         },
         "lanes": [],
         "road_number": "",
@@ -474,7 +474,7 @@
         "reduced_speed_limit": 25,
         "workers_present": false,
         "restrictions": [],
-        "description": "20-0006: Roadwork I-480 E\nsensors: \n{\n  \"type\": \"iCone\",\n  \"id\": \"#1\",\n  \"location\": [\n    \"41.4154540\",\n    \"-81.8924030\"\n  ],\n  \"radar\": {\n    \"average_speed\": 63.91586206896551,\n    \"std_dev_speed\": 5.249863448275863,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"#2\",\n  \"location\": [\n    \"41.4042230\",\n    \"-81.9215770\"\n  ],\n  \"radar\": {\n    \"average_speed\": 0,\n    \"std_dev_speed\": 0,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"#3\",\n  \"location\": [\n    \"41.3956920\",\n    \"-81.9455400\"\n  ],\n  \"radar\": {\n    \"average_speed\": 63.32446601941748,\n    \"std_dev_speed\": 5.089465048543689,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"#4\",\n  \"location\": [\n    \"41.3883260\",\n    \"-81.9707500\"\n  ],\n  \"radar\": {\n    \"average_speed\": 63.521549295774655,\n    \"std_dev_speed\": 7.321549295774648,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}",
+        "description": "20-0006: Roadwork I-480 E\n sensors: \n{\n  \"type\": \"iCone\",\n  \"id\": \"#1\",\n  \"location\": [\n    \"41.4154540\",\n    \"-81.8924030\"\n  ],\n  \"radar\": {\n    \"average_speed\": 63.91586206896551,\n    \"std_dev_speed\": 5.249863448275863,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"#2\",\n  \"location\": [\n    \"41.4042230\",\n    \"-81.9215770\"\n  ],\n  \"radar\": {\n    \"average_speed\": 0,\n    \"std_dev_speed\": 0,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"#3\",\n  \"location\": [\n    \"41.3956920\",\n    \"-81.9455400\"\n  ],\n  \"radar\": {\n    \"average_speed\": 63.32446601941748,\n    \"std_dev_speed\": 5.089465048543689,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"#4\",\n  \"location\": [\n    \"41.3883260\",\n    \"-81.9707500\"\n  ],\n  \"radar\": {\n    \"average_speed\": 63.521549295774655,\n    \"std_dev_speed\": 7.321549295774648,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n displays: \n{\n  \"type\": \"PCMS\",\n  \"id\": \"PCMS 1\",\n  \"timestamp\": \"2020-08-21T15:50:15Z\",\n  \"location\": [\n    \"41.3861690\",\n    \"-81.9805130\"\n  ],\n  \"messages\": [\n    \" ROAD / WORK / AHEAD // NIGHTLY / LANE / CLOSURES\"\n  ]\n}\n{\n  \"type\": \"PCMS\",\n  \"id\": \"PCMS 1\",\n  \"timestamp\": \"2020-08-21T15:50:15Z\",\n  \"location\": [\n    \"41.3861690\",\n    \"-81.9805130\"\n  ],\n  \"messages\": [\n    \" ROAD / WORK / AHEAD // NIGHTLY / LANE / CLOSURES\"\n  ]\n}\n{\n  \"type\": \"PCMS\",\n  \"id\": \"PCMS 1\",\n  \"timestamp\": \"2020-08-21T15:50:15Z\",\n  \"location\": [\n    \"41.3861690\",\n    \"-81.9805130\"\n  ],\n  \"messages\": [\n    \" ROAD / WORK / AHEAD // NIGHTLY / LANE / CLOSURES\"\n  ]\n}\n{\n  \"type\": \"PCMS\",\n  \"id\": \"PCMS 1\",\n  \"timestamp\": \"2020-08-21T15:50:15Z\",\n  \"location\": [\n    \"41.3861690\",\n    \"-81.9805130\"\n  ],\n  \"messages\": [\n    \" ROAD / WORK / AHEAD // NIGHTLY / LANE / CLOSURES\"\n  ]\n}\n{\n  \"type\": \"PCMS\",\n  \"id\": \"PCMS 1\",\n  \"timestamp\": \"2020-08-21T15:50:15Z\",\n  \"location\": [\n    \"41.3861690\",\n    \"-81.9805130\"\n  ],\n  \"messages\": [\n    \" ROAD / WORK / AHEAD // NIGHTLY / LANE / CLOSURES\"\n  ]\n}",
         "creation_date": "2020-06-12T19:03:27Z",
         "update_date": "2020-08-21T15:52:04Z"
       },
@@ -503,9 +503,9 @@
     {
       "type": "Feature",
       "properties": {
-        "road_event_id": "21fcde1a-2291-4299-996b-0b5eee3e9074",
+        "road_event_id": "e19b3e9d-158f-4339-8732-7e0e7c3e8c8c",
         "event_type": "work-zone",
-        "data_source_id": "fd246c88-112e-4fa4-97a3-5ffc21a92e5a",
+        "data_source_id": "29816190-1c80-4882-aeba-0daf67300a97",
         "start_date": "2020-06-12T19:36:33Z",
         "end_date": "",
         "start_date_accuracy": "estimated",
@@ -516,8 +516,8 @@
         "direction": "westbound",
         "vehicle_impact": "all-lanes-open",
         "relationship": {
-          "relationship_id": "50255fef-2f86-4a1f-8a03-8b90e7e56242",
-          "road_event_id": "21fcde1a-2291-4299-996b-0b5eee3e9074"
+          "relationship_id": "f30c7fed-9812-4828-9fa5-099e5e7bd964",
+          "road_event_id": "e19b3e9d-158f-4339-8732-7e0e7c3e8c8c"
         },
         "lanes": [],
         "road_number": "",
@@ -529,7 +529,7 @@
         "reduced_speed_limit": 25,
         "workers_present": false,
         "restrictions": [],
-        "description": "20-0006: Roadwork I-480 W\nsensors: \n{\n  \"type\": \"iCone\",\n  \"id\": \"#1\",\n  \"location\": [\n    \"41.3953620\",\n    \"-81.9474090\"\n  ],\n  \"radar\": {\n    \"average_speed\": 60.06224999999999,\n    \"std_dev_speed\": 4.24192375,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"#2\",\n  \"location\": [\n    \"41.4045600\",\n    \"-81.9217400\"\n  ],\n  \"radar\": {\n    \"average_speed\": 57.5,\n    \"std_dev_speed\": 2.151666666666667,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"#3\",\n  \"location\": [\n    \"41.4141050\",\n    \"-81.8986860\"\n  ],\n  \"radar\": {\n    \"average_speed\": 59.51434108527132,\n    \"std_dev_speed\": 6.711744186046512,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"#4\",\n  \"location\": [\n    \"41.4249920\",\n    \"-81.8621120\"\n  ],\n  \"radar\": {\n    \"average_speed\": 63.44017045454545,\n    \"std_dev_speed\": 5.45975625,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}",
+        "description": "20-0006: Roadwork I-480 W\n sensors: \n{\n  \"type\": \"iCone\",\n  \"id\": \"#1\",\n  \"location\": [\n    \"41.3953620\",\n    \"-81.9474090\"\n  ],\n  \"radar\": {\n    \"average_speed\": 60.06224999999999,\n    \"std_dev_speed\": 4.24192375,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"#2\",\n  \"location\": [\n    \"41.4045600\",\n    \"-81.9217400\"\n  ],\n  \"radar\": {\n    \"average_speed\": 57.5,\n    \"std_dev_speed\": 2.151666666666667,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"#3\",\n  \"location\": [\n    \"41.4141050\",\n    \"-81.8986860\"\n  ],\n  \"radar\": {\n    \"average_speed\": 59.51434108527132,\n    \"std_dev_speed\": 6.711744186046512,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"#4\",\n  \"location\": [\n    \"41.4249920\",\n    \"-81.8621120\"\n  ],\n  \"radar\": {\n    \"average_speed\": 63.44017045454545,\n    \"std_dev_speed\": 5.45975625,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n displays: \n{\n  \"type\": \"PCMS\",\n  \"id\": \"PCMS 1\",\n  \"timestamp\": \"2020-08-21T15:50:15Z\",\n  \"location\": [\n    \"41.4203770\",\n    \"-81.8314710\"\n  ],\n  \"messages\": [\n    \" ROAD / WORK / AHEAD // NIGHTLY / LANE / CLOSURES\"\n  ]\n}\n{\n  \"type\": \"PCMS\",\n  \"id\": \"PCMS 1\",\n  \"timestamp\": \"2020-08-21T15:50:15Z\",\n  \"location\": [\n    \"41.4203770\",\n    \"-81.8314710\"\n  ],\n  \"messages\": [\n    \" ROAD / WORK / AHEAD // NIGHTLY / LANE / CLOSURES\"\n  ]\n}\n{\n  \"type\": \"PCMS\",\n  \"id\": \"PCMS 1\",\n  \"timestamp\": \"2020-08-21T15:50:15Z\",\n  \"location\": [\n    \"41.4203770\",\n    \"-81.8314710\"\n  ],\n  \"messages\": [\n    \" ROAD / WORK / AHEAD // NIGHTLY / LANE / CLOSURES\"\n  ]\n}\n{\n  \"type\": \"PCMS\",\n  \"id\": \"PCMS 1\",\n  \"timestamp\": \"2020-08-21T15:50:15Z\",\n  \"location\": [\n    \"41.4203770\",\n    \"-81.8314710\"\n  ],\n  \"messages\": [\n    \" ROAD / WORK / AHEAD // NIGHTLY / LANE / CLOSURES\"\n  ]\n}\n{\n  \"type\": \"PCMS\",\n  \"id\": \"PCMS 1\",\n  \"timestamp\": \"2020-08-21T15:50:15Z\",\n  \"location\": [\n    \"41.4203770\",\n    \"-81.8314710\"\n  ],\n  \"messages\": [\n    \" ROAD / WORK / AHEAD // NIGHTLY / LANE / CLOSURES\"\n  ]\n}",
         "creation_date": "2020-06-12T19:05:34Z",
         "update_date": "2020-08-21T15:52:04Z"
       },
