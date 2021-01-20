@@ -20,11 +20,18 @@ Requires:
 
 - Python 3.6 (or higher)
   - xmltodict
+  - jsonschema
+  - shapely
    
   
 ## Environment Setup
 
 This code requires Python 3.6 or a higher version. If you haven’t already, download Python and Pip. Next, you’ll need to install several packages that we’ll use throughout this tutorial. You can do this by opening terminal or command prompt on your operating system:
+
+```
+pip install -r requirements.txt
+```
+
 
 
 ### Execution
@@ -34,7 +41,32 @@ This code requires Python 3.6 or a higher version. If you haven’t already, dow
 ```
 python icone_translator.py -i inputfile.xml -o outputfile.geojson
 ```
+Example usage:
+```
+python icone_translator.py -i '../sample files/icone data/incidents_extended.xml' 
+```
 
+### Unit Testing
+
+
+#### Run the unit test for translator script (from root directory)
+
+```
+$ python -m pytest 'test/' -v
+```
+Ensure you have your environment configured correctly (as described above).
+
+
+### Google Cloud Function
+
+A system was created in google cloud platform to automatically translate iCone data to WZDx message.This system consits of two buckets and a cloud function.
+When a file is uploaded to the first bucket, the cloud function automatically downloads the file, translates to a WZDx message and uploads it to the second bucket.
+
+![alt text](translator/GCP_cloud_function/iCone_Translator%20block%20diagram%20.png)
+
+### Documentation
+
+documentation for iCone to WZDx translator is located here: [docs](translator/docs)
 
 ### Guidelines
 
