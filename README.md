@@ -48,27 +48,13 @@ python icone_translator.py -i '../sample files/icone data/incidents_extended.xml
 
 ### Unit Testing
 
-#### Step 1: Install coverage.py:
 
-```
-$ pip install coverage
-```
+#### Run the unit test for translator script (from root directory)
 
-#### Step 2: Run the unit test for translator script under coverage with(from root directory)
-
-```
-$ coverage run -m pytest arg1 arg2 arg3
-```
-Example usage:
 ```
 $ coverage run -m pytest 'test/' -v
 ```
-
-#### Step 3: Use coverage report to report on the results:
-
-```
-$ coverage report -m
-```
+Ensure you have your environment configured correctly (as described above).
 
 
 ### Google Cloud Function
