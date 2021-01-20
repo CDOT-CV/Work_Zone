@@ -27,6 +27,7 @@ Requires:
 This code requires Python 3.6 or a higher version. If you haven’t already, download Python and Pip. Next, you’ll need to install several packages that we’ll use throughout this tutorial. You can do this by opening terminal or command prompt on your operating system:
 
 
+
 ### Execution
 
 #### Step 1: Run the translator script (from Work_Zone/translator/source code/Folder)
@@ -34,6 +35,17 @@ This code requires Python 3.6 or a higher version. If you haven’t already, dow
 ```
 python icone_translator.py -i inputfile.xml -o outputfile.geojson
 ```
+
+### Testing
+
+#### Step 1: Run the unit test for translator script (from root directory)
+
+
+
+```
+coverage run -m pytest 'test/' -v 
+```
+
 
 
 ### Guidelines
