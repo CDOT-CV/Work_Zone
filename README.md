@@ -46,7 +46,7 @@ Example usage:
 python icone_translator.py -i '../sample files/icone data/incidents_extended.xml' 
 ```
 
-### Testing
+### Unit Testing
 
 #### Step 1: Run the unit test for translator script (from root directory)
 
