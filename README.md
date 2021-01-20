@@ -62,11 +62,11 @@ Ensure you have your environment configured correctly (as described above).
 A system was created in google cloud platform to automatically translate iCone data to WZDx message.This system consits of two buckets and a cloud function.
 When a file is uploaded to the first bucket, the cloud function automatically downloads the file, translates to a WZDx message and uploads it to the second bucket.
 
-![alt text](https://github.com/CDOT-CV/Work_Zone/blob/dev/translator/GCP_cloud_function/iCone_Translator%20block%20diagram%20.png)
+![alt text](translator/GCP_cloud_function/iCone_Translator%20block%20diagram%20.png)
 
 ### Documentation
 
-documentation for iCone to WZDx translator is located here: https://github.com/CDOT-CV/Work_Zone/tree/main/translator/docs
+documentation for iCone to WZDx translator is located here: [docs](translator/docs)
 
 ### Guidelines
 
