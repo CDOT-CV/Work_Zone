@@ -1,17 +1,12 @@
 import xmltodict
-import xml.etree.ElementTree as ET
 import json
 from datetime import datetime
 import uuid
 import random
 import string
-import pytest
-import os.path
 import sys, getopt
 from jsonschema import validate
 from jsonschema import ValidationError
-from shapely.geometry import Point
-from shapely.geometry.polygon import Polygon
 
 
 # Translator
@@ -38,29 +33,11 @@ def wzdx_creator(messages, info):
     if info['metadata'].get('datafeed_frequency_update', False):
         data_source['update_frequency'] = info['metadata']['datafeed_frequency_update']
     data_source['update_date'] = datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
-    # data_source['location_verify_method'] = info['metadata']['location_verify_method']
     data_source['location_method'] = info['metadata']['wz_location_method']
     data_source['lrs_type'] = info['metadata']['lrs_type']
-    # data_source['lrs_url'] = "basic url"
-
-    # data_source_icone= {}
-    # data_source_icone['data_source_id'] = str(uuid.uuid4())
-    # data_source_icone['feed_info_id'] = info['feed_info_id']
-    # data_source_icone['organization_name'] = info['metadata']['issuing_organization']
-    # data_source_icone['contact_name'] = info['metadata']['contact_name']
-    # data_source_icone['contact_email'] = info['metadata']['contact_email']
-    # if info['metadata'].get('datafeed_frequency_update', False):
-    #     data_source_icone['update_frequency'] = info['metadata']['datafeed_frequency_update']
-    # data_source_icone['update_date'] = datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
-    # data_source_icone['location_verify_method'] = info['metadata']['location_verify_method']
-    # data_source_icone['location_method'] = info['metadata']['wz_location_method']
-    # data_source_icone['lrs_type'] = info['metadata']['lrs_type']
-    # # data_source_icone['lrs_url'] = "basic url"
-
     wzd['road_event_feed_info']['data_sources'] = [data_source]
 
     wzd['type'] = 'FeatureCollection'
-    nodes = []
     sub_identifier = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in
                              range(6))  # Create random 6 character digit/letter string
     road_event_id = str(uuid.uuid4())
@@ -69,24 +46,13 @@ def wzdx_creator(messages, info):
     ids['road_event_id'] = road_event_id
 
     wzd['features'] = []
-    # print(messages)
-    # print("")
-    # print("")
-    # print("")
-    # print("")
-    # print("")
     for incident in messages['incidents']['incident']:
-        # print(incident)
-        # print("")
-        # print("")
         # Parse Incident to WZDx Feature
-        polyline = parse_polyline(incident['location']['polyline'])
-        avg_point = [(polyline[0][0] + polyline[-1][0]) / 2, (polyline[0][1] + polyline[-1][1]) / 2]
 
-        if is_in_colorado(avg_point) or True:
-            feature = parse_incident(incident)
-            if feature:
-                wzd['features'].append(feature)
+
+        feature = parse_incident(incident)
+        if feature:
+            wzd['features'].append(feature)
 
     wzd = add_ids(wzd, True)
     return wzd
@@ -106,18 +72,7 @@ def wzdx_creator(messages, info):
 #   </incident>
 
 
-def polygon_contains_point(point, polygon):
-    return polygon.contains(point)
 
-
-def is_in_colorado(coordinates):
-    point = Point(coordinates[0], coordinates[1])
-    colorado = Polygon(
-        [(36.993016, -102.042089), (36.999084, -109.045223), (41.000659, -109.050076), (41.002361, -102.051721)])
-    return polygon_contains_point(point, colorado)
-
-
-is_in_colorado([40.703547, -102.584596])
 
 
 # function to calculate vehicle impact
@@ -415,27 +370,10 @@ def add_ids(message, add_ids):
             feature = message['features'][i]
             road_event_id = road_event_ids[i]
             feature['properties']['road_event_id'] = road_event_id
-            # feature['properties']['feed_info_id'] = feed_info_id
             feature['properties']['data_source_id'] = data_source_id
-            # feature['properties']['relationship'] = {}
             feature['properties']['relationship']['relationship_id'] = str(uuid.uuid4())
-            feature['properties']['relationship']['road_event_id'] = road_event_id
-            #### Relationship logic invalid. It assumes that each feature is part of the same work zone
-            # if i == 0: feature['properties']['relationship']['first'] = road_event_ids
-            # else: feature['properties']['relationship']['next'] = road_event_ids
+            feature['properties']['relationship']['road_event_id'] = road_event_id 
 
-            # for lane in feature['properties']['lanes']:
-            #     lane_id = str(uuid.uuid4())
-            #     lane['lane_id'] = lane_id
-            #     lane['road_event_id'] = road_event_id
-            #     for lane_restriction in lane.get('restrictions', []):
-            #         lane_restriction_id = str(uuid.uuid4())
-            #         lane_restriction['lane_restriction_id'] = lane_restriction_id
-            #         lane_restriction['lane_id'] = lane_id
-            # for types_of_work in feature['properties']['types_of_work']:
-            #     types_of_work_id = str(uuid.uuid4())
-            #     types_of_work['types_of_work_id'] = types_of_work_id
-            #     types_of_work['road_event_id'] = road_event_id
     return message
 
 
@@ -445,18 +383,14 @@ def parse_arguments(argv):
     try:
         opts, args = getopt.getopt(argv, "hi:o:", ["ifile=", "ofile="])
     except getopt.GetoptError:
-        # print ('test.py -i <inputfile> -o <outputfile>')
         sys.exit(2)
     for opt, arg in opts:
         if opt == '-h':
-            #  print ('test.py -i <inputfile> -o <outputfile>')
             sys.exit()
         elif opt in ("-i", "--ifile"):
             inputfile = arg
         elif opt in ("-o", "--ofile"):
             outputfile = arg
-    # print ('Input file is "', inputfile)
-    # print ('Output file is "', outputfile)
     return inputfile, outputfile
 
 
@@ -473,9 +407,6 @@ def initialize_info():
     info['metadata'] = {}
     info['metadata']['wz_location_method'] = "channel-device-method"
     info['metadata']['lrs_type'] = "lrs_type"
-    # info['metadata']['location_verify_method'] = "location_verify_method"
-    # info['metadata']['datafeed_frequency_update'] = 86400
-    # info['metadata']['timestamp_metadata_update'] = "timestamp_metadata_update"
     info['metadata']['contact_name'] = "Abinash Konersman"  # we can consider to add a representive name from iCone
     info['metadata']['contact_email'] = "abinash.konersman@state.co.us"
     info['metadata']['issuing_organization'] = "iCone"
@@ -502,10 +433,7 @@ def validate_write(wzdx_obj, outputfile, location_schema):
     with open(outputfile, 'w') as fwzdx:
         fwzdx.write(json.dumps(wzdx_obj, indent=2))
 
-    # if not os.path.exists(outputfile) or os.stat(outputfile).st_size == 0:
-    #     print('Output file creation failed . file does not exist or is empty')
-    #     return False
-    # else:
+
     return True
 
 
