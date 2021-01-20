@@ -6,8 +6,16 @@ When a file is uploaded to the first bucket, the cloud function automatically do
 ![alt text](iCone_Translator%20block%20diagram%20.png)
 
 ## files present
-cloud_function.zip
-- Zip file containing cloud function deployment files
+cloud funtion files
+- icone_translator.py
+- main.py  
+- requirements.txt
+- wzdx_schema.json
+
+documentation file
+
+- iCone_Translator block diagram.png
+- README.md
 
 
 

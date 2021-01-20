@@ -52,7 +52,7 @@ python icone_translator.py -i '../sample files/icone data/incidents_extended.xml
 #### Run the unit test for translator script (from root directory)
 
 ```
-$ coverage run -m pytest 'test/' -v
+$ python -m pytest 'test/' -v
 ```
 Ensure you have your environment configured correctly (as described above).
 
