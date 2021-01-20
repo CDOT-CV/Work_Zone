@@ -45,6 +45,14 @@ Example usage:
 ```
 python icone_translator.py -i '../sample files/icone data/incidents_extended.xml' 
 ```
+
+### Testing
+
+#### Step 1: Run the unit test for translator script (from root directory)
+
+```
+coverage run -m pytest 'test/' -v 
+```
 ### Google Cloud Function
 
 A system was created in google cloud platform to automatically translate iCone data to WZDx message.This system consits of two buckets and a cloud function.
