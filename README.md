@@ -48,11 +48,29 @@ python icone_translator.py -i '../sample files/icone data/incidents_extended.xml
 
 ### Unit Testing
 
-#### Step 1: Run the unit test for translator script (from root directory)
+#### Step 1: Install coverage.py:
 
 ```
-coverage run -m pytest 'test/' -v 
+$ pip install coverage
 ```
+
+#### Step 2: Run the unit test for translator script under coverage with(from root directory)
+
+```
+$ coverage run -m pytest arg1 arg2 arg3
+```
+Example usage:
+```
+$ coverage run -m pytest 'test/' -v
+```
+
+#### Step 3: Use coverage report to report on the results:
+
+```
+$ coverage report -m
+```
+
+
 ### Google Cloud Function
 
 A system was created in google cloud platform to automatically translate iCone data to WZDx message.This system consits of two buckets and a cloud function.
