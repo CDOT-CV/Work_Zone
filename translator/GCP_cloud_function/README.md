@@ -4,7 +4,7 @@ A system was created in google cloud platform to automatically translate iCone d
 A cloud scheduler automatically sends a message to a pubsub topic which triggers the cloud function. The cloud function retrieves iCone data from an ftp server (ftp://iconetraffic.com:42663) and translates to WZDx message.
 It validates the WZDx message with json schema and publishes the message to a pubsub topic.
 
-![alt text](iCone_Translator%20block%20diagram.png)
+![alt text](iCone%20Translator%20block%20diagram.png)
 
 ## files present
 cloud funtion files
