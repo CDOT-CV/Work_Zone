@@ -53,10 +53,12 @@ def parse_xml(xml_string):
 def get_wzdx_schema(schema_file_name):
   return json.loads(open(schema_file_name,'r').read())
 
+
+#this function retrieves username and password info from secrets .This will be implemented after correct secretrs are implemented.
 def get_ftp_credentials():
   secret_client = secretmanager.SecretManagerServiceClient()
-  username_secret_name = os.environ['icone_ftp_username_secret_name']#"icone_ftp_username"
-  password_secret_name = os.environ['icone_ftp_password_secret_name']#icone_ftp_password"
+  username_secret_name = os.environ['icone_ftp_username_secret_name']
+  password_secret_name = os.environ['icone_ftp_password_secret_name']
   project_id = os.environ['project_id']
   request = {"name": f"projects/{project_id}/secrets/{username_secret_name}/versions/latest"}
   response = client.access_secret_version(request)
