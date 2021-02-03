@@ -59,8 +59,8 @@ Ensure you have your environment configured correctly (as described above).
 
 ### Google Cloud Function
 
-A system was created in google cloud platform to automatically translate iCone data to WZDx message.This system consits of two buckets and a cloud function.
-When a file is uploaded to the first bucket, the cloud function automatically downloads the file, translates to a WZDx message and uploads it to the second bucket.
+A system was created in google cloud platform to automatically translate iCone data to WZDx message. This system consists of two pubsub topics and a cloud function. A cloud scheduler automatically sends a message to a pubsub topic which triggers the cloud function. The cloud function retrieves iCone data from an ftp server (ftp://iconetraffic.com:42663) and translates to WZDx message. It validates the WZDx message with json schema and publishes the message to a pubsub topic.
+
 
 ![alt text](translator/GCP_cloud_function/iCone%20Translator%20block%20diagram.png)
 
