@@ -28,9 +28,8 @@ def translate_newest_icone_to_wzdx(event, context):
 
   icone_data=get_ftp_file(ftpUrl)
   icone_obj=parse_xml(icone_data)
-  info=icone_translator.initialize_info()
 
-  wzdx_obj=icone_translator.wzdx_creator(icone_obj,info)
+  wzdx_obj=icone_translator.wzdx_creator(icone_obj)
   wzdx_schema=get_wzdx_schema('wzdx_schema.json')
   #this will throw an exception if validation fails
   icone_translator.validate_wzdx(wzdx_obj,wzdx_schema)
@@ -53,8 +52,7 @@ def parse_xml(xml_string):
 def get_wzdx_schema(schema_file_name):
   return json.loads(open(schema_file_name,'r').read())
 
-
-#this function retrieves username and password info from secrets .This will be implemented after correct secretrs are implemented.
+#this function retrieves username and password info from secrets .This will be implemented after correct secrets are implemented.
 def get_ftp_credentials():
   secret_client = secretmanager.SecretManagerServiceClient()
   username_secret_name = os.environ['icone_ftp_username_secret_name']

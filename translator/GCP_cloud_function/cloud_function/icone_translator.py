@@ -7,8 +7,11 @@ import sys, getopt
 from jsonschema import validate
 
 
+
 # Translator
-def wzdx_creator(messages, info):
+def wzdx_creator(messages, info=None):
+    if not info:
+        info=initialize_info()
     wzd = {}
     wzd['road_event_feed_info'] = {}
     # hardcode
@@ -112,7 +115,7 @@ def get_road_direction(coordinates):
 
 def parse_direction_from_street_name(street):
     # function to parse direction from street name
-    if not street :
+    if not street:
         return None
     street_char = street[-1]
     street_chars = street[-2:]
@@ -280,10 +283,10 @@ def parse_incident(incident):
     road_name = incident['location'].get('street', '')
     if not road_name:
         return None
-    properties['road_name'] = incident['location'].get('street', '')
+    properties['road_name'] = road_name
 
     # direction
-    direction = parse_direction_from_street_name(incident['location'].get('street', ''))
+    direction = parse_direction_from_street_name(road_name)
     if not direction:
         direction = get_road_direction(geometry['coordinates'])
         if not direction:
@@ -406,7 +409,8 @@ def initialize_info():
     info['metadata']['issuing_organization'] = "iCone"
 
     return info
-#this will throw an exception if validation failed
+
+#This will throw an exception if validation failed
 def validate_wzdx(wzdx_obj, wzdx_schema):
 
     validate(instance=wzdx_obj, schema=wzdx_schema)
