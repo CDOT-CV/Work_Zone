@@ -4,3 +4,5 @@ xmltodict
 jsonschema
 shapely
 gcloud
+google-cloud-pubsub
+google-cloud-secret-manager

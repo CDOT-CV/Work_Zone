@@ -1,35 +1,69 @@
-# {'bucket': 'icone_files', 'contentType': 'image/jpeg', 'crc32c': 'ZO4N6A==', 'etag': 'CNu+up7tnu4CEAE=', 
-# 'generation': '1610745138552667', 'id': 'icone_files/61862931_1039122999618882_7010636350885986304_o_1039122996285549.JPEG/1610745138552667', 
-# 'kind': 'storage#object', 'md5Hash': 'yOlwCtFi0L/3GPe23rYGbw==', 
-# 'mediaLink': 'https://www.googleapis.com/download/storage/v1/b/icone_files/o/61862931_1039122999618882_7010636350885986304_o_1039122996285549.JPEG?generation=1610745138552667&alt=media', 
-# 'metageneration': '1', 'name': '61862931_1039122999618882_7010636350885986304_o_1039122996285549.JPEG',
-#  'selfLink': 'https://www.googleapis.com/storage/v1/b/icone_files/o/61862931_1039122999618882_7010636350885986304_o_1039122996285549.JPEG',
-#   'size': '447421', 'storageClass': 'STANDARD', 'timeCreated': '2021-01-15T21:12:18.552Z', 'timeStorageClassUpdated': '2021-01-15T21:12:18.552Z', 
-#   'updated': '2021-01-15T21:12:18.552Z'}
-
 import icone_translator
 from gcloud import storage
 import json
 import xmltodict
+import shutil
+import urllib.request as request
+from contextlib import closing
+from google.cloud import pubsub_v1
+import os
+from google.cloud import secretmanager
 
-def hello_gcs(event, context):
-    """Triggered by a change to a Cloud Storage bucket.
-    Args:
-         event (dict): Event payload.
-         context (google.cloud.functions.Context): Metadata for the event.
-    """
-    file = event
-    print(f"Processing file: {file['name']}.")
-    print (event)
-    client = storage.Client()
-    bucket = client.get_bucket(event['bucket'])
-    blob = bucket.blob(event['name'])
-    icone_obj=xmltodict.parse(blob.download_as_string())
-    info=icone_translator.initialize_info()
-    wzdx_obj=icone_translator.wzdx_creator(icone_obj,info)
-    print(json.dumps(wzdx_obj))
-    client = storage.Client()
-    bucket = client.get_bucket('wzdx_files')
-    blob = bucket.blob('wzdx.geojson')
-    blob.upload_from_string(json.dumps(wzdx_obj, indent=2))
-    return
+
+
+server = os.environ['ftp_server_address']
+port = os.environ['ftp_port']
+user=os.environ['icone_ftp_username']
+password=os.environ['icone_ftp_password']
+#user,password=get_ftp_credentials()
+filepath = os.environ['ftp_icone_file_path']
+
+
+ftpString = 'ftp://{0}:{1}@{2}:{3}/{4}'
+ftpUrl = ftpString.format(user, password, server, port, filepath)
+
+
+def translate_newest_icone_to_wzdx(event, context):
+
+
+  icone_data=get_ftp_file(ftpUrl)
+  icone_obj=parse_xml(icone_data)
+
+  wzdx_obj=icone_translator.wzdx_creator(icone_obj)
+  wzdx_schema=get_wzdx_schema('wzdx_schema.json')
+  #this will throw an exception if validation fails
+  icone_translator.validate_wzdx(wzdx_obj,wzdx_schema)
+  print(json.dumps(wzdx_obj))
+
+  publisher = pubsub_v1.PublisherClient()
+  topic_path = publisher.topic_path(os.environ['project_id'], os.environ['wzdx_topic_id'])
+  future=publisher.publish(topic_path,str.encode(json.dumps(wzdx_obj, indent=2)),origin='auto_icone_translator_ftp cloud function')
+  print(future.result())
+  return
+
+def get_ftp_file(url) :
+  with closing(request.urlopen(url)) as r:
+    return r.read().decode('utf-8-sig')
+
+
+def parse_xml(xml_string):
+  return xmltodict.parse(xml_string)
+
+def get_wzdx_schema(schema_file_name):
+  return json.loads(open(schema_file_name,'r').read())
+
+#this function retrieves username and password info from secrets .This will be implemented after correct secrets are implemented.
+def get_ftp_credentials():
+  secret_client = secretmanager.SecretManagerServiceClient()
+  username_secret_name = os.environ['icone_ftp_username_secret_name']
+  password_secret_name = os.environ['icone_ftp_password_secret_name']
+  project_id = os.environ['project_id']
+  request = {"name": f"projects/{project_id}/secrets/{username_secret_name}/versions/latest"}
+  response = client.access_secret_version(request)
+  username = response.payload.data.decode("UTF-8")
+
+  request = {"name": f"projects/{project_id}/secrets/{password_secret_name}/versions/latest"}
+  response = client.access_secret_version(request)
+  password = response.payload.data.decode("UTF-8")
+
+  return username,password
