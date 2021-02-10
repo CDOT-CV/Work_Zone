@@ -10,7 +10,9 @@ from jsonschema import ValidationError
 
 
 # Translator
-def wzdx_creator(messages, info):
+def wzdx_creator(messages, info=None):
+    if not info:
+        info=initialize_info()
     wzd = {}
     wzd['road_event_feed_info'] = {}
     # hardcode
@@ -114,6 +116,8 @@ def get_road_direction(coordinates):
 
 def parse_direction_from_street_name(street):
     # function to parse direction from street name
+    if not street:
+        return None
     street_char = street[-1]
     street_chars = street[-2:]
     if street_char == 'N' or street_chars == 'NB':
@@ -280,10 +284,10 @@ def parse_incident(incident):
     road_name = incident['location'].get('street', '')
     if not road_name:
         return None
-    properties['road_name'] = incident['location'].get('street', '')
-
+    properties['road_name'] = road_name
     # direction
-    direction = parse_direction_from_street_name(incident['location'].get('street', ''))
+    direction = parse_direction_from_street_name(road_name)
+
     if not direction:
         direction = get_road_direction(geometry['coordinates'])
         if not direction:
@@ -309,12 +313,6 @@ def parse_incident(incident):
 
     # beginning_cross_street
     properties['ending_cross_street'] = ""
-
-    # # beginning_milepost
-    # properties['beginning_milepost'] = ""
-    #
-    # # ending_milepost
-    # properties['ending_milepost'] = ""
 
     # event status
     start_time = datetime.strptime(incident['starttime'], "%Y-%m-%dT%H:%M:%SZ")
@@ -415,10 +413,10 @@ def initialize_info():
 
 
 def parse_xml(inputfile):
-    with open(inputfile, encoding='utf-8-sig') as frsm:
+    with open(inputfile, encoding='utf-8-sig') as ficone:
         # Read
-        xmlSTRING = frsm.read()
-        icone_obj = xmltodict.parse(xmlSTRING)
+        xml_string = ficone.read()
+        icone_obj = xmltodict.parse(xml_string)
         return icone_obj
 
 
@@ -428,13 +426,12 @@ def validate_write(wzdx_obj, outputfile, location_schema):
         validate(instance=wzdx_obj, schema=wzdx_schema)
     except ValidationError as e:
         print(e)
-        return False
+        return False, str(e)
 
     with open(outputfile, 'w') as fwzdx:
         fwzdx.write(json.dumps(wzdx_obj, indent=2))
 
-
-    return True
+    return True, None
 
 
 if inputfile:

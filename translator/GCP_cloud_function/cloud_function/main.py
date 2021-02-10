@@ -1,32 +1,16 @@
 import icone_translator
-from gcloud import storage
 import json
 import xmltodict
-import shutil
-import urllib.request as request
-from contextlib import closing
+import urllib.request
 from google.cloud import pubsub_v1
 import os
 from google.cloud import secretmanager
 
 
-
-server = os.environ['ftp_server_address']
-port = os.environ['ftp_port']
-user=os.environ['icone_ftp_username']
-password=os.environ['icone_ftp_password']
-#user,password=get_ftp_credentials()
-filepath = os.environ['ftp_icone_file_path']
-
-
-ftpString = 'ftp://{0}:{1}@{2}:{3}/{4}'
-ftpUrl = ftpString.format(user, password, server, port, filepath)
-
-
 def translate_newest_icone_to_wzdx(event, context):
 
-
-  icone_data=get_ftp_file(ftpUrl)
+  ftp_url=get_ftp_url()
+  icone_data=get_ftp_file(ftp_url)
   icone_obj=parse_xml(icone_data)
 
   wzdx_obj=icone_translator.wzdx_creator(icone_obj)
@@ -41,9 +25,25 @@ def translate_newest_icone_to_wzdx(event, context):
   print(future.result())
   return
 
+def get_ftp_url():
+  server = os.environ['ftp_server_address']
+  port = os.environ['ftp_port']
+  user = os.environ['icone_ftp_username']
+  password = os.environ['icone_ftp_password']
+  # user,password=get_ftp_credentials()
+  filepath = os.environ['ftp_icone_file_path']
+
+  ftpString = 'ftp://{0}:{1}@{2}:{3}/{4}'
+  ftpUrl = ftpString.format(user, password, server, port, filepath)
+  return ftpUrl
+
 def get_ftp_file(url) :
-  with closing(request.urlopen(url)) as r:
-    return r.read().decode('utf-8-sig')
+  # this function opens the url and returns the file contents as a string
+  try:
+    test_string=urllib.request.urlopen(url).read()
+    return test_string.decode('utf-8-sig')
+  except Exception as e:
+    return None
 
 
 def parse_xml(xml_string):
@@ -67,3 +67,4 @@ def get_ftp_credentials():
   password = response.payload.data.decode("UTF-8")
 
   return username,password
+
