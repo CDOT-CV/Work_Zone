@@ -1,3 +1,4 @@
+import xmltodict
 import json
 from datetime import datetime
 import uuid
@@ -5,7 +6,7 @@ import random
 import string
 import sys, getopt
 from jsonschema import validate
-
+from jsonschema import ValidationError
 
 
 # Translator
@@ -115,8 +116,6 @@ def get_road_direction(coordinates):
 
 def parse_direction_from_street_name(street):
     # function to parse direction from street name
-    if not street:
-        return None
     street_char = street[-1]
     street_chars = street[-2:]
     if street_char == 'N' or street_chars == 'NB':
@@ -313,6 +312,12 @@ def parse_incident(incident):
     # beginning_cross_street
     properties['ending_cross_street'] = ""
 
+    # # beginning_milepost
+    # properties['beginning_milepost'] = ""
+    #
+    # # ending_milepost
+    # properties['ending_milepost'] = ""
+
     # event status
     start_time = datetime.strptime(incident['starttime'], "%Y-%m-%dT%H:%M:%SZ")
 
@@ -410,7 +415,11 @@ def initialize_info():
 
     return info
 
-#This will throw an exception if validation failed
 def validate_wzdx(wzdx_obj, wzdx_schema):
-
+    #wzdx_schema = json.loads(open(location_schema).read())
+    # try:
     validate(instance=wzdx_obj, schema=wzdx_schema)
+    # except ValidationError as e:
+    #     print(e)
+    #     return False
+    return True
