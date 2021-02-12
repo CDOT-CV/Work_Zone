@@ -1,8 +1,6 @@
 import icone_translator
-from gcloud import storage
 import json
 import xmltodict
-import shutil
 import urllib.request as request
 from contextlib import closing
 from google.cloud import pubsub_v1
@@ -54,8 +52,8 @@ def get_wzdx_schema(schema_file_name):
 
 def get_ftp_credentials():
   secret_client = secretmanager.SecretManagerServiceClient()
-  username_secret_name = os.environ['icone_ftp_username_secret_name']#"icone_ftp_username"
-  password_secret_name = os.environ['icone_ftp_password_secret_name']#icone_ftp_password"
+  username_secret_name = os.environ['icone_ftp_username_secret_name']
+  password_secret_name = os.environ['icone_ftp_password_secret_name']
   project_id = os.environ['project_id']
   request = {"name": f"projects/{project_id}/secrets/{username_secret_name}/versions/latest"}
   response = secret_client.access_secret_version(request)
