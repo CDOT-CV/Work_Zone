@@ -1,11 +1,25 @@
+import urllib
+
 import icone_translator
 import json
 import xmltodict
-import urllib.request
+import urllib.request as request
+from contextlib import closing
 from google.cloud import pubsub_v1
 import os
 from google.cloud import secretmanager
 
+
+
+def get_ftp_url():
+  server = os.environ['ftp_server_address']
+  port = os.environ['ftp_port']
+  user,password=get_ftp_credentials()
+  filepath = os.environ['ftp_icone_file_path']
+
+  ftpString = 'ftp://{0}:{1}@{2}:{3}/{4}'
+  ftpUrl = ftpString.format(user, password, server, port, filepath)
+  return ftpUrl
 
 def translate_newest_icone_to_wzdx(event, context):
 
@@ -25,25 +39,8 @@ def translate_newest_icone_to_wzdx(event, context):
   print(future.result())
   return
 
-def get_ftp_url():
-  server = os.environ['ftp_server_address']
-  port = os.environ['ftp_port']
-  user = os.environ['icone_ftp_username']
-  password = os.environ['icone_ftp_password']
-  # user,password=get_ftp_credentials()
-  filepath = os.environ['ftp_icone_file_path']
-
-  ftpString = 'ftp://{0}:{1}@{2}:{3}/{4}'
-  ftpUrl = ftpString.format(user, password, server, port, filepath)
-  return ftpUrl
-
 def get_ftp_file(url) :
-  # this function opens the url and returns the file contents as a string
-  try:
-    test_string=urllib.request.urlopen(url).read()
-    return test_string.decode('utf-8-sig')
-  except Exception as e:
-    return None
+  return urllib.request.urlopen(url).read().decode('utf-8-sig')
 
 
 def parse_xml(xml_string):
@@ -52,19 +49,17 @@ def parse_xml(xml_string):
 def get_wzdx_schema(schema_file_name):
   return json.loads(open(schema_file_name,'r').read())
 
-#this function retrieves username and password info from secrets .This will be implemented after correct secrets are implemented.
 def get_ftp_credentials():
   secret_client = secretmanager.SecretManagerServiceClient()
   username_secret_name = os.environ['icone_ftp_username_secret_name']
   password_secret_name = os.environ['icone_ftp_password_secret_name']
   project_id = os.environ['project_id']
   request = {"name": f"projects/{project_id}/secrets/{username_secret_name}/versions/latest"}
-  response = client.access_secret_version(request)
+  response = secret_client.access_secret_version(request)
   username = response.payload.data.decode("UTF-8")
 
   request = {"name": f"projects/{project_id}/secrets/{password_secret_name}/versions/latest"}
-  response = client.access_secret_version(request)
+  response = secret_client.access_secret_version(request)
   password = response.payload.data.decode("UTF-8")
 
   return username,password
-

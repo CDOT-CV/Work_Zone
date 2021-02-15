@@ -1,13 +1,14 @@
 import sys
+from collections import OrderedDict
+
 sys.path.append('..')
 sys.path.append('./translator/GCP_cloud_function/cloud_function')
 import main, icone_translator
-# import translator
-#from translator.GCP_cloud_function.cloud_function import icone_translator
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock, patch, call
 import urllib.request as request
 from contextlib import closing
 from google.cloud import pubsub_v1
+from google.cloud import secretmanager
 import os
 import json
 
@@ -22,31 +23,63 @@ def test_get_ftp_file(request):
 @patch('google.cloud.pubsub_v1.PublisherClient')
 @patch.object(icone_translator,'wzdx_creator')
 @patch.object(icone_translator,'validate_wzdx')
-@patch(main)
-def test_translate_newest_icone_to_wzdx(test_main, validate_wzdx, wzdx_creator, pubsub):
-    #import main as temp_main
-    temp_main.get_ftp_url=MagicMock(return_value='')
-    temp_main.get_ftp_file=MagicMock(return_value='')
-    temp_main.parse_xml=MagicMock(return_value='')
-    temp_main.get_wzdx_schema=MagicMock(return_value='')
+@patch.object(main, 'get_ftp_url')
+@patch.object(main, 'get_ftp_file')
+@patch.object(main, 'parse_xml')
+@patch.object(main, 'get_wzdx_schema')
+def test_translate_newest_icone_to_wzdx(get_wzdx_schema, parse_xml, get_ftp_file, get_ftp_url, validate_wzdx, wzdx_creator, pubsub):
+    main.get_ftp_url=MagicMock(return_value='')
+    main.get_ftp_file=MagicMock(return_value='')
+    main.parse_xml=MagicMock(return_value='')
+    main.get_wzdx_schema=MagicMock(return_value='')
     icone_translator.wzdx_creator= MagicMock(return_value='WZDx')
     icone_translator.validate_wzdx= MagicMock(return_value='')
     os.environ['project_id']='project_id'
     os.environ['wzdx_topic_id']='wzdx_topic_id'
-    temp_main.translate_newest_icone_to_wzdx(None,None)
+    main.translate_newest_icone_to_wzdx(None,None)
     publisher=pubsub().publish
     publisher.assert_called_with(pubsub().topic_path('project_id', 'wzdx_topic_id'),str.encode(json.dumps('WZDx', indent=2)),origin='auto_icone_translator_ftp cloud function')
     assert True
 
-def test_get_ftp_url():
-    import main
+
+@patch.object(main, 'get_ftp_credentials')
+def test_get_ftp_url(ftp_credentials):
+    credentials='username', 'password'
+    main.get_ftp_credentials=MagicMock(return_value=credentials)
     os.environ['ftp_server_address']='www.icone.com'
     os.environ['ftp_port']='4425'
     os.environ['icone_ftp_username']='username'
     os.environ['icone_ftp_password']='password'
-    # user,password=get_ftp_credentials()
     os.environ['ftp_icone_file_path']='test_filepath'
     test_ftp_url='ftp://username:password@www.icone.com:4425/test_filepath'
+    # print(ftp_credentials())
+    print(main.get_ftp_credentials())
     actual=main.get_ftp_url()
     assert actual==test_ftp_url
 
+def test_parse_xml():
+    test_parse_xml_string= """<incident id="U13631595_202012160845">
+        <updatetime>2020-12-16T17:18:00Z</updatetime>
+        <type>CONSTRUCTION</type>
+         <type> Hazard </type>
+          <polyline>34.8380671,-114.1450650,34.8380671,-114.1450650</polyline>
+        </incident>"""
+
+    test_valid_output= {"incident": OrderedDict({'@id': 'U13631595_202012160845', 'updatetime': '2020-12-16T17:18:00Z', 'type': ['CONSTRUCTION', 'Hazard'], 'polyline': '34.8380671,-114.1450650,34.8380671,-114.1450650' })}
+    actual_output= main.parse_xml(test_parse_xml_string)
+    assert actual_output == test_valid_output
+
+
+@patch('google.cloud.secretmanager.SecretManagerServiceClient')
+def test_get_ftp_credentials(secret):
+    os.environ['icone_ftp_username_secret_name']='secret_username'
+    os.environ['icone_ftp_password_secret_name']='secret_password'
+    os.environ['project_id'] = 'project_id'
+    main.get_ftp_credentials()
+    valid_secret_user_request={"name": "projects/project_id/secrets/secret_username/versions/latest"}
+    valid_secret_pass_request = {"name": "projects/project_id/secrets/secret_password/versions/latest"}
+    requests=[call(valid_secret_user_request),call().payload.data.decode("UTF-8"), call(valid_secret_pass_request), call().payload.data.decode("UTF-8")]
+    secret_client=secret().access_secret_version
+    secret_client.assert_has_calls(requests)
+
+    assert True
