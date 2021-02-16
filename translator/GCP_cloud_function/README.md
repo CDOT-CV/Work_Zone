@@ -9,6 +9,7 @@ It validates the WZDx message with json schema and publishes the message to a pu
 ## files present
 cloud funtion files
 - icone_translator.py
+  - This file is currently located in translator/source_code/icone_translator.py
 - main.py  
 - requirements.txt
 - wzdx_schema.json
