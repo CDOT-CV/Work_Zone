@@ -1,14 +1,11 @@
 import sys
 from collections import OrderedDict
-
 sys.path.append('..')
 sys.path.append('./translator/GCP_cloud_function/cloud_function')
-import main, icone_translator
-from unittest.mock import MagicMock, patch, call
-import urllib.request as request
-from contextlib import closing
-from google.cloud import pubsub_v1
-from google.cloud import secretmanager
+from unittest.mock import MagicMock, patch, call, Mock
+sys.modules['icone_translator'] =Mock()
+import main
+import icone_translator
 import os
 import json
 
@@ -21,13 +18,11 @@ def test_get_ftp_file(request):
 
 
 @patch('google.cloud.pubsub_v1.PublisherClient')
-@patch.object(icone_translator,'wzdx_creator')
-@patch.object(icone_translator,'validate_wzdx')
 @patch.object(main, 'get_ftp_url')
 @patch.object(main, 'get_ftp_file')
 @patch.object(main, 'parse_xml')
 @patch.object(main, 'get_wzdx_schema')
-def test_translate_newest_icone_to_wzdx(get_wzdx_schema, parse_xml, get_ftp_file, get_ftp_url, validate_wzdx, wzdx_creator, pubsub):
+def test_translate_newest_icone_to_wzdx(get_wzdx_schema, parse_xml, get_ftp_file, get_ftp_url, pubsub):
     main.get_ftp_url=MagicMock(return_value='')
     main.get_ftp_file=MagicMock(return_value='')
     main.parse_xml=MagicMock(return_value='')

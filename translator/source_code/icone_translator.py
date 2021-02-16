@@ -7,6 +7,7 @@ import string
 import sys, getopt
 from jsonschema import validate
 from jsonschema import ValidationError
+import logging
 
 
 # Translator
@@ -419,18 +420,21 @@ def parse_xml(inputfile):
         icone_obj = xmltodict.parse(xml_string)
         return icone_obj
 
+def validate_wzdx(wzdx_obj, wzdx_schema):
+    #wzdx_schema = json.loads(open(location_schema).read())
+    try:
+      validate(instance=wzdx_obj, schema=wzdx_schema)
+    except ValidationError as e:
+      logging.error(RuntimeError(str(e)))
+      return False
+    return True
 
 def validate_write(wzdx_obj, outputfile, location_schema):
     wzdx_schema = json.loads(open(location_schema).read())
-    try:
-        validate(instance=wzdx_obj, schema=wzdx_schema)
-    except ValidationError as e:
-        print(e)
+    if not validate_wzdx(wzdx_obj, wzdx_schema):
         return False
-
     with open(outputfile, 'w') as fwzdx:
         fwzdx.write(json.dumps(wzdx_obj, indent=2))
-
     return True
 
 
