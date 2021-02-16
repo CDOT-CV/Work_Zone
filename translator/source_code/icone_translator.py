@@ -426,12 +426,12 @@ def validate_write(wzdx_obj, outputfile, location_schema):
         validate(instance=wzdx_obj, schema=wzdx_schema)
     except ValidationError as e:
         print(e)
-        return False, str(e)
+        return False
 
     with open(outputfile, 'w') as fwzdx:
         fwzdx.write(json.dumps(wzdx_obj, indent=2))
 
-    return True, None
+    return True
 
 
 if inputfile:
