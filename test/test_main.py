@@ -3,8 +3,10 @@ from collections import OrderedDict
 
 sys.path.append('..')
 sys.path.append('./translator/GCP_cloud_function/cloud_function')
-import main, icone_translator
-from unittest.mock import MagicMock, patch, call
+from unittest.mock import MagicMock, patch, call, Mock
+sys.modules['icone_translator'] =Mock()
+import main #, icone_translator
+from translator.source_code import icone_translator
 import urllib.request as request
 from contextlib import closing
 from google.cloud import pubsub_v1

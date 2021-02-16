@@ -1,5 +1,4 @@
 import urllib
-
 import icone_translator
 import json
 import xmltodict
@@ -8,7 +7,6 @@ from contextlib import closing
 from google.cloud import pubsub_v1
 import os
 from google.cloud import secretmanager
-
 
 
 def get_ftp_url():
