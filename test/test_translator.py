@@ -4,9 +4,6 @@ from translator.source_code import icone_translator
 import xmltodict
 import json
 from jsonschema import validate
-from datetime import datetime
-import subprocess
-
 
 
 
@@ -232,26 +229,10 @@ def test_get_event_status():
 def test_wzdx_creator() :
     wzdx_schema = json.loads(open('translator/sample files/validation_schema/wzdx_v3.0_feed.json').read())
     icone_data =open('translator/sample files/Icone Data/incidents_extended.xml').read()
-
-
     icone_obj = xmltodict.parse(icone_data)
-
-    # info={}
-    # info['feed_info_id'] = "feed_info_id"
-    #
-    # #### This information is required, might want to hardcode
-    # info['metadata'] = {}
-    # info['metadata']['wz_location_method'] = "channel-device-method"
-    # info['metadata']['lrs_type'] = "lrs_type"
-    # info['metadata']['location_verify_method'] = "location_verify_method"
-    # info['metadata']['datafeed_frequency_update'] = 86400
-    # info['metadata']['timestamp_metadata_update'] = "timestamp_metadata_update"
-    # info['metadata']['contact_name'] = "contact_name"
-    # info['metadata']['contact_email'] = "contact_email"
-    # info['metadata']['issuing_organization'] = "issuing_organization"
-    test_wzdx=icone_translator.wzdx_creator(icone_obj,icone_translator.initialize_info())
-
-    validate(instance=test_wzdx,schema=wzdx_schema)
+    test_wzdx = icone_translator.wzdx_creator(icone_obj, icone_translator.initialize_info())
+    validate(instance=test_wzdx, schema=wzdx_schema)
+    assert True
 
 
 def test_parse_arguments():
@@ -274,8 +255,7 @@ def test_validate_write():
     test_output_file='translator/sample files/Output Message/icone_to_wzdx_test.geojson'
     test_schema='translator/sample files/validation_schema/wzdx_v3.0_feed.json'
     validate_write=icone_translator.validate_write(valid_wzdx_data,test_output_file,test_schema)
-
-    assert  validate_write == True
+    assert validate_write == True
 
     invalid_wzdx_data=json.loads('{"road_event_feed_info": {"feed_info_id": "feed_info_id", "update_date": "2021-01-05T12:14:07Z", "publisher": "CDOT ", "contact_name": "Abinash Konersman", "contact_email": "abinash.konersman@state.co.us", "update_frequency": 86400, "version": "3.0", "data_sources": [{"data_source_id": "d5333bb4-0ea2-4318-8934-91f8916d6a8e", "feed_info_id": "feed_info_id", "organization_name": "issuing_organization", "contact_name": "contact_name", "contact_email": "contact_email", "update_frequency": 86400, "update_date": "2021-01-05T12:14:07Z", "location_verify_method": "location_verify_method", "location_method": "fail", "lrs_type": "lrs_type"}]}, "type": "FeatureCollection", "features": [{"type": "Feature", "properties": {"road_event_id": "3f6fc7b7-9133-41be-9636-994432c1d0c3", "event_type": "work-zone", "data_source_id": "d5333bb4-0ea2-4318-8934-91f8916d6a8e", "start_date": "2020-02-14T17:08:16Z", "end_date": "", "start_date_accuracy": "estimated", "end_date_accuracy": "estimated", "beginning_accuracy": "fail", "ending_accuracy": "estimated", "road_name": "I-75 N", "direction": "westbound", "vehicle_impact": "all-lanes-open", "relationship": {"relationship_id": "3ae833b0-123c-4c4d-b906-3e4f6949bee8", "road_event_id": "3f6fc7b7-9133-41be-9636-994432c1d0c3"}, "lanes": [], "road_number": "", "beginning_cross_street": "", "ending_cross_street": "", "event_status": "active", "total_num_lanes": 1, "types_of_work": [], "reduced_speed_limit": 25, "workers_present": false, "restrictions": [], "description": "19-1245: Roadwork between MP 40 and MP 48", "creation_date": "2019-11-05T01:22:20Z", "update_date": "2020-08-21T15:52:02Z"}, "geometry": {"type": "LineString", "coordinates": [[-84.112854, 37.157199], [-84.1238971, 37.1686478], [-84.145861, 37.1913], [-84.175297, 37.209348], [-84.201303, 37.216837]]}}, {"type": "Feature", "properties": {"road_event_id": "52a6ecf1-4bee-49e9-a3bc-47c6cf20db19", "event_type": "work-zone", "data_source_id": "d5333bb4-0ea2-4318-8934-91f8916d6a8e", "start_date": "2019-11-22T23:02:21Z", "end_date": "", "start_date_accuracy": "estimated", "end_date_accuracy": "estimated", "beginning_accuracy": "estimated", "ending_accuracy": "estimated", "road_name": "I-75 S", "direction": "southbound", "vehicle_impact": "all-lanes-open", "relationship": {"relationship_id": "a5e54a72-d639-4945-9cf6-1b518f68399b", "road_event_id": "52a6ecf1-4bee-49e9-a3bc-47c6cf20db19"}, "lanes": [], "road_number": "", "beginning_cross_street": "", "ending_cross_street": "", "event_status": "active", "total_num_lanes": 1, "types_of_work": [], "reduced_speed_limit": 25, "workers_present": false, "restrictions": [], "description": "19-1245: Roadwork between MP 48 and MP 40", "creation_date": "2019-11-05T01:32:44Z", "update_date": "2020-08-21T15:52:02Z"}, "geometry": {"type": "LineString", "coordinates": [[-84.169129, 37.20667], [-84.157346, 37.201223], [-84.140482, 37.185815], [-84.121425, 37.166345], [-84.111588, 37.147808]]}}]}')
     invalid_write=icone_translator.validate_write(invalid_wzdx_data,test_output_file,test_schema)

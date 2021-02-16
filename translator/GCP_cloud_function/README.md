@@ -13,6 +13,28 @@ cloud funtion files
 - requirements.txt
 - wzdx_schema.json
 
+## Environment Setup
+
+Runtime Environment Variables
+
+| Name      | Value | Description    |
+| :---        |    :----:   |          ---: |
+| icone_ftp_username_secret_name     | icone_ftp_username       |  name of secret containing iCone ftp server username  |
+| icone_ftp_password_secret_name   | icone_ftp_password       | name of secret containing iCone ftp server password
+| ftp_server_address   | iconetraffic.com        | iCone ftp server address     |
+| ftp_port   | 42663       | iCone ftp server port number      |
+| ftp_icone_file_path   | incidents.xml      | The icone filename in ftp server       |
+| project_id   | cdot-cv-ode-dev        |  gcp project id        |
+| wzdx_topic_id   | wzdx_messages        |  topic id for wzdx pub/sub topic      |
+
+GCP Secrets
+
+| Name       | Description     |
+| :---           |          ---: |
+| icone_ftp_username     |  icone ftp server username   |
+| icone_ftp_password      | icone ftp server password      |
+
+
 documentation file
 
 - iCone_Translator block diagram.png
