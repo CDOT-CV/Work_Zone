@@ -36,7 +36,7 @@ def test_translate_newest_icone_to_wzdx(get_wzdx_schema, parse_xml, get_ftp_file
     main.translate_newest_icone_to_wzdx(None,None)
     publisher=pubsub().publish
     publisher.assert_called_with(pubsub().topic_path('project_id', 'wzdx_topic_id'),str.encode(json.dumps('WZDx', indent=2)),origin='auto_icone_translator_ftp cloud function')
-    assert True
+
 
 
 @patch.object(main, 'get_ftp_credentials')
@@ -78,4 +78,4 @@ def test_get_ftp_credentials(secret):
     requests=[call(valid_secret_user_request),call().payload.data.decode("UTF-8"), call(valid_secret_pass_request), call().payload.data.decode("UTF-8")]
     secret_client=secret().access_secret_version
     secret_client.assert_has_calls(requests)
-    assert True
+
