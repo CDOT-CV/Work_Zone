@@ -1,14 +1,11 @@
 import icone_translator
-from gcloud import storage
 import json
 import xmltodict
-import shutil
-import urllib.request as request
-from contextlib import closing
+import urllib
 from google.cloud import pubsub_v1
 import os
 from google.cloud import secretmanager
-import flask
+import logging
 
 
 
@@ -42,8 +39,8 @@ def translate_newest_icone_to_wzdx(event, context):
   return
 
 def get_ftp_file(url) :
-  with closing(request.urlopen(url)) as r:
-    return r.read().decode('utf-8-sig')
+  return urllib.request.urlopen(url).read().decode('utf-8-sig')
+
 
 
 def parse_xml(xml_string):

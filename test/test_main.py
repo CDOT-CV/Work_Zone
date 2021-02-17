@@ -9,6 +9,7 @@ import icone_translator
 import os
 import json
 
+
 @patch('urllib.request')
 def test_get_ftp_file(request):
     test_url='fake url'
@@ -23,12 +24,13 @@ def test_get_ftp_file(request):
 @patch.object(main, 'parse_xml')
 @patch.object(main, 'get_wzdx_schema')
 def test_translate_newest_icone_to_wzdx(get_wzdx_schema, parse_xml, get_ftp_file, get_ftp_url, pubsub):
+#the intent of this magic mock fuction is that we give a valid input ,that publishes data
     main.get_ftp_url=MagicMock(return_value='')
     main.get_ftp_file=MagicMock(return_value='')
     main.parse_xml=MagicMock(return_value='')
     main.get_wzdx_schema=MagicMock(return_value='')
     icone_translator.wzdx_creator= MagicMock(return_value='WZDx')
-    icone_translator.validate_wzdx= MagicMock(return_value='')
+    icone_translator.validate_wzdx= MagicMock(return_value=True)
     os.environ['project_id']='project_id'
     os.environ['wzdx_topic_id']='wzdx_topic_id'
     main.translate_newest_icone_to_wzdx(None,None)
@@ -76,5 +78,4 @@ def test_get_ftp_credentials(secret):
     requests=[call(valid_secret_user_request),call().payload.data.decode("UTF-8"), call(valid_secret_pass_request), call().payload.data.decode("UTF-8")]
     secret_client=secret().access_secret_version
     secret_client.assert_has_calls(requests)
-
     assert True
