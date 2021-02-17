@@ -49,7 +49,6 @@ def test_get_ftp_url(ftp_credentials):
     os.environ['icone_ftp_password']='password'
     os.environ['ftp_icone_file_path']='test_filepath'
     test_ftp_url='ftp://username:password@www.icone.com:4425/test_filepath'
-    # print(ftp_credentials())
     print(main.get_ftp_credentials())
     actual=main.get_ftp_url()
     assert actual==test_ftp_url
