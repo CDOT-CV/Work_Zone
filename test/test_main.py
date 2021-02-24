@@ -1,6 +1,5 @@
 import sys
 from collections import OrderedDict
-sys.path.append('..')
 sys.path.append('./translator/GCP_cloud_function/cloud_function')
 from unittest.mock import MagicMock, patch, call, Mock
 sys.modules['icone_translator'] =Mock()
@@ -15,7 +14,6 @@ def test_get_ftp_file(request):
     test_url='fake url'
     test_output=main.get_ftp_file(test_url)
     request.urlopen.assert_called_with(test_url)
-    assert True
 
 
 @patch('google.cloud.pubsub_v1.PublisherClient')
@@ -49,7 +47,6 @@ def test_get_ftp_url(ftp_credentials):
     os.environ['icone_ftp_password']='password'
     os.environ['ftp_icone_file_path']='test_filepath'
     test_ftp_url='ftp://username:password@www.icone.com:4425/test_filepath'
-    # print(ftp_credentials())
     print(main.get_ftp_credentials())
     actual=main.get_ftp_url()
     assert actual==test_ftp_url

@@ -1,10 +1,8 @@
-import sys
-sys.path.append("..")
+
 from translator.source_code import icone_translator
 import xmltodict
 import json
 from jsonschema import validate
-
 
 
 
