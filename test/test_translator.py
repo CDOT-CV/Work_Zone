@@ -2,7 +2,7 @@
 from translator.source_code import icone_translator
 import xmltodict
 import json
-from jsonschema import validate
+import jsonschema
 
 
 
@@ -229,7 +229,7 @@ def test_wzdx_creator() :
     icone_data =open('translator/sample files/Icone Data/incidents_extended.xml').read()
     icone_obj = xmltodict.parse(icone_data)
     test_wzdx = icone_translator.wzdx_creator(icone_obj, icone_translator.initialize_info())
-    validate(instance=test_wzdx, schema=wzdx_schema)
+    jsonschema.validate(instance=test_wzdx, schema=wzdx_schema)
     assert True
 
 

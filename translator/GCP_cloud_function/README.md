@@ -14,6 +14,31 @@ cloud funtion files
 - requirements.txt
 - wzdx_schema.json
 
+## Monitoring Setup
+When Google Cloud Function invocations fail,  There is a  monitoring alert tool in GCP which sends out emails whenever this happens.
+We configure the monitoring system,every time it logs an error.
+
+### setup instruction
+Use the following settings:
+
+- Resource type: Cloud Functions
+- Metric: Log entries
+
+- Filter: 
+  - severity = ERROR
+  
+### Configuration: 
+  - Condition triggers if: Any time series violates
+  - Condition: is above
+   - Threshold: 0
+  - For: most recent value
+
+### Adding Notification Channel
+- Notifications: Email
+- Email address: Enter your email address
+
+
+
 ## Environment Setup
 
 Runtime Environment Variables
