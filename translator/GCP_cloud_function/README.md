@@ -19,7 +19,7 @@ When Google Cloud Function invocations fail,  There is a  monitoring alert tool 
 We configure the monitoring system,every time it logs an error.
 
 ### setup instruction
-Use the following settings:
+in GCP console,use this following settings:( Monitoring> Alerting > Create a Policy)
 
 - Resource type: Cloud Functions
 - Metric: Log entries
