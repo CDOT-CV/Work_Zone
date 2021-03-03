@@ -6,10 +6,11 @@ from google.cloud import pubsub_v1
 import os
 from google.cloud import secretmanager
 import logging
-
+import jsonschema
 
 
 def get_ftp_url():
+
   server = os.environ['ftp_server_address']
   port = os.environ['ftp_port']
   user,password=get_ftp_credentials()
@@ -20,8 +21,12 @@ def get_ftp_url():
   return ftpUrl
 
 def translate_newest_icone_to_wzdx(event, context):
-  ftp_url=get_ftp_url()
-  icone_data=get_ftp_file(ftp_url)
+  try:
+    ftp_url=get_ftp_url()
+    icone_data=get_ftp_file(ftp_url)
+  except:
+    logging.error(RuntimeError('failed to get ftp file. Exiting Application!'))
+    return 'failed to get ftp file. Exiting Application!', 500
   icone_obj=parse_xml(icone_data)
 
   wzdx_obj=icone_translator.wzdx_creator(icone_obj)
@@ -47,7 +52,22 @@ def parse_xml(xml_string):
   return xmltodict.parse(xml_string)
 
 def get_wzdx_schema(schema_file_name):
-  return json.loads(open(schema_file_name,'r').read())
+  try:
+    schema_string=open(schema_file_name,'r').read()
+  except FileNotFoundError as e:
+    raise RuntimeError('invalid schema: file does not exist')
+  if not schema_string:
+    raise RuntimeError('invalid schema: empty schema')
+  try:
+    schema_obj= json.loads(schema_string)
+    jsonschema.validate('', schema_obj)  
+  except json.decoder.JSONDecodeError as e :
+    raise RuntimeError('invalid schema: not valid json') from e
+  except jsonschema.SchemaError as e :
+    raise RecursionError('invalid schema: schema failed validation') from e
+  except jsonschema.ValidationError:
+    return schema_obj
+  return schema_obj
 
 def get_ftp_credentials():
   secret_client = secretmanager.SecretManagerServiceClient()

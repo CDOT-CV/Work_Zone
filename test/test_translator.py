@@ -6,7 +6,8 @@ import jsonschema
 
 
 
-#Unit testing code
+
+#Unit testing code for icone_translator.py
 def test_parse_incident() :
     test_var=""" <incident id="1245">
     <creationtime>2019-11-05T01:22:20Z</creationtime>
@@ -83,23 +84,6 @@ def test_parse_incident() :
 
     assert test_feature == valid_feature
 
-    test_var=""" <incident id="U13631595_202012160845">
-        <creationtime>2020-12-16T08:45:03Z</creationtime>
-        <updatetime>2020-12-16T17:18:00Z</updatetime>
-        <type>CONSTRUCTION</type>
-        <description>Roadwork - Lane Closed, MERGE LEFT [Trafficade, iCone]</description>
-        <location>
-          <direction>ONE_DIRECTION</direction>
-          <polyline>34.8380671,-114.1450650,34.8380671,-114.1450650</polyline>
-        </location>
-        <starttime>2020-12-16T08:45:03Z</starttime>
-        </incident> """
-
-    icone_obj = xmltodict.parse(test_var)
-    test_feature = icone_translator.parse_incident(icone_obj['incident'])
-
-    assert test_feature == None
-
     test_var = """ <incident id="U13631595_202012160845">
            <creationtime>2020-12-16T08:45:03Z</creationtime>
            <updatetime>2020-12-16T17:18:00Z</updatetime>
@@ -132,6 +116,36 @@ def test_parse_polyline() :
           ]
         ]
     assert  test_coordinates == valid_coordinates
+
+def test_parse_polyline_invalid_data() :
+    test_polyline= '' 
+    test_coordinates=icone_translator.parse_polyline(test_polyline)
+    valid_coordinates= []
+    assert  test_coordinates == valid_coordinates
+
+    test_polyline= None
+    test_coordinates=icone_translator.parse_polyline(test_polyline)
+    valid_coordinates= []
+    assert  test_coordinates == valid_coordinates
+
+    test_polyline= 'invalid' 
+    test_coordinates=icone_translator.parse_polyline(test_polyline)
+    valid_coordinates= []
+    assert  test_coordinates == valid_coordinates
+
+    try:
+        test_polyline= 'a,b,c,d' 
+        test_coordinates=icone_translator.parse_polyline(test_polyline)
+        assert False
+    except RuntimeError: 
+        assert True
+
+
+
+
+
+
+    
 
 
 def test_get_road_direction():
@@ -223,6 +237,8 @@ def test_get_event_status():
 
     assert test_event_status == valid_event_status
 
+    
+
 
 def test_wzdx_creator() :
     wzdx_schema = json.loads(open('translator/sample files/validation_schema/wzdx_v3.0_feed.json').read())
@@ -231,7 +247,6 @@ def test_wzdx_creator() :
     test_wzdx = icone_translator.wzdx_creator(icone_obj, icone_translator.initialize_info())
     jsonschema.validate(instance=test_wzdx, schema=wzdx_schema)
     assert True
-
 
 def test_parse_arguments():
     test_input='-i inputfile.xml -o outputfile.geojson'

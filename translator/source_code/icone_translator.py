@@ -69,7 +69,7 @@ def wzdx_creator(messages, info=None):
 #     <description>Roadwork - Lane Closed, MERGE LEFT [iCone]</description>
 #     <location>
 #       <direction>ONE_DIRECTION</direction>
-#       <polyline>28.8060608,-96.9916512,28.8060608,-96.9916512</polyline>
+#       <polyline>[28.8060608,-96.9916512,28.8060608,-96.9916512]</polyline>
 #     </location>
 #     <starttime>2020-12-16T17:17:00Z</starttime>
 #   </incident>
@@ -80,7 +80,7 @@ def wzdx_creator(messages, info=None):
 
 # function to calculate vehicle impact
 def get_vehicle_impact(description):
-    vehicle_impact = 'all-lanes-open'
+    vehicle_impact = 'all-lanes-open'     
     if 'lane closed' in description.lower():
         vehicle_impact = 'some-lanes-closed'
     return vehicle_impact
@@ -88,10 +88,15 @@ def get_vehicle_impact(description):
 
 # function to parse polyline to geometry line string
 def parse_polyline(polylinestring):
-    polyline = polylinestring.split(',')
+    if not polylinestring:
+        return []
+    polyline = polylinestring.split(',') #polyline rightnow is a list which has an empty string in it.
     coordinates = []
-    for i in range(0, len(polyline), 2):
-        coordinates.append([float(polyline[i + 1]), float(polyline[i])])
+    for i in range(0, len(polyline)-1, 2):
+        try:
+            coordinates.append([float(polyline[i + 1]), float(polyline[i])])
+        except ValueError as e :
+            raise RuntimeError('Failed to parse polyline data.') from e
     return coordinates
 
 
