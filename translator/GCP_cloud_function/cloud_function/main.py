@@ -10,12 +10,10 @@ import jsonschema
 
 
 def get_ftp_url():
-
   server = os.environ['ftp_server_address']
   port = os.environ['ftp_port']
   user,password=get_ftp_credentials()
   filepath = os.environ['ftp_icone_file_path']
-
   ftpString = 'ftp://{0}:{1}@{2}:{3}/{4}'
   ftpUrl = ftpString.format(user, password, server, port, filepath)
   return ftpUrl
@@ -34,7 +32,6 @@ def translate_newest_icone_to_wzdx(event, context):
   if not icone_translator.validate_wzdx(wzdx_obj,wzdx_schema):
     logging.error(RuntimeError('WZDx message failed validation. Exiting Application !'))
     return 'WZDx message failed validation. Exiting Application !', 500
-
   print(json.dumps(wzdx_obj))
 
   publisher = pubsub_v1.PublisherClient()
@@ -45,8 +42,6 @@ def translate_newest_icone_to_wzdx(event, context):
 
 def get_ftp_file(url) :
   return urllib.request.urlopen(url).read().decode('utf-8-sig')
-
-
 
 def parse_xml(xml_string):
   return xmltodict.parse(xml_string)

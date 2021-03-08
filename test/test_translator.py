@@ -3,12 +3,14 @@ from translator.source_code import icone_translator
 import xmltodict
 import json
 import jsonschema
+import re
 
 
 
 
 #Unit testing code for icone_translator.py
-def test_parse_incident() :
+
+def test_parse_incident_success() :
     test_var=""" <incident id="1245">
     <creationtime>2019-11-05T01:22:20Z</creationtime>
     <updatetime>2020-08-21T15:52:02Z</updatetime>
@@ -45,7 +47,6 @@ def test_parse_incident() :
     "beginning_cross_street": "",
     "ending_cross_street": "",
     "event_status": "active",
-    "total_num_lanes": 1,
     "types_of_work": [],
     "reduced_speed_limit": 25,
     "workers_present": False,
@@ -80,10 +81,29 @@ def test_parse_incident() :
     ]
   }
 }
-
-
     assert test_feature == valid_feature
 
+def test_parse_incident_success_no_data():
+  test_feature = icone_translator.parse_incident(None)
+  valid_feature=None
+  assert test_feature == valid_feature
+
+def test_parse_incident_success_invalid_data():
+  test_var='a,b,c,d'
+  try:
+    test_feature = icone_translator.parse_incident(test_var, callback_function=invalid_incident_callback)
+    assert False
+
+  except RuntimeError:
+    assert True
+    
+
+def invalid_incident_callback(incident):
+  raise RuntimeError()
+  
+
+
+def test_parse_incident_no_direction() :
     test_var = """ <incident id="U13631595_202012160845">
            <creationtime>2020-12-16T08:45:03Z</creationtime>
            <updatetime>2020-12-16T17:18:00Z</updatetime>
@@ -99,10 +119,9 @@ def test_parse_incident() :
 
     icone_obj = xmltodict.parse(test_var)
     test_feature = icone_translator.parse_incident(icone_obj['incident'])
-
     assert test_feature == None
 
-def test_parse_polyline() :
+def test_parse_polyline_valid_data() :
     test_polyline= "34.8380671,-114.1450650,34.8380671,-114.1450650"
     test_coordinates=icone_translator.parse_polyline(test_polyline)
     valid_coordinates= [
@@ -117,22 +136,20 @@ def test_parse_polyline() :
         ]
     assert  test_coordinates == valid_coordinates
 
-def test_parse_polyline_invalid_data() :
-    test_polyline= '' 
-    test_coordinates=icone_translator.parse_polyline(test_polyline)
-    valid_coordinates= []
-    assert  test_coordinates == valid_coordinates
+def test_parse_polyline_empty_string() :
 
     test_polyline= None
     test_coordinates=icone_translator.parse_polyline(test_polyline)
     valid_coordinates= []
     assert  test_coordinates == valid_coordinates
 
+def test_parse_polyline_invalid_data() :
     test_polyline= 'invalid' 
     test_coordinates=icone_translator.parse_polyline(test_polyline)
     valid_coordinates= []
     assert  test_coordinates == valid_coordinates
 
+def test_parse_polyline_invalid_coordinates() :
     try:
         test_polyline= 'a,b,c,d' 
         test_coordinates=icone_translator.parse_polyline(test_polyline)
@@ -140,15 +157,52 @@ def test_parse_polyline_invalid_data() :
     except RuntimeError: 
         assert True
 
+def test_validate_incident_valid_data():
+  test_valid_output = {
+    '@id': 'U13631595_202012160845',
+    'updatetime': '2020-12-16T17:18:00Z',
+    'starttime': '2020-12-07T14:18:00Z',
+    'description': 'Road constructions are going on', 
+    'creationtime': '2020-12-13T14:18:00Z', 
+    'location': {
+      'polyline': '34.8380671,-114.1450650,34.8380671,-114.1450650',
+      'street': 'I-70 N'
+    }
+  }
+  assert icone_translator.validate_incident(test_valid_output) == True
 
+def test_validate_incident_missing_required_field():
+  test_valid_output = {
+    '@id': 'U13631595_202012160845',
+    'updatetime': '2020-12-16T17:18:00Z',
+    'starttime': '2020-12-07T14:18:00Z',
+    'creationtime': '2020-12-13T14:18:00Z', 
+    'location': {
+      'polyline': '34.8380671,-114.1450650,34.8380671,-114.1450650'
+    }
+  }
+  assert icone_translator.validate_incident(test_valid_output) == False
 
+def test_validate_incident_invalid_start_time():
+  test_valid_output = {
+    '@id': 'U13631595_202012160845',
+    'updatetime': '2020-12-16T17:18:00Z',
+    'starttime': '2020-12',
+    'description': 'Road constructions are going on',
+    'creationtime': '2020-12-13T14:18:00Z', 
+    'location': {
+      'polyline': '34.8380671,-114.1450650,34.8380671,-114.1450650',
+      'street': 'I-70 N'
+    }
+  }
+  assert icone_translator.validate_incident(test_valid_output) == False
 
-
-
+def test_validate_incident_no_data():
+  test_valid_output = None
+  assert icone_translator.validate_incident(test_valid_output) == False
     
 
-
-def test_get_road_direction():
+def test_get_road_direction_no_direction():
     test_coordinates = [
           [
             -114.145065,
@@ -164,6 +218,23 @@ def test_get_road_direction():
 
     assert test_direction==valid_direction
 
+def test_get_road_direction_invalid_direction():
+    test_coordinates = ''
+    test_direction=icone_translator.get_road_direction(test_coordinates)
+    valid_direction= []
+    assert test_direction==valid_direction
+
+    test_coordinates = []
+    test_direction=icone_translator.get_road_direction(test_coordinates)
+    valid_direction= []
+    assert test_direction==valid_direction
+
+    test_coordinates = None
+    test_direction=icone_translator.get_road_direction(test_coordinates)
+    valid_direction= []
+    assert test_direction==valid_direction
+
+def test_get_road_direction_valid_direction():
     test_coordinates = [
         [
             -114.145065,
@@ -241,12 +312,35 @@ def test_get_event_status():
 
 
 def test_wzdx_creator() :
-    wzdx_schema = json.loads(open('translator/sample files/validation_schema/wzdx_v3.0_feed.json').read())
-    icone_data =open('translator/sample files/Icone Data/incidents_extended.xml').read()
-    icone_obj = xmltodict.parse(icone_data)
-    test_wzdx = icone_translator.wzdx_creator(icone_obj, icone_translator.initialize_info())
-    jsonschema.validate(instance=test_wzdx, schema=wzdx_schema)
-    assert True
+
+  icone_obj = {'incidents': {'incident': [{
+    '@id': 'U13631595_202012160845',
+    'updatetime': '2020-12-16T17:18:00Z',
+    'starttime': '2020-12-07T14:18:00Z',
+    'creationtime': '2020-12-13T14:18:00Z', 
+    'description': 'Road constructions are going on',
+    'location': {
+      'polyline': '34.8380671,-114.1450650,34.8380671,-114.1450650',
+      'street': 'I-70 N'
+    }
+  }]}}
+  
+#[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z 
+# [0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}
+
+  wzdx_re='{"road_event_feed_info": {"feed_info_id": "104d7746-688c-44ed-b195-2ee948bf9dfa", "update_date": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z", "publisher": "CDOT", "contact_name": "Abinash Konersman", "contact_email": "abinash\.konersman@state\.co\.us", "version": "3\.0", "data_sources": \[{"data_source_id": "[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}", "feed_info_id": "104d7746-688c-44ed-b195-2ee948bf9dfa", "organization_name": "iCone", "contact_name": "Abinash Konersman", "contact_email": "abinash\.konersman@state\.co\.us", "update_date": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z", "location_method": "channel-device-method", "lrs_type": "lrs_type"}\]}, "type": "FeatureCollection", "features": \[{"type": "Feature", "properties": {"road_event_id": "[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}", "event_type": "work-zone", "data_source_id": "[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}", "start_date": "2020-12-07T14:18:00Z", "end_date": "", "start_date_accuracy": "estimated", "end_date_accuracy": "estimated", "beginning_accuracy": "estimated", "ending_accuracy": "estimated", "road_name": "I-70 N", "direction": "northbound", "vehicle_impact": "all-lanes-open", "relationship": {"relationship_id": "[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}", "road_event_id": "[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}"}, "lanes": \[\], "road_number": "", "beginning_cross_street": "", "ending_cross_street": "", "event_status": "active", "types_of_work": \[\], "reduced_speed_limit": 25, "workers_present": false, "restrictions": \[\], "description": "Road constructions are going on", "creation_date": "2020-12-13T14:18:00Z", "update_date": "2020-12-16T17:18:00Z"}, "geometry": {"type": "LineString", "coordinates": \[\[-114\.145065, 34\.8380671\], \[-114\.145065, 34\.8380671\]\]}}\]}'
+
+
+  test_wzdx = icone_translator.wzdx_creator(icone_obj, icone_translator.initialize_info())
+  print(json.dumps(test_wzdx))
+
+  assert re.match(wzdx_re,json.dumps(test_wzdx)) != None
+
+def test_wzdx_creator_empty_icone_object() :
+
+  icone_obj = None
+  test_wzdx = icone_translator.wzdx_creator(icone_obj)
+  assert test_wzdx == None
 
 def test_parse_arguments():
     test_input='-i inputfile.xml -o outputfile.geojson'

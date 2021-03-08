@@ -92,7 +92,6 @@ def test_parse_xml():
          <type> Hazard </type>
           <polyline>34.8380671,-114.1450650,34.8380671,-114.1450650</polyline>
         </incident>"""
-
     test_valid_output= {"incident": OrderedDict({'@id': 'U13631595_202012160845', 'updatetime': '2020-12-16T17:18:00Z', 'type': ['CONSTRUCTION', 'Hazard'], 'polyline': '34.8380671,-114.1450650,34.8380671,-114.1450650' })}
     actual_output= main.parse_xml(test_parse_xml_string)
     assert actual_output == test_valid_output
@@ -110,10 +109,21 @@ def test_get_ftp_credentials(secret):
     secret_client=secret().access_secret_version
     secret_client.assert_has_calls(requests)
 
+@patch('google.cloud.secretmanager.SecretManagerServiceClient')
+def test_get_ftp_credentials(secret):
+    os.environ['icone_ftp_username_secret_name']='secret_username'
+    os.environ['icone_ftp_password_secret_name']='secret_password'
+    os.environ['project_id'] = 'project_id'
+    main.get_ftp_credentials()
+    valid_secret_user_request={"name": "projects/project_id/secrets/secret_username/versions/latest"}
+    valid_secret_pass_request = {"name": "projects/project_id/secrets/secret_password/versions/latest"}
+    requests=[call(valid_secret_user_request),call().payload.data.decode("UTF-8"), call(valid_secret_pass_request), call().payload.data.decode("UTF-8")]
+    secret_client=secret().access_secret_version
+    secret_client.assert_has_calls(requests)
+
 
 
 def test_get_wzdx_schema():
-
     main.get_wzdx_schema('translator/sample files/validation_schema/wzdx_v3.0_feed.json')
     #wzdx schema will throw an exception if schema is invalid
     assert True
