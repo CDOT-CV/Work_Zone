@@ -27,7 +27,7 @@ def translate_newest_icone_to_wzdx(event, context):
     return 'failed to get ftp file. Exiting Application!', 500
   icone_obj=parse_xml(icone_data)
 
-  wzdx_obj=icone_translator.wzdx_creator(icone_obj)
+  wzdx_obj=icone_translator.wzdx_creator(icone_obj, unsupported_message_callback=unsupported_messages_callback)
   wzdx_schema=get_wzdx_schema('wzdx_schema.json')
   if not icone_translator.validate_wzdx(wzdx_obj,wzdx_schema):
     logging.error(RuntimeError('WZDx message failed validation. Exiting Application !'))
@@ -78,3 +78,20 @@ def get_ftp_credentials():
   password = response.payload.data.decode("UTF-8")
 
   return username,password
+
+publisher = pubsub_v1.PublisherClient()
+topic_path = publisher.topic_path(os.environ['project_id'], os.environ['unsupported_messages_topic_id'])
+def unsupported_messages_callback(message):
+  #publish unsupported messages into pub/sub topic
+  try:
+    future=publisher.publish(topic_path,str.encode(json.dumps(message, indent=2)),origin='auto_icone_translator_ftp cloud function')
+  except:
+    future=publisher.publish(topic_path,str.encode(str(message)),origin='auto_icone_translator_ftp cloud function')
+    
+  print(future.result())
+  raise RuntimeError('exiting testing !')
+  return
+  
+  
+
+
