@@ -109,6 +109,7 @@ def test_get_ftp_credentials(secret):
     secret_client=secret().access_secret_version
     secret_client.assert_has_calls(requests)
 
+
 @patch('google.cloud.secretmanager.SecretManagerServiceClient')
 def test_get_ftp_credentials(secret):
     os.environ['icone_ftp_username_secret_name']='secret_username'
