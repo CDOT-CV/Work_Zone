@@ -139,22 +139,14 @@ def test_parse_polyline_null_parameter() :
 
     test_polyline= None
     test_coordinates=icone_translator.parse_polyline(test_polyline)
-    expected_coordinates= []
+    expected_coordinates= None
     assert  test_coordinates == expected_coordinates
 
 def test_parse_polyline_invalid_data() :
     test_polyline= 'invalid' 
     test_coordinates=icone_translator.parse_polyline(test_polyline)
-    valid_coordinates= []
-    assert  test_coordinates == valid_coordinates
-
-def test_parse_polyline_invalid_coordinates() :
-    try:
-        test_polyline= 'a,b,c,d' 
-        test_coordinates=icone_translator.parse_polyline(test_polyline)
-        assert False
-    except RuntimeError: 
-        assert True
+    expected_coordinates= []
+    assert  test_coordinates == expected_coordinates
 
 class TestTranslator(unittest.TestCase):
   def test_parse_polyline_invalid_coordinates(self):
@@ -205,7 +197,7 @@ def test_validate_incident_invalid_start_time():
   }
   assert icone_translator.validate_incident(test_valid_output) == False
 
-def test_validate_incident_invalid_test_valid_output():
+def test_validate_incident_invalid__output():
   test_valid_output = 'invalid output'
   assert icone_translator.validate_incident(test_valid_output) == False
 
@@ -230,17 +222,19 @@ def test_get_road_direction_no_direction():
 
     assert test_direction==valid_direction
 
-def test_get_road_direction_empty_coordinates():
+def test_get_road_direction_empty_string():
     test_coordinates = ''
     test_direction=icone_translator.get_road_direction(test_coordinates)
     valid_direction= []
     assert test_direction==valid_direction
 
+def test_get_road_direction_empty_coordinates():
     test_coordinates = []
     test_direction=icone_translator.get_road_direction(test_coordinates)
     valid_direction= []
     assert test_direction==valid_direction
 
+def test_get_road_direction_null_coordinates():
     test_coordinates = None
     test_direction=icone_translator.get_road_direction(test_coordinates)
     valid_direction= []

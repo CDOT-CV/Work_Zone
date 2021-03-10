@@ -96,7 +96,7 @@ def get_vehicle_impact(description):
 # function to parse polyline to geometry line string
 def parse_polyline(polylinestring):
     if not polylinestring:
-        return []
+        return None
     polyline = polylinestring.split(',') #polyline rightnow is a list which has an empty string in it.
     coordinates = []
     for i in range(0, len(polyline)-1, 2):
