@@ -83,12 +83,12 @@ def test_parse_incident_success() :
 }
     assert test_feature == valid_feature
 
-def test_parse_incident_success_no_data():
+def test_parse_incident_no_data():
   test_feature = icone_translator.parse_incident(None)
   valid_feature=None
   assert test_feature == valid_feature
 
-def test_parse_incident_success_invalid_data():
+def test_parse_incident_invalid_data():
   test_var='a,b,c,d'
   try:
     test_feature = icone_translator.parse_incident(test_var, callback_function=invalid_incident_callback)
@@ -136,12 +136,12 @@ def test_parse_polyline_valid_data() :
         ]
     assert  test_coordinates == valid_coordinates
 
-def test_parse_polyline_empty_string() :
+def test_parse_polyline_null_parameter() :
 
     test_polyline= None
     test_coordinates=icone_translator.parse_polyline(test_polyline)
-    valid_coordinates= []
-    assert  test_coordinates == valid_coordinates
+    expected_coordinates= []
+    assert  test_coordinates == expected_coordinates
 
 def test_parse_polyline_invalid_data() :
     test_polyline= 'invalid' 
@@ -171,7 +171,7 @@ def test_validate_incident_valid_data():
   }
   assert icone_translator.validate_incident(test_valid_output) == True
 
-def test_validate_incident_missing_required_field():
+def test_validate_incident_missing_required_field_description():
   test_valid_output = {
     '@id': 'U13631595_202012160845',
     'updatetime': '2020-12-16T17:18:00Z',
@@ -197,6 +197,10 @@ def test_validate_incident_invalid_start_time():
   }
   assert icone_translator.validate_incident(test_valid_output) == False
 
+def test_validate_incident_invalid_test_valid_output():
+  test_valid_output = 'invalid output'
+  assert icone_translator.validate_incident(test_valid_output) == False
+
 def test_validate_incident_no_data():
   test_valid_output = None
   assert icone_translator.validate_incident(test_valid_output) == False
@@ -218,7 +222,7 @@ def test_get_road_direction_no_direction():
 
     assert test_direction==valid_direction
 
-def test_get_road_direction_invalid_direction():
+def test_get_road_direction_empty_coordinates():
     test_coordinates = ''
     test_direction=icone_translator.get_road_direction(test_coordinates)
     valid_direction= []
@@ -234,7 +238,7 @@ def test_get_road_direction_invalid_direction():
     valid_direction= []
     assert test_direction==valid_direction
 
-def test_get_road_direction_valid_direction():
+def test_get_road_direction_northbound_direction():
     test_coordinates = [
         [
             -114.145065,
@@ -247,8 +251,9 @@ def test_get_road_direction_valid_direction():
     ]
     test_direction = icone_translator.get_road_direction(test_coordinates)
     valid_direction = 'northbound'
-
     assert test_direction == valid_direction
+
+def test_get_road_direction_eastbound_direction():
     test_coordinates = [
         [
             -114.145065,
@@ -261,8 +266,9 @@ def test_get_road_direction_valid_direction():
     ]
     test_direction = icone_translator.get_road_direction(test_coordinates)
     valid_direction ='eastbound'
-
     assert test_direction == valid_direction
+
+def test_get_road_direction_westbound_direction():
     test_coordinates = [
         [
             -114.145065,
@@ -275,18 +281,17 @@ def test_get_road_direction_valid_direction():
     ]
     test_direction = icone_translator.get_road_direction(test_coordinates)
     valid_direction = 'westbound'
-
     assert test_direction == valid_direction
 
 
-def test_get_vehicle_impact():
+def test_get_vehicle_impact_some_lanes_closed():
     test_description= "Roadwork - Lane Closed, MERGE LEFT [Trafficade, iCone]"
     test_vehicle_impact=icone_translator.get_vehicle_impact(test_description)
     valid_vehicle_impact = "some-lanes-closed"
 
     assert test_vehicle_impact==valid_vehicle_impact
 
-def test_get_event_status():
+def test_get_event_status_active():
     test_starttime_string = "2020-12-16T08:45:03Z"
     test_endtime_string=''
     test_event_status=icone_translator.get_event_status(test_starttime_string,test_endtime_string)
@@ -294,6 +299,7 @@ def test_get_event_status():
 
     assert  test_event_status==valid_event_status
 
+def test_get_event_status_planned():
     test_starttime_string = "2030-12-16T08:45:03Z"
     test_endtime_string = ''
     test_event_status = icone_translator.get_event_status(test_starttime_string, test_endtime_string)
@@ -301,6 +307,7 @@ def test_get_event_status():
 
     assert test_event_status == valid_event_status
 
+def test_get_event_status_completed():
     test_starttime_string = "2020-12-16T08:45:03Z"
     test_endtime_string = "2020-12-16T08:45:03Z"
     test_event_status = icone_translator.get_event_status(test_starttime_string, test_endtime_string)

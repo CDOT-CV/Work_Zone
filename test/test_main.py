@@ -76,7 +76,7 @@ def test_get_ftp_url(ftp_credentials):
     assert actual==test_ftp_url
 
 @patch.object(main, 'get_ftp_credentials')
-def test_get_ftp_url_invalid_data(ftp_credentials):
+def test_get_ftp_url_missing_environment_variable(ftp_credentials):
     credentials='username', 'password'
     main.get_ftp_credentials=MagicMock(return_value=credentials)
     try:
@@ -108,21 +108,6 @@ def test_get_ftp_credentials(secret):
     requests=[call(valid_secret_user_request),call().payload.data.decode("UTF-8"), call(valid_secret_pass_request), call().payload.data.decode("UTF-8")]
     secret_client=secret().access_secret_version
     secret_client.assert_has_calls(requests)
-
-
-@patch('google.cloud.secretmanager.SecretManagerServiceClient')
-def test_get_ftp_credentials(secret):
-    os.environ['icone_ftp_username_secret_name']='secret_username'
-    os.environ['icone_ftp_password_secret_name']='secret_password'
-    os.environ['project_id'] = 'project_id'
-    main.get_ftp_credentials()
-    valid_secret_user_request={"name": "projects/project_id/secrets/secret_username/versions/latest"}
-    valid_secret_pass_request = {"name": "projects/project_id/secrets/secret_password/versions/latest"}
-    requests=[call(valid_secret_user_request),call().payload.data.decode("UTF-8"), call(valid_secret_pass_request), call().payload.data.decode("UTF-8")]
-    secret_client=secret().access_secret_version
-    secret_client.assert_has_calls(requests)
-
-
 
 def test_get_wzdx_schema():
     main.get_wzdx_schema('translator/sample files/validation_schema/wzdx_v3.0_feed.json')
