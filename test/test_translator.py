@@ -4,13 +4,16 @@ import xmltodict
 import json
 import jsonschema
 import re
+import pytest
+import unittest
+from unittest.mock import MagicMock
 
 
 
 
 #Unit testing code for icone_translator.py
 
-def test_parse_incident_success() :
+def test_parse_incident_from_street_success() :
     test_var=""" <incident id="1245">
     <creationtime>2019-11-05T01:22:20Z</creationtime>
     <updatetime>2020-08-21T15:52:02Z</updatetime>
@@ -89,14 +92,10 @@ def test_parse_incident_no_data():
   assert test_feature == valid_feature
 
 def test_parse_incident_invalid_data():
-  test_var='a,b,c,d'
-  try:
-    test_feature = icone_translator.parse_incident(test_var, callback_function=invalid_incident_callback)
-    assert False
-
-  except RuntimeError:
-    assert True
-    
+  test_var = 'a,b,c,d'
+  callback = MagicMock()
+  test_feature = icone_translator.parse_incident(test_var, callback_function=callback)
+  assert callback.called
 
 def invalid_incident_callback(incident):
   raise RuntimeError()
@@ -156,6 +155,15 @@ def test_parse_polyline_invalid_coordinates() :
         assert False
     except RuntimeError: 
         assert True
+
+class TestTranslator(unittest.TestCase):
+  def test_parse_polyline_invalid_coordinates(self):
+    test_polyline = 'a,b,c,d'
+    with pytest.raises(RuntimeError) as runtimeErr:
+        icone_translator.parse_polyline(test_polyline)
+    assert "Failed to parse polyline data." in str(runtimeErr.value)
+
+    
 
 def test_validate_incident_valid_data():
   test_valid_output = {
