@@ -59,7 +59,7 @@ def get_wzdx_schema(schema_file_name):
   except json.decoder.JSONDecodeError as e :
     raise RuntimeError('invalid schema: not valid json') from e
   except jsonschema.SchemaError as e :
-    raise RecursionError('invalid schema: schema failed validation') from e
+    raise RuntimeError('invalid schema: schema failed validation') from e
   except jsonschema.ValidationError:
     return schema_obj
   return schema_obj

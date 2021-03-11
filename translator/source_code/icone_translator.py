@@ -382,8 +382,8 @@ def validate_incident(incident):
             direction=get_road_direction(coords)
             if not direction:
                 #raise RuntimeError('unable to parse direction from street name or polyline')
-                logging.warning('unable to parse direction from street name or polyline')
-            return False
+                logging.warning(f'Invalid incident with id = {incident.get("@id")}.unable to parse direction from street name or polyline')
+                return False
 
         datetime.strptime(incident['starttime'], "%Y-%m-%dT%H:%M:%SZ")
         if incident.get('endtime'):

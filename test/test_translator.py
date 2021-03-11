@@ -86,16 +86,90 @@ def test_parse_incident_from_street_success() :
 }
     assert test_feature == valid_feature
 
+def test_parse_incident_from_coordinates_success() :
+    test_var=""" <incident id="1245">
+    <creationtime>2019-11-05T01:22:20Z</creationtime>
+    <updatetime>2020-08-21T15:52:02Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>19-1245: Roadwork between MP 40 and MP 48</description>
+    <location>
+      <street>I-75</street>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>37.1571990,-84.1128540,37.1686478,-84.1238971,37.1913000,-84.1458610,37.2093480,-84.1752970,37.2168370,-84.2013030</polyline>
+    </location>
+    <starttime>2020-02-14T17:08:16Z</starttime>
+    </incident>  """
+
+    icone_obj = xmltodict.parse(test_var)
+    test_feature = icone_translator.parse_incident(icone_obj['incident'])
+    valid_feature = {
+  "type": "Feature",
+  "properties": {
+    "road_event_id": "",
+    "event_type": "work-zone",
+    "data_source_id": "",
+    "start_date": "2020-02-14T17:08:16Z",
+    "end_date": "",
+    "start_date_accuracy": "estimated",
+    "end_date_accuracy": "estimated",
+    "beginning_accuracy": "estimated",
+    "ending_accuracy": "estimated",
+    "road_name": "I-75",
+    "direction": "westbound",
+    "vehicle_impact": "all-lanes-open",
+    "relationship": {},
+    "lanes": [],
+    "road_number": "",
+    "beginning_cross_street": "",
+    "ending_cross_street": "",
+    "event_status": "active",
+    "types_of_work": [],
+    "reduced_speed_limit": 25,
+    "workers_present": False,
+    "restrictions": [],
+    "description": "19-1245: Roadwork between MP 40 and MP 48",
+    "creation_date": "2019-11-05T01:22:20Z",
+    "update_date": "2020-08-21T15:52:02Z"
+  },
+  "geometry": {
+    "type": "LineString",
+    "coordinates": [
+      [
+        -84.112854,
+        37.157199
+      ],
+      [
+        -84.1238971,
+        37.1686478
+      ],
+      [
+        -84.145861,
+        37.1913
+      ],
+      [
+        -84.175297,
+        37.209348
+      ],
+      [
+        -84.201303,
+        37.216837
+      ]
+    ]
+  }
+}
+    assert test_feature == valid_feature
+
 def test_parse_incident_no_data():
   test_feature = icone_translator.parse_incident(None)
   valid_feature=None
   assert test_feature == valid_feature
 
 def test_parse_incident_invalid_data():
+  
   test_var = 'a,b,c,d'
   callback = MagicMock()
   test_feature = icone_translator.parse_incident(test_var, callback_function=callback)
-  assert callback.called
+  assert callback.called and test_feature == None
 
 def invalid_incident_callback(incident):
   raise RuntimeError()
@@ -287,6 +361,13 @@ def test_get_road_direction_westbound_direction():
 
 
 def test_get_vehicle_impact_some_lanes_closed():
+    test_description= "Roadwork - Lane Closed, MERGE LEFT [Trafficade, iCone]"
+    test_vehicle_impact=icone_translator.get_vehicle_impact(test_description)
+    valid_vehicle_impact = "some-lanes-closed"
+
+    assert test_vehicle_impact==valid_vehicle_impact
+
+def test_get_vehicle_impact_no_lanes_closed():
     test_description= "Roadwork - Lane Closed, MERGE LEFT [Trafficade, iCone]"
     test_vehicle_impact=icone_translator.get_vehicle_impact(test_description)
     valid_vehicle_impact = "some-lanes-closed"
