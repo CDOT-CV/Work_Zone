@@ -271,7 +271,7 @@ def test_validate_incident_invalid_start_time():
   }
   assert icone_translator.validate_incident(test_valid_output) == False
 
-def test_validate_incident_invalid__output():
+def test_validate_incident_invalid():
   test_valid_output = 'invalid output'
   assert icone_translator.validate_incident(test_valid_output) == False
 
@@ -363,16 +363,15 @@ def test_get_road_direction_westbound_direction():
 def test_get_vehicle_impact_some_lanes_closed():
     test_description= "Roadwork - Lane Closed, MERGE LEFT [Trafficade, iCone]"
     test_vehicle_impact=icone_translator.get_vehicle_impact(test_description)
-    valid_vehicle_impact = "some-lanes-closed"
+    expected_vehicle_impact = "some-lanes-closed"
 
-    assert test_vehicle_impact==valid_vehicle_impact
+    assert test_vehicle_impact==expected_vehicle_impact
 
-def test_get_vehicle_impact_no_lanes_closed():
-    test_description= "Roadwork - Lane Closed, MERGE LEFT [Trafficade, iCone]"
+def test_get_vehicle_impact_all_lanes_open():
+    test_description= ''
     test_vehicle_impact=icone_translator.get_vehicle_impact(test_description)
-    valid_vehicle_impact = "some-lanes-closed"
-
-    assert test_vehicle_impact==valid_vehicle_impact
+    expected_vehicle_impact = "all-lanes-open"
+    assert test_vehicle_impact==expected_vehicle_impact
 
 def test_get_event_status_active():
     test_starttime_string = "2020-12-16T08:45:03Z"
