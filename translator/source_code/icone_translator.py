@@ -9,6 +9,7 @@ from jsonschema import validate
 from jsonschema import ValidationError
 import logging
 from collections import OrderedDict
+import re
 
 
 
@@ -19,6 +20,8 @@ def wzdx_creator(messages, info=None, unsupported_message_callback=None):
    #verify info obj 
     if not info:
         info=initialize_info()
+    if not validate_info(info):
+        return None
     wzd = {}
     wzd['road_event_feed_info'] = {}
     # hardcode
@@ -63,7 +66,8 @@ def wzdx_creator(messages, info=None, unsupported_message_callback=None):
         feature = parse_incident(incident, callback_function=unsupported_message_callback)
         if feature:
             wzd['features'].append(feature)
-
+    if not wzd['features']:
+        return None
     wzd = add_ids(wzd, True)
     return wzd
 
@@ -82,6 +86,28 @@ def wzdx_creator(messages, info=None, unsupported_message_callback=None):
 #   </incident>
 
 
+def validate_info(info):
+
+    if ((not info) or (type(info) != dict and type(info) != OrderedDict)):
+        logging.warning('invalid type')
+        return False
+    
+    #### Consider whether this id needs to be hardcoded or generated
+    feed_info_id = str(info.get('feed_info_id', ''))
+    check_feed_info_id = re.match('[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}', feed_info_id)
+    #### This information is required, might want to hardcode
+    metadata=info.get('metadata', {})
+    wz_location_method = metadata.get('wz_location_method')
+    lrs_type = metadata.get('lrs_type')
+    contact_name = metadata.get('contact_name')
+    contact_email = metadata.get('contact_email') 
+    issuing_organization=metadata.get('issuing_organization')
+    required_fields = [ check_feed_info_id, metadata, wz_location_method, lrs_type, contact_name, contact_email, issuing_organization]
+    for field in required_fields:
+        if not field:
+            return False
+            logging.warning( 'Not all required fields are present') 
+    return True
 
 
 
@@ -95,7 +121,7 @@ def get_vehicle_impact(description):
 
 # function to parse polyline to geometry line string
 def parse_polyline(polylinestring):
-    if not polylinestring:
+    if not polylinestring or type(polylinestring) != str:
         return None
     polyline = polylinestring.split(',') #polyline rightnow is a list which has an empty string in it.
     coordinates = []
@@ -103,7 +129,8 @@ def parse_polyline(polylinestring):
         try:
             coordinates.append([float(polyline[i + 1]), float(polyline[i])])
         except ValueError as e :
-            raise RuntimeError('Failed to parse polyline data.') from e
+            logging.warning('failed to parse polyline!')
+            return []
     return coordinates
 
 
@@ -370,28 +397,37 @@ def validate_incident(incident):
     if not incident or (type(incident) != dict and type(incident) != OrderedDict):
         logging.warning('incident is empty or has invalid type')
         return False
-    try:
-        coords = parse_polyline(incident['location']['polyline'])
-        incident['starttime']
-        incident['description']
-        incident['creationtime']
-        incident['updatetime']
-        road_name = incident['location']['street']
-        direction = parse_direction_from_street_name(road_name)
-        if not direction:
-            direction=get_road_direction(coords)
-            if not direction:
-                logging.warning(f'Invalid incident with id = {incident.get("@id")}.unable to parse direction from street name or polyline')
-                return False
+    
+    location = incident.get('location', {})
+    polyline = location.get('polyline')
+    coords = parse_polyline(polyline)
+    street = location.get('street', '')
 
+    starttime = incident.get('starttime')
+    description = incident.get('description')
+    creationtime = incident.get('creationtime')
+    updatetime = incident.get('updatetime')
+    direction = parse_direction_from_street_name(street)
+    if not direction:
+        direction=get_road_direction(coords)
+        if not direction:
+            logging.warning(f'Invalid incident with id = {incident.get("@id")}.unable to parse direction from street name or polyline')
+            return False
+    required_fields = [location, polyline, coords, street, starttime, description, creationtime, updatetime, direction]
+    for field in required_fields:
+        if not field:
+            return False
+            logging.warning(f'Invalid incident with id = {incident.get("@id")}. Not all required fields are present')
+
+    try:
         datetime.strptime(incident['starttime'], "%Y-%m-%dT%H:%M:%SZ")
         if incident.get('endtime'):
-            datetime.strptime(incident['endtime'], "%Y-%m-%dT%H:%M:%SZ")
-        return True
-
-    except Exception as e:
-        logging.warning(f'Invalid incident with id = {incident.get("@id")}. Not all required fields are present. Erroe message: {e}')
+            datetime.strptime(incident['endtime'], "%Y-%m-%dT%H:%M:%SZ") 
+    except ValueError:
+        logging.warning(f'Invalid incident with id = {incident.get("@id")}. Invalid date time format')
         return False
+    
+    return True
 
 
 # Add ids to message

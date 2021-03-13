@@ -91,7 +91,6 @@ def unsupported_messages_callback(message):
     future=publisher.publish(topic_path,str.encode(str(message)),origin='auto_icone_translator_ftp cloud function')
     
   print(future.result())
-  raise RuntimeError('exiting testing !')
   return
   
   

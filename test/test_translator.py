@@ -222,12 +222,12 @@ def test_parse_polyline_invalid_data() :
     expected_coordinates= []
     assert  test_coordinates == expected_coordinates
 
-class TestTranslator(unittest.TestCase):
-  def test_parse_polyline_invalid_coordinates(self):
+def test_parse_polyline_invalid_coordinates():
     test_polyline = 'a,b,c,d'
-    with pytest.raises(RuntimeError) as runtimeErr:
-        icone_translator.parse_polyline(test_polyline)
-    assert "Failed to parse polyline data." in str(runtimeErr.value)
+    test_coordinates = icone_translator.parse_polyline(test_polyline)
+    expected_coordinates= []
+    assert  test_coordinates == expected_coordinates
+
 
     
 
@@ -368,7 +368,7 @@ def test_get_vehicle_impact_some_lanes_closed():
     assert test_vehicle_impact==expected_vehicle_impact
 
 def test_get_vehicle_impact_all_lanes_open():
-    test_description= ''
+    test_description= 'Road Ranger Emergency Personnel On-Scene. Move over - Caution [DBi, iCone]'
     test_vehicle_impact=icone_translator.get_vehicle_impact(test_description)
     expected_vehicle_impact = "all-lanes-open"
     assert test_vehicle_impact==expected_vehicle_impact
@@ -421,8 +421,6 @@ def test_wzdx_creator() :
 
 
   test_wzdx = icone_translator.wzdx_creator(icone_obj, icone_translator.initialize_info())
-  print(json.dumps(test_wzdx))
-
   assert re.match(wzdx_re,json.dumps(test_wzdx)) != None
 
 def test_wzdx_creator_empty_icone_object() :
@@ -430,6 +428,130 @@ def test_wzdx_creator_empty_icone_object() :
   icone_obj = None
   test_wzdx = icone_translator.wzdx_creator(icone_obj)
   assert test_wzdx == None
+
+def test_wzdx_creator_no_info_object() :
+
+  icone_obj = {'incidents': {'incident': [{
+    '@id': 'U13631595_202012160845',
+    'updatetime': '2020-12-16T17:18:00Z',
+    'starttime': '2020-12-07T14:18:00Z',
+    'creationtime': '2020-12-13T14:18:00Z', 
+    'description': 'Road constructions are going on',
+    'location': {
+      'polyline': '34.8380671,-114.1450650,34.8380671,-114.1450650',
+      'street': 'I-70 N'
+    }
+  }]}}
+  
+#[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z 
+# [0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}
+
+  wzdx_re='{"road_event_feed_info": {"feed_info_id": "104d7746-688c-44ed-b195-2ee948bf9dfa", "update_date": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z", "publisher": "CDOT", "contact_name": "Abinash Konersman", "contact_email": "abinash\\.konersman@state\\.co\\.us", "version": "3\\.0", "data_sources": \\[{"data_source_id": "[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}", "feed_info_id": "104d7746-688c-44ed-b195-2ee948bf9dfa", "organization_name": "iCone", "contact_name": "Abinash Konersman", "contact_email": "abinash\\.konersman@state\\.co\\.us", "update_date": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z", "location_method": "channel-device-method", "lrs_type": "lrs_type"}\\]}, "type": "FeatureCollection", "features": \\[{"type": "Feature", "properties": {"road_event_id": "[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}", "event_type": "work-zone", "data_source_id": "[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}", "start_date": "2020-12-07T14:18:00Z", "end_date": "", "start_date_accuracy": "estimated", "end_date_accuracy": "estimated", "beginning_accuracy": "estimated", "ending_accuracy": "estimated", "road_name": "I-70 N", "direction": "northbound", "vehicle_impact": "all-lanes-open", "relationship": {"relationship_id": "[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}", "road_event_id": "[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}"}, "lanes": \\[\\], "road_number": "", "beginning_cross_street": "", "ending_cross_street": "", "event_status": "active", "types_of_work": \\[\\], "reduced_speed_limit": 25, "workers_present": false, "restrictions": \\[\\], "description": "Road constructions are going on", "creation_date": "2020-12-13T14:18:00Z", "update_date": "2020-12-16T17:18:00Z"}, "geometry": {"type": "LineString", "coordinates": \\[\\[-114\\.145065, 34\\.8380671\\], \\[-114\\.145065, 34\\.8380671\\]\\]}}\\]}'
+
+  test_wzdx = icone_translator.wzdx_creator(icone_obj)
+  assert re.match(wzdx_re,json.dumps(test_wzdx)) != None
+
+def test_wzdx_creator_no_incidents() :
+  icone_obj = {'incidents': {'@timestamp': '2020-12-16T17:18:00Z'}}
+  test_wzdx = icone_translator.wzdx_creator(icone_obj)
+  assert test_wzdx == None
+  
+def test_wzdx_creator_invalid_incidents_no_description() :
+
+  icone_obj = {'incidents': {'incident': [{
+    '@id': 'U13631595_202012160845',
+    'updatetime': '2020-12-16T17:18:00Z',
+    'starttime': '2020-12-07T14:18:00Z',
+    'creationtime': '2020-12-13T14:18:00Z', 
+    'location': {
+      'polyline': '34.8380671,-114.1450650,34.8380671,-114.1450650',
+      'street': 'I-70 N'
+    }
+  }]}}
+  
+  test_wzdx = icone_translator.wzdx_creator(icone_obj)
+  assert test_wzdx == None
+
+def test_wzdx_creator_invalid_info_object() :
+
+  icone_obj = {'incidents': {'incident': [{
+    '@id': 'U13631595_202012160845',
+    'updatetime': '2020-12-16T17:18:00Z',
+    'starttime': '2020-12-07T14:18:00Z',
+    'creationtime': '2020-12-13T14:18:00Z', 
+    'location': {
+      'polyline': '34.8380671,-114.1450650,34.8380671,-114.1450650',
+      'street': 'I-70 N'
+    }
+  }]}}
+
+  test_invalid_info_object =  {
+    'feed_info_id': "104d7746-e948bf9dfa",
+    'metadata':{
+      'wz_location_method': "channel-device-method",
+      'lrs_type': "lrs_type",
+      'contact_name':"Abinash Konersman",
+      'contact_email': "abinash.konersman@state.co.us",
+      'issuing_organization': "iCone",
+      }
+    }
+  
+  test_wzdx = icone_translator.wzdx_creator(icone_obj, test_invalid_info_object)
+  assert test_wzdx == None
+
+
+
+def test_valid_info_valid_info():
+  test_info = {
+    'feed_info_id': "104d7746-688c-44ed-b195-2ee948bf9dfa",
+    'metadata':{
+      'wz_location_method': "channel-device-method",
+      'lrs_type': "lrs_type",
+      'contact_name':"Abinash Konersman",
+      'contact_email': "abinash.konersman@state.co.us",
+      'issuing_organization': "iCone",
+      }
+    }
+
+  test_validate_info=icone_translator.validate_info(test_info)
+  assert test_validate_info == True
+
+def test_valid_info_no_info():
+  test_info = None
+  test_validate_info=icone_translator.validate_info(test_info)
+  assert test_validate_info == False
+
+def test_valid_info_invalid_info_missing_required_fields_lrs_type():
+  test_info = {
+    'feed_info_id': "104d7746-688c-44ed-b195-2ee948bf9dfa",
+    'metadata':{
+      'wz_location_method': "channel-device-method",
+      'contact_name':"Abinash Konersman",
+      'contact_email': "abinash.konersman@state.co.us",
+      'issuing_organization': "iCone",
+      }
+    }
+  test_validate_info=icone_translator.validate_info(test_info)
+  assert test_validate_info == False
+
+def test_valid_info_invalid_info_invalid_feed_info_id(): 
+  test_info = {
+    'feed_info_id': "104d7746-e948bf9dfa",
+    'metadata':{
+      'wz_location_method': "channel-device-method",
+      'lrs_type': "lrs_type",
+      'contact_name':"Abinash Konersman",
+      'contact_email': "abinash.konersman@state.co.us",
+      'issuing_organization': "iCone",
+      }
+    } 
+  test_validate_info=icone_translator.validate_info(test_info)
+  assert test_validate_info == False
+
+
+
+
+
 
 def test_parse_arguments():
     test_input='-i inputfile.xml -o outputfile.geojson'
@@ -457,19 +579,22 @@ def test_validate_write():
     invalid_write=icone_translator.validate_write(invalid_wzdx_data,test_output_file,test_schema)
     assert invalid_write == False
 
-def test_parse_direction_from_street_name():
+def test_parse_direction_from_street_name_southbound():
     test_road_name='I-75 S'
     output_direction=icone_translator.parse_direction_from_street_name(test_road_name)
     assert  output_direction == 'southbound'
 
+def test_parse_direction_from_street_name_northbound():
     test_road_name='I-75 NB'
     output_direction=icone_translator.parse_direction_from_street_name(test_road_name)
     assert  output_direction == 'northbound'
 
+def test_parse_direction_from_street_name_eastbound():
     test_road_name = 'I-75 EB'
     output_direction = icone_translator.parse_direction_from_street_name(test_road_name)
     assert output_direction == 'eastbound'
 
+def test_parse_direction_from_street_name_westbound():
     test_road_name = 'I-75 W'
     output_direction = icone_translator.parse_direction_from_street_name(test_road_name)
     assert output_direction == 'westbound'

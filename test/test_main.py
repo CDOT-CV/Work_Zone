@@ -122,9 +122,22 @@ def test_get_wzdx_schema_invalid_data():
         assert True
 
     try:
-        main.get_wzdx_schema('not_exixt.json')
+        main.get_wzdx_schema('not_exist.json')
         assert False
 
     except RuntimeError :
         assert True
+
+
+@patch('google.cloud.pubsub_v1.PublisherClient')
+def test_unsupported_messages_callback(pubsub):
+    #add one more test: its a valid test,but its another way to test the other published case
+    #invalid case
+    os.environ['project_id']='project_id'
+    os.environ['unsupported_messages_topic_id']='unsupported_messages_topic_id'
+    output=main.unsupported_messages_callback('unsupported_messages')
+    publisher=pubsub().publish
+    publisher.assert_called()
+    
+
 
