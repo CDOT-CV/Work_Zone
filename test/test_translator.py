@@ -559,6 +559,19 @@ def test_parse_arguments():
     test_input,test_output=icone_translator.parse_arguments(test_argv)
     assert test_output== test_argv[3] and test_input==test_argv[1]
 
+def test_parse_arguments_no_arguments():
+    test_input= ''
+    test_argv=test_input.split(' ')
+    test_input,test_output=icone_translator.parse_arguments(test_argv)
+    assert test_output== 'wzdx_translated_output_message.geojson' and test_input== ''
+
+def test_parse_arguments_invalid_arguments():
+    test_input= 'inputfile.xml outputfile.geojson'
+    test_argv=test_input.split(' ')
+    test_input,test_output=icone_translator.parse_arguments(test_argv)
+    assert test_output== 'wzdx_translated_output_message.geojson' and test_input== ''
+
+
 def test_parse_xml():
 
     test_input='translator/sample files/Icone Data/incident_short.xml'
