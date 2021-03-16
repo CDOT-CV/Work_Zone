@@ -10,20 +10,26 @@ import json
 from unittest import TestCase
 import pytest
 
-#delete all the environment variable and make it patch.dict
 
+
+#--------------------------------------------------------------------------------unit test for get_ftp_file function--------------------------------------------------------------------------------
 @patch('urllib.request')
 def test_get_ftp_file(request):
     test_url='fake url'
     test_output=main.get_ftp_file(test_url)
     request.urlopen.assert_called_with(test_url)
+    
 
-
+#--------------------------------------------------------------------------------unit test for translate_newest_icone_to_wzdx function--------------------------------------------------------------------------------
 @patch('google.cloud.pubsub_v1.PublisherClient')
 @patch.object(main, 'get_ftp_url')
 @patch.object(main, 'get_ftp_file')
 @patch.object(main, 'parse_xml')
 @patch.object(main, 'get_wzdx_schema')
+@patch.dict(os.environ, {
+    'project_id': 'project_id',
+    'wzdx_topic_id': 'wzdx_topic_id',
+    })
 def test_translate_newest_icone_to_wzdx(get_wzdx_schema, parse_xml, get_ftp_file, get_ftp_url, pubsub):
 #the intent of this magic mock fuction is that we give a valid input ,that publishes data
     main.get_ftp_url=MagicMock(return_value='url')
@@ -32,8 +38,6 @@ def test_translate_newest_icone_to_wzdx(get_wzdx_schema, parse_xml, get_ftp_file
     main.get_wzdx_schema=MagicMock(return_value='')
     icone_translator.wzdx_creator= MagicMock(return_value='WZDx')
     icone_translator.validate_wzdx= MagicMock(return_value=True)
-    os.environ['project_id']='project_id'
-    os.environ['wzdx_topic_id']='wzdx_topic_id'
     main.translate_newest_icone_to_wzdx(None,None)
     publisher=pubsub().publish
     publisher.assert_called_with(pubsub().topic_path('project_id', 'wzdx_topic_id'),str.encode(json.dumps('WZDx', indent=2)),origin='auto_icone_translator_ftp cloud function')
@@ -44,38 +48,36 @@ def test_translate_newest_icone_to_wzdx(get_wzdx_schema, parse_xml, get_ftp_file
 @patch.object(main, 'get_ftp_file')
 @patch.object(main, 'parse_xml')
 @patch.object(main, 'get_wzdx_schema')
+@patch.dict(os.environ, {
+    'project_id': 'project_id',
+    'wzdx_topic_id': 'wzdx_topic_id',
+    })
 def test_translate_newest_icone_to_wzdx_with_invalid_data(get_wzdx_schema, parse_xml, get_ftp_file, get_ftp_url, pubsub):
 #the intent of this magic mock fuction is that we give a valid input ,that publishes data
-    main.get_ftp_url=MagicMock(return_value='')
+    main.get_ftp_url=MagicMock(return_value='url')
     main.get_ftp_file=MagicMock(return_value='')
     main.parse_xml=MagicMock(return_value='')
     main.get_wzdx_schema=MagicMock(return_value='')
     icone_translator.wzdx_creator= MagicMock(return_value='WZDx')
     icone_translator.validate_wzdx= MagicMock(return_value=False)
-    os.environ['project_id']='project_id'
-    os.environ['wzdx_topic_id']='wzdx_topic_id'
     main.translate_newest_icone_to_wzdx(None,None)
     publisher=pubsub().publish
     publisher.assert_not_called()
 
-
-
+#--------------------------------------------------------------------------------unit test for get_ftp_url function--------------------------------------------------------------------------------
+@patch.dict(os.environ, {
+    'ftp_server_address': 'www.icone.com',
+    'ftp_port': '4425',
+    'icone_ftp_username': 'username',
+    'icone_ftp_password': 'password',
+    'ftp_icone_file_path': 'test_filepath',    
+    })
 @patch.object(main, 'get_ftp_credentials')
 def test_get_ftp_url(ftp_credentials):
     credentials='username', 'password'
     main.get_ftp_credentials=MagicMock(return_value=credentials)
-    os.environ['ftp_server_address']='www.icone.com'
-    os.environ['ftp_port']='4425'
-    os.environ['icone_ftp_username']='username'
-    os.environ['icone_ftp_password']='password'
-    os.environ['ftp_icone_file_path']='test_filepath'
     test_ftp_url='ftp://username:password@www.icone.com:4425/test_filepath'
     actual=main.get_ftp_url()
-    del os.environ['ftp_server_address']
-    del os.environ['ftp_port']
-    del os.environ['icone_ftp_username']
-    del os.environ['icone_ftp_password']
-    del os.environ['ftp_icone_file_path']
     assert actual==test_ftp_url
 
 @patch.object(main, 'get_ftp_credentials')
@@ -87,7 +89,8 @@ def test_get_ftp_url_missing_environment_variable(ftp_credentials):
         assert False
     except KeyError:
         assert True
-        
+
+#--------------------------------------------------------------------------------unit test for parse_xml function--------------------------------------------------------------------------------
 def test_parse_xml():
     test_parse_xml_string= """<incident id="U13631595_202012160845">
         <updatetime>2020-12-16T17:18:00Z</updatetime>
@@ -99,6 +102,7 @@ def test_parse_xml():
     actual_output= main.parse_xml(test_parse_xml_string)
     assert actual_output == test_valid_output
 
+#--------------------------------------------------------------------------------unit test for get_ftp_credentials function--------------------------------------------------------------------------------
 @patch.dict(os.environ, {
     'icone_ftp_username_secret_name': 'secret_username',
     'icone_ftp_password_secret_name': 'secret_password',
@@ -109,8 +113,7 @@ def test_get_ftp_credentials(secret):
     actual = main.get_ftp_credentials()
     valid_username = 'username'
     valid_password = 'password'
-    expected = (valid_username, valid_password)
-    
+    expected = (valid_username, valid_password) 
     assert actual == expected
     
 @patch.dict(os.environ, {})
@@ -130,7 +133,7 @@ def test_get_ftp_secrets_does_not_exist(secret):
     actual = main.get_ftp_credentials()
     
     assert actual == (None, None)
-    
+  
 valid_secret_user_request={"name": "projects/project_id/secrets/secret_username/versions/latest"}
 valid_secret_pass_request = {"name": "projects/project_id/secrets/secret_password/versions/latest"}
 def fake_secret_client(request):
@@ -148,12 +151,13 @@ def fake_secret_client(request):
         raise RuntimeError('secret does not exist!')
         
 
+#--------------------------------------------------------------------------------unit test for get_wzdx_schema function--------------------------------------------------------------------------------
 def test_get_wzdx_schema():
-    main.get_wzdx_schema('translator/sample files/validation_schema/wzdx_v3.0_feed.json')
-    #wzdx schema will throw an exception if schema is invalid
-    assert True
+    expected_schema= json.loads(open('translator/sample files/validation_schema/wzdx_v3.0_feed.json').read())
+    actual=main.get_wzdx_schema('translator/sample files/validation_schema/wzdx_v3.0_feed.json')
+    assert actual == expected_schema
 
-#class get_wzdx_schema(TestCase):
+
 def test_get_wzdx_schema_invalid_data():
 
     with pytest.raises(RuntimeError) as runtimeErr:
@@ -167,26 +171,29 @@ def test_get_wzdx_schema_not_exist():
     assert 'invalid schema: file does not exist' in str(runtimeErr.value)   
     
 
+#--------------------------------------------------------------------------------unit test for unsupported_messages_callback function--------------------------------------------------------------------------------
+@patch('google.cloud.pubsub_v1.PublisherClient')
+@patch.dict(os.environ, {'project_id': 'project_id',
+    'unsupported_messages_topic_id': 'unsupported_messages_topic_id'})
+def test_unsupported_messages_callback_dict(pubsub):
+
+    output=main.unsupported_messages_callback({'messages':'unsupported_messages'})
+    publisher=pubsub().publish
+    publisher.assert_called_with(pubsub().topic_path('project_id', 'unsupported_messages_topic_id'),str.encode(json.dumps({'messages':'unsupported_messages'}, indent=2)),origin='auto_icone_translator_ftp cloud function')
 
 @patch('google.cloud.pubsub_v1.PublisherClient')
-def test_unsupported_messages_callback(pubsub):
-    #add one more test: its a valid test,but its another way to test the other published case
-    #invalid case
-    os.environ['project_id']='project_id'
-    os.environ['unsupported_messages_topic_id']='unsupported_messages_topic_id'
+@patch.dict(os.environ, {'project_id': 'project_id',
+    'unsupported_messages_topic_id': 'unsupported_messages_topic_id'})
+def test_unsupported_messages_callback_string(pubsub):
+
     output=main.unsupported_messages_callback('unsupported_messages')
     publisher=pubsub().publish
-    publisher.assert_called()
+    publisher.assert_called_with(pubsub().topic_path('project_id', 'unsupported_messages_topic_id'),str.encode(json.dumps('unsupported_messages')),origin='auto_icone_translator_ftp cloud function')
+
 
 @patch('google.cloud.pubsub_v1.PublisherClient')
-def test_unsupported_messages_callback(pubsub):
-    #add one more test: its a valid test,but its another way to test the other published case
-    #invalid case
-    os.environ['project_id']='project_id'
-    os.environ['unsupported_messages_topic_id']='unsupported_messages_topic_id'
+@patch.dict(os.environ, {})
+def test_unsupported_messages_callback_invalid(pubsub):
     output=main.unsupported_messages_callback('unsupported_messages')
     publisher=pubsub().publish
-    publisher.assert_called()
-    
-
-
+    publisher.assert_not_called()

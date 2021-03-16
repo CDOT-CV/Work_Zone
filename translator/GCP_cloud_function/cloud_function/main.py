@@ -99,17 +99,20 @@ def get_ftp_credentials():
 
 
 def unsupported_messages_callback(message):
+  project_id = os.environ.get('project_id')
+  unsupported_messages_topic_id = os.environ.get('unsupported_messages_topic_id')
+  if not project_id or not unsupported_messages_callback:
+    return False
   #update this so that this code will execute once, not everytime the function is called
   publisher = pubsub_v1.PublisherClient()
-  topic_path = publisher.topic_path(os.environ['project_id'], os.environ['unsupported_messages_topic_id'])
+  topic_path = publisher.topic_path(project_id, unsupported_messages_topic_id)
   #publish unsupported messages into pub/sub topic
   try:
     future=publisher.publish(topic_path,str.encode(json.dumps(message, indent=2)),origin='auto_icone_translator_ftp cloud function')
   except:
     future=publisher.publish(topic_path,str.encode(str(message)),origin='auto_icone_translator_ftp cloud function')
-    
   print(future.result())
-  return
+  return True
   
 
 
