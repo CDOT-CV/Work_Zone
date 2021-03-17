@@ -416,9 +416,9 @@ def validate_incident(incident):
     required_fields = [location, polyline, coords, street, starttime, description, creationtime, updatetime, direction]
     for field in required_fields:
         if not field:
-            return False
             logging.warning(f'Invalid incident with id = {incident.get("@id")}. Not all required fields are present')
-
+            return False
+            
     try:
         datetime.strptime(incident['starttime'], "%Y-%m-%dT%H:%M:%SZ")
         if incident.get('endtime'):
