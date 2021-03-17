@@ -187,7 +187,6 @@ def test_get_wzdx_schema_not_exist():
 @patch.dict(os.environ, {'project_id': 'project_id',
     'unsupported_messages_topic_id': 'unsupported_messages_topic_id'})
 def test_unsupported_messages_callback_dict(pubsub):
-
     output=main.unsupported_messages_callback({'messages':'unsupported_messages'})
     publisher=pubsub().publish
     publisher.assert_called_with(pubsub().topic_path('project_id', 'unsupported_messages_topic_id'),str.encode(json.dumps({'messages':'unsupported_messages'}, indent=2)),origin='auto_icone_translator_ftp cloud function')
@@ -196,7 +195,6 @@ def test_unsupported_messages_callback_dict(pubsub):
 @patch.dict(os.environ, {'project_id': 'project_id',
     'unsupported_messages_topic_id': 'unsupported_messages_topic_id'})
 def test_unsupported_messages_callback_string(pubsub):
-
     output=main.unsupported_messages_callback('unsupported_messages')
     publisher=pubsub().publish
     publisher.assert_called_with(pubsub().topic_path('project_id', 'unsupported_messages_topic_id'),str.encode(json.dumps('unsupported_messages')),origin='auto_icone_translator_ftp cloud function')
@@ -204,7 +202,7 @@ def test_unsupported_messages_callback_string(pubsub):
 
 @patch('google.cloud.pubsub_v1.PublisherClient')
 @patch.dict(os.environ, {})
-def test_unsupported_messages_callback_invalid(pubsub):
+def test_unsupported_messages_callback_no_environment_variable(pubsub):
     output=main.unsupported_messages_callback('unsupported_messages')
     publisher=pubsub().publish
     publisher.assert_not_called()
