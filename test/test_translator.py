@@ -480,7 +480,7 @@ def test_wzdx_creator_invalid_info_object() :
   test_wzdx = icone_translator.wzdx_creator(icone_obj, test_invalid_info_object)
   assert test_wzdx == None
 
-def test_wzdx_creator_valid _and_invalid() :
+def test_wzdx_creator_valid_and_invalid() :
   icone_obj = {'incidents': {'incident': [{
     '@id': 'U13631595_202012160845',
     'updatetime': '2020-12-16T17:18:00Z',
