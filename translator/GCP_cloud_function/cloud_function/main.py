@@ -78,7 +78,7 @@ def get_ftp_credentials():
   project_id = os.environ.get('project_id')
            
   if not username_secret_name or not password_secret_name or not project_id:
-    return None
+    return None, None
   request = {"name": f"projects/{project_id}/secrets/{username_secret_name}/versions/latest"}
   try:
     response = secret_client.access_secret_version(request)
@@ -101,7 +101,7 @@ def get_ftp_credentials():
 def unsupported_messages_callback(message):
   project_id = os.environ.get('project_id')
   unsupported_messages_topic_id = os.environ.get('unsupported_messages_topic_id')
-  if not project_id or not unsupported_messages_callback:
+  if not project_id or not unsupported_messages_topic_id:
     return False
   #update this so that this code will execute once, not everytime the function is called
   publisher = pubsub_v1.PublisherClient()

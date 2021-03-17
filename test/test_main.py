@@ -121,7 +121,7 @@ def test_get_ftp_credentials(secret):
 def test_get_ftp_credentials_no_env_vars(secret):
     secret().access_secret_version = fake_secret_client
     actual = main.get_ftp_credentials()
-    assert actual == None
+    assert actual == (None, None) 
 
 @patch.dict(os.environ, {
     'icone_ftp_username_secret_name': 'secret_username',
