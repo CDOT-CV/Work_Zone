@@ -124,11 +124,22 @@ def test_get_ftp_credentials_no_env_vars(secret):
     assert actual == None
 
 @patch.dict(os.environ, {
+    'icone_ftp_username_secret_name': 'secret_username',
+    'icone_ftp_password_secret_name': 'fail',
+    'project_id': 'project_id'})
+@patch('google.cloud.secretmanager.SecretManagerServiceClient')
+def test_get_ftp_secrets_username_password_does_not_exist(secret):
+    secret().access_secret_version = fake_secret_client
+    actual = main.get_ftp_credentials()
+    
+    assert actual == (None, None)
+
+@patch.dict(os.environ, {
     'icone_ftp_username_secret_name': 'fail',
     'icone_ftp_password_secret_name': 'secret_password',
     'project_id': 'project_id'})
 @patch('google.cloud.secretmanager.SecretManagerServiceClient')
-def test_get_ftp_secrets_does_not_exist(secret):
+def test_get_ftp_secrets_username_does_not_exist(secret):
     secret().access_secret_version = fake_secret_client
     actual = main.get_ftp_credentials()
     
