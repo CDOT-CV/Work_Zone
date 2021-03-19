@@ -137,7 +137,7 @@ def parse_polyline(polylinestring):
 # function to get road direction by using geometry coordinates
 def get_road_direction(coordinates):
     if not coordinates:
-        return []
+        return None
     try:
         long_dif = coordinates[-1][0] - coordinates[0][0]
         lat_dif = coordinates[-1][1] - coordinates[0][1]

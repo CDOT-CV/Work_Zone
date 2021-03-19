@@ -30,7 +30,7 @@ def test_get_ftp_file(request):
     'project_id': 'project_id',
     'wzdx_topic_id': 'wzdx_topic_id',
     })
-def test_translate_newest_icone_to_wzdx(get_wzdx_schema, parse_xml, get_ftp_file, get_ftp_url, pubsub):
+def test_translate_newest_icone_to_wzdx_success(get_wzdx_schema, parse_xml, get_ftp_file, get_ftp_url, pubsub):
 #the intent of this magic mock fuction is that we give a valid input ,that publishes data
     main.get_ftp_url=MagicMock(return_value='url')
     main.get_ftp_file=MagicMock(return_value='')
@@ -52,7 +52,7 @@ def test_translate_newest_icone_to_wzdx(get_wzdx_schema, parse_xml, get_ftp_file
     'project_id': 'project_id',
     'wzdx_topic_id': 'wzdx_topic_id',
     })
-def test_translate_newest_icone_to_wzdx_with_invalid_data(get_wzdx_schema, parse_xml, get_ftp_file, get_ftp_url, pubsub):
+def test_translate_newest_icone_to_wzdx_validation_failed(get_wzdx_schema, parse_xml, get_ftp_file, get_ftp_url, pubsub):
 #the intent of this magic mock fuction is that we give a valid input ,that publishes data
     main.get_ftp_url=MagicMock(return_value='url')
     main.get_ftp_file=MagicMock(return_value='')
@@ -61,6 +61,39 @@ def test_translate_newest_icone_to_wzdx_with_invalid_data(get_wzdx_schema, parse
     icone_translator.wzdx_creator= MagicMock(return_value='WZDx')
     icone_translator.validate_wzdx= MagicMock(return_value=False)
     main.translate_newest_icone_to_wzdx(None,None)
+    publisher=pubsub().publish
+    publisher.assert_not_called()
+
+
+@patch('google.cloud.pubsub_v1.PublisherClient')
+@patch.object(main, 'get_ftp_url')
+@patch.object(main, 'get_ftp_file')
+@patch.object(main, 'parse_xml')
+@patch.object(main, 'get_wzdx_schema')
+@patch.dict(os.environ, {
+    'project_id': 'project_id',
+    'wzdx_topic_id': 'wzdx_topic_id',
+    })
+def test_translate_newest_icone_to_wzdx_no_ftp_url(get_wzdx_schema, parse_xml, get_ftp_file, get_ftp_url, pubsub):
+#the intent of this magic mock fuction is that we give a valid input ,that publishes data
+    main.get_ftp_url=MagicMock(return_value = None)
+    publisher=pubsub().publish
+    publisher.assert_not_called()
+
+    
+@patch('google.cloud.pubsub_v1.PublisherClient')
+@patch.object(main, 'get_ftp_url')
+@patch.object(main, 'get_ftp_file')
+@patch.object(main, 'parse_xml')
+@patch.object(main, 'get_wzdx_schema')
+@patch.dict(os.environ, {
+    'project_id': 'project_id',
+    'wzdx_topic_id': 'wzdx_topic_id',
+    })
+def test_translate_newest_icone_to_wzdx_invalid_ftp_url(get_wzdx_schema, parse_xml, get_ftp_file, get_ftp_url, pubsub):
+#the intent of this magic mock fuction is that we give a valid input ,that publishes data
+    main.get_ftp_url=MagicMock(return_value = 'url')
+    main.get_ftp_file=MagicMock(side_effect = ValueError('malformed URL'))
     publisher=pubsub().publish
     publisher.assert_not_called()
 

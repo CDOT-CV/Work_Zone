@@ -296,19 +296,19 @@ def test_get_road_direction_no_direction():
 def test_get_road_direction_empty_string():
     test_coordinates = ''
     test_direction=icone_translator.get_road_direction(test_coordinates)
-    valid_direction= []
+    valid_direction= None
     assert test_direction==valid_direction
 
 def test_get_road_direction_empty_coordinates():
     test_coordinates = []
     test_direction=icone_translator.get_road_direction(test_coordinates)
-    valid_direction= []
+    valid_direction= None
     assert test_direction==valid_direction
 
 def test_get_road_direction_null_coordinates():
     test_coordinates = None
     test_direction=icone_translator.get_road_direction(test_coordinates)
-    valid_direction= []
+    valid_direction= None
     assert test_direction==valid_direction
 
 def test_get_road_direction_northbound_direction():

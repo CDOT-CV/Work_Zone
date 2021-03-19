@@ -24,8 +24,8 @@ def translate_newest_icone_to_wzdx(event, context):
   try:
     ftp_url=get_ftp_url()
     if not ftp_url:
-      logging.error(RuntimeError('failed to get ftp file. Exiting Application!'))
-      return 'failed to get ftp file. Exiting Application!', 500
+      logging.error(RuntimeError('failed to get ftp url. Exiting Application!'))
+      return 'failed to get ftp url. Exiting Application!', 500
 
     icone_data=get_ftp_file(ftp_url)
   except:
@@ -103,16 +103,25 @@ def unsupported_messages_callback(message):
   unsupported_messages_topic_id = os.environ.get('unsupported_messages_topic_id')
   if not project_id or not unsupported_messages_topic_id:
     return False
-  #update this so that this code will execute once, not everytime the function is called
   publisher = pubsub_v1.PublisherClient()
   topic_path = publisher.topic_path(project_id, unsupported_messages_topic_id)
   #publish unsupported messages into pub/sub topic
   try:
-    future=publisher.publish(topic_path,str.encode(json.dumps(message, indent=2)),origin='auto_icone_translator_ftp cloud function')
-  except:
-    future=publisher.publish(topic_path,str.encode(str(message)),origin='auto_icone_translator_ftp cloud function')
+    future = publisher.publish(topic_path, str.encode(formatMessage(message)), origin='auto_icone_translator_ftp cloud function')
+    #future=publisher.publish(topic_path,str.encode(json.dumps(message, indent=2)),origin='auto_icone_translator_ftp cloud function')
+  except Exception as e:
+    logging.error('failed to publish unsupported message to project_id: {:s}, topic_id: {:s}, error_message: {:s}'.format(project_id, unsupported_messages_topic_id, str(e)))
+    return False
   print(future.result())
   return True
+
+def formatMessage(message) -> str:
+  message_type = [dict,list, tuple, str, int, float, bool, type(None)]
+  if type(message) in message_type:
+    msg = json.dumps(message, indent=2)  
+  else:
+    msg = str(message) 
+  return msg
   
 
 
