@@ -80,7 +80,7 @@ def test_translate_newest_icone_to_wzdx_no_ftp_url(get_wzdx_schema, parse_xml, g
     publisher=pubsub().publish
     publisher.assert_not_called()
 
-    
+
 @patch('google.cloud.pubsub_v1.PublisherClient')
 @patch.object(main, 'get_ftp_url')
 @patch.object(main, 'get_ftp_file')
@@ -114,14 +114,12 @@ def test_get_ftp_url(ftp_credentials):
     assert actual==test_ftp_url
 
 @patch.object(main, 'get_ftp_credentials')
+@patch.dict(os.environ, {})
 def test_get_ftp_url_missing_environment_variable(ftp_credentials):
     credentials='username', 'password'
     main.get_ftp_credentials=MagicMock(return_value=credentials)
-    try:
-        actual=main.get_ftp_url()
-        assert False
-    except KeyError:
-        assert True
+    with pytest.raises(KeyError):
+        main.get_ftp_url()
 
 #--------------------------------------------------------------------------------unit test for parse_xml function--------------------------------------------------------------------------------
 def test_parse_xml():

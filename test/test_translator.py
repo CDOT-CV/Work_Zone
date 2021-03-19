@@ -189,7 +189,6 @@ def test_parse_incident_no_direction() :
 
 
 
-
 #--------------------------------------------------------------------------------Unit test for parse_polyline function--------------------------------------------------------------------------------
 def test_parse_polyline_valid_data() :
     test_polyline= "34.8380671,-114.1450650,34.8380671,-114.1450650"
@@ -506,6 +505,7 @@ def test_wzdx_creator_valid_and_invalid() :
   assert re.match(wzdx_re,json.dumps(test_wzdx)) != None
 
 
+
 #--------------------------------------------------------------------------------unit test for valid_info function--------------------------------------------------------------------------------
 def test_valid_info_valid_info():
   test_info = {
@@ -572,6 +572,12 @@ def test_parse_arguments_invalid_arguments():
     test_argv=test_input.split(' ')
     test_input,test_output=icone_translator.parse_arguments(test_argv)
     assert test_output== 'wzdx_translated_output_message.geojson' and test_input== ''
+
+def test_parse_arguments_help():
+    test_input= '-h'
+    test_argv=test_input.split(' ')
+    with pytest.raises(SystemExit):
+        icone_translator.parse_arguments(test_argv)
 
 #--------------------------------------------------------------------------------unit test for parse_xml function--------------------------------------------------------------------------------
 def test_parse_xml():

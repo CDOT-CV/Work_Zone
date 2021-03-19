@@ -14,6 +14,8 @@ import re
 
 
 # Translator
+
+
 def wzdx_creator(messages, info=None, unsupported_message_callback=None):
     if not messages:
         return None
@@ -453,19 +455,29 @@ def add_ids(message, add_ids):
     return message
 
 
+help_string = """ 
+
+Usage: python icone_translator.py [arguments]
+
+Global options:
+-h, --help                  Print this usage information.
+-i, --input                 specify the xml file to translate
+-o, --output                specify the output file for generated wzdx geojson message """
+
 def parse_arguments(argv):
     inputfile = ''
     outputfile = 'wzdx_translated_output_message.geojson'
     try:
-        opts, args = getopt.getopt(argv, "hi:o:", ["ifile=", "ofile="])
+        opts, args = getopt.getopt(argv, "hi:o:", ["input=", "output="])
     except getopt.GetoptError:
         sys.exit(2)
     for opt, arg in opts:
-        if opt == '-h':
+        if opt in ("-h", "--help"):
+            print(help_string)
             sys.exit()
-        elif opt in ("-i", "--ifile"):
+        elif opt in ("-i", "--input"):
             inputfile = arg
-        elif opt in ("-o", "--ofile"):
+        elif opt in ("-o", "--output"):
             outputfile = arg
     return inputfile, outputfile
 inputfile, outputfile = parse_arguments(sys.argv[1:])
