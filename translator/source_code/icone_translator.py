@@ -400,7 +400,11 @@ def validate_incident(incident):
         logging.warning('incident is empty or has invalid type')
         return False
     
-    location = incident.get('location', {})
+    location = incident.get('location')
+    if not location:
+        logging.warning(f'Invalid incident with id = {incident.get("@id")}. Location object not present')
+        return False
+
     polyline = location.get('polyline')
     coords = parse_polyline(polyline)
     street = location.get('street', '')

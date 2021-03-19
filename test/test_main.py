@@ -237,3 +237,50 @@ def test_unsupported_messages_callback_no_environment_variable(pubsub):
     output=main.unsupported_messages_callback('unsupported_messages')
     publisher=pubsub().publish
     publisher.assert_not_called()
+
+#--------------------------------------------------------------------------------unit test for formatMessage function--------------------------------------------------------------------------------
+def test_formatMessage_dict_type():
+    test_message = {'type': 'PCMS',
+    'id': 'I-75 NB - MP 48.3',
+    'timestamp': '2020-08-21T15:48:25Z'}
+
+    actual = main.formatMessage(test_message)
+    expected_output= '{\n  "type": "PCMS",\n  "id": "I-75 NB - MP 48.3",\n  "timestamp": "2020-08-21T15:48:25Z"\n}'
+    assert actual == expected_output
+
+def test_formatMessage_string_type():
+    test_message = 'string_type_message'
+    actual = main.formatMessage(test_message)
+    expected_output= '"string_type_message"'
+    assert actual == expected_output
+
+def test_formatMessage_list_type():
+    test_message = ['message', 'type', 'list', 12345]
+    actual = main.formatMessage(test_message)
+    expected_output = '[\n  "message",\n  "type",\n  "list",\n  12345\n]'
+    assert actual == expected_output
+
+def test_formatMessage_None_type():
+    test_message = None
+    actual = main.formatMessage(test_message)
+    expected_output= 'null'
+    assert actual == expected_output
+
+def test_formatMessage_int_type():
+    test_message = 12345
+    actual = main.formatMessage(test_message)
+    expected_output= '12345'
+    assert actual == expected_output
+
+def test_formatMessage_float_type():
+    test_message = 12345.67
+    actual = main.formatMessage(test_message)
+    expected_output= '12345.67'
+    assert actual == expected_output
+
+def test_formatMessage_byte_string():
+    test_message = b'byte_string_message'
+    actual = main.formatMessage(test_message)
+    expected_output= "b'byte_string_message'"
+    assert actual == expected_output
+
