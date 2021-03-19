@@ -187,8 +187,7 @@ def test_parse_incident_no_direction() :
     test_feature = icone_translator.parse_incident(icone_obj['incident'])
     assert test_feature == None
 
-def invalid_incident_callback(incident):
-  raise RuntimeError()
+
 
 
 #--------------------------------------------------------------------------------Unit test for parse_polyline function--------------------------------------------------------------------------------
