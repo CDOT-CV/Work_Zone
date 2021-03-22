@@ -77,6 +77,7 @@ def test_translate_newest_icone_to_wzdx_validation_failed(get_wzdx_schema, parse
 def test_translate_newest_icone_to_wzdx_no_ftp_url(get_wzdx_schema, parse_xml, get_ftp_file, get_ftp_url, pubsub):
 #the intent of this magic mock fuction is that we give a valid input ,that publishes data
     main.get_ftp_url=MagicMock(return_value = None)
+    main.translate_newest_icone_to_wzdx(None,None)
     publisher=pubsub().publish
     publisher.assert_not_called()
 
@@ -94,6 +95,7 @@ def test_translate_newest_icone_to_wzdx_invalid_ftp_url(get_wzdx_schema, parse_x
 #the intent of this magic mock fuction is that we give a valid input ,that publishes data
     main.get_ftp_url=MagicMock(return_value = 'url')
     main.get_ftp_file=MagicMock(side_effect = ValueError('malformed URL'))
+    main.translate_newest_icone_to_wzdx(None,None)
     publisher=pubsub().publish
     publisher.assert_not_called()
 
