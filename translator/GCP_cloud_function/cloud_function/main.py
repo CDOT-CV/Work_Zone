@@ -108,7 +108,6 @@ def unsupported_messages_callback(message):
   #publish unsupported messages into pub/sub topic
   try:
     future = publisher.publish(topic_path, str.encode(formatMessage(message)), origin='auto_icone_translator_ftp cloud function')
-    #future=publisher.publish(topic_path,str.encode(json.dumps(message, indent=2)),origin='auto_icone_translator_ftp cloud function')
   except Exception as e:
     logging.error('failed to publish unsupported message to project_id: {:s}, topic_id: {:s}, error_message: {:s}'.format(project_id, unsupported_messages_topic_id, str(e)))
     return False
