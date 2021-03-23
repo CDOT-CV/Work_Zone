@@ -7,10 +7,23 @@ import string
 import sys, getopt
 from jsonschema import validate
 from jsonschema import ValidationError
+import logging
+from collections import OrderedDict
+import re
+
 
 
 # Translator
-def wzdx_creator(messages, info):
+
+
+def wzdx_creator(messages, info=None, unsupported_message_callback=None):
+    if not messages:
+        return None
+   #verify info obj 
+    if not info:
+        info=initialize_info()
+    if not validate_info(info):
+        return None
     wzd = {}
     wzd['road_event_feed_info'] = {}
     # hardcode
@@ -46,14 +59,17 @@ def wzdx_creator(messages, info):
     ids['road_event_id'] = road_event_id
 
     wzd['features'] = []
+
+    if not messages.get('incidents', {}).get('incident'):
+        return None
+
     for incident in messages['incidents']['incident']:
-        # Parse Incident to WZDx Feature
-
-
-        feature = parse_incident(incident)
+        # Parse Incident to WZDx Feature    
+        feature = parse_incident(incident, callback_function=unsupported_message_callback)
         if feature:
             wzd['features'].append(feature)
-
+    if not wzd['features']:
+        return None
     wzd = add_ids(wzd, True)
     return wzd
 
@@ -66,18 +82,40 @@ def wzdx_creator(messages, info):
 #     <description>Roadwork - Lane Closed, MERGE LEFT [iCone]</description>
 #     <location>
 #       <direction>ONE_DIRECTION</direction>
-#       <polyline>28.8060608,-96.9916512,28.8060608,-96.9916512</polyline>
+#       <polyline>[28.8060608,-96.9916512,28.8060608,-96.9916512]</polyline>
 #     </location>
 #     <starttime>2020-12-16T17:17:00Z</starttime>
 #   </incident>
 
 
+def validate_info(info):
+
+    if ((not info) or (type(info) != dict and type(info) != OrderedDict)):
+        logging.warning('invalid type')
+        return False
+    
+    #### Consider whether this id needs to be hardcoded or generated
+    feed_info_id = str(info.get('feed_info_id', ''))
+    check_feed_info_id = re.match('[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}', feed_info_id)
+    #### This information is required, might want to hardcode
+    metadata=info.get('metadata', {})
+    wz_location_method = metadata.get('wz_location_method')
+    lrs_type = metadata.get('lrs_type')
+    contact_name = metadata.get('contact_name')
+    contact_email = metadata.get('contact_email') 
+    issuing_organization=metadata.get('issuing_organization')
+    required_fields = [ check_feed_info_id, metadata, wz_location_method, lrs_type, contact_name, contact_email, issuing_organization]
+    for field in required_fields:
+        if not field:
+            return False
+            logging.warning( 'Not all required fields are present') 
+    return True
 
 
 
 # function to calculate vehicle impact
 def get_vehicle_impact(description):
-    vehicle_impact = 'all-lanes-open'
+    vehicle_impact = 'all-lanes-open'     
     if 'lane closed' in description.lower():
         vehicle_impact = 'some-lanes-closed'
     return vehicle_impact
@@ -85,17 +123,29 @@ def get_vehicle_impact(description):
 
 # function to parse polyline to geometry line string
 def parse_polyline(polylinestring):
-    polyline = polylinestring.split(',')
+    if not polylinestring or type(polylinestring) != str:
+        return None
+    polyline = polylinestring.split(',') #polyline rightnow is a list which has an empty string in it.
     coordinates = []
-    for i in range(0, len(polyline), 2):
-        coordinates.append([float(polyline[i + 1]), float(polyline[i])])
+    for i in range(0, len(polyline)-1, 2):
+        try:
+            coordinates.append([float(polyline[i + 1]), float(polyline[i])])
+        except ValueError as e :
+            logging.warning('failed to parse polyline!')
+            return []
     return coordinates
 
 
 # function to get road direction by using geometry coordinates
 def get_road_direction(coordinates):
-    long_dif = coordinates[-1][0] - coordinates[0][0]
-    lat_dif = coordinates[-1][1] - coordinates[0][1]
+    if not coordinates:
+        return None
+    try:
+        long_dif = coordinates[-1][0] - coordinates[0][0]
+        lat_dif = coordinates[-1][1] - coordinates[0][1]
+    except ValueError as e :
+        raise RuntimeError('Failed to get road direction.') from e
+
     if abs(long_dif) > abs(lat_dif):
         if long_dif > 0:
             direction = 'eastbound'
@@ -111,9 +161,10 @@ def get_road_direction(coordinates):
 
     return direction
 
-
+# function to parse direction from street name
 def parse_direction_from_street_name(street):
-    # function to parse direction from street name
+    if not street or type(street) != str:
+        return None
     street_char = street[-1]
     street_chars = street[-2:]
     if street_char == 'N' or street_chars == 'NB':
@@ -144,7 +195,7 @@ def get_event_status(start_time_string, end_time_string):
             event_status = "completed"
     return event_status
 
-
+#function to get description
 def create_description(incident):
     description = incident['description']
 
@@ -235,7 +286,11 @@ def parse_pcms_sensor(sensor):
 
 
 # Parse Icone Incident to WZDx
-def parse_incident(incident):
+def parse_incident(incident, callback_function=None):
+    if not validate_incident(incident):
+        if callback_function:    #Note :a call back fucnction , which will trigger every time the invalid data is given
+            callback_function(incident)
+        return None
     feature = {}
     geometry = {}
     geometry['type'] = "LineString"
@@ -277,18 +332,14 @@ def parse_incident(incident):
     properties['ending_accuracy'] = "estimated"
 
     # road_name
-    road_name = incident['location'].get('street', '')
-    if not road_name:
-        return None
-    properties['road_name'] = incident['location'].get('street', '')
+    road_name = incident['location']['street']
+    properties['road_name'] = road_name
 
     # direction
-    direction = parse_direction_from_street_name(incident['location'].get('street', ''))
+    direction = parse_direction_from_street_name(road_name)
+
     if not direction:
         direction = get_road_direction(geometry['coordinates'])
-        if not direction:
-            return None
-
     properties['direction'] = direction
 
     # vehicle impact
@@ -310,19 +361,8 @@ def parse_incident(incident):
     # beginning_cross_street
     properties['ending_cross_street'] = ""
 
-    # # beginning_milepost
-    # properties['beginning_milepost'] = ""
-    #
-    # # ending_milepost
-    # properties['ending_milepost'] = ""
-
     # event status
-    start_time = datetime.strptime(incident['starttime'], "%Y-%m-%dT%H:%M:%SZ")
-
     properties['event_status'] = get_event_status(incident['starttime'], incident.get('endtime'))
-
-    # event status
-    properties['total_num_lanes'] = 1
 
     # type_of_work
     # maintenance, minor-road-defect-repair, roadside-work, overhead-work, below-road-work, barrier-work, surface-work, painting, roadway-relocation, roadway-creation
@@ -353,6 +393,48 @@ def parse_incident(incident):
 
     return feature
 
+#function to validate the incident
+def validate_incident(incident):
+    
+    if not incident or (type(incident) != dict and type(incident) != OrderedDict):
+        logging.warning('incident is empty or has invalid type')
+        return False
+    
+    location = incident.get('location')
+    if not location:
+        logging.warning(f'Invalid incident with id = {incident.get("@id")}. Location object not present')
+        return False
+
+    polyline = location.get('polyline')
+    coords = parse_polyline(polyline)
+    street = location.get('street', '')
+
+    starttime = incident.get('starttime')
+    description = incident.get('description')
+    creationtime = incident.get('creationtime')
+    updatetime = incident.get('updatetime')
+    direction = parse_direction_from_street_name(street)
+    if not direction:
+        direction=get_road_direction(coords)
+        if not direction:
+            logging.warning(f'Invalid incident with id = {incident.get("@id")}.unable to parse direction from street name or polyline')
+            return False
+    required_fields = [location, polyline, coords, street, starttime, description, creationtime, updatetime, direction]
+    for field in required_fields:
+        if not field:
+            logging.warning(f'Invalid incident with id = {incident.get("@id")}. Not all required fields are present')
+            return False
+            
+    try:
+        datetime.strptime(incident['starttime'], "%Y-%m-%dT%H:%M:%SZ")
+        if incident.get('endtime'):
+            datetime.strptime(incident['endtime'], "%Y-%m-%dT%H:%M:%SZ") 
+    except ValueError:
+        logging.warning(f'Invalid incident with id = {incident.get("@id")}. Invalid date time format')
+        return False
+    
+    return True
+
 
 # Add ids to message
 #### This function may fail if some optional fields are not present (lanes, types_of_work, relationship, ...)
@@ -377,23 +459,31 @@ def add_ids(message, add_ids):
     return message
 
 
+help_string = """ 
+
+Usage: python icone_translator.py [arguments]
+
+Global options:
+-h, --help                  Print this usage information.
+-i, --input                 specify the xml file to translate
+-o, --output                specify the output file for generated wzdx geojson message """
+
 def parse_arguments(argv):
     inputfile = ''
     outputfile = 'wzdx_translated_output_message.geojson'
     try:
-        opts, args = getopt.getopt(argv, "hi:o:", ["ifile=", "ofile="])
+        opts, args = getopt.getopt(argv, "hi:o:", ["input=", "output="])
     except getopt.GetoptError:
         sys.exit(2)
     for opt, arg in opts:
-        if opt == '-h':
+        if opt in ("-h", "--help"):
+            print(help_string)
             sys.exit()
-        elif opt in ("-i", "--ifile"):
+        elif opt in ("-i", "--input"):
             inputfile = arg
-        elif opt in ("-o", "--ofile"):
+        elif opt in ("-o", "--output"):
             outputfile = arg
     return inputfile, outputfile
-
-
 inputfile, outputfile = parse_arguments(sys.argv[1:])
 
 
@@ -415,25 +505,27 @@ def initialize_info():
 
 
 def parse_xml(inputfile):
-    with open(inputfile, encoding='utf-8-sig') as frsm:
+    with open(inputfile, encoding='utf-8-sig') as ficone:
         # Read
-        xmlSTRING = frsm.read()
-        icone_obj = xmltodict.parse(xmlSTRING)
+        xml_string = ficone.read()
+        icone_obj = xmltodict.parse(xml_string)
         return icone_obj
 
+def validate_wzdx(wzdx_obj, wzdx_schema):
+    #wzdx_schema = json.loads(open(location_schema).read())
+    try:
+      validate(instance=wzdx_obj, schema=wzdx_schema)
+    except ValidationError as e:
+      logging.error(RuntimeError(str(e)))
+      return False
+    return True
 
 def validate_write(wzdx_obj, outputfile, location_schema):
     wzdx_schema = json.loads(open(location_schema).read())
-    try:
-        validate(instance=wzdx_obj, schema=wzdx_schema)
-    except ValidationError as e:
-        print(e)
+    if not validate_wzdx(wzdx_obj, wzdx_schema):
         return False
-
     with open(outputfile, 'w') as fwzdx:
         fwzdx.write(json.dumps(wzdx_obj, indent=2))
-
-
     return True
 
 

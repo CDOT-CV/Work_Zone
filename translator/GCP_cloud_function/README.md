@@ -9,9 +9,38 @@ It validates the WZDx message with json schema and publishes the message to a pu
 ## files present
 cloud funtion files
 - icone_translator.py
+  - This file is currently located in translator/source_code/icone_translator.py
 - main.py  
 - requirements.txt
 - wzdx_schema.json
+
+## Monitoring Setup
+There is GCP monitoring alert which sends out an email whenever the cloud function logs an error or throws an exception.
+The monitoring system is reading the logs constantly and it triggers whenever there is an error in the log. The email gives a link to the cloud function log.
+
+
+## Environment Setup
+
+Runtime Environment Variables
+
+| Name      | Value | Description    |
+| :---        |    :----:   |          ---: |
+| icone_ftp_username_secret_name     | icone_ftp_username       |  name of secret containing iCone ftp server username  |
+| icone_ftp_password_secret_name   | icone_ftp_password       | name of secret containing iCone ftp server password
+| ftp_server_address   | iconetraffic.com        | iCone ftp server address     |
+| ftp_port   | 42663       | iCone ftp server port number      |
+| ftp_icone_file_path   | incidents.xml      | The icone filename in ftp server       |
+| project_id   | cdot-cv-ode-dev        | gcp project id        |
+| wzdx_topic_id   | wzdx_messages        | topic id for wzdx pub/sub topic      |
+
+GCP Secrets
+
+| Name       | Description     |
+| :---           |          ---: |
+| icone_ftp_username     |  icone ftp server username   |
+| icone_ftp_password      | icone ftp server password      |
+
+
 
 documentation file
 
