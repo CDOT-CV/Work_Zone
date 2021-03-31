@@ -106,14 +106,7 @@ def validate_info(info):
 
 # function to calculate vehicle impact
 def get_vehicle_impact(closure_type):
-
-        #Closure type value : [-'Shoulder Closure', -'Single Lane Closure', -'No Closure', -'Right Shoulder Closed', -'Alternating Traffic', '-Off-Ramp Closure',
-        # -'On-Ramp Closure', -'All Lanes Closed', -'Single Lane Traffic', -'Left Lane Closed', -'Intermittent Traffic Stops', -'Intermittent Lane Closure', 
-        # -'Right Lane Closed', -'Various Lane Closures', -'Express Lanes Closed', -'Mobile Lane Closure', -'Left Two Lanes Closed', '-Alternating Single Lane Closures',
-        # -'Left Turn Lane Closure', -'Center Lanes Closed', -'Right Turn Lane Closure', -'Intersection Closure', -'Bridge Closed'] 
-
-        #list of vehicle impact : all-lanes-closed, some-lanes-closed, all-lanes-open, alternating-one-way, unknown
-
+    
     all_lanes_closed = ['All Lanes Closed', 'Intersection Closure', 'Bridge Closed' ]
     some_lanes_closed = ['Single Lane Closure', 'Left Lane Closed', 'Right Lane Closed','Various Lane Closures', 'Express Lanes Closed', 'Mobile Lane Closure', 'Left Two Lanes Closed',
     'Left Turn Lane Closure', 'Center Lanes Closed', 'Right Turn Lane Closure', 'Alternating Single Lane Closures','Intermittent Lane Closure'  ]
