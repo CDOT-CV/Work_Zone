@@ -6,7 +6,7 @@
         <global:GeneratedDate>2021-03-12T09:49:19.612-07:00</global:GeneratedDate>
     </alert:Header>
     <alert:Alert>
-        <alert:AlertId>349611</alert:AlertId>   
+        <alert:AlertId>349611</alert:AlertId>
         <alert:Type>Road Work</alert:Type>
         <alert:TypeId>1</alert:TypeId>
         <alert:Title>Road Construction</alert:Title>

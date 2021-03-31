@@ -147,10 +147,6 @@ def parse_polyline(polylinestring):
         geometry.append(coords)
     return geometry
 
-    
-
-
-
 
 
 # function to get event status
