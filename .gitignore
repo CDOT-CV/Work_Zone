@@ -5,3 +5,5 @@
 .DS_Store
 icone_to_wzdx_test.geojson
 wzdx_translated_output_message.geojson
+cotrip_translated_output_message.geojson
+deduplicated_wzdx_field
