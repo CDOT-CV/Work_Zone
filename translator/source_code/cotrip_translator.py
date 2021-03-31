@@ -328,14 +328,6 @@ def add_ids(message, add_ids):
     return message
 
 
-help_string = """ 
-
-Usage: python icone_translator.py [arguments]
-
-Global options:
--h, --help                  Print this usage information.
--i, --input                 specify the xml file to translate
--o, --output                specify the output file for generated wzdx geojson message """
 
 def parse_arguments(argv):
     inputfile = ''
@@ -366,7 +358,7 @@ def initialize_info():
     info['metadata'] = {}
     info['metadata']['wz_location_method'] = "channel-device-method"
     info['metadata']['lrs_type'] = "lrs_type"
-    info['metadata']['contact_name'] = "Abinash Konersman"  # we can consider to add a representive name from iCone
+    info['metadata']['contact_name'] = "Abinash Konersman"  # we can consider to add a representive name from cotrip
     info['metadata']['contact_email'] = "abinash.konersman@state.co.us"
     info['metadata']['issuing_organization'] = "COtrip"
 
@@ -374,9 +366,9 @@ def initialize_info():
 
 
 def parse_xml(inputfile):
-    with open(inputfile, encoding='utf-8-sig') as ficone:
+    with open(inputfile, encoding='utf-8-sig') as fcotrip:
         # Read
-        xml_string = ficone.read()
+        xml_string = fcotrip.read()
         cotrip_obj = xmltodict.parse(xml_string)
         return cotrip_obj
 
@@ -406,3 +398,13 @@ if inputfile:
         print('validation error more messages are printed above')
     else:
         print('huraaah ! your wzdx message is successfully generated and located here: ' + str(outputfile))
+
+
+help_string = """ 
+
+Usage: python cotrip_translator.py [arguments]
+
+Global options:
+-h, --help                  Print this usage information.
+-i, --input                 specify the xml file to translate
+-o, --output                specify the output file for generated wzdx geojson message """
