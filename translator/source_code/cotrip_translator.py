@@ -106,7 +106,7 @@ def validate_info(info):
 
 # function to calculate vehicle impact
 def get_vehicle_impact(closure_type):
-    
+
     all_lanes_closed = ['All Lanes Closed', 'Intersection Closure', 'Bridge Closed' ]
     some_lanes_closed = ['Single Lane Closure', 'Left Lane Closed', 'Right Lane Closed','Various Lane Closures', 'Express Lanes Closed', 'Mobile Lane Closure', 'Left Two Lanes Closed',
     'Left Turn Lane Closure', 'Center Lanes Closed', 'Right Turn Lane Closure', 'Alternating Single Lane Closures','Intermittent Lane Closure'  ]
@@ -126,7 +126,6 @@ def get_vehicle_impact(closure_type):
 
 
 # function to parse polyline to geometry line string
-#-104.480110,37.007645,0 -104.480103,37.008034,0 -104.480125,37.008469,0
 def parse_polyline(polylinestring):
     if not polylinestring or type(polylinestring) != str:
         return None
@@ -165,7 +164,7 @@ def get_event_status(start_time_string, end_time_string):
 # Parse COtrip alert to WZDx
 def parse_alert(alert, callback_function=None):
     if not validate_alert(alert):
-        if callback_function:    #Note :a call back fucnction , which will trigger every time the invalid data is given
+        if callback_function:    
             callback_function(alert)
         return None
     feature = {}
