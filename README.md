@@ -36,7 +36,7 @@ pip install -r requirements.txt
 
 ### Execution for iCone translator
 
-#### Step 1: Run the translator script (from Work_Zone/translator/source code/Folder)
+#### Step 1: Run the translator script (from Work_Zone/translator/source code)
 
 ```
 python icone_translator.py -i inputfile.xml -o outputfile.geojson
@@ -48,7 +48,7 @@ python icone_translator.py -i '../sample files/icone data/incidents_extended.xml
 
 ### Execution for COtrip translator
 
-#### Step 1: Run the translator script (from Work_Zone/translator/source code/Folder)
+#### Step 1: Run the translator script (from Work_Zone/translator/source code)
 
 ```
 python cotrip_translator.py -i inputfile.xml -o outputfile.geojson
