@@ -15,7 +15,14 @@ import dateutil.parser
 
 
 
+help_string = """ 
 
+Usage: python cotrip_translator.py [arguments]
+
+Global options:
+-h, --help                  Print this usage information.
+-i, --input                 specify the xml file to translate
+-o, --output                specify the output file for generated wzdx geojson message """
 
 # Translator
 
@@ -394,17 +401,9 @@ if inputfile:
 
     cotrip_obj = parse_xml(inputfile)
     wzdx = wzdx_creator(cotrip_obj, initialize_info())
-    if not validate_write(wzdx, outputfile, '../validation_schema/wzdx_v3.0_feed.json'):
+    if not validate_write(wzdx, outputfile, '../sample files/validation_schema/wzdx_v3.0_feed.json'):
         print('validation error more messages are printed above')
     else:
         print('huraaah ! your wzdx message is successfully generated and located here: ' + str(outputfile))
 
 
-help_string = """ 
-
-Usage: python cotrip_translator.py [arguments]
-
-Global options:
--h, --help                  Print this usage information.
--i, --input                 specify the xml file to translate
--o, --output                specify the output file for generated wzdx geojson message """
