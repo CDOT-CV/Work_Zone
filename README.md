@@ -55,7 +55,7 @@ python cotrip_translator.py -i inputfile.xml -o outputfile.geojson
 ```
 Example usage:
 ```
-python cotrip_translator.py -i '../sample files/icone data/incidents_extended.xml' 
+python cotrip_translator.py -i '../sample files/cotrip_data/cotrip_data.xml' 
 ```
 
 ### Unit Testing
