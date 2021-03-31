@@ -389,7 +389,6 @@ def parse_xml(inputfile):
         return cotrip_obj
 
 def validate_wzdx(wzdx_obj, wzdx_schema):
-    #wzdx_schema = json.loads(open(location_schema).read())
     try:
       validate(instance=wzdx_obj, schema=wzdx_schema)
     except ValidationError as e:
