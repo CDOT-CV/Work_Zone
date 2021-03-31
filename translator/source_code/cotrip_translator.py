@@ -385,8 +385,8 @@ def parse_xml(inputfile):
     with open(inputfile, encoding='utf-8-sig') as ficone:
         # Read
         xml_string = ficone.read()
-        icone_obj = xmltodict.parse(xml_string)
-        return icone_obj
+        cotrip_obj = xmltodict.parse(xml_string)
+        return cotrip_obj
 
 def validate_wzdx(wzdx_obj, wzdx_schema):
     #wzdx_schema = json.loads(open(location_schema).read())
@@ -409,8 +409,8 @@ def validate_write(wzdx_obj, outputfile, location_schema):
 if inputfile:
     # Added encoding argument because of weird character at start of alerts.xml file
 
-    icone_obj = parse_xml(inputfile)
-    wzdx = wzdx_creator(icone_obj, initialize_info())
+    cotrip_obj = parse_xml(inputfile)
+    wzdx = wzdx_creator(cotrip_obj, initialize_info())
     if not validate_write(wzdx, outputfile, '../validation_schema/wzdx_v3.0_feed.json'):
         print('validation error more messages are printed above')
     else:
