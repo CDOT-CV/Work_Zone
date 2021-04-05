@@ -196,7 +196,7 @@ def get_vehicle_impact(closure_type):
     'Left Turn Lane Closure', 'Center Lanes Closed', 'Right Turn Lane Closure', 'Alternating Single Lane Closures','Intermittent Lane Closure'  ]
     all_lanes_open = ['No Closure', -'Intermittent Traffic Stops', 'Shoulder Closure', 'Right Shoulder Closed', 'Off-Ramp Closure', 'On-Ramp Closure',  ]
     alternating_one_way = ['Single Lane Traffic', 'Alternating Traffic' ]
-    unknown = []
+    
     vehicle_impact = 'unknown'    
     if closure_type in all_lanes_closed:
         vehicle_impact = 'all-lanes-closed'
