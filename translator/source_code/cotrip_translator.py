@@ -1,7 +1,7 @@
 
 import xmltodict
 import json
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 import uuid
 import random
 import string
@@ -134,16 +134,21 @@ def get_vehicle_impact(closure_type):
 
 
 # function to get event status
-def get_event_status(start_time_string, end_time_string):
-    start_time = dateutil.parser.parse(start_time_string)
+def get_event_status(start_time_string, end_time_string):  
 
+    start_time = dateutil.parser.parse(start_time_string)
+    current_time = datetime.now(timezone.utc)
+    future_date_after_2weeks = current_time + \
+                        timedelta(days = 14)
     event_status = "active"
-    if datetime.now(timezone.utc) < start_time:
-        event_status = "planned"  # if < 2 to 3 weeks make it pending instead of planned
+    if current_time < start_time:
+        event_status = "planned"
+    elif start_time < future_date_after_2weeks:
+        event_status = "pending"
     elif end_time_string:
         end_time = dateutil.parser.parse(end_time_string)
 
-        if end_time < datetime.now(timezone.utc):
+        if end_time < current_time:
             event_status = "completed"
     return event_status
 
