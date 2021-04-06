@@ -10,6 +10,7 @@ from jsonschema import ValidationError
 import logging
 from collections import OrderedDict
 import re
+import translator_shared_library
 
 
 
@@ -21,8 +22,8 @@ def wzdx_creator(messages, info=None, unsupported_message_callback=None):
         return None
    #verify info obj 
     if not info:
-        info=initialize_info()
-    if not validate_info(info):
+        info = translator_shared_library.initialize_info()
+    if not translator_shared_library.validate_info(info):
         return None
     wzd = {}
     wzd['road_event_feed_info'] = {}
@@ -88,28 +89,7 @@ def wzdx_creator(messages, info=None, unsupported_message_callback=None):
 #   </incident>
 
 
-def validate_info(info):
 
-    if ((not info) or (type(info) != dict and type(info) != OrderedDict)):
-        logging.warning('invalid type')
-        return False
-    
-    #### Consider whether this id needs to be hardcoded or generated
-    feed_info_id = str(info.get('feed_info_id', ''))
-    check_feed_info_id = re.match('[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}', feed_info_id)
-    #### This information is required, might want to hardcode
-    metadata=info.get('metadata', {})
-    wz_location_method = metadata.get('wz_location_method')
-    lrs_type = metadata.get('lrs_type')
-    contact_name = metadata.get('contact_name')
-    contact_email = metadata.get('contact_email') 
-    issuing_organization=metadata.get('issuing_organization')
-    required_fields = [ check_feed_info_id, metadata, wz_location_method, lrs_type, contact_name, contact_email, issuing_organization]
-    for field in required_fields:
-        if not field:
-            return False
-            logging.warning( 'Not all required fields are present') 
-    return True
 
 
 
@@ -459,70 +439,13 @@ def add_ids(message, add_ids):
     return message
 
 
-help_string = """ 
 
-Usage: python icone_translator.py [arguments]
+inputfile, outputfile = translator_shared_library.parse_arguments(sys.argv[1:], default_output_file_name = 'icone_wzdx_translated_output_message.geojson')
 
-Global options:
--h, --help                  Print this usage information.
--i, --input                 specify the xml file to translate
--o, --output                specify the output file for generated wzdx geojson message """
-
-def parse_arguments(argv):
-    inputfile = ''
-    outputfile = 'wzdx_translated_output_message.geojson'
-    try:
-        opts, args = getopt.getopt(argv, "hi:o:", ["input=", "output="])
-    except getopt.GetoptError:
-        sys.exit(2)
-    for opt, arg in opts:
-        if opt in ("-h", "--help"):
-            print(help_string)
-            sys.exit()
-        elif opt in ("-i", "--input"):
-            inputfile = arg
-        elif opt in ("-o", "--output"):
-            outputfile = arg
-    return inputfile, outputfile
-inputfile, outputfile = parse_arguments(sys.argv[1:])
-
-
-def initialize_info():
-    info = {}
-
-    #### Consider whether this id needs to be hardcoded or generated
-    info['feed_info_id'] = "104d7746-688c-44ed-b195-2ee948bf9dfa"
-
-    #### This information is required, might want to hardcode
-    info['metadata'] = {}
-    info['metadata']['wz_location_method'] = "channel-device-method"
-    info['metadata']['lrs_type'] = "lrs_type"
-    info['metadata']['contact_name'] = "Abinash Konersman"  # we can consider to add a representive name from iCone
-    info['metadata']['contact_email'] = "abinash.konersman@state.co.us"
-    info['metadata']['issuing_organization'] = "iCone"
-
-    return info
-
-
-def parse_xml(inputfile):
-    with open(inputfile, encoding='utf-8-sig') as ficone:
-        # Read
-        xml_string = ficone.read()
-        icone_obj = xmltodict.parse(xml_string)
-        return icone_obj
-
-def validate_wzdx(wzdx_obj, wzdx_schema):
-    #wzdx_schema = json.loads(open(location_schema).read())
-    try:
-      validate(instance=wzdx_obj, schema=wzdx_schema)
-    except ValidationError as e:
-      logging.error(RuntimeError(str(e)))
-      return False
-    return True
 
 def validate_write(wzdx_obj, outputfile, location_schema):
     wzdx_schema = json.loads(open(location_schema).read())
-    if not validate_wzdx(wzdx_obj, wzdx_schema):
+    if not translator_shared_library.validate_wzdx(wzdx_obj, wzdx_schema):
         return False
     with open(outputfile, 'w') as fwzdx:
         fwzdx.write(json.dumps(wzdx_obj, indent=2))
@@ -532,8 +455,8 @@ def validate_write(wzdx_obj, outputfile, location_schema):
 if inputfile:
     # Added encoding argument because of weird character at start of incidents.xml file
 
-    icone_obj = parse_xml(inputfile)
-    wzdx = wzdx_creator(icone_obj, initialize_info())
+    icone_obj = translator_shared_library.parse_xml(inputfile)
+    wzdx = wzdx_creator(icone_obj, translator_shared_library.initialize_info())
     if not validate_write(wzdx, outputfile, '../sample files/validation_schema/wzdx_v3.0_feed.json'):
         print('validation error more messages are printed above')
     else:

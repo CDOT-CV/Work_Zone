@@ -12,69 +12,28 @@ import logging
 from collections import OrderedDict
 import re
 import dateutil.parser
-
-
-
-help_string = """ 
-
-Usage: python cotrip_translator.py [arguments]
-
-Global options:
--h, --help                  Print this usage information.
--i, --input                 specify the xml file to translate
--o, --output                specify the output file for generated wzdx geojson message """
+import translator_shared_library
 
 # Translator
 
 def main():
-    inputfile, outputfile = parse_arguments(sys.argv[1:])
+    
+    inputfile, outputfile = translator_shared_library.parse_arguments(sys.argv[1:], default_output_file_name = 'cotrip_wzdx_translated_output_message.geojson')
     if inputfile:
 
-        cotrip_obj = parse_xml(inputfile)
-        wzdx_obj = wzdx_creator(cotrip_obj, initialize_info())
+        cotrip_obj = translator_shared_library.parse_xml(inputfile)
+        wzdx_obj = wzdx_creator(cotrip_obj)
         location_schema = '../sample files/validation_schema/wzdx_v3.0_feed.json'
         wzdx_schema = json.loads(open(location_schema).read())
-        if not validate_wzdx(wzdx_obj, wzdx_schema):
+        if not translator_shared_library.validate_wzdx(wzdx_obj, wzdx_schema):
             print('validation error more messages are printed above')
         with open(outputfile, 'w') as fwzdx:
             fwzdx.write(json.dumps(wzdx_obj, indent=2))
             print('huraaah ! your wzdx message is successfully generated and located here: ' + str(outputfile))
-            
-        
-            
+    else:
+        print('please specify the input file with -i')
+        print(translator_shared_library.help_string)
 
-
-def parse_arguments(argv):
-    inputfile = ''
-    outputfile = 'cotrip_wzdx_translated_output_message.geojson'
-    try:
-        opts, args = getopt.getopt(argv, "hi:o:", ["input=", "output="])
-    except getopt.GetoptError:
-        sys.exit(2)
-    for opt, arg in opts:
-        if opt in ("-h", "--help"):
-            print(help_string)
-            sys.exit()
-        elif opt in ("-i", "--input"):
-            inputfile = arg
-        elif opt in ("-o", "--output"):
-            outputfile = arg
-    return inputfile, outputfile
-
-def parse_xml(inputfile):
-    with open(inputfile, encoding='utf-8-sig') as fcotrip:
-        # Read
-        xml_string = fcotrip.read()
-        cotrip_obj = xmltodict.parse(xml_string)
-        return cotrip_obj
-
-def validate_wzdx(wzdx_obj, wzdx_schema):
-    try:
-      validate(instance=wzdx_obj, schema=wzdx_schema)
-    except ValidationError as e:
-      logging.error(RuntimeError(str(e)))
-      return False
-    return True
 
     
 def wzdx_creator(messages, info=None, unsupported_message_callback=None):
@@ -82,8 +41,8 @@ def wzdx_creator(messages, info=None, unsupported_message_callback=None):
         return None
    #verify info obj 
     if not info:
-        info=initialize_info()
-    if not validate_info(info):
+        info = translator_shared_library.initialize_info()
+    if not translator_shared_library.validate_info(info):
         return None
     wzd = {}
     wzd['road_event_feed_info'] = {}
@@ -134,44 +93,8 @@ def wzdx_creator(messages, info=None, unsupported_message_callback=None):
     wzd = add_ids(wzd, True)
     return wzd
 
-def initialize_info():
-    info = {}
 
-    #### Consider whether this id needs to be hardcoded or generated
-    info['feed_info_id'] = "104d7746-688c-44ed-b195-2ee948bf9dfa"
 
-    #### This information is required, might want to hardcode
-    info['metadata'] = {}
-    info['metadata']['wz_location_method'] = "channel-device-method"
-    info['metadata']['lrs_type'] = "lrs_type"
-    info['metadata']['contact_name'] = "Abinash Konersman"  # we can consider to add a representive name from cotrip
-    info['metadata']['contact_email'] = "abinash.konersman@state.co.us"
-    info['metadata']['issuing_organization'] = "COtrip"
-
-    return info
-
-def validate_info(info):
-
-    if ((not info) or (type(info) != dict and type(info) != OrderedDict)):
-        logging.warning('invalid type')
-        return False
-    
-    #### Consider whether this id needs to be hardcoded or generated
-    feed_info_id = str(info.get('feed_info_id', ''))
-    check_feed_info_id = re.match('[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}', feed_info_id)
-    #### This information is required, might want to hardcode
-    metadata=info.get('metadata', {})
-    wz_location_method = metadata.get('wz_location_method')
-    lrs_type = metadata.get('lrs_type')
-    contact_name = metadata.get('contact_name')
-    contact_email = metadata.get('contact_email') 
-    issuing_organization=metadata.get('issuing_organization')
-    required_fields = [ check_feed_info_id, metadata, wz_location_method, lrs_type, contact_name, contact_email, issuing_organization]
-    for field in required_fields:
-        if not field:
-            return False
-            logging.warning('Not all required fields are present') 
-    return True
 
 
 # function to parse polyline to geometry line string
