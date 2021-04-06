@@ -111,25 +111,27 @@ def parse_polyline(polylinestring):
         geometry.append(coords)
     return geometry
 
-# function to calculate vehicle impact
-def get_vehicle_impact(closure_type):
 
-    all_lanes_closed = ['All Lanes Closed', 'Intersection Closure', 'Bridge Closed' ]
-    some_lanes_closed = ['Single Lane Closure', 'Left Lane Closed', 'Right Lane Closed','Various Lane Closures', 'Express Lanes Closed', 'Mobile Lane Closure', 'Left Two Lanes Closed',
-    'Left Turn Lane Closure', 'Center Lanes Closed', 'Right Turn Lane Closure', 'Alternating Single Lane Closures','Intermittent Lane Closure'  ]
-    all_lanes_open = ['No Closure', -'Intermittent Traffic Stops', 'Shoulder Closure', 'Right Shoulder Closed', 'Off-Ramp Closure', 'On-Ramp Closure',  ]
-    alternating_one_way = ['Single Lane Traffic', 'Alternating Traffic' ]
+
+# function to calculate vehicle impact
+# def get_vehicle_impact(closure_type):
+
+#     all_lanes_closed = ['All Lanes Closed', 'Intersection Closure', 'Bridge Closed' ]
+#     some_lanes_closed = ['Single Lane Closure', 'Left Lane Closed', 'Right Lane Closed','Various Lane Closures', 'Express Lanes Closed', 'Mobile Lane Closure', 'Left Two Lanes Closed',
+#     'Left Turn Lane Closure', 'Center Lanes Closed', 'Right Turn Lane Closure', 'Alternating Single Lane Closures','Intermittent Lane Closure'  ]
+#     all_lanes_open = ['No Closure', -'Intermittent Traffic Stops', 'Shoulder Closure', 'Right Shoulder Closed', 'Off-Ramp Closure', 'On-Ramp Closure',  ]
+#     alternating_one_way = ['Single Lane Traffic', 'Alternating Traffic' ]
     
-    vehicle_impact = 'unknown'    
-    if closure_type in all_lanes_closed:
-        vehicle_impact = 'all-lanes-closed'
-    elif closure_type in some_lanes_closed:
-        vehicle_impact = 'some-lanes-closed'
-    elif closure_type in all_lanes_open:
-        vehicle_impact = 'all-lanes-open'
-    elif closure_type in alternating_one_way:
-        vehicle_impact = 'alternating-one-way'
-    return vehicle_impact
+#     vehicle_impact = 'unknown'    
+#     if closure_type in all_lanes_closed:
+#         vehicle_impact = 'all-lanes-closed'
+#     elif closure_type in some_lanes_closed:
+#         vehicle_impact = 'some-lanes-closed'
+#     elif closure_type in all_lanes_open:
+#         vehicle_impact = 'all-lanes-open'
+#     elif closure_type in alternating_one_way:
+#         vehicle_impact = 'alternating-one-way'
+#     return vehicle_impact
 
 
 
@@ -231,12 +233,6 @@ def parse_alert(alert, callback_function=None):
     # maintenance, minor-road-defect-repair, roadside-work, overhead-work, below-road-work, barrier-work, surface-work, painting, roadway-relocation, roadway-creation
     properties['types_of_work'] = []
 
-    # reduced speed limit
-    properties['reduced_speed_limit'] = 25
-
-    # workers present
-    properties['workers_present'] = False
-
     # restrictions
     properties['restrictions'] = [] 
 
@@ -272,23 +268,25 @@ def validate_alert(alert):
     endtime = alert.get('alert:ExpectedEndTime')
     description = alert.get('alert:Description')
    
-    required_fields = [ polyline, coords, street, starttime, endtime, description]
+    required_fields = [ polyline, coords, street, starttime, description]
     for field in required_fields:
         if not field:
             logging.warning(f'Invalid alert with alert id = {alert.get("alert:AlertId")}. not all required fields are present')
             return False
             
     try:
-        dateutil.parser.parse(alert['alert:ReportedTime'])
-        if alert.get('alert:ExpectedEndTime'):
-            dateutil.parser.parse(alert['alert:ExpectedEndTime'])
-    except ValueError:
-        logging.warning('Invalid alert with id . Invalid datetime format')
+        dateutil.parser.parse(starttime)
+        if endtime != None:
+            dateutil.parser.parse(endtime)
+    except dateutil.parser._parser.ParserError:
+        logging.warning(f'Invalid alert with id = {alert.get("alert:AlertId")}. Invalid datetime format')
         return False
     
     return True
 
 def reformat_datetime(datetime_string):
+    if not datetime_string:
+        return ''
     time = dateutil.parser.parse(datetime_string)
     wzdx_format_datetime = time.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     return wzdx_format_datetime
@@ -297,7 +295,6 @@ def reformat_datetime(datetime_string):
 #### This function may fail if some optional fields are not present (lanes, types_of_work, relationship, ...)
 def add_ids(message, add_ids):
     if add_ids:
-        feed_info_id = message['road_event_feed_info']['feed_info_id']
         data_source_id = message['road_event_feed_info']['data_sources'][0]['data_source_id']
 
         road_event_length = len(message['features'])
