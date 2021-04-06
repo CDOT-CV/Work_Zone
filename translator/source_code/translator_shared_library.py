@@ -18,11 +18,11 @@ def validate_info(info):
     if ((not info) or (type(info) != dict and type(info) != OrderedDict)):
         logging.warning('invalid type')
         return False
-    
-    #### Consider whether this id needs to be hardcoded or generated
+
     feed_info_id = str(info.get('feed_info_id', ''))
     check_feed_info_id = re.match('[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}', feed_info_id)
-    #### This information is required, might want to hardcode
+    
+
     metadata=info.get('metadata', {})
     wz_location_method = metadata.get('wz_location_method')
     lrs_type = metadata.get('lrs_type')
@@ -32,8 +32,9 @@ def validate_info(info):
     required_fields = [ check_feed_info_id, metadata, wz_location_method, lrs_type, contact_name, contact_email, issuing_organization]
     for field in required_fields:
         if not field:
-            return False
             logging.warning( 'Not all required fields are present') 
+            return False
+            
     return True
 
 def parse_xml(inputfile):
@@ -52,15 +53,11 @@ def validate_wzdx(wzdx_obj, wzdx_schema):
 
 def initialize_info():
     info = {}
-
-    #### Consider whether this id needs to be hardcoded or generated
     info['feed_info_id'] = "104d7746-688c-44ed-b195-2ee948bf9dfa"
-
-    #### This information is required, might want to hardcode
     info['metadata'] = {}
     info['metadata']['wz_location_method'] = "channel-device-method"
     info['metadata']['lrs_type'] = "lrs_type"
-    info['metadata']['contact_name'] = "Abinash Konersman"  # we can consider to add a representive name from cotrip
+    info['metadata']['contact_name'] = "Abinash Konersman"
     info['metadata']['contact_email'] = "abinash.konersman@state.co.us"
     info['metadata']['issuing_organization'] = "COtrip"
 

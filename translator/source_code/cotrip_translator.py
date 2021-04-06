@@ -168,9 +168,6 @@ def parse_alert(alert, callback_function=None):
     feature['type'] = "Feature"
     properties = {}
 
-    #### I included a skeleton of the message, fill out all required fields and as many optional fields as you can. Below is a link to the spec page for a road event
-    #### https://github.com/usdot-jpo-ode/jpo-wzdx/blob/master/spec-content/objects/RoadEvent.md
-
     # road_event_id
     #### Leave this empty, it will be populated by add_ids
     properties['road_event_id'] = ''
@@ -210,8 +207,7 @@ def parse_alert(alert, callback_function=None):
     properties['direction'] = Direction_map.get(alert['alert:Direction'])
 
     # vehicle impact
-
-    properties['vehicle_impact'] = 'unknown' #get_vehicle_impact(alert['alert:ClosureType'])
+    properties['vehicle_impact'] = 'unknown'
 
     # Relationship
     properties['relationship'] = {}
@@ -242,7 +238,7 @@ def parse_alert(alert, callback_function=None):
     properties['workers_present'] = False
 
     # restrictions
-    properties['restrictions'] = [] #will work with it late
+    properties['restrictions'] = [] 
 
     # description
     properties['description'] = alert['alert:Description']
@@ -251,7 +247,6 @@ def parse_alert(alert, callback_function=None):
     properties['creation_date'] = reformat_datetime(alert['alert:ReportedTime'])
 
     # update_date
-    
     properties['update_date'] = reformat_datetime(alert['alert:LastUpdatedDate'])
 
     feature = {}
