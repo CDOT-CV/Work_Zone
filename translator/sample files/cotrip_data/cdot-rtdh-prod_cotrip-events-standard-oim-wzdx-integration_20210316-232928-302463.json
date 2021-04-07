@@ -1,0 +1,36 @@
+{
+    "rtdh_timestamp": 1615866698.395242,
+    "rtdh_message_id": "9a5ecc01-443f-4139-95e2-278b943ac98a",
+    "event": {
+        "type": "Construction",
+        "sub_type": "Work Zone:roadway-relocation",
+        "source": {
+            "id": "336432",
+            "id2": "30178",
+            "name": "CDOT ITS",
+            "type": "Road Work",
+            "sub_type": "Road Construction",
+            "collection_timestamp": 1609859641
+        },
+        "lrs": null,
+        "geometry": "LINESTRING (-104.614075 38.472839, -104.614532 38.473991, -104.615318 38.475819, -104.618164 38.482033, -104.61834 38.48241, -104.619576 38.484974, -104.619865 38.485592, -104.620689 38.487366, -104.621246 38.488556, -104.623253 38.492847, -104.625534 38.497715, -104.625946 38.498608, -104.625999 38.498768, -104.626389 38.500099, -104.626434 38.500233, -104.626732 38.50135, -104.626854 38.501785, -104.627579 38.506145, -104.628044 38.508568, -104.628639 38.511688, -104.628906 38.513115, -104.62912 38.514153, -104.62925 38.514767, -104.629349 38.515266, -104.629456 38.515759, -104.629784 38.516792, -104.630127 38.517647, -104.630722 38.518829, -104.635178 38.527622, -104.635345 38.527943, -104.638474 38.534046, -104.638512 38.534122, -104.641815 38.540623, -104.642242 38.541466, -104.645813 38.54847, -104.645943 38.548717, -104.646851 38.550549, -104.647705 38.55254, -104.647705 38.552551, -104.648628 38.554554, -104.648796 38.554932, -104.650467 38.558655, -104.651794 38.561726, -104.652885 38.564129, -104.652985 38.564346, -104.653763 38.56601, -104.655014 38.568596, -104.65538 38.569351, -104.655998 38.570591, -104.656334 38.571205, -104.656723 38.571743, -104.657295 38.57243, -104.658897 38.574165, -104.66394 38.579468, -104.664627 38.580185, -104.664658 38.580223, -104.665451 38.581085, -104.666672 38.582375, -104.667076 38.582851, -104.667549 38.58358, -104.668724 38.585709, -104.669189 38.586552, -104.669205 38.586575, -104.670326 38.588688, -104.670471 38.58897, -104.670898 38.589767, -104.670959 38.589882, -104.673157 38.593891)",
+        "header": {
+            "name": "I-25 Southbound / Northbound I-25 Southbound from MP 122 at Pikes Peak International Speedway to MP 113 five miles south of Wigwam, El Paso and Pueblo County (Milemarker 113.04-122.04) (through January 2021)",
+            "description": "Road Construction - I-25 Southbound from MP 122 at Pikes Peak International Speedway to MP 113 five miles south of Wigwam, El Paso and Pueblo County",
+            "location_description": "I-25 Southbound from MP 122 at Pikes Peak International Speedway to MP 113 five miles south of Wigwam, El Paso and Pueblo County",
+            "severity": "Moderate",
+            "language": "English",
+            "external_reference_url": "https://www.codot.gov/projects/i25-cablebarrier-ph4-swco",
+            "start_timestamp": 1592200800,
+            "end_timestamp": 1612076400
+        },
+        "detail": {
+            "description": "The project goal is install cable barrier and guardrail to maintain and improve the safety of the interstate median.",
+            "work_updates": null,
+            "road_name": "I-25",
+            "road_number": "I-25",
+            "direction": "South"
+        },
+        "additional_info": null
+    }
+}

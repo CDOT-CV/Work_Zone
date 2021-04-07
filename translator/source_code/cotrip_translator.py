@@ -80,14 +80,11 @@ def wzdx_creator(messages, info=None, unsupported_message_callback=None):
 
     wzd['features'] = []
 
-    if not messages.get('alert:Alerts', {}).get('alert:Alert'):
-        return None
-
-    for alert in messages['alert:Alerts']['alert:Alert']:
-        # Parse alert to WZDx Feature    
-        feature = parse_alert(alert, callback_function=unsupported_message_callback)
-        if feature:
-            wzd['features'].append(feature)
+    
+    # Parse alert to WZDx Feature    
+    feature = parse_alert(alert, callback_function=unsupported_message_callback)
+    if feature:
+        wzd['features'].append(feature)
     if not wzd['features']:
         return None
     wzd = add_ids(wzd, True)
@@ -165,7 +162,7 @@ def parse_alert(alert, callback_function=None):
     feature = {}
     geometry = {}
     geometry['type'] = "LineString"
-    geometry['coordinates'] = parse_polyline(alert['alert:Polyline'])
+    geometry['coordinates'] = parse_polyline(alert['geometry'])
 
     feature['type'] = "Feature"
     properties = {}
@@ -182,10 +179,10 @@ def parse_alert(alert, callback_function=None):
     properties['data_source_id'] = ''
 
     # start_date
-    properties['start_date'] = reformat_datetime(alert['alert:ReportedTime'])
+    properties['start_date'] = reformat_datetime(alert['header']['start_timestamp'])
 
     # end_date
-    properties['end_date'] = reformat_datetime(alert.get('alert:ExpectedEndTime', ''))
+    properties['end_date'] = reformat_datetime(alert.get(['header']['end_timestamp'], ''))
 
     # start_date_accuracy
     properties['start_date_accuracy'] = "estimated"
@@ -200,13 +197,12 @@ def parse_alert(alert, callback_function=None):
     properties['ending_accuracy'] = "estimated"
 
     # road_name
-    road_name = alert['alert:RoadName']
-    properties['road_name'] = road_name
+    properties['road_name'] = alert['detail']['road_name']
 
     # direction
     Direction_map = {'North': 'northbound', 'South': 'southbound', 'West': 'westbound', 'East': 'eastbound'}
  
-    properties['direction'] = Direction_map.get(alert['alert:Direction'])
+    properties['direction'] = Direction_map.get(alert['detail']['direction'])
 
     # vehicle impact
     properties['vehicle_impact'] = 'unknown'
@@ -217,9 +213,6 @@ def parse_alert(alert, callback_function=None):
     # lanes
     properties['lanes'] = []
 
-    # road_name
-    properties['road_number'] = ""
-
     # beginning_cross_street
     properties['beginning_cross_street'] = ""
 
@@ -227,7 +220,7 @@ def parse_alert(alert, callback_function=None):
     properties['ending_cross_street'] = ""
 
     # event status
-    properties['event_status'] = get_event_status(alert['alert:ReportedTime'], alert.get('alert:ExpectedEndTime'))
+    properties['event_status'] = get_event_status(alert['header']['start_timestamp'], alert.get(['header']['end_timestamp'])
 
     # type_of_work
     # maintenance, minor-road-defect-repair, roadside-work, overhead-work, below-road-work, barrier-work, surface-work, painting, roadway-relocation, roadway-creation
@@ -237,13 +230,13 @@ def parse_alert(alert, callback_function=None):
     properties['restrictions'] = [] 
 
     # description
-    properties['description'] = alert['alert:Description']
+    properties['description'] = alert['header']['description']
 
     # creation_date
-    properties['creation_date'] = reformat_datetime(alert['alert:ReportedTime'])
+    properties['creation_date'] = reformat_datetime(alert['source']['collection_timestamp'])
 
     # update_date
-    properties['update_date'] = reformat_datetime(alert['alert:LastUpdatedDate'])
+    properties['update_date'] = reformat_datetime(alert['rtdh_timestamp'])
 
     feature = {}
     feature['type'] = "Feature"

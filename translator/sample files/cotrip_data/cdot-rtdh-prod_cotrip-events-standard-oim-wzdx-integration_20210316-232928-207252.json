@@ -1,0 +1,36 @@
+{
+    "rtdh_timestamp": 1615866698.394965,
+    "rtdh_message_id": "7d879830-5877-474e-8193-5377563b99c5",
+    "event": {
+        "type": "Construction",
+        "sub_type": "Work Zone:roadway-relocation",
+        "source": {
+            "id": "348325",
+            "id2": "30634",
+            "name": "CDOT ITS",
+            "type": "Road Work",
+            "sub_type": "Road Construction",
+            "collection_timestamp": 1614266040
+        },
+        "lrs": null,
+        "geometry": "POINT (-104.61239 38.30132)",
+        "header": {
+            "name": "I-25 Northbound / Southbound I-25 on/off-ramps at W 29th (Milemarker 101-101) (through June 2021)",
+            "description": "Road Construction - I-25 on/off-ramps at W 29th",
+            "location_description": "I-25 on/off-ramps at W 29th",
+            "severity": "Moderate",
+            "language": "English",
+            "external_reference_url": "Unknown",
+            "start_timestamp": 1601272800,
+            "end_timestamp": 1624860000
+        },
+        "detail": {
+            "description": "This project is a part of CDOT\u2019s 2017, Curb Ramp Accessibility Initiative to bring all curb ramps in alignment with the ADA and PROWAG standards over the next five years. \u202f",
+            "work_updates": null,
+            "road_name": "I-25",
+            "road_number": "I-25",
+            "direction": "North"
+        },
+        "additional_info": null
+    }
+}
