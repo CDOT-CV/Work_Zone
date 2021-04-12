@@ -10,6 +10,7 @@ from jsonschema import ValidationError
 import logging
 from collections import OrderedDict
 import re
+import os
 
 
 
@@ -53,7 +54,7 @@ def validate_wzdx(wzdx_obj, wzdx_schema):
 
 def initialize_info():
     info = {}
-    info['feed_info_id'] = "104d7746-688c-44ed-b195-2ee948bf9dfa"
+    info['feed_info_id'] = os.environ['feed_info_id'] #104d7746-688c-44ed-b195-2ee948bf9dfa
     info['metadata'] = {}
     info['metadata']['wz_location_method'] = "channel-device-method"
     info['metadata']['lrs_type'] = "lrs_type"
