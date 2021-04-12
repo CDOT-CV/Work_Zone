@@ -117,12 +117,14 @@ def get_event_status(start_time_string, end_time_string):
                         timedelta(days = 14)
     event_status = "active"
     if current_time < start_time:
-        event_status = "planned"
-    elif start_time < future_date_after_2weeks:
-        event_status = "pending"
+        if start_time < future_date_after_2weeks  :
+            event_status = "pending"
+        else:
+            event_status = "planned"
+
+
     elif end_time_string:
         end_time = datetime.fromtimestamp(end_time_string)
-
         if end_time < current_time:
             event_status = "completed"
     return event_status
