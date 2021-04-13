@@ -60,7 +60,7 @@ def initialize_info():
     info['metadata']['lrs_type'] = "lrs_type"
     info['metadata']['contact_name'] = "Abinash Konersman"
     info['metadata']['contact_email'] = "abinash.konersman@state.co.us"
-    info['metadata']['issuing_organization'] = "COtrip"
+    info['metadata']['issuing_organization'] = "CDOT"
 
     return info
 
