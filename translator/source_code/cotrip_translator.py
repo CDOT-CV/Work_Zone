@@ -103,7 +103,8 @@ def parse_polyline(poly):
     coordinates = []
     for i in polyline:
         coords = i.split(' ')
-        coordinates.append([float(coords[0]), float(coords[1])])
+        if len(coords) >= 2 and re.match('^-?([0-9]*[.])?[0-9]+$', coords[0]) and re.match('^-?([0-9]*[.])?[0-9]+$', coords[1]):
+            coordinates.append([float(coords[0]), float(coords[1])])
     return coordinates
 
 
@@ -240,8 +241,9 @@ def validate_alert(alert):
     starttime = header.get('start_timestamp')
     endtime = header.get('end_timestamp', 0)
     description = header.get('description')
+    direction = event.get('detail', {}).get('direction')
    
-    required_fields = [ polyline, coords, street, starttime, description]
+    required_fields = [ polyline, coords, street, starttime, description, direction]
     for field in required_fields:
         if not field:
             logging.warning(f'Invalid event with event id = {alert.get("rtdh_message_id")}. not all required fields are present')
@@ -257,6 +259,11 @@ def validate_alert(alert):
 def reformat_datetime(datetime_string):
     if not datetime_string:
         return ''
+    elif type(datetime_string) == str:
+        if re.match('^-?([0-9]*[.])?[0-9]+$', datetime_string):
+            datetime_string = float(datetime_string)
+        else:
+            return ''
     time = datetime.fromtimestamp(datetime_string)
     wzdx_format_datetime = time.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     return wzdx_format_datetime
