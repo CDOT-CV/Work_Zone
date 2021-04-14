@@ -1,6 +1,3 @@
-import sys
-from translator.source_code import translator_shared_library
-sys.modules['translator_shared_library'] = translator_shared_library
 from translator.source_code import icone_translator
 import xmltodict
 import json
@@ -9,6 +6,7 @@ import re
 import pytest
 import unittest
 from unittest.mock import MagicMock
+from translator.source_code import translator_shared_library
 
 
 #Unit testing code for icone_translator.py

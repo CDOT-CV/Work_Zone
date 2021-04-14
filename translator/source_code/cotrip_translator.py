@@ -10,7 +10,7 @@ import logging
 from collections import OrderedDict
 import re
 import dateutil.parser
-import translator_shared_library
+from translator.source_code import translator_shared_library
 
 # Translator
 
@@ -85,7 +85,7 @@ def wzdx_creator(message, info=None, unsupported_message_callback=None):
         wzd['features'].append(feature)
     if not wzd['features']:
         return None
-    wzd = add_ids(wzd, True)
+    wzd =translator_shared_library.add_ids(wzd, True)
     return wzd
 
 
@@ -266,26 +266,7 @@ def reformat_datetime(datetime_string):
     wzdx_format_datetime = time.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     return wzdx_format_datetime
 
-# Add ids to message
-#### This function may fail if some optional fields are not present (lanes, types_of_work, relationship, ...)
-def add_ids(message, add_ids):
-    if add_ids:
-        data_source_id = message['road_event_feed_info']['data_sources'][0]['data_source_id']
 
-        road_event_length = len(message['features'])
-        road_event_ids = []
-        for i in range(road_event_length):
-            road_event_ids.append(str(uuid.uuid4()))
-
-        for i in range(road_event_length):
-            feature = message['features'][i]
-            road_event_id = road_event_ids[i]
-            feature['properties']['road_event_id'] = road_event_id
-            feature['properties']['data_source_id'] = data_source_id
-            feature['properties']['relationship']['relationship_id'] = str(uuid.uuid4())
-            feature['properties']['relationship']['road_event_id'] = road_event_id 
-
-    return message
 
 
 if __name__ == "__main__":

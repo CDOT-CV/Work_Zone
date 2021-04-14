@@ -51,11 +51,11 @@ python icone_translator.py -i '../sample files/icone data/incidents_extended.xml
 #### Step 1: Run the translator script (from Work_Zone/translator/source code)
 
 ```
-python cotrip_translator.py -i inputfile.xml -o outputfile.geojson
+python cotrip_translator.py -i inputfile.json -o outputfile.geojson
 ```
 Example usage:
 ```
-python cotrip_translator.py -i '../sample files/cotrip_data/cotrip_data.xml' 
+python cotrip_translator.py -i '../sample files/cotrip_data/cotrip_1.json' 
 ```
 
 ### Unit Testing
