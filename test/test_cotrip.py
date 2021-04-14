@@ -45,7 +45,7 @@ def test_wzdx_creator() :
 
 
 
-def test_wzdx_creator_empty_icone_object() :
+def test_wzdx_creator_empty_cotrip_object() :
   cotrip_obj = None
   test_wzdx = cotrip_translator.wzdx_creator(cotrip_obj)
   assert test_wzdx == None
