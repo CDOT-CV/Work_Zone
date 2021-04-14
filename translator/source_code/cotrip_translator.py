@@ -101,7 +101,9 @@ def parse_polyline(poly):
     coordinates = []
     for i in polyline:
         coords = i.split(' ')
-        if len(coords) >= 2 and re.match('^-?([0-9]*[.])?[0-9]+$', coords[0]) and re.match('^-?([0-9]*[.])?[0-9]+$', coords[1]):
+
+        # the regular rexpression '^-?([0-9]*[.])?[0-9]+$ matches an integer or decimals
+        if len(coords) >= 2 and re.match('^-?([0-9]*[.])?[0-9]+$', coords[0]) and re.match('^-?([0-9]*[.])?[0-9]+$', coords[1]): 
             coordinates.append([float(coords[0]), float(coords[1])])
     return coordinates
 
@@ -202,7 +204,7 @@ def parse_alert(alert, callback_function=None):
 
     # type_of_work
     # maintenance, minor-road-defect-repair, roadside-work, overhead-work, below-road-work, barrier-work, surface-work, painting, roadway-relocation, roadway-creation
-    properties['types_of_work'] = []
+    properties['types_of_work'] = event.get('subtype')
 
     # restrictions
     properties['restrictions'] = [] 

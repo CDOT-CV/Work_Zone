@@ -72,7 +72,7 @@ Usage: python icone_translator.py [arguments]
 
 Global options:
 -h, --help                  Print this usage information.
--i, --input                 specify the xml file to translate
+-i, --input                 specify the file to translate
 -o, --output                specify the output file for generated wzdx geojson message """
 
 def parse_arguments(argv, default_output_file_name = 'wzdx_translated_output_message.geojson'):
@@ -80,7 +80,7 @@ def parse_arguments(argv, default_output_file_name = 'wzdx_translated_output_mes
     outputfile = default_output_file_name
 
     try:
-        opts, args = getopt.getopt(argv, "hi:o:", ["input=", "output="])
+        opts, _ = getopt.getopt(argv, "hi:o:", ["input=", "output="])
     except getopt.GetoptError:
         sys.exit(2)
     for opt, arg in opts:
