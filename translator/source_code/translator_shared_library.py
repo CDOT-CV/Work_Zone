@@ -39,10 +39,10 @@ def validate_info(info):
     return True
 
 def parse_xml(inputfile):
-    with open(inputfile, encoding='utf-8-sig') as ficone:
-        xml_string = ficone.read()
-        icone_obj = xmltodict.parse(xml_string)
-        return icone_obj
+    with open(inputfile, encoding='utf-8-sig') as f:
+        xml_string = f.read()
+        inputfile_obj = xmltodict.parse(xml_string)
+        return inputfile_obj
 
 def validate_wzdx(wzdx_obj, wzdx_schema):
     try:
