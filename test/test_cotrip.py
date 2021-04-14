@@ -536,7 +536,7 @@ def test_validate_alert_invalid():
   test_valid_output = 'invalid output'
   assert cotrip_translator.validate_alert(test_valid_output) == False
 
-def test_validate_incident_no_data():
+def test_validate_alert_no_data():
   test_valid_output = None
   assert cotrip_translator.validate_alert(test_valid_output) == False
 
