@@ -1,5 +1,3 @@
-
-import xmltodict
 import json
 from datetime import datetime, timezone, timedelta
 import uuid
