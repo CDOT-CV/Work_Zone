@@ -1,8 +1,6 @@
 from translator.source_code import translator_shared_library
 import json
 import pytest
-import unittest
-
 #--------------------------------------------------------------------------------unit test for valid_info function--------------------------------------------------------------------------------
 def test_valid_info_valid_info():
   test_info = {
