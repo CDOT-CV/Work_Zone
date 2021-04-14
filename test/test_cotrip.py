@@ -475,7 +475,7 @@ def test_validate_alert_valid_data():
 }
   assert cotrip_translator.validate_alert(test_valid_output) == True
 
-def test_validate_incident_missing_required_field_description():
+def test_validate_alert_missing_required_field_description():
   test_valid_output ={
     "rtdh_timestamp": 1615866698.393723,
     "rtdh_message_id": "dd962abd-0afa-4810-aac0-165edb834e71",
