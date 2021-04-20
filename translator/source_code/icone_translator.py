@@ -10,7 +10,7 @@ from jsonschema import ValidationError
 import logging
 from collections import OrderedDict
 import re
-from translator.source_code import translator_shared_library
+import translator_shared_library
 
 
 

@@ -1,11 +1,12 @@
+import sys
+from translator.source_code import translator_shared_library
+sys.modules['translator_shared_library'] = translator_shared_library
 from translator.source_code import cotrip_translator
 import json
 import re
 from datetime import datetime, date
 from unittest.mock import MagicMock, patch
 import time_machine
-from translator.source_code import translator_shared_library
-
 
 def test_wzdx_creator() :
   cotrip_obj = {

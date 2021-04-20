@@ -10,7 +10,7 @@ import logging
 from collections import OrderedDict
 import re
 import dateutil.parser
-from translator.source_code import translator_shared_library
+import translator_shared_library
 
 # Translator
 
@@ -204,7 +204,7 @@ def parse_alert(alert, callback_function=None):
 
     # type_of_work
     # maintenance, minor-road-defect-repair, roadside-work, overhead-work, below-road-work, barrier-work, surface-work, painting, roadway-relocation, roadway-creation
-    properties['types_of_work'] = event.get('subtype')
+    properties['types_of_work'] = []
 
     # restrictions
     properties['restrictions'] = [] 
