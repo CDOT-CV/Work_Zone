@@ -3,14 +3,12 @@ from datetime import datetime, timezone, timedelta
 import uuid
 import random
 import string
-import sys, getopt
+import sys
 from jsonschema import validate
-from jsonschema import ValidationError
 import logging
 from collections import OrderedDict
 import re
-import dateutil.parser
-import translator_shared_library
+from translator.source_code import translator_shared_library
 
 # Translator
 

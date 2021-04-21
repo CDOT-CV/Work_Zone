@@ -1,16 +1,11 @@
 import xmltodict
-import json
-from datetime import datetime
 import uuid
-import random
-import string
 import sys, getopt
 from jsonschema import validate
 from jsonschema import ValidationError
 import logging
 from collections import OrderedDict
 import re
-import os
 
 
 

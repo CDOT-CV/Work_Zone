@@ -94,3 +94,15 @@ def test_validate_wzdx_invalid_wzdx_data():
     test_schema= json.loads(open('translator/sample files/validation_schema/wzdx_v3.0_feed.json').read())
     invalid_write=translator_shared_library.validate_wzdx(invalid_wzdx_data,test_schema)
     assert invalid_write == False
+
+# def test_validate_wzdx_invalid_wzdx_data():
+#     invalid_wzdx_data=json.loads('')
+#     test_schema= json.loads(open('translator/sample files/validation_schema/wzdx_v3.0_feed.json').read())
+#     invalid_write=translator_shared_library.validate_wzdx(invalid_wzdx_data,test_schema)
+#     assert invalid_write == False
+
+#--------------------------------------------------------------------------------unit test for initialize_info function--------------------------------------------------------------------------------
+# def test_initialize_info():
+  
+
+#--------------------------------------------------------------------------------Unit test for add_ids function--------------------------------------------------------------------------------

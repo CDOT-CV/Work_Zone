@@ -1,10 +1,9 @@
-import sys
+
 from translator.source_code import translator_shared_library
-sys.modules['translator_shared_library'] = translator_shared_library
 from translator.source_code import cotrip_translator
 import json
 import re
-from datetime import datetime, date
+from datetime import date
 from unittest.mock import MagicMock, patch
 import time_machine
 
@@ -558,3 +557,4 @@ def test_reformat_datetime_invalid_time():
     actual_time = cotrip_translator.reformat_datetime(test_time)
     expected_time = ''
     assert actual_time == expected_time
+
