@@ -7,6 +7,8 @@ from jsonschema import ValidationError
 import logging
 from collections import OrderedDict
 import re
+import os
+import os.path
 
 
 def validate_info(info):
@@ -36,6 +38,8 @@ def validate_info(info):
 
 
 def parse_xml(inputfile):
+    if not inputfile or os.path.isfile(inputfile):
+        return None
     with open(inputfile, encoding='utf-8-sig') as f:
         xml_string = f.read()
         inputfile_obj = xmltodict.parse(xml_string)
@@ -100,18 +104,24 @@ def parse_arguments(argv, default_output_file_name='wzdx_translated_output_messa
 
 
 def add_ids(message):
-    data_source_id = message['road_event_feed_info']['data_sources'][0]['data_source_id']
-    road_event_length = len(message['features'])
-    road_event_ids = []
-    for i in range(road_event_length):
-        road_event_ids.append(str(uuid.uuid4()))
+    if not message or type(message) != dict:
+        return None
+    try:
 
-    for i in range(road_event_length):
-        feature = message['features'][i]
-        road_event_id = road_event_ids[i]
-        feature['properties']['road_event_id'] = road_event_id
-        feature['properties']['data_source_id'] = data_source_id
-        feature['properties']['relationship']['relationship_id'] = str(
-            uuid.uuid4())
-        feature['properties']['relationship']['road_event_id'] = road_event_id
-    return message
+        data_source_id = message['road_event_feed_info']['data_sources'][0]['data_source_id']
+        road_event_length = len(message['features'])
+        road_event_ids = []
+        for i in range(road_event_length):
+            road_event_ids.append(str(uuid.uuid4()))
+
+        for i in range(road_event_length):
+            feature = message['features'][i]
+            road_event_id = road_event_ids[i]
+            feature['properties']['road_event_id'] = road_event_id
+            feature['properties']['data_source_id'] = data_source_id
+            feature['properties']['relationship']['relationship_id'] = str(
+                uuid.uuid4())
+            feature['properties']['relationship']['road_event_id'] = road_event_id
+        return message
+    except:
+        return message
