@@ -11,14 +11,13 @@ from collections import OrderedDict
 from translator.source_code import translator_shared_library
 
 
-
 # Translator
 
 
 def wzdx_creator(messages, info=None, unsupported_message_callback=None):
     if not messages:
         return None
-   #verify info obj 
+   # verify info obj
     if not info:
         info = translator_shared_library.initialize_info()
     if not translator_shared_library.validate_info(info):
@@ -27,7 +26,8 @@ def wzdx_creator(messages, info=None, unsupported_message_callback=None):
     wzd['road_event_feed_info'] = {}
     # hardcode
     wzd['road_event_feed_info']['feed_info_id'] = info['feed_info_id']
-    wzd['road_event_feed_info']['update_date'] = datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
+    wzd['road_event_feed_info']['update_date'] = datetime.now().strftime(
+        "%Y-%m-%dT%H:%M:%SZ")
     wzd['road_event_feed_info']['publisher'] = 'CDOT'
     wzd['road_event_feed_info']['contact_name'] = 'Abinash Konersman'
     wzd['road_event_feed_info']['contact_email'] = 'abinash.konersman@state.co.us'
@@ -63,13 +63,14 @@ def wzdx_creator(messages, info=None, unsupported_message_callback=None):
         return None
 
     for incident in messages['incidents']['incident']:
-        # Parse Incident to WZDx Feature    
-        feature = parse_incident(incident, callback_function=unsupported_message_callback)
+        # Parse Incident to WZDx Feature
+        feature = parse_incident(
+            incident, callback_function=unsupported_message_callback)
         if feature:
             wzd['features'].append(feature)
     if not wzd['features']:
         return None
-    wzd = translator_shared_library.add_ids(wzd, True)
+    wzd = translator_shared_library.add_ids(wzd)
     return wzd
 
 
@@ -87,13 +88,9 @@ def wzdx_creator(messages, info=None, unsupported_message_callback=None):
 #   </incident>
 
 
-
-
-
-
 # function to calculate vehicle impact
 def get_vehicle_impact(description):
-    vehicle_impact = 'all-lanes-open'     
+    vehicle_impact = 'all-lanes-open'
     if 'lane closed' in description.lower():
         vehicle_impact = 'some-lanes-closed'
     return vehicle_impact
@@ -103,12 +100,13 @@ def get_vehicle_impact(description):
 def parse_polyline(polylinestring):
     if not polylinestring or type(polylinestring) != str:
         return None
-    polyline = polylinestring.split(',') #polyline rightnow is a list which has an empty string in it.
+    # polyline rightnow is a list which has an empty string in it.
+    polyline = polylinestring.split(',')
     coordinates = []
     for i in range(0, len(polyline)-1, 2):
         try:
             coordinates.append([float(polyline[i + 1]), float(polyline[i])])
-        except ValueError as e :
+        except ValueError as e:
             logging.warning('failed to parse polyline!')
             return []
     return coordinates
@@ -121,7 +119,7 @@ def get_road_direction(coordinates):
     try:
         long_dif = coordinates[-1][0] - coordinates[0][0]
         lat_dif = coordinates[-1][1] - coordinates[0][1]
-    except ValueError as e :
+    except ValueError as e:
         raise RuntimeError('Failed to get road direction.') from e
 
     if abs(long_dif) > abs(lat_dif):
@@ -140,6 +138,8 @@ def get_road_direction(coordinates):
     return direction
 
 # function to parse direction from street name
+
+
 def parse_direction_from_street_name(street):
     if not street or type(street) != str:
         return None
@@ -173,7 +173,9 @@ def get_event_status(start_time_string, end_time_string):
             event_status = "completed"
     return event_status
 
-#function to get description
+# function to get description
+
+
 def create_description(incident):
     description = incident['description']
 
@@ -182,11 +184,13 @@ def create_description(incident):
         for sensor in incident['sensor']:
             if not isinstance(sensor, str):
                 if sensor['@type'] == 'iCone':
-                    description += '\n' + json.dumps(parse_icone_sensor(sensor), indent=2)
+                    description += '\n' + \
+                        json.dumps(parse_icone_sensor(sensor), indent=2)
             else:
                 sensor = incident['sensor']
                 if sensor['@type'] == 'iCone':
-                    description += '\n' + json.dumps(parse_icone_sensor(sensor), indent=2)
+                    description += '\n' + \
+                        json.dumps(parse_icone_sensor(sensor), indent=2)
 
     if incident.get('display'):
         description += '\n displays: '
@@ -208,14 +212,15 @@ def parse_icone_sensor(sensor):
     icone = {}
     icone['type'] = sensor['@type']
     icone['id'] = sensor['@id']
-    icone['location'] = [float(sensor['@latitude']), float(sensor['@longitude'])]
+    icone['location'] = [float(sensor['@latitude']),
+                         float(sensor['@longitude'])]
 
     if sensor.get('radar', None):
         avg_speed = 0
         std_dev_speed = 0
         num_reads = 0
         for radar in sensor['radar']:
-            timestamp=''
+            timestamp = ''
             if not isinstance(radar, str):
                 curr_reads = int(radar['@numReads'])
                 if curr_reads == 0:
@@ -223,8 +228,10 @@ def parse_icone_sensor(sensor):
                 curr_avg_speed = float(radar['@avgSpeed'])
                 curr_dev_speed = float(radar['@stDevSpeed'])
                 total_num_reads = num_reads + curr_reads
-                avg_speed = (avg_speed * num_reads + curr_avg_speed * curr_reads) / total_num_reads
-                std_dev_speed = (std_dev_speed * num_reads + curr_dev_speed * curr_reads) / total_num_reads
+                avg_speed = (avg_speed * num_reads +
+                             curr_avg_speed * curr_reads) / total_num_reads
+                std_dev_speed = (std_dev_speed * num_reads +
+                                 curr_dev_speed * curr_reads) / total_num_reads
                 num_reads = total_num_reads
                 timestamp = radar['@intervalEnd']
             else:
@@ -235,9 +242,9 @@ def parse_icone_sensor(sensor):
 
         radar = {}
 
-        radar['average_speed'] = round(avg_speed,2)
-        radar['std_dev_speed'] = round(std_dev_speed,2)
-        radar['timestamp']=timestamp
+        radar['average_speed'] = round(avg_speed, 2)
+        radar['std_dev_speed'] = round(std_dev_speed, 2)
+        radar['timestamp'] = timestamp
         icone['radar'] = radar
     return icone
 
@@ -247,7 +254,8 @@ def parse_pcms_sensor(sensor):
     pcms['type'] = sensor['@type']
     pcms['id'] = sensor['@id']
     pcms['timestamp'] = sensor['@id']
-    pcms['location'] = [float(sensor['@latitude']), float(sensor['@longitude'])]
+    pcms['location'] = [float(sensor['@latitude']),
+                        float(sensor['@longitude'])]
     if sensor.get('message', None):
         pcms['messages'] = []
         for message in sensor['message']:
@@ -266,7 +274,7 @@ def parse_pcms_sensor(sensor):
 # Parse Icone Incident to WZDx
 def parse_incident(incident, callback_function=None):
     if not validate_incident(incident):
-        if callback_function:    #Note :a call back fucnction , which will trigger every time the invalid data is given
+        if callback_function:  # Note :a call back fucnction , which will trigger every time the invalid data is given
             callback_function(incident)
         return None
     feature = {}
@@ -277,18 +285,18 @@ def parse_incident(incident, callback_function=None):
     feature['type'] = "Feature"
     properties = {}
 
-    #### I included a skeleton of the message, fill out all required fields and as many optional fields as you can. Below is a link to the spec page for a road event
-    #### https://github.com/usdot-jpo-ode/jpo-wzdx/blob/master/spec-content/objects/RoadEvent.md
+    # I included a skeleton of the message, fill out all required fields and as many optional fields as you can. Below is a link to the spec page for a road event
+    # https://github.com/usdot-jpo-ode/jpo-wzdx/blob/master/spec-content/objects/RoadEvent.md
 
     # road_event_id
-    #### Leave this empty, it will be populated by add_ids
+    # Leave this empty, it will be populated by add_ids
     properties['road_event_id'] = ''
 
     # Event Type ['work-zone', 'detour']
     properties['event_type'] = 'work-zone'
 
     # data_source_id
-    #### Leave this empty, it will be populated by add_ids
+    # Leave this empty, it will be populated by add_ids
     properties['data_source_id'] = ''
 
     # start_date
@@ -340,7 +348,8 @@ def parse_incident(incident, callback_function=None):
     properties['ending_cross_street'] = ""
 
     # event status
-    properties['event_status'] = get_event_status(incident['starttime'], incident.get('endtime'))
+    properties['event_status'] = get_event_status(
+        incident['starttime'], incident.get('endtime'))
 
     # type_of_work
     # maintenance, minor-road-defect-repair, roadside-work, overhead-work, below-road-work, barrier-work, surface-work, painting, roadway-relocation, roadway-creation
@@ -371,16 +380,19 @@ def parse_incident(incident, callback_function=None):
 
     return feature
 
-#function to validate the incident
+# function to validate the incident
+
+
 def validate_incident(incident):
-    
+
     if not incident or (type(incident) != dict and type(incident) != OrderedDict):
         logging.warning('incident is empty or has invalid type')
         return False
-    
+
     location = incident.get('location')
     if not location:
-        logging.warning(f'Invalid incident with id = {incident.get("@id")}. Location object not present')
+        logging.warning(
+            f'Invalid incident with id = {incident.get("@id")}. Location object not present')
         return False
 
     polyline = location.get('polyline')
@@ -393,28 +405,33 @@ def validate_incident(incident):
     updatetime = incident.get('updatetime')
     direction = parse_direction_from_street_name(street)
     if not direction:
-        direction=get_road_direction(coords)
+        direction = get_road_direction(coords)
         if not direction:
-            logging.warning(f'Invalid incident with id = {incident.get("@id")}.unable to parse direction from street name or polyline')
+            logging.warning(
+                f'Invalid incident with id = {incident.get("@id")}.unable to parse direction from street name or polyline')
             return False
-    required_fields = [location, polyline, coords, street, starttime, description, creationtime, updatetime, direction]
+    required_fields = [location, polyline, coords, street,
+                       starttime, description, creationtime, updatetime, direction]
     for field in required_fields:
         if not field:
-            logging.warning(f'Invalid incident with id = {incident.get("@id")}. Not all required fields are present')
+            logging.warning(
+                f'Invalid incident with id = {incident.get("@id")}. Not all required fields are present')
             return False
-            
+
     try:
         datetime.strptime(incident['starttime'], "%Y-%m-%dT%H:%M:%SZ")
         if incident.get('endtime'):
-            datetime.strptime(incident['endtime'], "%Y-%m-%dT%H:%M:%SZ") 
+            datetime.strptime(incident['endtime'], "%Y-%m-%dT%H:%M:%SZ")
     except ValueError:
-        logging.warning(f'Invalid incident with id = {incident.get("@id")}. Invalid date time format')
+        logging.warning(
+            f'Invalid incident with id = {incident.get("@id")}. Invalid date time format')
         return False
-    
+
     return True
 
 
-inputfile, outputfile = translator_shared_library.parse_arguments(sys.argv[1:], default_output_file_name = 'icone_wzdx_translated_output_message.geojson')
+inputfile, outputfile = translator_shared_library.parse_arguments(
+    sys.argv[1:], default_output_file_name='icone_wzdx_translated_output_message.geojson')
 
 
 def validate_write(wzdx_obj, outputfile, location_schema):
@@ -431,7 +448,7 @@ if inputfile:
 
     icone_obj = translator_shared_library.parse_xml(inputfile)
     wzdx = wzdx_creator(icone_obj, translator_shared_library.initialize_info())
-    if not validate_write(wzdx, outputfile, '../sample files/validation_schema/wzdx_v3.0_feed.json'):
+    if not validate_write(wzdx, outputfile, 'translator/sample files/validation_schema/wzdx_v3.0_feed.json'):
         print('validation error more messages are printed above')
     else:
         print('huraaah ! your wzdx message is successfully generated and located here: ' + str(outputfile))

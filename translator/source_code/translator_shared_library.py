@@ -1,12 +1,12 @@
 import xmltodict
 import uuid
-import sys, getopt
+import sys
+import getopt
 from jsonschema import validate
 from jsonschema import ValidationError
 import logging
 from collections import OrderedDict
 import re
-
 
 
 def validate_info(info):
@@ -16,22 +16,24 @@ def validate_info(info):
         return False
 
     feed_info_id = str(info.get('feed_info_id', ''))
-    check_feed_info_id = re.match('[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}', feed_info_id)
-    
+    check_feed_info_id = re.match(
+        '[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}', feed_info_id)
 
-    metadata=info.get('metadata', {})
+    metadata = info.get('metadata', {})
     wz_location_method = metadata.get('wz_location_method')
     lrs_type = metadata.get('lrs_type')
     contact_name = metadata.get('contact_name')
-    contact_email = metadata.get('contact_email') 
-    issuing_organization=metadata.get('issuing_organization')
-    required_fields = [ check_feed_info_id, metadata, wz_location_method, lrs_type, contact_name, contact_email, issuing_organization]
+    contact_email = metadata.get('contact_email')
+    issuing_organization = metadata.get('issuing_organization')
+    required_fields = [check_feed_info_id, metadata, wz_location_method,
+                       lrs_type, contact_name, contact_email, issuing_organization]
     for field in required_fields:
         if not field:
-            logging.warning( 'Not all required fields are present') 
+            logging.warning('Not all required fields are present')
             return False
-            
+
     return True
+
 
 def parse_xml(inputfile):
     with open(inputfile, encoding='utf-8-sig') as f:
@@ -39,13 +41,17 @@ def parse_xml(inputfile):
         inputfile_obj = xmltodict.parse(xml_string)
         return inputfile_obj
 
+
 def validate_wzdx(wzdx_obj, wzdx_schema):
+    if not wzdx_schema or not wzdx_obj:
+        return False
     try:
-      validate(instance=wzdx_obj, schema=wzdx_schema)
+        validate(instance=wzdx_obj, schema=wzdx_schema)
     except ValidationError as e:
-      logging.error(RuntimeError(str(e)))
-      return False
+        logging.error(RuntimeError(str(e)))
+        return False
     return True
+
 
 def initialize_info():
     info = {}
@@ -60,7 +66,6 @@ def initialize_info():
     return info
 
 
-
 help_string = """ 
 
 Usage: python icone_translator.py [arguments]
@@ -70,7 +75,8 @@ Global options:
 -i, --input                 specify the file to translate
 -o, --output                specify the output file for generated wzdx geojson message """
 
-def parse_arguments(argv, default_output_file_name = 'wzdx_translated_output_message.geojson'):
+
+def parse_arguments(argv, default_output_file_name='wzdx_translated_output_message.geojson'):
     inputfile = ''
     outputfile = default_output_file_name
 
@@ -90,21 +96,22 @@ def parse_arguments(argv, default_output_file_name = 'wzdx_translated_output_mes
     return inputfile, outputfile
 
 # Add ids to message
-#### This function may fail if some optional fields are not present (lanes, types_of_work, relationship, ...)
-def add_ids(message, add_ids):
-    if add_ids:
-        data_source_id = message['road_event_feed_info']['data_sources'][0]['data_source_id']
+# This function may fail if some optional fields are not present (lanes, types_of_work, relationship, ...)
 
-        road_event_length = len(message['features'])
-        road_event_ids = []
-        for i in range(road_event_length):
-            road_event_ids.append(str(uuid.uuid4()))
 
-        for i in range(road_event_length):
-            feature = message['features'][i]
-            road_event_id = road_event_ids[i]
-            feature['properties']['road_event_id'] = road_event_id
-            feature['properties']['data_source_id'] = data_source_id
-            feature['properties']['relationship']['relationship_id'] = str(uuid.uuid4())
-            feature['properties']['relationship']['road_event_id'] = road_event_id 
+def add_ids(message):
+    data_source_id = message['road_event_feed_info']['data_sources'][0]['data_source_id']
+    road_event_length = len(message['features'])
+    road_event_ids = []
+    for i in range(road_event_length):
+        road_event_ids.append(str(uuid.uuid4()))
+
+    for i in range(road_event_length):
+        feature = message['features'][i]
+        road_event_id = road_event_ids[i]
+        feature['properties']['road_event_id'] = road_event_id
+        feature['properties']['data_source_id'] = data_source_id
+        feature['properties']['relationship']['relationship_id'] = str(
+            uuid.uuid4())
+        feature['properties']['relationship']['road_event_id'] = road_event_id
     return message

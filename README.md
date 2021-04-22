@@ -36,26 +36,26 @@ pip install -r requirements.txt
 
 ### Execution for iCone translator
 
-#### Step 1: Run the translator script (from Work_Zone/translator/source code)
+#### Step 1: Run the translator script (from Work_Zone)
 
 ```
-python icone_translator.py -i inputfile.xml -o outputfile.geojson
+python -m translator.source_code.icone_translator.py -i inputfile.xml -o outputfile.geojson
 ```
 Example usage:
 ```
-python icone_translator.py -i '../sample files/icone data/incidents_extended.xml' 
+python -m translator.source_code.icone_translator.py -i 'translator/sample files/icone data/incidents_extended.xml' 
 ```
 
 ### Execution for COtrip translator
 
-#### Step 1: Run the translator script (from Work_Zone/translator/source code)
+#### Step 1: Run the translator script (from Work_Zone)
 
 ```
-python cotrip_translator.py -i inputfile.json -o outputfile.geojson
+python -m translator.source_code.cotrip_translator.py -i inputfile.json -o outputfile.geojson
 ```
 Example usage:
 ```
-python cotrip_translator.py -i '../sample files/cotrip_data/cotrip_1.json' 
+python -m translator.source_code.cotrip_translator.py -i 'translator/sample files/cotrip_data/cotrip_1.json' 
 ```
 
 ### Unit Testing
