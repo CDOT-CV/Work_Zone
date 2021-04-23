@@ -68,11 +68,11 @@ def test_parse_xml():
     assert actual_icone_data == expected_icone_data
 
 
-# def test_parse_xml_file_doesnot_exist():
-#     test_input = ''
-#     expected_icone_data = None
-#     actual_icone_data = translator_shared_library.parse_xml(test_input)
-#     assert expected_icone_data == actual_icone_data
+def test_parse_xml_file_doesnot_exist():
+    test_input = ''
+    expected_icone_data = None
+    actual_icone_data = translator_shared_library.parse_xml(test_input)
+    assert expected_icone_data == actual_icone_data
 
 # --------------------------------------------------------------------------------unit test for parse_arguments function--------------------------------------------------------------------------------
 

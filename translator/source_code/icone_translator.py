@@ -15,52 +15,15 @@ from translator.source_code import translator_shared_library
 
 
 def wzdx_creator(messages, info=None, unsupported_message_callback=None):
-    if not messages:
+    if not messages or not messages.get('incidents', {}).get('incident'):
         return None
    # verify info obj
     if not info:
         info = translator_shared_library.initialize_info()
     if not translator_shared_library.validate_info(info):
         return None
-    wzd = {}
-    wzd['road_event_feed_info'] = {}
-    # hardcode
-    wzd['road_event_feed_info']['feed_info_id'] = info['feed_info_id']
-    wzd['road_event_feed_info']['update_date'] = datetime.now().strftime(
-        "%Y-%m-%dT%H:%M:%SZ")
-    wzd['road_event_feed_info']['publisher'] = 'CDOT'
-    wzd['road_event_feed_info']['contact_name'] = 'Abinash Konersman'
-    wzd['road_event_feed_info']['contact_email'] = 'abinash.konersman@state.co.us'
-    if info['metadata'].get('datafeed_frequency_update', False):
-        wzd['road_event_feed_info']['update_frequency'] = info['metadata'][
-            'datafeed_frequency_update']  # Verify data type
-    wzd['road_event_feed_info']['version'] = '3.0'
 
-    data_source = {}
-    data_source['data_source_id'] = str(uuid.uuid4())
-    data_source['feed_info_id'] = info['feed_info_id']
-    data_source['organization_name'] = info['metadata']['issuing_organization']
-    data_source['contact_name'] = info['metadata']['contact_name']
-    data_source['contact_email'] = info['metadata']['contact_email']
-    if info['metadata'].get('datafeed_frequency_update', False):
-        data_source['update_frequency'] = info['metadata']['datafeed_frequency_update']
-    data_source['update_date'] = datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
-    data_source['location_method'] = info['metadata']['wz_location_method']
-    data_source['lrs_type'] = info['metadata']['lrs_type']
-    wzd['road_event_feed_info']['data_sources'] = [data_source]
-
-    wzd['type'] = 'FeatureCollection'
-    sub_identifier = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in
-                             range(6))  # Create random 6 character digit/letter string
-    road_event_id = str(uuid.uuid4())
-    ids = {}
-    ids['sub_identifier'] = sub_identifier
-    ids['road_event_id'] = road_event_id
-
-    wzd['features'] = []
-
-    if not messages.get('incidents', {}).get('incident'):
-        return None
+    wzd = translator_shared_library.initialize_wzdx_object(info)
 
     for incident in messages['incidents']['incident']:
         # Parse Incident to WZDx Feature
@@ -277,12 +240,9 @@ def parse_incident(incident, callback_function=None):
         if callback_function:  # Note :a call back fucnction , which will trigger every time the invalid data is given
             callback_function(incident)
         return None
-    feature = {}
     geometry = {}
     geometry['type'] = "LineString"
     geometry['coordinates'] = parse_polyline(incident['location']['polyline'])
-
-    feature['type'] = "Feature"
     properties = {}
 
     # I included a skeleton of the message, fill out all required fields and as many optional fields as you can. Below is a link to the spec page for a road event
@@ -449,6 +409,6 @@ if inputfile:
     icone_obj = translator_shared_library.parse_xml(inputfile)
     wzdx = wzdx_creator(icone_obj, translator_shared_library.initialize_info())
     if not validate_write(wzdx, outputfile, 'translator/sample files/validation_schema/wzdx_v3.0_feed.json'):
-        print('validation error more messages are printed above')
+        print('validation error more message are printed above. output file is not created because the message failed validation.')
     else:
         print('huraaah ! your wzdx message is successfully generated and located here: ' + str(outputfile))

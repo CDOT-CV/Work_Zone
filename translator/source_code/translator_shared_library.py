@@ -8,7 +8,10 @@ import logging
 from collections import OrderedDict
 import re
 import os
+from datetime import datetime
 import os.path
+import random
+import string
 
 
 def validate_info(info):
@@ -38,7 +41,7 @@ def validate_info(info):
 
 
 def parse_xml(inputfile):
-    if not inputfile or os.path.isfile(inputfile):
+    if not inputfile or not os.path.isfile(inputfile):
         return None
     with open(inputfile, encoding='utf-8-sig') as f:
         xml_string = f.read()
@@ -72,7 +75,7 @@ def initialize_info():
 
 help_string = """ 
 
-Usage: python icone_translator.py [arguments]
+Usage: python **script_name** [arguments]
 
 Global options:
 -h, --help                  Print this usage information.
@@ -125,3 +128,44 @@ def add_ids(message):
         return message
     except:
         return message
+
+
+def initialize_wzdx_object(info):
+    wzd = {}
+    wzd['road_event_feed_info'] = {}
+    # hardcode
+    wzd['road_event_feed_info']['feed_info_id'] = info['feed_info_id']
+    wzd['road_event_feed_info']['update_date'] = datetime.now().strftime(
+        "%Y-%m-%dT%H:%M:%SZ")
+    wzd['road_event_feed_info']['publisher'] = 'CDOT'
+    wzd['road_event_feed_info']['contact_name'] = 'Abinash Konersman'
+    wzd['road_event_feed_info']['contact_email'] = 'abinash.konersman@state.co.us'
+    if info['metadata'].get('datafeed_frequency_update', False):
+        wzd['road_event_feed_info']['update_frequency'] = info['metadata'][
+            'datafeed_frequency_update']  # Verify data type
+    wzd['road_event_feed_info']['version'] = '3.0'
+
+    data_source = {}
+    data_source['data_source_id'] = str(uuid.uuid4())
+    data_source['feed_info_id'] = info['feed_info_id']
+    data_source['organization_name'] = info['metadata']['issuing_organization']
+    data_source['contact_name'] = info['metadata']['contact_name']
+    data_source['contact_email'] = info['metadata']['contact_email']
+    if info['metadata'].get('datafeed_frequency_update', False):
+        data_source['update_frequency'] = info['metadata']['datafeed_frequency_update']
+    data_source['update_date'] = datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
+    data_source['location_method'] = info['metadata']['wz_location_method']
+    data_source['lrs_type'] = info['metadata']['lrs_type']
+    wzd['road_event_feed_info']['data_sources'] = [data_source]
+
+    wzd['type'] = 'FeatureCollection'
+    sub_identifier = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in
+                             range(6))  # Create random 6 character digit/letter string
+    road_event_id = str(uuid.uuid4())
+    ids = {}
+    ids['sub_identifier'] = sub_identifier
+    ids['road_event_id'] = road_event_id
+
+    wzd['features'] = []
+
+    return wzd

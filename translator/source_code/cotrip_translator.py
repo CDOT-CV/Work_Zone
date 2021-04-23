@@ -24,7 +24,8 @@ def main():
         location_schema = 'translator/sample files/validation_schema/wzdx_v3.0_feed.json'
         wzdx_schema = json.loads(open(location_schema).read())
         if not translator_shared_library.validate_wzdx(wzdx_obj, wzdx_schema):
-            print('validation error more message are printed above')
+            print('validation error more message are printed above. output file is not created because the message failed validation.')
+            return
         with open(outputfile, 'w') as fwzdx:
             fwzdx.write(json.dumps(wzdx_obj, indent=2))
             print(
@@ -42,42 +43,8 @@ def wzdx_creator(message, info=None, unsupported_message_callback=None):
         info = translator_shared_library.initialize_info()
     if not translator_shared_library.validate_info(info):
         return None
-    wzd = {}
-    wzd['road_event_feed_info'] = {}
-    # hardcode
-    wzd['road_event_feed_info']['feed_info_id'] = info['feed_info_id']
-    wzd['road_event_feed_info']['update_date'] = datetime.now().strftime(
-        "%Y-%m-%dT%H:%M:%SZ")
-    wzd['road_event_feed_info']['publisher'] = 'CDOT'
-    wzd['road_event_feed_info']['contact_name'] = 'Abinash Konersman'
-    wzd['road_event_feed_info']['contact_email'] = 'abinash.konersman@state.co.us'
-    if info['metadata'].get('datafeed_frequency_update', False):
-        wzd['road_event_feed_info']['update_frequency'] = info['metadata'][
-            'datafeed_frequency_update']  # Verify data type
-    wzd['road_event_feed_info']['version'] = '3.0'
 
-    data_source = {}
-    data_source['data_source_id'] = str(uuid.uuid4())
-    data_source['feed_info_id'] = info['feed_info_id']
-    data_source['organization_name'] = info['metadata']['issuing_organization']
-    data_source['contact_name'] = info['metadata']['contact_name']
-    data_source['contact_email'] = info['metadata']['contact_email']
-    if info['metadata'].get('datafeed_frequency_update', False):
-        data_source['update_frequency'] = info['metadata']['datafeed_frequency_update']
-    data_source['update_date'] = datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
-    data_source['location_method'] = info['metadata']['wz_location_method']
-    data_source['lrs_type'] = info['metadata']['lrs_type']
-    wzd['road_event_feed_info']['data_sources'] = [data_source]
-
-    wzd['type'] = 'FeatureCollection'
-    sub_identifier = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in
-                             range(6))  # Create random 6 character digit/letter string
-    road_event_id = str(uuid.uuid4())
-    ids = {}
-    ids['sub_identifier'] = sub_identifier
-    ids['road_event_id'] = road_event_id
-
-    wzd['features'] = []
+    wzd = translator_shared_library.initialize_wzdx_object(info)
 
     # Parse alert to WZDx Feature
     feature = parse_alert(
@@ -135,12 +102,9 @@ def parse_alert(alert, callback_function=None):
             callback_function(alert)
         return None
     event = alert.get('event', {})
-    feature = {}
     geometry = {}
     geometry['type'] = "LineString"
     geometry['coordinates'] = parse_polyline(event['geometry'])
-
-    feature['type'] = "Feature"
     properties = {}
 
     # road_event_id
