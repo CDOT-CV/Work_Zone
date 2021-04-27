@@ -10,9 +10,8 @@ import pyproj
 def main():
     with open('combined_wzdx_message.geojson', 'w+') as f:
         wzdx_icone, wzdx_cotrip = wzdx_input()
-        input = wzdx_cotrip['features'][0]['geometry']['coordinates']
-        print(input)
-        polygon = generate_polygon(input)
+        polygon = generate_polygon(
+            wzdx_cotrip['features'][0]['geometry']['coordinates'])
         feature = iterate_feature(polygon, wzdx_icone)
         if feature:
             f.write(json.dumps(combine_wzdx(
@@ -37,15 +36,12 @@ def generate_polygon(geometry):
             p2 = geometry[i]
 
         fwd_azimuth, back_azimuth, distance = geodesic_pyproj.inv(
-            p1[1], p1[0], p2[1], p2[0])
-
-        print(fwd_azimuth)
+            p1[0], p1[1], p2[0], p2[1])
 
         left = fwd_azimuth + 90
         right = fwd_azimuth - 90
 
         p1 = geometry[i]
-        print(p1)
         origin = geopy.Point(p1[1], p1[0])
         left_point = geodesic(
             kilometers=box_width/1000).destination(origin, left)
@@ -63,8 +59,6 @@ def generate_polygon(geometry):
         polygon_points.append(i)
 
     polygon_points.append(polygon_left_points[0])
-
-    print(polygon_points)
 
     polygon = Polygon(polygon_points)
     return polygon
