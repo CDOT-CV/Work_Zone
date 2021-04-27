@@ -1,19 +1,19 @@
 {
   "road_event_feed_info": {
     "feed_info_id": "104d7746-688c-44ed-b195-2ee948bf9dfa",
-    "update_date": "2021-04-22T13:40:20Z",
+    "update_date": "2021-04-27T12:57:01Z",
     "publisher": "CDOT",
     "contact_name": "Abinash Konersman",
     "contact_email": "abinash.konersman@state.co.us",
     "version": "3.0",
     "data_sources": [
       {
-        "data_source_id": "081d185b-8743-4be3-b8b6-a4b92b630df1",
+        "data_source_id": "9c4320ec-ee80-4b3c-81c4-2842744cd299",
         "feed_info_id": "104d7746-688c-44ed-b195-2ee948bf9dfa",
         "organization_name": "CDOT",
         "contact_name": "Abinash Konersman",
         "contact_email": "abinash.konersman@state.co.us",
-        "update_date": "2021-04-22T13:40:20Z",
+        "update_date": "2021-04-27T12:57:01Z",
         "location_method": "channel-device-method",
         "lrs_type": "lrs_type"
       }
@@ -24,9 +24,9 @@
     {
       "type": "Feature",
       "properties": {
-        "road_event_id": "062fc470-46b5-4be6-885a-b6df07c02106",
+        "road_event_id": "3cb55d03-dfd4-482d-8c99-9ede1249cd09",
         "event_type": "work-zone",
-        "data_source_id": "081d185b-8743-4be3-b8b6-a4b92b630df1",
+        "data_source_id": "9c4320ec-ee80-4b3c-81c4-2842744cd299",
         "start_date": "2021-03-15T13:00:00Z",
         "end_date": "2021-11-30T07:00:00Z",
         "start_date_accuracy": "estimated",
@@ -37,8 +37,8 @@
         "direction": "northbound",
         "vehicle_impact": "unknown",
         "relationship": {
-          "relationship_id": "b70dfe90-bda7-4824-9e77-7ee9ade85e23",
-          "road_event_id": "062fc470-46b5-4be6-885a-b6df07c02106"
+          "relationship_id": "4e1df58f-2274-4130-84d9-84e58cf162b6",
+          "road_event_id": "3cb55d03-dfd4-482d-8c99-9ede1249cd09"
         },
         "lanes": [],
         "beginning_cross_street": "",
