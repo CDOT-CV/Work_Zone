@@ -8,6 +8,5 @@ icone_to_wzdx_test.geojson
 icone_wzdx_translated_output_message.geojson
 cotrip_translated_output_message.geojson
 cotrip_wzdx_translated_output_message.geojson
-combined_wzdx_message.geojson
 .vscode/settings.json
 __init__.pyc
