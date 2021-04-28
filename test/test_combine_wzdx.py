@@ -73,7 +73,7 @@ def test_combine_wzdx():
 # --------------------------------------------------------------------------------Unit test for iterate_feature function--------------------------------------------------------------------------------
 
 
-@path.object(combine_wzdx, 'isPointInPolygon')
+@patch.object(combine_wzdx, 'isPointInPolygon')
 def test_iterate_feature(mocked_combine_wzdx):
     combine_wzdx.isPointInPolygon = MagicMock(return_value=True)
 
@@ -116,3 +116,9 @@ def test_iterate_feature(mocked_combine_wzdx):
     actual = combine_wzdx.iterate_feature('polygon', test_wzdx_message)
 
     assert actual == expected
+
+# --------------------------------------------------------------------------------Unit test for generate_polygon function--------------------------------------------------------------------------------
+
+
+# def test_generate_polygon():
+#     test_geomatry =
