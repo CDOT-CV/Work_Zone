@@ -12,7 +12,7 @@ Work zone code and documentation for WZDx, iCone, etc.
 
 ## Project Description
 
-This project is an open source, proof of concept for Work Zone Data Exchange message creation from CDOT data to include iCone. The purpose of this tool is to  build a translator from CDOT work zone data and iCone data to the WZDx message (3.0). The message will contain required data by WZDx that can be populated by iCone and other CDOT Work Zone resources. Basically, in this project, we run a python script to parse data from the iCone xml file and other CDOT data which genrates WXDx 3.0 messages in a geojson format.
+This project is an open source, proof of concept for Work Zone Data Exchange message creation from CDOT data to include iCone and Cotrip. The purpose of this tool is to  build a translator from Cotrip work zone data and iCone data to the WZDx message (3.0). The message will contain required data by WZDx that can be populated by iCone and other Cotrip Work Zone resources. Basically, in this project, we run a python script to parse data from the iCone xml file and COtrip data which genrates WXDx 3.0 messages in a geojson format.
 
 ## Prerequisites
 
@@ -34,16 +34,40 @@ pip install -r requirements.txt
 
 
 
-### Execution
+### Execution for iCone translator
 
-#### Step 1: Run the translator script (from Work_Zone/translator/source code/Folder)
+#### Step 1: Run the translator script (from Work_Zone)
 
 ```
-python icone_translator.py -i inputfile.xml -o outputfile.geojson
+python -m translator.source_code.icone_translator -i inputfile.xml -o outputfile.geojson
 ```
 Example usage:
 ```
-python icone_translator.py -i '../sample files/icone data/incidents_extended.xml' 
+python -m translator.source_code.icone_translator -i 'translator/sample files/icone data/incidents_extended.xml' 
+```
+
+### Execution for COtrip translator
+
+#### Step 1: Run the translator script (from Work_Zone)
+
+```
+python -m translator.source_code.cotrip_translator -i inputfile.json -o outputfile.geojson
+```
+Example usage:
+```
+python -m translator.source_code.cotrip_translator -i 'translator/sample files/cotrip_data/cotrip_1.json' 
+```
+
+### Execution for Combine_wzdx
+
+#### Step 1: Run the translator script (from Work_Zone)
+
+```
+python -m translator.source_code.combine_wzdx 
+```
+Example usage:
+```
+python -m translator.source_code.combine_wzdx
 ```
 
 ### Unit Testing
