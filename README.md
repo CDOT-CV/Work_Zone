@@ -58,6 +58,18 @@ Example usage:
 python -m translator.source_code.cotrip_translator -i 'translator/sample files/cotrip_data/cotrip_1.json' 
 ```
 
+### Execution for Combine_wzdx
+
+#### Step 1: Run the translator script (from Work_Zone)
+
+```
+python -m translator.source_code.combine_wzdx 
+```
+Example usage:
+```
+python -m translator.source_code.combine_wzdx
+```
+
 ### Unit Testing
 
 

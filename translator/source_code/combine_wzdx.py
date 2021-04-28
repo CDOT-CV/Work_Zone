@@ -15,7 +15,7 @@ def main():
             'translator/sample files/Output Message/cotrip_wzdx_translated_output_message.geojson', 'r').read())
 
         polygon = generate_polygon(
-            wzdx_cotrip['features'][0]['geometry']['coordinates'])
+            wzdx_cotrip['features'][0]['geometry']['coordinates'], 100)
         feature = iterate_feature(polygon, wzdx_icone)
         if feature:
             f.write(json.dumps(combine_wzdx(
@@ -38,19 +38,16 @@ def iterate_feature(polygon, wzdx_message):
                 return feature
 
 
-# generate polygon from list of geometry ([[long, lat], ...])
-def generate_polygon(geometry):
+# generate polygon from list of geometry ([[long, lat], ...]) and width in meters
+def generate_polygon(geometry, polygon_width):
 
-    if not geometry:
+    if not geometry or type(geometry) != list or len(geometry) <= 1:
         return None
     geodesic_pyproj = pyproj.Geod(ellps='WGS84')
 
     # Initializing lists to create polygon
     polygon_left_points = []
     polygon_right_points = []
-
-    # Width of generated path in meters (added to each side, so total width will be double this)
-    box_width = 50
 
     for i in range(0, len(geometry)):
         # Set up points to calculate heading
@@ -76,8 +73,9 @@ def generate_polygon(geometry):
 
         # get left and right points from direction and distance
         origin = geopy.Point(p1[1], p1[0])
-        left_point = geodesic(meters=box_width).destination(origin, left)
-        right_point = geodesic(meters=box_width).destination(origin, right)
+        left_point = geodesic(meters=polygon_width/2).destination(origin, left)
+        right_point = geodesic(meters=polygon_width /
+                               2).destination(origin, right)
 
         # Append points to left and right lists
         polygon_left_points.append([left_point.latitude, left_point.longitude])

@@ -165,17 +165,20 @@ def test_generate_polygon():
         ]
     ]
 
+    test_polygon_width = 100
+
     expected = Polygon([[37.00765150000295, -104.48067172189111], [37.008040500002515, -104.48066472475348], [37.008027497338986, -
                        104.4795412753422], [37.007638497338576, -104.47954827820456], [37.00765150000295, -104.48067172189111]])
 
-    actual = combine_wzdx.generate_polygon(test_geometry)
+    actual = combine_wzdx.generate_polygon(test_geometry, test_polygon_width)
     assert actual == expected
 
 
 def test_generate_polygon_no_geometry():
     test_geometry = []
+    test_polygon_width = 100
     expected = None
-    actual = combine_wzdx.generate_polygon(test_geometry)
+    actual = combine_wzdx.generate_polygon(test_geometry, test_polygon_width)
     assert actual == expected
 
 # --------------------------------------------------------------------------------Unit test for isPointInPolygon function--------------------------------------------------------------------------------
