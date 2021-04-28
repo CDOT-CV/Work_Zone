@@ -1,9 +1,13 @@
-from unittest import mock
-from translator.source_code import combine_wzdx
-from unittest.mock import MagicMock
 
+from os import path
+from translator.source_code import combine_wzdx
+from shapely.geometry.polygon import Polygon
+from shapely.geometry import Point
+from unittest.mock import MagicMock, patch, call, Mock
 
 # --------------------------------------------------------------------------------Unit test for combine_wzdx function--------------------------------------------------------------------------------
+
+
 def test_combine_wzdx():
     test_cotrip_data = {
         "road_event_feed_info": {
@@ -65,3 +69,50 @@ def test_combine_wzdx():
         test_cotrip_data, test_icone_data, icone_feature)
 
     assert expected_combined_wzdx == actual
+
+# --------------------------------------------------------------------------------Unit test for iterate_feature function--------------------------------------------------------------------------------
+
+
+@path.object(combine_wzdx, 'isPointInPolygon')
+def test_iterate_feature(mocked_combine_wzdx):
+    combine_wzdx.isPointInPolygon = MagicMock(return_value=True)
+
+    test_wzdx_message = {
+        "features": [
+            {
+                "geometry": {
+                    "type": "LineString",
+                    "coordinates": [
+                        [
+                            -104.48011,
+                            37.007645
+                        ],
+                        [
+                            -104.480103,
+                            37.008034
+                        ]
+                    ]
+                }
+            }
+        ]
+    }
+
+    expected = {
+        "geometry": {
+            "type": "LineString",
+                    "coordinates": [
+                        [
+                            -104.48011,
+                            37.007645
+                        ],
+                        [
+                            -104.480103,
+                            37.008034
+                        ]
+                    ]
+        }
+    }
+
+    actual = combine_wzdx.iterate_feature('polygon', test_wzdx_message)
+
+    assert actual == expected
