@@ -97,7 +97,6 @@ def generate_polygon(geometry, polygon_width):
 
     # Return generated polygon
     polygon = Polygon(polygon_points)
-    print(polygon_points)
     return polygon
 
 
