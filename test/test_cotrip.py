@@ -4,7 +4,7 @@ from translator.source_code import cotrip_translator
 import json
 import re
 from datetime import date
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
 import time_machine
 
 
