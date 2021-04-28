@@ -40,6 +40,9 @@ def iterate_feature(polygon, wzdx_message):
 
 # generate polygon from list of geometry ([[long, lat], ...])
 def generate_polygon(geometry):
+
+    if not geometry:
+        return None
     geodesic_pyproj = pyproj.Geod(ellps='WGS84')
 
     # Initializing lists to create polygon
@@ -96,11 +99,14 @@ def generate_polygon(geometry):
 
     # Return generated polygon
     polygon = Polygon(polygon_points)
+    print(polygon_points)
     return polygon
 
 
 # Check if point is in polygon
 def isPointInPolygon(point, polygon):
+    if not point or not polygon or type(point) != Point or type(polygon) != Polygon:
+        return None
     return polygon.contains(point)
 
 
