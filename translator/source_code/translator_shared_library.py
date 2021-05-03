@@ -138,9 +138,12 @@ def initialize_wzdx_object(info):
     wzd['road_event_feed_info']['feed_info_id'] = info.get('feed_info_id')
     wzd['road_event_feed_info']['update_date'] = datetime.now().strftime(
         "%Y-%m-%dT%H:%M:%SZ")
-    wzd['road_event_feed_info']['publisher'] = 'CDOT'
-    wzd['road_event_feed_info']['contact_name'] = 'Abinash Konersman'
-    wzd['road_event_feed_info']['contact_email'] = 'abinash.konersman@state.co.us'
+    wzd['road_event_feed_info']['publisher'] = info.get(
+        'metadata').get('issuing_organization')
+    wzd['road_event_feed_info']['contact_name'] = info.get(
+        'metadata').get('contact_name')
+    wzd['road_event_feed_info']['contact_email'] = info.get(
+        'metadata').get('contact_email')
     if info['metadata'].get('datafeed_frequency_update', False):
         wzd['road_event_feed_info']['update_frequency'] = info.get('metadata')[
             'datafeed_frequency_update']  # Verify data type

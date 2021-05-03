@@ -1,9 +1,6 @@
 
 import json
 from datetime import datetime
-import uuid
-import random
-import string
 import sys
 from jsonschema import validate
 import logging
@@ -316,12 +313,6 @@ def parse_incident(incident, callback_function=None):
     # type_of_work
     # maintenance, minor-road-defect-repair, roadside-work, overhead-work, below-road-work, barrier-work, surface-work, painting, roadway-relocation, roadway-creation
     properties['types_of_work'] = []
-
-    # reduced speed limit
-    properties['reduced_speed_limit'] = 25
-
-    # workers present
-    properties['workers_present'] = False
 
     # restrictions
     properties['restrictions'] = []

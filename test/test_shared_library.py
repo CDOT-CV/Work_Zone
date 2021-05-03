@@ -1,6 +1,6 @@
 from translator.source_code import translator_shared_library
 import json
-from unittest.mock import MagicMock, patch, Mock
+from unittest.mock import patch, Mock
 import pytest
 import uuid
 
