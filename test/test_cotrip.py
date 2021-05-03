@@ -48,7 +48,7 @@ def test_wzdx_creator_empty_cotrip_object():
 
 
 def test_wzdx_creator_invalid_incidents_no_description():
-    cotrip_obj = cotrip_obj = {
+    cotrip_obj = {
         "rtdh_timestamp": 1615866698.393723,
         "rtdh_message_id": "dd962abd-0afa-4810-aac0-165edb834e71",
         "event": {

@@ -15,11 +15,15 @@ def main():
     inputfile, outputfile = translator_shared_library.parse_arguments(
         sys.argv[1:], default_output_file_name='cotrip_wzdx_translated_output_message.geojson')
     if inputfile:
-
-        cotrip_obj = json.loads(open(inputfile).read())
+        try:
+            cotrip_obj = json.loads(open(inputfile).read())
+        except ValueError as e:
+            raise ValueError(
+                'Invalid file type. Please specify a valid Json file!') from e
         wzdx_obj = wzdx_creator(cotrip_obj)
         location_schema = 'translator/sample files/validation_schema/wzdx_v3.0_feed.json'
         wzdx_schema = json.loads(open(location_schema).read())
+
         if not translator_shared_library.validate_wzdx(wzdx_obj, wzdx_schema):
             print('validation error more message are printed above. output file is not created because the message failed validation.')
             return
@@ -28,7 +32,7 @@ def main():
             print(
                 'huraaah ! your wzdx message is successfully generated and located here: ' + str(outputfile))
     else:
-        print('please specify the input file with -i')
+        print('please specify an input json file with -i')
         print(translator_shared_library.help_string)
 
 
