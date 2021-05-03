@@ -111,14 +111,15 @@ def add_ids(message):
         return None
     try:
 
-        data_source_id = message['road_event_feed_info']['data_sources'][0]['data_source_id']
-        road_event_length = len(message['features'])
+        data_source_id = message.get('road_event_feed_info').get(
+            'data_sources')[0].get('data_source_id')
+        road_event_length = len(message.get('features'))
         road_event_ids = []
         for i in range(road_event_length):
             road_event_ids.append(str(uuid.uuid4()))
 
         for i in range(road_event_length):
-            feature = message['features'][i]
+            feature = message.get('features')[i]
             road_event_id = road_event_ids[i]
             feature['properties']['road_event_id'] = road_event_id
             feature['properties']['data_source_id'] = data_source_id
@@ -134,28 +135,31 @@ def initialize_wzdx_object(info):
     wzd = {}
     wzd['road_event_feed_info'] = {}
     # hardcode
-    wzd['road_event_feed_info']['feed_info_id'] = info['feed_info_id']
+    wzd['road_event_feed_info']['feed_info_id'] = info.get('feed_info_id')
     wzd['road_event_feed_info']['update_date'] = datetime.now().strftime(
         "%Y-%m-%dT%H:%M:%SZ")
     wzd['road_event_feed_info']['publisher'] = 'CDOT'
     wzd['road_event_feed_info']['contact_name'] = 'Abinash Konersman'
     wzd['road_event_feed_info']['contact_email'] = 'abinash.konersman@state.co.us'
     if info['metadata'].get('datafeed_frequency_update', False):
-        wzd['road_event_feed_info']['update_frequency'] = info['metadata'][
+        wzd['road_event_feed_info']['update_frequency'] = info.get('metadata')[
             'datafeed_frequency_update']  # Verify data type
     wzd['road_event_feed_info']['version'] = '3.0'
 
     data_source = {}
     data_source['data_source_id'] = str(uuid.uuid4())
-    data_source['feed_info_id'] = info['feed_info_id']
-    data_source['organization_name'] = info['metadata']['issuing_organization']
-    data_source['contact_name'] = info['metadata']['contact_name']
-    data_source['contact_email'] = info['metadata']['contact_email']
+    data_source['feed_info_id'] = info.get('feed_info_id')
+    data_source['organization_name'] = info.get(
+        'metadata').get('issuing_organization')
+    data_source['contact_name'] = info.get('metadata').get('contact_name')
+    data_source['contact_email'] = info.get('metadata').get('contact_email')
     if info['metadata'].get('datafeed_frequency_update', False):
-        data_source['update_frequency'] = info['metadata']['datafeed_frequency_update']
+        data_source['update_frequency'] = info.get(
+            'metadata').get('datafeed_frequency_update')
     data_source['update_date'] = datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
-    data_source['location_method'] = info['metadata']['wz_location_method']
-    data_source['lrs_type'] = info['metadata']['lrs_type']
+    data_source['location_method'] = info.get(
+        'metadata').get('wz_location_method')
+    data_source['lrs_type'] = info.get('metadata').get('lrs_type')
     wzd['road_event_feed_info']['data_sources'] = [data_source]
 
     wzd['type'] = 'FeatureCollection'

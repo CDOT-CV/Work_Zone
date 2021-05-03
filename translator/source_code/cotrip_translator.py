@@ -1,8 +1,5 @@
 import json
 from datetime import datetime, timezone, timedelta
-import uuid
-import random
-import string
 import sys
 from jsonschema import validate
 import logging
@@ -50,8 +47,8 @@ def wzdx_creator(message, info=None, unsupported_message_callback=None):
     feature = parse_alert(
         message, callback_function=unsupported_message_callback)
     if feature:
-        wzd['features'].append(feature)
-    if not wzd['features']:
+        wzd.get('features').append(feature)
+    if not wzd.get('features'):
         return None
     wzd = translator_shared_library.add_ids(wzd)
     return wzd
@@ -104,7 +101,7 @@ def parse_alert(alert, callback_function=None):
     event = alert.get('event', {})
     geometry = {}
     geometry['type'] = "LineString"
-    geometry['coordinates'] = parse_polyline(event['geometry'])
+    geometry['coordinates'] = parse_polyline(event.get('geometry'))
     properties = {}
 
     # road_event_id
@@ -120,11 +117,11 @@ def parse_alert(alert, callback_function=None):
 
     # start_date
     properties['start_date'] = reformat_datetime(
-        event['header']['start_timestamp'])
+        event.get('header').get('start_timestamp'))
 
     # end_date
     properties['end_date'] = reformat_datetime(
-        event['header'].get('end_timestamp'))
+        event.get('header').get('end_timestamp'))
 
     # start_date_accuracy
     properties['start_date_accuracy'] = "estimated"
@@ -139,13 +136,14 @@ def parse_alert(alert, callback_function=None):
     properties['ending_accuracy'] = "estimated"
 
     # road_name
-    properties['road_name'] = event['detail']['road_name']
+    properties['road_name'] = event.get('detail').get('road_name')
 
     # direction
     Direction_map = {'North': 'northbound', 'South': 'southbound',
                      'West': 'westbound', 'East': 'eastbound'}
 
-    properties['direction'] = Direction_map.get(event['detail']['direction'])
+    properties['direction'] = Direction_map.get(
+        event.get('detail').get('direction'))
 
     # vehicle impact
     properties['vehicle_impact'] = 'unknown'
@@ -164,7 +162,7 @@ def parse_alert(alert, callback_function=None):
 
     # event status
     properties['event_status'] = get_event_status(
-        event['header']['start_timestamp'], event['header'].get('end_timestamp'))
+        event.get('header').get('start_timestamp'), event.get('header').get('end_timestamp'))
 
     # type_of_work
     # maintenance, minor-road-defect-repair, roadside-work, overhead-work, below-road-work, barrier-work, surface-work, painting, roadway-relocation, roadway-creation
@@ -174,14 +172,14 @@ def parse_alert(alert, callback_function=None):
     properties['restrictions'] = []
 
     # description
-    properties['description'] = event['header']['description']
+    properties['description'] = event.get('header').get('description')
 
     # creation_date
     properties['creation_date'] = reformat_datetime(
-        event['source']['collection_timestamp'])
+        event.get('source').get('collection_timestamp'))
 
     # update_date
-    properties['update_date'] = reformat_datetime(alert['rtdh_timestamp'])
+    properties['update_date'] = reformat_datetime(alert.get('rtdh_timestamp'))
 
     feature = {}
     feature['type'] = "Feature"
