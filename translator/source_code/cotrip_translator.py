@@ -19,7 +19,7 @@ def main():
             cotrip_obj = json.loads(open(inputfile).read())
         except ValueError as e:
             raise ValueError(
-                'Invalid file type. Please specify a valid Json file!') from e
+                'Invalid file type. Please specify a valid Json file!') from None
         wzdx_obj = wzdx_creator(cotrip_obj)
         location_schema = 'translator/sample files/validation_schema/wzdx_v3.0_feed.json'
         wzdx_schema = json.loads(open(location_schema).read())
