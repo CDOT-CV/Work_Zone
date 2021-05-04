@@ -1,5 +1,6 @@
 import json
 from datetime import datetime, timezone, timedelta
+from operator import ge
 import sys
 from jsonschema import validate
 import logging
@@ -170,7 +171,9 @@ def parse_alert(alert, callback_function=None):
 
     # type_of_work
     # maintenance, minor-road-defect-repair, roadside-work, overhead-work, below-road-work, barrier-work, surface-work, painting, roadway-relocation, roadway-creation
-    properties['types_of_work'] = []
+    works = event.get('sub_type')
+    types_of_work = get_types_of_work(works)
+    properties['types_of_work'] = types_of_work
 
     # restrictions
     properties['restrictions'] = []
@@ -240,6 +243,28 @@ def reformat_datetime(datetime_string):
     wzdx_format_datetime = time.astimezone(
         timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     return wzdx_format_datetime
+
+
+def get_types_of_work(sub_type):
+    sub_type_split = sub_type.split(':')
+    type_of_work = sub_type_split[1]
+
+    valid_types_of_work = ['maintenance',
+                           'minor-road-defect-repair',
+                           'roadside-work',
+                           'overhead-work',
+                           'below-road-work',
+                           'barrier-work',
+                           'surface-work',
+                           'painting',
+                           'roadway-relocation',
+                           'roadway-creation']
+    work_type = {'type_name': type_of_work,
+                 'is_architectural_change': True}
+    if type_of_work in valid_types_of_work:
+        return [work_type]
+    else:
+        return []
 
 
 if __name__ == "__main__":
