@@ -60,9 +60,9 @@ def validate_wzdx(wzdx_obj, wzdx_schema):
     return True
 
 
-def initialize_info():
+def initialize_info(feed_info_id):
     info = {}
-    info['feed_info_id'] = "104d7746-688c-44ed-b195-2ee948bf9dfa"
+    info['feed_info_id'] = feed_info_id
     info['metadata'] = {}
     info['metadata']['wz_location_method'] = "channel-device-method"
     info['metadata']['lrs_type'] = "lrs_type"

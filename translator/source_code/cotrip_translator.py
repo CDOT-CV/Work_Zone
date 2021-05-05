@@ -7,6 +7,7 @@ import logging
 from collections import OrderedDict
 import re
 from translator.source_code import translator_shared_library
+import copy
 
 # Translator
 
@@ -42,7 +43,8 @@ def wzdx_creator(message, info=None, unsupported_message_callback=None):
         return None
    # verify info obj
     if not info:
-        info = translator_shared_library.initialize_info()
+        info = translator_shared_library.initialize_info(
+            '8d062f70-d53e-4029-b94e-b7fbcbde5885')
     if not translator_shared_library.validate_info(info):
         return None
 
@@ -107,18 +109,10 @@ def parse_alert(alert, callback_function=None):
     geometry = {}
     geometry['type'] = "LineString"
     geometry['coordinates'] = parse_polyline(event.get('geometry'))
-    properties = {}
-
-    # road_event_id
-    # Leave this empty, it will be populated by add_ids
-    properties['road_event_id'] = ''
+    properties = initialize_feature_properties()
 
     # Event Type ['work-zone', 'detour']
     properties['event_type'] = 'work-zone'
-
-    # data_source_id
-    # Leave this empty, it will be populated by add_ids
-    properties['data_source_id'] = ''
 
     # start_date
     properties['start_date'] = reformat_datetime(
@@ -153,18 +147,6 @@ def parse_alert(alert, callback_function=None):
     # vehicle impact
     properties['vehicle_impact'] = 'unknown'
 
-    # Relationship
-    properties['relationship'] = {}
-
-    # lanes
-    properties['lanes'] = []
-
-    # beginning_cross_street
-    properties['beginning_cross_street'] = ""
-
-    # beginning_cross_street
-    properties['ending_cross_street'] = ""
-
     # event status
     properties['event_status'] = get_event_status(
         event.get('header').get('start_timestamp'), event.get('header').get('end_timestamp'))
@@ -176,7 +158,8 @@ def parse_alert(alert, callback_function=None):
     properties['types_of_work'] = types_of_work
 
     # restrictions
-    properties['restrictions'] = []
+    work_updates = event.get('detail').get('work_updates')
+    properties['restrictions'] = get_restrictions(work_updates)
 
     # description
     properties['description'] = event.get('header').get('description')
@@ -188,9 +171,15 @@ def parse_alert(alert, callback_function=None):
     # update_date
     properties['update_date'] = reformat_datetime(alert.get('rtdh_timestamp'))
 
+    filtered_properties = copy.deepcopy(properties)
+
+    for key, value in properties.items():
+        if value == None and key not in ['road_event_id', 'data_source_id']:
+            del filtered_properties[key]
+
     feature = {}
     feature['type'] = "Feature"
-    feature['properties'] = properties
+    feature['properties'] = filtered_properties
     feature['geometry'] = geometry
 
     return feature
@@ -265,6 +254,61 @@ def get_types_of_work(sub_type):
         return [work_type]
     else:
         return []
+
+
+def get_restrictions(work_updates):
+    restrictions = []
+    #work_updates = event.get('detail').get('work_updates')
+    valid_type_of_restrictions = ['no-trucks',
+                                  'travel-peak-hours-only',
+                                  'hov-3',
+                                  'hov-2',
+                                  'no-parking',
+                                  'reduced-width',
+                                  'reduced-height',
+                                  'reduced-length',
+                                  'reduced-weight',
+                                  'axle-load-limit',
+                                  'gross-weight-limit',
+                                  'towing-prohibited',
+                                  'permitted-oversize-loads-prohibited']
+    for work_update in work_updates:
+        if work_update.get('restrictions'):
+            for restriction in work_update.get('restrictions'):
+                restrict = restriction.get('type')
+                if restrict in valid_type_of_restrictions:
+                    restrictions.append(restrict)
+    return restrictions
+
+
+def initialize_feature_properties():
+    properties = {}
+    properties['road_event_id'] = None
+    properties['event_type'] = None
+    properties['data_source_id'] = None
+    properties['start_date'] = None
+    properties['end_date'] = None
+    properties['start_date_accuracy'] = None
+    properties['end_date_accuracy'] = None
+    properties['beginning_accuracy'] = None
+    properties['ending_accuracy'] = None
+    properties['road_name'] = None
+    properties['direction'] = None
+    properties['vehicle_impact'] = None
+    properties['relationship'] = None
+    properties['lanes'] = None
+    properties['beginning_cross_street'] = None
+    properties['ending_cross_street'] = None
+    properties['beginning_mile_post'] = None
+    properties['ending_mile_post'] = None
+    properties['event_status'] = None
+    properties['types_of_work'] = None
+    properties['restrictions'] = None
+    properties['description'] = None
+    properties['creation_date'] = None
+    properties['update_date'] = None
+
+    return properties
 
 
 if __name__ == "__main__":

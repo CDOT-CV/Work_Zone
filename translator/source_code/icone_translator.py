@@ -16,7 +16,8 @@ def wzdx_creator(messages, info=None, unsupported_message_callback=None):
         return None
    # verify info obj
     if not info:
-        info = translator_shared_library.initialize_info()
+        info = translator_shared_library.initialize_info(
+            '104d7746-688c-44ed-b195-2ee948bf9dfa')
     if not translator_shared_library.validate_info(info):
         return None
 
