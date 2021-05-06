@@ -105,6 +105,7 @@ def parse_alert(alert, callback_function=None):
         if callback_function:
             callback_function(alert)
         return None
+
     event = alert.get('event', {})
     geometry = {}
     geometry['type'] = "LineString"
@@ -155,11 +156,15 @@ def parse_alert(alert, callback_function=None):
     # maintenance, minor-road-defect-repair, roadside-work, overhead-work, below-road-work, barrier-work, surface-work, painting, roadway-relocation, roadway-creation
     works = event.get('sub_type')
     types_of_work = get_types_of_work(works)
-    properties['types_of_work'] = types_of_work
+    if types_of_work:
+        properties['types_of_work'] = types_of_work
 
     # restrictions
+
     work_updates = event.get('detail').get('work_updates')
-    properties['restrictions'] = get_restrictions(work_updates)
+    restrictions = get_restrictions(work_updates)
+    if restrictions:
+        properties['restrictions'] = restrictions
 
     # description
     properties['description'] = event.get('header').get('description')
@@ -258,7 +263,9 @@ def get_types_of_work(sub_type):
 
 def get_restrictions(work_updates):
     restrictions = []
-    #work_updates = event.get('detail').get('work_updates')
+    if restrictions == [] or restrictions == None:
+        return []
+
     valid_type_of_restrictions = ['no-trucks',
                                   'travel-peak-hours-only',
                                   'hov-3',
