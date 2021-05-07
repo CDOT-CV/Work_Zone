@@ -68,11 +68,19 @@ def test_parse_xml():
     assert actual_icone_data == expected_icone_data
 
 
-def test_parse_xml_file_doesnot_exist():
+def test_parse_xml_file_empty_string():
     test_input = ''
     expected_icone_data = None
     actual_icone_data = translator_shared_library.parse_xml(test_input)
     assert expected_icone_data == actual_icone_data
+
+
+def test_parse_xml_file_does_not_exist():
+    test_input = 'non-file.txt'
+    expected_icone_data = None
+    actual_icone_data = translator_shared_library.parse_xml(test_input)
+    assert expected_icone_data == actual_icone_data
+
 
 # --------------------------------------------------------------------------------unit test for parse_arguments function--------------------------------------------------------------------------------
 
@@ -147,7 +155,8 @@ def test_validate_wzdx_no_wzdx_data():
 
 
 def test_initialize_info():
-    actual = translator_shared_library.initialize_info()
+    actual = translator_shared_library.initialize_info(
+        "104d7746-688c-44ed-b195-2ee948bf9dfa")
     expected = {'feed_info_id': "104d7746-688c-44ed-b195-2ee948bf9dfa", 'metadata': {'wz_location_method': "channel-device-method",
                                                                                      'lrs_type': "lrs_type", 'contact_name': "Abinash Konersman", 'contact_email': "abinash.konersman@state.co.us", 'issuing_organization': "CDOT"}}
     assert actual == expected

@@ -36,9 +36,8 @@ def test_wzdx_creator():
         }
     }
 
-    wzdx_re = '{"road_event_feed_info": {"feed_info_id": "104d7746-688c-44ed-b195-2ee948bf9dfa", "update_date": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z", "publisher": "CDOT", "contact_name": "Abinash Konersman", "contact_email": "abinash\\.konersman@state\\.co\\.us", "version": "3\\.0", "data_sources": \\[{"data_source_id": "[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}", "feed_info_id": "104d7746-688c-44ed-b195-2ee948bf9dfa", "organization_name": "CDOT", "contact_name": "Abinash Konersman", "contact_email": "abinash\\.konersman@state\\.co\\.us", "update_date": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z", "location_method": "channel-device-method", "lrs_type": "lrs_type"}\\]}, "type": "FeatureCollection", "features": \\[{"type": "Feature", "properties": {"road_event_id": "[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}", "event_type": "work-zone", "data_source_id": "[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}", "start_date": "2021-03-15T13:00:00Z", "end_date": "2021-11-30T07:00:00Z", "start_date_accuracy": "estimated", "end_date_accuracy": "estimated", "beginning_accuracy": "estimated", "ending_accuracy": "estimated", "road_name": "I-25", "direction": "northbound", "vehicle_impact": "unknown", "event_status": "active", "types_of_work": \\[{"is_architectural_change": true,"type_name": "roadway-relocation"}\\], "description": "Road Construction - I-25 \\(Main St\\.\\) business loop from MP 1-2", "creation_date": "2021-03-11T17:12:00Z", "update_date": "2021-03-16T03:51:38Z"}, "geometry": {"type": "LineString", "coordinates": \\[\\[-104\\.48011, 37\\.007645\\], \\[-104\\.480103, 37\\.008034\\], \\[-104\\.480125, 37\\.008469\\], \\[-104\\.480202, 37\\.008904\\], \\[-104\\.48024, 37\\.009048\\], \\[-104\\.480324, 37\\.009338\\], \\[-104\\.482475, 37\\.015327\\], \\[-104\\.482712, 37\\.015945\\], \\[-104\\.48288, 37\\.016335\\], \\[-104\\.482979, 37\\.016521\\], \\[-104\\.483208, 37\\.016884\\], \\[-104\\.483467, 37\\.01722\\], \\[-104\\.483612, 37\\.01738\\], \\[-104\\.483925, 37\\.017681\\], \\[-104\\.484253, 37\\.017948\\], \\[-104\\.484772, 37\\.018295\\], \\[-104\\.485138, 37\\.01849\\], \\[-104\\.485504, 37\\.018661\\], \\[-104\\.485886, 37\\.01881\\], \\[-104\\.486473, 37\\.019005\\], \\[-104\\.488014, 37\\.019493\\]\\]}}\\]}'
+    wzdx_re = '{"road_event_feed_info": {"feed_info_id": "8d062f70-d53e-4029-b94e-b7fbcbde5885", "update_date": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z", "publisher": "CDOT", "contact_name": "Abinash Konersman", "contact_email": "abinash\\.konersman@state\\.co\\.us", "version": "3\\.0", "data_sources": \\[{"data_source_id": "[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}", "feed_info_id": "8d062f70-d53e-4029-b94e-b7fbcbde5885", "organization_name": "CDOT", "contact_name": "Abinash Konersman", "contact_email": "abinash\\.konersman@state\\.co\\.us", "update_date": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z", "location_method": "channel-device-method", "lrs_type": "lrs_type"}\\]}, "type": "FeatureCollection", "features": \\[{"type": "Feature", "properties": {"road_event_id": "[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}", "event_type": "work-zone", "data_source_id": "[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}", "start_date": "2021-03-15T13:00:00Z", "end_date": "2021-11-30T07:00:00Z", "start_date_accuracy": "estimated", "end_date_accuracy": "estimated", "beginning_accuracy": "estimated", "ending_accuracy": "estimated", "road_name": "I-25", "direction": "northbound", "vehicle_impact": "unknown", "event_status": "active", "types_of_work": \\[{"type_name": "roadway-relocation", "is_architectural_change": true}\\], "description": "Road Construction - I-25 \\(Main St\\.\\) business loop from MP 1-2", "creation_date": "2021-03-11T17:12:00Z", "update_date": "2021-03-16T03:51:38Z"}, "geometry": {"type": "LineString", "coordinates": \\[\\[-104\\.48011, 37\\.007645\\], \\[-104\\.480103, 37\\.008034\\], \\[-104\\.480125, 37\\.008469\\], \\[-104\\.480202, 37\\.008904\\], \\[-104\\.48024, 37\\.009048\\], \\[-104\\.480324, 37\\.009338\\], \\[-104\\.482475, 37\\.015327\\], \\[-104\\.482712, 37\\.015945\\], \\[-104\\.48288, 37\\.016335\\], \\[-104\\.482979, 37\\.016521\\], \\[-104\\.483208, 37\\.016884\\], \\[-104\\.483467, 37\\.01722\\], \\[-104\\.483612, 37\\.01738\\], \\[-104\\.483925, 37\\.017681\\], \\[-104\\.484253, 37\\.017948\\], \\[-104\\.484772, 37\\.018295\\], \\[-104\\.485138, 37\\.01849\\], \\[-104\\.485504, 37\\.018661\\], \\[-104\\.485886, 37\\.01881\\], \\[-104\\.486473, 37\\.019005\\], \\[-104\\.488014, 37\\.019493\\]\\]}}\\]}'
     test_wzdx = cotrip_translator.wzdx_creator(cotrip_obj)
-    print(test_wzdx)
     assert re.match(wzdx_re, json.dumps(test_wzdx)) != None
 
 
@@ -582,31 +581,104 @@ def test_get_types_of_work():
     actual = cotrip_translator.get_types_of_work(test_type_of_work)
     assert actual == expected
 
+
+def test_get_types_of_work_none_type_of_work():
+    test_type_of_work = None
+    expected = []
+    actual = cotrip_translator.get_types_of_work(test_type_of_work)
+    assert actual == expected
+
+
+def test_get_types_of_work_string_without_a_colon():
+    test_type_of_work = "Work Zone roadway-relocation"
+    expected = []
+    actual = cotrip_translator.get_types_of_work(test_type_of_work)
+    assert actual == expected
+
+
+def test_get_types_of_work():
+    test_type_of_work = "Work Zone:invalid"
+    expected = []
+    actual = cotrip_translator.get_types_of_work(test_type_of_work)
+    assert actual == expected
+
 # --------------------------------------------------------------------------------unit test for get_restrictions function--------------------------------------------------------------------------------
 
 
 def test_get_restrictions():
-    test_restrictions = [{
-
-        "id": "62410",
-        "description": "Work will consist of HMA removal and patching, concrete removals and pouring ada ramps, curb and gutter.",
+    test_work_updates = [{
         "restrictions": [
             {
                 "type": "Flagger Operations"
             }
         ]
-
     }]
 
     expected = []
-    actual = cotrip_translator.get_restrictions(test_restrictions)
+    actual = cotrip_translator.get_restrictions(test_work_updates)
 
     assert actual == expected
 
 
-def test_get_restrictions_none_restrictions():
-    test_restrictions = None
+def test_get_restrictions_none_work_updates():
+    test_work_updates = None
 
     expected = []
-    actual = cotrip_translator.get_restrictions(test_restrictions)
+    actual = cotrip_translator.get_restrictions(test_work_updates)
+    assert actual == expected
+
+
+def test_get_restrictions_empty_list():
+    test_work_updates = []
+    expected = []
+    actual = cotrip_translator.get_restrictions(test_work_updates)
+    assert actual == expected
+
+
+def test_get_restrictions_invalid_list():
+    test_work_updates = ["invalid", "data"]
+    expected = []
+    actual = cotrip_translator.get_restrictions(test_work_updates)
+    assert actual == expected
+
+
+def test_get_restrictions_valid():
+    test_work_updates = [{
+        "restrictions": [
+            {
+                "type": "travel-peak-hours-only"
+            }
+        ]
+    }]
+
+    expected = ['travel-peak-hours-only']
+    actual = cotrip_translator.get_restrictions(test_work_updates)
+
+    assert actual == expected
+
+
+def test_get_restrictions_no_restriction():
+    test_work_updates = [{
+        "invalid": [
+            {
+                "type": "travel-peak-hours-only"
+            }
+        ]
+    }]
+
+    expected = []
+    actual = cotrip_translator.get_restrictions(test_work_updates)
+
+    assert actual == expected
+
+
+def test_get_restrictions_empty_restriction():
+    test_work_updates = [{
+        "restrictions": []
+
+    }]
+
+    expected = []
+    actual = cotrip_translator.get_restrictions(test_work_updates)
+
     assert actual == expected

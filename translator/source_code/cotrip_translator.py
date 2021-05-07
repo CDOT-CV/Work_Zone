@@ -240,7 +240,11 @@ def reformat_datetime(datetime_string):
 
 
 def get_types_of_work(sub_type):
+    if not sub_type or type(sub_type) != str:
+        return []
     sub_type_split = sub_type.split(':')
+    if len(sub_type_split) < 2:
+        return []
     type_of_work = sub_type_split[1]
 
     valid_types_of_work = ['maintenance',
@@ -263,7 +267,7 @@ def get_types_of_work(sub_type):
 
 def get_restrictions(work_updates):
     restrictions = []
-    if restrictions == [] or restrictions == None:
+    if work_updates == [] or work_updates == None:
         return []
 
     valid_type_of_restrictions = ['no-trucks',
@@ -280,11 +284,12 @@ def get_restrictions(work_updates):
                                   'towing-prohibited',
                                   'permitted-oversize-loads-prohibited']
     for work_update in work_updates:
-        if work_update.get('restrictions'):
+        if type(work_update) == dict and work_update.get('restrictions'):
             for restriction in work_update.get('restrictions'):
-                restrict = restriction.get('type')
-                if restrict in valid_type_of_restrictions:
-                    restrictions.append(restrict)
+                if type(restriction) == dict:
+                    restrict = restriction.get('type')
+                    if restrict in valid_type_of_restrictions:
+                        restrictions.append(restrict)
     return restrictions
 
 
