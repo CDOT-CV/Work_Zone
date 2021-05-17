@@ -64,7 +64,7 @@ python -m translator.source_code.cotrip_translator -i 'translator/sample files/c
 #### Run the unit test for translator script (from root directory)
 
 ```
-$ python -m pytest 'test/' -v
+python -m pytest 'test/' -v
 ```
 Ensure you have your environment configured correctly (as described above).
 
