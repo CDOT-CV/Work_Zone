@@ -400,7 +400,8 @@ if inputfile:
     # Added encoding argument because of weird character at start of incidents.xml file
 
     icone_obj = translator_shared_library.parse_xml(inputfile)
-    wzdx = wzdx_creator(icone_obj, translator_shared_library.initialize_info())
+    wzdx = wzdx_creator(icone_obj, translator_shared_library.initialize_info(
+        '104d7746-688c-44ed-b195-2ee948bf9dfa'))
     if not validate_write(wzdx, outputfile, 'translator/sample files/validation_schema/wzdx_v3.0_feed.json'):
         print('validation error more message are printed above. output file is not created because the message failed validation.')
     else:
