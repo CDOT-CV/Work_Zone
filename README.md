@@ -48,7 +48,7 @@ python -m translator.source_code.icone_translator -i 'translator/sample files/ic
 
 ### Execution for COtrip translator
 
-#### Step 1: Run the translator script (from Work_Zone)
+#### Step 1: Run the translator script (from Work_Zone) and Please specify a valid Json file as an input file !
 
 ```
 python -m translator.source_code.cotrip_translator -i inputfile.json -o outputfile.geojson
