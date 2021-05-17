@@ -2,7 +2,6 @@
 import json
 from datetime import datetime
 import sys
-from jsonschema import validate
 import logging
 from collections import OrderedDict
 from translator.source_code import translator_shared_library

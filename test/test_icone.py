@@ -1,4 +1,3 @@
-from translator.source_code import translator_shared_library
 from translator.source_code import icone_translator
 import xmltodict
 import json

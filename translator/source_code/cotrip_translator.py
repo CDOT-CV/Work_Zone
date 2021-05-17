@@ -1,8 +1,6 @@
 import json
 from datetime import datetime, timezone, timedelta
-from operator import ge
 import sys
-from jsonschema import validate
 import logging
 from collections import OrderedDict
 import re

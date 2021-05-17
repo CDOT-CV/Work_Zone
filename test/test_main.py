@@ -1,5 +1,4 @@
 import pytest
-from unittest import TestCase
 import json
 import os
 import sys

@@ -1,5 +1,3 @@
-
-from translator.source_code import translator_shared_library
 from translator.source_code import cotrip_translator
 import json
 import re
