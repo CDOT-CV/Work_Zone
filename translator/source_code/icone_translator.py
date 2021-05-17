@@ -8,6 +8,29 @@ from translator.source_code import translator_shared_library
 
 
 # Translator
+def main():
+    inputfile, outputfile = translator_shared_library.parse_arguments(
+        sys.argv[1:], default_output_file_name='icone_wzdx_translated_output_message.geojson')
+
+    if inputfile:
+        # Added encoding argument because of weird character at start of incidents.xml file
+
+        icone_obj = translator_shared_library.parse_xml(inputfile)
+        wzdx = wzdx_creator(icone_obj, translator_shared_library.initialize_info(
+            '104d7746-688c-44ed-b195-2ee948bf9dfa'))
+        location_schema = 'translator/sample files/validation_schema/wzdx_v3.0_feed.json'
+        wzdx_schema = json.loads(open(location_schema).read())
+
+        if not translator_shared_library.validate_wzdx(wzdx, wzdx_schema):
+            print('validation error more message are printed above. output file is not created because the message failed validation.')
+            return
+        with open(outputfile, 'w') as fwzdx:
+            fwzdx.write(json.dumps(wzdx, indent=2))
+            print(
+                'huraaah ! your wzdx message is successfully generated and located here: ' + str(outputfile))
+    else:
+        print('please specify an input json file with -i')
+        print(translator_shared_library.help_string)
 
 
 def wzdx_creator(messages, info=None, unsupported_message_callback=None):
@@ -383,26 +406,5 @@ def validate_incident(incident):
     return True
 
 
-inputfile, outputfile = translator_shared_library.parse_arguments(
-    sys.argv[1:], default_output_file_name='icone_wzdx_translated_output_message.geojson')
-
-
-def validate_write(wzdx_obj, outputfile, location_schema):
-    wzdx_schema = json.loads(open(location_schema).read())
-    if not translator_shared_library.validate_wzdx(wzdx_obj, wzdx_schema):
-        return False
-    with open(outputfile, 'w') as fwzdx:
-        fwzdx.write(json.dumps(wzdx_obj, indent=2))
-    return True
-
-
-if inputfile:
-    # Added encoding argument because of weird character at start of incidents.xml file
-
-    icone_obj = translator_shared_library.parse_xml(inputfile)
-    wzdx = wzdx_creator(icone_obj, translator_shared_library.initialize_info(
-        '104d7746-688c-44ed-b195-2ee948bf9dfa'))
-    if not validate_write(wzdx, outputfile, 'translator/sample files/validation_schema/wzdx_v3.0_feed.json'):
-        print('validation error more message are printed above. output file is not created because the message failed validation.')
-    else:
-        print('huraaah ! your wzdx message is successfully generated and located here: ' + str(outputfile))
+if __name__ == "__main__":
+    main()
