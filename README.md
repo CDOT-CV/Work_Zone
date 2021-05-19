@@ -46,8 +46,19 @@ Runtime Environment Variables:
 
 
 Example usage:
+for mac computer run this bash script file for setting up environment variable
+
+env_var.sh
 ```
-python -m translator.source_code.icone_translator -i 'translator/sample files/icone data/incidents_extended.xml' 
+
+
+#!/bin/bash
+
+export contact_name='Abinash Konersman'
+export contact_email='abinash.konersman@state.co.us'
+export issuing_organization='CDOT'
+
+
 ```
 
 ### Execution for iCone translator
