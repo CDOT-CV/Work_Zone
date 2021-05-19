@@ -2,7 +2,7 @@ import pytest
 import json
 import os
 import sys
-from unittest.mock import MagicMock, patch, call, Mock
+from unittest.mock import MagicMock, patch, Mock
 sys.modules['icone_translator'] = Mock()  # noqa
 import icone_translator
 from translator.GCP_cloud_function.cloud_function import main

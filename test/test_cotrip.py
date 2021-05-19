@@ -704,11 +704,63 @@ def test_parse_reduced_speed_limit_from_description_invalid():
     assert expected == actual
 
 
-def test_parse_reduced_speed_limit_from_description_invalid():
+def test_parse_reduced_speed_limit_from_description_no_description():
 
     test_description = ""
     expected = None
     actual = cotrip_translator.parse_reduced_speed_limit_from_description(
         test_description)
+
+    assert expected == actual
+
+# --------------------------------------------------------------------------------unit test for get_rsz_from_event function--------------------------------------------------------------------------------
+
+
+def test_get_rsz_from_event():
+    test_event = {
+        "header": {
+            "description": "Bridge Construction - I-25 and Butte Creek at approximately MP 58.7, north of the Town of Walsenburg, Huerfano County",
+        },
+        "detail": {
+            "description": "Replacement of bridges N-17-BN and N-17-S at I-25 and Butte Creek, as well as ancillary highway and drainage work to accommodate the new bridge structures.  Each bridge crosses over Butte Creek, as well as the frontage road Huerfano County Road 103.  Area inlets that are currently present in the median between the north and south bound lanes of I-25 will also be upgraded to accommodate the bridge and roadway improvements.",
+            "work_updates": [{
+                "description": "&lt;a href=&quot; www.i25powers.com&quot;&gt;New Powers Blvd interchange under      construction. Work zone speed limit reduced to 65mph. Work adjacent to      highway and in median.&lt;/a&gt;"
+
+            }]
+        }
+    }
+
+    expected = '65'
+
+    actual = cotrip_translator.get_rsz_from_event(test_event)
+
+    assert expected == actual
+
+
+def test_get_rsz_from_event_invalid():
+    test_event = {
+        "header": {
+            "description": "Bridge Construction - I-25 and Butte Creek at approximately MP 58.7, north of the Town of Walsenburg, Huerfano County",
+        },
+        "detail": {
+            "description": "Replacement of bridges N-17-BN and N-17-S at I-25 and Butte Creek, as well as ancillary highway and drainage work to accommodate the new bridge structures.  Each bridge crosses over Butte Creek, as well as the frontage road Huerfano County Road 103.  Area inlets that are currently present in the median between the north and south bound lanes of I-25 will also be upgraded to accommodate the bridge and roadway improvements.",
+            "work_updates": [{
+                "description": "This project consists of furnishing and installing CCTV cameras and communication equipment along three major locations: - I-70 between Tower Road and Bennett - I-25 south of 6th Avenue - Arapahoe Road and Revere Parkway  Work on this project will take place from Monday through Friday, from 7 a.m. to 4 p.m., and during construction motorists can expect traffic impacts that include reduced speed limits and lane closures."
+            }]
+        }
+    }
+
+    expected = None
+
+    actual = cotrip_translator.get_rsz_from_event(test_event)
+
+    assert expected == actual
+
+
+def test_get_rsz_from_event_empty_event():
+    test_event = {}
+    expected = None
+
+    actual = cotrip_translator.get_rsz_from_event(test_event)
 
     assert expected == actual
