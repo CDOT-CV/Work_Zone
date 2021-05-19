@@ -46,19 +46,10 @@ Runtime Environment Variables:
 
 
 Example usage:
-for mac computer run this bash script file for setting up environment variable
+for mac computer run the following script to iniliatize the environment variable:
 
-env_var.sh
 ```
-
-
-#!/bin/bash
-
-export contact_name='Abinash Konersman'
-export contact_email='abinash.konersman@state.co.us'
-export issuing_organization='CDOT'
-
-
+env_var.sh
 ```
 
 ### Execution for iCone translator
