@@ -32,7 +32,23 @@ This code requires Python 3.6 or a higher version. If you haven’t already, dow
 pip install -r requirements.txt
 ```
 
+#### Environment variable
 
+Please set up the following environmet variable for your local computer before running the script.
+
+Runtime Environment Variables:
+
+| Name      | Value | Description    |
+| :---        |    :----:   |          ---: |
+| contact_name     | Abinash Konersman       |  name of environment variable contact_name containing name of the cotact person  |
+| contact_email   | abinash.konersman@state.co.us       | name of contact email containing email  of contact person |
+| issuing_organization   | CDOT       | name of the oraganization     |
+
+
+Example usage:
+```
+python -m translator.source_code.icone_translator -i 'translator/sample files/icone data/incidents_extended.xml' 
+```
 
 ### Execution for iCone translator
 

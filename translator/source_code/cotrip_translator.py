@@ -157,6 +157,10 @@ def parse_alert(alert, callback_function=None):
     if types_of_work:
         properties['types_of_work'] = types_of_work
 
+    # reduced_speed_limit
+
+    properties['reduced_speed_limit'] = get_rsz_from_event(event)
+
     # restrictions
 
     work_updates = event.get('detail').get('work_updates')
@@ -291,6 +295,35 @@ def get_restrictions(work_updates):
     return restrictions
 
 
+def parse_reduced_speed_limit_from_description(description) -> str:
+    search = re.search('speed limit ([0-9]{2}) mph', description)
+    if search:
+        return search[0][12:14]
+
+    search = re.search('speed limit reduced to ([0-9]{2})mph', description)
+    if search:
+        return search[0][23:25]
+
+
+def get_rsz_from_event(event):
+    rsz = parse_reduced_speed_limit_from_description(
+        event.get('header', {}).get('description', ""))
+    if rsz:
+        return rsz
+
+    rsz = parse_reduced_speed_limit_from_description(
+        event.get('detail', {}).get('description', ""))
+
+    if rsz:
+        return rsz
+
+    for work_update in event.get('detail', {}).get('work_updates', []):
+        rsz = parse_reduced_speed_limit_from_description(
+            work_update.get('description', ""))
+        if rsz:
+            return rsz
+
+
 def initialize_feature_properties():
     properties = {}
     properties['road_event_id'] = None
@@ -313,6 +346,8 @@ def initialize_feature_properties():
     properties['ending_mile_post'] = None
     properties['event_status'] = None
     properties['types_of_work'] = None
+    properties['workers_present'] = None
+    properties['reduced_speed_limit'] = None
     properties['restrictions'] = None
     properties['description'] = None
     properties['creation_date'] = None
