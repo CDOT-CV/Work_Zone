@@ -2,7 +2,8 @@ from translator.source_code import icone_translator
 import xmltodict
 import json
 import re
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, patch
+import os
 
 # Unit testing code for icone_translator.py
 # --------------------------------------------------------------------------------Unit test for parse_incident function--------------------------------------------------------------------------------
@@ -407,6 +408,11 @@ def test_get_event_status_completed():
 
 
 # --------------------------------------------------------------------------------Unit test for wzdx_creator function--------------------------------------------------------------------------------
+@patch.dict(os.environ, {
+    'contact_name': 'Abinash Konersman',
+    'contact_email': 'abinash.konersman@state.co.us',
+    'issuing_organization': 'CDOT'
+})
 def test_wzdx_creator():
     icone_obj = {'incidents': {'incident': [{
         '@id': 'U13631595_202012160845',
@@ -432,6 +438,11 @@ def test_wzdx_creator_empty_icone_object():
     assert test_wzdx == None
 
 
+@patch.dict(os.environ, {
+    'contact_name': 'Abinash Konersman',
+    'contact_email': 'abinash.konersman@state.co.us',
+    'issuing_organization': 'CDOT'
+})
 def test_wzdx_creator_no_info_object():
     icone_obj = {'incidents': {'incident': [{
         '@id': 'U13631595_202012160845',
@@ -456,6 +467,11 @@ def test_wzdx_creator_no_incidents():
     assert test_wzdx == None
 
 
+@patch.dict(os.environ, {
+    'contact_name': 'Abinash Konersman',
+    'contact_email': 'abinash.konersman@state.co.us',
+    'issuing_organization': 'CDOT'
+})
 def test_wzdx_creator_invalid_incidents_no_description():
     icone_obj = {'incidents': {'incident': [{
         '@id': 'U13631595_202012160845',
@@ -499,6 +515,11 @@ def test_wzdx_creator_invalid_info_object():
     assert test_wzdx == None
 
 
+@patch.dict(os.environ, {
+    'contact_name': 'Abinash Konersman',
+    'contact_email': 'abinash.konersman@state.co.us',
+    'issuing_organization': 'CDOT'
+})
 def test_wzdx_creator_valid_and_invalid():
     icone_obj = {'incidents': {'incident': [{
         '@id': 'U13631595_202012160845',

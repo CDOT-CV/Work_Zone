@@ -2,10 +2,16 @@ from translator.source_code import cotrip_translator
 import json
 import re
 from datetime import date
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, patch
 import time_machine
+import os
 
 
+@patch.dict(os.environ, {
+    'contact_name': 'Abinash Konersman',
+    'contact_email': 'abinash.konersman@state.co.us',
+    'issuing_organization': 'CDOT'
+})
 def test_wzdx_creator():
     cotrip_obj = {
         "rtdh_timestamp": 1615866698.393723,
@@ -45,6 +51,11 @@ def test_wzdx_creator_empty_cotrip_object():
     assert test_wzdx == None
 
 
+@patch.dict(os.environ, {
+    'contact_name': 'Abinash Konersman',
+    'contact_email': 'abinash.konersman@state.co.us',
+    'issuing_organization': 'CDOT'
+})
 def test_wzdx_creator_invalid_incidents_no_description():
     cotrip_obj = {
         "rtdh_timestamp": 1615866698.393723,
