@@ -3,6 +3,7 @@ import json
 from unittest.mock import patch, Mock
 import pytest
 import uuid
+import os
 
 # --------------------------------------------------------------------------------unit test for valid_info function--------------------------------------------------------------------------------
 
@@ -154,6 +155,11 @@ def test_validate_wzdx_no_wzdx_data():
 # --------------------------------------------------------------------------------unit test for initialize_info function--------------------------------------------------------------------------------
 
 
+@patch.dict(os.environ, {
+    'contact_name': 'Abinash Konersman',
+    'contact_email': 'abinash.konersman@state.co.us',
+    'issuing_organization': 'CDOT'
+})
 def test_initialize_info():
     actual = translator_shared_library.initialize_info(
         "104d7746-688c-44ed-b195-2ee948bf9dfa")
