@@ -32,7 +32,25 @@ This code requires Python 3.6 or a higher version. If you haven’t already, dow
 pip install -r requirements.txt
 ```
 
+#### Environment variable
 
+Please set up the following environment variable for your local computer before running the script.
+
+Runtime Environment Variables:
+
+| Name      | Value | Description    |
+| :---        |    :----:   |          ---: |
+| contact_name     | Abinash Konersman       |  name of environment variable contact_name containing name of the cotact person  |
+| contact_email   | abinash.konersman@state.co.us       | name of contact email containing email  of contact person |
+| issuing_organization   | CDOT       | name of the organization     |
+
+
+Example usage:
+for mac computer run the following script to initialize the environment variable:
+
+```
+env_var.sh
+```
 
 ### Execution for iCone translator
 
@@ -48,7 +66,7 @@ python -m translator.source_code.icone_translator -i 'translator/sample files/ic
 
 ### Execution for COtrip translator
 
-#### Step 1: Run the translator script (from Work_Zone)
+#### Step 1: Run the translator script (from Work_Zone) and Please specify a valid Json file as an input file !
 
 ```
 python -m translator.source_code.cotrip_translator -i inputfile.json -o outputfile.geojson
@@ -76,7 +94,7 @@ python -m translator.source_code.combine_wzdx
 #### Run the unit test for translator script (from root directory)
 
 ```
-$ python -m pytest 'test/' -v
+python -m pytest 'test/' -v
 ```
 Ensure you have your environment configured correctly (as described above).
 

@@ -1,8 +1,9 @@
 from translator.source_code import translator_shared_library
 import json
-from unittest.mock import MagicMock, patch, Mock
+from unittest.mock import patch, Mock
 import pytest
 import uuid
+import os
 
 # --------------------------------------------------------------------------------unit test for valid_info function--------------------------------------------------------------------------------
 
@@ -68,11 +69,19 @@ def test_parse_xml():
     assert actual_icone_data == expected_icone_data
 
 
-def test_parse_xml_file_doesnot_exist():
+def test_parse_xml_file_empty_string():
     test_input = ''
     expected_icone_data = None
     actual_icone_data = translator_shared_library.parse_xml(test_input)
     assert expected_icone_data == actual_icone_data
+
+
+def test_parse_xml_file_does_not_exist():
+    test_input = 'non-file.txt'
+    expected_icone_data = None
+    actual_icone_data = translator_shared_library.parse_xml(test_input)
+    assert expected_icone_data == actual_icone_data
+
 
 # --------------------------------------------------------------------------------unit test for parse_arguments function--------------------------------------------------------------------------------
 
@@ -119,7 +128,7 @@ def test_validate_wzdx_valid_wzdx_data():
     assert validate_write == True
 
 
-def test_validate_wzdx_invalid_wzdx_data():
+def test_validate_wzdx_invalid_location_method_wzdx_data():
     invalid_wzdx_data = json.loads('{"road_event_feed_info": {"feed_info_id": "feed_info_id", "update_date": "2021-01-05T12:14:07Z", "publisher": "CDOT ", "contact_name": "Abinash Konersman", "contact_email": "abinash.konersman@state.co.us", "update_frequency": 86400, "version": "3.0", "data_sources": [{"data_source_id": "d5333bb4-0ea2-4318-8934-91f8916d6a8e", "feed_info_id": "feed_info_id", "organization_name": "issuing_organization", "contact_name": "contact_name", "contact_email": "contact_email", "update_frequency": 86400, "update_date": "2021-01-05T12:14:07Z", "location_verify_method": "location_verify_method", "location_method": "fail", "lrs_type": "lrs_type"}]}, "type": "FeatureCollection", "features": [{"type": "Feature", "properties": {"road_event_id": "3f6fc7b7-9133-41be-9636-994432c1d0c3", "event_type": "work-zone", "data_source_id": "d5333bb4-0ea2-4318-8934-91f8916d6a8e", "start_date": "2020-02-14T17:08:16Z", "end_date": "", "start_date_accuracy": "estimated", "end_date_accuracy": "estimated", "beginning_accuracy": "fail", "ending_accuracy": "estimated", "road_name": "I-75 N", "direction": "westbound", "vehicle_impact": "all-lanes-open", "relationship": {"relationship_id": "3ae833b0-123c-4c4d-b906-3e4f6949bee8", "road_event_id": "3f6fc7b7-9133-41be-9636-994432c1d0c3"}, "lanes": [], "road_number": "", "beginning_cross_street": "", "ending_cross_street": "", "event_status": "active", "total_num_lanes": 1, "types_of_work": [], "reduced_speed_limit": 25, "workers_present": false, "restrictions": [], "description": "19-1245: Roadwork between MP 40 and MP 48", "creation_date": "2019-11-05T01:22:20Z", "update_date": "2020-08-21T15:52:02Z"}, "geometry": {"type": "LineString", "coordinates": [[-84.112854, 37.157199], [-84.1238971, 37.1686478], [-84.145861, 37.1913], [-84.175297, 37.209348], [-84.201303, 37.216837]]}}, {"type": "Feature", "properties": {"road_event_id": "52a6ecf1-4bee-49e9-a3bc-47c6cf20db19", "event_type": "work-zone", "data_source_id": "d5333bb4-0ea2-4318-8934-91f8916d6a8e", "start_date": "2019-11-22T23:02:21Z", "end_date": "", "start_date_accuracy": "estimated", "end_date_accuracy": "estimated", "beginning_accuracy": "estimated", "ending_accuracy": "estimated", "road_name": "I-75 S", "direction": "southbound", "vehicle_impact": "all-lanes-open", "relationship": {"relationship_id": "a5e54a72-d639-4945-9cf6-1b518f68399b", "road_event_id": "52a6ecf1-4bee-49e9-a3bc-47c6cf20db19"}, "lanes": [], "road_number": "", "beginning_cross_street": "", "ending_cross_street": "", "event_status": "active", "total_num_lanes": 1, "types_of_work": [], "reduced_speed_limit": 25, "workers_present": false, "restrictions": [], "description": "19-1245: Roadwork between MP 48 and MP 40", "creation_date": "2019-11-05T01:32:44Z", "update_date": "2020-08-21T15:52:02Z"}, "geometry": {"type": "LineString", "coordinates": [[-84.169129, 37.20667], [-84.157346, 37.201223], [-84.140482, 37.185815], [-84.121425, 37.166345], [-84.111588, 37.147808]]}}]}')
     test_schema = json.loads(
         open('translator/sample files/validation_schema/wzdx_v3.0_feed.json').read())
@@ -146,8 +155,14 @@ def test_validate_wzdx_no_wzdx_data():
 # --------------------------------------------------------------------------------unit test for initialize_info function--------------------------------------------------------------------------------
 
 
+@patch.dict(os.environ, {
+    'contact_name': 'Abinash Konersman',
+    'contact_email': 'abinash.konersman@state.co.us',
+    'issuing_organization': 'CDOT'
+})
 def test_initialize_info():
-    actual = translator_shared_library.initialize_info()
+    actual = translator_shared_library.initialize_info(
+        "104d7746-688c-44ed-b195-2ee948bf9dfa")
     expected = {'feed_info_id': "104d7746-688c-44ed-b195-2ee948bf9dfa", 'metadata': {'wz_location_method': "channel-device-method",
                                                                                      'lrs_type': "lrs_type", 'contact_name': "Abinash Konersman", 'contact_email': "abinash.konersman@state.co.us", 'issuing_organization': "CDOT"}}
     assert actual == expected
