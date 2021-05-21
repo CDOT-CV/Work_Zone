@@ -34,7 +34,7 @@ pip install -r requirements.txt
 
 #### Environment variable
 
-Please set up the following environmet variable for your local computer before running the script.
+Please set up the following environment variable for your local computer before running the script.
 
 Runtime Environment Variables:
 
@@ -42,11 +42,11 @@ Runtime Environment Variables:
 | :---        |    :----:   |          ---: |
 | contact_name     | Abinash Konersman       |  name of environment variable contact_name containing name of the cotact person  |
 | contact_email   | abinash.konersman@state.co.us       | name of contact email containing email  of contact person |
-| issuing_organization   | CDOT       | name of the oraganization     |
+| issuing_organization   | CDOT       | name of the organization     |
 
 
 Example usage:
-for mac computer run the following script to iniliatize the environment variable:
+for mac computer run the following script to initialize the environment variable:
 
 ```
 env_var.sh
