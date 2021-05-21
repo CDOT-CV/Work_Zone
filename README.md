@@ -12,7 +12,7 @@ Work zone code and documentation for WZDx, iCone, etc.
 
 ## Project Description
 
-This project is an open source, proof of concept for Work Zone Data Exchange message creation from CDOT data to include iCone. The purpose of this tool is to  build a translator from CDOT work zone data and iCone data to the WZDx message (3.0). The message will contain required data by WZDx that can be populated by iCone and other CDOT Work Zone resources. Basically, in this project, we run a python script to parse data from the iCone xml file and other CDOT data which genrates WXDx 3.0 messages in a geojson format.
+This project is an open source, proof of concept for Work Zone Data Exchange message creation from CDOT data to include iCone and Cotrip. The purpose of this tool is to  build a translator from Cotrip work zone data and iCone data to the WZDx message (3.0). The message will contain required data by WZDx that can be populated by iCone and other Cotrip Work Zone resources. Basically, in this project, we run a python script to parse data from the iCone xml file and COtrip data which genrates WXDx 3.0 messages in a geojson format.
 
 ## Prerequisites
 
@@ -32,18 +32,48 @@ This code requires Python 3.6 or a higher version. If you haven’t already, dow
 pip install -r requirements.txt
 ```
 
+#### Environment variable
+
+Please set up the following environment variable for your local computer before running the script.
+
+Runtime Environment Variables:
+
+| Name      | Value | Description    |
+| :---        |    :----:   |          ---: |
+| contact_name     | Abinash Konersman       |  name of environment variable contact_name containing name of the cotact person  |
+| contact_email   | abinash.konersman@state.co.us       | name of contact email containing email  of contact person |
+| issuing_organization   | CDOT       | name of the organization     |
 
 
-### Execution
-
-#### Step 1: Run the translator script (from Work_Zone/translator/source code/Folder)
+Example usage:
+for mac computer run the following script to initialize the environment variable:
 
 ```
-python icone_translator.py -i inputfile.xml -o outputfile.geojson
+env_var.sh
+```
+
+### Execution for iCone translator
+
+#### Step 1: Run the translator script (from Work_Zone)
+
+```
+python -m translator.source_code.icone_translator -i inputfile.xml -o outputfile.geojson
 ```
 Example usage:
 ```
-python icone_translator.py -i '../sample files/icone data/incidents_extended.xml' 
+python -m translator.source_code.icone_translator -i 'translator/sample files/icone data/incidents_extended.xml' 
+```
+
+### Execution for COtrip translator
+
+#### Step 1: Run the translator script (from Work_Zone) and Please specify a valid Json file as an input file !
+
+```
+python -m translator.source_code.cotrip_translator -i inputfile.json -o outputfile.geojson
+```
+Example usage:
+```
+python -m translator.source_code.cotrip_translator -i 'translator/sample files/cotrip_data/cotrip_1.json' 
 ```
 
 ### Unit Testing
@@ -52,7 +82,7 @@ python icone_translator.py -i '../sample files/icone data/incidents_extended.xml
 #### Run the unit test for translator script (from root directory)
 
 ```
-$ python -m pytest 'test/' -v
+python -m pytest 'test/' -v
 ```
 Ensure you have your environment configured correctly (as described above).
 
