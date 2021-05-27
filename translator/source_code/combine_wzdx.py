@@ -5,21 +5,32 @@ from shapely.geometry import Point
 import geopy
 from geopy.distance import geodesic
 import pyproj
+import getopt
+import sys
 
 
 def main():
-    with open('combined_wzdx_message.geojson', 'w+') as f:
+
+    icone_file, cotrip_file, outputfile = parse_arguments(
+        sys.argv[1:], default_output_file_name='combined_wzdx_message.geojson')
+
+    with open(outputfile, 'w+') as f:
         wzdx_icone = json.loads(open(
-            'translator/sample files/Output Message/icone_wzdx_translated.geojson', 'r').read())
+            icone_file, 'r').read())
         wzdx_cotrip = json.loads(open(
-            'translator/sample files/Output Message/cotrip_wzdx_translated_output_message.geojson', 'r').read())
+            cotrip_file, 'r').read())
 
         polygon = generate_polygon(
             wzdx_cotrip['features'][0]['geometry']['coordinates'], 100)
         feature = iterate_feature(polygon, wzdx_icone)
         if feature:
+
             f.write(json.dumps(combine_wzdx(
                 wzdx_cotrip, wzdx_icone, feature), indent=2))
+            print('duplicate iCone and COtrip messages were found and combined WZDx message was written to combined_wzdx_message.geojson file')
+
+        else:
+            print('no duplicate messages were found')
 
 
 def combine_wzdx(wzdx_cotrip, wzdx_icone, icone_feature):
@@ -105,6 +116,41 @@ def isPointInPolygon(point, polygon):
     if not point or not polygon or type(point) != Point or type(polygon) != Polygon:
         return None
     return polygon.contains(point)
+
+
+help_string = """ 
+
+Usage: python **script_name** [arguments]
+
+Global options:
+-h, --help                  Print this usage information.
+-i, --icone                 specify the WZDx icone file to compare/combine
+-c, --cotrip                specify the WZDx cotrip file to compare/combine
+-o, --output                specify the output file for generated wzdx geojson message """
+
+
+def parse_arguments(argv, default_output_file_name='combined_wzdx_message.geojson'):
+    icone = ''
+    cotrip = ''
+    outputfile = default_output_file_name
+
+    try:
+        opts, _ = getopt.getopt(
+            argv, "hi:c:o:", ["icone=", "cotrip=", "output="])
+    except getopt.GetoptError:
+        sys.exit(2)
+    for opt, arg in opts:
+        if opt in ("-h", "--help"):
+            print(help_string)
+            sys.exit()
+        elif opt in ("-i", "--icone"):
+            icone = arg
+        elif opt in ("-c", "--cotrop"):
+            cotrip = arg
+        elif opt in ("-o", "--output"):
+            outputfile = arg
+
+    return icone, cotrip, outputfile
 
 
 if __name__ == "__main__":

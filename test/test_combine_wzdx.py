@@ -1,12 +1,8 @@
-
 from os import path
-
-from shapely.geometry import polygon
 from translator.source_code import combine_wzdx
 from shapely.geometry.polygon import Polygon
 from shapely.geometry import Point
-from unittest.mock import MagicMock, patch, call, Mock
-
+from unittest.mock import MagicMock, patch
 # --------------------------------------------------------------------------------Unit test for combine_wzdx function--------------------------------------------------------------------------------
 
 
