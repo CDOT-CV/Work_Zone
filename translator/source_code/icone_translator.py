@@ -328,6 +328,7 @@ def parse_incident(incident, callback_function=None):
     if not direction:
         direction = get_road_direction(geometry.get('coordinates'))
     if not direction:
+        
         properties['direction'] = direction
 
     # vehicle impact
