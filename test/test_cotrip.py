@@ -20,7 +20,7 @@ def test_wzdx_creator():
             "type": "Construction",
             "sub_type": "Work Zone:roadway-relocation",
             "source": {
-                "id": "349611",
+                "road_event_id": "349611",
                 "type": "Road Work",
                 "sub_type": "Road Construction",
                 "collection_timestamp": 1615482720
@@ -64,7 +64,7 @@ def test_wzdx_creator_invalid_incidents_no_description():
             "type": "Construction",
             "sub_type": "Work Zone:roadway-relocation",
             "source": {
-                "id": "349611",
+                "road_event_id": "349611",
                 "type": "Road Work",
                 "sub_type": "Road Construction",
                 "collection_timestamp": 1615482720
@@ -94,7 +94,7 @@ def test_wzdx_creator_invalid_info_object():
             "type": "Construction",
             "sub_type": "Work Zone:roadway-relocation",
             "source": {
-                "id": "349611",
+                "road_event_id": "349611",
                 "type": "Road Work",
                 "sub_type": "Road Construction",
                 "collection_timestamp": 1615482720
@@ -220,7 +220,7 @@ def test_parse_alert_from_street_success():
             "type": "Construction",
             "sub_type": "Work Zone:below-road-work",
             "source": {
-                "id": "287810",
+                "road_event_id": "287810",
                 "id2": "27499",
                 "name": "CDOT ITS",
                 "type": "Road Work",
@@ -335,7 +335,7 @@ def test_parse_alert_from_coordinates_success():
             "type": "Construction",
             "sub_type": "Work Zone:below-road-work",
             "source": {
-                "id": "287810",
+                "road_event_id": "287810",
                 "id2": "27499",
                 "name": "CDOT ITS",
                 "type": "Road Work",
@@ -467,7 +467,7 @@ def test_validate_alert_valid_data():
             "type": "Construction",
             "sub_type": "Work Zone:roadway-relocation",
             "source": {
-                "id": "349611",
+                "road_event_id": "349611",
                 "type": "Road Work",
                 "sub_type": "Road Construction",
                 "collection_timestamp": 1615482720
@@ -497,7 +497,7 @@ def test_validate_alert_missing_required_field_description():
             "type": "Construction",
             "sub_type": "Work Zone:roadway-relocation",
             "source": {
-                "id": "349611",
+                "road_event_id": "349611",
                 "type": "Road Work",
                 "sub_type": "Road Construction",
                 "collection_timestamp": 1615482720
@@ -526,7 +526,7 @@ def test_validate_alert_invalid_start_time():
             "type": "Construction",
             "sub_type": "Work Zone:roadway-relocation",
             "source": {
-                "id": "349611",
+                "road_event_id": "349611",
                 "type": "Road Work",
                 "sub_type": "Road Construction",
                 "collection_timestamp": 1615482720

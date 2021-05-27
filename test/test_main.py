@@ -270,7 +270,7 @@ def test_formatMessage_dict_type():
                     'timestamp': '2020-08-21T15:48:25Z'}
 
     actual = main.formatMessage(test_message)
-    expected_output = '{\n  "type": "PCMS",\n  "id": "I-75 NB - MP 48.3",\n  "timestamp": "2020-08-21T15:48:25Z"\n}'
+    expected_output = '{\n  "type": "PCMS",\n  "road_event_id": "I-75 NB - MP 48.3",\n  "timestamp": "2020-08-21T15:48:25Z"\n}'
     assert actual == expected_output
 
 
