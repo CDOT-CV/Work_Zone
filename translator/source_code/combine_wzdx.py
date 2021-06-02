@@ -130,8 +130,8 @@ Global options:
 
 
 def parse_arguments(argv, default_output_file_name='combined_wzdx_message.geojson'):
-    icone = ''
-    cotrip = ''
+    icone = None
+    cotrip = None
     outputfile = default_output_file_name
 
     try:
