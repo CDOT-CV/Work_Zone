@@ -2,9 +2,10 @@ from translator.source_code import cotrip_translator
 import json
 import re
 from datetime import date
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock, patch, Mock
 import time_machine
 import os
+import uuid
 
 
 @patch.dict(os.environ, {
@@ -12,7 +13,10 @@ import os
     'contact_email': 'abinash.konersman@state.co.us',
     'issuing_organization': 'CDOT'
 })
-def test_wzdx_creator():
+@patch('uuid.uuid4')
+def test_wzdx_creator(mockuuid):
+    uuid.uuid4 = Mock()
+    uuid.uuid4.side_effect = 'we234de'
     cotrip_obj = {
         "rtdh_timestamp": 1615866698.393723,
         "rtdh_message_id": "dd962abd-0afa-4810-aac0-165edb834e71",
@@ -39,10 +43,54 @@ def test_wzdx_creator():
             },
         }
     }
+    expected_wzdx = {
+        'road_event_feed_info': {
+            'feed_info_id': '8d062f70-d53e-4029-b94e-b7fbcbde5885',
+            'update_date': '2021-04-12T19:00:00Z', 'publisher': 'CDOT',
+            'contact_name': 'Abinash Konersman',
+            'contact_email': 'abinash.konersman@state.co.us',
+            'version': '3.1',
+            'license': 'https://creativecommons.org/publicdomain/zero/1.0/',
+            'data_sources': [{
+                'data_source_id': 'w',
+                'feed_info_id': '8d062f70-d53e-4029-b94e-b7fbcbde5885',
+                'organization_name': 'CDOT',
+                'contact_name': 'Abinash Konersman',
+                'contact_email': 'abinash.konersman@state.co.us',
+                'update_date': '2021-04-12T19:00:00Z',
+                'location_method': 'channel-device-method',
+                'lrs_type': 'lrs_type'}]},
+        'type': 'FeatureCollection',
+        'features': [{
+            'type': 'Feature',
+            'properties': {
+                'road_event_id': '2',
+                'event_type': 'work-zone',
+                'data_source_id': 'w',
+                'start_date': '2021-03-15T13:00:00Z',
+                'end_date': '2021-11-30T07:00:00Z',
+                'start_date_accuracy': 'estimated',
+                'end_date_accuracy': 'estimated',
+                'beginning_accuracy': 'estimated',
+                'ending_accuracy': 'estimated',
+                'direction': 'northbound',
+                'vehicle_impact': 'unknown',
+                'event_status': 'active',
+                'types_of_work': [
+                    {
+                        'type_name': 'roadway-relocation',
+                        'is_architectural_change': True}],
+                'description': 'Road Construction - I-25 (Main St.) business loop from MP 1-2',
+                'creation_date': '2021-03-11T17:12:00Z',
+                'update_date': '2021-03-16T03:51:38Z',
+                'road_names': ['I-25']},
+            'geometry': {
+                'type': 'LineString',
+                'coordinates': [[-104.48011, 37.007645], [-104.480103, 37.008034], [-104.480125, 37.008469], [-104.480202, 37.008904], [-104.48024, 37.009048], [-104.480324, 37.009338], [-104.482475, 37.015327], [-104.482712, 37.015945], [-104.48288, 37.016335], [-104.482979, 37.016521], [-104.483208, 37.016884], [-104.483467, 37.01722], [-104.483612, 37.01738], [-104.483925, 37.017681], [-104.484253, 37.017948], [-104.484772, 37.018295], [-104.485138, 37.01849], [-104.485504, 37.018661], [-104.485886, 37.01881], [-104.486473, 37.019005], [-104.488014, 37.019493]]}}]}
 
-    wzdx_re = '{"road_event_feed_info": {"feed_info_id": "8d062f70-d53e-4029-b94e-b7fbcbde5885", "update_date": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z", "publisher": "CDOT", "contact_name": "Abinash Konersman", "contact_email": "abinash\\.konersman@state\\.co\\.us", "version": "3\\.0", "data_sources": \\[{"data_source_id": "[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}", "feed_info_id": "8d062f70-d53e-4029-b94e-b7fbcbde5885", "organization_name": "CDOT", "contact_name": "Abinash Konersman", "contact_email": "abinash\\.konersman@state\\.co\\.us", "update_date": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z", "location_method": "channel-device-method", "lrs_type": "lrs_type"}\\]}, "type": "FeatureCollection", "features": \\[{"type": "Feature", "properties": {"road_event_id": "[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}", "event_type": "work-zone", "data_source_id": "[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}", "start_date": "2021-03-15T13:00:00Z", "end_date": "2021-11-30T07:00:00Z", "start_date_accuracy": "estimated", "end_date_accuracy": "estimated", "beginning_accuracy": "estimated", "ending_accuracy": "estimated", "road_name": "I-25", "direction": "northbound", "vehicle_impact": "unknown", "event_status": "active", "types_of_work": \\[{"type_name": "roadway-relocation", "is_architectural_change": true}\\], "description": "Road Construction - I-25 \\(Main St\\.\\) business loop from MP 1-2", "creation_date": "2021-03-11T17:12:00Z", "update_date": "2021-03-16T03:51:38Z"}, "geometry": {"type": "LineString", "coordinates": \\[\\[-104\\.48011, 37\\.007645\\], \\[-104\\.480103, 37\\.008034\\], \\[-104\\.480125, 37\\.008469\\], \\[-104\\.480202, 37\\.008904\\], \\[-104\\.48024, 37\\.009048\\], \\[-104\\.480324, 37\\.009338\\], \\[-104\\.482475, 37\\.015327\\], \\[-104\\.482712, 37\\.015945\\], \\[-104\\.48288, 37\\.016335\\], \\[-104\\.482979, 37\\.016521\\], \\[-104\\.483208, 37\\.016884\\], \\[-104\\.483467, 37\\.01722\\], \\[-104\\.483612, 37\\.01738\\], \\[-104\\.483925, 37\\.017681\\], \\[-104\\.484253, 37\\.017948\\], \\[-104\\.484772, 37\\.018295\\], \\[-104\\.485138, 37\\.01849\\], \\[-104\\.485504, 37\\.018661\\], \\[-104\\.485886, 37\\.01881\\], \\[-104\\.486473, 37\\.019005\\], \\[-104\\.488014, 37\\.019493\\]\\]}}\\]}'
-    test_wzdx = cotrip_translator.wzdx_creator(cotrip_obj)
-    assert re.match(wzdx_re, json.dumps(test_wzdx)) != None
+    with time_machine.travel(date(2021, 4, 13)):
+        test_wzdx = cotrip_translator.wzdx_creator(cotrip_obj)
+    assert expected_wzdx == test_wzdx
 
 
 def test_wzdx_creator_empty_cotrip_object():
@@ -265,7 +313,7 @@ def test_parse_alert_from_street_success():
             "end_date_accuracy": "estimated",
             "beginning_accuracy": "estimated",
             "ending_accuracy": "estimated",
-            "road_name": "I-25",
+            "road_names": ['I-25'],
             "direction": "northbound",
             "vehicle_impact": "unknown",
 
@@ -380,7 +428,7 @@ def test_parse_alert_from_coordinates_success():
             "end_date_accuracy": "estimated",
             "beginning_accuracy": "estimated",
             "ending_accuracy": "estimated",
-            "road_name": "I-25",
+            "road_names": ["I-25"],
             "direction": "northbound",
             "vehicle_impact": "unknown",
 

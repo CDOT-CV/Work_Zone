@@ -185,11 +185,11 @@ def test_add_ids(mockuuid):
         'features': [
             {
                 'properties': {
-                    'id': "",
+                    'road_event_id': "",
                     'data_source_id': "",
                     'relationship': {
                         'relationship_id': "",
-                        'id': ""
+                        'road_event_id': ""
                     }
                 }
             }
@@ -207,11 +207,11 @@ def test_add_ids(mockuuid):
         'features': [
             {
                 'properties': {
-                    'id': "we234de",
+                    'road_event_id': "we234de",
                     'data_source_id': "u12s5grt",
                     'relationship': {
                         'relationship_id': "23wsg54h",
-                        'id': "we234de"
+                        'road_event_id': "we234de"
                     }
                 }
             }

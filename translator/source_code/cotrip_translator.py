@@ -155,7 +155,7 @@ def parse_alert(alert, callback_function=None):
 
     # road_name
     properties['road_names'] = [event.get('detail').get('road_name')]
-    road_number = [event.get('detail').get('road_number')]
+    road_number = event.get('detail').get('road_number')
     if road_number and not road_number in properties['road_names']:
         properties['road_names'].append(road_number)
 
