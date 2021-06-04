@@ -150,6 +150,10 @@ def test_iterate_feature_no_match_feature(mocked_combine_wzdx):
 # --------------------------------------------------------------------------------Unit test for generate_polygon function--------------------------------------------------------------------------------
 
 
+def closeTo(num1, num2, tolerance):
+    return abs(num1 - num2) < tolerance
+
+
 def test_generate_polygon():
     test_geometry = [
         [
@@ -168,7 +172,13 @@ def test_generate_polygon():
                        104.4795412753422], [37.007638497338576, -104.47954827820456], [37.00765150000295, -104.48067172189111]])
 
     actual = combine_wzdx.generate_polygon(test_geometry, test_polygon_width)
-    assert actual == expected
+
+    expected_boundary = expected.boundary.coords
+    actual_boundary = actual.boundary.coords
+    for index, expected_coord in enumerate(expected_boundary):
+        for index_2, val in enumerate(expected_coord):
+            # within 1 cm
+            assert closeTo(val, actual_boundary[index][index_2], 0.000001)
 
 
 def test_generate_polygon_no_geometry():
