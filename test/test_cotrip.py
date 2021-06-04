@@ -1,7 +1,5 @@
 from translator.source_code import cotrip_translator
-import json
-import re
-from datetime import date
+from datetime import datetime
 from unittest.mock import MagicMock, patch, Mock
 import time_machine
 import os
@@ -46,7 +44,7 @@ def test_wzdx_creator(mockuuid):
     expected_wzdx = {
         'road_event_feed_info': {
             'feed_info_id': '8d062f70-d53e-4029-b94e-b7fbcbde5885',
-            'update_date': '2021-04-12T19:00:00Z', 'publisher': 'CDOT',
+            'update_date': '2021-04-13T00:00:00Z', 'publisher': 'CDOT',
             'contact_name': 'Abinash Konersman',
             'contact_email': 'abinash.konersman@state.co.us',
             'version': '3.1',
@@ -57,7 +55,7 @@ def test_wzdx_creator(mockuuid):
                 'organization_name': 'CDOT',
                 'contact_name': 'Abinash Konersman',
                 'contact_email': 'abinash.konersman@state.co.us',
-                'update_date': '2021-04-12T19:00:00Z',
+                'update_date': '2021-04-13T00:00:00Z',
                 'location_method': 'channel-device-method',
                 'lrs_type': 'lrs_type'}]},
         'type': 'FeatureCollection',
@@ -88,7 +86,7 @@ def test_wzdx_creator(mockuuid):
                 'type': 'LineString',
                 'coordinates': [[-104.48011, 37.007645], [-104.480103, 37.008034], [-104.480125, 37.008469], [-104.480202, 37.008904], [-104.48024, 37.009048], [-104.480324, 37.009338], [-104.482475, 37.015327], [-104.482712, 37.015945], [-104.48288, 37.016335], [-104.482979, 37.016521], [-104.483208, 37.016884], [-104.483467, 37.01722], [-104.483612, 37.01738], [-104.483925, 37.017681], [-104.484253, 37.017948], [-104.484772, 37.018295], [-104.485138, 37.01849], [-104.485504, 37.018661], [-104.485886, 37.01881], [-104.486473, 37.019005], [-104.488014, 37.019493]]}}]}
 
-    with time_machine.travel(date(2021, 4, 13)):
+    with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
         test_wzdx = cotrip_translator.wzdx_creator(cotrip_obj)
     assert expected_wzdx == test_wzdx
 
@@ -219,7 +217,7 @@ def test_parse_polyline_invalid_coordinates():
 
 
 def test_get_event_status_active():
-    with time_machine.travel(date(2021, 4, 13)):
+    with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
         test_starttime_string = 1538978400
         test_endtime_string = ''
         test_event_status = cotrip_translator.get_event_status(
@@ -229,7 +227,7 @@ def test_get_event_status_active():
 
 
 def test_get_event_status_planned():
-    with time_machine.travel(date(2021, 4, 13)):
+    with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
         test_starttime_string = 1638978400
         test_endtime_string = ''
         test_event_status = cotrip_translator.get_event_status(
@@ -239,7 +237,7 @@ def test_get_event_status_planned():
 
 
 def test_get_event_status_completed():
-    with time_machine.travel(date(2021, 4, 13)):
+    with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
         test_starttime_string = 1538978400
         test_endtime_string = 1539978400
         test_event_status = cotrip_translator.get_event_status(
@@ -249,7 +247,7 @@ def test_get_event_status_completed():
 
 
 def test_get_event_status_pending():
-    with time_machine.travel(date(2021, 4, 13)):
+    with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
         test_starttime_string = 1618940814
         test_endtime_string = ''
         test_event_status = cotrip_translator.get_event_status(

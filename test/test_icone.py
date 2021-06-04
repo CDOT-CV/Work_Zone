@@ -1,12 +1,10 @@
 from translator.source_code import icone_translator
 import xmltodict
-import json
-import re
 from unittest.mock import MagicMock, patch, Mock
 import os
 import time_machine
 import uuid
-from datetime import date
+from datetime import datetime
 
 # Unit testing code for icone_translator.py
 # --------------------------------------------------------------------------------Unit test for parse_incident function--------------------------------------------------------------------------------
@@ -433,7 +431,7 @@ def test_wzdx_creator(mockuuid):
     expected_wzdx = {
         'road_event_feed_info': {
             'feed_info_id': '104d7746-688c-44ed-b195-2ee948bf9dfa',
-            'update_date': '2021-04-12T19:00:00Z',
+            'update_date': '2021-04-13T00:00:00Z',
             'publisher': 'CDOT',
             'contact_name': 'Abinash Konersman',
             'contact_email': 'abinash.konersman@state.co.us',
@@ -445,7 +443,7 @@ def test_wzdx_creator(mockuuid):
                 'organization_name': 'CDOT',
                 'contact_name': 'Abinash Konersman',
                 'contact_email': 'abinash.konersman@state.co.us',
-                'update_date': '2021-04-12T19:00:00Z',
+                'update_date': '2021-04-13T00:00:00Z',
                 'location_method': 'channel-device-method',
                 'lrs_type': 'lrs_type'}]},
         'type': 'FeatureCollection',
@@ -481,7 +479,7 @@ def test_wzdx_creator(mockuuid):
                 'type': 'LineString',
                 'coordinates': [[-114.145065, 34.8380671], [-114.145065, 34.8380671]]}}]}
 
-    with time_machine.travel(date(2021, 4, 13)):
+    with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
         test_wzdx = icone_translator.wzdx_creator(icone_obj)
 
     print(test_wzdx)
@@ -517,7 +515,7 @@ def test_wzdx_creator_no_info_object(mockuuid):
     expected_wzdx = {
         'road_event_feed_info': {
             'feed_info_id': '104d7746-688c-44ed-b195-2ee948bf9dfa',
-            'update_date': '2021-04-12T19:00:00Z',
+            'update_date': '2021-04-13T00:00:00Z',
             'publisher': 'CDOT',
             'contact_name': 'Abinash Konersman',
             'contact_email': 'abinash.konersman@state.co.us',
@@ -529,7 +527,7 @@ def test_wzdx_creator_no_info_object(mockuuid):
                 'organization_name': 'CDOT',
                 'contact_name': 'Abinash Konersman',
                 'contact_email': 'abinash.konersman@state.co.us',
-                'update_date': '2021-04-12T19:00:00Z',
+                'update_date': '2021-04-13T00:00:00Z',
                 'location_method': 'channel-device-method',
                 'lrs_type': 'lrs_type'}]},
         'type': 'FeatureCollection',
@@ -564,7 +562,7 @@ def test_wzdx_creator_no_info_object(mockuuid):
             'geometry': {
                 'type': 'LineString',
                 'coordinates': [[-114.145065, 34.8380671], [-114.145065, 34.8380671]]}}]}
-    with time_machine.travel(date(2021, 4, 13)):
+    with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
         test_wzdx = icone_translator.wzdx_creator(icone_obj)
     print(test_wzdx)
     assert expected_wzdx == test_wzdx
@@ -654,10 +652,10 @@ def test_wzdx_creator_valid_and_invalid(mockuuid):
         }
     }]}}
 
-    expected_wzdx = {'road_event_feed_info': {'feed_info_id': '104d7746-688c-44ed-b195-2ee948bf9dfa', 'update_date': '2021-04-12T19:00:00Z', 'publisher': 'CDOT', 'contact_name': 'Abinash Konersman', 'contact_email': 'abinash.konersman@state.co.us', 'version': '3.1', 'license': 'https://creativecommons.org/publicdomain/zero/1.0/', 'data_sources': [{'data_source_id': 'w', 'feed_info_id': '104d7746-688c-44ed-b195-2ee948bf9dfa', 'organization_name': 'CDOT', 'contact_name': 'Abinash Konersman', 'contact_email': 'abinash.konersman@state.co.us', 'update_date': '2021-04-12T19:00:00Z', 'location_method': 'channel-device-method', 'lrs_type': 'lrs_type'}]}, 'type': 'FeatureCollection', 'features': [{'type': 'Feature', 'properties': {
+    expected_wzdx = {'road_event_feed_info': {'feed_info_id': '104d7746-688c-44ed-b195-2ee948bf9dfa', 'update_date': '2021-04-13T00:00:00Z', 'publisher': 'CDOT', 'contact_name': 'Abinash Konersman', 'contact_email': 'abinash.konersman@state.co.us', 'version': '3.1', 'license': 'https://creativecommons.org/publicdomain/zero/1.0/', 'data_sources': [{'data_source_id': 'w', 'feed_info_id': '104d7746-688c-44ed-b195-2ee948bf9dfa', 'organization_name': 'CDOT', 'contact_name': 'Abinash Konersman', 'contact_email': 'abinash.konersman@state.co.us', 'update_date': '2021-04-13T00:00:00Z', 'location_method': 'channel-device-method', 'lrs_type': 'lrs_type'}]}, 'type': 'FeatureCollection', 'features': [{'type': 'Feature', 'properties': {
         'road_event_id': '2', 'event_type': 'work-zone', 'data_source_id': 'w', 'start_date': '2020-12-07T14:18:00Z', 'end_date': '', 'start_date_accuracy': 'estimated', 'end_date_accuracy': 'estimated', 'beginning_accuracy': 'estimated', 'ending_accuracy': 'estimated', 'road_names': ['I-70 N'], 'direction': 'northbound', 'vehicle_impact': 'all-lanes-open', 'relationship': {'relationship_id': '3', 'road_event_id': '2'}, 'lanes': [], 'beginning_cross_street': '', 'ending_cross_street': '', 'event_status': 'active', 'types_of_work': [], 'restrictions': [], 'description': 'Road constructions are going on', 'creation_date': '2020-12-13T14:18:00Z', 'update_date': '2020-12-16T17:18:00Z'}, 'geometry': {'type': 'LineString', 'coordinates': [[-114.145065, 34.8380671], [-114.145065, 34.8380671]]}}]}
 
-    with time_machine.travel(date(2021, 4, 13)):
+    with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
         test_wzdx = icone_translator.wzdx_creator(icone_obj)
     print(test_wzdx)
     assert expected_wzdx == test_wzdx

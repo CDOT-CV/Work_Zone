@@ -147,7 +147,7 @@ def initialize_wzdx_object(info):
     wzd['road_event_feed_info'] = {}
     # hardcode
     wzd['road_event_feed_info']['feed_info_id'] = info.get('feed_info_id')
-    wzd['road_event_feed_info']['update_date'] = datetime.now().strftime(
+    wzd['road_event_feed_info']['update_date'] = datetime.utcnow().strftime(
         "%Y-%m-%dT%H:%M:%SZ")
     wzd['road_event_feed_info']['publisher'] = info.get(
         'metadata').get('issuing_organization')
@@ -171,7 +171,8 @@ def initialize_wzdx_object(info):
     if info['metadata'].get('datafeed_frequency_update', False):
         data_source['update_frequency'] = info.get(
             'metadata').get('datafeed_frequency_update')
-    data_source['update_date'] = datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
+    data_source['update_date'] = datetime.utcnow().strftime(
+        "%Y-%m-%dT%H:%M:%SZ")
     data_source['location_method'] = info.get(
         'metadata').get('wz_location_method')
     data_source['lrs_type'] = info.get('metadata').get('lrs_type')
