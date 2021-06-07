@@ -50,7 +50,7 @@ def iterate_feature(polygon, wzdx_message):
 
 
 # generate polygon from list of geometry ([[long, lat], ...]) and width in meters
-def generate_polygon(geometry, polygon_width):
+def generate_polygon(geometry, polygon_width_in_meters):
 
     if not geometry or type(geometry) != list or len(geometry) <= 1:
         return None
@@ -84,8 +84,9 @@ def generate_polygon(geometry, polygon_width):
 
         # get left and right points from direction and distance
         origin = geopy.Point(p1[1], p1[0])
-        left_point = geodesic(meters=polygon_width/2).destination(origin, left)
-        right_point = geodesic(meters=polygon_width /
+        left_point = geodesic(
+            meters=polygon_width_in_meters/2).destination(origin, left)
+        right_point = geodesic(meters=polygon_width_in_meters /
                                2).destination(origin, right)
 
         # Append points to left and right lists
