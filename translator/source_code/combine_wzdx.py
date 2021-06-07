@@ -51,6 +51,12 @@ def iterate_feature(polygon, wzdx_message):
 
 # generate polygon from list of geometry ([[long, lat], ...]) and width in meters
 def generate_polygon(geometry, polygon_width_in_meters):
+    """generate polygon from list of geometry ([[long, lat], ...]) and width in meters
+
+    Args: 
+        geometry: something
+        polygon_width: width in meters
+    """
 
     if not geometry or type(geometry) != list or len(geometry) <= 1:
         return None
@@ -94,7 +100,7 @@ def generate_polygon(geometry, polygon_width_in_meters):
         polygon_right_points.append(
             [right_point.latitude, right_point.longitude])
 
-    # Create list of points in correct order (all left points, then all right points in reverese order)
+    # Create list of points in correct order (all left points, then all right points in reverse order)
     # This order is critical to prevent criss-crossing in the polygon
     polygon_points = []
 
