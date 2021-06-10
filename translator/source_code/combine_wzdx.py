@@ -8,6 +8,8 @@ import pyproj
 import getopt
 import sys
 
+polygon_width_meters = 100
+
 
 def main():
 
@@ -26,7 +28,7 @@ def main():
                 'One or more files specified are invalid. Please specify valid geojson files!') from None
 
         polygon = generate_polygon(
-            wzdx_cotrip['features'][0]['geometry']['coordinates'], 100)
+            wzdx_cotrip['features'][0]['geometry']['coordinates'], polygon_width_meters)
         feature = iterate_feature(polygon, wzdx_icone)
         if feature:
 
@@ -45,7 +47,7 @@ def main():
 def combine_wzdx(wzdx_cotrip, wzdx_icone, icone_feature):
     combined_wzdx = copy.deepcopy(wzdx_cotrip)
     combined_wzdx['features'][0]['properties']['vehicle_impact'] = icone_feature['properties']['vehicle_impact']
-    combined_wzdx['road_event_feed_info']['data_sources'].append(
+    combined_wzdx['road_event_feed_info']['data_sources'].extend(
         wzdx_icone['road_event_feed_info']['data_sources'][0])
 
     return combined_wzdx
@@ -60,10 +62,10 @@ def iterate_feature(polygon, wzdx_message):
 
 # generate polygon from list of geometry ([[long, lat], ...]) and width in meters
 def generate_polygon(geometry, polygon_width_in_meters):
-    """generate polygon from list of geometry ([[long, lat], ...]) and width in meters
+    """generate polygon from list of geometry ([[long, lat], ...]) as linestring and width in meters
 
     Args: 
-        geometry: something
+        geometry: Linestring
         polygon_width: width in meters
     """
 
