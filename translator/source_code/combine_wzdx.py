@@ -27,7 +27,8 @@ def main():
 
             f.write(json.dumps(combine_wzdx(
                 wzdx_cotrip, wzdx_icone, feature), indent=2))
-            print('duplicate iCone and COtrip messages were found and combined WZDx message was written to combined_wzdx_message.geojson file')
+            print(
+                'Combined WZDx message was written to combined_wzdx_message.geojson file.')
 
         else:
             print('no duplicate messages were found')
