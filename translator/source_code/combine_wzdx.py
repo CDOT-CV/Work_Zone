@@ -14,11 +14,16 @@ def main():
     icone_file, cotrip_file, outputfile = parse_arguments(
         sys.argv[1:], default_output_file_name='combined_wzdx_message.geojson')
 
-    with open(outputfile, 'w+') as f:
-        wzdx_icone = json.loads(open(
-            icone_file, 'r').read())
-        wzdx_cotrip = json.loads(open(
-            cotrip_file, 'r').read())
+    if icone_file and cotrip_file:
+        try:
+            with open(outputfile, 'w+') as f:
+                wzdx_icone = json.loads(open(
+                    icone_file, 'r').read())
+                wzdx_cotrip = json.loads(open(
+                    cotrip_file, 'r').read())
+        except ValueError as e:
+            raise ValueError(
+                'One or more files specified are invalid. Please specify valid geojson files!') from None
 
         polygon = generate_polygon(
             wzdx_cotrip['features'][0]['geometry']['coordinates'], 100)
@@ -32,6 +37,9 @@ def main():
 
         else:
             print('no duplicate messages were found')
+    else:
+        print('please specify an input json file with -i and -c')
+        print(help_string)
 
 
 def combine_wzdx(wzdx_cotrip, wzdx_icone, icone_feature):
@@ -145,8 +153,10 @@ def parse_arguments(argv, default_output_file_name='combined_wzdx_message.geojso
     try:
         opts, _ = getopt.getopt(
             argv, "hi:c:o:", ["icone=", "cotrip=", "output="])
-    except getopt.GetoptError:
+    except getopt.GetoptError as e:
+        print('Invalid arguments: '+str(e))
         sys.exit(2)
+
     for opt, arg in opts:
         if opt in ("-h", "--help"):
             print(help_string)
