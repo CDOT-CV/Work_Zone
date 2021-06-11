@@ -106,7 +106,7 @@ A system was created in google cloud platform to automatically translate iCone d
 
 ### Message Combination Logic:
 
-The combined WZDx script file combines each set of duplicated messages from iCone and COtrip to a single improved WZDx message.It begins with COtrip message and adds data from iCone and publishes a combined WZDx message as an output.
+The combined WZDx script file combines each set of duplicated messages from iCone and COtrip to a single improved WZDx message.It begins with COtrip message and adds data from iCone and publishes a combined WZDx message as an output.The script file checks for the vehicle_impact from iCone WZDx message and adds it    to the Combined WZDx output message file along with all  data sources present in  iCone message.We intend to add more fields in future but currently only vehicle_impact and datasources are being combined.
 
 ### Documentation
 
