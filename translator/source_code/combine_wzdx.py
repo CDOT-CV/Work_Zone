@@ -27,7 +27,7 @@ def main():
             raise ValueError(
                 'One or more files specified are invalid. Please specify valid geojson files!') from None
 
-        polygon = generate_polygon(
+        polygon = generate_buffer_polygon_from_linestring(
             wzdx_cotrip['features'][0]['geometry']['coordinates'], polygon_width_meters)
         feature = iterate_feature(polygon, wzdx_icone)
         if feature:
