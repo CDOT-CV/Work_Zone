@@ -60,9 +60,8 @@ def iterate_feature(polygon, wzdx_message):
                 return feature
 
 
-# generate polygon from list of geometry ([[long, lat], ...]) and width in meters
 def generate_polygon(geometry, polygon_width_in_meters):
-    """Generate a polygon from list of geometry ([[long, lat], ...]) as linestring and width in meters
+    """Generate a polygon from a Linestring using polygon_width_in_meters as a buffer.
 
     Args: 
         geometry: Linestring
