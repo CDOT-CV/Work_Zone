@@ -4,7 +4,7 @@ Work zone code and documentation for WZDx, iCone, etc.
 
 | Build | Quality Gate | Code Coverage |
 | :---- | :----------: | ------------: |
-|       |              |               |
+|       |             |               |
 
 # WZDX Translator
 
@@ -105,6 +105,10 @@ Ensure you have your environment configured correctly (as described above).
 A system was created in google cloud platform to automatically translate iCone data to WZDx message. This system consists of two pubsub topics and a cloud function. A cloud scheduler automatically sends a message to a pubsub topic which triggers the cloud function. The cloud function retrieves iCone data from an ftp server (ftp://iconetraffic.com:42663) and translates to WZDx message. It validates the WZDx message with json schema and publishes the message to a pubsub topic.
 
 ![alt text](translator/GCP_cloud_function/iCone%20Translator%20block%20diagram.png)
+
+### Message Combination Logic:
+
+The combined WZDx script file combines each set of duplicated messages from iCone and COtrip to a single improved WZDx message.It begins with COtrip message and adds data from iCone and publishes a combined WZDx message as an output.
 
 ### Documentation
 
