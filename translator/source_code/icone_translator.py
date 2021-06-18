@@ -7,6 +7,26 @@ from collections import OrderedDict
 from translator.source_code import translator_shared_library
 
 
+# Features
+
+# [*] Add local-access-only restriction
+# [*] Add license property to the RoadEventFeedInfo object
+
+
+# Refactoring
+
+# [*] Refactor LaneType enumerated type to deprecate values that can be determined from other properties of the Lane object, such as order, status, and lane_restrictions
+# [*] Add value alternating-flow to LaneStatus enumerated type and deprecate alternating-one-way
+# [*] Add road_names property to the RoadEvent object and deprecate road_name and road_number
+# [*] Deprecate the total_num_lanes property on the RoadEvent object as the RoadEvent's lanes array can be used to determine the number of lanes
+
+
+# Fixes
+
+# [*]  Add optional bbox property to allow providing a GeoJSON Bounding Box for the WZDxFeed and RoadEventFeature objects
+# [*]  Add an id property to the RoadEventFeature object for providing the a road event's identifier to better follow GeoJSON ID recommendations
+
+
 # Translator
 def main():
     inputfile, outputfile = translator_shared_library.parse_arguments(
@@ -18,7 +38,7 @@ def main():
         icone_obj = translator_shared_library.parse_xml(inputfile)
         wzdx = wzdx_creator(icone_obj, translator_shared_library.initialize_info(
             '104d7746-688c-44ed-b195-2ee948bf9dfa'))
-        location_schema = 'translator/sample files/validation_schema/wzdx_v3.0_feed.json'
+        location_schema = 'translator/sample files/validation_schema/wzdx_v3.1_feed.json'
         wzdx_schema = json.loads(open(location_schema).read())
 
         if not translator_shared_library.validate_wzdx(wzdx, wzdx_schema):
@@ -269,7 +289,7 @@ def parse_incident(incident, callback_function=None):
     # I included a skeleton of the message, fill out all required fields and as many optional fields as you can. Below is a link to the spec page for a road event
     # https://github.com/usdot-jpo-ode/jpo-wzdx/blob/master/spec-content/objects/RoadEvent.md
 
-    # road_event_id
+    # id
     # Leave this empty, it will be populated by add_ids
     properties['road_event_id'] = ''
 
@@ -299,14 +319,16 @@ def parse_incident(incident, callback_function=None):
     properties['ending_accuracy'] = "estimated"
 
     # road_name
-    road_name = incident.get('location').get('street')
-    properties['road_name'] = road_name
+    road_names = [incident.get('location').get('street')]
+    properties['road_names'] = road_names
 
     # direction
-    direction = parse_direction_from_street_name(road_name)
+    direction = parse_direction_from_street_name(road_names[0])
 
     if not direction:
         direction = get_road_direction(geometry.get('coordinates'))
+    if not direction:
+        return None
     properties['direction'] = direction
 
     # vehicle impact
@@ -319,9 +341,6 @@ def parse_incident(incident, callback_function=None):
 
     # lanes
     properties['lanes'] = []
-
-    # road_name
-    properties['road_number'] = ""
 
     # beginning_cross_street
     properties['beginning_cross_street'] = ""

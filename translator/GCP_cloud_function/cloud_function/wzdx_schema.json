@@ -10,7 +10,9 @@
     },
     "type": {
       "description": "The GeoJSON type",
-      "enum": ["FeatureCollection"]
+      "enum": [
+        "FeatureCollection"
+      ]
     },
     "features": {
       "description": "An array of GeoJSON Feature objects which represent WZDx road events",
@@ -20,7 +22,11 @@
       }
     }
   },
-  "required": ["road_event_feed_info", "type", "features"],
+  "required": [
+    "road_event_feed_info",
+    "type",
+    "features"
+  ],
   "definitions": {
     "RoadEventFeedInfo": {
       "title": "Road Event Feed Information",
@@ -64,7 +70,12 @@
           "minItems": 1
         }
       },
-      "required": ["update_date", "version", "publisher", "data_sources"]
+      "required": [
+        "update_date",
+        "version",
+        "publisher",
+        "data_sources"
+      ]
     },
     "RoadEventDataSource": {
       "title": "Road Event Data Source",
@@ -115,7 +126,11 @@
           "format": "uri"
         }
       },
-      "required": ["data_source_id", "organization_name", "location_method"]
+      "required": [
+        "data_source_id",
+        "organization_name",
+        "location_method"
+      ]
     },
     "LocationMethod": {
       "title": "Location Method Enumerated Type",
@@ -135,7 +150,9 @@
       "properties": {
         "type": {
           "description": "The GeoJSON object type; must be 'Feature'",
-          "enum": ["Feature"]
+          "enum": [
+            "Feature"
+          ]
         },
         "properties": {
           "$ref": "#/definitions/RoadEvent"
@@ -151,7 +168,11 @@
           ]
         }
       },
-      "required": ["type","properties","geometry"]
+      "required": [
+        "type",
+        "properties",
+        "geometry"
+      ]
     },
     "RoadEvent": {
       "title": "Road Event",
@@ -300,7 +321,7 @@
       "type": "object",
       "properties": {
         "first": {
-          "description": "Indicates the first (can be multiple) road event in a sequence of road events by 'road_event_id'",
+          "description": "Indicates the first (can be multiple) road event in a sequence of road events by 'id'",
           "type": "array",
           "minItems": 1,
           "items": {
@@ -308,7 +329,7 @@
           }
         },
         "next": {
-          "description": "Indicates the next (can be multiple) road event in a sequence of road events by 'road_event_id'",
+          "description": "Indicates the next (can be multiple) road event in a sequence of road events by 'id'",
           "type": "array",
           "minItems": 1,
           "items": {
@@ -346,7 +367,9 @@
           "type": "boolean"
         }
       },
-      "required": ["type_name"]
+      "required": [
+        "type_name"
+      ]
     },
     "Lane": {
       "title": "Lane",
@@ -377,7 +400,11 @@
           }
         }
       },
-      "required": ["status", "type", "order"]
+      "required": [
+        "status",
+        "type",
+        "order"
+      ]
     },
     "LaneRestriction": {
       "title": "Lane Restriction",
@@ -394,40 +421,70 @@
           "$ref": "#/definitions/LaneRestrictionUnit"
         }
       },
-      "required": ["restriction_type"],
+      "required": [
+        "restriction_type"
+      ],
       "dependencies": {
-        "restriction_value": ["restriction_units"]
+        "restriction_value": [
+          "restriction_units"
+        ]
       }
     },
     "EventType": {
       "title": "Road Event Type Enumerated Type",
       "description": "The type of WZDx road event",
-      "enum": ["work-zone", "detour"]
+      "enum": [
+        "work-zone",
+        "detour"
+      ]
     },
     "Direction": {
       "title": "Direction Enumerated Type",
       "description": "The direction for a road event based on standard naming for US roads; indicates the direction the traffic flow regardless of the real heading angle",
-      "enum": ["northbound", "eastbound", "southbound", "westbound"]
+      "enum": [
+        "northbound",
+        "eastbound",
+        "southbound",
+        "westbound"
+      ]
     },
     "SpatialVerification": {
       "title": "Spatial Verification Enumerated Type",
       "description": "An indication of how a geographical coordinate was defined",
-      "enum": ["estimated", "verified"]
+      "enum": [
+        "estimated",
+        "verified"
+      ]
     },
     "TimeVerification": {
       "title": "Time Verification Enumerated Type",
       "description": "A measure of how accurate a date-time is",
-      "enum": ["estimated", "verified"]
+      "enum": [
+        "estimated",
+        "verified"
+      ]
     },
     "EventStatus": {
       "title": "Event Status Enumerated Type",
       "description": "The status of the road event",
-      "enum": ["planned", "pending", "active", "completed", "cancelled"]
+      "enum": [
+        "planned",
+        "pending",
+        "active",
+        "completed",
+        "cancelled"
+      ]
     },
     "VehicleImpact": {
       "title": "Vehicle Impact Enumerated Type",
       "description": "The impact to vehicular lanes along a single road in a single direction",
-      "enum": ["all-lanes-closed", "some-lanes-closed", "all-lanes-open", "alternating-one-way", "unknown"]
+      "enum": [
+        "all-lanes-closed",
+        "some-lanes-closed",
+        "all-lanes-open",
+        "alternating-one-way",
+        "unknown"
+      ]
     },
     "RoadRestriction": {
       "title": "Road Restriction Enumerated Type",
@@ -467,7 +524,15 @@
     "LaneStatus": {
       "title": "Lane Status Enumerated Type",
       "description": "The status of the lane for the traveling public",
-      "enum": ["open", "closed", "shift-left", "shift-right", "merge-left", "merge-right", "alternating-one-way"]
+      "enum": [
+        "open",
+        "closed",
+        "shift-left",
+        "shift-right",
+        "merge-left",
+        "merge-right",
+        "alternating-one-way"
+      ]
     },
     "LaneType": {
       "title": "Lane Type Enumerated Type",
@@ -506,7 +571,14 @@
     "LaneRestrictionUnit": {
       "title": "Lane Restriction Unit Enumerated Type",
       "description": "Units of measure used for the lane restriction value",
-      "enum": ["feet", "inches", "centimeters", "pounds", "tons", "kilograms"]
+      "enum": [
+        "feet",
+        "inches",
+        "centimeters",
+        "pounds",
+        "tons",
+        "kilograms"
+      ]
     }
   }
 }

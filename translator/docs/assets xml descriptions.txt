@@ -15,7 +15,7 @@ optional configurations:
 	:"asset" child elements
 
 "asset" element - an individual iCone Connected Tech units
-	:"id" attribute - the unique device serial number for the unit
+	:"road_event_id" attribute - the unique device serial number for the unit
 	:"name" attribute - the user defined name for the unit
 	:"grpID" attribute - the unique id for the set of units this unit currently belongs to
 	:"grpName" attribute - the defined name for the grpID

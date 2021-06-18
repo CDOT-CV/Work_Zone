@@ -10,6 +10,26 @@ import copy
 # Translator
 
 
+# Features
+
+# [*] Add local-access-only restriction
+# [*] Add license property to the RoadEventFeedInfo object
+
+
+# Refactoring
+
+# [*] Refactor LaneType enumerated type to deprecate values that can be determined from other properties of the Lane object, such as order, status, and lane_restrictions
+# [*] Add value alternating-flow to LaneStatus enumerated type and deprecate alternating-one-way
+# [*] Add road_names property to the RoadEvent object and deprecate road_name and road_number
+# [*] Deprecate the total_num_lanes property on the RoadEvent object as the RoadEvent's lanes array can be used to determine the number of lanes
+
+
+# Fixes
+
+# [*]  Add optional bbox property to allow providing a GeoJSON Bounding Box for the WZDxFeed and RoadEventFeature objects
+# [*]  Add an id property to the RoadEventFeature object for providing the a road event's identifier to better follow GeoJSON ID recommendations
+
+
 def main():
 
     inputfile, outputfile = translator_shared_library.parse_arguments(
@@ -21,7 +41,7 @@ def main():
             raise ValueError(
                 'Invalid file type. Please specify a valid Json file!') from None
         wzdx_obj = wzdx_creator(cotrip_obj)
-        location_schema = 'translator/sample files/validation_schema/wzdx_v3.0_feed.json'
+        location_schema = 'translator/sample files/validation_schema/wzdx_v3.1_feed.json'
         wzdx_schema = json.loads(open(location_schema).read())
 
         if not translator_shared_library.validate_wzdx(wzdx_obj, wzdx_schema):
@@ -134,7 +154,10 @@ def parse_alert(alert, callback_function=None):
     properties['ending_accuracy'] = "estimated"
 
     # road_name
-    properties['road_name'] = event.get('detail').get('road_name')
+    properties['road_names'] = [event.get('detail').get('road_name')]
+    road_number = event.get('detail').get('road_number')
+    if road_number and not road_number in properties['road_names']:
+        properties['road_names'].append(road_number)
 
     # direction
     Direction_map = {'North': 'northbound', 'South': 'southbound',
@@ -284,7 +307,8 @@ def get_restrictions(work_updates):
                                   'axle-load-limit',
                                   'gross-weight-limit',
                                   'towing-prohibited',
-                                  'permitted-oversize-loads-prohibited']
+                                  'permitted-oversize-loads-prohibited'
+                                  'local-access-only']
     for work_update in work_updates:
         if type(work_update) == dict and work_update.get('restrictions'):
             for restriction in work_update.get('restrictions'):

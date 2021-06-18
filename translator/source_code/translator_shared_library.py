@@ -131,12 +131,12 @@ def add_ids(message):
 
         for i in range(road_event_length):
             feature = message.get('features')[i]
-            road_event_id = road_event_ids[i]
-            feature['properties']['road_event_id'] = road_event_id
+            id = road_event_ids[i]
+            feature['properties']['road_event_id'] = id
             feature['properties']['data_source_id'] = data_source_id
             feature['properties']['relationship']['relationship_id'] = str(
                 uuid.uuid4())
-            feature['properties']['relationship']['road_event_id'] = road_event_id
+            feature['properties']['relationship']['road_event_id'] = id
         return message
     except:
         return message
@@ -147,7 +147,7 @@ def initialize_wzdx_object(info):
     wzd['road_event_feed_info'] = {}
     # hardcode
     wzd['road_event_feed_info']['feed_info_id'] = info.get('feed_info_id')
-    wzd['road_event_feed_info']['update_date'] = datetime.now().strftime(
+    wzd['road_event_feed_info']['update_date'] = datetime.utcnow().strftime(
         "%Y-%m-%dT%H:%M:%SZ")
     wzd['road_event_feed_info']['publisher'] = info.get(
         'metadata').get('issuing_organization')
@@ -158,7 +158,8 @@ def initialize_wzdx_object(info):
     if info['metadata'].get('datafeed_frequency_update', False):
         wzd['road_event_feed_info']['update_frequency'] = info.get('metadata')[
             'datafeed_frequency_update']  # Verify data type
-    wzd['road_event_feed_info']['version'] = '3.0'
+    wzd['road_event_feed_info']['version'] = '3.1'
+    wzd['road_event_feed_info']['license'] = "https://creativecommons.org/publicdomain/zero/1.0/"
 
     data_source = {}
     data_source['data_source_id'] = str(uuid.uuid4())
@@ -170,7 +171,8 @@ def initialize_wzdx_object(info):
     if info['metadata'].get('datafeed_frequency_update', False):
         data_source['update_frequency'] = info.get(
             'metadata').get('datafeed_frequency_update')
-    data_source['update_date'] = datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
+    data_source['update_date'] = datetime.utcnow().strftime(
+        "%Y-%m-%dT%H:%M:%SZ")
     data_source['location_method'] = info.get(
         'metadata').get('wz_location_method')
     data_source['lrs_type'] = info.get('metadata').get('lrs_type')
@@ -179,10 +181,10 @@ def initialize_wzdx_object(info):
     wzd['type'] = 'FeatureCollection'
     sub_identifier = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in
                              range(6))  # Create random 6 character digit/letter string
-    road_event_id = str(uuid.uuid4())
+    id = str(uuid.uuid4())
     ids = {}
     ids['sub_identifier'] = sub_identifier
-    ids['road_event_id'] = road_event_id
+    ids['id'] = id
 
     wzd['features'] = []
 
