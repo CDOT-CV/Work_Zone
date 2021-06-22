@@ -10,7 +10,7 @@ Work zone code and documentation for WZDx, iCone, etc.
 
 ## Project Description
 
-This project is an open source, proof of concept for Work Zone Data Exchange message creation from CDOT data to include iCone and Cotrip. The purpose of this tool is to  build a translator from Cotrip work zone data and iCone data to the WZDx message (3.1). The message will contain required data by WZDx that can be populated by iCone and other Cotrip Work Zone resources. Basically, in this project, we run a python script to parse data from the iCone xml file and COtrip data which genrates WXDx 3.1 messages in a geojson format.
+This project is an open source, proof of concept for Work Zone Data Exchange message creation from CDOT data to include iCone and Cotrip. The purpose of this tool is to  build a translator from Cotrip work zone data and iCone data to the WZDx message (3.1). The message will contain required data by WZDx that can be populated by iCone and other Cotrip Work Zone resources. Basically, in this project, we run a python script to parse data from the iCone xml file and COtrip data which generates WXDx 3.1 messages in a geojson format.
 
 ## Prerequisites
 
