@@ -17,9 +17,6 @@ This project is an open source, proof of concept for Work Zone Data Exchange mes
 Requires:
 
 - Python 3.6 (or higher)
-  - xmltodict
-  - jsonschema
-  - shapely
 
 ## Environment Setup
 
