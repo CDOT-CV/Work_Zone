@@ -307,7 +307,7 @@ def get_restrictions(work_updates):
                                   'axle-load-limit',
                                   'gross-weight-limit',
                                   'towing-prohibited',
-                                  'permitted-oversize-loads-prohibited'
+                                  'permitted-oversize-loads-prohibited',
                                   'local-access-only']
     for work_update in work_updates:
         if type(work_update) == dict and work_update.get('restrictions'):
