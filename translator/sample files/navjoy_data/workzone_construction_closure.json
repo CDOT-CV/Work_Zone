@@ -1,0 +1,262 @@
+[
+    {
+        "sys_gUid": "ConstructionWorkZone-4b2719b3-7cf7-4038-9902-5362f3002a40",
+        "data": {
+            "constructionType": "Lane Expansion",
+            "description": "Test Site",
+            "streetNameFrom": "Belleview Ave",
+            "streetNameTo": "Bowles Ave",
+            "routeName": "C-470",
+            "mileMarkerStart": "21.9",
+            "mileMarkerEnd": "22.3",
+            "travelRestriction": "Right lane both directions",
+            "notes1": "Paonia is the GC",
+            "ConstructionWorkZonePlan": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -105.15708984752104,
+                                39.62598162507104
+                            ],
+                            [
+                                -105.15091003795072,
+                                39.617386938794475
+                            ],
+                            [
+                                -105.1553732337515,
+                                39.60654288891114
+                            ],
+                            [
+                                -105.15181628653889,
+                                39.60601386741819
+                            ],
+                            [
+                                -105.1470097679842,
+                                39.61791587338656
+                            ],
+                            [
+                                -105.15370456168537,
+                                39.62796486262866
+                            ],
+                            [
+                                -105.15708984752104,
+                                39.62598162507104
+                            ]
+                        ]
+                    ],
+                    "className": "ConstructionWorkZone"
+                },
+                {
+                    "type": "Point",
+                    "coordinates": [
+                        -105.14853074952508,
+                        39.62115550956358
+                    ],
+                    "className": "text"
+                },
+                {
+                    "type": "Point",
+                    "coordinates": [
+                        -105.14750078126336,
+                        39.61679188254689
+                    ],
+                    "className": "text"
+                }
+            ],
+            "closureStatus": "Active",
+            "permitDocument": [
+                {
+                    "documentName": "CDOT Permit ",
+                    "description": "Expires June 30, 2021",
+                    "doc_url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/CDOT%20Region%201/Files/590d3daa-1eaa-4e2d-b3c3-ca7b998e41f1CDOT%20Permit%20",
+                    "UniqueDocName": "590d3daa-1eaa-4e2d-b3c3-ca7b998e41f1CDOT Permit ",
+                    "s3FileName": "Documents/CDOT Region 1/Files/590d3daa-1eaa-4e2d-b3c3-ca7b998e41f1CDOT Permit ",
+                    "uploadedDate": "2021-02-23T14:46:46.358Z",
+                    "contentType": "application/pdf"
+                },
+                {
+                    "documentName": "Method Of Handling Traffic",
+                    "description": "Prepared by HDR",
+                    "doc_url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/CDOT%20Region%201/Files/c9409ba2-83e6-49ce-b1ff-c1eb902803ecMethod%20Of%20Handling%20Traffic",
+                    "UniqueDocName": "c9409ba2-83e6-49ce-b1ff-c1eb902803ecMethod Of Handling Traffic",
+                    "s3FileName": "Documents/CDOT Region 1/Files/c9409ba2-83e6-49ce-b1ff-c1eb902803ecMethod Of Handling Traffic",
+                    "uploadedDate": "2021-02-23T14:48:02.442Z",
+                    "contentType": "application/pdf"
+                }
+            ],
+            "permitID": "2021-1098A",
+            "actualStartDate": "2020-12-24T14:44:00.000Z",
+            "plannedStartDate": "2021-01-05T14:40:00.000Z",
+            "plannedEndDate": "2021-07-31T13:40:00.000Z"
+        },
+        "componentsData": []
+    },
+    {
+        "sys_gUid": "ConstructionWorkZone-a5ff2fd6-94bf-4496-956f-b0263d74b7af",
+        "data": {
+            "constructionType": "Traffic Signal Installation",
+            "description": "Installing signal",
+            "streetNameFrom": "44th Ave.",
+            "streetNameTo": "40th Ave.",
+            "routeName": "US 287",
+            "mileMarkerStart": "42.5",
+            "mileMarkerEnd": "48.1",
+            "travelRestriction": "Daily Right Lane Closure",
+            "notes1": "Any notes can go here",
+            "ConstructionWorkZonePlan": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -105.02536913607729,
+                                39.7766424440161
+                            ],
+                            [
+                                -105.02503117774141,
+                                39.77663419842862
+                            ],
+                            [
+                                -105.0250819152026,
+                                39.771948514459645
+                            ],
+                            [
+                                -105.02539573365735,
+                                39.77195057599695
+                            ],
+                            [
+                                -105.02536913607729,
+                                39.7766424440161
+                            ]
+                        ]
+                    ],
+                    "className": "ConstructionWorkZone"
+                }
+            ],
+            "closureStatus": "Active",
+            "actualStartDate": "2020-12-16T19:13:00.000Z",
+            "permitDocument": [],
+            "permitID": "2020-7652",
+            "plannedStartDate": "2020-12-14T18:01:00.000Z",
+            "plannedEndDate": "2021-06-30T06:00:00.000Z"
+        }
+    },
+    {
+        "sys_gUid": "ConstructionWorkZone-17a11a46-294f-486a-a276-4e7d2c97a142",
+        "data": {
+            "constructionType": "Traffic Signal Installation",
+            "description": "Installing Traffic Signal and Intersection Improvement  US 88 and Tennessee ",
+            "routeName": "US 88A",
+            "mileMarkerStart": "2.48",
+            "mileMarkerEnd": "3.0",
+            "streetNameFrom": "W. Exposition Ave.",
+            "streetNameTo": "W. Mississippi Ave.",
+            "ConstructionWorkZonePlan": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -105.02495229328107,
+                                39.69679262686785
+                            ],
+                            [
+                                -105.0249737509532,
+                                39.698051525047624
+                            ],
+                            [
+                                -105.02498204339254,
+                                39.703844124710066
+                            ],
+                            [
+                                -105.0251912556957,
+                                39.703839997559
+                            ],
+                            [
+                                -105.02518844463438,
+                                39.700288412201914
+                            ],
+                            [
+                                -105.02515076485587,
+                                39.69675728193709
+                            ],
+                            [
+                                -105.02494557586623,
+                                39.6967516065215
+                            ],
+                            [
+                                -105.02495429304552,
+                                39.696796493886254
+                            ],
+                            [
+                                -105.02495229328107,
+                                39.69679262686785
+                            ]
+                        ]
+                    ],
+                    "className": "ConstructionWorkZone"
+                }
+            ],
+            "closureStatus": "Active",
+            "plannedStartDate": "2020-12-07T21:23:00.000Z",
+            "plannedEndDate": "2021-05-15T20:23:00.000Z",
+            "actualStartDate": "2020-10-20T20:39:00.000Z",
+            "actualEndDate": "2020-10-20T20:39:00.000Z"
+        }
+    },
+    {
+        "sys_gUid": "ConstructionWorkZone-9e794601-310e-47ed-9b66-2f8d969ec189",
+        "data": {
+            "constructionType": "Traffic Signal Installation",
+            "description": "Installing Traffic Signal and Intersection Improvements",
+            "routeName": "US 40",
+            "mileMarkerStart": "301.0",
+            "mileMarkerEnd": "301.75",
+            "travelRestriction": "Daily Right Lane Closure",
+            "ConstructionWorkZonePlan": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -104.91883396656637,
+                                39.74024914746338
+                            ],
+                            [
+                                -104.92577015907888,
+                                39.740257397408264
+                            ],
+                            [
+                                -104.92577552349691,
+                                39.740047023504836
+                            ],
+                            [
+                                -104.91629659683828,
+                                39.74006352344207
+                            ],
+                            [
+                                -104.91633414776449,
+                                39.740240897517495
+                            ],
+                            [
+                                -104.91883396656637,
+                                39.74024914746338
+                            ]
+                        ]
+                    ],
+                    "className": "ConstructionWorkZone"
+                }
+            ],
+            "closureStatus": "Active",
+            "permitDocument": [],
+            "streetNameFrom": "Glencoe St.",
+            "streetNameTo": "Jersey St.",
+            "plannedStartDate": "2020-12-14T20:30:00.000Z",
+            "plannedEndDate": "2021-06-30T19:30:00.000Z",
+            "actualStartDate": "2020-10-20T20:16:00.000Z",
+            "actualEndDate": "2021-06-30T20:16:00.000Z"
+        }
+    }
+]
