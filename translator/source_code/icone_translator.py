@@ -323,8 +323,11 @@ def parse_incident(incident, callback_function=None):
     properties['road_names'] = road_names
 
     # direction
-    direction = parse_direction_from_street_name(road_names[0])
-
+    direction = None
+    for road_name in road_names:
+        direction = parse_direction_from_street_name(road_name)
+        if direction:
+            break
     if not direction:
         direction = get_road_direction(geometry.get('coordinates'))
     if not direction:
