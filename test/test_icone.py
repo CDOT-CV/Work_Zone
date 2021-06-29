@@ -1,9 +1,10 @@
 from translator.source_code import icone_translator
 import xmltodict
-import json
-import re
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock, patch, Mock
 import os
+import time_machine
+import uuid
+from datetime import datetime
 
 # Unit testing code for icone_translator.py
 # --------------------------------------------------------------------------------Unit test for parse_incident function--------------------------------------------------------------------------------
@@ -37,12 +38,11 @@ def test_parse_incident_from_street_success():
             "end_date_accuracy": "estimated",
             "beginning_accuracy": "estimated",
             "ending_accuracy": "estimated",
-            "road_name": "I-75 N",
+            "road_names": ["I-75 N"],
             "direction": "northbound",
             "vehicle_impact": "all-lanes-open",
             "relationship": {},
             "lanes": [],
-            "road_number": "",
             "beginning_cross_street": "",
             "ending_cross_street": "",
             "event_status": "active",
@@ -109,12 +109,11 @@ def test_parse_incident_from_coordinates_success():
             "end_date_accuracy": "estimated",
             "beginning_accuracy": "estimated",
             "ending_accuracy": "estimated",
-            "road_name": "I-75",
+            "road_names": ["I-75"],
             "direction": "westbound",
             "vehicle_impact": "all-lanes-open",
             "relationship": {},
             "lanes": [],
-            "road_number": "",
             "beginning_cross_street": "",
             "ending_cross_street": "",
             "event_status": "active",
@@ -413,7 +412,10 @@ def test_get_event_status_completed():
     'contact_email': 'abinash.konersman@state.co.us',
     'issuing_organization': 'CDOT'
 })
-def test_wzdx_creator():
+@patch('uuid.uuid4')
+def test_wzdx_creator(mockuuid):
+    uuid.uuid4 = Mock()
+    uuid.uuid4.side_effect = 'we234de'
     icone_obj = {'incidents': {'incident': [{
         '@id': 'U13631595_202012160845',
         'updatetime': '2020-12-16T17:18:00Z',
@@ -426,10 +428,62 @@ def test_wzdx_creator():
         }
     }]}}
 
-    wzdx_re = '{"road_event_feed_info": {"feed_info_id": "104d7746-688c-44ed-b195-2ee948bf9dfa", "update_date": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z", "publisher": "CDOT", "contact_name": "Abinash Konersman", "contact_email": "abinash\\.konersman@state\\.co\\.us", "version": "3\\.0", "data_sources": \\[{"data_source_id": "[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}", "feed_info_id": "104d7746-688c-44ed-b195-2ee948bf9dfa", "organization_name": "CDOT", "contact_name": "Abinash Konersman", "contact_email": "abinash\\.konersman@state\\.co\\.us", "update_date": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z", "location_method": "channel-device-method", "lrs_type": "lrs_type"}\\]}, "type": "FeatureCollection", "features": \\[{"type": "Feature", "properties": {"road_event_id": "[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}", "event_type": "work-zone", "data_source_id": "[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}", "start_date": "2020-12-07T14:18:00Z", "end_date": "", "start_date_accuracy": "estimated", "end_date_accuracy": "estimated", "beginning_accuracy": "estimated", "ending_accuracy": "estimated", "road_name": "I-70 N", "direction": "northbound", "vehicle_impact": "all-lanes-open", "relationship": {"relationship_id": "[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}", "road_event_id": "[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}"}, "lanes": \\[\\], "road_number": "", "beginning_cross_street": "", "ending_cross_street": "", "event_status": "active", "types_of_work": \\[\\], "restrictions": \\[\\], "description": "Road constructions are going on", "creation_date": "2020-12-13T14:18:00Z", "update_date": "2020-12-16T17:18:00Z"}, "geometry": {"type": "LineString", "coordinates": \\[\\[-114\\.145065, 34\\.8380671\\], \\[-114\\.145065, 34\\.8380671\\]\\]}}\\]}'
-    test_wzdx = icone_translator.wzdx_creator(icone_obj)
-    print(json.dumps(test_wzdx))
-    assert re.match(wzdx_re, json.dumps(test_wzdx)) != None
+    expected_wzdx = {
+        'road_event_feed_info': {
+            'feed_info_id': '104d7746-688c-44ed-b195-2ee948bf9dfa',
+            'update_date': '2021-04-13T00:00:00Z',
+            'publisher': 'CDOT',
+            'contact_name': 'Abinash Konersman',
+            'contact_email': 'abinash.konersman@state.co.us',
+            'version': '3.1',
+            'license': 'https://creativecommons.org/publicdomain/zero/1.0/',
+            'data_sources': [{
+                'data_source_id': 'w',
+                'feed_info_id': '104d7746-688c-44ed-b195-2ee948bf9dfa',
+                'organization_name': 'CDOT',
+                'contact_name': 'Abinash Konersman',
+                'contact_email': 'abinash.konersman@state.co.us',
+                'update_date': '2021-04-13T00:00:00Z',
+                'location_method': 'channel-device-method',
+                'lrs_type': 'lrs_type'}]},
+        'type': 'FeatureCollection',
+        'features': [{
+            'type': 'Feature',
+            'properties': {
+
+                'road_event_id': '2',
+                'event_type': 'work-zone',
+                'data_source_id': 'w',
+                'start_date': '2020-12-07T14:18:00Z',
+                'end_date': '',
+                'start_date_accuracy': 'estimated',
+                'end_date_accuracy': 'estimated',
+                'beginning_accuracy': 'estimated',
+                'ending_accuracy': 'estimated',
+                'road_names': ['I-70 N'],
+                'direction': 'northbound',
+                'vehicle_impact': 'all-lanes-open',
+                'relationship': {
+                    'relationship_id': '3',
+                    'road_event_id': '2'},
+                'lanes': [],
+                'beginning_cross_street': '',
+                'ending_cross_street': '',
+                'event_status': 'active',
+                'types_of_work': [],
+                'restrictions': [],
+                'description': 'Road constructions are going on',
+                'creation_date': '2020-12-13T14:18:00Z',
+                'update_date': '2020-12-16T17:18:00Z'},
+            'geometry': {
+                'type': 'LineString',
+                'coordinates': [[-114.145065, 34.8380671], [-114.145065, 34.8380671]]}}]}
+
+    with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
+        test_wzdx = icone_translator.wzdx_creator(icone_obj)
+
+    print(test_wzdx)
+    assert expected_wzdx == test_wzdx
 
 
 def test_wzdx_creator_empty_icone_object():
@@ -443,7 +497,10 @@ def test_wzdx_creator_empty_icone_object():
     'contact_email': 'abinash.konersman@state.co.us',
     'issuing_organization': 'CDOT'
 })
-def test_wzdx_creator_no_info_object():
+@patch('uuid.uuid4')
+def test_wzdx_creator_no_info_object(mockuuid):
+    uuid.uuid4 = Mock()
+    uuid.uuid4.side_effect = 'we234de'
     icone_obj = {'incidents': {'incident': [{
         '@id': 'U13631595_202012160845',
         'updatetime': '2020-12-16T17:18:00Z',
@@ -455,10 +512,60 @@ def test_wzdx_creator_no_info_object():
             'street': 'I-70 N'
         }
     }]}}
+    expected_wzdx = {
+        'road_event_feed_info': {
+            'feed_info_id': '104d7746-688c-44ed-b195-2ee948bf9dfa',
+            'update_date': '2021-04-13T00:00:00Z',
+            'publisher': 'CDOT',
+            'contact_name': 'Abinash Konersman',
+            'contact_email': 'abinash.konersman@state.co.us',
+            'version': '3.1',
+            'license': 'https://creativecommons.org/publicdomain/zero/1.0/',
+            'data_sources': [{
+                'data_source_id': 'w',
+                'feed_info_id': '104d7746-688c-44ed-b195-2ee948bf9dfa',
+                'organization_name': 'CDOT',
+                'contact_name': 'Abinash Konersman',
+                'contact_email': 'abinash.konersman@state.co.us',
+                'update_date': '2021-04-13T00:00:00Z',
+                'location_method': 'channel-device-method',
+                'lrs_type': 'lrs_type'}]},
+        'type': 'FeatureCollection',
+        'features': [{
+            'type': 'Feature',
+            'properties': {
 
-    wzdx_re = '{"road_event_feed_info": {"feed_info_id": "104d7746-688c-44ed-b195-2ee948bf9dfa", "update_date": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z", "publisher": "CDOT", "contact_name": "Abinash Konersman", "contact_email": "abinash\\.konersman@state\\.co\\.us", "version": "3\\.0", "data_sources": \\[{"data_source_id": "[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}", "feed_info_id": "104d7746-688c-44ed-b195-2ee948bf9dfa", "organization_name": "CDOT", "contact_name": "Abinash Konersman", "contact_email": "abinash\\.konersman@state\\.co\\.us", "update_date": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z", "location_method": "channel-device-method", "lrs_type": "lrs_type"}\\]}, "type": "FeatureCollection", "features": \\[{"type": "Feature", "properties": {"road_event_id": "[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}", "event_type": "work-zone", "data_source_id": "[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}", "start_date": "2020-12-07T14:18:00Z", "end_date": "", "start_date_accuracy": "estimated", "end_date_accuracy": "estimated", "beginning_accuracy": "estimated", "ending_accuracy": "estimated", "road_name": "I-70 N", "direction": "northbound", "vehicle_impact": "all-lanes-open", "relationship": {"relationship_id": "[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}", "road_event_id": "[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}"}, "lanes": \\[\\], "road_number": "", "beginning_cross_street": "", "ending_cross_street": "", "event_status": "active", "types_of_work": \\[\\], "restrictions": \\[\\], "description": "Road constructions are going on", "creation_date": "2020-12-13T14:18:00Z", "update_date": "2020-12-16T17:18:00Z"}, "geometry": {"type": "LineString", "coordinates": \\[\\[-114\\.145065, 34\\.8380671\\], \\[-114\\.145065, 34\\.8380671\\]\\]}}\\]}'
-    test_wzdx = icone_translator.wzdx_creator(icone_obj)
-    assert re.match(wzdx_re, json.dumps(test_wzdx)) != None
+                'road_event_id': '2',
+                'event_type': 'work-zone',
+                'data_source_id': 'w',
+                'start_date': '2020-12-07T14:18:00Z',
+                'end_date': '',
+                'start_date_accuracy': 'estimated',
+                'end_date_accuracy': 'estimated',
+                'beginning_accuracy': 'estimated',
+                'ending_accuracy': 'estimated',
+                'road_names': ['I-70 N'],
+                'direction': 'northbound',
+                'vehicle_impact': 'all-lanes-open',
+                'relationship': {
+                    'relationship_id': '3',
+                    'road_event_id': '2'},
+                'lanes': [],
+                'beginning_cross_street': '',
+                'ending_cross_street': '',
+                'event_status': 'active',
+                'types_of_work': [],
+                'restrictions': [],
+                'description': 'Road constructions are going on',
+                'creation_date': '2020-12-13T14:18:00Z',
+                'update_date': '2020-12-16T17:18:00Z'},
+            'geometry': {
+                'type': 'LineString',
+                'coordinates': [[-114.145065, 34.8380671], [-114.145065, 34.8380671]]}}]}
+    with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
+        test_wzdx = icone_translator.wzdx_creator(icone_obj)
+    print(test_wzdx)
+    assert expected_wzdx == test_wzdx
 
 
 def test_wzdx_creator_no_incidents():
@@ -520,7 +627,10 @@ def test_wzdx_creator_invalid_info_object():
     'contact_email': 'abinash.konersman@state.co.us',
     'issuing_organization': 'CDOT'
 })
-def test_wzdx_creator_valid_and_invalid():
+@patch('uuid.uuid4')
+def test_wzdx_creator_valid_and_invalid(mockuuid):
+    uuid.uuid4 = Mock()
+    uuid.uuid4.side_effect = 'we234de'
     icone_obj = {'incidents': {'incident': [{
         '@id': 'U13631595_202012160845',
         'updatetime': '2020-12-16T17:18:00Z',
@@ -542,9 +652,13 @@ def test_wzdx_creator_valid_and_invalid():
         }
     }]}}
 
-    wzdx_re = '{"road_event_feed_info": {"feed_info_id": "104d7746-688c-44ed-b195-2ee948bf9dfa", "update_date": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z", "publisher": "CDOT", "contact_name": "Abinash Konersman", "contact_email": "abinash\\.konersman@state\\.co\\.us", "version": "3\\.0", "data_sources": \\[{"data_source_id": "[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}", "feed_info_id": "104d7746-688c-44ed-b195-2ee948bf9dfa", "organization_name": "CDOT", "contact_name": "Abinash Konersman", "contact_email": "abinash\\.konersman@state\\.co\\.us", "update_date": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z", "location_method": "channel-device-method", "lrs_type": "lrs_type"}\\]}, "type": "FeatureCollection", "features": \\[{"type": "Feature", "properties": {"road_event_id": "[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}", "event_type": "work-zone", "data_source_id": "[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}", "start_date": "2020-12-07T14:18:00Z", "end_date": "", "start_date_accuracy": "estimated", "end_date_accuracy": "estimated", "beginning_accuracy": "estimated", "ending_accuracy": "estimated", "road_name": "I-70 N", "direction": "northbound", "vehicle_impact": "all-lanes-open", "relationship": {"relationship_id": "[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}", "road_event_id": "[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}"}, "lanes": \\[\\], "road_number": "", "beginning_cross_street": "", "ending_cross_street": "", "event_status": "active", "types_of_work": \\[\\], "restrictions": \\[\\], "description": "Road constructions are going on", "creation_date": "2020-12-13T14:18:00Z", "update_date": "2020-12-16T17:18:00Z"}, "geometry": {"type": "LineString", "coordinates": \\[\\[-114\\.145065, 34\\.8380671\\], \\[-114\\.145065, 34\\.8380671\\]\\]}}\\]}'
-    test_wzdx = icone_translator.wzdx_creator(icone_obj)
-    assert re.match(wzdx_re, json.dumps(test_wzdx)) != None
+    expected_wzdx = {'road_event_feed_info': {'feed_info_id': '104d7746-688c-44ed-b195-2ee948bf9dfa', 'update_date': '2021-04-13T00:00:00Z', 'publisher': 'CDOT', 'contact_name': 'Abinash Konersman', 'contact_email': 'abinash.konersman@state.co.us', 'version': '3.1', 'license': 'https://creativecommons.org/publicdomain/zero/1.0/', 'data_sources': [{'data_source_id': 'w', 'feed_info_id': '104d7746-688c-44ed-b195-2ee948bf9dfa', 'organization_name': 'CDOT', 'contact_name': 'Abinash Konersman', 'contact_email': 'abinash.konersman@state.co.us', 'update_date': '2021-04-13T00:00:00Z', 'location_method': 'channel-device-method', 'lrs_type': 'lrs_type'}]}, 'type': 'FeatureCollection', 'features': [{'type': 'Feature', 'properties': {
+        'road_event_id': '2', 'event_type': 'work-zone', 'data_source_id': 'w', 'start_date': '2020-12-07T14:18:00Z', 'end_date': '', 'start_date_accuracy': 'estimated', 'end_date_accuracy': 'estimated', 'beginning_accuracy': 'estimated', 'ending_accuracy': 'estimated', 'road_names': ['I-70 N'], 'direction': 'northbound', 'vehicle_impact': 'all-lanes-open', 'relationship': {'relationship_id': '3', 'road_event_id': '2'}, 'lanes': [], 'beginning_cross_street': '', 'ending_cross_street': '', 'event_status': 'active', 'types_of_work': [], 'restrictions': [], 'description': 'Road constructions are going on', 'creation_date': '2020-12-13T14:18:00Z', 'update_date': '2020-12-16T17:18:00Z'}, 'geometry': {'type': 'LineString', 'coordinates': [[-114.145065, 34.8380671], [-114.145065, 34.8380671]]}}]}
+
+    with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
+        test_wzdx = icone_translator.wzdx_creator(icone_obj)
+    print(test_wzdx)
+    assert expected_wzdx == test_wzdx
 # --------------------------------------------------------------------------------unit test for parse_direction_from_street_name function--------------------------------------------------------------------------------
 
 
