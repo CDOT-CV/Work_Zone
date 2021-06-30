@@ -18,7 +18,7 @@ def main():
         icone_obj = translator_shared_library.parse_xml(inputfile)
         wzdx = wzdx_creator(icone_obj, translator_shared_library.initialize_info(
             '104d7746-688c-44ed-b195-2ee948bf9dfa'))
-        location_schema = 'translator/sample files/validation_schema/wzdx_v3.0_feed.json'
+        location_schema = 'translator/sample files/validation_schema/wzdx_v3.1_feed.json'
         wzdx_schema = json.loads(open(location_schema).read())
 
         if not translator_shared_library.validate_wzdx(wzdx, wzdx_schema):
@@ -269,7 +269,7 @@ def parse_incident(incident, callback_function=None):
     # I included a skeleton of the message, fill out all required fields and as many optional fields as you can. Below is a link to the spec page for a road event
     # https://github.com/usdot-jpo-ode/jpo-wzdx/blob/master/spec-content/objects/RoadEvent.md
 
-    # road_event_id
+    # id
     # Leave this empty, it will be populated by add_ids
     properties['road_event_id'] = ''
 
@@ -299,14 +299,19 @@ def parse_incident(incident, callback_function=None):
     properties['ending_accuracy'] = "estimated"
 
     # road_name
-    road_name = incident.get('location').get('street')
-    properties['road_name'] = road_name
+    road_names = [incident.get('location').get('street')]
+    properties['road_names'] = road_names
 
     # direction
-    direction = parse_direction_from_street_name(road_name)
-
+    direction = None
+    for road_name in road_names:
+        direction = parse_direction_from_street_name(road_name)
+        if direction:
+            break
     if not direction:
         direction = get_road_direction(geometry.get('coordinates'))
+    if not direction:
+        return None
     properties['direction'] = direction
 
     # vehicle impact
@@ -319,9 +324,6 @@ def parse_incident(incident, callback_function=None):
 
     # lanes
     properties['lanes'] = []
-
-    # road_name
-    properties['road_number'] = ""
 
     # beginning_cross_street
     properties['beginning_cross_street'] = ""
