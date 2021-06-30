@@ -46,7 +46,8 @@ def main():
 
 def combine_wzdx(wzdx_cotrip, wzdx_icone, icone_feature):
     combined_wzdx = copy.deepcopy(wzdx_cotrip)
-    combined_wzdx['features'][0]['properties']['vehicle_impact'] = icone_feature['properties']['vehicle_impact']
+    if len(combined_wzdx['features']) >= 1:
+        combined_wzdx['features'][0]['properties']['vehicle_impact'] = icone_feature['properties']['vehicle_impact']
     combined_wzdx['road_event_feed_info']['data_sources'].extend(
         wzdx_icone['road_event_feed_info']['data_sources'])
 
