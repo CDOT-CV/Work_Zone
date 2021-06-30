@@ -18,11 +18,10 @@ def main():
 
     if icone_file and cotrip_file:
         try:
-            with open(outputfile, 'w+') as f:
-                wzdx_icone = json.loads(open(
-                    icone_file, 'r').read())
-                wzdx_cotrip = json.loads(open(
-                    cotrip_file, 'r').read())
+            wzdx_icone = json.loads(open(
+                icone_file, 'r').read())
+            wzdx_cotrip = json.loads(open(
+                cotrip_file, 'r').read())
         except ValueError as e:
             raise ValueError(
                 'One or more files specified are invalid. Please specify valid geojson files!') from None
@@ -32,8 +31,9 @@ def main():
         feature = iterate_feature(polygon, wzdx_icone)
         if feature:
 
-            f.write(json.dumps(combine_wzdx(
-                wzdx_cotrip, wzdx_icone, feature), indent=2))
+            with open(outputfile, 'w+') as f:
+                f.write(json.dumps(combine_wzdx(
+                    wzdx_cotrip, wzdx_icone, feature), indent=2))
             print(
                 'Combined WZDx message was written to combined_wzdx_message.geojson file.')
 
