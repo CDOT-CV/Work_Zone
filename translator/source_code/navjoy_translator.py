@@ -10,8 +10,6 @@ import copy
 # Translator
 
 
-
-
 def main():
 
     inputfile, outputfile = translator_shared_library.parse_arguments(
@@ -116,18 +114,26 @@ def parse_alert(alert, callback_function=None):
     properties['event_type'] = 'work-zone'
 
     # start_date
-    properties['start_date'] = reformat_datetime(
-        event.get('header').get('start_timestamp'))
+    actual_start_date = event.get('data').get('actualStartDate')
+    planned_start_date = event.get('data').get('plannedStartDate')
+    properties['start_date'] = actual_start_date
+    if not actual_start_date:
+        properties['start_date'] = planned_start_date
+        properties['start_date_accuracy'] = "estimated"
 
     # end_date
-    properties['end_date'] = reformat_datetime(
-        event.get('header').get('end_timestamp'))
+    actual_end_date = event.get('data').get('actualEndDate')
+    planned_end_date = event.get('data').get('plannedEndDate')
+    properties['end_date'] = actual_end_date
+    if not actual_start_date:
+        properties['end_date'] = planned_start_date
+        properties['end_date_accuracy'] = "estimated"
 
     # start_date_accuracy
-    properties['start_date_accuracy'] = "estimated"
+    properties['start_date_accuracy'] = "verified"
 
     # end_date_accuracy
-    properties['end_date_accuracy'] = "estimated"
+    properties['end_date_accuracy'] = "verified"
 
     # beginning_accuracy
     properties['beginning_accuracy'] = "estimated"
@@ -136,8 +142,8 @@ def parse_alert(alert, callback_function=None):
     properties['ending_accuracy'] = "estimated"
 
     # road_name
-    properties['road_names'] = [event.get('detail').get('road_name')]
-    road_number = event.get('detail').get('road_number')
+    properties['road_names'] = [event.get('data').get('routeName')]
+    road_number = event.get('data').get('routeName')
     if road_number and not road_number in properties['road_names']:
         properties['road_names'].append(road_number)
 
@@ -145,15 +151,14 @@ def parse_alert(alert, callback_function=None):
     Direction_map = {'North': 'northbound', 'South': 'southbound',
                      'West': 'westbound', 'East': 'eastbound'}
 
-    properties['direction'] = Direction_map.get(
-        event.get('detail').get('direction'))
+    properties['direction'] = get_direction_from_routeName(routeName)
 
     # vehicle impact
-    properties['vehicle_impact'] = 'unknown'
+    properties['vehicle_impact'] = get_vehicle_impact(
+        event.get('data').get('travelRestriction'))
 
     # event status
-    properties['event_status'] = get_event_status(
-        event.get('header').get('start_timestamp'), event.get('header').get('end_timestamp'))
+    properties['event_status'] = event.get('data').get('closureStatus')
 
     # type_of_work
     # maintenance, minor-road-defect-repair, roadside-work, overhead-work, below-road-work, barrier-work, surface-work, painting, roadway-relocation, roadway-creation
@@ -174,7 +179,7 @@ def parse_alert(alert, callback_function=None):
         properties['restrictions'] = restrictions
 
     # description
-    properties['description'] = event.get('header').get('description')
+    properties['description'] = event.get('data').get('description')
 
     # creation_date
     properties['creation_date'] = reformat_datetime(
@@ -230,6 +235,18 @@ def validate_alert(alert):
             return False
 
     return True
+
+# function to calculate vehicle impact
+
+
+def get_vehicle_impact(travelRestriction):
+    vehicle_impact = 'all-lanes-open'
+    if 'Daily Right Lane Closure' in travelRestriction.lower():
+        vehicle_impact = 'some-lanes-closed'
+    elif 'Right lane both directions' in travelRestriction.lower():
+        vehicle_impact = 'all-lanes-closed'
+
+    return vehicle_impact
 
 
 def reformat_datetime(datetime_string):
