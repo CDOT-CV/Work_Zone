@@ -249,46 +249,6 @@ def get_vehicle_impact(travelRestriction):
     return vehicle_impact
 
 
-def reformat_datetime(datetime_string):
-    if not datetime_string:
-        return ''
-    elif type(datetime_string) == str:
-        if re.match('^-?([0-9]*[.])?[0-9]+$', datetime_string):
-            datetime_string = float(datetime_string)
-        else:
-            return ''
-    time = datetime.fromtimestamp(datetime_string)
-    wzdx_format_datetime = time.astimezone(
-        timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-    return wzdx_format_datetime
-
-
-def get_types_of_work(sub_type):
-    if not sub_type or type(sub_type) != str:
-        return []
-    sub_type_split = sub_type.split(':')
-    if len(sub_type_split) < 2:
-        return []
-    type_of_work = sub_type_split[1]
-
-    valid_types_of_work = ['maintenance',
-                           'minor-road-defect-repair',
-                           'roadside-work',
-                           'overhead-work',
-                           'below-road-work',
-                           'barrier-work',
-                           'surface-work',
-                           'painting',
-                           'roadway-relocation',
-                           'roadway-creation']
-    work_type = {'type_name': type_of_work,
-                 'is_architectural_change': True}
-    if type_of_work in valid_types_of_work:
-        return [work_type]
-    else:
-        return []
-
-
 def get_restrictions(work_updates):
     restrictions = []
     if work_updates == [] or work_updates == None:
@@ -316,35 +276,6 @@ def get_restrictions(work_updates):
                     if restrict in valid_type_of_restrictions:
                         restrictions.append(restrict)
     return restrictions
-
-
-def parse_reduced_speed_limit_from_description(description) -> str:
-    search = re.search('speed limit ([0-9]{2}) mph', description)
-    if search:
-        return search[0][12:14]
-
-    search = re.search('speed limit reduced to ([0-9]{2})mph', description)
-    if search:
-        return search[0][23:25]
-
-
-def get_rsz_from_event(event):
-    rsz = parse_reduced_speed_limit_from_description(
-        event.get('header', {}).get('description', ""))
-    if rsz:
-        return rsz
-
-    rsz = parse_reduced_speed_limit_from_description(
-        event.get('detail', {}).get('description', ""))
-
-    if rsz:
-        return rsz
-
-    for work_update in event.get('detail', {}).get('work_updates', []):
-        rsz = parse_reduced_speed_limit_from_description(
-            work_update.get('description', ""))
-        if rsz:
-            return rsz
 
 
 def initialize_feature_properties():
