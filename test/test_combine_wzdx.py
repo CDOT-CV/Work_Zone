@@ -33,13 +33,14 @@ def test_combine_wzdx():
                     "data_source_id": "123dhthu-j234-o2687hvvct-o12"
                 }
             ]
-        }
-    }
-
-    icone_feature = {
-        "properties": {
-            "vehicle_impact": "all-lanes-open"
-        }
+        },
+        "features": [
+            {
+                "properties": {
+                    "vehicle_impact": "all-lanes-open"
+                }
+            }
+        ]
     }
 
     expected_combined_wzdx = {
@@ -65,7 +66,189 @@ def test_combine_wzdx():
     }
 
     actual = combine_wzdx.combine_wzdx(
-        test_cotrip_data, test_icone_data, icone_feature)
+        test_cotrip_data, 0, test_icone_data, 0)
+
+    assert expected_combined_wzdx == actual
+
+# --------------------------------------------------------------------------------Unit test for duplicate_features_and_combine function--------------------------------------------------------------------------------
+
+
+def test_find_duplicate_features_and_combine():
+    test_cotrip_data = {
+        "road_event_feed_info": {
+            "data_sources": [
+                {
+                    "data_source_id": "e9403a90-e033-44d1-969e-c4ac62f26b1d"
+                }
+            ]
+        },
+
+        "features": [
+            {
+                "properties": {
+                    "vehicle_impact": "unknown"
+                },
+                "geometry": {
+                    "type": "LineString",
+                    "coordinates": [
+                        [
+                            -104.48011,
+                            37.007645
+                        ],
+                        [
+                            -104.480103,
+                            37.008034
+                        ]
+                    ]
+                }
+            }
+        ]
+    }
+
+    # First feature is duplicate, second is not
+    test_icone_data = {
+        "road_event_feed_info": {
+            "data_sources": [
+                {
+                    "data_source_id": "123dhthu-j234-o2687hvvct-o12"
+                }
+            ]
+        },
+        "features": [
+            {
+                "properties": {
+                    "vehicle_impact": "all-lanes-open"
+                },
+                "geometry": {
+                    "type": "LineString",
+                    "coordinates": [
+                        [
+                            -104.480108,
+                            37.007900
+                        ],
+                    ]
+                }
+            },
+            {
+                "properties": {
+                    "vehicle_impact": "all-lanes-closed"
+                },
+                "geometry": {
+                    "type": "LineString",
+                    "coordinates": [
+                        [
+                            -104.490108,
+                            37.007900
+                        ],
+                    ]
+                }
+            }
+        ]
+    }
+
+    expected_combined_wzdx = {
+        "road_event_feed_info": {
+            "data_sources": [
+                {
+                    "data_source_id": "e9403a90-e033-44d1-969e-c4ac62f26b1d"
+                },
+
+                {
+                    "data_source_id": "123dhthu-j234-o2687hvvct-o12"
+                }
+            ]
+        },
+
+        "features": [
+            {
+                "properties": {
+                    "vehicle_impact": "all-lanes-open"
+                },
+                "geometry": {
+                    "type": "LineString",
+                    "coordinates": [
+                        [
+                            -104.48011,
+                            37.007645
+                        ],
+                        [
+                            -104.480103,
+                            37.008034
+                        ]
+                    ]
+                }
+            }
+        ]
+    }
+
+    actual = combine_wzdx.find_duplicate_features_and_combine(
+        test_icone_data, test_cotrip_data)
+
+    assert expected_combined_wzdx == actual
+
+
+def test_find_duplicate_features_and_combine_no_duplicates():
+    test_cotrip_data = {
+        "road_event_feed_info": {
+            "data_sources": [
+                {
+                    "data_source_id": "e9403a90-e033-44d1-969e-c4ac62f26b1d"
+                }
+            ]
+        },
+
+        "features": [
+            {
+                "properties": {
+                    "vehicle_impact": "unknown"
+                },
+                "geometry": {
+                    "type": "LineString",
+                    "coordinates": [
+                        [
+                            -104.48011,
+                            37.007645
+                        ],
+                        [
+                            -104.480103,
+                            37.008034
+                        ]
+                    ]
+                }
+            }
+        ]
+    }
+
+    test_icone_data = {
+        "road_event_feed_info": {
+            "data_sources": [
+                {
+                    "data_source_id": "123dhthu-j234-o2687hvvct-o12"
+                }
+            ]
+        },
+        "features": [
+            {
+                "properties": {
+                    "vehicle_impact": "all-lanes-open"
+                },
+                "geometry": {
+                    "type": "LineString",
+                    "coordinates": [
+                        [
+                            -104.490108,
+                            37.007900
+                        ],
+                    ]
+                }
+            }
+        ]
+    }
+
+    expected_combined_wzdx = None
+
+    actual = combine_wzdx.find_duplicate_features_and_combine(
+        test_icone_data, test_cotrip_data)
 
     assert expected_combined_wzdx == actual
 
@@ -92,13 +275,10 @@ def test_iterate_feature(mocked_combine_wzdx):
                         ]
                     ]
                 }
-            }
-        ]
-    }
-
-    expected = {
-        "geometry": {
-            "type": "LineString",
+            },
+            {
+                "geometry": {
+                    "type": "LineString",
                     "coordinates": [
                         [
                             -104.48011,
@@ -109,8 +289,12 @@ def test_iterate_feature(mocked_combine_wzdx):
                             37.008034
                         ]
                     ]
-        }
+                }
+            }
+        ]
     }
+
+    expected = [0, 1]
 
     actual = combine_wzdx.iterate_feature('polygon', test_wzdx_message)
 
@@ -141,7 +325,7 @@ def test_iterate_feature_no_match_feature(mocked_combine_wzdx):
         ]
     }
 
-    expected = None
+    expected = []
 
     actual = combine_wzdx.iterate_feature('polygon', test_wzdx_message)
 
