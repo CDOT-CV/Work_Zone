@@ -48,7 +48,7 @@ env_var.sh
 
 ### Execution for iCone translator
 
-#### Step : Run the translator script (from Work_Zone)
+#### Run the translator script (from Work_Zone)
 
 ```
 python -m translator.source_code.icone_translator -i inputfile.xml -o outputfile.geojson
@@ -62,7 +62,7 @@ python -m translator.source_code.icone_translator -i 'translator/sample files/ic
 
 ### Execution for COtrip translator
 
-#### Step : Run the translator script (from Work_Zone) and Please specify a valid Json file as an input file !
+#### Run the translator script (from Work_Zone) and Please specify a valid Json file as an input file !
 
 ```
 python -m translator.source_code.cotrip_translator -i inputfile.json -o outputfile.geojson
@@ -76,7 +76,7 @@ python -m translator.source_code.cotrip_translator -i 'translator/sample files/c
 
 ### Execution for Combine_wzdx
 
-#### Step : Run the translator script (from Work_Zone/translator/source_code)
+#### Run the translator script (from Work_Zone/translator/source_code)
 
 ```
 python combine_wzdx.py -i icone_wzdx_output_message_file -c cotrip_wzdx_output_message_file 
