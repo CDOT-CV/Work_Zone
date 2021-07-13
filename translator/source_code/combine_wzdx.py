@@ -112,7 +112,6 @@ def combine_wzdx(wzdx_destination: dict, destination_feature_index: int, wzdx_so
 
     # If indexes do not exist for either source or destination, immediately return destination object
     if len(wzdx_destination['features']) <= destination_feature_index or len(wzdx_source['features']) <= source_feature_index:
-        destination_feature = wzdx_destination['features'][destination_feature_index]
         return wzdx_destination
 
     # check if vehicle impact severity of source is higher than that of destination. If it is, overwrite destination with source
