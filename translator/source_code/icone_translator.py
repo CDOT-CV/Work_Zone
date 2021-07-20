@@ -7,26 +7,6 @@ from collections import OrderedDict
 from translator.source_code import translator_shared_library
 
 
-# Features
-
-# [*] Add local-access-only restriction
-# [*] Add license property to the RoadEventFeedInfo object
-
-
-# Refactoring
-
-# [*] Refactor LaneType enumerated type to deprecate values that can be determined from other properties of the Lane object, such as order, status, and lane_restrictions
-# [*] Add value alternating-flow to LaneStatus enumerated type and deprecate alternating-one-way
-# [*] Add road_names property to the RoadEvent object and deprecate road_name and road_number
-# [*] Deprecate the total_num_lanes property on the RoadEvent object as the RoadEvent's lanes array can be used to determine the number of lanes
-
-
-# Fixes
-
-# [*]  Add optional bbox property to allow providing a GeoJSON Bounding Box for the WZDxFeed and RoadEventFeature objects
-# [*]  Add an id property to the RoadEventFeature object for providing the a road event's identifier to better follow GeoJSON ID recommendations
-
-
 # Translator
 def main():
     inputfile, outputfile = translator_shared_library.parse_arguments(
@@ -323,8 +303,11 @@ def parse_incident(incident, callback_function=None):
     properties['road_names'] = road_names
 
     # direction
-    direction = parse_direction_from_street_name(road_names[0])
-
+    direction = None
+    for road_name in road_names:
+        direction = parse_direction_from_street_name(road_name)
+        if direction:
+            break
     if not direction:
         direction = get_road_direction(geometry.get('coordinates'))
     if not direction:

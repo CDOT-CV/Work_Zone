@@ -10,16 +10,14 @@ Work zone code and documentation for WZDx, iCone, etc.
 
 ## Project Description
 
-This project is an open source, proof of concept for Work Zone Data Exchange message creation from CDOT data to include iCone and Cotrip. The purpose of this tool is to  build a translator from Cotrip work zone data and iCone data to the WZDx message (3.1). The message will contain required data by WZDx that can be populated by iCone and other Cotrip Work Zone resources. Basically, in this project, we run a python script to parse data from the iCone xml file and COtrip data which genrates WXDx 3.1 messages in a geojson format.
+This project is an open source, proof of concept for Work Zone Data Exchange message creation from CDOT data to include iCone and Cotrip. The purpose of this tool is to  build a translator from Cotrip work zone data and iCone data to the WZDx message (3.1). The message will contain required data by WZDx that can be populated by iCone and other Cotrip Work Zone resources. Basically, in this project, we run a python script to parse data from the iCone xml file and COtrip data which generates WXDx 3.1 messages in a geojson format.
 
 ## Prerequisites
 
 Requires:
 
 - Python 3.6 (or higher)
-  - xmltodict
-  - jsonschema
-  - shapely
+- All libraries present in requirement.txt
 
 ## Environment Setup
 
@@ -50,7 +48,7 @@ env_var.sh
 
 ### Execution for iCone translator
 
-#### Step 1: Run the translator script (from Work_Zone)
+#### Run the translator script (from Work_Zone)
 
 ```
 python -m translator.source_code.icone_translator -i inputfile.xml -o outputfile.geojson
@@ -64,7 +62,7 @@ python -m translator.source_code.icone_translator -i 'translator/sample files/ic
 
 ### Execution for COtrip translator
 
-#### Step 1: Run the translator script (from Work_Zone) and Please specify a valid Json file as an input file !
+#### Run the translator script (from Work_Zone) and Please specify a valid Json file as an input file !
 
 ```
 python -m translator.source_code.cotrip_translator -i inputfile.json -o outputfile.geojson
@@ -74,6 +72,20 @@ Example usage:
 
 ```
 python -m translator.source_code.cotrip_translator -i 'translator/sample files/cotrip_data/cotrip_1.json' 
+```
+
+### Execution for Combine_wzdx
+
+#### Run the translator script (from Work_Zone/translator/source_code)
+
+```
+python combine_wzdx.py -i icone_wzdx_output_message_file -c cotrip_wzdx_output_message_file 
+```
+
+Example usage:
+
+```
+python combine_wzdx.py -i '../sample files/Output Message/icone_wzdx_translated.geojson' -c '../sample files/Output Message/cotrip_wzdx_translated_output_message.geojson'
 ```
 
 ### Unit Testing
@@ -91,6 +103,10 @@ Ensure you have your environment configured correctly (as described above).
 A system was created in google cloud platform to automatically translate iCone data to WZDx message. This system consists of two pubsub topics and a cloud function. A cloud scheduler automatically sends a message to a pubsub topic which triggers the cloud function. The cloud function retrieves iCone data from an ftp server (ftp://iconetraffic.com:42663) and translates to WZDx message. It validates the WZDx message with json schema and publishes the message to a pubsub topic.
 
 ![alt text](translator/GCP_cloud_function/iCone%20Translator%20block%20diagram.png)
+
+### Message Combination Logic:
+
+The `combine_wzdx` script file combines the output from the iCone and COtrip translators, based on overlapping geography, into a single improved WZDx message. The COtrip message set contains significantly more data, and is used as the base for this new combined message. The script then finds any geographically co-located messages from the iCone data set, pulls in the additional information (comprised of vehicle impact data and data sources) and publishes a new, combined WZDx message. Future state of this script will include additional data fields from the iCone data set as they become available.
 
 ### Documentation
 
