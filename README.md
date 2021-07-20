@@ -1,6 +1,6 @@
 # Work_Zone
 
-Work zone code and documentation for WZDx, iCone, etc.
+Work zone code and documentation for WZDx, iCone, etc. 
 
 | Build | Quality Gate | Code Coverage |
 | :---- | :----------: | ------------: |
