@@ -7,9 +7,9 @@ from geopy.distance import geodesic
 import pyproj
 import getopt
 import sys
+import argparse
 
-
-polygon_width_meters = 100
+POLYGON_WIDTH_METERS = 100
 
 # Severity hierarchy for vehicle_impacts
 VEHICLE_IMPACT_SEVERITIES = {
@@ -20,25 +20,9 @@ VEHICLE_IMPACT_SEVERITIES = {
     "all-lanes-closed": 4,
 }
 
-help_string = """
-
-Usage: python **script_name** [arguments]
-
-Global options:
--h, --help                  Print this usage information.
--i, --icone                 specify the WZDx icone file to compare/combine
--c, --cotrip                specify the WZDx cotrip file to compare/combine
--o, --output                specify the output file for generated wzdx geojson message """
-
 
 def main():
-    icone_file, cotrip_file, outputfile = parse_arguments(
-        sys.argv[1:], default_output_file_name='combined_wzdx_message.geojson')
-
-    if not icone_file or not cotrip_file:
-        print('please specify an input json file with -i and -c')
-        print(help_string)
-        return
+    icone_file, cotrip_file, outputfile = parse_combined_arguments()
 
     try:
         wzdx_icone = json.loads(open(
@@ -58,6 +42,24 @@ def main():
         print(f'Combined WZDx message was written to {outputfile}.')
     else:
         print('No duplicate WZDx messages were found. Output file was not created')
+
+
+# parse combination script command line arguments
+def parse_combined_arguments() -> tuple:
+    """Parse command line arguments for combination script
+
+    Returns: 
+        Tuple of (iCone file path, cotrip file path, output file path)
+    """
+    parser = argparse.ArgumentParser(
+        description='Detect and combine duplicate iCone and COTrip WZDx work zone messages')
+    parser.add_argument('cotripFilePath', help='cotrip file path')
+    parser.add_argument('iconeFilePath', help='icone file path')
+    parser.add_argument('--out', required=False,
+                        default='combined_wzdx_message.geojson', help='WZDx output file path')
+
+    args = parser.parse_args()
+    return args.cotripFilePath, args.iconeFilePath, args.outputFilePath
 
 
 def find_duplicate_features_and_combine(wzdx_source: dict, wzdx_destination: dict) -> dict:
@@ -80,7 +82,7 @@ def find_duplicate_features_and_combine(wzdx_source: dict, wzdx_destination: dic
 
         # Generate polygon from destination feature
         polygon = generate_buffer_polygon_from_linestring(
-            destination_feature['geometry']['coordinates'], polygon_width_meters)
+            destination_feature['geometry']['coordinates'], POLYGON_WIDTH_METERS)
 
         # Get list of duplicate source features
         iconeIndexes = iterate_feature(polygon, wzdx_source)

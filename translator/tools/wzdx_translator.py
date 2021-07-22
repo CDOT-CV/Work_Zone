@@ -1,9 +1,6 @@
 import xmltodict
 import uuid
-import sys
-import getopt
-from jsonschema import validate
-from jsonschema import ValidationError
+import jsonschema
 import logging
 from collections import OrderedDict
 import re
@@ -54,8 +51,8 @@ def validate_wzdx(wzdx_obj, wzdx_schema):
     if not wzdx_schema or not wzdx_obj:
         return False
     try:
-        validate(instance=wzdx_obj, schema=wzdx_schema)
-    except ValidationError as e:
+        jsonschema.validate(instance=wzdx_obj, schema=wzdx_schema)
+    except jsonschema.ValidationError as e:
         logging.error(RuntimeError(str(e)))
         return False
     return True
@@ -84,39 +81,8 @@ def initialize_info(feed_info_id):
     return info
 
 
-help_string = """ 
-
-Usage: python **script_name** [arguments]
-
-Global options:
--h, --help                  Print this usage information.
--i, --input                 specify the file to translate
--o, --output                specify the output file for generated wzdx geojson message """
-
-
-def parse_arguments(argv, default_output_file_name='wzdx_translated_output_message.geojson'):
-    inputfile = ''
-    outputfile = default_output_file_name
-
-    try:
-        opts, _ = getopt.getopt(argv, "hi:o:", ["input=", "output="])
-    except getopt.GetoptError:
-        sys.exit(2)
-    for opt, arg in opts:
-        if opt in ("-h", "--help"):
-            print(help_string)
-            sys.exit()
-        elif opt in ("-i", "--input"):
-            inputfile = arg
-        elif opt in ("-o", "--output"):
-            outputfile = arg
-
-    return inputfile, outputfile
-
 # Add ids to message
 # This function may fail if some optional fields are not present (lanes, types_of_work, relationship, ...)
-
-
 def add_ids(message):
     if not message or type(message) != dict:
         return None

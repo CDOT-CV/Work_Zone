@@ -1,5 +1,5 @@
 from os import path
-from translator.source_code import combine_wzdx
+from translator import combine_wzdx
 from shapely.geometry.polygon import Polygon
 from shapely.geometry import Point
 from unittest.mock import MagicMock, patch
@@ -410,52 +410,3 @@ def test_isPointInPolygon_no_polygon():
     actual = combine_wzdx.isPointInPolygon(test_point, test_polygon)
 
     assert actual == None
-
-# --------------------------------------------------------------------------------Unit test for parse_arguments function--------------------------------------------------------------------------------
-
-
-def test_parse_arguments():
-    test_input = '-i icone.xml -c cotrip.xml'
-    test_argv = test_input.split(' ')
-    test_icone, test_cotrip, test_output = combine_wzdx.parse_arguments(
-        test_argv)
-    assert test_icone == test_argv[1] and test_cotrip == test_argv[3] and test_output == 'combined_wzdx_message.geojson'
-
-
-def test_parse_arguments_no_arguments():
-    test_input = ''
-    test_argv = test_input.split(' ')
-    test_icone, test_cotrip, test_output = combine_wzdx.parse_arguments(
-        test_argv)
-    assert test_icone == None and test_cotrip == None and test_output == 'combined_wzdx_message.geojson'
-
-
-def test_parse_arguments_invalid_arguments():
-    test_input = 'inputfile.xml outputfile.geojson'
-    test_argv = test_input.split(' ')
-    test_icone, test_cotrip, test_output = combine_wzdx.parse_arguments(
-        test_argv)
-    assert test_output == 'combined_wzdx_message.geojson' and test_icone == None and test_cotrip == None
-
-
-def test_parse_arguments_help():
-    test_input = '-h'
-    test_argv = test_input.split(' ')
-    with pytest.raises(SystemExit):
-        combine_wzdx.parse_arguments(test_argv)
-
-
-def test_parse_arguments_alternate_order():
-    test_input = '-c icone.xml -i cotrip.xml'
-    test_argv = test_input.split(' ')
-    test_icone, test_cotrip, test_output = combine_wzdx.parse_arguments(
-        test_argv)
-    assert test_icone == test_argv[3] and test_cotrip == test_argv[1] and test_output == 'combined_wzdx_message.geojson'
-
-
-def test_parse_arguments_output():
-    test_input = '-i icone.xml -c cotrip.xml -o combined.geojson'
-    test_argv = test_input.split(' ')
-    test_icone, test_cotrip, test_output = combine_wzdx.parse_arguments(
-        test_argv)
-    assert test_icone == test_argv[1] and test_cotrip == test_argv[3] and test_output == 'combined.geojson'

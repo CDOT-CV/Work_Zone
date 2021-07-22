@@ -1,27 +1,26 @@
 
 import json
 from datetime import datetime
-import sys
 import logging
 from collections import OrderedDict
-from translator.source_code import translator_shared_library
+from translator import tools
+import argparse
 
 
-# Translator
+DEFAULT_ICONE_FEED_INFO_ID = '104d7746-688c-44ed-b195-2ee948bf9dfa'
+
+
 def main():
-    inputfile, outputfile = translator_shared_library.parse_arguments(
-        sys.argv[1:], default_output_file_name='icone_wzdx_translated_output_message.geojson')
-
+    inputfile, outputfile = parse_icone_arguments()
     if inputfile:
         # Added encoding argument because of weird character at start of incidents.xml file
 
-        icone_obj = translator_shared_library.parse_xml(inputfile)
-        wzdx = wzdx_creator(icone_obj, translator_shared_library.initialize_info(
-            '104d7746-688c-44ed-b195-2ee948bf9dfa'))
+        icone_obj = tools.wzdx_translator.parse_xml(inputfile)
+        wzdx = wzdx_creator(icone_obj)
         location_schema = 'translator/sample files/validation_schema/wzdx_v3.1_feed.json'
         wzdx_schema = json.loads(open(location_schema).read())
 
-        if not translator_shared_library.validate_wzdx(wzdx, wzdx_schema):
+        if not tools.wzdx_translator.validate_wzdx(wzdx, wzdx_schema):
             print('validation error more message are printed above. output file is not created because the message failed validation.')
             return
         with open(outputfile, 'w') as fwzdx:
@@ -30,7 +29,19 @@ def main():
                 'huraaah ! your wzdx message is successfully generated and located here: ' + str(outputfile))
     else:
         print('please specify an input json file with -i')
-        print(translator_shared_library.help_string)
+        print(tools.wzdx_translator.help_string)
+
+
+# parse cotrip script command line arguments
+def parse_icone_arguments():
+    parser = argparse.ArgumentParser(
+        description='Translate iCone data to WZDx')
+    parser.add_argument('iconeFilePath', help='icone file path')
+    parser.add_argument('--outputFilePath', required=False,
+                        default='icone_wzdx_translated_output_message.geojson', help='output file path')
+
+    args = parser.parse_args()
+    return args.iconeFilePath, args.outputFilePath
 
 
 def wzdx_creator(messages, info=None, unsupported_message_callback=None):
@@ -38,12 +49,12 @@ def wzdx_creator(messages, info=None, unsupported_message_callback=None):
         return None
    # verify info obj
     if not info:
-        info = translator_shared_library.initialize_info(
-            '104d7746-688c-44ed-b195-2ee948bf9dfa')
-    if not translator_shared_library.validate_info(info):
+        info = tools.wzdx_translator.initialize_info(
+            DEFAULT_ICONE_FEED_INFO_ID)
+    if not tools.wzdx_translator.validate_info(info):
         return None
 
-    wzd = translator_shared_library.initialize_wzdx_object(info)
+    wzd = tools.wzdx_translator.initialize_wzdx_object(info)
 
     for incident in messages.get('incidents').get('incident'):
         # Parse Incident to WZDx Feature
@@ -53,7 +64,7 @@ def wzdx_creator(messages, info=None, unsupported_message_callback=None):
             wzd.get('features').append(feature)
     if not wzd.get('features'):
         return None
-    wzd = translator_shared_library.add_ids(wzd)
+    wzd = tools.wzdx_translator.add_ids(wzd)
     return wzd
 
 

@@ -1,4 +1,4 @@
-from translator.source_code import icone_translator
+from translator import icone_translator
 import xmltodict
 from unittest.mock import MagicMock, patch, Mock
 import os

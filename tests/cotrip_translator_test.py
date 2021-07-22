@@ -1,4 +1,4 @@
-from translator.source_code import cotrip_translator
+from translator import cotrip_translator
 from datetime import datetime
 from unittest.mock import MagicMock, patch, Mock
 import time_machine
@@ -602,29 +602,6 @@ def test_validate_alert_invalid():
 def test_validate_alert_no_data():
     test_valid_output = None
     assert cotrip_translator.validate_alert(test_valid_output) == False
-
-# --------------------------------------------------------------------------------unit test for reformat_datetime function--------------------------------------------------------------------------------
-
-
-def test_reformat_datetime_valid_timeformat():
-    test_time = 1609398000
-    actual_time = cotrip_translator.reformat_datetime(test_time)
-    expected_time = "2020-12-31T07:00:00Z"
-    assert actual_time == expected_time
-
-
-def test_reformat_datetime_null_time():
-    test_time = None
-    actual_time = cotrip_translator.reformat_datetime(test_time)
-    expected_time = ''
-    assert actual_time == expected_time
-
-
-def test_reformat_datetime_invalid_time():
-    test_time = "16093s98000z"
-    actual_time = cotrip_translator.reformat_datetime(test_time)
-    expected_time = ''
-    assert actual_time == expected_time
 
 # --------------------------------------------------------------------------------unit test for get_types_of_work function--------------------------------------------------------------------------------
 

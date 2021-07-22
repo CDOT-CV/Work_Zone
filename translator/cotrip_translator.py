@@ -1,52 +1,60 @@
 import json
-from datetime import datetime, timezone, timedelta
-import sys
+from datetime import datetime, timedelta
 import logging
 from collections import OrderedDict
 import re
-from translator.source_code import translator_shared_library
+from translator import tools
 import copy
+import argparse
 
-# Translator
+
+DEFAULT_COTRIP_FEED_INFO_ID = '8d062f70-d53e-4029-b94e-b7fbcbde5885'
 
 
 def main():
+    inputFile, outputFile = parse_cotrip_arguments()
 
-    inputfile, outputfile = translator_shared_library.parse_arguments(
-        sys.argv[1:], default_output_file_name='cotrip_wzdx_translated_output_message.geojson')
-    if inputfile:
-        try:
-            cotrip_obj = json.loads(open(inputfile).read())
-        except ValueError as e:
-            raise ValueError(
-                'Invalid file type. Please specify a valid Json file!') from None
-        wzdx_obj = wzdx_creator(cotrip_obj)
-        location_schema = 'translator/sample files/validation_schema/wzdx_v3.1_feed.json'
-        wzdx_schema = json.loads(open(location_schema).read())
+    try:
+        cotrip_obj = json.loads(open(inputFile).read())
+    except ValueError as e:
+        raise ValueError(
+            'Invalid file type. Please specify a valid Json file!') from None
+    wzdx_obj = wzdx_creator(cotrip_obj)
+    location_schema = 'translator/sample files/validation_schema/wzdx_v3.1_feed.json'
+    wzdx_schema = json.loads(open(location_schema).read())
 
-        if not translator_shared_library.validate_wzdx(wzdx_obj, wzdx_schema):
-            print('validation error more message are printed above. output file is not created because the message failed validation.')
-            return
-        with open(outputfile, 'w') as fwzdx:
-            fwzdx.write(json.dumps(wzdx_obj, indent=2))
-            print(
-                'huraaah ! your wzdx message is successfully generated and located here: ' + str(outputfile))
-    else:
-        print('please specify an input json file with -i')
-        print(translator_shared_library.help_string)
+    if not tools.wzdx_translator.validate_wzdx(wzdx_obj, wzdx_schema):
+        print('validation error more message are printed above. output file is not created because the message failed validation.')
+        return
+    with open(outputFile, 'w') as fwzdx:
+        fwzdx.write(json.dumps(wzdx_obj, indent=2))
+        print(
+            'huraaah ! your wzdx message is successfully generated and located here: ' + str(outputFile))
+
+
+# parse cotrip script command line arguments
+def parse_cotrip_arguments():
+    parser = argparse.ArgumentParser(
+        description='Translate COTrip data to WZDx')
+    parser.add_argument('cotripFilePath', help='cotrip file path')
+    parser.add_argument('--out', required=False,
+                        default='cotrip_wzdx_translated_output_message.geojson', help='WZDx output file path')
+
+    args = parser.parse_args()
+    return args.cotripFilePath, args.outputFilePath
 
 
 def wzdx_creator(message, info=None, unsupported_message_callback=None):
     if not message:
         return None
-   # verify info obj
+
     if not info:
-        info = translator_shared_library.initialize_info(
-            '8d062f70-d53e-4029-b94e-b7fbcbde5885')
-    if not translator_shared_library.validate_info(info):
+        info = tools.wzdx_translator.initialize_info(
+            DEFAULT_COTRIP_FEED_INFO_ID)
+    if not tools.wzdx_translator.validate_info(info):
         return None
 
-    wzd = translator_shared_library.initialize_wzdx_object(info)
+    wzd = tools.wzdx_translator.initialize_wzdx_object(info)
 
     # Parse alert to WZDx Feature
     feature = parse_alert(
@@ -55,7 +63,7 @@ def wzdx_creator(message, info=None, unsupported_message_callback=None):
         wzd.get('features').append(feature)
     if not wzd.get('features'):
         return None
-    wzd = translator_shared_library.add_ids(wzd)
+    wzd = tools.wzdx_translator.add_ids(wzd)
     return wzd
 
 
@@ -74,9 +82,8 @@ def parse_polyline(poly):
             coordinates.append([float(coords[0]), float(coords[1])])
     return coordinates
 
+
 # function to get event status
-
-
 def get_event_status(start_time_string, end_time_string):
 
     start_time = datetime.fromtimestamp(start_time_string)
@@ -114,11 +121,11 @@ def parse_alert(alert, callback_function=None):
     properties['event_type'] = 'work-zone'
 
     # start_date
-    properties['start_date'] = reformat_datetime(
+    properties['start_date'] = tools.date.reformat_datetime(
         event.get('header').get('start_timestamp'))
 
     # end_date
-    properties['end_date'] = reformat_datetime(
+    properties['end_date'] = tools.date.reformat_datetime(
         event.get('header').get('end_timestamp'))
 
     # start_date_accuracy
@@ -175,11 +182,12 @@ def parse_alert(alert, callback_function=None):
     properties['description'] = event.get('header').get('description')
 
     # creation_date
-    properties['creation_date'] = reformat_datetime(
+    properties['creation_date'] = tools.date.reformat_datetime(
         event.get('source').get('collection_timestamp'))
 
     # update_date
-    properties['update_date'] = reformat_datetime(alert.get('rtdh_timestamp'))
+    properties['update_date'] = tools.date.reformat_datetime(
+        alert.get('rtdh_timestamp'))
 
     filtered_properties = copy.deepcopy(properties)
 
@@ -194,9 +202,8 @@ def parse_alert(alert, callback_function=None):
 
     return feature
 
+
 # function to validate the alert
-
-
 def validate_alert(alert):
 
     if not alert or (type(alert) != dict and type(alert) != OrderedDict):
@@ -228,20 +235,6 @@ def validate_alert(alert):
             return False
 
     return True
-
-
-def reformat_datetime(datetime_string):
-    if not datetime_string:
-        return ''
-    elif type(datetime_string) == str:
-        if re.match('^-?([0-9]*[.])?[0-9]+$', datetime_string):
-            datetime_string = float(datetime_string)
-        else:
-            return ''
-    time = datetime.fromtimestamp(datetime_string)
-    wzdx_format_datetime = time.astimezone(
-        timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-    return wzdx_format_datetime
 
 
 def get_types_of_work(sub_type):
