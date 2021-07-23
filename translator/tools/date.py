@@ -1,5 +1,5 @@
-from datetime import datetime, timezone
 import re
+from datetime import datetime, timezone
 
 
 # convert UNIX timestamp to ISO timestamp

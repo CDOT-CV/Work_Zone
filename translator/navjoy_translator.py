@@ -1,16 +1,20 @@
-import json
-from datetime import datetime, timezone, timedelta
-import sys
-import logging
-from collections import OrderedDict
-import re
+import argparse
 import copy
+import json
+import logging
+import re
+import sys
+from collections import OrderedDict
+from datetime import datetime, timedelta, timezone
+
 from translator import tools
+
+PROGRAM_NAME = 'NavJoyTranslator'
+PROGRAM_VERSION = '1.0'
 
 
 def main():
-    inputfile, outputfile = tools.wzdx_translator.parse_arguments(
-        sys.argv[1:], default_output_file_name='navjoy_wzdx_translated_output_message.geojson')
+    inputfile, outputfile = parse_navjoy_arguments()
     if inputfile:
         try:
             navjoy_obj = json.loads(open(inputfile).read())
@@ -31,6 +35,20 @@ def main():
     else:
         print('please specify an input json file with -i')
         print(tools.wzdx_translator.help_string)
+
+
+# parse script command line arguments
+def parse_navjoy_arguments():
+    parser = argparse.ArgumentParser(
+        description='Translate iCone data to WZDx')
+    parser.add_argument('--version', action='version',
+                        version=f'{PROGRAM_NAME} {PROGRAM_VERSION}')
+    parser.add_argument('navjoyFile', help='navjoy file path')
+    parser.add_argument('--outputFile', required=False,
+                        default='navjoy_wzdx_translated_output_message.geojson', help='output file path')
+
+    args = parser.parse_args()
+    return args.iconeFile, args.outputFile
 
 
 def wzdx_creator(message, info=None, unsupported_message_callback=None):

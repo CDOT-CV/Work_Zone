@@ -1,10 +1,14 @@
 
+import argparse
 import json
-from datetime import datetime
 import logging
 from collections import OrderedDict
+from datetime import datetime
+
 from translator import tools
-import argparse
+
+PROGRAM_NAME = 'IconeTranslator'
+PROGRAM_VERSION = '1.0'
 
 
 DEFAULT_ICONE_FEED_INFO_ID = '104d7746-688c-44ed-b195-2ee948bf9dfa'
@@ -32,16 +36,18 @@ def main():
         print(tools.wzdx_translator.help_string)
 
 
-# parse cotrip script command line arguments
+# parse script command line arguments
 def parse_icone_arguments():
     parser = argparse.ArgumentParser(
         description='Translate iCone data to WZDx')
-    parser.add_argument('iconeFilePath', help='icone file path')
-    parser.add_argument('--outputFilePath', required=False,
+    parser.add_argument('--version', action='version',
+                        version=f'{PROGRAM_NAME} {PROGRAM_VERSION}')
+    parser.add_argument('iconeFile', help='icone file path')
+    parser.add_argument('--outputFile', required=False,
                         default='icone_wzdx_translated_output_message.geojson', help='output file path')
 
     args = parser.parse_args()
-    return args.iconeFilePath, args.outputFilePath
+    return args.iconeFile, args.outputFile
 
 
 def wzdx_creator(messages, info=None, unsupported_message_callback=None):

@@ -1,14 +1,15 @@
-import xmltodict
-import uuid
-import jsonschema
 import logging
-from collections import OrderedDict
-import re
 import os
-from datetime import datetime
 import os.path
 import random
+import re
 import string
+import uuid
+from collections import OrderedDict
+from datetime import datetime
+
+import jsonschema
+import xmltodict
 
 
 def validate_info(info):

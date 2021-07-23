@@ -1,13 +1,17 @@
-import json
-import copy
-from shapely.geometry.polygon import Polygon
-from shapely.geometry import Point
-import geopy
-from geopy.distance import geodesic
-import pyproj
-import getopt
-import sys
 import argparse
+import copy
+import getopt
+import json
+import sys
+
+import geopy
+import pyproj
+from geopy.distance import geodesic
+from shapely.geometry import Point
+from shapely.geometry.polygon import Polygon
+
+PROGRAM_NAME = 'WZDxCombiner'
+PROGRAM_VERSION = '1.0'
 
 POLYGON_WIDTH_METERS = 100
 
@@ -53,13 +57,15 @@ def parse_combined_arguments() -> tuple:
     """
     parser = argparse.ArgumentParser(
         description='Detect and combine duplicate iCone and COTrip WZDx work zone messages')
-    parser.add_argument('cotripFilePath', help='cotrip file path')
-    parser.add_argument('iconeFilePath', help='icone file path')
-    parser.add_argument('--out', required=False,
+    parser.add_argument('--version', action='version',
+                        version=f'{PROGRAM_NAME} {PROGRAM_VERSION}')
+    parser.add_argument('iconeFile', help='icone file path')
+    parser.add_argument('cotripFile', help='cotrip file path')
+    parser.add_argument('--outputFile', required=False,
                         default='combined_wzdx_message.geojson', help='WZDx output file path')
 
     args = parser.parse_args()
-    return args.cotripFilePath, args.iconeFilePath, args.outputFilePath
+    return args.iconeFile, args.cotripFile, args.outputFile
 
 
 def find_duplicate_features_and_combine(wzdx_source: dict, wzdx_destination: dict) -> dict:

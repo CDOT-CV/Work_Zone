@@ -1,12 +1,16 @@
-import json
-from datetime import datetime, timedelta
-import logging
-from collections import OrderedDict
-import re
-from translator import tools
-import copy
 import argparse
+import copy
+import json
+import logging
+import re
+from collections import OrderedDict
+from datetime import datetime, timedelta
 
+from translator import tools
+
+
+PROGRAM_NAME = 'CotripTranslator'
+PROGRAM_VERSION = '1.0'
 
 DEFAULT_COTRIP_FEED_INFO_ID = '8d062f70-d53e-4029-b94e-b7fbcbde5885'
 
@@ -36,12 +40,14 @@ def main():
 def parse_cotrip_arguments():
     parser = argparse.ArgumentParser(
         description='Translate COTrip data to WZDx')
-    parser.add_argument('cotripFilePath', help='cotrip file path')
-    parser.add_argument('--out', required=False,
+    parser.add_argument('--version', action='version',
+                        version=f'{PROGRAM_NAME} {PROGRAM_VERSION}')
+    parser.add_argument('cotripFile', help='cotrip file path')
+    parser.add_argument('--outputFile', required=False,
                         default='cotrip_wzdx_translated_output_message.geojson', help='WZDx output file path')
 
     args = parser.parse_args()
-    return args.cotripFilePath, args.outputFilePath
+    return args.cotripFile, args.o
 
 
 def wzdx_creator(message, info=None, unsupported_message_callback=None):

@@ -1,10 +1,11 @@
-from shapely.geometry.polygon import Polygon
-from shapely.geometry import Point
-import geopy
-from geopy.distance import geodesic
-import pyproj
 import getopt
 import sys
+
+import geopy
+import pyproj
+from geopy.distance import geodesic
+from shapely.geometry import Point
+from shapely.geometry.polygon import Polygon
 
 
 def generate_buffer_polygon_from_linestring(geometry: list, polygon_width_in_meters: float):
