@@ -12,6 +12,38 @@ import jsonschema
 import xmltodict
 
 
+def initialize_feature_properties():
+    properties = {}
+    properties['road_event_id'] = None
+    properties['event_type'] = None
+    properties['data_source_id'] = None
+    properties['start_date'] = None
+    properties['end_date'] = None
+    properties['start_date_accuracy'] = None
+    properties['end_date_accuracy'] = None
+    properties['beginning_accuracy'] = None
+    properties['ending_accuracy'] = None
+    properties['road_name'] = None
+    properties['direction'] = None
+    properties['vehicle_impact'] = None
+    properties['relationship'] = None
+    properties['lanes'] = None
+    properties['beginning_cross_street'] = None
+    properties['ending_cross_street'] = None
+    properties['beginning_mile_post'] = None
+    properties['ending_mile_post'] = None
+    properties['event_status'] = None
+    properties['types_of_work'] = None
+    properties['workers_present'] = None
+    properties['reduced_speed_limit'] = None
+    properties['restrictions'] = None
+    properties['description'] = None
+    properties['creation_date'] = None
+    properties['update_date'] = None
+
+    return properties
+
+
 def validate_info(info):
 
     if ((not info) or (type(info) != dict and type(info) != OrderedDict)):

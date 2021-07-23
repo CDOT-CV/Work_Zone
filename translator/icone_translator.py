@@ -5,7 +5,7 @@ import logging
 from collections import OrderedDict
 from datetime import datetime
 
-from translator import tools
+from translator.tools import wzdx_translator
 
 PROGRAM_NAME = 'IconeTranslator'
 PROGRAM_VERSION = '1.0'
@@ -16,24 +16,20 @@ DEFAULT_ICONE_FEED_INFO_ID = '104d7746-688c-44ed-b195-2ee948bf9dfa'
 
 def main():
     inputfile, outputfile = parse_icone_arguments()
-    if inputfile:
-        # Added encoding argument because of weird character at start of incidents.xml file
+    # Added encoding argument because of weird character at start of incidents.xml file
 
-        icone_obj = tools.wzdx_translator.parse_xml(inputfile)
-        wzdx = wzdx_creator(icone_obj)
-        location_schema = 'translator/sample files/validation_schema/wzdx_v3.1_feed.json'
-        wzdx_schema = json.loads(open(location_schema).read())
+    icone_obj = wzdx_translator.parse_xml(inputfile)
+    wzdx = wzdx_creator(icone_obj)
+    location_schema = 'translator/sample files/validation_schema/wzdx_v3.1_feed.json'
+    wzdx_schema = json.loads(open(location_schema).read())
 
-        if not tools.wzdx_translator.validate_wzdx(wzdx, wzdx_schema):
-            print('validation error more message are printed above. output file is not created because the message failed validation.')
-            return
-        with open(outputfile, 'w') as fwzdx:
-            fwzdx.write(json.dumps(wzdx, indent=2))
-            print(
-                'huraaah ! your wzdx message is successfully generated and located here: ' + str(outputfile))
-    else:
-        print('please specify an input json file with -i')
-        print(tools.wzdx_translator.help_string)
+    if not wzdx_translator.validate_wzdx(wzdx, wzdx_schema):
+        print('validation error more message are printed above. output file is not created because the message failed validation.')
+        return
+    with open(outputfile, 'w') as fwzdx:
+        fwzdx.write(json.dumps(wzdx, indent=2))
+        print(
+            'huraaah ! your wzdx message is successfully generated and located here: ' + str(outputfile))
 
 
 # parse script command line arguments
@@ -55,12 +51,12 @@ def wzdx_creator(messages, info=None, unsupported_message_callback=None):
         return None
    # verify info obj
     if not info:
-        info = tools.wzdx_translator.initialize_info(
+        info = wzdx_translator.initialize_info(
             DEFAULT_ICONE_FEED_INFO_ID)
-    if not tools.wzdx_translator.validate_info(info):
+    if not wzdx_translator.validate_info(info):
         return None
 
-    wzd = tools.wzdx_translator.initialize_wzdx_object(info)
+    wzd = wzdx_translator.initialize_wzdx_object(info)
 
     for incident in messages.get('incidents').get('incident'):
         # Parse Incident to WZDx Feature
@@ -70,7 +66,7 @@ def wzdx_creator(messages, info=None, unsupported_message_callback=None):
             wzd.get('features').append(feature)
     if not wzd.get('features'):
         return None
-    wzd = tools.wzdx_translator.add_ids(wzd)
+    wzd = wzdx_translator.add_ids(wzd)
     return wzd
 
 

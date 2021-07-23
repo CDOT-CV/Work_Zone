@@ -2,6 +2,10 @@ import math
 
 import numpy as np
 import pyproj
+import logging
+
+
+CORNER_PRECISION_DEGREES = 10
 
 
 def angle_between_vectors_degrees(u, v):
@@ -11,125 +15,82 @@ def angle_between_vectors_degrees(u, v):
         math.acos(np.dot(u, v) / (np.linalg.norm(u) * np.linalg.norm(v))))
 
 
+def average_coordinates(coord1: list, coord2: list) -> list:
+    if len(coord1) != 2 or len(coord2) != 2:
+        return None
+    return [(coord1[0]+coord2[0])/2, (coord1[1]+coord2[1])/2]
+
+
+def average_polygon_to_centerline(polygon):
+    """Take in correctly ordered polygon and average all points to get 
+    centerline"""
+    centerline = []
+    for i in range(0, len(polygon), 2):
+        centerline.append(average_coordinates(polygon[i], polygon[i+1]))
+    return centerline
+
+
+def average_symmetric_polygon_to_centerline(polygon):
+    """Take in correctly ordered polygon and average all points to get 
+    centerline"""
+    centerline = []
+    for i in range(0, len(polygon), 2):
+        centerline.append(average_coordinates(polygon[i], polygon[i+1]))
+    return centerline
+
+
 def rotate(l, n):
     return l[-n:] + l[:-n]
 
 
-coordinates = [
-    [
-        -105.15708984752104,
-        39.62598162507104
-    ],
-    [
-        -105.15091003795072,
-        39.617386938794475
-    ],
-    [
-        -105.1553732337515,
-        39.60654288891114
-    ],
-    [
-        -105.15181628653889,
-        39.60601386741819
-    ],
-    [
-        -105.1470097679842,
-        39.61791587338656
-    ],
-    [
-        -105.15370456168537,
-        39.62796486262866
-    ],
-    [
-        -105.15708984752104,
-        39.62598162507104
-    ]
-]
-print(coordinates)
+def polygon_to_polyline(coordinates):
+    corners = []
+    geodesic = pyproj.Geod(ellps='WGS84')
+    coordinates_padded = coordinates[:-1] + coordinates[0:3]
+    for i in range(len(coordinates_padded) - 3):
+        i0 = i
+        i1 = i + 1
+        i2 = i + 2
+        i3 = i + 3
 
-coordinates = rotate(coordinates[:-1], 2)
-coordinates.append(coordinates[0])
-print(coordinates)
+        bearing_1, _, distance_1 = geodesic.inv(
+            coordinates_padded[i0][0], coordinates_padded[i0][1], coordinates_padded[i1][0], coordinates_padded[i1][1])
+        bearing_2, _, distance_2 = geodesic.inv(
+            coordinates_padded[i1][0], coordinates_padded[i1][1], coordinates_padded[i2][0], coordinates_padded[i2][1])
+        bearing_3, _, distance_3 = geodesic.inv(
+            coordinates_padded[i2][0], coordinates_padded[i2][1], coordinates_padded[i3][0], coordinates_padded[i3][1])
 
-# angles = []
-# geodesic = pyproj.Geod(ellps='WGS84')
-# for i in range(len(coordinates) - 1):
-#     i0 = i - 1
-#     i1 = i
-#     i2 = i + 1
+        angle_1 = bearing_1 - bearing_2
+        angle_2 = bearing_2 - bearing_3
 
-#     if i == 0:
-#         i0 = len(coordinates) - 2
-#     elif i == len(coordinates) - 2:
-#         i2 = 0
+        net_angle = abs(angle_1 + angle_2)
+        if abs(net_angle - 180) < CORNER_PRECISION_DEGREES:
+            corners.append([i1, i2, net_angle, distance_2])
 
-#     print(i0, i1, i2)
-#     bearing_1, reverse_azimuth, distance = geodesic.inv(
-#         coordinates[i1][0], coordinates[i1][1], coordinates[i0][0], coordinates[i0][1])
-#     bearing_2, _, __ = geodesic.inv(
-#         coordinates[i1][0], coordinates[i1][1], coordinates[i2][0], coordinates[i2][1])
+    # If 4 corners, assume the polygon is a rectangle. Select shortest 2 sides as ends
+    if len(corners) == 4:
+        # lowest to highest
+        corners = sorted(corners, key=lambda corner: corner[3])
+        corners = corners[:2]
 
-#     angle = abs(bearing_1 - bearing_2)
-#     if (angle > 180):
-#         angle -= 180
-#     # if (angle < -180):
-#     #     angle += 180
-#     angles.append(angle)
-# print(angles)
+    # If not 4 or 2 corners, return None because this polygon cannot be parsed
+    elif len(corners) != 2:
+        print("Unable to find exactly 2 180 degree corners")
+        return None
 
-corners = []
-geodesic = pyproj.Geod(ellps='WGS84')
-coordinates_padded = coordinates + coordinates[-3:]
-print(len(coordinates_padded))
-for i in range(len(coordinates_padded) - 4):
-    i0 = i
-    i1 = i + 1
-    i2 = i + 2
-    i3 = i + 3
+    # Check that corners are on opposite sides. If not, generate simple centerline
+    lengthCoords = len(coordinates) - 1
+    # will return False if corners are not opposite or if polygon has odd number of edges
+    if abs(corners[0][0] - corners[1][0]) != lengthCoords/2:
+        logging.debug(
+            "Corners found are not opposite within the polygon. Generating limited centerline")
+        # average coner coordinates to get start and end points
+        return [average_coordinates(coordinates[corners[0][0]], coordinates[corners[0][1]]),
+                average_coordinates(coordinates[corners[1][0]], coordinates[corners[1][1]])]
 
-    print(i0, i1, i2, i3)
-    bearing_1, _, __ = geodesic.inv(
-        coordinates_padded[i0][0], coordinates_padded[i0][1], coordinates_padded[i1][0], coordinates_padded[i1][1])
-    bearing_2, _, __ = geodesic.inv(
-        coordinates_padded[i1][0], coordinates_padded[i1][1], coordinates_padded[i2][0], coordinates_padded[i2][1])
-    bearing_3, _, __ = geodesic.inv(
-        coordinates_padded[i2][0], coordinates_padded[i2][1], coordinates_padded[i3][0], coordinates_padded[i3][1])
-    if bearing_1 < 0:
-        bearing_1 += 360
-    if bearing_2 < 0:
-        bearing_2 += 360
-    if bearing_3 < 0:
-        bearing_3 += 360
-    print(bearing_1, bearing_2, bearing_3)
-
-    angle_1 = bearing_1 - bearing_2
-    angle_2 = bearing_2 - bearing_3
-    print(angle_1, angle_2)
-
-    net_angle = angle_1 + angle_2
-    print(net_angle)
-    if abs(net_angle - 180) < 50:
-        corners.append([i1, i2, net_angle])
-print(corners)
-
-
-# for i in range(len(angles)):
-#     i0 = i - 1
-#     i1 = i
-#     if i == 0:
-#         i0 = len(angles) - 1
-
-#     print(i0, i1)
-#     print(angles[i0] + angles[i1])
-
-
-# small_angles = []
-# for i, angle in enumerate(angles):
-#     if angle < 115:
-#         small_angles.append([i, angle])
-
-# if len(small_angles) != 4:
-#     raise RuntimeError("Cannot convert polygon")
-
-
-# for i, index in enumerate(small_angles):
+    # found polygon corners, now rotate polygon and average to centerline
+    # ignore last point which is duplicate for first
+    rotated_coordinates = coordinates[:-1]
+    rotated_coordinates = rotate(rotated_coordinates, corners[0][0])
+    print(rotated_coordinates)
+    return average_symmetric_polygon_to_centerline(rotated_coordinates)
