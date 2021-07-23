@@ -11,3 +11,4 @@ cotrip_wzdx_translated_output_message.geojson
 .vscode/settings.json
 *.pyc
 *.geojson
+test-output.xml
