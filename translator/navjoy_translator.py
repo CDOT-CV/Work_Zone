@@ -1,19 +1,20 @@
-import json
-from datetime import datetime, timezone, timedelta
-import sys
-import logging
-from collections import OrderedDict
-import re
-from translator.source_code import translator_shared_library
+import argparse
 import copy
+import json
+import logging
+import re
+import sys
+from collections import OrderedDict
+from datetime import datetime, timedelta, timezone
 
-# Translator
+from translator import tools
+
+PROGRAM_NAME = 'NavJoyTranslator'
+PROGRAM_VERSION = '1.0'
 
 
 def main():
-
-    inputfile, outputfile = translator_shared_library.parse_arguments(
-        sys.argv[1:], default_output_file_name='navjoy_wzdx_translated_output_message.geojson')
+    inputfile, outputfile = parse_navjoy_arguments()
     if inputfile:
         try:
             navjoy_obj = json.loads(open(inputfile).read())
@@ -24,7 +25,7 @@ def main():
         location_schema = 'translator/sample files/validation_schema/wzdx_v3.1_feed.json'
         wzdx_schema = json.loads(open(location_schema).read())
 
-        if not translator_shared_library.validate_wzdx(wzdx_obj, wzdx_schema):
+        if not tools.wzdx_translator.validate_wzdx(wzdx_obj, wzdx_schema):
             print('validation error more message are printed above. output file is not created because the message failed validation.')
             return
         with open(outputfile, 'w') as fwzdx:
@@ -33,7 +34,21 @@ def main():
                 'huraaah ! your wzdx message is successfully generated and located here: ' + str(outputfile))
     else:
         print('please specify an input json file with -i')
-        print(translator_shared_library.help_string)
+        print(tools.wzdx_translator.help_string)
+
+
+# parse script command line arguments
+def parse_navjoy_arguments():
+    parser = argparse.ArgumentParser(
+        description='Translate iCone data to WZDx')
+    parser.add_argument('--version', action='version',
+                        version=f'{PROGRAM_NAME} {PROGRAM_VERSION}')
+    parser.add_argument('navjoyFile', help='navjoy file path')
+    parser.add_argument('--outputFile', required=False,
+                        default='navjoy_wzdx_translated_output_message.geojson', help='output file path')
+
+    args = parser.parse_args()
+    return args.iconeFile, args.outputFile
 
 
 def wzdx_creator(message, info=None, unsupported_message_callback=None):
@@ -41,12 +56,12 @@ def wzdx_creator(message, info=None, unsupported_message_callback=None):
         return None
    # verify info obj
     if not info:
-        info = translator_shared_library.initialize_info(
+        info = tools.wzdx_translator.initialize_info(
             '8d062f70-d53e-4029-b94e-b7fbcbde5885')
-    if not translator_shared_library.validate_info(info):
+    if not tools.wzdx_translator.validate_info(info):
         return None
 
-    wzd = translator_shared_library.initialize_wzdx_object(info)
+    wzd = tools.wzdx_translator.initialize_wzdx_object(info)
 
     # Parse alert to WZDx Feature
     feature = parse_alert(
@@ -55,7 +70,7 @@ def wzdx_creator(message, info=None, unsupported_message_callback=None):
         wzd.get('features').append(feature)
     if not wzd.get('features'):
         return None
-    wzd = translator_shared_library.add_ids(wzd)
+    wzd = tools.wzdx_translator.add_ids(wzd)
     return wzd
 
 

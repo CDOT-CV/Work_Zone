@@ -1,4 +1,4 @@
-from translator.source_code import cotrip_translator
+from translator import cotrip_translator
 from datetime import datetime
 from unittest.mock import MagicMock, patch, Mock
 import time_machine
@@ -258,7 +258,7 @@ def test_get_event_status_pending():
 # --------------------------------------------------------------------------------Unit test for parse_incident function--------------------------------------------------------------------------------
 
 
-def test_parse_alert_from_street_success():
+def test_parse_alert_success():
     cotrip_obj = {
         "rtdh_timestamp": 1615866698.394646,
         "rtdh_message_id": "6a04ed6f-2f3d-4da6-b6ea-061242b800bb",
@@ -373,7 +373,7 @@ def test_parse_alert_from_street_success():
     assert test_feature == expected_feature
 
 
-def test_parse_alert_from_coordinates_success():
+def test_parse_alert_multiple_road_names():
     cotrip_obj = {
         "rtdh_timestamp": 1615866698.394646,
         "rtdh_message_id": "6a04ed6f-2f3d-4da6-b6ea-061242b800bb",
@@ -404,7 +404,7 @@ def test_parse_alert_from_coordinates_success():
                 "description": "Replacement of bridges N-17-BN and N-17-S at I-25 and Butte Creek, as well as ancillary highway and drainage work to accommodate the new bridge structures.  Each bridge crosses over Butte Creek, as well as the frontage road Huerfano County Road 103.  Area inlets that are currently present in the median between the north and south bound lanes of I-25 will also be upgraded to accommodate the bridge and roadway improvements.",
                 "work_updates": [],
                 "road_name": "I-25",
-                "road_number": "I-25",
+                "road_number": "I-24",
                 "direction": "North"
             },
             "additional_info": None
@@ -426,7 +426,7 @@ def test_parse_alert_from_coordinates_success():
             "end_date_accuracy": "estimated",
             "beginning_accuracy": "estimated",
             "ending_accuracy": "estimated",
-            "road_names": ["I-25"],
+            "road_names": ["I-25", "I-24"],
             "direction": "northbound",
             "vehicle_impact": "unknown",
 
@@ -602,29 +602,6 @@ def test_validate_alert_invalid():
 def test_validate_alert_no_data():
     test_valid_output = None
     assert cotrip_translator.validate_alert(test_valid_output) == False
-
-# --------------------------------------------------------------------------------unit test for reformat_datetime function--------------------------------------------------------------------------------
-
-
-def test_reformat_datetime_valid_timeformat():
-    test_time = 1609398000
-    actual_time = cotrip_translator.reformat_datetime(test_time)
-    expected_time = "2020-12-31T07:00:00Z"
-    assert actual_time == expected_time
-
-
-def test_reformat_datetime_null_time():
-    test_time = None
-    actual_time = cotrip_translator.reformat_datetime(test_time)
-    expected_time = ''
-    assert actual_time == expected_time
-
-
-def test_reformat_datetime_invalid_time():
-    test_time = "16093s98000z"
-    actual_time = cotrip_translator.reformat_datetime(test_time)
-    expected_time = ''
-    assert actual_time == expected_time
 
 # --------------------------------------------------------------------------------unit test for get_types_of_work function--------------------------------------------------------------------------------
 

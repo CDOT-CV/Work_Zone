@@ -1,47 +1,30 @@
 
+import argparse
 import json
-from datetime import datetime
-import sys
 import logging
 from collections import OrderedDict
-from translator.source_code import translator_shared_library
+from datetime import datetime
+
+from translator import tools
+
+PROGRAM_NAME = 'IconeTranslator'
+PROGRAM_VERSION = '1.0'
 
 
-# Features
-
-# [*] Add local-access-only restriction
-# [*] Add license property to the RoadEventFeedInfo object
+DEFAULT_ICONE_FEED_INFO_ID = '104d7746-688c-44ed-b195-2ee948bf9dfa'
 
 
-# Refactoring
-
-# [*] Refactor LaneType enumerated type to deprecate values that can be determined from other properties of the Lane object, such as order, status, and lane_restrictions
-# [*] Add value alternating-flow to LaneStatus enumerated type and deprecate alternating-one-way
-# [*] Add road_names property to the RoadEvent object and deprecate road_name and road_number
-# [*] Deprecate the total_num_lanes property on the RoadEvent object as the RoadEvent's lanes array can be used to determine the number of lanes
-
-
-# Fixes
-
-# [*]  Add optional bbox property to allow providing a GeoJSON Bounding Box for the WZDxFeed and RoadEventFeature objects
-# [*]  Add an id property to the RoadEventFeature object for providing the a road event's identifier to better follow GeoJSON ID recommendations
-
-
-# Translator
 def main():
-    inputfile, outputfile = translator_shared_library.parse_arguments(
-        sys.argv[1:], default_output_file_name='icone_wzdx_translated_output_message.geojson')
-
+    inputfile, outputfile = parse_icone_arguments()
     if inputfile:
         # Added encoding argument because of weird character at start of incidents.xml file
 
-        icone_obj = translator_shared_library.parse_xml(inputfile)
-        wzdx = wzdx_creator(icone_obj, translator_shared_library.initialize_info(
-            '104d7746-688c-44ed-b195-2ee948bf9dfa'))
+        icone_obj = tools.wzdx_translator.parse_xml(inputfile)
+        wzdx = wzdx_creator(icone_obj)
         location_schema = 'translator/sample files/validation_schema/wzdx_v3.1_feed.json'
         wzdx_schema = json.loads(open(location_schema).read())
 
-        if not translator_shared_library.validate_wzdx(wzdx, wzdx_schema):
+        if not tools.wzdx_translator.validate_wzdx(wzdx, wzdx_schema):
             print('validation error more message are printed above. output file is not created because the message failed validation.')
             return
         with open(outputfile, 'w') as fwzdx:
@@ -50,7 +33,21 @@ def main():
                 'huraaah ! your wzdx message is successfully generated and located here: ' + str(outputfile))
     else:
         print('please specify an input json file with -i')
-        print(translator_shared_library.help_string)
+        print(tools.wzdx_translator.help_string)
+
+
+# parse script command line arguments
+def parse_icone_arguments():
+    parser = argparse.ArgumentParser(
+        description='Translate iCone data to WZDx')
+    parser.add_argument('--version', action='version',
+                        version=f'{PROGRAM_NAME} {PROGRAM_VERSION}')
+    parser.add_argument('iconeFile', help='icone file path')
+    parser.add_argument('--outputFile', required=False,
+                        default='icone_wzdx_translated_output_message.geojson', help='output file path')
+
+    args = parser.parse_args()
+    return args.iconeFile, args.outputFile
 
 
 def wzdx_creator(messages, info=None, unsupported_message_callback=None):
@@ -58,12 +55,12 @@ def wzdx_creator(messages, info=None, unsupported_message_callback=None):
         return None
    # verify info obj
     if not info:
-        info = translator_shared_library.initialize_info(
-            '104d7746-688c-44ed-b195-2ee948bf9dfa')
-    if not translator_shared_library.validate_info(info):
+        info = tools.wzdx_translator.initialize_info(
+            DEFAULT_ICONE_FEED_INFO_ID)
+    if not tools.wzdx_translator.validate_info(info):
         return None
 
-    wzd = translator_shared_library.initialize_wzdx_object(info)
+    wzd = tools.wzdx_translator.initialize_wzdx_object(info)
 
     for incident in messages.get('incidents').get('incident'):
         # Parse Incident to WZDx Feature
@@ -73,7 +70,7 @@ def wzdx_creator(messages, info=None, unsupported_message_callback=None):
             wzd.get('features').append(feature)
     if not wzd.get('features'):
         return None
-    wzd = translator_shared_library.add_ids(wzd)
+    wzd = tools.wzdx_translator.add_ids(wzd)
     return wzd
 
 
@@ -323,8 +320,11 @@ def parse_incident(incident, callback_function=None):
     properties['road_names'] = road_names
 
     # direction
-    direction = parse_direction_from_street_name(road_names[0])
-
+    direction = None
+    for road_name in road_names:
+        direction = parse_direction_from_street_name(road_name)
+        if direction:
+            break
     if not direction:
         direction = get_road_direction(geometry.get('coordinates'))
     if not direction:

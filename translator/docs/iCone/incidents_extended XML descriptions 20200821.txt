@@ -1,0 +1,60 @@
+Based on the Waze incident feed:
+  https://developers.google.com/waze/data-feed/incident-information
+  http://www.gstatic.com/road-incidents/incidents_feed.xsd
+
+
+Additional iCone data elements:
+
+"sensor" element: A traffic sensor location associated with the incident
+	type := The type of the traffic sensor
+			- "iCone" for an iCone speed barrel
+	id := A unique identifier string for this sensor location within the incident (at this time)
+	latitude := The defined GPS latitude for this sensor location, if available
+	longitude := The defined GPS longitude for this sensor location, if available
+
+"radar" element: Radar details for a sensor element
+	devID := A unique identifier for the device which reported the radar data
+	intervalEnd := The timestamp of the end of the radar data sampling interval
+	latitude := The reported GPS latitude associated with this radar data, if available
+	longitude := The reported GPS longitude associated with this radar data, if available
+	numReads := The number of radar readings made during this data interval
+	avgSpeed := The average speed, in mph, for the radar readings made during this data interval
+	stDevSpeed := The weighted standard deviation, in mph, of the speed readings made during this data interval
+
+"display" element: A displayed message location associated with the incident
+	type := The type of the messaging device
+			- "PCMS" for a Portable Changeable Message Sign trailer
+			- "AB" for an Arrow Board
+			- "Signal" for a portable traffic signal
+	id := A unique identifier string for this display location within the incident (at this time)
+	latitude := The defined GPS latitude for this display location, if available
+	longitude := The defined GPS longitude for this display location, if available
+
+"message" element: Message details for a display element
+	verified := The timestamp that the message was verified as being displayed
+	text := The displayed message text. " / " used to separate lines, and " // " used to separate frames (or pages)
+	indicator := The meaning of an indication symbol, i.e. "Merge Right", "Merge Left", "Merge Left or Right", "Caution"
+	latitude := The reported GPS latitude associated with this displayed message, if available
+	longitude := The reported GPS longitude associated with this displayed message, if available
+	
+"marker" element: A marker of a generic location or device within the incident
+	type := The type of device used for this marker
+			- "iPin" for an iPin marker
+			- "Baton" for a Baton marker
+			- "Truck Beacon" for a truck mounted beacon
+	id := A unique identifier string for this marker location within the incident (at this time)
+	latitude := The defined GPS latitude for this sensor location, if available
+	longitude := The defined GPS longitude for this sensor location, if available
+	description := A manual description of the marker.  Frequently, the descriptions will start with a common aspect of the incident, i.e. "beginning" or "end"
+
+"status" element: Device Status details for a marker, display, or sensor element
+	type := The type of status report being made
+			- "iPin" for an iPin state (Active/Off)
+			- "Baton" for a Baton state (Active/Off)
+			- "Truck Beacon" for a Truck Beacon state (Active/Off)
+			- "Display Down" for a Display "Down" verification switch (Down/Up - technically up=NOT verified as down)
+			- "Display Up" for a Display "Up" verification switch (Up/Down - technically, down=NOT verified as up)
+			- "TMA Stowed" for a TMA "Stowed" verification switch (Stowed/Deployed - technically, deployed=NOT verified as stowed)
+	starttime := The timestamp of the first occurance of this state
+	verified := The timestamp of the most recent verification of this state
+	state := The reported state of this device/marker

@@ -212,16 +212,16 @@ def fake_secret_client(request):
 # --------------------------------------------------------------------------------unit test for get_wzdx_schema function--------------------------------------------------------------------------------
 def test_get_wzdx_schema():
     expected_schema = json.loads(
-        open('translator/sample files/validation_schema/wzdx_v3.0_feed.json').read())
+        open('translator/sample files/validation_schema/wzdx_v3.1_feed.json').read())
     actual = main.get_wzdx_schema(
-        'translator/sample files/validation_schema/wzdx_v3.0_feed.json')
+        'translator/sample files/validation_schema/wzdx_v3.1_feed.json')
     assert actual == expected_schema
 
 
 def test_get_wzdx_schema_invalid_data():
 
     with pytest.raises(RuntimeError) as runtimeErr:
-        main.get_wzdx_schema('test/docs/invalid_schema.json')
+        main.get_wzdx_schema('tests/docs/invalid_schema.json')
     assert 'invalid schema: not valid json' in str(runtimeErr.value)
 
 
