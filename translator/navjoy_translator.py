@@ -299,5 +299,49 @@ def get_types_of_work(constructionType):
     return types_of_work
 
 
+def get_restrictions(travelRestriction):
+    # valid_type_of_restrictions = ['no-trucks',
+    #                               'travel-peak-hours-only',
+    #                               'hov-3',
+    #                               'hov-2',
+    #                               'no-parking',
+    #                               'reduced-width',
+    #                               'reduced-height',
+    #                               'reduced-length',
+    #                               'reduced-weight',
+    #                               'axle-load-limit',
+    #                               'gross-weight-limit',
+    #                               'towing-prohibited',
+    #                               'permitted-oversize-loads-prohibited',
+    #                               'local-access-only']
+
+    restrictions = []
+
+    travel_restriction_split = travelRestriction.split(',')
+    for travel_restriction in travel_restriction_split:
+        if travel_restriction == 'Oversize Restriction':
+            restrictions.append('permitted-oversize-loads-prohibited')
+        elif 'Width Restrictions' in travel_restriction:
+            restrictions.append('reduced-width')
+
+    return restrictions
+
+
+# travelRestriction
+# Speeds Reduced,Oversize Restriction
+# (Sunday, April 7, 2019 - Saturday, April 13, 2019) : Delays Possible
+# (Sunday, May 26, 2019 - Saturday, June 1, 2019) : Delays Possible
+# (Sunday, May 26, 2019 - Saturday, June 1, 2019) : Delays Possible,Flagger Operations,Speeds Reduced,Traffic Shift,Width Restrictions: 12 Ft.,No Weekend Work,Trucks Entering and Exiting Work Zone
+# Various lane closures
+# Daily Right Lane Closure
+# Right lane both directions
+# (Sunday, May 26, 2019 - Saturday, June 1, 2019) : Delays Possible,Detour in Place,Speeds Reduced,Temporary Signals Used,Traffic Shift,Width Restrictions: 12 Ft.
+# Drivers should expect slower speed limits (65 mph), narrower lanes, increased volume, nighttime lane closures, and construction trucks entering and exiting the interstate throughout the corridor.
+# (Sunday, April 7, 2019 - Saturday, April 13, 2019) : Trucks Entering and Exiting Work Zone
+# (Sunday, May 26, 2019 - Saturday, June 1, 2019) : Flagger Operations
+# Daily Lane Closures
+# One Lane Closure
+
+
 if __name__ == "__main__":
     main()
