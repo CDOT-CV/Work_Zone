@@ -290,12 +290,28 @@ def get_types_of_work(constructionType):
     types_of_work = []
 
     if constructionType == 'Lane Expansion':
-        types_of_work.append({'type_name': 'roadway-creation',
+        types_of_work.append({'type_name': 'surface-work',
                               'is_architectural_change': True})
     elif constructionType == 'Traffic Signal Installation':
         types_of_work.append({'type_name': 'overhead-work',
                               'is_architectural_change': False})
-
+    elif constructionType == 'Median Work':
+        types_of_work.append({'type_name': 'surface-work',
+                              'is_architectural_change': False})
+    elif constructionType == 'Road':
+        types_of_work.append({'type_name': 'minor-road-defect-repair',
+                              'is_architectural_change': False})
+    elif constructionType == 'Bridge':
+        types_of_work.append({'type_name': 'below-road-work',
+                              'is_architectural_change': False})
+    elif constructionType == 'Underground':
+        types_of_work.append({'type_name': 'below-road-work',
+                              'is_architectural_change': False})
+    elif constructionType == 'Sidewalk':
+        types_of_work.append({'type_name': 'roadside-work',
+                              'is_architectural_change': False})
+    elif constructionType == 'Other':
+        pass
     return types_of_work
 
 
