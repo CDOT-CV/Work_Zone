@@ -5,7 +5,7 @@ import logging
 from collections import OrderedDict
 from datetime import datetime
 
-from translator.tools import wzdx_translator
+from translator.tools import wzdx_translator, polygon_tools, date_tools
 
 PROGRAM_NAME = 'IconeTranslator'
 PROGRAM_VERSION = '1.0'
@@ -108,34 +108,7 @@ def parse_polyline(polylinestring):
     return coordinates
 
 
-# function to get road direction by using geometry coordinates
-def get_road_direction(coordinates):
-    if not coordinates:
-        return None
-    try:
-        long_dif = coordinates[-1][0] - coordinates[0][0]
-        lat_dif = coordinates[-1][1] - coordinates[0][1]
-    except ValueError as e:
-        raise RuntimeError('Failed to get road direction.') from e
-
-    if abs(long_dif) > abs(lat_dif):
-        if long_dif > 0:
-            direction = 'eastbound'
-        else:
-            direction = 'westbound'
-    elif lat_dif > 0:
-        direction = 'northbound'
-    else:
-        direction = 'southbound'
-
-    if lat_dif == 0 and long_dif == 0:
-        direction = None
-
-    return direction
-
 # function to parse direction from street name
-
-
 def parse_direction_from_street_name(street):
     if not street or type(street) != str:
         return None
@@ -169,9 +142,8 @@ def get_event_status(start_time_string, end_time_string):
             event_status = "completed"
     return event_status
 
+
 # function to get description
-
-
 def create_description(incident):
     description = incident.get('description')
 
@@ -322,13 +294,13 @@ def parse_incident(incident, callback_function=None):
         if direction:
             break
     if not direction:
-        direction = get_road_direction(geometry.get('coordinates'))
+        direction = polygon_tools.get_road_direction_from_coordinates(
+            geometry.get('coordinates'))
     if not direction:
         return None
     properties['direction'] = direction
 
     # vehicle impact
-
     properties['vehicle_impact'] = get_vehicle_impact(
         incident.get('description'))
 
@@ -345,8 +317,9 @@ def parse_incident(incident, callback_function=None):
     properties['ending_cross_street'] = ""
 
     # event status
-    properties['event_status'] = get_event_status(
-        incident.get('starttime'), incident.get('endtime'))
+    start_time = date_tools.parse_datetime_from_iso_string(incident.get('starttime'))
+    end_time = date_tools.parse_datetime_from_iso_string(incident.get('endtime'))
+    properties['event_status'] = wzdx_translator.get_event_status(start_time, end_time)
 
     # type_of_work
     # maintenance, minor-road-defect-repair, roadside-work, overhead-work, below-road-work, barrier-work, surface-work, painting, roadway-relocation, roadway-creation
@@ -375,48 +348,51 @@ def parse_incident(incident, callback_function=None):
 
 
 def validate_incident(incident):
-
     if not incident or (type(incident) != dict and type(incident) != OrderedDict):
         logging.warning('incident is empty or has invalid type')
         return False
 
+    id = incident.get("@id")
+
     location = incident.get('location')
     if not location:
         logging.warning(
-            f'Invalid incident with id = {incident.get("@id")}. Location object not present')
+            f'Invalid incident with id = {id}. Location object not present')
         return False
 
     polyline = location.get('polyline')
     coords = parse_polyline(polyline)
     street = location.get('street', '')
 
-    starttime = incident.get('starttime')
+    starttime_string = incident.get('starttime')
+    endtime_string = incident.get('endtime')
     description = incident.get('description')
     creationtime = incident.get('creationtime')
     updatetime = incident.get('updatetime')
     direction = parse_direction_from_street_name(street)
     if not direction:
-        direction = get_road_direction(coords)
+        direction = wzdx_translator.get_road_direction(coords)
         if not direction:
             logging.warning(
-                f'Invalid incident with id = {incident.get("@id")}.unable to parse direction from street name or polyline')
+                f'Invalid incident with id = {id}.unable to parse direction from street name or polyline')
             return False
     required_fields = [location, polyline, coords, street,
-                       starttime, description, creationtime, updatetime, direction]
+                       starttime_string, description, creationtime, updatetime, direction]
     for field in required_fields:
         if not field:
             logging.warning(
-                f'Invalid incident with id = {incident.get("@id")}. Not all required fields are present')
+                f'Invalid incident with id = {id}. Not all required fields are present')
             return False
 
-    try:
-        datetime.strptime(incident.get('starttime'), "%Y-%m-%dT%H:%M:%SZ")
-        if incident.get('endtime'):
-            datetime.strptime(incident.get('endtime'), "%Y-%m-%dT%H:%M:%SZ")
-    except ValueError:
-        logging.warning(
-            f'Invalid incident with id = {incident.get("@id")}. Invalid date time format')
+    start_time = date_tools.parse_datetime_from_iso_string(starttime_string)
+    end_time = date_tools.parse_datetime_from_iso_string(endtime_string)
+    if not start_time:
+        logging.error(f'Invalid incident with id = {id}. Unsupported start time format: {start_time}')
         return False
+    elif endtime_string and not end_time:
+        logging.error(f'Invalid incident with id = {id}. Unsupported end time format: {end_time}')
+        return False
+
 
     return True
 

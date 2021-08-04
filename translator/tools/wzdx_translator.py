@@ -119,26 +119,24 @@ def initialize_info(feed_info_id):
 def add_ids(message):
     if not message or type(message) != dict:
         return None
-    try:
 
-        data_source_id = message.get('road_event_feed_info').get(
-            'data_sources')[0].get('data_source_id')
-        road_event_length = len(message.get('features'))
-        road_event_ids = []
-        for i in range(road_event_length):
-            road_event_ids.append(str(uuid.uuid4()))
+    data_source_id = message.get('road_event_feed_info').get(
+        'data_sources')[0].get('data_source_id')
+    road_event_length = len(message.get('features'))
+    road_event_ids = []
+    for i in range(road_event_length):
+        road_event_ids.append(str(uuid.uuid4()))
 
-        for i in range(road_event_length):
-            feature = message.get('features')[i]
-            id = road_event_ids[i]
-            feature['properties']['road_event_id'] = id
-            feature['properties']['data_source_id'] = data_source_id
+    for i in range(road_event_length):
+        feature = message.get('features')[i]
+        id = road_event_ids[i]
+        feature['properties']['road_event_id'] = id
+        feature['properties']['data_source_id'] = data_source_id
+        if feature['properties'].get('relationship'):
             feature['properties']['relationship']['relationship_id'] = str(
                 uuid.uuid4())
             feature['properties']['relationship']['road_event_id'] = id
-        return message
-    except:
-        return message
+    return message
 
 
 def initialize_wzdx_object(info):
@@ -188,3 +186,31 @@ def initialize_wzdx_object(info):
     wzd['features'] = []
 
     return wzd
+
+
+# function to get event status
+def get_event_status(start_time, end_time):
+    event_status = "active"
+
+    current_time = datetime.now()
+
+    # check if datetime is time zone aware. If it is, get utc time
+    if start_time.tzinfo is not None and start_time.tzinfo.utcoffset(start_time) is not None:
+        current_time = datetime.utcnow()
+
+    if current_time < start_time:
+        event_status = "planned"  # if < 2 to 3 weeks make it pending instead of planned
+
+        if end_time and end_time < current_time:
+            event_status = "completed"
+    return event_status
+
+
+def string_to_number(field):
+    try:
+        return int(field)
+    except ValueError:
+        try:
+            return float(field)
+        except ValueError:
+            return None

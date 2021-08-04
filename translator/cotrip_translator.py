@@ -123,16 +123,19 @@ def parse_alert(alert, callback_function=None):
     geometry['coordinates'] = parse_polyline(event.get('geometry'))
     properties = wzdx_translator.initialize_feature_properties()
 
+    header = event.get('header', {})
+    detail = event.get('detail', {})
+
     # Event Type ['work-zone', 'detour']
     properties['event_type'] = 'work-zone'
 
     # start_date
-    properties['start_date'] = date_tools.reformat_datetime(
-        event.get('header').get('start_timestamp'))
+    start_date = date_tools.parse_datetime_from_unix(header.get('start_timestamp'))
+    properties['start_date'] = date_tools.get_iso_string_from_datetime(start_date)
 
     # end_date
-    properties['end_date'] = date_tools.reformat_datetime(
-        event.get('header').get('end_timestamp'))
+    end_date = date_tools.parse_datetime_from_unix(header.get('end_timestamp'))
+    properties['end_date'] = date_tools.get_iso_string_from_datetime(end_date)
 
     # start_date_accuracy
     properties['start_date_accuracy'] = "estimated"
@@ -147,8 +150,8 @@ def parse_alert(alert, callback_function=None):
     properties['ending_accuracy'] = "estimated"
 
     # road_name
-    properties['road_names'] = [event.get('detail').get('road_name')]
-    road_number = event.get('detail').get('road_number')
+    properties['road_names'] = [detail.get('road_name')]
+    road_number = detail.get('road_number')
     if road_number and not road_number in properties['road_names']:
         properties['road_names'].append(road_number)
 
@@ -157,14 +160,13 @@ def parse_alert(alert, callback_function=None):
                      'West': 'westbound', 'East': 'eastbound'}
 
     properties['direction'] = Direction_map.get(
-        event.get('detail').get('direction'))
+        detail.get('direction'))
 
     # vehicle impact
     properties['vehicle_impact'] = 'unknown'
 
     # event status
-    properties['event_status'] = get_event_status(
-        event.get('header').get('start_timestamp'), event.get('header').get('end_timestamp'))
+    properties['event_status'] = wzdx_translator.get_event_status(start_date, end_date)
 
     # type_of_work
     # maintenance, minor-road-defect-repair, roadside-work, overhead-work, below-road-work, barrier-work, surface-work, painting, roadway-relocation, roadway-creation
@@ -174,18 +176,16 @@ def parse_alert(alert, callback_function=None):
         properties['types_of_work'] = types_of_work
 
     # reduced_speed_limit
-
     properties['reduced_speed_limit'] = get_rsz_from_event(event)
 
     # restrictions
-
-    work_updates = event.get('detail').get('work_updates')
+    work_updates = detail.get('work_updates')
     restrictions = get_restrictions(work_updates)
     if restrictions:
         properties['restrictions'] = restrictions
 
     # description
-    properties['description'] = event.get('header').get('description')
+    properties['description'] = header.get('description')
 
     # creation_date
     properties['creation_date'] = date_tools.reformat_datetime(
@@ -216,30 +216,40 @@ def validate_alert(alert):
         logging.warning('alert is empty or has invalid type')
         return False
 
+    id = alert.get("rtdh_message_id")
+
     event = alert.get('event', {})
-    polyline = event.get('geometry')
-    coords = parse_polyline(polyline)
-    street = event.get('detail', {}).get('road_name')
 
     header = event.get('header', {})
-    starttime = header.get('start_timestamp')
-    endtime = header.get('end_timestamp', 0)
+    detail = event.get('detail', {})
+
+    polyline = event.get('geometry')
+    coords = parse_polyline(polyline)
+    street = detail.get('road_name')
+
+    starttime_string = header.get('start_timestamp')
+    endtime_string = header.get('end_timestamp', 0)
     description = header.get('description')
     direction = event.get('detail', {}).get('direction')
 
     required_fields = [polyline, coords, street,
-                       starttime, description, direction]
+                       starttime_string, description, direction]
     for field in required_fields:
         if not field:
             logging.warning(
-                f'Invalid event with event id = {alert.get("rtdh_message_id")}. not all required fields are present')
+                f'Invalid event with event id = {id}. not all required fields are present')
             return False
 
-    if type(starttime) != int or type(endtime) != int:
-        logging.warning(
-            f'Invalid event with id = {alert.get("rtdh_message_id")}. Invalid datetime format')
+    start_time = date_tools.parse_datetime_from_iso_string(starttime_string)
+    end_time = date_tools.parse_datetime_from_iso_string(endtime_string)
+    if not start_time:
+        logging.error(
+            f'Invalid incident with id = {id}. Unsupported start time format: {start_time}')
         return False
-
+    elif endtime_string and not end_time:
+        logging.error(
+            f'Invalid incident with id = {id}. Unsupported end time format: {end_time}')
+        return False
     return True
 
 

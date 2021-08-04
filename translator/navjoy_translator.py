@@ -7,10 +7,16 @@ import sys
 from collections import OrderedDict
 from datetime import datetime, timedelta, timezone
 
-from translator.tools import wzdx_translator, polygon_to_line, date_tools
+from translator.tools import wzdx_translator, date_tools, polygon_tools
 
-PROGRAM_NAME = 'NavJoyTranslator'
+PROGRAM_NAME = 'NavJoy568Translator'
 PROGRAM_VERSION = '1.0'
+
+STRING_DIRECTION_MAP = {'north': 'northbound', 'south': 'southbound',
+                        'west': 'westbound', 'east': 'eastbound'}
+
+REVERSED_DIRECTION_MAP = {'northbound': 'southbound', 'southbound': 'northbound',
+                          'eastbound': 'westbound', 'westbound': 'eastbound'}
 
 
 def main():
@@ -21,11 +27,13 @@ def main():
         raise ValueError(
             'Invalid file type. Please specify a valid Json file!') from None
     wzdx_obj = wzdx_creator(navjoy_obj)
+
     location_schema = 'translator/sample files/validation_schema/wzdx_v3.1_feed.json'
     wzdx_schema = json.loads(open(location_schema).read())
 
     if not wzdx_translator.validate_wzdx(wzdx_obj, wzdx_schema):
-        print('validation error more message are printed above. output file is not created because the message failed validation.')
+        logging.error(
+            'validation error more message are printed above. output file is not created because the message failed validation.')
         return
     with open(outputfile, 'w') as fwzdx:
         fwzdx.write(json.dumps(wzdx_obj, indent=2))
@@ -60,35 +68,50 @@ def wzdx_creator(messages, info=None, unsupported_message_callback=None):
     wzd = wzdx_translator.initialize_wzdx_object(info)
 
     for message in messages:
-        # Parse closure to WZDx Feature
-        feature = parse_closure(
-            message, callback_function=unsupported_message_callback)
-        if feature:
-            wzd.get('features').append(feature)
+        # closures can cover both directions
+        directions = message.get('data', {}).get('directionOfTraffic')
+
+        for direction in get_directions_from_string(directions):
+            # Parse closure to WZDx Feature
+            feature = parse_reduction_zone(
+                message, direction, callback_function=unsupported_message_callback)
+            if feature:
+                wzd.get('features').append(feature)
     if not wzd.get('features'):
         return None
     wzd = wzdx_translator.add_ids(wzd)
     return wzd
 
 
-# function to parse polyline to geometry line string
-def parse_polyline(poly):
-    if not poly or type(poly) != str:
-        return None
-    poly = poly[len('LINESTRING ('): -1]
-    polyline = poly.split(', ')
-    coordinates = []
-    for i in polyline:
-        coords = i.split(' ')
+def get_linestring_index(map):
+    for i in range(len(map)):
+        if map[i].get("type") == "LineString":
+            return i
 
-        # the regular rexpression '^-?([0-9]*[.])?[0-9]+$ matches an integer or decimals
-        if len(coords) >= 2 and re.match('^-?([0-9]*[.])?[0-9]+$', coords[0]) and re.match('^-?([0-9]*[.])?[0-9]+$', coords[1]):
-            coordinates.append([float(coords[0]), float(coords[1])])
-    return coordinates
+
+def get_polygon_index(map):
+    for i in range(len(map)):
+        if map[i].get("type") == "Polygon":
+            return i
+
+
+def get_directions_from_string(directions_string) -> list:
+    if not directions_string or type(directions_string) != str:
+        return []
+
+    directions = []
+
+    # iterate over directions and convert short direction names to WZDx enum directions
+    directions_string = directions_string.strip()
+    for dir in directions_string.split('/'):
+        direction = STRING_DIRECTION_MAP.get(dir.lower())
+        if direction:
+            directions.append(direction)
+
+    return directions
+
 
 # function to get event status
-
-
 def get_event_status(start_time_string, end_time_string):
 
     start_time = datetime.fromtimestamp(start_time_string)
@@ -110,42 +133,67 @@ def get_event_status(start_time_string, end_time_string):
 
 
 # Parse Navjoy  to WZDx
-def parse_closure(obj, callback_function=None):
-    if not validate_alert(obj):
+def parse_reduction_zone(obj, direction, callback_function=None):
+    if not validate_closure(obj):
         if callback_function:
             callback_function(obj)
         return None
 
-    event = obj.get('event', {})
+    data = obj.get('data', {})
+
+    map = data.get('srzmap')
+    index = get_linestring_index(map)
+    if index:
+        coordinates = map[index].get("coordinates")
+    else:
+        index = get_polygon_index(map)
+        if index:
+            polygon = map[index].get("coordinates")
+            coordinates = polygon_tools.polygon_to_polyline_center(polygon)
+        else:
+            logging.warning("Invalid event. No polygon or linestring")
+            return None
+
+    # [0].get('coordinates')[0]
+    # coordinates = polygon_tools.polygon_to_polyline_center(polygon)
+
+    # Reverese polygon if it is in the opposide direction as the message
+    polyline_direction = polygon_tools.get_road_direction_from_coordinates(
+        coordinates)
+    if polyline_direction == REVERSED_DIRECTION_MAP.get(polyline_direction):
+        coordinates.reverse()
+
     geometry = {}
-    geometry['type'] = "LineString"
-    geometry['coordinates'] = parse_polyline(event.get('geometry'))
+    if len(coordinates) > 2:
+        geometry['type'] = "LineString"
+    else:
+        geometry['type'] = "MultiPoint"
+
+    geometry['coordinates'] = coordinates
     properties = wzdx_translator.initialize_feature_properties()
 
     # Event Type ['work-zone', 'detour']
     properties['event_type'] = 'work-zone'
 
     # start_date
-    actual_start_date = event.get('data').get('actualStartDate')
-    planned_start_date = event.get('data').get('plannedStartDate')
-    properties['start_date'] = actual_start_date
-    if not actual_start_date:
-        properties['start_date'] = planned_start_date
-        properties['start_date_accuracy'] = "estimated"
+    start_date = date_tools.parse_datetime_from_iso_string(
+        data.get('workStartDate'))
+    properties['start_date'] = date_tools.get_iso_string_from_datetime(
+        start_date)
 
     # end_date
-    actual_end_date = event.get('data').get('actualEndDate')
-    planned_end_date = event.get('data').get('plannedEndDate')
-    properties['end_date'] = actual_end_date
-    if not actual_start_date:
-        properties['end_date'] = planned_start_date
-        properties['end_date_accuracy'] = "estimated"
+    end_date = date_tools.parse_datetime_from_unix(data.get('workEndDate'))
+    if end_date:
+        properties['end_date'] = date_tools.get_iso_string_from_datetime(
+            end_date)
+    else:
+        properties['end_date'] = ''
 
     # start_date_accuracy
-    properties['start_date_accuracy'] = "verified"
+    properties['start_date_accuracy'] = "estimated"
 
     # end_date_accuracy
-    properties['end_date_accuracy'] = "verified"
+    properties['end_date_accuracy'] = "estimated"
 
     # beginning_accuracy
     properties['beginning_accuracy'] = "estimated"
@@ -154,47 +202,48 @@ def parse_closure(obj, callback_function=None):
     properties['ending_accuracy'] = "estimated"
 
     # road_name
-    properties['road_names'] = [event.get('data').get('routeName')]
-    road_number = event.get('data').get('routeName')
-    if road_number and not road_number in properties['road_names']:
-        properties['road_names'].append(road_number)
+    properties['road_names'] = [data.get('streetNameFrom')]
 
     # direction
-    properties['direction'] = get_direction_from_routeName(routeName)
+    properties['direction'] = direction
 
     # vehicle impact
     properties['vehicle_impact'] = get_vehicle_impact(
-        event.get('data').get('travelRestriction'))
+        data.get('reductionJustification'))
 
     # event status
-    properties['event_status'] = event.get('data').get('closureStatus')
+    properties['event_status'] = wzdx_translator.get_event_status(
+        start_date, end_date)
 
     # type_of_work
     # maintenance, minor-road-defect-repair, roadside-work, overhead-work, below-road-work, barrier-work, surface-work, painting, roadway-relocation, roadway-creation
-    works = event.get('sub_type')
-    types_of_work = get_types_of_work(works)
+    projectDescription = data.get('descriptionForProject')
+    types_of_work = get_types_of_work(projectDescription)
     if types_of_work:
         properties['types_of_work'] = types_of_work
 
     # reduced_speed_limit
-    properties['reduced_speed_limit'] = get_rsz_from_event(event)
+    reducedSpeed = data.get('requestedTemporarySpeed')
+    if reducedSpeed:
+        properties['reduced_speed_limit'] = wzdx_translator.string_to_number(
+            reducedSpeed)
 
     # restrictions
-    work_updates = event.get('detail').get('work_updates')
-    restrictions = get_restrictions(work_updates)
+    reductionJustification = data.get('reductionJustification')
+    restrictions = get_restrictions(reductionJustification)
     if restrictions:
         properties['restrictions'] = restrictions
 
     # description
-    properties['description'] = event.get('data').get('description')
+    properties['description'] = reductionJustification
 
     # creation_date
-    properties['creation_date'] = date_tools.reformat_datetime(
-        event.get('source').get('collection_timestamp'))
+    properties['creation_date'] = date_tools.get_iso_string_from_datetime(
+        datetime.utcnow())
 
     # update_date
-    properties['update_date'] = date_tools.reformat_datetime(
-        obj.get('rtdh_timestamp'))
+    properties['update_date'] = date_tools.get_iso_string_from_datetime(
+        datetime.utcnow())
 
     filtered_properties = copy.deepcopy(properties)
 
@@ -211,51 +260,58 @@ def parse_closure(obj, callback_function=None):
 
 
 # function to validate the alert
-def validate_alert(obj):
-
+def validate_closure(obj):
     if not obj or (type(obj) != dict and type(obj) != OrderedDict):
         logging.warning('alert is empty or has invalid type')
         return False
 
+    id = obj.get("sys_gUid")
+
     data = obj.get('data', {})
-    street = data.get('routeName')
+    street = data.get('streetNameFrom')
 
-    workPlan = data.get('ConstructionWorkZonePlan', [{}])
-    if type(workPlan) != list or len(workPlan) == 0:
+    map = data.get('srzmap', [{}])
+    if type(map) != list or len(map) == 0:
         logging.warning(
-            f'Invalid event with event id = {obj.get("sys_gUid")}. ConstructionWorkZonePlan object is either invalid or empty')
+            f'Invalid event with id = {id}. ConstructionWorkZonePlan object is either invalid or empty')
 
-    polygon = workPlan[0].get('coordinates', [])[0]
-    print(polygon)
-    polyline = polygon_to_line.polygon_to_polyline(polygon)
-    print(polyline)
+    index = get_linestring_index(map)
+    if index:
+        coordinates = map[index].get("coordinates")
+    else:
+        index = get_polygon_index(map)
+        if index:
+            polygon = map[index].get("coordinates")
+            coordinates = polygon_tools.polygon_to_polyline_center(polygon)
+            if not coordinates:
+                logging.warning(
+                    "Invalid event with id = {id}. Unable to retrieve centerline from polygon")
+        else:
+            logging.warning(
+                "Invalid event with id = {id}. No LineString or Polygon found")
+            return None
 
-    starttime = data.get('plannedStartDate')
-    endtime = data.get('plannedEndDate', 'invalid datetime')
+    starttime_string = data.get('workStartDate')
+    endtime_string = data.get('workEndDate')
 
-    description = data.get('description')
-    direction = None
-    # direction = data.get('detail', {}).get('direction')
+    description = data.get('reductionJustification')
 
-    if not polyline:
-        logging.warning(
-            f'Invalid event with event id = {obj.get("sys_gUid")}. Unable to retrieve centerline from polygon')
-        return False
-
-    required_fields = [street, starttime, description, direction]
+    required_fields = [street, starttime_string, description]
     for field in required_fields:
         if not field:
             logging.warning(
-                f'Invalid event with event id = {obj.get("sys_gUid")}. not all required fields are present')
+                f'Invalid event with id = {id}. not all required fields are present')
             return False
 
-    try:
-        datetime.strptime(starttime, "%Y-%m-%dT%H:%M:%SZ")
-        if endtime:
-            datetime.strptime(endtime, "%Y-%m-%dT%H:%M:%SZ")
-    except ValueError:
-        logging.warning(
-            f'Invalid incident with id = {obj.get("sys_gUid")}. Invalid date time format')
+    start_time = date_tools.parse_datetime_from_iso_string(starttime_string)
+    end_time = date_tools.parse_datetime_from_iso_string(endtime_string)
+    if not start_time:
+        logging.error(
+            f'Invalid incident with id = {id}. Unsupported start time format: {start_time}')
+        return False
+    elif endtime_string and not end_time:
+        logging.error(
+            f'Invalid incident with id = {id}. Unsupported end time format: {end_time}')
         return False
 
     return True
@@ -263,16 +319,22 @@ def validate_alert(obj):
 
 # function to calculate vehicle impact
 def get_vehicle_impact(travelRestriction):
+    if not travelRestriction or type(travelRestriction) != str:
+        return None
+    travelRestriction = travelRestriction.lower()
     vehicle_impact = 'all-lanes-open'
-    if 'right' in travelRestriction.lower():
+    if 'lane closure' in travelRestriction.lower():
         vehicle_impact = 'some-lanes-closed'
-    elif 'all' in travelRestriction.lower():
+    elif 'all lanes closed' in travelRestriction.lower():
         vehicle_impact = 'all-lanes-closed'
 
     return vehicle_impact
 
 
-def get_types_of_work(constructionType):
+def get_types_of_work(field):
+    if not field or type(field) != str:
+        return None
+    field = field.lower()
     # valid_types_of_work = ['maintenance',
     #                        'minor-road-defect-repair',
     #                        'roadside-work',
@@ -284,38 +346,21 @@ def get_types_of_work(constructionType):
     #                        'roadway-relocation',
     #                        'roadway-creation']
 
-    if not constructionType or type(constructionType) != str:
+    if not field or type(field) != str:
         return []
 
     types_of_work = []
 
-    if constructionType == 'Lane Expansion':
+    if 'restriping' in field or 'crack seal' in field:
         types_of_work.append({'type_name': 'surface-work',
                               'is_architectural_change': True})
-    elif constructionType == 'Traffic Signal Installation':
-        types_of_work.append({'type_name': 'overhead-work',
-                              'is_architectural_change': False})
-    elif constructionType == 'Median Work':
-        types_of_work.append({'type_name': 'surface-work',
-                              'is_architectural_change': False})
-    elif constructionType == 'Road':
-        types_of_work.append({'type_name': 'minor-road-defect-repair',
-                              'is_architectural_change': False})
-    elif constructionType == 'Bridge':
-        types_of_work.append({'type_name': 'below-road-work',
-                              'is_architectural_change': False})
-    elif constructionType == 'Underground':
-        types_of_work.append({'type_name': 'below-road-work',
-                              'is_architectural_change': False})
-    elif constructionType == 'Sidewalk':
-        types_of_work.append({'type_name': 'roadside-work',
-                              'is_architectural_change': False})
-    elif constructionType == 'Other':
-        pass
     return types_of_work
 
 
 def get_restrictions(travelRestriction):
+    if not travelRestriction or type(travelRestriction) != str:
+        return None
+    travelRestriction = travelRestriction.lower()
     # valid_type_of_restrictions = ['no-trucks',
     #                               'travel-peak-hours-only',
     #                               'hov-3',
@@ -333,30 +378,16 @@ def get_restrictions(travelRestriction):
 
     restrictions = []
 
-    travel_restriction_split = travelRestriction.split(',')
-    for travel_restriction in travel_restriction_split:
-        if travel_restriction == 'Oversize Restriction':
-            restrictions.append('permitted-oversize-loads-prohibited')
-        elif 'Width Restrictions' in travel_restriction:
-            restrictions.append('reduced-width')
-
     return restrictions
 
 
-# travelRestriction
-# Speeds Reduced,Oversize Restriction
-# (Sunday, April 7, 2019 - Saturday, April 13, 2019) : Delays Possible
-# (Sunday, May 26, 2019 - Saturday, June 1, 2019) : Delays Possible
-# (Sunday, May 26, 2019 - Saturday, June 1, 2019) : Delays Possible,Flagger Operations,Speeds Reduced,Traffic Shift,Width Restrictions: 12 Ft.,No Weekend Work,Trucks Entering and Exiting Work Zone
-# Various lane closures
-# Daily Right Lane Closure
-# Right lane both directions
-# (Sunday, May 26, 2019 - Saturday, June 1, 2019) : Delays Possible,Detour in Place,Speeds Reduced,Temporary Signals Used,Traffic Shift,Width Restrictions: 12 Ft.
-# Drivers should expect slower speed limits (65 mph), narrower lanes, increased volume, nighttime lane closures, and construction trucks entering and exiting the interstate throughout the corridor.
-# (Sunday, April 7, 2019 - Saturday, April 13, 2019) : Trucks Entering and Exiting Work Zone
-# (Sunday, May 26, 2019 - Saturday, June 1, 2019) : Flagger Operations
-# Daily Lane Closures
-# One Lane Closure
+def get_rsz_from_restrictions(travelRestriction):
+    match = re.search(
+        'expect slower speed limits \([0-9]{2} mph\)', travelRestriction)
+    if match:
+        speed_limit = match.group(
+            0)[len('expect slower speed limits ('):-len(' mph)')]
+        return speed_limit
 
 
 if __name__ == "__main__":
