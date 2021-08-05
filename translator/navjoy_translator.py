@@ -38,7 +38,7 @@ def main():
     with open(outputfile, 'w') as fwzdx:
         fwzdx.write(json.dumps(wzdx_obj, indent=2))
         print(
-            'huraaah ! your wzdx message is successfully generated and located here: ' + str(outputfile))
+            'Your wzdx message was successfully generated and is located here: ' + str(outputfile))
 
 
 # parse script command line arguments
@@ -74,7 +74,7 @@ def wzdx_creator(messages, info=None, unsupported_message_callback=None):
         for direction in get_directions_from_string(directions):
             # Parse closure to WZDx Feature
             feature = parse_reduction_zone(
-                message, direction, callback_function=unsupported_message_callback)
+                copy.deepcopy(message), direction, callback_function=unsupported_message_callback)
             if feature:
                 wzd.get('features').append(feature)
     if not wzd.get('features'):
@@ -143,16 +143,20 @@ def parse_reduction_zone(obj, direction, callback_function=None):
 
     map = data.get('srzmap')
     index = get_linestring_index(map)
-    if index:
+    if index != None:
         coordinates = map[index].get("coordinates")
     else:
         index = get_polygon_index(map)
-        if index:
+        if index != None:
             polygon = map[index].get("coordinates")
             coordinates = polygon_tools.polygon_to_polyline_center(polygon)
         else:
-            logging.warning("Invalid event. No polygon or linestring")
+            logging.warning(f"Invalid event with id = {obj.get('sys_gUid')}. No polygon or linestring")
             return None
+
+    if not coordinates:
+        logging.warning(f"Invalid event with id = {obj.get('sys_gUid')}. Unable to parse linestring from polygon")
+        return None
 
     # [0].get('coordinates')[0]
     # coordinates = polygon_tools.polygon_to_polyline_center(polygon)
@@ -160,7 +164,7 @@ def parse_reduction_zone(obj, direction, callback_function=None):
     # Reverese polygon if it is in the opposide direction as the message
     polyline_direction = polygon_tools.get_road_direction_from_coordinates(
         coordinates)
-    if polyline_direction == REVERSED_DIRECTION_MAP.get(polyline_direction):
+    if direction == REVERSED_DIRECTION_MAP.get(polyline_direction):
         coordinates.reverse()
 
     geometry = {}
@@ -276,11 +280,11 @@ def validate_closure(obj):
             f'Invalid event with id = {id}. ConstructionWorkZonePlan object is either invalid or empty')
 
     index = get_linestring_index(map)
-    if index:
+    if index != None:
         coordinates = map[index].get("coordinates")
     else:
         index = get_polygon_index(map)
-        if index:
+        if index != None:
             polygon = map[index].get("coordinates")
             coordinates = polygon_tools.polygon_to_polyline_center(polygon)
             if not coordinates:

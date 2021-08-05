@@ -200,9 +200,8 @@ def get_event_status(start_time, end_time):
 
     if current_time < start_time:
         event_status = "planned"  # if < 2 to 3 weeks make it pending instead of planned
-
-        if end_time and end_time < current_time:
-            event_status = "completed"
+    elif end_time and end_time < current_time:
+        event_status = "completed"
     return event_status
 
 

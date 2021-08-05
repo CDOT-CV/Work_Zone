@@ -164,10 +164,7 @@ def rotate(l, n):
 def polygon_to_polyline_center(coordinates):
     """Convert a polygon to a polyline by finding the 2 segments farthest from the center of mass"""
     if not coordinates or type(coordinates) != list or len(coordinates) < 5:
-        print(coordinates)
         return None
-
-    print(coordinates)
 
     geodesic = pyproj.Geod(ellps='WGS84')
 

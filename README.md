@@ -51,32 +51,46 @@ env_var.sh
 #### Run the translator script (from Work_Zone)
 
 ```
-python -m translator.source_code.icone_translator inputfile.xml --outputFile outputfile.geojson
+python -m translator.icone_translator inputfile.xml --outputFile outputfile.geojson
 ```
 
 Example usage:
 
 ```
-python -m translator.source_code.icone_translator 'translator/sample files/icone data/incidents_extended.xml' 
+python -m translator.icone_translator 'translator/sample files/icone data/incidents_extended.xml' 
 ```
 
 ### Execution for COtrip translator
 
-#### Run the translator script (from Work_Zone) and Please specify a valid Json file as an input file !
+#### Run the translator script (from Work_Zone)
 
 ```
-python -m translator.source_code.cotrip_translator inputfile.json --outputFile outputfile.geojson
+python -m translator.cotrip_translator inputfile.json --outputFile outputfile.geojson
 ```
 
 Example usage:
 
 ```
-python -m translator.source_code.cotrip_translator 'translator/sample files/cotrip_data/cotrip_1.json' 
+python -m translator.cotrip_translator 'translator/sample files/cotrip_data/cotrip_1.json'
+```
+
+### Execution for NavJoy 568 translator
+
+#### Run the translator script (from Work_Zone)
+
+```
+python -m translator.navjoy_translator inputfile.json --outputFile outputfile.geojson
+```
+
+Example usage:
+
+```
+python -m translator.navjoy_translator 'translator/sample files/navjoy_data/568_data.json'
 ```
 
 ### Execution for Combine_wzdx
 
-#### Run the translator script (from Work_Zone/translator/source_code)
+#### Run the translator script (from Work_Zone/translator)
 
 ```
 python combine_wzdx.py icone_wzdx_output_message_file cotrip_wzdx_output_message_file --outputFile outputfile.geojson

@@ -241,30 +241,3 @@ def test_add_ids_empty_message(mockuuid):
     expected = None
 
     assert actual == expected
-
-
-@patch('uuid.uuid4')
-def test_add_ids_invalid_message(mockuuid):
-    uuid.uuid4 = Mock()
-    uuid.uuid4.side_effect = ['we234de', '23wsg54h']
-    input_message = {
-        'road_event_feed_info': {
-            'data_sources': [
-                {
-                    'data_source_id': 'u12s5grt'
-                }
-            ]
-        }
-    }
-    actual = wzdx_translator.add_ids(input_message)
-    expected = {
-        'road_event_feed_info': {
-            'data_sources': [
-                {
-                    'data_source_id': 'u12s5grt'
-                }
-            ]
-        }
-    }
-
-    assert actual == expected

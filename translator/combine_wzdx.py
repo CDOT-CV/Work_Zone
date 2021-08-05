@@ -3,6 +3,7 @@ import copy
 import getopt
 import json
 import sys
+import logging
 
 import geopy
 import pyproj
@@ -45,9 +46,10 @@ def main():
     if combined_wzdx:
         with open(outputfile, 'w+') as f:
             f.write(json.dumps(combined_wzdx, indent=2))
-        print(f'Combined WZDx message was written to {outputfile}.')
+        logging.info(f'Combined WZDx message was written to {outputfile}.')
     else:
-        print('No duplicate WZDx messages were found. Output file was not created')
+        logging.warning(
+            'No duplicate WZDx messages were found. Output file was not created')
 
 
 # parse combination script command line arguments

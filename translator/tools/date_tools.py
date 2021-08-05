@@ -47,8 +47,8 @@ def parse_datetime_from_unix(time):
 
     if type(time) == str:
         if re.match('^-?([0-9]*[.])?[0-9]+$', time):
-            return float(time)
+            return datetime.fromtimestamp(float(time))
         else:
             return None
-    elif type(time) == float:
+    elif type(time) == int or type(time) == float:
         return datetime.fromtimestamp(time)

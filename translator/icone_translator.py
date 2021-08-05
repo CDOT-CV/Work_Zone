@@ -24,12 +24,12 @@ def main():
     wzdx_schema = json.loads(open(location_schema).read())
 
     if not wzdx_translator.validate_wzdx(wzdx, wzdx_schema):
-        print('validation error more message are printed above. output file is not created because the message failed validation.')
+        logging.error(
+            'validation error more message are printed above. output file is not created because the message failed validation.')
         return
     with open(outputfile, 'w') as fwzdx:
         fwzdx.write(json.dumps(wzdx, indent=2))
-        print(
-            'huraaah ! your wzdx message is successfully generated and located here: ' + str(outputfile))
+        print('Your wzdx message was successfully generated and is located here: ' + str(outputfile))
 
 
 # parse script command line arguments
@@ -317,9 +317,12 @@ def parse_incident(incident, callback_function=None):
     properties['ending_cross_street'] = ""
 
     # event status
-    start_time = date_tools.parse_datetime_from_iso_string(incident.get('starttime'))
-    end_time = date_tools.parse_datetime_from_iso_string(incident.get('endtime'))
-    properties['event_status'] = wzdx_translator.get_event_status(start_time, end_time)
+    start_time = date_tools.parse_datetime_from_iso_string(
+        incident.get('starttime'))
+    end_time = date_tools.parse_datetime_from_iso_string(
+        incident.get('endtime'))
+    properties['event_status'] = wzdx_translator.get_event_status(
+        start_time, end_time)
 
     # type_of_work
     # maintenance, minor-road-defect-repair, roadside-work, overhead-work, below-road-work, barrier-work, surface-work, painting, roadway-relocation, roadway-creation
@@ -371,10 +374,10 @@ def validate_incident(incident):
     updatetime = incident.get('updatetime')
     direction = parse_direction_from_street_name(street)
     if not direction:
-        direction = wzdx_translator.get_road_direction(coords)
+        direction = polygon_tools.get_road_direction_from_coordinates(coords)
         if not direction:
             logging.warning(
-                f'Invalid incident with id = {id}.unable to parse direction from street name or polyline')
+                f'Invalid incident with id = {id}. unable to parse direction from street name or polyline')
             return False
     required_fields = [location, polyline, coords, street,
                        starttime_string, description, creationtime, updatetime, direction]
@@ -387,12 +390,13 @@ def validate_incident(incident):
     start_time = date_tools.parse_datetime_from_iso_string(starttime_string)
     end_time = date_tools.parse_datetime_from_iso_string(endtime_string)
     if not start_time:
-        logging.error(f'Invalid incident with id = {id}. Unsupported start time format: {start_time}')
+        logging.warning(
+            f'Invalid incident with id = {id}. Unsupported start time format: {start_time}')
         return False
     elif endtime_string and not end_time:
-        logging.error(f'Invalid incident with id = {id}. Unsupported end time format: {end_time}')
+        logging.warning(
+            f'Invalid incident with id = {id}. Unsupported end time format: {end_time}')
         return False
-
 
     return True
 

@@ -28,12 +28,13 @@ def main():
     wzdx_schema = json.loads(open(location_schema).read())
 
     if not wzdx_translator.validate_wzdx(wzdx_obj, wzdx_schema):
-        print('validation error more message are printed above. output file is not created because the message failed validation.')
+        logging.error(
+            'validation error more message are printed above. output file is not created because the message failed validation.')
         return
     with open(outputFile, 'w') as fwzdx:
         fwzdx.write(json.dumps(wzdx_obj, indent=2))
         print(
-            'huraaah ! your wzdx message is successfully generated and located here: ' + str(outputFile))
+            'Your wzdx message was successfully generated and is located here: ' + str(outputFile))
 
 
 # parse cotrip script command line arguments
@@ -47,7 +48,7 @@ def parse_cotrip_arguments():
                         default='cotrip_wzdx_translated_output_message.geojson', help='WZDx output file path')
 
     args = parser.parse_args()
-    return args.cotripFile, args.o
+    return args.cotripFile, args.outputFile
 
 
 def wzdx_creator(message, info=None, unsupported_message_callback=None):
@@ -125,13 +126,16 @@ def parse_alert(alert, callback_function=None):
 
     header = event.get('header', {})
     detail = event.get('detail', {})
+    source = event.get('source', {})
 
     # Event Type ['work-zone', 'detour']
     properties['event_type'] = 'work-zone'
 
     # start_date
-    start_date = date_tools.parse_datetime_from_unix(header.get('start_timestamp'))
-    properties['start_date'] = date_tools.get_iso_string_from_datetime(start_date)
+    start_date = date_tools.parse_datetime_from_unix(
+        header.get('start_timestamp'))
+    properties['start_date'] = date_tools.get_iso_string_from_datetime(
+        start_date)
 
     # end_date
     end_date = date_tools.parse_datetime_from_unix(header.get('end_timestamp'))
@@ -166,7 +170,8 @@ def parse_alert(alert, callback_function=None):
     properties['vehicle_impact'] = 'unknown'
 
     # event status
-    properties['event_status'] = wzdx_translator.get_event_status(start_date, end_date)
+    properties['event_status'] = wzdx_translator.get_event_status(
+        start_date, end_date)
 
     # type_of_work
     # maintenance, minor-road-defect-repair, roadside-work, overhead-work, below-road-work, barrier-work, surface-work, painting, roadway-relocation, roadway-creation
@@ -188,12 +193,16 @@ def parse_alert(alert, callback_function=None):
     properties['description'] = header.get('description')
 
     # creation_date
-    properties['creation_date'] = date_tools.reformat_datetime(
-        event.get('source').get('collection_timestamp'))
+    creation_date = date_tools.parse_datetime_from_unix(
+        source.get('collection_timestamp'))
+    properties['creation_date'] = date_tools.get_iso_string_from_datetime(
+        creation_date)
 
     # update_date
-    properties['update_date'] = date_tools.reformat_datetime(
+    update_date = date_tools.parse_datetime_from_unix(
         alert.get('rtdh_timestamp'))
+    properties['update_date'] = date_tools.get_iso_string_from_datetime(
+        update_date)
 
     filtered_properties = copy.deepcopy(properties)
 
@@ -240,15 +249,15 @@ def validate_alert(alert):
                 f'Invalid event with event id = {id}. not all required fields are present')
             return False
 
-    start_time = date_tools.parse_datetime_from_iso_string(starttime_string)
-    end_time = date_tools.parse_datetime_from_iso_string(endtime_string)
+    start_time = date_tools.parse_datetime_from_unix(starttime_string)
+    end_time = date_tools.parse_datetime_from_unix(endtime_string)
     if not start_time:
-        logging.error(
-            f'Invalid incident with id = {id}. Unsupported start time format: {start_time}')
+        logging.warning(
+            f'Invalid incident with id = {id}. Unsupported start time format: {starttime_string}')
         return False
     elif endtime_string and not end_time:
-        logging.error(
-            f'Invalid incident with id = {id}. Unsupported end time format: {end_time}')
+        logging.warning(
+            f'Invalid incident with id = {id}. Unsupported end time format: {endtime_string}')
         return False
     return True
 
