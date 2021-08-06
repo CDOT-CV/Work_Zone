@@ -110,7 +110,7 @@ def get_directions_from_string(directions_string) -> list:
 
     return directions
 
-
+# TODO: Support additional zones per message (streetNameFrom2, ...)
 # Parse Navjoy  to WZDx
 def parse_reduction_zone(obj, direction, callback_function=None):
     if not validate_closure(obj):
