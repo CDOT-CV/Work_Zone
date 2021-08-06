@@ -188,7 +188,7 @@ def polygon_to_polyline_center(coordinates):
             avg_lon, avg_lat, center_lon, center_lat)
         distances.append([distance, [avg_lon, avg_lat]])
 
-    distances = sorted(distances, key=lambda ls: ls[0])
+    distances = sorted(distances, key=lambda ls: -ls[0])
 
     polyline = []
     polyline.append(distances[0][1])
