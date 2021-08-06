@@ -3,9 +3,8 @@ import argparse
 import json
 import logging
 from collections import OrderedDict
-from datetime import datetime
 
-from translator.tools import wzdx_translator, polygon_tools, date_tools
+from translator.tools import date_tools, polygon_tools, wzdx_translator
 
 PROGRAM_NAME = 'IconeTranslator'
 PROGRAM_VERSION = '1.0'

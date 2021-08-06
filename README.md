@@ -10,7 +10,7 @@ Work zone code and documentation for WZDx, iCone, etc.
 
 ## Project Description
 
-This is an open source, proof of concept solution for translating work zone data in the form of COtrip/Salesforce, iCone, and NavJOY messages to the standardized WZDx 3.1 format. This project was developed for CDOT. A unique translator has been developed for each of these message types. These translators read in the source message, parse out specific fields, and generate a WZDx 3.1 message. For more information on these message formats and the data mappings between these messages and the WZDx format, see the [documentation](translator/docs). Sample files are located [here](translator/sample files). All these translators are built to run from the command line and from GCP cloud functions, hosted within the CDOT RTDH (real time data hub). For more information on cloud hosting, see [GCP_cloud_function](translator/GCP_cloud_function). 
+This is an open source, proof of concept solution for translating work zone data in the form of COtrip/Salesforce, iCone, and NavJOY messages to the standardized WZDx 3.1 format. This project was developed for CDOT. A unique translator has been developed for each of these message types. These translators read in the source message, parse out specific fields, and generate a WZDx 3.1 message. For more information on these message formats and the data mappings between these messages and the WZDx format, see the [documentation](translator/docs). Sample files are located [here](translator/sample%20files). All these translators are built to run from the command line and from GCP cloud functions, hosted within the CDOT OIM WZDX environment, connected to the RTDH (real time data hub). For more information on cloud hosting, see [GCP_cloud_function](translator/GCP_cloud_function). 
 
 ## Prerequisites
 
@@ -33,11 +33,11 @@ Please set up the following environment variable for your local computer before 
 
 Runtime Environment Variables:
 
-| Name                 |             Value             |                                                                    Description |
-| :------------------- | :---------------------------: | -----------------------------------------------------------------------------: |
-| contact_name         |       Abinash Konersman       | name of environment variable contact_name containing name of the cotact person |
-| contact_email        | abinash.konersman@state.co.us |                      name of contact email containing email  of contact person |
-| issuing_organization |             CDOT              |                                                       name of the organization |
+| Name                 |          Value           |                                    Description |
+| :------------------- | :----------------------: | ---------------------------------------------: |
+| contact_name         |       Ashley Nylen       |                      name of WZDx feed contact |
+| contact_email        | ashley.nylen@state.co.us |                     email of WZDx feed contact |
+| issuing_organization |           CDOT           | name of the organization issuing the WZDx feed |
 
 Example usage:
 for mac computer run the following script to initialize the environment variable:
@@ -137,8 +137,8 @@ documentation for iCone to WZDx translator is located here: [docs](translator/do
 
 ## Contact Information
 
-Contact Name: Abinash Konersman
-Contact Information: [abinash.konersman@state.co.us]
+Contact Name: Ashley Nylen
+Contact Information: [ashley.nylen@state.co.us]
 
 ## Abbreviations
 

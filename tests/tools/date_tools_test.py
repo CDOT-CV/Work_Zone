@@ -1,7 +1,7 @@
-from translator.tools import date_tools
 from datetime import datetime, timedelta, timezone
+
 import time_machine
-import unittest
+from translator.tools import date_tools
 
 
 # --------------------------------------------------------------------------------unit test for parse_datetime_from_unix function--------------------------------------------------------------------------------
@@ -49,7 +49,7 @@ def test_parse_datetime_from_iso_string_valid():
     assert actual == expected
 
 
-def test_parse_datetime_from_iso_string_with_deccimal():
+def test_parse_datetime_from_iso_string_with_decimal():
     time_string = "2020-12-31T07:00:00.123Z"
     expected = datetime(2020, 12, 31, 7, 0, 0, 123000, tzinfo=timezone.utc)
     actual = date_tools.parse_datetime_from_iso_string(time_string)

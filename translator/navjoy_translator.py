@@ -2,12 +2,10 @@ import argparse
 import copy
 import json
 import logging
-import re
-import sys
 from collections import OrderedDict
-from datetime import datetime, timedelta, timezone
+from datetime import datetime
 
-from translator.tools import wzdx_translator, date_tools, polygon_tools
+from translator.tools import date_tools, polygon_tools, wzdx_translator
 
 PROGRAM_NAME = 'NavJoy568Translator'
 PROGRAM_VERSION = '1.0'
@@ -112,6 +110,8 @@ def get_directions_from_string(directions_string) -> list:
 
 # TODO: Support additional zones per message (streetNameFrom2, ...)
 # Parse Navjoy  to WZDx
+
+
 def parse_reduction_zone(obj, direction, callback_function=None):
     if not validate_closure(obj):
         if callback_function:

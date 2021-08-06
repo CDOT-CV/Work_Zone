@@ -3,16 +3,16 @@
         "feed_info_id": "8d062f70-d53e-4029-b94e-b7fbcbde5885",
         "update_date": "2021-05-06T18: 24: 52Z",
         "publisher": "CDOT",
-        "contact_name": "Abinash Konersman",
-        "contact_email": "abinash.konersman@state.co.us",
+        "contact_name": "Ashley Nylen",
+        "contact_email": "ashley.nylen@state.co.us",
         "version": "3.0",
         "data_sources": [
             {
                 "data_source_id": "f1f6164e-f969-4df4-9adb-badf67fe7260",
                 "feed_info_id": "8d062f70-d53e-4029-b94e-b7fbcbde5885",
                 "organization_name": "CDOT",
-                "contact_name": "Abinash Konersman",
-                "contact_email": "abinash.konersman@state.co.us",
+                "contact_name": "Ashley Nylen",
+                "contact_email": "ashley.nylen@state.co.us",
                 "update_date": "2021-05-06T18: 24: 52Z",
                 "location_method": "channel-device-method",
                 "lrs_type": "lrs_type"

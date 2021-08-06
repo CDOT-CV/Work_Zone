@@ -4,10 +4,8 @@ import json
 import logging
 import re
 from collections import OrderedDict
-from datetime import datetime, timedelta
 
-from translator.tools import wzdx_translator, date_tools
-
+from translator.tools import date_tools, wzdx_translator
 
 PROGRAM_NAME = 'CotripTranslator'
 PROGRAM_VERSION = '1.0'

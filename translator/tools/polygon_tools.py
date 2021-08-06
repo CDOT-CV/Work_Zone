@@ -138,15 +138,6 @@ def average_coordinates(coord1: list, coord2: list) -> list:
     return [(coord1[0]+coord2[0])/2, (coord1[1]+coord2[1])/2]
 
 
-def average_polygon_to_centerline(polygon):
-    """Take in correctly ordered polygon and average all points to get 
-    centerline"""
-    centerline = []
-    for i in range(0, len(polygon), 2):
-        centerline.append(average_coordinates(polygon[i], polygon[i+1]))
-    return centerline
-
-
 def average_symmetric_polygon_to_centerline(polygon):
     """Take in correctly ordered polygon and average all points to get 
     centerline"""

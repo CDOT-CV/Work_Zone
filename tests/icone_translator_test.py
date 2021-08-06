@@ -1,10 +1,11 @@
-from translator import icone_translator
-import xmltodict
-from unittest.mock import MagicMock, patch, Mock
 import os
-import time_machine
 import uuid
 from datetime import datetime
+from unittest.mock import MagicMock, Mock, patch
+
+import time_machine
+import xmltodict
+from translator import icone_translator
 
 # Unit testing code for icone_translator.py
 # --------------------------------------------------------------------------------Unit test for parse_incident function--------------------------------------------------------------------------------
@@ -294,8 +295,8 @@ def test_get_vehicle_impact_all_lanes_open():
 
 # --------------------------------------------------------------------------------Unit test for wzdx_creator function--------------------------------------------------------------------------------
 @patch.dict(os.environ, {
-    'contact_name': 'Abinash Konersman',
-    'contact_email': 'abinash.konersman@state.co.us',
+    'contact_name': 'Ashley Nylen',
+    'contact_email': 'ashley.nylen@state.co.us',
     'issuing_organization': 'CDOT'
 })
 @patch('uuid.uuid4')
@@ -319,16 +320,16 @@ def test_wzdx_creator(mockuuid):
             'feed_info_id': '104d7746-688c-44ed-b195-2ee948bf9dfa',
             'update_date': '2021-04-13T00:00:00Z',
             'publisher': 'CDOT',
-            'contact_name': 'Abinash Konersman',
-            'contact_email': 'abinash.konersman@state.co.us',
+            'contact_name': 'Ashley Nylen',
+            'contact_email': 'ashley.nylen@state.co.us',
             'version': '3.1',
             'license': 'https://creativecommons.org/publicdomain/zero/1.0/',
             'data_sources': [{
                 'data_source_id': 'w',
                 'feed_info_id': '104d7746-688c-44ed-b195-2ee948bf9dfa',
                 'organization_name': 'CDOT',
-                'contact_name': 'Abinash Konersman',
-                'contact_email': 'abinash.konersman@state.co.us',
+                'contact_name': 'Ashley Nylen',
+                'contact_email': 'ashley.nylen@state.co.us',
                 'update_date': '2021-04-13T00:00:00Z',
                 'location_method': 'channel-device-method',
                 'lrs_type': 'lrs_type'}]},
@@ -376,8 +377,8 @@ def test_wzdx_creator_empty_icone_object():
 
 
 @patch.dict(os.environ, {
-    'contact_name': 'Abinash Konersman',
-    'contact_email': 'abinash.konersman@state.co.us',
+    'contact_name': 'Ashley Nylen',
+    'contact_email': 'ashley.nylen@state.co.us',
     'issuing_organization': 'CDOT'
 })
 @patch('uuid.uuid4')
@@ -400,16 +401,16 @@ def test_wzdx_creator_no_info_object(mockuuid):
             'feed_info_id': '104d7746-688c-44ed-b195-2ee948bf9dfa',
             'update_date': '2021-04-13T00:00:00Z',
             'publisher': 'CDOT',
-            'contact_name': 'Abinash Konersman',
-            'contact_email': 'abinash.konersman@state.co.us',
+            'contact_name': 'Ashley Nylen',
+            'contact_email': 'ashley.nylen@state.co.us',
             'version': '3.1',
             'license': 'https://creativecommons.org/publicdomain/zero/1.0/',
             'data_sources': [{
                 'data_source_id': 'w',
                 'feed_info_id': '104d7746-688c-44ed-b195-2ee948bf9dfa',
                 'organization_name': 'CDOT',
-                'contact_name': 'Abinash Konersman',
-                'contact_email': 'abinash.konersman@state.co.us',
+                'contact_name': 'Ashley Nylen',
+                'contact_email': 'ashley.nylen@state.co.us',
                 'update_date': '2021-04-13T00:00:00Z',
                 'location_method': 'channel-device-method',
                 'lrs_type': 'lrs_type'}]},
@@ -455,8 +456,8 @@ def test_wzdx_creator_no_incidents():
 
 
 @patch.dict(os.environ, {
-    'contact_name': 'Abinash Konersman',
-    'contact_email': 'abinash.konersman@state.co.us',
+    'contact_name': 'Ashley Nylen',
+    'contact_email': 'ashley.nylen@state.co.us',
     'issuing_organization': 'CDOT'
 })
 def test_wzdx_creator_invalid_incidents_no_description():
@@ -491,8 +492,8 @@ def test_wzdx_creator_invalid_info_object():
         'metadata': {
             'wz_location_method': "channel-device-method",
             'lrs_type': "lrs_type",
-            'contact_name': "Abinash Konersman",
-            'contact_email': "abinash.konersman@state.co.us",
+            'contact_name': "Ashley Nylen",
+            'contact_email': "ashley.nylen@state.co.us",
             'issuing_organization': "iCone",
         }
     }
@@ -503,8 +504,8 @@ def test_wzdx_creator_invalid_info_object():
 
 
 @patch.dict(os.environ, {
-    'contact_name': 'Abinash Konersman',
-    'contact_email': 'abinash.konersman@state.co.us',
+    'contact_name': 'Ashley Nylen',
+    'contact_email': 'ashley.nylen@state.co.us',
     'issuing_organization': 'CDOT'
 })
 @patch('uuid.uuid4')
@@ -537,17 +538,17 @@ def test_wzdx_creator_valid_and_invalid(mockuuid):
         'update_date': '2021-04-13T00:00:00Z',
         'publisher': 'CDOT',
         'contact_name':
-        'Abinash Konersman',
+        'Ashley Nylen',
         'contact_email':
-        'abinash.konersman@state.co.us',
+        'ashley.nylen@state.co.us',
         'version': '3.1',
         'license': 'https://creativecommons.org/publicdomain/zero/1.0/',
         'data_sources': [
             {'data_source_id': 'w',
              'feed_info_id': '104d7746-688c-44ed-b195-2ee948bf9dfa',
              'organization_name': 'CDOT',
-             'contact_name': 'Abinash Konersman',
-             'contact_email': 'abinash.konersman@state.co.us',
+             'contact_name': 'Ashley Nylen',
+             'contact_email': 'ashley.nylen@state.co.us',
              'update_date': '2021-04-13T00:00:00Z',
              'location_method': 'channel-device-method',
              'lrs_type': 'lrs_type'}

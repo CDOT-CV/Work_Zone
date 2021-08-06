@@ -1,13 +1,8 @@
 import argparse
 import copy
-import getopt
 import json
-import sys
 import logging
 
-import geopy
-import pyproj
-from geopy.distance import geodesic
 from shapely.geometry import Point
 from shapely.geometry.polygon import Polygon
 

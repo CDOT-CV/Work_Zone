@@ -1,14 +1,15 @@
-from translator import cotrip_translator
-from datetime import datetime
-from unittest.mock import MagicMock, patch, Mock
-import time_machine
 import os
 import uuid
+from datetime import datetime
+from unittest.mock import MagicMock, Mock, patch
+
+import time_machine
+from translator import cotrip_translator
 
 
 @patch.dict(os.environ, {
-    'contact_name': 'Abinash Konersman',
-    'contact_email': 'abinash.konersman@state.co.us',
+    'contact_name': 'Ashley Nylen',
+    'contact_email': 'ashley.nylen@state.co.us',
     'issuing_organization': 'CDOT'
 })
 @patch('uuid.uuid4')
@@ -45,16 +46,16 @@ def test_wzdx_creator(mockuuid):
         'road_event_feed_info': {
             'feed_info_id': '8d062f70-d53e-4029-b94e-b7fbcbde5885',
             'update_date': '2021-04-13T00:00:00Z', 'publisher': 'CDOT',
-            'contact_name': 'Abinash Konersman',
-            'contact_email': 'abinash.konersman@state.co.us',
+            'contact_name': 'Ashley Nylen',
+            'contact_email': 'ashley.nylen@state.co.us',
             'version': '3.1',
             'license': 'https://creativecommons.org/publicdomain/zero/1.0/',
             'data_sources': [{
                 'data_source_id': 'w',
                 'feed_info_id': '8d062f70-d53e-4029-b94e-b7fbcbde5885',
                 'organization_name': 'CDOT',
-                'contact_name': 'Abinash Konersman',
-                'contact_email': 'abinash.konersman@state.co.us',
+                'contact_name': 'Ashley Nylen',
+                'contact_email': 'ashley.nylen@state.co.us',
                 'update_date': '2021-04-13T00:00:00Z',
                 'location_method': 'channel-device-method',
                 'lrs_type': 'lrs_type'}]},
@@ -98,8 +99,8 @@ def test_wzdx_creator_empty_cotrip_object():
 
 
 @patch.dict(os.environ, {
-    'contact_name': 'Abinash Konersman',
-    'contact_email': 'abinash.konersman@state.co.us',
+    'contact_name': 'Ashley Nylen',
+    'contact_email': 'ashley.nylen@state.co.us',
     'issuing_organization': 'CDOT'
 })
 def test_wzdx_creator_invalid_incidents_no_description():
@@ -165,8 +166,8 @@ def test_wzdx_creator_invalid_info_object():
         'metadata': {
             'wz_location_method': "channel-device-method",
             'lrs_type': "lrs_type",
-            'contact_name': "Abinash Konersman",
-            'contact_email': "abinash.konersman@state.co.us",
+            'contact_name': "Ashley Nylen",
+            'contact_email': "ashley.nylen@state.co.us",
             'issuing_organization': "COtrip",
         }
     }
