@@ -213,51 +213,8 @@ def test_parse_polyline_invalid_coordinates():
     expected_coordinates = []
     assert test_coordinates == expected_coordinates
 
-# --------------------------------------------------------------------------------Unit test for get_event_status function--------------------------------------------------------------------------------
-
-
-def test_get_event_status_active():
-    with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
-        test_starttime_string = 1538978400
-        test_endtime_string = ''
-        test_event_status = cotrip_translator.get_event_status(
-            test_starttime_string, test_endtime_string)
-    valid_event_status = "active"
-    assert test_event_status == valid_event_status
-
-
-def test_get_event_status_planned():
-    with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
-        test_starttime_string = 1638978400
-        test_endtime_string = ''
-        test_event_status = cotrip_translator.get_event_status(
-            test_starttime_string, test_endtime_string)
-    valid_event_status = "planned"
-    assert test_event_status == valid_event_status
-
-
-def test_get_event_status_completed():
-    with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
-        test_starttime_string = 1538978400
-        test_endtime_string = 1539978400
-        test_event_status = cotrip_translator.get_event_status(
-            test_starttime_string, test_endtime_string)
-    valid_event_status = "completed"
-    assert test_event_status == valid_event_status
-
-
-def test_get_event_status_pending():
-    with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
-        test_starttime_string = 1618940814
-        test_endtime_string = ''
-        test_event_status = cotrip_translator.get_event_status(
-            test_starttime_string, test_endtime_string)
-    valid_event_status = "pending"
-    assert test_event_status == valid_event_status
 
 # --------------------------------------------------------------------------------Unit test for parse_incident function--------------------------------------------------------------------------------
-
-
 def test_parse_alert_success():
     cotrip_obj = {
         "rtdh_timestamp": 1615866698.394646,

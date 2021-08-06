@@ -1,28 +1,16 @@
 import re
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
+import datetime as dt
 import logging
+import pytz
 
 
 ISO_8601_FORMAT_STRING = "%Y-%m-%dT%H:%M:%SZ"
 
 
-# convert UNIX timestamp to ISO timestamp
-def reformat_datetime(datetime_string):
-    if not datetime_string:
-        return None
-    elif type(datetime_string) == str:
-        if re.match('^-?([0-9]*[.])?[0-9]+$', datetime_string):
-            datetime_string = float(datetime_string)
-        else:
-            return None
-    time = datetime.fromtimestamp(datetime_string)
-    wzdx_format_datetime = time.astimezone(
-        timezone.utc).strftime(ISO_8601_FORMAT_STRING)
-    return wzdx_format_datetime
-
-
 def get_iso_string_from_datetime(date):
-    if not date or type(date) != datetime:
+    # This is added for unit test mocking (dt.datetime instead of just datetime)
+    if not date or type(date) != dt.datetime:
         return None
     return date.astimezone(timezone.utc).strftime(ISO_8601_FORMAT_STRING)
 
@@ -32,10 +20,10 @@ def parse_datetime_from_iso_string(time_string):
         return None
 
     try:
-        return datetime.strptime(time_string, "%Y-%m-%dT%H:%M:%SZ")
+        return pytz.utc.localize(datetime.strptime(time_string, "%Y-%m-%dT%H:%M:%SZ"))
     except ValueError:
         try:
-            return datetime.strptime(time_string, "%Y-%m-%dT%H:%M:%S.%fZ")
+            return pytz.utc.localize(datetime.strptime(time_string, "%Y-%m-%dT%H:%M:%S.%fZ"))
         except ValueError:
             logging.warning("invalid datetime string: " + time_string)
             return None
@@ -47,8 +35,34 @@ def parse_datetime_from_unix(time):
 
     if type(time) == str:
         if re.match('^-?([0-9]*[.])?[0-9]+$', time):
-            return datetime.fromtimestamp(float(time))
+            return datetime.fromtimestamp(float(time), tz=timezone.utc)
         else:
             return None
     elif type(time) == int or type(time) == float:
-        return datetime.fromtimestamp(time)
+        return datetime.fromtimestamp(time, tz=timezone.utc)
+
+
+# function to get event status from start and end datetimes
+def get_event_status(start_time, end_time):
+    if not start_time or type(start_time) != dt.datetime:
+        return None
+
+    event_status = "active"
+
+    current_time = datetime.now()
+
+    # check if datetime is time zone aware. If it is, get utc time
+    if start_time.tzinfo is not None and start_time.tzinfo.utcoffset(start_time) is not None:
+        current_time = datetime.utcnow().astimezone(timezone.utc)
+
+    future_date_after_2weeks = current_time + \
+        timedelta(days=14)
+
+    if current_time < start_time:
+        if start_time < future_date_after_2weeks:
+            event_status = "pending"
+        else:
+            event_status = "planned"
+    elif end_time and type(end_time) == dt.datetime and end_time < current_time:
+        event_status = "completed"
+    return event_status

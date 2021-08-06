@@ -6,7 +6,7 @@ import re
 import string
 import uuid
 from collections import OrderedDict
-from datetime import datetime
+from datetime import datetime, timezone
 
 import jsonschema
 import xmltodict
@@ -186,23 +186,6 @@ def initialize_wzdx_object(info):
     wzd['features'] = []
 
     return wzd
-
-
-# function to get event status
-def get_event_status(start_time, end_time):
-    event_status = "active"
-
-    current_time = datetime.now()
-
-    # check if datetime is time zone aware. If it is, get utc time
-    if start_time.tzinfo is not None and start_time.tzinfo.utcoffset(start_time) is not None:
-        current_time = datetime.utcnow()
-
-    if current_time < start_time:
-        event_status = "planned"  # if < 2 to 3 weeks make it pending instead of planned
-    elif end_time and end_time < current_time:
-        event_status = "completed"
-    return event_status
 
 
 def string_to_number(field):

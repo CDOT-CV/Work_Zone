@@ -90,27 +90,6 @@ def parse_polyline(poly):
     return coordinates
 
 
-# function to get event status
-def get_event_status(start_time_string, end_time_string):
-
-    start_time = datetime.fromtimestamp(start_time_string)
-    current_time = datetime.now()
-    future_date_after_2weeks = current_time + \
-        timedelta(days=14)
-    event_status = "active"
-    if current_time < start_time:
-        if start_time < future_date_after_2weeks:
-            event_status = "pending"
-        else:
-            event_status = "planned"
-
-    elif end_time_string:
-        end_time = datetime.fromtimestamp(end_time_string)
-        if end_time < current_time:
-            event_status = "completed"
-    return event_status
-
-
 # Parse COtrip alert to WZDx
 def parse_alert(alert, callback_function=None):
     if not validate_alert(alert):
@@ -170,7 +149,7 @@ def parse_alert(alert, callback_function=None):
     properties['vehicle_impact'] = 'unknown'
 
     # event status
-    properties['event_status'] = wzdx_translator.get_event_status(
+    properties['event_status'] = date_tools.get_event_status(
         start_date, end_date)
 
     # type_of_work
@@ -246,7 +225,8 @@ def validate_alert(alert):
     for field in required_fields:
         if not field:
             logging.warning(
-                f'Invalid event with event id = {id}. not all required fields are present')
+                f'''Invalid event with event id = {id}. not all required fields are present. Required fields are: 
+                polyline, street, start_timestamp, description, and direction''')
             return False
 
     start_time = date_tools.parse_datetime_from_unix(starttime_string)

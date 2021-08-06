@@ -292,34 +292,6 @@ def test_get_vehicle_impact_all_lanes_open():
     assert test_vehicle_impact == expected_vehicle_impact
 
 
-# --------------------------------------------------------------------------------Unit test for get_event_status function--------------------------------------------------------------------------------
-def test_get_event_status_active():
-    test_starttime_string = "2020-12-16T08:45:03Z"
-    test_endtime_string = ''
-    test_event_status = icone_translator.get_event_status(
-        test_starttime_string, test_endtime_string)
-    valid_event_status = "active"
-    assert test_event_status == valid_event_status
-
-
-def test_get_event_status_planned():
-    test_starttime_string = "2030-12-16T08:45:03Z"
-    test_endtime_string = ''
-    test_event_status = icone_translator.get_event_status(
-        test_starttime_string, test_endtime_string)
-    valid_event_status = "planned"
-    assert test_event_status == valid_event_status
-
-
-def test_get_event_status_completed():
-    test_starttime_string = "2020-12-16T08:45:03Z"
-    test_endtime_string = "2020-12-16T08:45:03Z"
-    test_event_status = icone_translator.get_event_status(
-        test_starttime_string, test_endtime_string)
-    valid_event_status = "completed"
-    assert test_event_status == valid_event_status
-
-
 # --------------------------------------------------------------------------------Unit test for wzdx_creator function--------------------------------------------------------------------------------
 @patch.dict(os.environ, {
     'contact_name': 'Abinash Konersman',

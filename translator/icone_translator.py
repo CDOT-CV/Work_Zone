@@ -128,21 +128,6 @@ def parse_direction_from_street_name(street):
     return direction
 
 
-# function to get event status
-def get_event_status(start_time_string, end_time_string):
-    start_time = datetime.strptime(start_time_string, "%Y-%m-%dT%H:%M:%SZ")
-
-    event_status = "active"
-    if datetime.now() < start_time:
-        event_status = "planned"  # if < 2 to 3 weeks make it pending instead of planned
-    elif end_time_string:
-        end_time = datetime.strptime(end_time_string, "%Y-%m-%dT%H:%M:%SZ")
-
-        if end_time < datetime.now():
-            event_status = "completed"
-    return event_status
-
-
 # function to get description
 def create_description(incident):
     description = incident.get('description')
@@ -321,7 +306,7 @@ def parse_incident(incident, callback_function=None):
         incident.get('starttime'))
     end_time = date_tools.parse_datetime_from_iso_string(
         incident.get('endtime'))
-    properties['event_status'] = wzdx_translator.get_event_status(
+    properties['event_status'] = date_tools.get_event_status(
         start_time, end_time)
 
     # type_of_work
@@ -384,7 +369,8 @@ def validate_incident(incident):
     for field in required_fields:
         if not field:
             logging.warning(
-                f'Invalid incident with id = {id}. Not all required fields are present')
+                f'''Invalid incident with id = {id}. Not all required fields are present. Required fields are: 
+                location, polyline, street, starttime, description, creationtime, and updatetime''')
             return False
 
     start_time = date_tools.parse_datetime_from_iso_string(starttime_string)

@@ -75,7 +75,7 @@
             "descriptionForProject": "Bridge Repairs",
             "srzmap": [
                 {
-                    "type": "Polygon",
+                    "type": "LineString",
                     "coordinates": [
                         [
                             [

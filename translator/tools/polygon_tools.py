@@ -163,6 +163,7 @@ def rotate(l, n):
 
 def polygon_to_polyline_center(coordinates):
     """Convert a polygon to a polyline by finding the 2 segments farthest from the center of mass"""
+    print(coordinates)
     if not coordinates or type(coordinates) != list or len(coordinates) < 5:
         return None
 
@@ -196,8 +197,12 @@ def polygon_to_polyline_center(coordinates):
     return polyline
 
 
+# Welp, this is now worthless. None of the polygons NavJoy is generating follow the roadway and thus don't have
+# 90 degree corners. So this can never find any good corners except on the 4 (5) point rectangular polygons,
+# which the centers function handles better. who doesn't love wasting time am I right?
 def polygon_to_polyline_corners(coordinates):
     """Convert a polygon to a polyline by finding corners"""
+    print(coordinates)
     if not coordinates or type(coordinates) != list:
         return None
     corners = []
@@ -222,6 +227,8 @@ def polygon_to_polyline_corners(coordinates):
         net_angle = abs(angle_1 + angle_2)
         if abs(net_angle - 180) < CORNER_PRECISION_DEGREES:
             corners.append([i1, i2, net_angle, distance_2])
+
+    print(corners)
 
     # If 4 corners, assume the polygon is a rectangle. Select shortest 2 sides as ends
     if len(corners) == 4:

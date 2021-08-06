@@ -111,27 +111,6 @@ def get_directions_from_string(directions_string) -> list:
     return directions
 
 
-# function to get event status
-def get_event_status(start_time_string, end_time_string):
-
-    start_time = datetime.fromtimestamp(start_time_string)
-    current_time = datetime.now()
-    future_date_after_2weeks = current_time + \
-        timedelta(days=14)
-    event_status = "active"
-    if current_time < start_time:
-        if start_time < future_date_after_2weeks:
-            event_status = "pending"
-        else:
-            event_status = "planned"
-
-    elif end_time_string:
-        end_time = datetime.fromtimestamp(end_time_string)
-        if end_time < current_time:
-            event_status = "completed"
-    return event_status
-
-
 # Parse Navjoy  to WZDx
 def parse_reduction_zone(obj, direction, callback_function=None):
     if not validate_closure(obj):
@@ -144,19 +123,21 @@ def parse_reduction_zone(obj, direction, callback_function=None):
     map = data.get('srzmap')
     index = get_linestring_index(map)
     if index != None:
-        coordinates = map[index].get("coordinates")
+        coordinates = map[index].get("coordinates", [None])[0]
     else:
         index = get_polygon_index(map)
         if index != None:
-            polygon = map[index].get("coordinates")
+            polygon = map[index].get("coordinates", [None])[0]
             coordinates = polygon_tools.polygon_to_polyline_center(polygon)
         else:
-            logging.warning(f"Invalid event with id = {obj.get('sys_gUid')}. No polygon or linestring")
+            logging.warning(
+                f"Invalid event with id = {obj.get('sys_gUid')}. No polygon or linestring")
             return None
 
     if not coordinates:
-        logging.warning(f"Invalid event with id = {obj.get('sys_gUid')}. Unable to parse linestring from polygon")
-        return None
+        logging.warning(
+            f"Invalid event with id = {obj.get('sys_gUid')}. No valid coordinates found")
+        return False
 
     # [0].get('coordinates')[0]
     # coordinates = polygon_tools.polygon_to_polyline_center(polygon)
@@ -186,7 +167,8 @@ def parse_reduction_zone(obj, direction, callback_function=None):
         start_date)
 
     # end_date
-    end_date = date_tools.parse_datetime_from_unix(data.get('workEndDate'))
+    end_date = date_tools.parse_datetime_from_iso_string(
+        data.get('workEndDate'))
     if end_date:
         properties['end_date'] = date_tools.get_iso_string_from_datetime(
             end_date)
@@ -216,7 +198,7 @@ def parse_reduction_zone(obj, direction, callback_function=None):
         data.get('reductionJustification'))
 
     # event status
-    properties['event_status'] = wzdx_translator.get_event_status(
+    properties['event_status'] = date_tools.get_event_status(
         start_date, end_date)
 
     # type_of_work
@@ -232,18 +214,15 @@ def parse_reduction_zone(obj, direction, callback_function=None):
         properties['reduced_speed_limit'] = wzdx_translator.string_to_number(
             reducedSpeed)
 
-    # restrictions
-    reductionJustification = data.get('reductionJustification')
-    restrictions = get_restrictions(reductionJustification)
-    if restrictions:
-        properties['restrictions'] = restrictions
-
     # description
-    properties['description'] = reductionJustification
+    reductionJustification = data.get('reductionJustification')
+    properties['description'] = data.get(
+        'descriptionForProject', '') + '. ' + reductionJustification
 
     # creation_date
     properties['creation_date'] = date_tools.get_iso_string_from_datetime(
         datetime.utcnow())
+    print('creation_date', properties['creation_date'])
 
     # update_date
     properties['update_date'] = date_tools.get_iso_string_from_datetime(
@@ -279,32 +258,35 @@ def validate_closure(obj):
         logging.warning(
             f'Invalid event with id = {id}. ConstructionWorkZonePlan object is either invalid or empty')
 
+    # TODO: Support MultiPoint
     index = get_linestring_index(map)
     if index != None:
-        coordinates = map[index].get("coordinates")
+        coordinates = map[index].get("coordinates", [None])[0]
     else:
         index = get_polygon_index(map)
         if index != None:
-            polygon = map[index].get("coordinates")
+            polygon = map[index].get("coordinates", [None])[0]
             coordinates = polygon_tools.polygon_to_polyline_center(polygon)
-            if not coordinates:
-                logging.warning(
-                    "Invalid event with id = {id}. Unable to retrieve centerline from polygon")
         else:
             logging.warning(
-                "Invalid event with id = {id}. No LineString or Polygon found")
-            return None
+                f"Invalid event with id = {id}. No LineString or Polygon found")
+            return False
+
+    if not coordinates:
+        logging.warning(
+            f"Invalid event with id = {obj.get('sys_gUid')}. No valid coordinates found")
+        return False
 
     starttime_string = data.get('workStartDate')
     endtime_string = data.get('workEndDate')
-
-    description = data.get('reductionJustification')
+    description = data.get('descriptionForProject')
 
     required_fields = [street, starttime_string, description]
     for field in required_fields:
         if not field:
             logging.warning(
-                f'Invalid event with id = {id}. not all required fields are present')
+                f'''Invalid event with id = {id}. not all required fields are present. Required fields are: 
+                streetNameFrom, workStartDate, and descriptionForProject''')
             return False
 
     start_time = date_tools.parse_datetime_from_iso_string(starttime_string)
@@ -357,41 +339,8 @@ def get_types_of_work(field):
 
     if 'restriping' in field or 'crack seal' in field:
         types_of_work.append({'type_name': 'surface-work',
-                              'is_architectural_change': True})
+                              'is_architectural_change': False})
     return types_of_work
-
-
-def get_restrictions(travelRestriction):
-    if not travelRestriction or type(travelRestriction) != str:
-        return None
-    travelRestriction = travelRestriction.lower()
-    # valid_type_of_restrictions = ['no-trucks',
-    #                               'travel-peak-hours-only',
-    #                               'hov-3',
-    #                               'hov-2',
-    #                               'no-parking',
-    #                               'reduced-width',
-    #                               'reduced-height',
-    #                               'reduced-length',
-    #                               'reduced-weight',
-    #                               'axle-load-limit',
-    #                               'gross-weight-limit',
-    #                               'towing-prohibited',
-    #                               'permitted-oversize-loads-prohibited',
-    #                               'local-access-only']
-
-    restrictions = []
-
-    return restrictions
-
-
-def get_rsz_from_restrictions(travelRestriction):
-    match = re.search(
-        'expect slower speed limits \([0-9]{2} mph\)', travelRestriction)
-    if match:
-        speed_limit = match.group(
-            0)[len('expect slower speed limits ('):-len(' mph)')]
-        return speed_limit
 
 
 if __name__ == "__main__":
