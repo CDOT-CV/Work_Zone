@@ -257,7 +257,7 @@ def test_validate_incident_invalid_start_time():
     test_valid_output = {
         '@id': 'U13631595_202012160845',
         'updatetime': '2020-12-16T17:18:00Z',
-        'starttime': '2020-12',
+        'starttime': 'dsafsaf',
         'description': 'Road constructions are going on',
         'creationtime': '2020-12-13T14:18:00Z',
         'location': {

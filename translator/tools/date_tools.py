@@ -1,8 +1,7 @@
-import re
 from datetime import datetime, timedelta, timezone
 import datetime as dt
 import logging
-import pytz
+from dateutil import parser
 
 
 ISO_8601_FORMAT_STRING = "%Y-%m-%dT%H:%M:%SZ"
@@ -16,17 +15,15 @@ def get_iso_string_from_datetime(date):
 
 
 def parse_datetime_from_iso_string(time_string):
+    """Parse ISO string to datetime. Handles many differnet datetime formats"""
     if not time_string or type(time_string) != str:
         return None
 
     try:
-        return pytz.utc.localize(datetime.strptime(time_string, "%Y-%m-%dT%H:%M:%SZ"))
+        return parser.parse(time_string)
     except ValueError:
-        try:
-            return pytz.utc.localize(datetime.strptime(time_string, "%Y-%m-%dT%H:%M:%S.%fZ"))
-        except ValueError:
-            logging.warning("invalid datetime string: " + time_string)
-            return None
+        logging.warning("invalid datetime string: " + time_string)
+        return None
 
 
 def parse_datetime_from_unix(time):
@@ -34,9 +31,9 @@ def parse_datetime_from_unix(time):
         return None
 
     if type(time) == str:
-        if re.match('^-?([0-9]*[.])?[0-9]+$', time):
+        try:
             return datetime.fromtimestamp(float(time), tz=timezone.utc)
-        else:
+        except ValueError:
             return None
     elif type(time) == int or type(time) == float:
         return datetime.fromtimestamp(time, tz=timezone.utc)
