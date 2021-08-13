@@ -5,7 +5,7 @@ import logging
 from collections import OrderedDict
 from datetime import datetime
 
-from translator.tools import date_tools, polygon_tools, wzdx_translator
+from translator.tools import array_tools, date_tools, polygon_tools, wzdx_translator
 
 PROGRAM_NAME = 'NavJoy568Translator'
 PROGRAM_VERSION = '1.0'
@@ -108,10 +108,9 @@ def get_directions_from_string(directions_string) -> list:
 
     return directions
 
+
 # TODO: Support additional zones per message (streetNameFrom2, ...)
 # Parse Navjoy  to WZDx
-
-
 def parse_reduction_zone(obj, direction, callback_function=None):
     if not validate_closure(obj):
         if callback_function:
@@ -123,12 +122,16 @@ def parse_reduction_zone(obj, direction, callback_function=None):
     map = data.get('srzmap')
     index = get_linestring_index(map)
     if index != None:
-        coordinates = map[index].get("coordinates", [None])[0]
+        coordinates = map[index].get("coordinates")
+        coordinates = array_tools.get_2d_list(coordinates)
     else:
         index = get_polygon_index(map)
         if index != None:
-            polygon = map[index].get("coordinates", [None])[0]
-            coordinates = polygon_tools.polygon_to_polyline_center(polygon)
+            polygon = map[index].get("coordinates")
+            coordinates = array_tools.get_2d_list(polygon)
+            if coordinates:
+                coordinates = polygon_tools.polygon_to_polyline_center(
+                    coordinates)
         else:
             logging.warning(
                 f"Invalid event with id = {obj.get('sys_gUid')}. No polygon or linestring")
@@ -137,10 +140,7 @@ def parse_reduction_zone(obj, direction, callback_function=None):
     if not coordinates:
         logging.warning(
             f"Invalid event with id = {obj.get('sys_gUid')}. No valid coordinates found")
-        return False
-
-    # [0].get('coordinates')[0]
-    # coordinates = polygon_tools.polygon_to_polyline_center(polygon)
+        return None
 
     # Reverese polygon if it is in the opposide direction as the message
     polyline_direction = polygon_tools.get_road_direction_from_coordinates(
@@ -222,7 +222,6 @@ def parse_reduction_zone(obj, direction, callback_function=None):
     # creation_date
     properties['creation_date'] = date_tools.get_iso_string_from_datetime(
         datetime.utcnow())
-    print('creation_date', properties['creation_date'])
 
     # update_date
     properties['update_date'] = date_tools.get_iso_string_from_datetime(

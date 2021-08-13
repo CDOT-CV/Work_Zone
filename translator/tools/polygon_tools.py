@@ -103,6 +103,8 @@ def isPointInPolygon(point: Point, polygon: Polygon) -> bool:
 def get_road_direction_from_coordinates(coordinates):
     if not coordinates or type(coordinates) != list or len(coordinates) < 2:
         return None
+
+    print(coordinates)
     try:
         long_dif = coordinates[-1][0] - coordinates[0][0]
         lat_dif = coordinates[-1][1] - coordinates[0][1]
@@ -154,7 +156,6 @@ def rotate(l, n):
 
 def polygon_to_polyline_center(coordinates):
     """Convert a polygon to a polyline by finding the 2 segments farthest from the center of mass"""
-    print(coordinates)
     if not coordinates or type(coordinates) != list or len(coordinates) < 5:
         return None
 
@@ -193,7 +194,6 @@ def polygon_to_polyline_center(coordinates):
 # which the centers function handles better. who doesn't love wasting time am I right?
 def polygon_to_polyline_corners(coordinates):
     """Convert a polygon to a polyline by finding corners"""
-    print(coordinates)
     if not coordinates or type(coordinates) != list:
         return None
     corners = []
