@@ -74,7 +74,7 @@ def test_combine_wzdx():
 # --------------------------------------------------------------------------------Unit test for duplicate_features_and_combine function--------------------------------------------------------------------------------
 
 
-def test_find_duplicate_features_and_combine():
+def test_find_overlapping_features_and_combine():
     test_cotrip_data = {
         "road_event_feed_info": {
             "data_sources": [
@@ -182,13 +182,13 @@ def test_find_duplicate_features_and_combine():
         ]
     }
 
-    actual = combine_wzdx.find_duplicate_features_and_combine(
+    actual = combine_wzdx.find_overlapping_features_and_combine(
         test_icone_data, test_cotrip_data)
 
     assert expected_combined_wzdx == actual
 
 
-def test_find_duplicate_features_and_combine_no_duplicates():
+def test_find_overlapping_features_and_combine_no_duplicates():
     test_cotrip_data = {
         "road_event_feed_info": {
             "data_sources": [
@@ -248,7 +248,7 @@ def test_find_duplicate_features_and_combine_no_duplicates():
 
     expected_combined_wzdx = None
 
-    actual = combine_wzdx.find_duplicate_features_and_combine(
+    actual = combine_wzdx.find_overlapping_features_and_combine(
         test_icone_data, test_cotrip_data)
 
     assert expected_combined_wzdx == actual

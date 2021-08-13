@@ -469,7 +469,7 @@ def test_wzdx_creator(mock_dt, mock_dt_2, mock_dt_3, mockuuid):
 
     expected_wzdx = {
         'road_event_feed_info': {
-            'feed_info_id': '8d062f70-d53e-4029-b94e-b7fbcbde5885',
+            'feed_info_id': '2ed141dc-b998-4f7a-8395-9ae9dc7df2f8',
             'update_date': '2021-04-13T00:00:00Z',
             'publisher': 'CDOT',
             'contact_name': 'Ashley Nylen',
@@ -479,7 +479,7 @@ def test_wzdx_creator(mock_dt, mock_dt_2, mock_dt_3, mockuuid):
             'data_sources': [
                 {
                     'data_source_id': 'w',
-                    'feed_info_id': '8d062f70-d53e-4029-b94e-b7fbcbde5885',
+                    'feed_info_id': '2ed141dc-b998-4f7a-8395-9ae9dc7df2f8',
                     'organization_name': 'CDOT',
                     'contact_name': 'Ashley Nylen',
                     'contact_email': 'ashley.nylen@state.co.us',
@@ -780,7 +780,7 @@ def test_wzdx_creator_valid_and_invalid(mock_dt, mock_dt_2, mock_dt_3, mockuuid)
 
     expected_wzdx = {
         'road_event_feed_info': {
-            'feed_info_id': '8d062f70-d53e-4029-b94e-b7fbcbde5885',
+            'feed_info_id': '2ed141dc-b998-4f7a-8395-9ae9dc7df2f8',
             'update_date': '2021-04-13T00:00:00Z',
             'publisher': 'CDOT',
             'contact_name': 'Ashley Nylen',
@@ -790,7 +790,7 @@ def test_wzdx_creator_valid_and_invalid(mock_dt, mock_dt_2, mock_dt_3, mockuuid)
             'data_sources': [
                 {
                     'data_source_id': 'w',
-                    'feed_info_id': '8d062f70-d53e-4029-b94e-b7fbcbde5885',
+                    'feed_info_id': '2ed141dc-b998-4f7a-8395-9ae9dc7df2f8',
                     'organization_name': 'CDOT',
                     'contact_name': 'Ashley Nylen',
                     'contact_email': 'ashley.nylen@state.co.us',
