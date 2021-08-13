@@ -10,6 +10,8 @@ from translator.tools import array_tools, date_tools, polygon_tools, wzdx_transl
 PROGRAM_NAME = 'NavJoy568Translator'
 PROGRAM_VERSION = '1.0'
 
+DEFAULT_NAVJOY_FEED_INFO_ID = '2ed141dc-b998-4f7a-8395-9ae9dc7df2f8'
+
 STRING_DIRECTION_MAP = {'north': 'northbound', 'south': 'southbound',
                         'west': 'westbound', 'east': 'eastbound'}
 
@@ -58,8 +60,7 @@ def wzdx_creator(messages, info=None, unsupported_message_callback=None):
         return None
    # verify info obj
     if not info:
-        info = wzdx_translator.initialize_info(
-            '8d062f70-d53e-4029-b94e-b7fbcbde5885')
+        info = wzdx_translator.initialize_info(DEFAULT_NAVJOY_FEED_INFO_ID)
     if not wzdx_translator.validate_info(info):
         return None
 
@@ -110,7 +111,7 @@ def get_directions_from_string(directions_string) -> list:
 
 
 # TODO: Support additional zones per message (streetNameFrom2, ...)
-# Parse Navjoy  to WZDx
+# Convert individual Navjoy 658 speed reduction zone to WZDx feature
 def parse_reduction_zone(obj, direction, callback_function=None):
     if not validate_closure(obj):
         if callback_function:
@@ -142,7 +143,7 @@ def parse_reduction_zone(obj, direction, callback_function=None):
             f"Invalid event with id = {obj.get('sys_gUid')}. No valid coordinates found")
         return None
 
-    # Reverese polygon if it is in the opposide direction as the message
+    # Reverse polygon if it is in the opposite direction as the message
     polyline_direction = polygon_tools.get_road_direction_from_coordinates(
         coordinates)
     if direction == REVERSED_DIRECTION_MAP.get(polyline_direction):
@@ -209,10 +210,8 @@ def parse_reduction_zone(obj, direction, callback_function=None):
         properties['types_of_work'] = types_of_work
 
     # reduced_speed_limit
-    reducedSpeed = data.get('requestedTemporarySpeed')
-    if reducedSpeed:
-        properties['reduced_speed_limit'] = wzdx_translator.string_to_number(
-            reducedSpeed)
+    properties['reduced_speed_limit'] = wzdx_translator.string_to_number(
+        data.get('requestedTemporarySpeed'))
 
     # description
     reductionJustification = data.get('reductionJustification')
@@ -316,6 +315,7 @@ def get_vehicle_impact(travelRestriction):
     return vehicle_impact
 
 
+# TODO: Support more types of work
 def get_types_of_work(field):
     if not field or type(field) != str:
         return None

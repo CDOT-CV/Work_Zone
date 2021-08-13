@@ -35,7 +35,7 @@ def main():
         raise ValueError(
             'One or more files specified are invalid. Please specify valid geojson files!') from None
 
-    combined_wzdx = find_duplicate_features_and_combine(
+    combined_wzdx = find_overlapping_features_and_combine(
         wzdx_icone, wzdx_cotrip)
 
     if combined_wzdx:
@@ -44,7 +44,7 @@ def main():
         logging.info(f'Combined WZDx message was written to {outputfile}.')
     else:
         logging.warning(
-            'No duplicate WZDx messages were found. Output file was not created')
+            'No overlapping WZDx messages were found. Output file was not created')
 
 
 # parse combination script command line arguments
@@ -55,7 +55,7 @@ def parse_combined_arguments() -> tuple:
         Tuple of (iCone file path, cotrip file path, output file path)
     """
     parser = argparse.ArgumentParser(
-        description='Detect and combine duplicate iCone and COTrip WZDx work zone messages')
+        description='Detect and combine overlapping iCone and COTrip WZDx work zone messages')
     parser.add_argument('--version', action='version',
                         version=f'{PROGRAM_NAME} {PROGRAM_VERSION}')
     parser.add_argument('iconeFile', help='icone file path')
@@ -67,8 +67,8 @@ def parse_combined_arguments() -> tuple:
     return args.iconeFile, args.cotripFile, args.outputFile
 
 
-def find_duplicate_features_and_combine(wzdx_source: dict, wzdx_destination: dict) -> dict:
-    """Find duplicate features in WZDx messages and combine source duplicates into destination message
+def find_overlapping_features_and_combine(wzdx_source: dict, wzdx_destination: dict) -> dict:
+    """Find overlapping features in WZDx messages and combine into destination message
 
     Args:
         wzdx_source: Source WZDx message
@@ -78,10 +78,10 @@ def find_duplicate_features_and_combine(wzdx_source: dict, wzdx_destination: dic
         Destination WZDx message, updated from source if new data was found
     """
 
-    # Make copy of destination object to combine duplicates into
+    # Make copy of destination object to combine overlapping messages into
     combined_wzdx = copy.deepcopy(wzdx_destination)
 
-    # Iterate over destination features, for each search for duplicate source features. If any are found, combine them into the
+    # Iterate over destination features, for each search for overlapping source features. If any are found, combine them into the
     # combined_wzdx feature
     for index, destination_feature in enumerate(wzdx_destination["features"]):
 
@@ -89,7 +89,7 @@ def find_duplicate_features_and_combine(wzdx_source: dict, wzdx_destination: dic
         polygon = polygon_tools.generate_buffer_polygon_from_linestring(
             destination_feature['geometry']['coordinates'], POLYGON_WIDTH_METERS)
 
-        # Get list of duplicate source features
+        # Get list of overlapping source features
         iconeIndexes = iterate_feature(polygon, wzdx_source)
 
         # Iteratively combine them with the combined feature
@@ -97,7 +97,7 @@ def find_duplicate_features_and_combine(wzdx_source: dict, wzdx_destination: dic
             combined_wzdx = combine_wzdx(
                 combined_wzdx, index, wzdx_source, iconeIndex)
 
-    # If features are identical, then no duplicates were found, return None. Else return combined message
+    # If features are identical, then no overlapping messages were found, return None. Else return combined message
     if combined_wzdx == wzdx_destination:
         return None
     else:
@@ -105,7 +105,7 @@ def find_duplicate_features_and_combine(wzdx_source: dict, wzdx_destination: dic
 
 
 def combine_wzdx(wzdx_destination: dict, destination_feature_index: int, wzdx_source: dict, source_feature_index: int) -> dict:
-    """Combine WZDx messages given duplicate feature indexes
+    """Combine WZDx messages given overlapping feature indexes
 
     Args:
         combined_wzdx: Destination WZDx message (dict)

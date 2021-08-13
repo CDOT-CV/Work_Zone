@@ -6,7 +6,7 @@ import re
 import string
 import uuid
 from collections import OrderedDict
-from datetime import datetime, timezone
+from datetime import datetime
 
 import jsonschema
 import xmltodict

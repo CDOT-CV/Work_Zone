@@ -5,9 +5,8 @@ from unittest.mock import Mock, patch
 
 from translator.tools import wzdx_translator
 
+
 # --------------------------------------------------------------------------------unit test for valid_info function--------------------------------------------------------------------------------
-
-
 def test_valid_info_valid_info():
     test_info = {
         'feed_info_id': "104d7746-688c-44ed-b195-2ee948bf9dfa",
@@ -57,9 +56,8 @@ def test_valid_info_invalid_info_invalid_feed_info_id():
     test_validate_info = wzdx_translator.validate_info(test_info)
     assert test_validate_info == False
 
+
 # --------------------------------------------------------------------------------unit test for parse_xml function--------------------------------------------------------------------------------
-
-
 def test_parse_xml():
 
     test_input = './translator/sample files/Icone Data/incident_short.xml'
@@ -83,42 +81,7 @@ def test_parse_xml_file_does_not_exist():
     assert expected_icone_data == actual_icone_data
 
 
-# # --------------------------------------------------------------------------------unit test for parse_arguments function--------------------------------------------------------------------------------
-
-
-# def test_parse_arguments():
-#     test_input = '-i inputfile.xml -o outputfile.geojson'
-#     test_argv = test_input.split(' ')
-#     test_input, test_output = wzdx_translator.parse_arguments(
-#         test_argv)
-#     assert test_output == test_argv[3] and test_input == test_argv[1]
-
-
-# def test_parse_arguments_no_arguments():
-#     test_input = ''
-#     test_argv = test_input.split(' ')
-#     test_input, test_output = wzdx_translator.parse_arguments(
-#         test_argv)
-#     assert test_output == 'wzdx_translated_output_message.geojson' and test_input == ''
-
-
-# def test_parse_arguments_invalid_arguments():
-#     test_input = 'inputfile.xml outputfile.geojson'
-#     test_argv = test_input.split(' ')
-#     test_input, test_output = wzdx_translator.parse_arguments(
-#         test_argv)
-#     assert test_output == 'wzdx_translated_output_message.geojson' and test_input == ''
-
-
-# def test_parse_arguments_help():
-#     test_input = '-h'
-#     test_argv = test_input.split(' ')
-#     with pytest.raises(SystemExit):
-#         wzdx_translator.parse_arguments(test_argv)
-
 # --------------------------------------------------------------------------------unit test for validate_wzdx function--------------------------------------------------------------------------------
-
-
 def test_validate_wzdx_valid_wzdx_data():
     valid_wzdx_data = json.loads('{"road_event_feed_info": {"feed_info_id": "feed_info_id", "update_date": "2021-01-05T12:14:07Z", "publisher": "CDOT ", "contact_name": "Ashley Nylen", "contact_email": "ashley.nylen@state.co.us", "update_frequency": 86400, "version": "3.0", "data_sources": [{"data_source_id": "d5333bb4-0ea2-4318-8934-91f8916d6a8e", "feed_info_id": "feed_info_id", "organization_name": "issuing_organization", "contact_name": "contact_name", "contact_email": "contact_email", "update_frequency": 86400, "update_date": "2021-01-05T12:14:07Z", "location_verify_method": "location_verify_method", "location_method": "channel-device-method", "lrs_type": "lrs_type"}]}, "type": "FeatureCollection", "features": [{"type": "Feature", "properties": {"road_event_id": "3f6fc7b7-9133-41be-9636-994432c1d0c3", "event_type": "work-zone", "data_source_id": "d5333bb4-0ea2-4318-8934-91f8916d6a8e", "start_date": "2020-02-14T17:08:16Z", "end_date": "", "start_date_accuracy": "estimated", "end_date_accuracy": "estimated", "beginning_accuracy": "estimated", "ending_accuracy": "estimated", "road_name": "I-75 N", "direction": "westbound", "vehicle_impact": "all-lanes-open", "relationship": {"relationship_id": "3ae833b0-123c-4c4d-b906-3e4f6949bee8", "road_event_id": "3f6fc7b7-9133-41be-9636-994432c1d0c3"}, "lanes": [], "road_number": "", "beginning_cross_street": "", "ending_cross_street": "", "event_status": "active", "total_num_lanes": 1, "types_of_work": [], "reduced_speed_limit": 25, "workers_present": false, "restrictions": [], "description": "19-1245: Roadwork between MP 40 and MP 48", "creation_date": "2019-11-05T01:22:20Z", "update_date": "2020-08-21T15:52:02Z"}, "geometry": {"type": "LineString", "coordinates": [[-84.112854, 37.157199], [-84.1238971, 37.1686478], [-84.145861, 37.1913], [-84.175297, 37.209348], [-84.201303, 37.216837]]}}, {"type": "Feature", "properties": {"road_event_id": "52a6ecf1-4bee-49e9-a3bc-47c6cf20db19", "event_type": "work-zone", "data_source_id": "d5333bb4-0ea2-4318-8934-91f8916d6a8e", "start_date": "2019-11-22T23:02:21Z", "end_date": "", "start_date_accuracy": "estimated", "end_date_accuracy": "estimated", "beginning_accuracy": "estimated", "ending_accuracy": "estimated", "road_name": "I-75 S", "direction": "southbound", "vehicle_impact": "all-lanes-open", "relationship": {"relationship_id": "a5e54a72-d639-4945-9cf6-1b518f68399b", "road_event_id": "52a6ecf1-4bee-49e9-a3bc-47c6cf20db19"}, "lanes": [], "road_number": "", "beginning_cross_street": "", "ending_cross_street": "", "event_status": "active", "total_num_lanes": 1, "types_of_work": [], "reduced_speed_limit": 25, "workers_present": false, "restrictions": [], "description": "19-1245: Roadwork between MP 48 and MP 40", "creation_date": "2019-11-05T01:32:44Z", "update_date": "2020-08-21T15:52:02Z"}, "geometry": {"type": "LineString", "coordinates": [[-84.169129, 37.20667], [-84.157346, 37.201223], [-84.140482, 37.185815], [-84.121425, 37.166345], [-84.111588, 37.147808]]}}]}')
     test_schema = json.loads(
@@ -152,9 +115,9 @@ def test_validate_wzdx_no_wzdx_data():
     validate_write = wzdx_translator.validate_wzdx(
         test_wzdx_data, test_schema)
     assert validate_write == False
+
+
 # --------------------------------------------------------------------------------unit test for initialize_info function--------------------------------------------------------------------------------
-
-
 @patch.dict(os.environ, {
     'contact_name': 'Ashley Nylen',
     'contact_email': 'ashley.nylen@state.co.us',
@@ -169,7 +132,6 @@ def test_initialize_info():
 
 
 # --------------------------------------------------------------------------------Unit test for add_ids function--------------------------------------------------------------------------------
-
 @patch('uuid.uuid4')
 def test_add_ids(mockuuid):
     uuid.uuid4 = Mock()
