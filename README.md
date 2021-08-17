@@ -1,16 +1,16 @@
 # Work_Zone
 
-Work zone code and documentation for WZDx, iCone, etc.
+Work zone code and documentation for WZDx, iCone, etc. 
 
 | Build | Quality Gate | Code Coverage |
 | :---- | :----------: | ------------: |
-|       |             |               |
+|       |              |               |
 
 # WZDX Translator
 
 ## Project Description
 
-This project is an open source, proof of concept for Work Zone Data Exchange message creation from CDOT data to include iCone and Cotrip. The purpose of this tool is to  build a translator from Cotrip work zone data and iCone data to the WZDx message (3.1). The message will contain required data by WZDx that can be populated by iCone and other Cotrip Work Zone resources. Basically, in this project, we run a python script to parse data from the iCone xml file and COtrip data which generates WXDx 3.1 messages in a geojson format.
+This is an open source, proof of concept solution for translating work zone data in the form of COtrip/Salesforce, iCone, and NavJOY messages to the standardized WZDx 3.1 format. This project was developed for CDOT. A unique translator has been developed for each of these message types. These translators read in the source message, parse out specific fields, and generate a WZDx 3.1 message. For more information on these message formats and the data mappings between these messages and the WZDx format, see the [documentation](translator/docs). Sample files are located [here](translator/sample%20files). All these translators are built to run from the command line and from GCP cloud functions, hosted within the CDOT OIM WZDX environment, connected to the RTDH (real time data hub). For more information on cloud hosting, see [GCP_cloud_function](translator/GCP_cloud_function). 
 
 ## Prerequisites
 
@@ -21,7 +21,7 @@ Requires:
 
 ## Environment Setup
 
-This code requires Python 3.6 or a higher version. If you haven’t already, download Python and Pip. Next, you’ll need to install several packages that we’ll use throughout this tutorial. You can do this by opening terminal or command prompt on your operating system:
+This code requires Python 3.6 or a higher version. If you haven’t already, download Python and pip. You can install the required packages by running the following command:
 
 ```
 pip install -r requirements.txt
@@ -33,11 +33,11 @@ Please set up the following environment variable for your local computer before 
 
 Runtime Environment Variables:
 
-| Name                 |             Value             |                                                                    Description |
-| :------------------- | :---------------------------: | -----------------------------------------------------------------------------: |
-| contact_name         |       Abinash Konersman       | name of environment variable contact_name containing name of the cotact person |
-| contact_email        | abinash.konersman@state.co.us |                      name of contact email containing email  of contact person |
-| issuing_organization |             CDOT             |                                                       name of the organization |
+| Name                 |          Value           |                                    Description |
+| :------------------- | :----------------------: | ---------------------------------------------: |
+| contact_name         |       Ashley Nylen       |                      name of WZDx feed contact |
+| contact_email        | ashley.nylen@state.co.us |                     email of WZDx feed contact |
+| issuing_organization |           CDOT           | name of the organization issuing the WZDx feed |
 
 Example usage:
 for mac computer run the following script to initialize the environment variable:
@@ -51,41 +51,58 @@ env_var.sh
 #### Run the translator script (from Work_Zone)
 
 ```
-python -m translator.source_code.icone_translator -i inputfile.xml -o outputfile.geojson
+python -m translator.icone_translator inputfile.xml --outputFile outputfile.geojson
 ```
 
 Example usage:
 
 ```
-python -m translator.source_code.icone_translator -i 'translator/sample files/icone data/incidents_extended.xml' 
+python -m translator.icone_translator 'translator/sample files/icone data/incidents_extended.xml' 
 ```
 
 ### Execution for COtrip translator
 
-#### Run the translator script (from Work_Zone) and Please specify a valid Json file as an input file !
+#### Run the translator script (from Work_Zone)
 
 ```
-python -m translator.source_code.cotrip_translator -i inputfile.json -o outputfile.geojson
+python -m translator.cotrip_translator inputfile.json --outputFile outputfile.geojson
 ```
 
 Example usage:
 
 ```
-python -m translator.source_code.cotrip_translator -i 'translator/sample files/cotrip_data/cotrip_1.json' 
+python -m translator.cotrip_translator 'translator/sample files/cotrip_data/cotrip_1.json'
+```
+
+### Execution for NavJoy 568 translator
+This translator reads in a NavJoy 568 speed reduction form and translates it into a WZDx message. Many of the 568 messages cover 2 directions of traffic, and are thus expanded into 2 WZDx messages, one for each direction. 
+
+The NavJoy Work Zone feed is being translated into WZDx by NavJoy themselves, the source and WZDx example messages are located here: [Navjoy Sample Data](translator/sample%20files/navjoy_data)
+
+#### Run the translator script (from Work_Zone)
+
+```
+python -m translator.navjoy_translator inputfile.json --outputFile outputfile.geojson
+```
+
+Example usage:
+
+```
+python -m translator.navjoy_translator 'translator/sample files/navjoy_data/568_data.json'
 ```
 
 ### Execution for Combine_wzdx
 
-#### Run the translator script (from Work_Zone/translator/source_code)
+#### Run the translator script (from Work_Zone/translator)
 
 ```
-python combine_wzdx.py -i icone_wzdx_output_message_file -c cotrip_wzdx_output_message_file 
+python combine_wzdx.py icone_wzdx_output_message_file cotrip_wzdx_output_message_file --outputFile outputfile.geojson
 ```
 
 Example usage:
 
 ```
-python combine_wzdx.py -i '../sample files/Output Message/icone_wzdx_translated.geojson' -c '../sample files/Output Message/cotrip_wzdx_translated_output_message.geojson'
+python combine_wzdx.py '../sample files/Output Message/icone_wzdx_translated.geojson' '../sample files/Output Message/cotrip_wzdx_translated_output_message.geojson'
 ```
 
 ### Unit Testing
@@ -93,7 +110,7 @@ python combine_wzdx.py -i '../sample files/Output Message/icone_wzdx_translated.
 #### Run the unit test for translator script (from root directory)
 
 ```
-python -m pytest 'test/' -v
+python -m pytest 'tests/' -v
 ```
 
 Ensure you have your environment configured correctly (as described above).
@@ -123,8 +140,8 @@ documentation for iCone to WZDx translator is located here: [docs](translator/do
 
 ## Contact Information
 
-Contact Name: Abinash Konersman
-Contact Information: [abinash.konersman@state.co.us]
+Contact Name: Ashley Nylen
+Contact Information: [ashley.nylen@state.co.us]
 
 ## Abbreviations
 

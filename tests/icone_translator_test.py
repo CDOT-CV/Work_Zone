@@ -1,10 +1,11 @@
-from translator.source_code import icone_translator
-import xmltodict
-from unittest.mock import MagicMock, patch, Mock
 import os
-import time_machine
 import uuid
 from datetime import datetime
+from unittest.mock import MagicMock, Mock, patch
+
+import time_machine
+import xmltodict
+from translator import icone_translator
 
 # Unit testing code for icone_translator.py
 # --------------------------------------------------------------------------------Unit test for parse_incident function--------------------------------------------------------------------------------
@@ -256,7 +257,7 @@ def test_validate_incident_invalid_start_time():
     test_valid_output = {
         '@id': 'U13631595_202012160845',
         'updatetime': '2020-12-16T17:18:00Z',
-        'starttime': '2020-12',
+        'starttime': 'dsafsaf',
         'description': 'Road constructions are going on',
         'creationtime': '2020-12-13T14:18:00Z',
         'location': {
@@ -277,92 +278,6 @@ def test_validate_incident_no_data():
     assert icone_translator.validate_incident(test_valid_output) == False
 
 
-# --------------------------------------------------------------------------------Unit test for get_road_direction function--------------------------------------------------------------------------------
-def test_get_road_direction_no_direction():
-    test_coordinates = [
-        [
-            -114.145065,
-            34.8380671
-        ],
-        [
-            -114.145065,
-            34.8380671
-        ]
-    ]
-    test_direction = icone_translator.get_road_direction(test_coordinates)
-    valid_direction = None
-    assert test_direction == valid_direction
-
-
-def test_get_road_direction_empty_string():
-    test_coordinates = ''
-    test_direction = icone_translator.get_road_direction(test_coordinates)
-    valid_direction = None
-    assert test_direction == valid_direction
-
-
-def test_get_road_direction_empty_coordinates():
-    test_coordinates = []
-    test_direction = icone_translator.get_road_direction(test_coordinates)
-    valid_direction = None
-    assert test_direction == valid_direction
-
-
-def test_get_road_direction_null_coordinates():
-    test_coordinates = None
-    test_direction = icone_translator.get_road_direction(test_coordinates)
-    valid_direction = None
-    assert test_direction == valid_direction
-
-
-def test_get_road_direction_northbound_direction():
-    test_coordinates = [
-        [
-            -114.145065,
-            34.8380671
-        ],
-        [
-            -114.145065,
-            38.8380671
-        ]
-    ]
-    test_direction = icone_translator.get_road_direction(test_coordinates)
-    valid_direction = 'northbound'
-    assert test_direction == valid_direction
-
-
-def test_get_road_direction_eastbound_direction():
-    test_coordinates = [
-        [
-            -114.145065,
-            34.8380671
-        ],
-        [
-            -104.145065,
-            34.8380671
-        ]
-    ]
-    test_direction = icone_translator.get_road_direction(test_coordinates)
-    valid_direction = 'eastbound'
-    assert test_direction == valid_direction
-
-
-def test_get_road_direction_westbound_direction():
-    test_coordinates = [
-        [
-            -114.145065,
-            34.8380671
-        ],
-        [
-            -124.145065,
-            34.8380671
-        ]
-    ]
-    test_direction = icone_translator.get_road_direction(test_coordinates)
-    valid_direction = 'westbound'
-    assert test_direction == valid_direction
-
-
 # --------------------------------------------------------------------------------Unit test for get_vehicle_impact function--------------------------------------------------------------------------------
 def test_get_vehicle_impact_some_lanes_closed():
     test_description = "Roadwork - Lane Closed, MERGE LEFT [Trafficade, iCone]"
@@ -378,38 +293,10 @@ def test_get_vehicle_impact_all_lanes_open():
     assert test_vehicle_impact == expected_vehicle_impact
 
 
-# --------------------------------------------------------------------------------Unit test for get_event_status function--------------------------------------------------------------------------------
-def test_get_event_status_active():
-    test_starttime_string = "2020-12-16T08:45:03Z"
-    test_endtime_string = ''
-    test_event_status = icone_translator.get_event_status(
-        test_starttime_string, test_endtime_string)
-    valid_event_status = "active"
-    assert test_event_status == valid_event_status
-
-
-def test_get_event_status_planned():
-    test_starttime_string = "2030-12-16T08:45:03Z"
-    test_endtime_string = ''
-    test_event_status = icone_translator.get_event_status(
-        test_starttime_string, test_endtime_string)
-    valid_event_status = "planned"
-    assert test_event_status == valid_event_status
-
-
-def test_get_event_status_completed():
-    test_starttime_string = "2020-12-16T08:45:03Z"
-    test_endtime_string = "2020-12-16T08:45:03Z"
-    test_event_status = icone_translator.get_event_status(
-        test_starttime_string, test_endtime_string)
-    valid_event_status = "completed"
-    assert test_event_status == valid_event_status
-
-
 # --------------------------------------------------------------------------------Unit test for wzdx_creator function--------------------------------------------------------------------------------
 @patch.dict(os.environ, {
-    'contact_name': 'Abinash Konersman',
-    'contact_email': 'abinash.konersman@state.co.us',
+    'contact_name': 'Ashley Nylen',
+    'contact_email': 'ashley.nylen@state.co.us',
     'issuing_organization': 'CDOT'
 })
 @patch('uuid.uuid4')
@@ -433,16 +320,16 @@ def test_wzdx_creator(mockuuid):
             'feed_info_id': '104d7746-688c-44ed-b195-2ee948bf9dfa',
             'update_date': '2021-04-13T00:00:00Z',
             'publisher': 'CDOT',
-            'contact_name': 'Abinash Konersman',
-            'contact_email': 'abinash.konersman@state.co.us',
+            'contact_name': 'Ashley Nylen',
+            'contact_email': 'ashley.nylen@state.co.us',
             'version': '3.1',
             'license': 'https://creativecommons.org/publicdomain/zero/1.0/',
             'data_sources': [{
                 'data_source_id': 'w',
                 'feed_info_id': '104d7746-688c-44ed-b195-2ee948bf9dfa',
                 'organization_name': 'CDOT',
-                'contact_name': 'Abinash Konersman',
-                'contact_email': 'abinash.konersman@state.co.us',
+                'contact_name': 'Ashley Nylen',
+                'contact_email': 'ashley.nylen@state.co.us',
                 'update_date': '2021-04-13T00:00:00Z',
                 'location_method': 'channel-device-method',
                 'lrs_type': 'lrs_type'}]},
@@ -463,9 +350,7 @@ def test_wzdx_creator(mockuuid):
                 'road_names': ['I-70 N'],
                 'direction': 'northbound',
                 'vehicle_impact': 'all-lanes-open',
-                'relationship': {
-                    'relationship_id': '3',
-                    'road_event_id': '2'},
+                'relationship': {},
                 'lanes': [],
                 'beginning_cross_street': '',
                 'ending_cross_street': '',
@@ -482,7 +367,6 @@ def test_wzdx_creator(mockuuid):
     with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
         test_wzdx = icone_translator.wzdx_creator(icone_obj)
 
-    print(test_wzdx)
     assert expected_wzdx == test_wzdx
 
 
@@ -493,8 +377,8 @@ def test_wzdx_creator_empty_icone_object():
 
 
 @patch.dict(os.environ, {
-    'contact_name': 'Abinash Konersman',
-    'contact_email': 'abinash.konersman@state.co.us',
+    'contact_name': 'Ashley Nylen',
+    'contact_email': 'ashley.nylen@state.co.us',
     'issuing_organization': 'CDOT'
 })
 @patch('uuid.uuid4')
@@ -517,16 +401,16 @@ def test_wzdx_creator_no_info_object(mockuuid):
             'feed_info_id': '104d7746-688c-44ed-b195-2ee948bf9dfa',
             'update_date': '2021-04-13T00:00:00Z',
             'publisher': 'CDOT',
-            'contact_name': 'Abinash Konersman',
-            'contact_email': 'abinash.konersman@state.co.us',
+            'contact_name': 'Ashley Nylen',
+            'contact_email': 'ashley.nylen@state.co.us',
             'version': '3.1',
             'license': 'https://creativecommons.org/publicdomain/zero/1.0/',
             'data_sources': [{
                 'data_source_id': 'w',
                 'feed_info_id': '104d7746-688c-44ed-b195-2ee948bf9dfa',
                 'organization_name': 'CDOT',
-                'contact_name': 'Abinash Konersman',
-                'contact_email': 'abinash.konersman@state.co.us',
+                'contact_name': 'Ashley Nylen',
+                'contact_email': 'ashley.nylen@state.co.us',
                 'update_date': '2021-04-13T00:00:00Z',
                 'location_method': 'channel-device-method',
                 'lrs_type': 'lrs_type'}]},
@@ -547,9 +431,7 @@ def test_wzdx_creator_no_info_object(mockuuid):
                 'road_names': ['I-70 N'],
                 'direction': 'northbound',
                 'vehicle_impact': 'all-lanes-open',
-                'relationship': {
-                    'relationship_id': '3',
-                    'road_event_id': '2'},
+                'relationship': {},
                 'lanes': [],
                 'beginning_cross_street': '',
                 'ending_cross_street': '',
@@ -564,7 +446,6 @@ def test_wzdx_creator_no_info_object(mockuuid):
                 'coordinates': [[-114.145065, 34.8380671], [-114.145065, 34.8380671]]}}]}
     with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
         test_wzdx = icone_translator.wzdx_creator(icone_obj)
-    print(test_wzdx)
     assert expected_wzdx == test_wzdx
 
 
@@ -575,8 +456,8 @@ def test_wzdx_creator_no_incidents():
 
 
 @patch.dict(os.environ, {
-    'contact_name': 'Abinash Konersman',
-    'contact_email': 'abinash.konersman@state.co.us',
+    'contact_name': 'Ashley Nylen',
+    'contact_email': 'ashley.nylen@state.co.us',
     'issuing_organization': 'CDOT'
 })
 def test_wzdx_creator_invalid_incidents_no_description():
@@ -611,8 +492,8 @@ def test_wzdx_creator_invalid_info_object():
         'metadata': {
             'wz_location_method': "channel-device-method",
             'lrs_type': "lrs_type",
-            'contact_name': "Abinash Konersman",
-            'contact_email': "abinash.konersman@state.co.us",
+            'contact_name': "Ashley Nylen",
+            'contact_email': "ashley.nylen@state.co.us",
             'issuing_organization': "iCone",
         }
     }
@@ -623,8 +504,8 @@ def test_wzdx_creator_invalid_info_object():
 
 
 @patch.dict(os.environ, {
-    'contact_name': 'Abinash Konersman',
-    'contact_email': 'abinash.konersman@state.co.us',
+    'contact_name': 'Ashley Nylen',
+    'contact_email': 'ashley.nylen@state.co.us',
     'issuing_organization': 'CDOT'
 })
 @patch('uuid.uuid4')
@@ -652,12 +533,65 @@ def test_wzdx_creator_valid_and_invalid(mockuuid):
         }
     }]}}
 
-    expected_wzdx = {'road_event_feed_info': {'feed_info_id': '104d7746-688c-44ed-b195-2ee948bf9dfa', 'update_date': '2021-04-13T00:00:00Z', 'publisher': 'CDOT', 'contact_name': 'Abinash Konersman', 'contact_email': 'abinash.konersman@state.co.us', 'version': '3.1', 'license': 'https://creativecommons.org/publicdomain/zero/1.0/', 'data_sources': [{'data_source_id': 'w', 'feed_info_id': '104d7746-688c-44ed-b195-2ee948bf9dfa', 'organization_name': 'CDOT', 'contact_name': 'Abinash Konersman', 'contact_email': 'abinash.konersman@state.co.us', 'update_date': '2021-04-13T00:00:00Z', 'location_method': 'channel-device-method', 'lrs_type': 'lrs_type'}]}, 'type': 'FeatureCollection', 'features': [{'type': 'Feature', 'properties': {
-        'road_event_id': '2', 'event_type': 'work-zone', 'data_source_id': 'w', 'start_date': '2020-12-07T14:18:00Z', 'end_date': '', 'start_date_accuracy': 'estimated', 'end_date_accuracy': 'estimated', 'beginning_accuracy': 'estimated', 'ending_accuracy': 'estimated', 'road_names': ['I-70 N'], 'direction': 'northbound', 'vehicle_impact': 'all-lanes-open', 'relationship': {'relationship_id': '3', 'road_event_id': '2'}, 'lanes': [], 'beginning_cross_street': '', 'ending_cross_street': '', 'event_status': 'active', 'types_of_work': [], 'restrictions': [], 'description': 'Road constructions are going on', 'creation_date': '2020-12-13T14:18:00Z', 'update_date': '2020-12-16T17:18:00Z'}, 'geometry': {'type': 'LineString', 'coordinates': [[-114.145065, 34.8380671], [-114.145065, 34.8380671]]}}]}
+    expected_wzdx = {'road_event_feed_info': {
+        'feed_info_id': '104d7746-688c-44ed-b195-2ee948bf9dfa',
+        'update_date': '2021-04-13T00:00:00Z',
+        'publisher': 'CDOT',
+        'contact_name':
+        'Ashley Nylen',
+        'contact_email':
+        'ashley.nylen@state.co.us',
+        'version': '3.1',
+        'license': 'https://creativecommons.org/publicdomain/zero/1.0/',
+        'data_sources': [
+            {'data_source_id': 'w',
+             'feed_info_id': '104d7746-688c-44ed-b195-2ee948bf9dfa',
+             'organization_name': 'CDOT',
+             'contact_name': 'Ashley Nylen',
+             'contact_email': 'ashley.nylen@state.co.us',
+             'update_date': '2021-04-13T00:00:00Z',
+             'location_method': 'channel-device-method',
+             'lrs_type': 'lrs_type'}
+        ]
+    },
+        'type': 'FeatureCollection',
+        'features': [
+            {'type': 'Feature', 'properties': {
+                'road_event_id': '2',
+                'event_type':
+                'work-zone',
+                'data_source_id': 'w',
+                'start_date': '2020-12-07T14:18:00Z',
+                'end_date': '',
+                'start_date_accuracy': 'estimated',
+                'end_date_accuracy': 'estimated',
+                'beginning_accuracy': 'estimated',
+                'ending_accuracy': 'estimated',
+                'road_names': ['I-70 N'],
+                'direction': 'northbound',
+                'vehicle_impact': 'all-lanes-open',
+                'relationship': {}, 'lanes': [],
+                'beginning_cross_street': '',
+                'ending_cross_street': '',
+                'event_status': 'active',
+                'types_of_work': [],
+                'restrictions': [],
+                'description': 'Road constructions are going on',
+                'creation_date': '2020-12-13T14:18:00Z',
+                'update_date': '2020-12-16T17:18:00Z'},
+                'geometry': {
+                    'type': 'LineString',
+                    'coordinates': [
+                        [-114.145065, 34.8380671],
+                        [-114.145065, 34.8380671]
+                    ]
+            }
+            }
+    ]
+    }
 
     with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
         test_wzdx = icone_translator.wzdx_creator(icone_obj)
-    print(test_wzdx)
     assert expected_wzdx == test_wzdx
 # --------------------------------------------------------------------------------unit test for parse_direction_from_street_name function--------------------------------------------------------------------------------
 

@@ -221,7 +221,7 @@ def test_get_wzdx_schema():
 def test_get_wzdx_schema_invalid_data():
 
     with pytest.raises(RuntimeError) as runtimeErr:
-        main.get_wzdx_schema('test/docs/invalid_schema.json')
+        main.get_wzdx_schema('tests/docs/invalid_schema.json')
     assert 'invalid schema: not valid json' in str(runtimeErr.value)
 
 

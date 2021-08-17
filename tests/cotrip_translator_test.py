@@ -1,14 +1,15 @@
-from translator.source_code import cotrip_translator
-from datetime import datetime
-from unittest.mock import MagicMock, patch, Mock
-import time_machine
 import os
 import uuid
+from datetime import datetime
+from unittest.mock import MagicMock, Mock, patch
+
+import time_machine
+from translator import cotrip_translator
 
 
 @patch.dict(os.environ, {
-    'contact_name': 'Abinash Konersman',
-    'contact_email': 'abinash.konersman@state.co.us',
+    'contact_name': 'Ashley Nylen',
+    'contact_email': 'ashley.nylen@state.co.us',
     'issuing_organization': 'CDOT'
 })
 @patch('uuid.uuid4')
@@ -45,16 +46,16 @@ def test_wzdx_creator(mockuuid):
         'road_event_feed_info': {
             'feed_info_id': '8d062f70-d53e-4029-b94e-b7fbcbde5885',
             'update_date': '2021-04-13T00:00:00Z', 'publisher': 'CDOT',
-            'contact_name': 'Abinash Konersman',
-            'contact_email': 'abinash.konersman@state.co.us',
+            'contact_name': 'Ashley Nylen',
+            'contact_email': 'ashley.nylen@state.co.us',
             'version': '3.1',
             'license': 'https://creativecommons.org/publicdomain/zero/1.0/',
             'data_sources': [{
                 'data_source_id': 'w',
                 'feed_info_id': '8d062f70-d53e-4029-b94e-b7fbcbde5885',
                 'organization_name': 'CDOT',
-                'contact_name': 'Abinash Konersman',
-                'contact_email': 'abinash.konersman@state.co.us',
+                'contact_name': 'Ashley Nylen',
+                'contact_email': 'ashley.nylen@state.co.us',
                 'update_date': '2021-04-13T00:00:00Z',
                 'location_method': 'channel-device-method',
                 'lrs_type': 'lrs_type'}]},
@@ -98,8 +99,8 @@ def test_wzdx_creator_empty_cotrip_object():
 
 
 @patch.dict(os.environ, {
-    'contact_name': 'Abinash Konersman',
-    'contact_email': 'abinash.konersman@state.co.us',
+    'contact_name': 'Ashley Nylen',
+    'contact_email': 'ashley.nylen@state.co.us',
     'issuing_organization': 'CDOT'
 })
 def test_wzdx_creator_invalid_incidents_no_description():
@@ -165,8 +166,8 @@ def test_wzdx_creator_invalid_info_object():
         'metadata': {
             'wz_location_method': "channel-device-method",
             'lrs_type': "lrs_type",
-            'contact_name': "Abinash Konersman",
-            'contact_email': "abinash.konersman@state.co.us",
+            'contact_name': "Ashley Nylen",
+            'contact_email': "ashley.nylen@state.co.us",
             'issuing_organization': "COtrip",
         }
     }
@@ -213,51 +214,8 @@ def test_parse_polyline_invalid_coordinates():
     expected_coordinates = []
     assert test_coordinates == expected_coordinates
 
-# --------------------------------------------------------------------------------Unit test for get_event_status function--------------------------------------------------------------------------------
-
-
-def test_get_event_status_active():
-    with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
-        test_starttime_string = 1538978400
-        test_endtime_string = ''
-        test_event_status = cotrip_translator.get_event_status(
-            test_starttime_string, test_endtime_string)
-    valid_event_status = "active"
-    assert test_event_status == valid_event_status
-
-
-def test_get_event_status_planned():
-    with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
-        test_starttime_string = 1638978400
-        test_endtime_string = ''
-        test_event_status = cotrip_translator.get_event_status(
-            test_starttime_string, test_endtime_string)
-    valid_event_status = "planned"
-    assert test_event_status == valid_event_status
-
-
-def test_get_event_status_completed():
-    with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
-        test_starttime_string = 1538978400
-        test_endtime_string = 1539978400
-        test_event_status = cotrip_translator.get_event_status(
-            test_starttime_string, test_endtime_string)
-    valid_event_status = "completed"
-    assert test_event_status == valid_event_status
-
-
-def test_get_event_status_pending():
-    with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
-        test_starttime_string = 1618940814
-        test_endtime_string = ''
-        test_event_status = cotrip_translator.get_event_status(
-            test_starttime_string, test_endtime_string)
-    valid_event_status = "pending"
-    assert test_event_status == valid_event_status
 
 # --------------------------------------------------------------------------------Unit test for parse_incident function--------------------------------------------------------------------------------
-
-
 def test_parse_alert_success():
     cotrip_obj = {
         "rtdh_timestamp": 1615866698.394646,
@@ -602,29 +560,6 @@ def test_validate_alert_invalid():
 def test_validate_alert_no_data():
     test_valid_output = None
     assert cotrip_translator.validate_alert(test_valid_output) == False
-
-# --------------------------------------------------------------------------------unit test for reformat_datetime function--------------------------------------------------------------------------------
-
-
-def test_reformat_datetime_valid_timeformat():
-    test_time = 1609398000
-    actual_time = cotrip_translator.reformat_datetime(test_time)
-    expected_time = "2020-12-31T07:00:00Z"
-    assert actual_time == expected_time
-
-
-def test_reformat_datetime_null_time():
-    test_time = None
-    actual_time = cotrip_translator.reformat_datetime(test_time)
-    expected_time = ''
-    assert actual_time == expected_time
-
-
-def test_reformat_datetime_invalid_time():
-    test_time = "16093s98000z"
-    actual_time = cotrip_translator.reformat_datetime(test_time)
-    expected_time = ''
-    assert actual_time == expected_time
 
 # --------------------------------------------------------------------------------unit test for get_types_of_work function--------------------------------------------------------------------------------
 

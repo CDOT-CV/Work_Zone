@@ -38,12 +38,11 @@ def translate_newest_icone_to_wzdx(event, context):
   if not icone_translator.validate_wzdx(wzdx_obj,wzdx_schema):
     logging.error(RuntimeError('WZDx message failed validation. Exiting Application !'))
     return 'WZDx message failed validation. Exiting Application !', 500
-  print(json.dumps(wzdx_obj))
 
   publisher = pubsub_v1.PublisherClient()
   topic_path = publisher.topic_path(os.environ['project_id'], os.environ['wzdx_topic_id'])
   future=publisher.publish(topic_path,str.encode(json.dumps(wzdx_obj, indent=2)),origin='auto_icone_translator_ftp cloud function')
-  print(future.result())
+  logging.debug(future.result())
   return
 
 def get_ftp_file(url) :
@@ -111,7 +110,7 @@ def unsupported_messages_callback(message):
   except Exception as e:
     logging.error('failed to publish unsupported message to project_id: {:s}, topic_id: {:s}, error_message: {:s}'.format(project_id, unsupported_messages_topic_id, str(e)))
     return False
-  print(future.result())
+  logging.debug(future.result())
   return True
 
 def formatMessage(message) -> str:

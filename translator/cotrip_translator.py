@@ -1,52 +1,65 @@
-import json
-from datetime import datetime, timezone, timedelta
-import sys
-import logging
-from collections import OrderedDict
-import re
-from translator.source_code import translator_shared_library
+import argparse
 import copy
+import json
+import logging
+import re
+from collections import OrderedDict
 
-# Translator
+from translator.tools import date_tools, wzdx_translator
+
+PROGRAM_NAME = 'CotripTranslator'
+PROGRAM_VERSION = '1.0'
+
+DEFAULT_COTRIP_FEED_INFO_ID = '8d062f70-d53e-4029-b94e-b7fbcbde5885'
 
 
 def main():
+    inputFile, outputFile = parse_cotrip_arguments()
 
-    inputfile, outputfile = translator_shared_library.parse_arguments(
-        sys.argv[1:], default_output_file_name='cotrip_wzdx_translated_output_message.geojson')
-    if inputfile:
-        try:
-            cotrip_obj = json.loads(open(inputfile).read())
-        except ValueError as e:
-            raise ValueError(
-                'Invalid file type. Please specify a valid Json file!') from None
-        wzdx_obj = wzdx_creator(cotrip_obj)
-        location_schema = 'translator/sample files/validation_schema/wzdx_v3.1_feed.json'
-        wzdx_schema = json.loads(open(location_schema).read())
+    try:
+        cotrip_obj = json.loads(open(inputFile).read())
+    except ValueError as e:
+        raise ValueError(
+            'Invalid file type. Please specify a valid Json file!') from None
+    wzdx_obj = wzdx_creator(cotrip_obj)
+    location_schema = 'translator/sample files/validation_schema/wzdx_v3.1_feed.json'
+    wzdx_schema = json.loads(open(location_schema).read())
 
-        if not translator_shared_library.validate_wzdx(wzdx_obj, wzdx_schema):
-            print('validation error more message are printed above. output file is not created because the message failed validation.')
-            return
-        with open(outputfile, 'w') as fwzdx:
-            fwzdx.write(json.dumps(wzdx_obj, indent=2))
-            print(
-                'huraaah ! your wzdx message is successfully generated and located here: ' + str(outputfile))
-    else:
-        print('please specify an input json file with -i')
-        print(translator_shared_library.help_string)
+    if not wzdx_translator.validate_wzdx(wzdx_obj, wzdx_schema):
+        logging.error(
+            'validation error more message are printed above. output file is not created because the message failed validation.')
+        return
+    with open(outputFile, 'w') as fwzdx:
+        fwzdx.write(json.dumps(wzdx_obj, indent=2))
+        print(
+            'Your wzdx message was successfully generated and is located here: ' + str(outputFile))
+
+
+# parse cotrip script command line arguments
+def parse_cotrip_arguments():
+    parser = argparse.ArgumentParser(
+        description='Translate COTrip data to WZDx')
+    parser.add_argument('--version', action='version',
+                        version=f'{PROGRAM_NAME} {PROGRAM_VERSION}')
+    parser.add_argument('cotripFile', help='cotrip file path')
+    parser.add_argument('--outputFile', required=False,
+                        default='cotrip_wzdx_translated_output_message.geojson', help='WZDx output file path')
+
+    args = parser.parse_args()
+    return args.cotripFile, args.outputFile
 
 
 def wzdx_creator(message, info=None, unsupported_message_callback=None):
     if not message:
         return None
-   # verify info obj
+
     if not info:
-        info = translator_shared_library.initialize_info(
-            '8d062f70-d53e-4029-b94e-b7fbcbde5885')
-    if not translator_shared_library.validate_info(info):
+        info = wzdx_translator.initialize_info(
+            DEFAULT_COTRIP_FEED_INFO_ID)
+    if not wzdx_translator.validate_info(info):
         return None
 
-    wzd = translator_shared_library.initialize_wzdx_object(info)
+    wzd = wzdx_translator.initialize_wzdx_object(info)
 
     # Parse alert to WZDx Feature
     feature = parse_alert(
@@ -55,7 +68,7 @@ def wzdx_creator(message, info=None, unsupported_message_callback=None):
         wzd.get('features').append(feature)
     if not wzd.get('features'):
         return None
-    wzd = translator_shared_library.add_ids(wzd)
+    wzd = wzdx_translator.add_ids(wzd)
     return wzd
 
 
@@ -74,28 +87,6 @@ def parse_polyline(poly):
             coordinates.append([float(coords[0]), float(coords[1])])
     return coordinates
 
-# function to get event status
-
-
-def get_event_status(start_time_string, end_time_string):
-
-    start_time = datetime.fromtimestamp(start_time_string)
-    current_time = datetime.now()
-    future_date_after_2weeks = current_time + \
-        timedelta(days=14)
-    event_status = "active"
-    if current_time < start_time:
-        if start_time < future_date_after_2weeks:
-            event_status = "pending"
-        else:
-            event_status = "planned"
-
-    elif end_time_string:
-        end_time = datetime.fromtimestamp(end_time_string)
-        if end_time < current_time:
-            event_status = "completed"
-    return event_status
-
 
 # Parse COtrip alert to WZDx
 def parse_alert(alert, callback_function=None):
@@ -108,18 +99,24 @@ def parse_alert(alert, callback_function=None):
     geometry = {}
     geometry['type'] = "LineString"
     geometry['coordinates'] = parse_polyline(event.get('geometry'))
-    properties = initialize_feature_properties()
+    properties = wzdx_translator.initialize_feature_properties()
+
+    header = event.get('header', {})
+    detail = event.get('detail', {})
+    source = event.get('source', {})
 
     # Event Type ['work-zone', 'detour']
     properties['event_type'] = 'work-zone'
 
     # start_date
-    properties['start_date'] = reformat_datetime(
-        event.get('header').get('start_timestamp'))
+    start_date = date_tools.parse_datetime_from_unix(
+        header.get('start_timestamp'))
+    properties['start_date'] = date_tools.get_iso_string_from_datetime(
+        start_date)
 
     # end_date
-    properties['end_date'] = reformat_datetime(
-        event.get('header').get('end_timestamp'))
+    end_date = date_tools.parse_datetime_from_unix(header.get('end_timestamp'))
+    properties['end_date'] = date_tools.get_iso_string_from_datetime(end_date)
 
     # start_date_accuracy
     properties['start_date_accuracy'] = "estimated"
@@ -134,8 +131,8 @@ def parse_alert(alert, callback_function=None):
     properties['ending_accuracy'] = "estimated"
 
     # road_name
-    properties['road_names'] = [event.get('detail').get('road_name')]
-    road_number = event.get('detail').get('road_number')
+    properties['road_names'] = [detail.get('road_name')]
+    road_number = detail.get('road_number')
     if road_number and not road_number in properties['road_names']:
         properties['road_names'].append(road_number)
 
@@ -144,14 +141,14 @@ def parse_alert(alert, callback_function=None):
                      'West': 'westbound', 'East': 'eastbound'}
 
     properties['direction'] = Direction_map.get(
-        event.get('detail').get('direction'))
+        detail.get('direction'))
 
     # vehicle impact
     properties['vehicle_impact'] = 'unknown'
 
     # event status
-    properties['event_status'] = get_event_status(
-        event.get('header').get('start_timestamp'), event.get('header').get('end_timestamp'))
+    properties['event_status'] = date_tools.get_event_status(
+        start_date, end_date)
 
     # type_of_work
     # maintenance, minor-road-defect-repair, roadside-work, overhead-work, below-road-work, barrier-work, surface-work, painting, roadway-relocation, roadway-creation
@@ -161,25 +158,28 @@ def parse_alert(alert, callback_function=None):
         properties['types_of_work'] = types_of_work
 
     # reduced_speed_limit
-
     properties['reduced_speed_limit'] = get_rsz_from_event(event)
 
     # restrictions
-
-    work_updates = event.get('detail').get('work_updates')
+    work_updates = detail.get('work_updates')
     restrictions = get_restrictions(work_updates)
     if restrictions:
         properties['restrictions'] = restrictions
 
     # description
-    properties['description'] = event.get('header').get('description')
+    properties['description'] = header.get('description')
 
     # creation_date
-    properties['creation_date'] = reformat_datetime(
-        event.get('source').get('collection_timestamp'))
+    creation_date = date_tools.parse_datetime_from_unix(
+        source.get('collection_timestamp'))
+    properties['creation_date'] = date_tools.get_iso_string_from_datetime(
+        creation_date)
 
     # update_date
-    properties['update_date'] = reformat_datetime(alert.get('rtdh_timestamp'))
+    update_date = date_tools.parse_datetime_from_unix(
+        alert.get('rtdh_timestamp'))
+    properties['update_date'] = date_tools.get_iso_string_from_datetime(
+        update_date)
 
     filtered_properties = copy.deepcopy(properties)
 
@@ -194,54 +194,50 @@ def parse_alert(alert, callback_function=None):
 
     return feature
 
+
 # function to validate the alert
-
-
 def validate_alert(alert):
 
     if not alert or (type(alert) != dict and type(alert) != OrderedDict):
         logging.warning('alert is empty or has invalid type')
         return False
 
+    id = alert.get("rtdh_message_id")
+
     event = alert.get('event', {})
-    polyline = event.get('geometry')
-    coords = parse_polyline(polyline)
-    street = event.get('detail', {}).get('road_name')
 
     header = event.get('header', {})
-    starttime = header.get('start_timestamp')
-    endtime = header.get('end_timestamp', 0)
+    detail = event.get('detail', {})
+
+    polyline = event.get('geometry')
+    coords = parse_polyline(polyline)
+    street = detail.get('road_name')
+
+    starttime_string = header.get('start_timestamp')
+    endtime_string = header.get('end_timestamp', 0)
     description = header.get('description')
     direction = event.get('detail', {}).get('direction')
 
     required_fields = [polyline, coords, street,
-                       starttime, description, direction]
+                       starttime_string, description, direction]
     for field in required_fields:
         if not field:
             logging.warning(
-                f'Invalid event with event id = {alert.get("rtdh_message_id")}. not all required fields are present')
+                f'''Invalid event with event id = {id}. not all required fields are present. Required fields are: 
+                polyline, street, start_timestamp, description, and direction''')
             return False
 
-        if type(starttime) != int or type(endtime) != int:
-            logging.warning(
-                f'Invalid event with id = {alert.get("rtdh_message_id")}. Invalid datetime format')
-            return False
-
+    start_time = date_tools.parse_datetime_from_unix(starttime_string)
+    end_time = date_tools.parse_datetime_from_unix(endtime_string)
+    if not start_time:
+        logging.warning(
+            f'Invalid incident with id = {id}. Unsupported start time format: {starttime_string}')
+        return False
+    elif endtime_string and not end_time:
+        logging.warning(
+            f'Invalid incident with id = {id}. Unsupported end time format: {endtime_string}')
+        return False
     return True
-
-
-def reformat_datetime(datetime_string):
-    if not datetime_string:
-        return ''
-    elif type(datetime_string) == str:
-        if re.match('^-?([0-9]*[.])?[0-9]+$', datetime_string):
-            datetime_string = float(datetime_string)
-        else:
-            return ''
-    time = datetime.fromtimestamp(datetime_string)
-    wzdx_format_datetime = time.astimezone(
-        timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-    return wzdx_format_datetime
 
 
 def get_types_of_work(sub_type):
@@ -326,38 +322,6 @@ def get_rsz_from_event(event):
             work_update.get('description', ""))
         if rsz:
             return rsz
-
-
-def initialize_feature_properties():
-    properties = {}
-    properties['road_event_id'] = None
-    properties['event_type'] = None
-    properties['data_source_id'] = None
-    properties['start_date'] = None
-    properties['end_date'] = None
-    properties['start_date_accuracy'] = None
-    properties['end_date_accuracy'] = None
-    properties['beginning_accuracy'] = None
-    properties['ending_accuracy'] = None
-    properties['road_name'] = None
-    properties['direction'] = None
-    properties['vehicle_impact'] = None
-    properties['relationship'] = None
-    properties['lanes'] = None
-    properties['beginning_cross_street'] = None
-    properties['ending_cross_street'] = None
-    properties['beginning_mile_post'] = None
-    properties['ending_mile_post'] = None
-    properties['event_status'] = None
-    properties['types_of_work'] = None
-    properties['workers_present'] = None
-    properties['reduced_speed_limit'] = None
-    properties['restrictions'] = None
-    properties['description'] = None
-    properties['creation_date'] = None
-    properties['update_date'] = None
-
-    return properties
 
 
 if __name__ == "__main__":

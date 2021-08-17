@@ -1,0 +1,3930 @@
+[
+    {
+        "sys_gUid": "Form568-d7c32f68-1d90-4e09-9422-c47309fa54d3",
+        "data": {
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "cdotSection/DepartmentName": "test data",
+            "cdotPatrolNumber/Id": "test datatest data",
+            "subAccountNumber": "test data",
+            "mpaCode": "test data",
+            "descriptionForProject": "test data",
+            "streetNameFrom": "test data",
+            "mileMarkerStart": "test data",
+            "mileMarkerEnd": "test data",
+            "requestedTemporarySpeed": "test data",
+            "currentPostedSpeed": "test data",
+            "directionOfTraffic": "East",
+            "workEndDate": "2021-07-17T06:36:51.474Z",
+            "workStartDate": "2021-07-17T06:36:53.467Z",
+            "reductionJustification": "test data",
+            "document": [],
+            "approval": {
+                "description": "",
+                "value": "Update Requested"
+            },
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-ff5530eb-8219-469b-b0de-4d96270930a8",
+                "firstName": "Jonathan",
+                "lastName": "Glover",
+                "title": "TIM III"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "taskChecklist": [
+                "Is the Required Information tab complete?"
+            ],
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-07-17T06:40:30.118Z",
+                "name": "Jonathan Woodworth"
+            }
+        }
+    },
+    {
+        "sys_gUid": "Form568-cb0fdaf0-c27a-4bef-aabd-442615dfb2d6",
+        "data": {
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [
+                {
+                    "documentName": "MHT East/West",
+                    "doc_url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/CDOT%20Region%204/Files/92a33e02-79c2-4f21-a7e8-01943542f9b2MHT%20East/West",
+                    "UniqueDocName": "92a33e02-79c2-4f21-a7e8-01943542f9b2MHT East/West",
+                    "s3FileName": "Documents/CDOT Region 4/Files/92a33e02-79c2-4f21-a7e8-01943542f9b2MHT East/West",
+                    "uploadedDate": "2021-07-15T15:06:20.452Z",
+                    "contentType": "image/png"
+                }
+            ],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "cdotSection/DepartmentName": "Projects",
+            "cdotPatrolNumber/Id": "1",
+            "subAccountNumber": "12345",
+            "mpaCode": "12345",
+            "descriptionForProject": "Bridge Repairs",
+            "srzmap": [
+                {
+                    "type": "LineString",
+                    "coordinates": [
+                        [
+                            [
+                                -104.65225365171561,
+                                40.39393671703483
+                            ],
+                            [
+                                -104.65228583822379,
+                                40.39342193227279
+                            ],
+                            [
+                                -104.64946415434012,
+                                40.39348730198451
+                            ],
+                            [
+                                -104.64953925619254,
+                                40.394108311080984
+                            ],
+                            [
+                                -104.65225365171561,
+                                40.39393671703483
+                            ]
+                        ]
+                    ],
+                    "className": "Form568"
+                },
+                {
+                    "type": "Point",
+                    "coordinates": [
+                        -104.64936759481559,
+                        40.3937120098846
+                    ],
+                    "className": "text"
+                }
+            ],
+            "streetNameFrom": "US-34",
+            "mileMarkerStart": "56",
+            "mileMarkerEnd": "56.4",
+            "directionOfTraffic": " East/West ",
+            "currentPostedSpeed": "50",
+            "requestedTemporarySpeed": "45",
+            "workStartDate": "2021-08-09T13:00:00.000Z",
+            "workEndDate": "2021-09-24T23:00:00.000Z",
+            "reductionJustification": "Crews roadside.",
+            "document": [],
+            "approval": {
+                "description": "",
+                "value": "Approved"
+            },
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "taskChecklist": [
+                "Is the Required Information tab complete?",
+                "Is/are the MHT(s) signed prior to submission per CDOT Requirements?",
+                "Is the requested speed reduction valid based on the criteria shown in the Authority tab?",
+                "Are the speed reduction details and the SRZ polygon accurate?",
+                "Are the requester and CDOT Engineer details accurate?"
+            ],
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-07-15T15:16:11.559Z",
+                "name": "Jonathan Woodworth"
+            }
+        }
+    },
+    {
+        "sys_gUid": "Form568-30e62780-29f4-4b6f-b1de-7d1e390bc799",
+        "data": {
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "cdotSection/DepartmentName": "Projects",
+            "cdotPatrolNumber/Id": "1",
+            "subAccountNumber": "65651",
+            "mpaCode": "6651",
+            "descriptionForProject": "Test 29",
+            "srzmap": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -104.21782753174276,
+                                40.871839840105395
+                            ],
+                            [
+                                -104.217870447087,
+                                40.87060667094028
+                            ],
+                            [
+                                -104.18280861084432,
+                                40.870541766663806
+                            ],
+                            [
+                                -104.18306610290975,
+                                40.8714828724459
+                            ],
+                            [
+                                -104.21782753174276,
+                                40.871839840105395
+                            ]
+                        ]
+                    ],
+                    "className": "Speed Reduction Zone Polygon"
+                }
+            ],
+            "streetNameFrom": "Country Road 122",
+            "mileMarkerStart": "5",
+            "mileMarkerEnd": "38",
+            "directionOfTraffic": " East/West ",
+            "currentPostedSpeed": "45",
+            "requestedTemporarySpeed": "20",
+            "workStartDate": "2021-07-19T22:39:00.000Z",
+            "workEndDate": "2021-07-30T22:39:00.000Z",
+            "reductionJustification": "Test 29",
+            "document": [],
+            "approval": {
+                "description": "",
+                "value": "Not Applicable"
+            },
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "taskChecklist": [
+                "Is the Required Information tab complete?",
+                "Are the requester and CDOT Engineer details accurate?",
+                "Are all relevant Permit(s) and permit number(s) attached?"
+            ],
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-07-14T22:41:33.813Z",
+                "name": "Jonathan Woodworth"
+            }
+        }
+    },
+    {
+        "sys_gUid": "Form568-11cf2aea-ba27-4e76-abd3-fcbf9aa70b66",
+        "data": {
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "cdotSection/DepartmentName": "Projects",
+            "cdotPatrolNumber/Id": "1",
+            "subAccountNumber": "6516516",
+            "mpaCode": "65651",
+            "descriptionForProject": "Test 27",
+            "streetNameFrom": "County Road 21",
+            "mileMarkerStart": "2",
+            "mileMarkerEnd": "7",
+            "directionOfTraffic": " North/South",
+            "srzmap": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -103.393203564788,
+                                40.653361125193804
+                            ],
+                            [
+                                -103.39303190341104,
+                                40.62639735305869
+                            ],
+                            [
+                                -103.38908369174112,
+                                40.626527639007456
+                            ],
+                            [
+                                -103.38977033724893,
+                                40.653882057001844
+                            ],
+                            [
+                                -103.393203564788,
+                                40.653361125193804
+                            ]
+                        ]
+                    ],
+                    "className": "Speed Reduction Zone Polygon"
+                }
+            ],
+            "currentPostedSpeed": "35",
+            "requestedTemporarySpeed": "30",
+            "workStartDate": "2021-07-20T21:52:00.000Z",
+            "workEndDate": "2021-07-22T21:52:00.000Z",
+            "reductionJustification": "Test 28",
+            "document": [],
+            "approval": {
+                "description": "",
+                "value": "Not Applicable"
+            },
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "taskChecklist": [
+                "Is/are the MHT(s) signed prior to submission per CDOT Requirements?"
+            ],
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-07-14T21:54:53.862Z",
+                "name": "Jonathan Woodworth"
+            }
+        }
+    },
+    {
+        "sys_gUid": "Form568-14094cbb-45c4-41d0-9b9b-6e1bc3ace784",
+        "data": {
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "cdotSection/DepartmentName": "Projects",
+            "cdotPatrolNumber/Id": "1",
+            "subAccountNumber": "65165161",
+            "mpaCode": "65161",
+            "descriptionForProject": "Test 26",
+            "srzmap": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -104.7009004488917,
+                                40.479932965768214
+                            ],
+                            [
+                                -104.70021380338389,
+                                40.47843137818361
+                            ],
+                            [
+                                -104.69815386686045,
+                                40.478692526263096
+                            ],
+                            [
+                                -104.69849718961436,
+                                40.480716389436054
+                            ],
+                            [
+                                -104.7009004488917,
+                                40.479932965768214
+                            ]
+                        ]
+                    ],
+                    "className": "Speed Reduction Zone Polygon"
+                },
+                {
+                    "type": "Point",
+                    "coordinates": [
+                        -104.68922747525889,
+                        40.47142896654365
+                    ],
+                    "className": "text"
+                }
+            ],
+            "streetNameFrom": "US-85",
+            "mileMarkerStart": "98",
+            "mileMarkerEnd": "98.1",
+            "directionOfTraffic": " North/South",
+            "currentPostedSpeed": "50",
+            "requestedTemporarySpeed": "40",
+            "workStartDate": "2021-07-26T21:49:00.000Z",
+            "workEndDate": "2021-07-30T21:49:00.000Z",
+            "reductionJustification": "Test 26",
+            "document": [],
+            "approval": {
+                "description": "",
+                "value": "Update Requested"
+            },
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "taskChecklist": [
+                "Is/are the MHT(s) signed prior to submission per CDOT Requirements?"
+            ],
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-07-14T21:51:26.484Z",
+                "name": "Jonathan Woodworth"
+            }
+        }
+    },
+    {
+        "sys_gUid": "Form568-feabe70f-4e38-49e0-938a-b9cb089db81b",
+        "data": {
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "cdotSection/DepartmentName": "Projects",
+            "cdotPatrolNumber/Id": "1",
+            "subAccountNumber": "651651",
+            "mpaCode": "15161",
+            "descriptionForProject": "Test 26",
+            "srzmap": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -105.22759689247715,
+                                40.80090981216436
+                            ],
+                            [
+                                -105.22982849037754,
+                                40.79974029656923
+                            ],
+                            [
+                                -105.21618141090977,
+                                40.7933725723931
+                            ],
+                            [
+                                -105.213520659567,
+                                40.79512700633857
+                            ],
+                            [
+                                -105.22759689247715,
+                                40.80090981216436
+                            ]
+                        ]
+                    ],
+                    "className": "Form568"
+                },
+                {
+                    "type": "Point",
+                    "coordinates": [
+                        -105.19609702980625,
+                        40.79355126685997
+                    ],
+                    "className": "text"
+                }
+            ],
+            "streetNameFrom": "US-287",
+            "mileMarkerStart": "3000",
+            "mileMarkerEnd": "297",
+            "directionOfTraffic": " North/South",
+            "currentPostedSpeed": "60",
+            "requestedTemporarySpeed": "50",
+            "workStartDate": "2021-07-26T21:42:00.000Z",
+            "workEndDate": "2021-07-30T21:42:00.000Z",
+            "reductionJustification": "Test 26",
+            "document": [],
+            "approval": {
+                "description": "",
+                "value": "Update Submitted"
+            },
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-07-14T21:43:52.426Z",
+                "name": "Jonathan Woodworth"
+            },
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "taskChecklist": [
+                "Is the Required Information tab complete?",
+                "Is/are the MHT(s) signed prior to submission per CDOT Requirements?",
+                "Are the requester and CDOT Engineer details accurate?",
+                "Are all relevant Permit(s) and permit number(s) attached?",
+                "Is the requested speed reduction valid based on the criteria shown in the Authority tab?"
+            ]
+        }
+    },
+    {
+        "sys_gUid": "Form568-65ab9add-8b26-4dab-a304-3dd553b93b4b",
+        "data": {
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "cdotSection/DepartmentName": "Projects",
+            "cdotPatrolNumber/Id": "1",
+            "subAccountNumber": "516516",
+            "mpaCode": "5965161",
+            "descriptionForProject": "Test 25",
+            "srzmap": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -102.30274748465743,
+                                40.578495642987825
+                            ],
+                            [
+                                -102.30257582328048,
+                                40.57093320592696
+                            ],
+                            [
+                                -102.30146002433028,
+                                40.570998403002456
+                            ],
+                            [
+                                -102.30154585501876,
+                                40.578560832694656
+                            ],
+                            [
+                                -102.30274748465743,
+                                40.578495642987825
+                            ]
+                        ]
+                    ],
+                    "className": "Speed Reduction Zone Polygon"
+                },
+                {
+                    "type": "Point",
+                    "coordinates": [
+                        -102.30300497672286,
+                        40.5739159071056
+                    ],
+                    "className": "text"
+                }
+            ],
+            "streetNameFrom": "US-385",
+            "mileMarkerStart": "98",
+            "mileMarkerEnd": "98.9",
+            "directionOfTraffic": " North/South",
+            "currentPostedSpeed": "45",
+            "requestedTemporarySpeed": "40",
+            "workStartDate": "2021-07-19T21:36:00.000Z",
+            "workEndDate": "2021-07-23T21:36:00.000Z",
+            "reductionJustification": "Test 25",
+            "document": [],
+            "approval": {
+                "description": "",
+                "value": "Approved"
+            },
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "taskChecklist": [
+                "Is the Required Information tab complete?",
+                "Is/are the MHT(s) signed prior to submission per CDOT Requirements?",
+                "Is the requested speed reduction valid based on the criteria shown in the Authority tab?",
+                "Are the requester and CDOT Engineer details accurate?",
+                "Are the speed reduction details and the SRZ polygon accurate?",
+                "Are all relevant Permit(s) and permit number(s) attached?"
+            ],
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-07-14T21:38:14.311Z",
+                "name": "Jonathan Woodworth"
+            }
+        }
+    },
+    {
+        "sys_gUid": "Form568-b78818c9-7160-474f-a284-f9d75a990ecf",
+        "data": {
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "cdotSection/DepartmentName": "Projects",
+            "cdotPatrolNumber/Id": "1",
+            "subAccountNumber": "5561",
+            "mpaCode": "65161",
+            "descriptionForProject": "Test 25",
+            "srzmap": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -103.17130040113868,
+                                40.625392709715676
+                            ],
+                            [
+                                -103.17889641706886,
+                                40.61979008921054
+                            ],
+                            [
+                                -103.17567776625098,
+                                40.61724921108253
+                            ],
+                            [
+                                -103.17396115248145,
+                                40.616206771586256
+                            ],
+                            [
+                                -103.16709469740333,
+                                40.62167939747747
+                            ],
+                            [
+                                -103.16851090376319,
+                                40.62477383867882
+                            ],
+                            [
+                                -103.17130040113868,
+                                40.625392709715676
+                            ]
+                        ]
+                    ],
+                    "className": "Form568"
+                },
+                {
+                    "type": "Point",
+                    "coordinates": [
+                        -103.16971253340186,
+                        40.62092205187358
+                    ],
+                    "className": "text"
+                }
+            ],
+            "streetNameFrom": "I-76",
+            "mileMarkerStart": "123",
+            "mileMarkerEnd": "126",
+            "directionOfTraffic": " East/West ",
+            "currentPostedSpeed": "65",
+            "requestedTemporarySpeed": "50",
+            "reductionJustification": "Test 24",
+            "document": [],
+            "workStartDate": "2021-12-06T22:30:00.000Z",
+            "workEndDate": "2022-06-24T21:30:00.000Z",
+            "approval": {
+                "description": "",
+                "value": "Approved"
+            },
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "taskChecklist": [
+                "Is the Required Information tab complete?"
+            ],
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-07-14T21:32:55.133Z",
+                "name": "Jonathan Woodworth"
+            }
+        }
+    },
+    {
+        "sys_gUid": "Form568-37409265-ab75-455e-86c2-01e3d034d821",
+        "data": {
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "cdotSection/DepartmentName": "Projects",
+            "cdotPatrolNumber/Id": "1651",
+            "subAccountNumber": "651651",
+            "mpaCode": "65161",
+            "descriptionForProject": "Test 24",
+            "srzmap": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -102.70027917355857,
+                                40.11951107205442
+                            ],
+                            [
+                                -102.70010751218162,
+                                40.11793581620427
+                            ],
+                            [
+                                -102.66182702512107,
+                                40.11793581620427
+                            ],
+                            [
+                                -102.66217034787498,
+                                40.1197736111481
+                            ],
+                            [
+                                -102.70027917355857,
+                                40.11951107205442
+                            ]
+                        ]
+                    ],
+                    "className": "Speed Reduction Zone Polygon"
+                },
+                {
+                    "type": "Point",
+                    "coordinates": [
+                        -102.68611710995994,
+                        40.11562209301177
+                    ],
+                    "className": "text"
+                }
+            ],
+            "streetNameFrom": "US-34",
+            "mileMarkerStart": "55",
+            "mileMarkerEnd": "40",
+            "directionOfTraffic": " East/West ",
+            "currentPostedSpeed": "50",
+            "requestedTemporarySpeed": "45",
+            "workStartDate": "2021-08-02T21:25:00.000Z",
+            "workEndDate": "2021-08-27T21:25:00.000Z",
+            "reductionJustification": "Test 24",
+            "document": [],
+            "approval": {
+                "description": "",
+                "value": "Approved"
+            },
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "taskChecklist": [
+                "Is the Required Information tab complete?",
+                "Is/are the MHT(s) signed prior to submission per CDOT Requirements?",
+                "Is the requested speed reduction valid based on the criteria shown in the Authority tab?",
+                "Are the requester and CDOT Engineer details accurate?",
+                "Are all relevant Permit(s) and permit number(s) attached?",
+                "Are the speed reduction details and the SRZ polygon accurate?"
+            ],
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-07-14T21:27:12.795Z",
+                "name": "Jonathan Woodworth"
+            }
+        }
+    },
+    {
+        "sys_gUid": "Form568-b5a3d729-a9b2-46f0-9581-cb4f4141d4b6",
+        "data": {
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "cdotSection/DepartmentName": "Projects",
+            "cdotPatrolNumber/Id": "21",
+            "subAccountNumber": "659861",
+            "mpaCode": "654916",
+            "descriptionForProject": "Test 23",
+            "srzmap": [
+                {
+                    "type": "LineString",
+                    "coordinates": [
+                        [
+                            -104.13097277078053,
+                            40.232238658068255
+                        ],
+                        [
+                            -104.16599169167897,
+                            40.23197655373459
+                        ],
+                        [
+                            -104.1680516282024,
+                            40.23197655373459
+                        ],
+                        [
+                            -104.16959658059498,
+                            40.231583395332095
+                        ],
+                        [
+                            -104.17165651711842,
+                            40.23092812625596
+                        ],
+                        [
+                            -104.2058171311321,
+                            40.21939435281266
+                        ]
+                    ],
+                    "className": "Form568"
+                },
+                {
+                    "type": "Point",
+                    "coordinates": [
+                        -104.18006792458912,
+                        40.22525978414362
+                    ],
+                    "className": "text"
+                }
+            ],
+            "streetNameFrom": "I-76",
+            "mileMarkerStart": "56",
+            "mileMarkerEnd": "62",
+            "directionOfTraffic": " East/West ",
+            "currentPostedSpeed": "65",
+            "requestedTemporarySpeed": "50",
+            "workStartDate": "2021-08-09T21:18:00.000Z",
+            "workEndDate": "2021-08-27T21:18:00.000Z",
+            "reductionJustification": "Test 23",
+            "document": [],
+            "approval": {
+                "description": "",
+                "value": "Approved"
+            },
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "taskChecklist": [
+                "Is the Required Information tab complete?",
+                "Is/are the MHT(s) signed prior to submission per CDOT Requirements?",
+                "Is the requested speed reduction valid based on the criteria shown in the Authority tab?",
+                "Are the requester and CDOT Engineer details accurate?",
+                "Are all relevant Permit(s) and permit number(s) attached?",
+                "Are the speed reduction details and the SRZ polygon accurate?"
+            ],
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-07-14T21:20:32.523Z",
+                "name": "Jonathan Woodworth"
+            }
+        }
+    },
+    {
+        "sys_gUid": "Form568-5e295ddb-6466-4def-a0ea-01956b33b915",
+        "data": {
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "cdotSection/DepartmentName": "Projects",
+            "cdotPatrolNumber/Id": "1",
+            "subAccountNumber": "6516516",
+            "descriptionForProject": "Test 22",
+            "mpaCode": "4516",
+            "srzmap": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -103.67824931431491,
+                                40.26844628158382
+                            ],
+                            [
+                                -103.67824931431491,
+                                40.26775862352706
+                            ],
+                            [
+                                -103.65919490147311,
+                                40.267987843656115
+                            ],
+                            [
+                                -103.65932364750583,
+                                40.26883922590585
+                            ],
+                            [
+                                -103.67824931431491,
+                                40.26844628158382
+                            ]
+                        ]
+                    ],
+                    "className": "Speed Reduction Zone Polygon"
+                },
+                {
+                    "type": "Point",
+                    "coordinates": [
+                        -103.65975280094821,
+                        40.26742297836513
+                    ],
+                    "className": "text"
+                }
+            ],
+            "streetNameFrom": "I-76",
+            "mileMarkerStart": "86.9",
+            "mileMarkerEnd": "87.7",
+            "directionOfTraffic": " East/West ",
+            "currentPostedSpeed": "65",
+            "requestedTemporarySpeed": "50",
+            "workStartDate": "2021-11-08T22:00:00.000Z",
+            "workEndDate": "2021-11-26T22:00:00.000Z",
+            "reductionJustification": "Test 22",
+            "document": [],
+            "approval": {
+                "description": "",
+                "value": "Approved"
+            },
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "taskChecklist": [
+                "Is the Required Information tab complete?",
+                "Is/are the MHT(s) signed prior to submission per CDOT Requirements?",
+                "Is the requested speed reduction valid based on the criteria shown in the Authority tab?",
+                "Are the requester and CDOT Engineer details accurate?",
+                "Are all relevant Permit(s) and permit number(s) attached?",
+                "Are the speed reduction details and the SRZ polygon accurate?"
+            ],
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-07-14T21:04:40.509Z",
+                "name": "Jonathan Woodworth"
+            }
+        }
+    },
+    {
+        "sys_gUid": "Form568-464c7499-26b7-4ccb-8c13-5e9682cbd313",
+        "data": {
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "cdotSection/DepartmentName": "Projects",
+            "cdotPatrolNumber/Id": "1",
+            "subAccountNumber": "65196561",
+            "mpaCode": "165160",
+            "descriptionForProject": "Test 21",
+            "srzmap": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -104.99729093852928,
+                                40.706012554123326
+                            ],
+                            [
+                                -104.9993294173806,
+                                40.703979231889555
+                            ],
+                            [
+                                -104.99892172161033,
+                                40.70192958025394
+                            ],
+                            [
+                                -104.99763426128318,
+                                40.70163676772854
+                            ],
+                            [
+                                -104.99544557872703,
+                                40.70371896216215
+                            ],
+                            [
+                                -104.99596056285789,
+                                40.70596375511676
+                            ],
+                            [
+                                -104.99729093852928,
+                                40.706012554123326
+                            ]
+                        ]
+                    ],
+                    "className": "Speed Reduction Zone Polygon"
+                },
+                {
+                    "type": "Point",
+                    "coordinates": [
+                        -104.99617513957908,
+                        40.705195166046934
+                    ],
+                    "className": "text"
+                }
+            ],
+            "streetNameFrom": "I-25",
+            "mileMarkerStart": "277.90",
+            "mileMarkerEnd": "278",
+            "directionOfTraffic": " North/South",
+            "currentPostedSpeed": "65",
+            "requestedTemporarySpeed": "50",
+            "workStartDate": "2021-09-12T13:00:00.000Z",
+            "workEndDate": "2021-09-30T23:00:00.000Z",
+            "reductionJustification": "Test 21",
+            "document": [],
+            "approval": {
+                "description": "",
+                "value": "Approved"
+            },
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "taskChecklist": [
+                "Is the Required Information tab complete?",
+                "Is/are the MHT(s) signed prior to submission per CDOT Requirements?",
+                "Is the requested speed reduction valid based on the criteria shown in the Authority tab?",
+                "Are the requester and CDOT Engineer details accurate?",
+                "Are all relevant Permit(s) and permit number(s) attached?",
+                "Are the speed reduction details and the SRZ polygon accurate?"
+            ],
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-07-14T20:48:31.054Z",
+                "name": "Jonathan Woodworth"
+            }
+        }
+    },
+    {
+        "sys_gUid": "Form568-a73025f9-77e9-4473-bbb1-1929c92a3873",
+        "data": {
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "cdotSection/DepartmentName": "Projects",
+            "cdotPatrolNumber/Id": "1",
+            "subAccountNumber": "6598461",
+            "mpaCode": "6849841",
+            "descriptionForProject": "Test 20",
+            "srzmap": [
+                {
+                    "type": "LineString",
+                    "coordinates": [
+                        [
+                            -104.93833724371977,
+                            40.911228329707164
+                        ],
+                        [
+                            -104.94692031256743,
+                            40.897994666102015
+                        ],
+                        [
+                            -104.95138350836821,
+                            40.88709436656477
+                        ],
+                        [
+                            -104.96511641852446,
+                            40.84269603675355
+                        ],
+                        [
+                            -104.96511641852446,
+                            40.844773815258044
+                        ]
+                    ],
+                    "className": "Form568"
+                },
+                {
+                    "type": "Point",
+                    "coordinates": [
+                        -104.92082778327055,
+                        40.882097795776026
+                    ],
+                    "className": "text"
+                }
+            ],
+            "streetNameFrom": "I-25",
+            "mileMarkerStart": "287",
+            "mileMarkerEnd": "297",
+            "directionOfTraffic": " North/South",
+            "currentPostedSpeed": "65",
+            "requestedTemporarySpeed": "50",
+            "workStartDate": "2021-08-09T11:00:00.000Z",
+            "workEndDate": "2021-08-13T21:00:00.000Z",
+            "reductionJustification": "Crews roadside.",
+            "document": [],
+            "taskChecklist": [
+                "Is the Required Information tab complete?",
+                "Is/are the MHT(s) signed prior to submission per CDOT Requirements?",
+                "Is the requested speed reduction valid based on the criteria shown in the Authority tab?",
+                "Are the requester and CDOT Engineer details accurate?",
+                "Are all relevant Permit(s) and permit number(s) attached?",
+                "Are the speed reduction details and the SRZ polygon accurate?"
+            ],
+            "approval": {
+                "description": "",
+                "value": "Approved"
+            },
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-07-14T20:41:03.684Z",
+                "name": "Jonathan Woodworth"
+            }
+        }
+    },
+    {
+        "sys_gUid": "Form568-7d41ef4f-d696-482e-ae0f-56eeb746fd94",
+        "data": {
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "cdotSection/DepartmentName": "Permits Unit",
+            "cdotPatrolNumber/Id": "1",
+            "subAccountNumber": "551651",
+            "mpaCode": "65651",
+            "descriptionForProject": "Test 19",
+            "srzmap": [
+                {
+                    "type": "LineString",
+                    "coordinates": [
+                        [
+                            -105.09285123660483,
+                            40.33596056520122
+                        ],
+                        [
+                            -105.07804544284262,
+                            40.3358951396771
+                        ],
+                        [
+                            -105.0772300513021,
+                            40.33614048506544
+                        ],
+                        [
+                            -105.07570655658164,
+                            40.33682744740683
+                        ],
+                        [
+                            -105.07536323382773,
+                            40.337154569873064
+                        ]
+                    ],
+                    "className": "Form568"
+                },
+                {
+                    "type": "Point",
+                    "coordinates": [
+                        -105.08253009631552,
+                        40.33589105057975
+                    ],
+                    "className": "text"
+                }
+            ],
+            "streetNameFrom": "US-287",
+            "mileMarkerStart": "196",
+            "mileMarkerEnd": "198",
+            "directionOfTraffic": "South",
+            "currentPostedSpeed": "50",
+            "requestedTemporarySpeed": "40",
+            "workStartDate": "2021-07-19T22:15:00.000Z",
+            "workEndDate": "2021-07-23T22:15:00.000Z",
+            "reductionJustification": "Test 19",
+            "document": [],
+            "approval": {
+                "description": "",
+                "value": "Approved"
+            },
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-07-13T22:22:07.954Z",
+                "name": "Jonathan Woodworth"
+            },
+            "taskChecklist": [
+                "Is the Required Information tab complete?"
+            ],
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            }
+        }
+    },
+    {
+        "sys_gUid": "Form568-f5b7ff0e-509f-47fa-a043-1cecb34b8c37",
+        "data": {
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "cdotSection/DepartmentName": "Permits Unit",
+            "cdotPatrolNumber/Id": "1",
+            "subAccountNumber": "651651",
+            "mpaCode": "49546",
+            "descriptionForProject": "Test 18",
+            "srzmap": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -105.07763032172286,
+                                40.523872252723734
+                            ],
+                            [
+                                -105.07764105055892,
+                                40.52308933291003
+                            ],
+                            [
+                                -105.07658962462509,
+                                40.523048555585866
+                            ],
+                            [
+                                -105.0766271755513,
+                                40.52390487418417
+                            ],
+                            [
+                                -105.07763032172286,
+                                40.523872252723734
+                            ]
+                        ]
+                    ],
+                    "className": "Speed Reduction Zone Polygon"
+                },
+                {
+                    "type": "Point",
+                    "coordinates": [
+                        -105.07642332766616,
+                        40.523341132337286
+                    ],
+                    "className": "text"
+                }
+            ],
+            "streetNameFrom": "US-287",
+            "mileMarkerStart": "295",
+            "mileMarkerEnd": "295.1",
+            "directionOfTraffic": " North/South",
+            "currentPostedSpeed": "45",
+            "requestedTemporarySpeed": "35",
+            "workStartDate": "2021-07-26T22:12:00.000Z",
+            "workEndDate": "2021-07-30T22:12:00.000Z",
+            "reductionJustification": "Test 18",
+            "document": [],
+            "approval": {
+                "description": "",
+                "value": "Approved"
+            },
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "taskChecklist": [
+                "Is the Required Information tab complete?",
+                "Is/are the MHT(s) signed prior to submission per CDOT Requirements?",
+                "Is the requested speed reduction valid based on the criteria shown in the Authority tab?",
+                "Are the requester and CDOT Engineer details accurate?",
+                "Are all relevant Permit(s) and permit number(s) attached?",
+                "Are the speed reduction details and the SRZ polygon accurate?"
+            ],
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-07-13T22:29:33.294Z",
+                "name": "Jonathan Woodworth"
+            }
+        }
+    },
+    {
+        "sys_gUid": "Form568-cb16a5d6-2b8d-4a24-bae7-aab11de32b02",
+        "data": {
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "cdotSection/DepartmentName": "Permits",
+            "cdotPatrolNumber/Id": "1",
+            "subAccountNumber": "6515",
+            "mpaCode": "4984",
+            "descriptionForProject": "Test 17",
+            "srzmap": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -105.07767227668664,
+                                40.430586203417015
+                            ],
+                            [
+                                -105.07766154785058,
+                                40.43033303504004
+                            ],
+                            [
+                                -105.07722702999017,
+                                40.43034528514476
+                            ],
+                            [
+                                -105.07721093673608,
+                                40.43061070353195
+                            ],
+                            [
+                                -105.07767227668664,
+                                40.430586203417015
+                            ]
+                        ]
+                    ],
+                    "className": "Speed Reduction Zone Polygon"
+                },
+                {
+                    "type": "Point",
+                    "coordinates": [
+                        -105.07810679454705,
+                        40.430687266333614
+                    ],
+                    "className": "text"
+                }
+            ],
+            "streetNameFrom": "US-287",
+            "mileMarkerStart": "281",
+            "mileMarkerEnd": "281",
+            "directionOfTraffic": " North/South",
+            "currentPostedSpeed": "40",
+            "requestedTemporarySpeed": "35",
+            "workStartDate": "2021-11-01T22:08:00.000Z",
+            "workEndDate": "2021-11-30T23:08:00.000Z",
+            "reductionJustification": "Test 17",
+            "document": [],
+            "approval": {
+                "description": "",
+                "value": "Approved"
+            },
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "taskChecklist": [
+                "Is the Required Information tab complete?",
+                "Is/are the MHT(s) signed prior to submission per CDOT Requirements?",
+                "Is the requested speed reduction valid based on the criteria shown in the Authority tab?",
+                "Are the requester and CDOT Engineer details accurate?",
+                "Are all relevant Permit(s) and permit number(s) attached?",
+                "Are the speed reduction details and the SRZ polygon accurate?"
+            ],
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-07-13T22:25:10.414Z",
+                "name": "Jonathan Woodworth"
+            }
+        }
+    },
+    {
+        "sys_gUid": "Form568-60ad80fb-e283-4afa-9184-1a47ac168f99",
+        "data": {
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "cdotSection/DepartmentName": "Permits Unit ",
+            "cdotPatrolNumber/Id": "1",
+            "subAccountNumber": "651984",
+            "mpaCode": "148",
+            "descriptionForProject": "Test 16",
+            "srzmap": [
+                {
+                    "type": "LineString",
+                    "coordinates": [
+                        [
+                            -102.28273684232364,
+                            40.585719094619684
+                        ],
+                        [
+                            -102.27382117955814,
+                            40.58572724245658
+                        ]
+                    ],
+                    "className": "Form568"
+                },
+                {
+                    "type": "Point",
+                    "coordinates": [
+                        -102.27951819150577,
+                        40.58622222168646
+                    ],
+                    "className": "text"
+                }
+            ],
+            "streetNameFrom": "US-6",
+            "mileMarkerStart": "15",
+            "mileMarkerEnd": "20",
+            "directionOfTraffic": "West",
+            "currentPostedSpeed": "65",
+            "requestedTemporarySpeed": "50",
+            "workStartDate": "2021-07-19T22:04:00.000Z",
+            "workEndDate": "2021-07-23T22:04:00.000Z",
+            "reductionJustification": "Test 16",
+            "document": [],
+            "approval": {
+                "description": "",
+                "value": "Approved"
+            },
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "taskChecklist": [
+                "Is the Required Information tab complete?",
+                "Is/are the MHT(s) signed prior to submission per CDOT Requirements?",
+                "Is the requested speed reduction valid based on the criteria shown in the Authority tab?",
+                "Are the requester and CDOT Engineer details accurate?",
+                "Are all relevant Permit(s) and permit number(s) attached?",
+                "Are the speed reduction details and the SRZ polygon accurate?"
+            ],
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-07-13T22:41:32.746Z",
+                "name": "Jonathan Woodworth"
+            }
+        }
+    },
+    {
+        "sys_gUid": "Form568-b2cf5bab-13f5-4563-a35f-8960164fae83",
+        "data": {
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "cdotSection/DepartmentName": "Permits Unit",
+            "cdotPatrolNumber/Id": "1",
+            "subAccountNumber": "4651651",
+            "mpaCode": "65651",
+            "descriptionForProject": "Test 15",
+            "srzmap": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -104.56856616481438,
+                                40.392927634243954
+                            ],
+                            [
+                                -104.56852324947015,
+                                40.392502726451845
+                            ],
+                            [
+                                -104.56079848750726,
+                                40.39269066676749
+                            ],
+                            [
+                                -104.56088431819573,
+                                40.39324631332852
+                            ],
+                            [
+                                -104.56856616481438,
+                                40.392927634243954
+                            ]
+                        ]
+                    ],
+                    "className": "Speed Reduction Zone Polygon"
+                },
+                {
+                    "type": "Point",
+                    "coordinates": [
+                        -104.56427463039056,
+                        40.39297461907557
+                    ],
+                    "className": "text"
+                }
+            ],
+            "streetNameFrom": "US-34",
+            "mileMarkerStart": "86.3",
+            "mileMarkerEnd": "91.2",
+            "directionOfTraffic": " East/West ",
+            "currentPostedSpeed": "65",
+            "requestedTemporarySpeed": "40",
+            "workStartDate": "2021-09-01T21:54:00.000Z",
+            "workEndDate": "2021-11-06T21:54:00.000Z",
+            "reductionJustification": "Testing 15",
+            "document": [],
+            "approval": {
+                "description": "",
+                "value": "Update Submitted"
+            },
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-07-13T22:33:43.156Z",
+                "name": "Jonathan Woodworth"
+            },
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "taskChecklist": [
+                "Is the Required Information tab complete?",
+                "Is/are the MHT(s) signed prior to submission per CDOT Requirements?",
+                "Is the requested speed reduction valid based on the criteria shown in the Authority tab?",
+                "Are the requester and CDOT Engineer details accurate?",
+                "Are all relevant Permit(s) and permit number(s) attached?",
+                "Are the speed reduction details and the SRZ polygon accurate?"
+            ]
+        }
+    },
+    {
+        "sys_gUid": "Form568-671b543d-2338-4c5f-84b2-58c7618cadde",
+        "data": {
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "cdotSection/DepartmentName": "Permits Unit",
+            "cdotPatrolNumber/Id": "1",
+            "subAccountNumber": "65169561",
+            "mpaCode": "516461",
+            "descriptionForProject": "Test 11",
+            "srzmap": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -105.10316905336035,
+                                40.2034216067243
+                            ],
+                            [
+                                -105.10316368894232,
+                                40.20316758515526
+                            ],
+                            [
+                                -105.1026567514385,
+                                40.202884882612594
+                            ],
+                            [
+                                -105.10239657716406,
+                                40.202880785465645
+                            ],
+                            [
+                                -105.10205325441015,
+                                40.20319011936518
+                            ],
+                            [
+                                -105.101846724316,
+                                40.20340316970696
+                            ],
+                            [
+                                -105.10242071704519,
+                                40.203773957647435
+                            ],
+                            [
+                                -105.10264870481146,
+                                40.20378010328681
+                            ],
+                            [
+                                -105.10316905336035,
+                                40.2034216067243
+                            ]
+                        ]
+                    ],
+                    "className": "Speed Reduction Zone Polygon"
+                },
+                {
+                    "type": "Point",
+                    "coordinates": [
+                        -105.10195937709463,
+                        40.2035644934386
+                    ],
+                    "className": "text"
+                }
+            ],
+            "streetNameFrom": "US-287",
+            "mileMarkerStart": "1",
+            "mileMarkerEnd": "3",
+            "directionOfTraffic": " North/South",
+            "currentPostedSpeed": "45",
+            "requestedTemporarySpeed": "40",
+            "workStartDate": "2021-08-09T21:33:00.000Z",
+            "workEndDate": "2021-10-30T21:33:00.000Z",
+            "reductionJustification": "Interchange rebuild.",
+            "streetNameFrom2": "CO-66",
+            "mileMarkerStart2": "14",
+            "mileMarkerEnd2": "15",
+            "directionOfTraffic2": " East/West ",
+            "currentPostedSpeed2": "55",
+            "requestedTemporarySpeed2": "40",
+            "workStartDate2": "2021-08-09T21:33:00.000Z",
+            "workEndDate2": "2021-10-30T21:33:00.000Z",
+            "document": [],
+            "approval": {
+                "description": "",
+                "value": "Approved"
+            },
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "taskChecklist": [
+                "Is the Required Information tab complete?",
+                "Are the requester and CDOT Engineer details accurate?",
+                "Are all relevant Permit(s) and permit number(s) attached?",
+                "Is the requested speed reduction valid based on the criteria shown in the Authority tab?",
+                "Is/are the MHT(s) signed prior to submission per CDOT Requirements?",
+                "Are the speed reduction details and the SRZ polygon accurate?"
+            ],
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-07-13T21:37:38.613Z",
+                "name": "Jonathan Woodworth"
+            }
+        }
+    },
+    {
+        "sys_gUid": "Form568-1815c297-bc69-430c-9cea-6a125cd006e5",
+        "data": {
+            "srzmap": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -102.80936382969064,
+                                40.82272311486202
+                            ],
+                            [
+                                -102.80889176090402,
+                                40.82205736213747
+                            ],
+                            [
+                                -102.80477188785714,
+                                40.82230093098262
+                            ],
+                            [
+                                -102.80140303333444,
+                                40.823859750410804
+                            ],
+                            [
+                                -102.80063055713815,
+                                40.82511002701562
+                            ],
+                            [
+                                -102.80442856510324,
+                                40.824769044824556
+                            ],
+                            [
+                                -102.80936382969064,
+                                40.82272311486202
+                            ]
+                        ]
+                    ],
+                    "className": "Speed Reduction Zone Polygon"
+                },
+                {
+                    "type": "Point",
+                    "coordinates": [
+                        -102.8055373599256,
+                        40.82374811692934
+                    ],
+                    "className": "text"
+                }
+            ],
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "cdotSection/DepartmentName": "Projects",
+            "cdotPatrolNumber/Id": "1",
+            "subAccountNumber": "459849",
+            "mpaCode": "194981",
+            "descriptionForProject": "Restriping",
+            "streetNameFrom": "I-76",
+            "mileMarkerStart": "1",
+            "mileMarkerEnd": "2",
+            "directionOfTraffic": " East/West ",
+            "currentPostedSpeed": "65",
+            "requestedTemporarySpeed": "45",
+            "workStartDate": "2021-06-14T14:57:00.000Z",
+            "workEndDate": "2021-06-28T14:57:00.000Z",
+            "reductionJustification": "Restriping operations",
+            "document": [],
+            "approval": {
+                "description": "",
+                "value": "Approved"
+            },
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "taskChecklist": [
+                "Is the Required Information tab complete?"
+            ],
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-07-13T22:34:42.890Z",
+                "name": "Jonathan Woodworth"
+            }
+        }
+    },
+    {
+        "sys_gUid": "Form568-19f09300-acb6-4d34-9de4-849278c0914e",
+        "data": {
+            "srzmap": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -104.99347375840149,
+                                40.43897058316368
+                            ],
+                            [
+                                -104.99107049912415,
+                                40.43897058316368
+                            ],
+                            [
+                                -104.99038385361634,
+                                40.47541233260094
+                            ],
+                            [
+                                -104.9941604039093,
+                                40.475151171762356
+                            ],
+                            [
+                                -104.99347375840149,
+                                40.43897058316368
+                            ]
+                        ]
+                    ],
+                    "className": "Speed Reduction Zone Polygon"
+                },
+                {
+                    "type": "Point",
+                    "coordinates": [
+                        -104.96909784287415,
+                        40.460230672460426
+                    ],
+                    "className": "text"
+                }
+            ],
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [
+                {
+                    "documentName": "MHT",
+                    "description": "Method of handling traffic, both directions.",
+                    "doc_url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/CDOT%20Region%204/Files/b416cf9b-abf2-4d99-96d8-51f74872764cMHT",
+                    "UniqueDocName": "b416cf9b-abf2-4d99-96d8-51f74872764cMHT",
+                    "s3FileName": "Documents/CDOT Region 4/Files/b416cf9b-abf2-4d99-96d8-51f74872764cMHT",
+                    "uploadedDate": "2021-05-27T15:57:56.627Z",
+                    "contentType": "image/png"
+                }
+            ],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [
+                {
+                    "documentName": "Permits",
+                    "doc_url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/CDOT%20Region%204/Files/8cecc5d6-2201-4523-ad44-034a32aff227Permits",
+                    "UniqueDocName": "8cecc5d6-2201-4523-ad44-034a32aff227Permits",
+                    "s3FileName": "Documents/CDOT Region 4/Files/8cecc5d6-2201-4523-ad44-034a32aff227Permits",
+                    "uploadedDate": "2021-05-27T15:58:14.666Z",
+                    "contentType": "image/png"
+                }
+            ],
+            "cdotSection/DepartmentName": "Permits",
+            "cdotPatrolNumber/Id": "1",
+            "subAccountNumber": "1698941-B",
+            "permitNumber": "794618,479448,498765",
+            "mpaCode": "187942-A",
+            "descriptionForProject": "Restriping and crack seal operations.",
+            "streetNameFrom": "I-25",
+            "mileMarkerStart": "259",
+            "mileMarkerEnd": "262",
+            "directionOfTraffic": " North/South",
+            "currentPostedSpeed": "65",
+            "requestedTemporarySpeed": "50",
+            "workStartDate": "2021-06-07T10:00:00.000Z",
+            "workEndDate": "2021-06-14T03:00:00.000Z",
+            "reductionJustification": "Alternating single lane closures with crews roadside doing crack seal and restriping operations.",
+            "document": [],
+            "approval": {
+                "description": "",
+                "value": "Approved"
+            },
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "taskChecklist": [
+                "Is the Required Information tab complete?",
+                "Is/are the MHT(s) signed prior to submission per CDOT Requirements?",
+                "Are the requester and CDOT Engineer details accurate?",
+                "Are the speed reduction details and the SRZ polygon accurate?",
+                "Are all relevant Permit(s) and permit number(s) attached?",
+                "Is the requested speed reduction valid based on the criteria shown in the Authority tab?"
+            ],
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-05-27T16:03:48.393Z",
+                "name": "Jonathan Woodworth"
+            },
+            "user": [
+                {
+                    "sys_gUid": "user-f66cbed7-4f49-4cf4-a7d6-76dacb610817",
+                    "firstName": "Navin",
+                    "lastName": "Nageli",
+                    "username": "nnageli@navjoyinc.com.cdotr4"
+                }
+            ]
+        }
+    },
+    {
+        "sys_gUid": "Form568-fa2d7300-6ace-4286-bfa4-0b01dbc10888",
+        "data": {
+            "srzmap": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -104.32836430269519,
+                                40.183719913861516
+                            ],
+                            [
+                                -104.318064620078,
+                                40.17270277596618
+                            ],
+                            [
+                                -104.19378178316394,
+                                40.21518759313975
+                            ],
+                            [
+                                -104.20545475679675,
+                                40.22357650761386
+                            ],
+                            [
+                                -104.32836430269519,
+                                40.183719913861516
+                            ]
+                        ]
+                    ],
+                    "className": "Speed Reduction Zone Polygon"
+                }
+            ],
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "cdotSection/DepartmentName": "1",
+            "cdotPatrolNumber/Id": "1",
+            "subAccountNumber": "1",
+            "mpaCode": "1",
+            "descriptionForProject": "1",
+            "streetNameFrom": "I-",
+            "mileMarkerStart": "1",
+            "mileMarkerEnd": "1",
+            "directionOfTraffic": " East/West ",
+            "currentPostedSpeed": "1",
+            "requestedTemporarySpeed": "1",
+            "workStartDate": "2021-04-05T17:33:00.000Z",
+            "workEndDate": "2021-04-23T17:33:00.000Z",
+            "reductionJustification": "Test 10",
+            "document": [],
+            "approval": {
+                "description": "",
+                "value": "Approved"
+            },
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "taskChecklist": [
+                "Are the requester and CDOT Engineer details accurate?"
+            ],
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-05-11T17:34:52.978Z",
+                "name": "Jonathan Woodworth"
+            }
+        }
+    },
+    {
+        "sys_gUid": "Form568-2162938d-4c6f-496f-807d-c065a88c0bc9",
+        "data": {
+            "srzmap": [
+                {
+                    "type": "LineString",
+                    "coordinates": [
+                        [
+                            -102.6160166225571,
+                            40.8760899447895
+                        ],
+                        [
+                            -102.5171396694321,
+                            40.90256338778641
+                        ]
+                    ],
+                    "className": "Form568"
+                },
+                {
+                    "type": "Point",
+                    "coordinates": [
+                        -102.58128499138986,
+                        40.879351028691914
+                    ],
+                    "className": "text"
+                }
+            ],
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "cdotSection/DepartmentName": "Projects",
+            "cdotPatrolNumber/Id": "1",
+            "subAccountNumber": "1",
+            "mpaCode": "1",
+            "descriptionForProject": "Test 9",
+            "streetNameFrom": "I-76",
+            "mileMarkerStart": "1",
+            "mileMarkerEnd": "2",
+            "directionOfTraffic": " East/West ",
+            "currentPostedSpeed": "65",
+            "requestedTemporarySpeed": "60",
+            "workStartDate": "2021-05-11T17:29:32.533Z",
+            "workEndDate": "2021-05-11T17:29:36.472Z",
+            "reductionJustification": "Test 9",
+            "document": [],
+            "taskChecklist": [
+                "Are the requester and CDOT Engineer details accurate?"
+            ],
+            "approval": {
+                "description": "",
+                "value": "Approved"
+            },
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            }
+        }
+    },
+    {
+        "sys_gUid": "Form568-f72380c4-2608-4c54-a480-f44287485c17",
+        "data": {
+            "srzmap": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -104.73620408770844,
+                                39.987440582960566
+                            ],
+                            [
+                                -104.74002355334565,
+                                39.98461274923118
+                            ],
+                            [
+                                -104.73689073321626,
+                                39.98329743784639
+                            ],
+                            [
+                                -104.73320001361176,
+                                39.98625685285265
+                            ],
+                            [
+                                -104.73247045275971,
+                                39.98763786931776
+                            ],
+                            [
+                                -104.73620408770844,
+                                39.987440582960566
+                            ]
+                        ]
+                    ],
+                    "className": "Speed Reduction Zone Polygon"
+                }
+            ],
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [
+                {
+                    "documentName": "Permit",
+                    "doc_url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/CDOT%20Region%204/Files/468e5a02-e0bc-4aca-84bc-0387631c2b48Permit",
+                    "UniqueDocName": "468e5a02-e0bc-4aca-84bc-0387631c2b48Permit",
+                    "s3FileName": "Documents/CDOT Region 4/Files/468e5a02-e0bc-4aca-84bc-0387631c2b48Permit",
+                    "uploadedDate": "2021-05-11T17:20:32.771Z",
+                    "contentType": "image/png"
+                }
+            ],
+            "subAccountNumber": "1",
+            "permitNumber": "1",
+            "mpaCode": "1",
+            "streetNameFrom": "I-76",
+            "mileMarkerStart": "1",
+            "mileMarkerEnd": "1",
+            "directionOfTraffic": " East/West ",
+            "currentPostedSpeed": "1",
+            "requestedTemporarySpeed": "1",
+            "workStartDate": "2021-05-11T17:21:18.655Z",
+            "workEndDate": "2021-05-11T17:21:22.040Z",
+            "reductionJustification": "Test 8",
+            "document": [],
+            "taskChecklist": [
+                "Have you filled Project Engineer details?"
+            ],
+            "approval": {
+                "description": "",
+                "value": "Approved"
+            },
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-4b0086e0-e6dc-4ee8-b093-3239966516bd",
+                "firstName": "Ruben",
+                "lastName": "Ramos",
+                "title": "TIM II"
+            },
+            "requestorName": {
+                "sys_gUid": "User-d143efff-1e1d-4dda-9cce-f3608625ad57",
+                "username": "Timothy.Bilobran@state.co.us",
+                "firstName": "Tim",
+                "lastName": "Bilobran",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Permits Unit Requestor",
+                "email": "Timothy.Bilobran@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Permits Manager"
+            }
+        }
+    },
+    {
+        "sys_gUid": "Form568-196da876-face-4575-958a-342156a7ba6f",
+        "data": {
+            "srzmap": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -104.98190118911467,
+                                40.33548400936807
+                            ],
+                            [
+                                -104.98233034255705,
+                                40.30675590276099
+                            ],
+                            [
+                                -104.97821046951017,
+                                40.306821356530776
+                            ],
+                            [
+                                -104.9784679615756,
+                                40.33430633191049
+                            ],
+                            [
+                                -104.98190118911467,
+                                40.33548400936807
+                            ]
+                        ]
+                    ],
+                    "className": "Form568"
+                },
+                {
+                    "type": "Point",
+                    "coordinates": [
+                        -104.98564972289628,
+                        40.32292923461432
+                    ],
+                    "className": "text"
+                }
+            ],
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "cdotSection/DepartmentName": "LA Projects",
+            "cdotPatrolNumber/Id": "1",
+            "subAccountNumber": "1687954-A",
+            "mpaCode": "1689651",
+            "descriptionForProject": "Test 7",
+            "streetNameFrom": "I-25",
+            "mileMarkerStart": "1",
+            "mileMarkerEnd": "5",
+            "directionOfTraffic": " North/South",
+            "currentPostedSpeed": "4",
+            "requestedTemporarySpeed": "4",
+            "workStartDate": "2021-05-11T17:11:52.881Z",
+            "workEndDate": "2021-05-11T17:11:56.763Z",
+            "reductionJustification": "Bridge repair",
+            "document": [],
+            "approval": {
+                "description": "",
+                "value": "Approved"
+            },
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-05-11T17:14:24.231Z",
+                "name": "Jonathan Woodworth"
+            },
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "taskChecklist": [
+                "Is the requested speed reduction valid based on the criteria shown in the Authority tab?"
+            ]
+        }
+    },
+    {
+        "sys_gUid": "Form568-afff586a-a7a3-48ee-835e-58e01d77bcc5",
+        "data": {
+            "srzmap": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -104.77349396355578,
+                                40.32002403286012
+                            ],
+                            [
+                                -104.71306915886828,
+                                40.29489003447542
+                            ],
+                            [
+                                -104.79272003777453,
+                                40.23411093098869
+                            ],
+                            [
+                                -104.83117218621203,
+                                40.25926752804222
+                            ],
+                            [
+                                -104.77349396355578,
+                                40.32002403286012
+                            ]
+                        ]
+                    ],
+                    "className": "Speed Reduction Zone Polygon"
+                }
+            ],
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [
+                {
+                    "documentName": "Permit",
+                    "doc_url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/CDOT%20Region%204/Files/41e6b32f-bdf0-44f7-9c5b-5261ba966a2dPermit",
+                    "UniqueDocName": "41e6b32f-bdf0-44f7-9c5b-5261ba966a2dPermit",
+                    "s3FileName": "Documents/CDOT Region 4/Files/41e6b32f-bdf0-44f7-9c5b-5261ba966a2dPermit",
+                    "uploadedDate": "2021-05-11T16:41:02.387Z",
+                    "contentType": "image/png"
+                }
+            ],
+            "subAccountNumber": "54984",
+            "permitNumber": "49846",
+            "mpaCode": "549845",
+            "streetNameFrom": "85",
+            "mileMarkerStart": "1",
+            "mileMarkerEnd": "2",
+            "directionOfTraffic": " North/South",
+            "currentPostedSpeed": "646",
+            "requestedTemporarySpeed": "6",
+            "workStartDate": "2021-05-11T16:44:04.524Z",
+            "workEndDate": "2021-05-11T16:44:06.979Z",
+            "reductionJustification": "1",
+            "document": [],
+            "taskChecklist": [
+                "Have you filled Project Engineer details?"
+            ],
+            "approval": {
+                "description": "",
+                "value": "Not Applicable"
+            },
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-213bef7a-cbab-427f-83c9-ce75e925bd0d",
+                "firstName": "Robert",
+                "lastName": "Shepherd",
+                "title": "TIM II"
+            },
+            "requestorName": {
+                "sys_gUid": "User-d143efff-1e1d-4dda-9cce-f3608625ad57",
+                "username": "Timothy.Bilobran@state.co.us",
+                "firstName": "Tim",
+                "lastName": "Bilobran",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Permits Unit Requestor",
+                "email": "Timothy.Bilobran@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Permits Manager"
+            }
+        }
+    },
+    {
+        "sys_gUid": "Form568-d227fa08-516d-43b3-8de0-44859ea56186",
+        "data": {
+            "srzmap": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -105.07752592711702,
+                                40.53793064629388
+                            ],
+                            [
+                                -105.07658178954378,
+                                40.53793064629388
+                            ],
+                            [
+                                -105.07662470488802,
+                                40.52370916051971
+                            ],
+                            [
+                                -105.07774050383821,
+                                40.523807025091564
+                            ],
+                            [
+                                -105.07752592711702,
+                                40.53793064629388
+                            ]
+                        ]
+                    ],
+                    "className": "Form568"
+                },
+                {
+                    "type": "Point",
+                    "coordinates": [
+                        -105.08768285544582,
+                        40.532786850293505
+                    ],
+                    "className": "text"
+                }
+            ],
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "cdotSection/DepartmentName": "LA Projects",
+            "cdotPatrolNumber/Id": "1",
+            "subAccountNumber": "793245-A",
+            "mpaCode": "712458",
+            "descriptionForProject": "Crack seal operations.",
+            "streetNameFrom": "US-287",
+            "mileMarkerStart": "221",
+            "mileMarkerEnd": "221.87",
+            "directionOfTraffic": " North/South",
+            "currentPostedSpeed": "40",
+            "requestedTemporarySpeed": "30",
+            "workStartDate": "2021-06-14T14:00:00.000Z",
+            "workEndDate": "2021-06-18T22:00:00.000Z",
+            "reductionJustification": "Mobile single lane closures. Crews in roadway.",
+            "document": [],
+            "approval": {
+                "description": "",
+                "value": "Not Applicable"
+            },
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "taskChecklist": [
+                "Is the Required Information Tab Complete?",
+                "Are the requester and CDOT Engineer details accurate?",
+                "Are the speed reduction details and the SRZ polygon accurate?",
+                "Is the requested speed reduction valid based on the criteria shown in the Authority tab?"
+            ],
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-05-11T16:36:21.801Z",
+                "name": "Jonathan Woodworth"
+            }
+        }
+    },
+    {
+        "sys_gUid": "Form568-6ab4408e-d9c1-4ac0-ab1d-b16feb17f18d",
+        "data": {
+            "srzmap": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -104.67900571959923,
+                                40.42358701413087
+                            ],
+                            [
+                                -104.6784049047799,
+                                40.42358701413087
+                            ],
+                            [
+                                -104.67841563361596,
+                                40.422517055735916
+                            ],
+                            [
+                                -104.67902717727135,
+                                40.42254155879033
+                            ],
+                            [
+                                -104.67900571959923,
+                                40.42358701413087
+                            ]
+                        ]
+                    ],
+                    "className": "Form568"
+                },
+                {
+                    "type": "Point",
+                    "coordinates": [
+                        -104.67878764081412,
+                        40.42327902840428
+                    ],
+                    "className": "text"
+                }
+            ],
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "cdotSection/DepartmentName": "LA Projects",
+            "cdotPatrolNumber/Id": "1",
+            "subAccountNumber": "48976-A",
+            "mpaCode": "789465",
+            "descriptionForProject": "Bridge Repair and replacement.",
+            "streetNameFrom": "US-85",
+            "mileMarkerStart": "47.25",
+            "mileMarkerEnd": "47.30",
+            "directionOfTraffic": " North/South",
+            "currentPostedSpeed": "45",
+            "requestedTemporarySpeed": "35",
+            "reductionJustification": "Repairing and replacing the bridge. Crews will be roadside, various alternating single lane closures.",
+            "document": [],
+            "approval": {
+                "description": "",
+                "value": "Approved"
+            },
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-05-11T16:25:45.352Z",
+                "name": "Jonathan Woodworth"
+            },
+            "workStartDate": "2021-08-02T12:00:00.000Z",
+            "workEndDate": "2021-10-30T00:00:00.000Z",
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "taskChecklist": [
+                "Is the Required Information Tab Complete?",
+                "Are the requester and CDOT Engineer details accurate?",
+                "Are the speed reduction details and the SRZ polygon accurate?",
+                "Is the requested speed reduction valid based on the criteria shown in the Authority tab?"
+            ]
+        }
+    },
+    {
+        "sys_gUid": "Form568-2f560979-b6e9-4d28-a6e1-6120066ee992",
+        "data": {
+            "srzmap": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -104.68031879637711,
+                                40.418367644368814
+                            ],
+                            [
+                                -104.67920299742691,
+                                40.418367644368814
+                            ],
+                            [
+                                -104.67928882811539,
+                                40.40980683657896
+                            ],
+                            [
+                                -104.68074794981949,
+                                40.40980683657896
+                            ],
+                            [
+                                -104.68031879637711,
+                                40.418367644368814
+                            ]
+                        ]
+                    ],
+                    "className": "Form568"
+                },
+                {
+                    "type": "Point",
+                    "coordinates": [
+                        -104.67991855002329,
+                        40.415730628325946
+                    ],
+                    "className": "text"
+                }
+            ],
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "cdotSection/DepartmentName": "Traffic and LA Projects",
+            "cdotPatrolNumber/Id": "1",
+            "subAccountNumber": "1458-A",
+            "mpaCode": "124578",
+            "descriptionForProject": "Restriping operations.",
+            "streetNameFrom": "US-85",
+            "mileMarkerStart": "48",
+            "mileMarkerEnd": "50",
+            "directionOfTraffic": " North/South",
+            "currentPostedSpeed": "45",
+            "requestedTemporarySpeed": "35",
+            "workStartDate": "2021-06-07T13:00:00.000Z",
+            "workEndDate": "2021-06-25T23:00:00.000Z",
+            "reductionJustification": "Crews will be roadside restriping in various alternating lane closures.",
+            "document": [],
+            "approval": {
+                "description": "",
+                "value": "Approved"
+            },
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "taskChecklist": [
+                "Is the Required Information Tab Complete?",
+                "Are the requester and CDOT Engineer details accurate?",
+                "Are the speed reduction details and the SRZ polygon accurate?",
+                "Is the requested speed reduction valid based on the criteria shown in the Authority tab?"
+            ],
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-05-11T16:16:35.783Z",
+                "name": "Jonathan Woodworth"
+            }
+        }
+    },
+    {
+        "sys_gUid": "Form568-152e76d6-e746-4802-bd06-53b07f37e9fa",
+        "data": {
+            "srzmap": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -105.01512234004633,
+                                40.58224927329731
+                            ],
+                            [
+                                -105.01512234004633,
+                                40.58042403813538
+                            ],
+                            [
+                                -105.00181858333247,
+                                40.5783379941093
+                            ],
+                            [
+                                -105.00023071559565,
+                                40.57820761419784
+                            ],
+                            [
+                                -104.98327915462153,
+                                40.58065219525426
+                            ],
+                            [
+                                -104.98293583186762,
+                                40.58166259599811
+                            ],
+                            [
+                                -104.99752704890864,
+                                40.58202112162573
+                            ],
+                            [
+                                -104.99993030818598,
+                                40.583911497701756
+                            ],
+                            [
+                                -105.00323478969233,
+                                40.583781128653115
+                            ],
+                            [
+                                -105.00628177913325,
+                                40.582216680249026
+                            ],
+                            [
+                                -105.01512234004633,
+                                40.58224927329731
+                            ]
+                        ]
+                    ],
+                    "className": "Speed Reduction Zone Polygon"
+                },
+                {
+                    "type": "Point",
+                    "coordinates": [
+                        -104.9969980565221,
+                        40.58150370234938
+                    ],
+                    "className": "text"
+                },
+                {
+                    "type": "Point",
+                    "coordinates": [
+                        -104.9969980565221,
+                        40.58150370234938
+                    ],
+                    "className": "text"
+                }
+            ],
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "subAccountNumber": "4",
+            "mpaCode": "1",
+            "descriptionForProject": "Test 6",
+            "streetNameFrom": "CO-14 and I-25",
+            "mileMarkerStart": "1",
+            "mileMarkerEnd": "1",
+            "directionOfTraffic": " East/West ",
+            "currentPostedSpeed": "11",
+            "requestedTemporarySpeed": "22",
+            "workStartDate": "2021-05-24T16:58:00.000Z",
+            "workEndDate": "2021-06-25T16:58:00.000Z",
+            "reductionJustification": "Test 6",
+            "document": [],
+            "approval": {
+                "description": "",
+                "value": "Approved"
+            },
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "taskChecklist": [
+                "Is the Required Information Tab Complete?"
+            ],
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-05-07T17:00:46.936Z",
+                "name": "Jonathan Woodworth"
+            }
+        }
+    },
+    {
+        "sys_gUid": "Form568-fd8699e1-3552-43ba-8865-dc365690149a",
+        "data": {
+            "srzmap": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -104.70457569119029,
+                                40.50145654159371
+                            ],
+                            [
+                                -104.70277324673228,
+                                40.50171760008761
+                            ],
+                            [
+                                -104.69882503506236,
+                                40.48174369144793
+                            ],
+                            [
+                                -104.70139995571665,
+                                40.48187425917224
+                            ],
+                            [
+                                -104.70457569119029,
+                                40.50145654159371
+                            ]
+                        ]
+                    ],
+                    "className": "Speed Reduction Zone Polygon"
+                },
+                {
+                    "type": "Point",
+                    "coordinates": [
+                        -104.69862535717405,
+                        40.493697743746544
+                    ],
+                    "className": "text"
+                }
+            ],
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "subAccountNumber": "1",
+            "mpaCode": "2",
+            "descriptionForProject": "Test 5",
+            "streetNameFrom": "US-85",
+            "mileMarkerStart": "1",
+            "mileMarkerEnd": "1",
+            "directionOfTraffic": " North/South",
+            "requestedTemporarySpeed": "1",
+            "workStartDate": "2021-08-02T16:42:00.000Z",
+            "workEndDate": "2021-09-25T16:42:00.000Z",
+            "reductionJustification": "Test 5",
+            "currentPostedSpeed": "11",
+            "document": [],
+            "approval": {
+                "description": "",
+                "value": "Approved"
+            },
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "taskChecklist": [
+                "Are the requester and CDOT Engineer details accurate?"
+            ],
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-05-07T16:47:05.330Z",
+                "name": "Jonathan Woodworth"
+            }
+        }
+    },
+    {
+        "sys_gUid": "Form568-342bf876-38bf-473d-85b0-5f344260c01f",
+        "data": {
+            "srzmap": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -103.80131849794394,
+                                40.26467977688342
+                            ],
+                            [
+                                -103.80123266725546,
+                                40.2616997088795
+                            ],
+                            [
+                                -103.77239355592734,
+                                40.26212544091744
+                            ],
+                            [
+                                -103.77252230196005,
+                                40.264155818394485
+                            ],
+                            [
+                                -103.80114683656699,
+                                40.26445054554388
+                            ],
+                            [
+                                -103.80131849794394,
+                                40.26467977688342
+                            ]
+                        ]
+                    ],
+                    "className": "Speed Reduction Zone Polygon"
+                },
+                {
+                    "type": "Point",
+                    "coordinates": [
+                        -103.78031888635574,
+                        40.26262075939811
+                    ],
+                    "className": "text"
+                }
+            ],
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "subAccountNumber": "4",
+            "mpaCode": "2",
+            "descriptionForProject": "Test 4",
+            "streetNameFrom": "I-76",
+            "mileMarkerStart": "1",
+            "mileMarkerEnd": "1",
+            "directionOfTraffic": " East/West ",
+            "currentPostedSpeed": "1",
+            "requestedTemporarySpeed": "1",
+            "workStartDate": "2021-06-07T16:29:00.000Z",
+            "workEndDate": "2021-07-30T16:29:00.000Z",
+            "reductionJustification": "Test 4",
+            "document": [],
+            "approval": {
+                "description": "",
+                "value": "Approved"
+            },
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "taskChecklist": [
+                "Is the Required Information Tab Complete?",
+                "Is/are the MHT(s) signed prior to submission per CDOT Requirements?"
+            ],
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-05-07T16:31:41.728Z",
+                "name": "Jonathan Woodworth"
+            }
+        }
+    },
+    {
+        "sys_gUid": "Form568-ad58c9d3-3cd3-41b4-8c19-bd7f9997c972",
+        "data": {
+            "srzmap": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -102.32131426550248,
+                                40.58728929170774
+                            ],
+                            [
+                                -102.3214430115352,
+                                40.58650711310775
+                            ],
+                            [
+                                -102.34114115454057,
+                                40.589961666235105
+                            ],
+                            [
+                                -102.34066908575394,
+                                40.59074380443147
+                            ],
+                            [
+                                -102.32131426550248,
+                                40.58728929170774
+                            ]
+                        ]
+                    ],
+                    "className": "Speed Reduction Zone Polygon"
+                },
+                {
+                    "type": "Point",
+                    "coordinates": [
+                        -102.33095620970042,
+                        40.5910411764967
+                    ],
+                    "className": "text"
+                }
+            ],
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "subAccountNumber": "4",
+            "mpaCode": "4",
+            "descriptionForProject": "Test 3",
+            "streetNameFrom": "CO-6",
+            "mileMarkerStart": "1",
+            "mileMarkerEnd": "1",
+            "directionOfTraffic": " East/West ",
+            "currentPostedSpeed": "1",
+            "requestedTemporarySpeed": "1",
+            "workStartDate": "2021-07-05T16:19:00.000Z",
+            "workEndDate": "2021-07-31T16:19:00.000Z",
+            "reductionJustification": "1",
+            "document": [],
+            "approval": {
+                "description": "",
+                "value": "Approved"
+            },
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "taskChecklist": [
+                "Is the Required Information Tab Complete?"
+            ],
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-05-07T16:20:59.837Z",
+                "name": "Jonathan Woodworth"
+            }
+        }
+    },
+    {
+        "sys_gUid": "Form568-a539ef4e-dc9a-4702-bf07-a42e54d2018f",
+        "data": {
+            "srzmap": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -103.25723700469047,
+                                40.62404939945342
+                            ],
+                            [
+                                -103.25708680098563,
+                                40.62334908350518
+                            ],
+                            [
+                                -103.24468426650077,
+                                40.62437512529957
+                            ],
+                            [
+                                -103.24481301253348,
+                                40.62514057478525
+                            ],
+                            [
+                                -103.25723700469047,
+                                40.62404939945342
+                            ]
+                        ]
+                    ],
+                    "className": "Speed Reduction Zone Polygon"
+                },
+                {
+                    "type": "Point",
+                    "coordinates": [
+                        -103.24830360896107,
+                        40.62302538798103
+                    ],
+                    "className": "text"
+                }
+            ],
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "subAccountNumber": "4",
+            "mpaCode": "4",
+            "descriptionForProject": "Test 2",
+            "streetNameFrom": "CO-14",
+            "mileMarkerStart": "1",
+            "mileMarkerEnd": "1",
+            "directionOfTraffic": " East/West ",
+            "currentPostedSpeed": "1",
+            "requestedTemporarySpeed": "1",
+            "workStartDate": "2021-05-10T16:12:00.000Z",
+            "workEndDate": "2021-05-14T16:12:00.000Z",
+            "reductionJustification": "2",
+            "document": [],
+            "approval": {
+                "description": "",
+                "value": "Approved"
+            },
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "taskChecklist": [
+                "Is the Required Information Tab Complete?"
+            ],
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-05-07T16:14:32.715Z",
+                "name": "Jonathan Woodworth"
+            }
+        }
+    },
+    {
+        "sys_gUid": "Form568-b08eaf60-8edc-45c6-9387-28f2e452680c",
+        "data": {
+            "srzmap": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -103.21018888161012,
+                                40.15934770034194
+                            ],
+                            [
+                                -103.21015133068391,
+                                40.15890902280084
+                            ],
+                            [
+                                -103.2070506970627,
+                                40.15890492299739
+                            ],
+                            [
+                                -103.20702387497255,
+                                40.15942559605761
+                            ],
+                            [
+                                -103.21018888161012,
+                                40.15934770034194
+                            ]
+                        ]
+                    ],
+                    "className": "Speed Reduction Zone Polygon"
+                },
+                {
+                    "type": "Point",
+                    "coordinates": [
+                        -103.20805745662034,
+                        40.15900383056196
+                    ],
+                    "className": "text"
+                }
+            ],
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [
+                {
+                    "documentName": "MHT",
+                    "doc_url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/CDOT%20Region%204/Files/d820fe9e-a840-4d68-a8f5-679990541329MHT",
+                    "UniqueDocName": "d820fe9e-a840-4d68-a8f5-679990541329MHT",
+                    "s3FileName": "Documents/CDOT Region 4/Files/d820fe9e-a840-4d68-a8f5-679990541329MHT",
+                    "uploadedDate": "2021-05-07T15:39:16.445Z",
+                    "contentType": "image/png"
+                }
+            ],
+            "professionalEngineerStamp/Certification": [
+                {
+                    "documentName": "Permit",
+                    "doc_url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/CDOT%20Region%204/Files/430f254e-f1c5-4a5c-9b5c-1cddc1bf8544Permit",
+                    "UniqueDocName": "430f254e-f1c5-4a5c-9b5c-1cddc1bf8544Permit",
+                    "s3FileName": "Documents/CDOT Region 4/Files/430f254e-f1c5-4a5c-9b5c-1cddc1bf8544Permit",
+                    "uploadedDate": "2021-05-07T15:39:31.092Z",
+                    "contentType": "image/png"
+                }
+            ],
+            "permits": [],
+            "subAccountNumber": "4",
+            "mpaCode": "4",
+            "descriptionForProject": "Testing 1",
+            "streetNameFrom": "5",
+            "mileMarkerStart": "5",
+            "mileMarkerEnd": "1",
+            "directionOfTraffic": " East/West ",
+            "currentPostedSpeed": "4",
+            "requestedTemporarySpeed": "5",
+            "workStartDate": "2021-05-17T15:39:00.000Z",
+            "workEndDate": "2021-05-28T15:39:00.000Z",
+            "reductionJustification": "Testing 1",
+            "document": [],
+            "approval": {
+                "description": "",
+                "value": "Approved"
+            },
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "taskChecklist": [
+                "Is the Required Information Tab Complete?",
+                "Is/are the MHT(s) signed prior to submission per CDOT Requirements?"
+            ],
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-05-07T15:42:13.527Z",
+                "name": "Jonathan Woodworth"
+            }
+        }
+    },
+    {
+        "sys_gUid": "Form568-d53675be-baa8-453a-870a-64d9fd47daee",
+        "data": {
+            "srzmap": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -103.11830737345086,
+                                40.673444380169684
+                            ],
+                            [
+                                -103.1152174686657,
+                                40.67168673459563
+                            ],
+                            [
+                                -103.09796550028192,
+                                40.68138575657258
+                            ],
+                            [
+                                -103.10088374369012,
+                                40.683012971013795
+                            ],
+                            [
+                                -103.11830737345086,
+                                40.673444380169684
+                            ]
+                        ]
+                    ],
+                    "className": "Speed Reduction Zone Polygon"
+                }
+            ],
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "cdotSection/DepartmentName": "Permits",
+            "subAccountNumber": "16849651",
+            "permitNumber": "146499,654985,65498461",
+            "mpaCode": "1984161",
+            "descriptionForProject": "Geo-Notif test",
+            "streetNameFrom": "I-76",
+            "mileMarkerStart": "72",
+            "mileMarkerEnd": "78",
+            "directionOfTraffic": " East/West ",
+            "currentPostedSpeed": "65",
+            "requestedTemporarySpeed": "55",
+            "workStartDate": "2021-06-07T16:05:00.000Z",
+            "workEndDate": "2021-06-30T16:05:00.000Z",
+            "reductionJustification": "Geo Notif Test",
+            "document": [],
+            "approval": {
+                "description": "",
+                "value": "Approved"
+            },
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "taskChecklist": [
+                "Is the Required Information Tab Complete?",
+                "Is/are the MHT(s) signed prior to submission per CDOT Requirements?",
+                "Are the requester and CDOT Engineer details accurate?",
+                "Are all relevant Permit(s) and permit number(s) attached?",
+                "Are the speed reduction details and the SRZ polygon accurate?",
+                "Is the requested speed reduction valid based on the criteria shown in the Authority tab?"
+            ],
+            "user": [
+                {
+                    "sys_gUid": "User-eef67120-fa5d-4187-a02b-a90c3a399f69",
+                    "firstName": "Rob",
+                    "lastName": "Marone",
+                    "username": "robMarone@state.co.csp"
+                }
+            ],
+            "userGroup": [
+                {
+                    "sys_gUid": "UserGroup-bf4a7432-a29b-43ec-b26a-0346120f29bd",
+                    "userGroupName": "CDOT R4 maintenance patrol"
+                },
+                {
+                    "sys_gUid": "UserGroup-12931743-fc08-4acb-9af3-ce71b10a79bc",
+                    "userGroupName": "CDOT RE and PE group"
+                },
+                {
+                    "sys_gUid": "UserGroup-219ce27c-2732-425d-a95f-49755cba2b51",
+                    "userGroupName": "R4 TIM I II III group"
+                }
+            ],
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-05-06T16:07:28.956Z",
+                "name": "Jonathan Woodworth"
+            }
+        }
+    },
+    {
+        "sys_gUid": "Form568-1f9e9fa5-d8c3-41c1-b693-3609ed465858",
+        "data": {
+            "srzmap": [
+                {
+                    "type": "LineString",
+                    "coordinates": [
+                        [
+                            -104.69689016482316,
+                            40.392008664075504
+                        ],
+                        [
+                            -104.6959245695778,
+                            40.39192695013167
+                        ],
+                        [
+                            -104.69472293993913,
+                            40.39168180770523
+                        ],
+                        [
+                            -104.69292049548112,
+                            40.39127323501147
+                        ]
+                    ],
+                    "className": "Form568"
+                },
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -104.69277029177628,
+                                40.39150203602537
+                            ],
+                            [
+                                -104.69309215685807,
+                                40.390881002893366
+                            ],
+                            [
+                                -104.68974476000749,
+                                40.3901292182815
+                            ],
+                            [
+                                -104.68927269122086,
+                                40.39058682730556
+                            ],
+                            [
+                                -104.68905811449967,
+                                40.39210672067722
+                            ],
+                            [
+                                -104.69277029177628,
+                                40.39150203602537
+                            ]
+                        ]
+                    ],
+                    "className": "Form568"
+                },
+                {
+                    "type": "Point",
+                    "coordinates": [
+                        -104.6949519702046,
+                        40.39212510577539
+                    ],
+                    "className": "text"
+                }
+            ],
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [
+                {
+                    "documentName": "Permit",
+                    "description": "4979,19879,1879",
+                    "doc_url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/CDOT%20Region%204/Files/90142d32-7508-4c09-9fc9-4c6373367109Permit",
+                    "UniqueDocName": "90142d32-7508-4c09-9fc9-4c6373367109Permit",
+                    "s3FileName": "Documents/CDOT Region 4/Files/90142d32-7508-4c09-9fc9-4c6373367109Permit",
+                    "uploadedDate": "2021-04-16T20:42:27.151Z",
+                    "contentType": "image/png"
+                }
+            ],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "subAccountNumber": "1648-B",
+            "permitNumber": "4978,198795,1987",
+            "mpaCode": "145-B",
+            "descriptionForProject": "Bridge Repair",
+            "streetNameFrom": "US-34",
+            "mileMarkerStart": "1",
+            "mileMarkerEnd": "2",
+            "directionOfTraffic": " East/West ",
+            "currentPostedSpeed": "45",
+            "requestedTemporarySpeed": "40",
+            "reductionJustification": "Bridge repair, crews will roadside replacing caissons. Narrow shoulder leading into no shoulder on the ramp.",
+            "document": [],
+            "approval": {
+                "description": "",
+                "value": "Approved"
+            },
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-04-16T20:51:22.717Z",
+                "name": "Jonathan Woodworth"
+            },
+            "workStartDate": "2021-05-03T13:00:00.000Z",
+            "workEndDate": "2021-05-28T23:00:00.000Z",
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "taskChecklist": [
+                "Is the Required Information Tab Complete?",
+                "Are all relevant Permit(s) and permit number(s) attached?",
+                "Are the requester and CDOT Engineer details accurate?",
+                "Are the speed reduction details and the SRZ polygon accurate?",
+                "Is the requested speed reduction valid based on the criteria shown in the Authority tab?",
+                "Is/are the MHT(s) signed prior to submission per CDOT Requirements?"
+            ],
+            "user": [
+                {
+                    "sys_gUid": "User-eef67120-fa5d-4187-a02b-a90c3a399f69",
+                    "firstName": "Rob",
+                    "lastName": "Marone",
+                    "username": "robMarone@state.co.csp"
+                }
+            ],
+            "userGroup": [
+                {
+                    "sys_gUid": "UserGroup-bf4a7432-a29b-43ec-b26a-0346120f29bd",
+                    "userGroupName": "CDOT R4 maintenance patrol"
+                },
+                {
+                    "sys_gUid": "UserGroup-12931743-fc08-4acb-9af3-ce71b10a79bc",
+                    "userGroupName": "CDOT RE and PE group"
+                },
+                {
+                    "sys_gUid": "UserGroup-219ce27c-2732-425d-a95f-49755cba2b51",
+                    "userGroupName": "R4 TIM I II III group"
+                }
+            ]
+        }
+    },
+    {
+        "sys_gUid": "Form568-df41c82d-2df5-4de3-88f8-c18e3120b275",
+        "data": {
+            "srzmap": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -103.59378453883093,
+                                39.74009207925854
+                            ],
+                            [
+                                -103.59378722103995,
+                                39.739877579855644
+                            ],
+                            [
+                                -103.59314349087637,
+                                39.73985901737593
+                            ],
+                            [
+                                -103.59316226633948,
+                                39.74014570400495
+                            ],
+                            [
+                                -103.59380331429404,
+                                39.74009207925854
+                            ],
+                            [
+                                -103.59378453883093,
+                                39.74009207925854
+                            ]
+                        ]
+                    ],
+                    "className": "Speed Reduction Zone Polygon"
+                },
+                {
+                    "type": "Point",
+                    "coordinates": [
+                        -103.59353509339255,
+                        39.73979868928232
+                    ],
+                    "className": "text"
+                }
+            ],
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "cdotSection/DepartmentName": "Permits",
+            "subAccountNumber": "6514941",
+            "permitNumber": "65984",
+            "mpaCode": "31984-s",
+            "descriptionForProject": "Replacing traffic signal",
+            "streetNameFrom": "US-36",
+            "mileMarkerStart": "1",
+            "mileMarkerEnd": "2",
+            "directionOfTraffic": " East/West ",
+            "currentPostedSpeed": "45",
+            "requestedTemporarySpeed": "35",
+            "workStartDate": "2021-04-30T13:00:00.000Z",
+            "workEndDate": "2021-05-14T23:00:00.000Z",
+            "reductionJustification": "Crews roadside",
+            "document": [],
+            "approval": {
+                "description": "",
+                "value": "Approved"
+            },
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "taskChecklist": [
+                "Is the Required Information Tab Complete?",
+                "Is/are the MHT(s) signed prior to submission per CDOT Requirements?",
+                "Is the requested speed reduction valid based on the criteria shown in the Authority tab?",
+                "Are the requester and CDOT Engineer details accurate?",
+                "Are all relevant Permit(s) and permit number(s) attached?",
+                "Are the speed reduction details and the SRZ polygon accurate?"
+            ],
+            "user": [
+                {
+                    "sys_gUid": "User-eef67120-fa5d-4187-a02b-a90c3a399f69",
+                    "firstName": "Rob",
+                    "lastName": "Marone",
+                    "username": "robMarone@state.co.csp"
+                }
+            ],
+            "userGroup": [
+                {
+                    "sys_gUid": "UserGroup-bf4a7432-a29b-43ec-b26a-0346120f29bd",
+                    "userGroupName": "CDOT R4 maintenance patrol"
+                },
+                {
+                    "sys_gUid": "UserGroup-12931743-fc08-4acb-9af3-ce71b10a79bc",
+                    "userGroupName": "CDOT RE and PE group"
+                },
+                {
+                    "sys_gUid": "UserGroup-219ce27c-2732-425d-a95f-49755cba2b51",
+                    "userGroupName": "R4 TIM I II III group"
+                }
+            ],
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-04-09T16:44:47.156Z",
+                "name": "Jonathan Woodworth"
+            }
+        }
+    },
+    {
+        "sys_gUid": "Form568-90dc21d7-c7f9-45d6-aeb9-3c08967b5b1b",
+        "data": {
+            "srzmap": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -102.84533626017284,
+                                39.65709979880013
+                            ],
+                            [
+                                -102.84550255713177,
+                                39.65702545974353
+                            ],
+                            [
+                                -102.84473008093548,
+                                39.65652573401017
+                            ],
+                            [
+                                -102.84448868212414,
+                                39.65637292459351
+                            ],
+                            [
+                                -102.84386104521465,
+                                39.655992964579696
+                            ],
+                            [
+                                -102.84367865500164,
+                                39.65610860480502
+                            ],
+                            [
+                                -102.84533626017284,
+                                39.65709979880013
+                            ]
+                        ]
+                    ],
+                    "className": "Speed Reduction Zone Polygon"
+                },
+                {
+                    "type": "LineString",
+                    "coordinates": [
+                        [
+                            -102.84465497908306,
+                            39.65643487439773
+                        ],
+                        [
+                            -102.84527725157452,
+                            39.65571212322705
+                        ],
+                        [
+                            -102.84546500620556,
+                            39.655538661821566
+                        ],
+                        [
+                            -102.8456527608366,
+                            39.65542715068815
+                        ],
+                        [
+                            -102.8458136933775,
+                            39.65536933002966
+                        ]
+                    ],
+                    "className": "Form568"
+                },
+                {
+                    "type": "Point",
+                    "coordinates": [
+                        -102.84672564444256,
+                        39.65648753168768
+                    ],
+                    "className": "text"
+                }
+            ],
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "cdotSection/DepartmentName": "Permits",
+            "subAccountNumber": "14697-A",
+            "permitNumber": "14512,87941,979871,5487851,",
+            "mpaCode": "849841-4",
+            "descriptionForProject": "Interchange repaving/restriping",
+            "streetNameFrom": "US-36",
+            "mileMarkerStart": "98.15",
+            "mileMarkerEnd": "98.55",
+            "directionOfTraffic": " East/West ",
+            "currentPostedSpeed": "65",
+            "requestedTemporarySpeed": "45",
+            "workStartDate": "2021-04-12T13:00:00.000Z",
+            "workEndDate": "2021-04-30T23:00:00.000Z",
+            "reductionJustification": "Crews will be roadside, removing old pavement and laying new, followed by restriping",
+            "streetNameFrom2": "CO-59",
+            "mileMarkerStart2": "59.88",
+            "mileMarkerEnd2": "60",
+            "directionOfTraffic2": " North/South",
+            "currentPostedSpeed2": "55",
+            "requestedTemporarySpeed2": "45",
+            "workStartDate2": "2021-04-12T13:00:00.000Z",
+            "workEndDate2": "2021-04-30T23:00:00.000Z",
+            "reductionJustification2": "Crews will be roadside, removing old pavement and laying new, followed by restriping",
+            "document": [],
+            "approval": {
+                "description": "",
+                "value": "Approved"
+            },
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "taskChecklist": [
+                "Is the Required Information Tab Complete?",
+                "Is/are the MHT(s) signed prior to submission per CDOT Requirements?",
+                "Are all relevant Permit(s) and permit number(s) attached?",
+                "Are the requester and CDOT Engineer details accurate?",
+                "Are the speed reduction details and the SRZ polygon accurate?",
+                "Is the requested speed reduction valid based on the criteria shown in the Authority tab?"
+            ],
+            "user": [
+                {
+                    "sys_gUid": "User-eef67120-fa5d-4187-a02b-a90c3a399f69",
+                    "firstName": "Rob",
+                    "lastName": "Marone",
+                    "username": "robMarone@state.co.csp"
+                }
+            ],
+            "userGroup": [
+                {
+                    "sys_gUid": "UserGroup-bf4a7432-a29b-43ec-b26a-0346120f29bd",
+                    "userGroupName": "CDOT R4 maintenance patrol"
+                },
+                {
+                    "sys_gUid": "UserGroup-12931743-fc08-4acb-9af3-ce71b10a79bc",
+                    "userGroupName": "CDOT RE and PE group"
+                },
+                {
+                    "sys_gUid": "UserGroup-219ce27c-2732-425d-a95f-49755cba2b51",
+                    "userGroupName": "R4 TIM I II III group"
+                }
+            ],
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-04-09T17:20:56.341Z",
+                "name": "Jonathan Woodworth"
+            }
+        }
+    },
+    {
+        "sys_gUid": "Form568-ae21a7b2-70d6-450b-8ee5-a2c1c35ee85f",
+        "data": {
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "cdotEngineeringRegionNumber": "4",
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-d57c71e2-0648-4b6a-bc84-1d57c3646e19",
+                "firstName": "Andrew",
+                "lastName": "Salva"
+            },
+            "requestorName": {
+                "sys_gUid": "User-a30827de-9721-48e0-a29e-61cfd5b1634c",
+                "firstName": "Ethan",
+                "lastName": "Alexander",
+                "Name": "CDOT Region 4",
+                "email": "ealexander@navjoyinc.com"
+            },
+            "subAccountNumber": "WNH-9879",
+            "permitNumber": "6549813",
+            "mpaCode": "81358",
+            "descriptionForProject": "Bridge repair",
+            "srzmap": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -104.64999790334367,
+                                40.071604340011305
+                            ],
+                            [
+                                -104.64853878163957,
+                                40.07111172981628
+                            ],
+                            [
+                                -104.64630718373918,
+                                40.07416585559219
+                            ],
+                            [
+                                -104.64180107259416,
+                                40.077055654946875
+                            ],
+                            [
+                                -104.64278812551164,
+                                40.07800794832414
+                            ],
+                            [
+                                -104.64759464406633,
+                                40.07518386708255
+                            ],
+                            [
+                                -104.64999790334367,
+                                40.071604340011305
+                            ]
+                        ]
+                    ],
+                    "className": "Speed Reduction Zone Polygon"
+                }
+            ],
+            "mileMarkerStart": "243.2",
+            "mileMarkerEnd": "243.8",
+            "stateHighwayRouteNumber": "I-76",
+            "directionOfTraffic": "North",
+            "currentPostedSpeed": "75",
+            "requestedTemporarySpeed": "55",
+            "workStartDate": "2020-12-21T07:00:00.000Z",
+            "workEndDate": "2020-12-31T07:00:00.000Z",
+            "user": [
+                {
+                    "sys_gUid": "User-4606f26f-86aa-46ca-b202-b3bf63c3eabc",
+                    "firstName": "Pat",
+                    "lastName": "Chavez",
+                    "username": "patrick.chavez@cdot.com"
+                }
+            ],
+            "userGroup": [
+                {
+                    "sys_gUid": "UserGroup-1f079ca9-f067-4904-a080-ede2afc22748",
+                    "userGroupName": "form 568"
+                }
+            ],
+            "contactRole": [
+                "Transportation",
+                "Law Enforcement",
+                "Emergency Management"
+            ],
+            "approval": {
+                "description": "",
+                "value": "SUBMITTED"
+            }
+        }
+    }
+]

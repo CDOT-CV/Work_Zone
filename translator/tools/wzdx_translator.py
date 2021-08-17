@@ -1,17 +1,47 @@
-import xmltodict
-import uuid
-import sys
-import getopt
-from jsonschema import validate
-from jsonschema import ValidationError
 import logging
-from collections import OrderedDict
-import re
 import os
-from datetime import datetime
 import os.path
 import random
+import re
 import string
+import uuid
+from collections import OrderedDict
+from datetime import datetime
+
+import jsonschema
+import xmltodict
+
+
+def initialize_feature_properties():
+    properties = {}
+    properties['road_event_id'] = None
+    properties['event_type'] = None
+    properties['data_source_id'] = None
+    properties['start_date'] = None
+    properties['end_date'] = None
+    properties['start_date_accuracy'] = None
+    properties['end_date_accuracy'] = None
+    properties['beginning_accuracy'] = None
+    properties['ending_accuracy'] = None
+    properties['road_name'] = None
+    properties['direction'] = None
+    properties['vehicle_impact'] = None
+    properties['relationship'] = None
+    properties['lanes'] = None
+    properties['beginning_cross_street'] = None
+    properties['ending_cross_street'] = None
+    properties['beginning_mile_post'] = None
+    properties['ending_mile_post'] = None
+    properties['event_status'] = None
+    properties['types_of_work'] = None
+    properties['workers_present'] = None
+    properties['reduced_speed_limit'] = None
+    properties['restrictions'] = None
+    properties['description'] = None
+    properties['creation_date'] = None
+    properties['update_date'] = None
+
+    return properties
 
 
 def validate_info(info):
@@ -54,8 +84,8 @@ def validate_wzdx(wzdx_obj, wzdx_schema):
     if not wzdx_schema or not wzdx_obj:
         return False
     try:
-        validate(instance=wzdx_obj, schema=wzdx_schema)
-    except ValidationError as e:
+        jsonschema.validate(instance=wzdx_obj, schema=wzdx_schema)
+    except jsonschema.ValidationError as e:
         logging.error(RuntimeError(str(e)))
         return False
     return True
@@ -84,62 +114,29 @@ def initialize_info(feed_info_id):
     return info
 
 
-help_string = """ 
-
-Usage: python **script_name** [arguments]
-
-Global options:
--h, --help                  Print this usage information.
--i, --input                 specify the file to translate
--o, --output                specify the output file for generated wzdx geojson message """
-
-
-def parse_arguments(argv, default_output_file_name='wzdx_translated_output_message.geojson'):
-    inputfile = ''
-    outputfile = default_output_file_name
-
-    try:
-        opts, _ = getopt.getopt(argv, "hi:o:", ["input=", "output="])
-    except getopt.GetoptError:
-        sys.exit(2)
-    for opt, arg in opts:
-        if opt in ("-h", "--help"):
-            print(help_string)
-            sys.exit()
-        elif opt in ("-i", "--input"):
-            inputfile = arg
-        elif opt in ("-o", "--output"):
-            outputfile = arg
-
-    return inputfile, outputfile
-
 # Add ids to message
 # This function may fail if some optional fields are not present (lanes, types_of_work, relationship, ...)
-
-
 def add_ids(message):
     if not message or type(message) != dict:
         return None
-    try:
 
-        data_source_id = message.get('road_event_feed_info').get(
-            'data_sources')[0].get('data_source_id')
-        road_event_length = len(message.get('features'))
-        road_event_ids = []
-        for i in range(road_event_length):
-            road_event_ids.append(str(uuid.uuid4()))
+    data_source_id = message.get('road_event_feed_info').get(
+        'data_sources')[0].get('data_source_id')
+    road_event_length = len(message.get('features'))
+    road_event_ids = []
+    for i in range(road_event_length):
+        road_event_ids.append(str(uuid.uuid4()))
 
-        for i in range(road_event_length):
-            feature = message.get('features')[i]
-            id = road_event_ids[i]
-            feature['properties']['road_event_id'] = id
-            feature['properties']['data_source_id'] = data_source_id
+    for i in range(road_event_length):
+        feature = message.get('features')[i]
+        id = road_event_ids[i]
+        feature['properties']['road_event_id'] = id
+        feature['properties']['data_source_id'] = data_source_id
+        if feature['properties'].get('relationship'):
             feature['properties']['relationship']['relationship_id'] = str(
                 uuid.uuid4())
             feature['properties']['relationship']['road_event_id'] = id
-        return message
-    except:
-        return message
+    return message
 
 
 def initialize_wzdx_object(info):
@@ -189,3 +186,13 @@ def initialize_wzdx_object(info):
     wzd['features'] = []
 
     return wzd
+
+
+def string_to_number(field):
+    try:
+        return int(field)
+    except ValueError:
+        try:
+            return float(field)
+        except ValueError:
+            return None
