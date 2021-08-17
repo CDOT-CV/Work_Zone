@@ -75,7 +75,7 @@ python -m translator.cotrip_translator 'translator/sample files/cotrip_data/cotr
 ```
 
 ### Execution for NavJoy 568 translator
-This translator reads in a NavJoy 568 speed reduction form an translates it into a WZDx message. Many of the 568 messages cover 2 directions of traffic, and are thus expanded into 2 WZDx messags, one for each direction. 
+This translator reads in a NavJoy 568 speed reduction form and translates it into a WZDx message. Many of the 568 messages cover 2 directions of traffic, and are thus expanded into 2 WZDx messages, one for each direction. 
 
 The NavJoy Work Zone feed is being translated into WZDx by NavJoy themselves, the source and WZDx example messages are located here: [Navjoy Sample Data](translator/sample%20files/navjoy_data)
 
