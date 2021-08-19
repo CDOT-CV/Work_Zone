@@ -10,3 +10,6 @@ time_machine
 shapely
 geopy
 pyproj
+numpy
+requests
+pytz
