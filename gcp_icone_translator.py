@@ -1,4 +1,5 @@
 from translator import icone_translator
+from translator.tools import wzdx_translator
 import json
 import xmltodict
 import urllib
@@ -39,7 +40,7 @@ def main(event, context):
     wzdx_obj = icone_translator.wzdx_creator(
         icone_obj, unsupported_message_callback=unsupported_messages_callback)
     wzdx_schema = get_wzdx_schema('wzdx_schema.json')
-    if not icone_translator.validate_wzdx(wzdx_obj, wzdx_schema):
+    if not wzdx_translator.validate_wzdx(wzdx_obj, wzdx_schema):
         logging.error(RuntimeError(
             'WZDx message failed validation. Exiting Application !'))
         return 'WZDx message failed validation. Exiting Application !', 500
