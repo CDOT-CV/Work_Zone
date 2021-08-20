@@ -9,24 +9,13 @@ from google.cloud import pubsub_v1
 from translator import navjoy_translator
 from translator.tools import wzdx_translator
 
-# from google.cloud import error_reporting
-# client = error_reporting.Client()
-
-
-# def main(request):
-#     print("Running Translator")
-#     directions = navjoy_translator.get_directions_from_string(" East/West ")
-#     print(directions)
-
-#     return
-
 
 def get_new_568_data():
     response = requests.get(os.environ['navjoy_568_endpoint'])
     return response.content.decode("utf-8")
 
 
-def main(request):
+def main(request, context):
     try:
         navjoy_obj = json.loads(get_new_568_data())
     except ValueError as e:
