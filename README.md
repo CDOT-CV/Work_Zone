@@ -115,7 +115,19 @@ python -m pytest 'tests/' -v
 
 Ensure you have your environment configured correctly (as described above).
 
-### Google Cloud Function
+### Google Cloud Functions
+
+iCone, COTrip, and NavJoy 568 message translators have been hosted in the GCP as cloud functions. 
+
+#### iCone
+The iCone cloud function is triggered once per day by a pub/sub topic. The cloud function is located at [https://console.cloud.google.com/functions/details/us-central1/auto_icone_translator_ftp?authuser=4&project=cdot-oim-wzdx-dev](https://console.cloud.google.com/functions/details/us-central1/auto_icone_translator_ftp?authuser=4&project=cdot-oim-wzdx-dev)
+
+#### COTrip/SalesForce
+The cotrip cloud function does not exist. It will be triggered when a new cotrip alert is placed in the CDOT RTDH cotrip-alerts-raw-oim-wzdx-integration pub/sub topic. The function will be located at [https://console.cloud.google.com/functions/details/us-central1/salesforce_data?authuser=4&folder=&organizationId=&project=cdot-oim-wzdx-prod](https://console.cloud.google.com/functions/details/us-central1/salesforce_data?authuser=4&folder=&organizationId=&project=cdot-oim-wzdx-prod)
+
+#### NavJoy 568
+The navjoy cloud function is triggered once per day by a pub/sub topic. The cloud function is located at [https://console.cloud.google.com/functions/details/us-central1/navjoy-568-translator?authuser=4&project=cdot-oim-wzdx-dev](https://console.cloud.google.com/functions/details/us-central1/navjoy-568-translator?authuser=4&project=cdot-oim-wzdx-dev)
+
 
 A system was created in google cloud platform to automatically translate iCone data to WZDx message. This system consists of two pubsub topics and a cloud function. A cloud scheduler automatically sends a message to a pubsub topic which triggers the cloud function. The cloud function retrieves iCone data from an ftp server (ftp://iconetraffic.com:42663) and translates to WZDx message. It validates the WZDx message with json schema and publishes the message to a pubsub topic.
 
