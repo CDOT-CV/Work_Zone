@@ -6,7 +6,7 @@ import os
 import sys
 from unittest.mock import MagicMock, patch, Mock
 from translator import icone_translator
-from translator.tools import wzdx_translator
+from translator.tools import wzdx_translator, gcp_tools
 
 
 # --------------------------------------------------------------------------------unit test for get_ftp_file function--------------------------------------------------------------------------------
@@ -22,19 +22,20 @@ def test_get_ftp_file(request):
 @patch.object(gcp_icone_translator, 'get_ftp_url')
 @patch.object(gcp_icone_translator, 'get_ftp_file')
 @patch.object(gcp_icone_translator, 'parse_xml')
-@patch.object(gcp_icone_translator, 'get_wzdx_schema')
+@patch.object(gcp_tools, 'get_wzdx_schema')
 @patch.object(icone_translator, 'wzdx_creator')
 @patch.object(wzdx_translator, 'validate_wzdx')
 @patch.dict(os.environ, {
     'project_id': 'project_id',
     'wzdx_topic_id': 'wzdx_topic_id',
+    'publish_source': 'publish_source'
 })
 def test_main_success(validate_wzdx, wzdx_creator, get_wzdx_schema, parse_xml, get_ftp_file, get_ftp_url, pubsub):
     # the intent of this magic mock fuction is that we give a valid input ,that publishes data
     gcp_icone_translator.get_ftp_url = MagicMock(return_value='url')
     gcp_icone_translator.get_ftp_file = MagicMock(return_value='')
     gcp_icone_translator.parse_xml = MagicMock(return_value='')
-    gcp_icone_translator.get_wzdx_schema = MagicMock(return_value='')
+    gcp_tools.get_wzdx_schema = MagicMock(return_value='')
     icone_translator.wzdx_creator = MagicMock(return_value='WZDx')
     wzdx_translator.validate_wzdx = MagicMock(
         return_value=True)
@@ -42,26 +43,27 @@ def test_main_success(validate_wzdx, wzdx_creator, get_wzdx_schema, parse_xml, g
     gcp_icone_translator.main(None, None)
     publisher = pubsub().publish
     publisher.assert_called_with(pubsub().topic_path('project_id', 'wzdx_topic_id'), str.encode(
-        json.dumps('WZDx', indent=2)), origin='auto_icone_translator_ftp cloud function')
+        json.dumps('WZDx', indent=2)), origin='publish_source')
 
 
 @patch('google.cloud.pubsub_v1.PublisherClient')
 @patch.object(gcp_icone_translator, 'get_ftp_url')
 @patch.object(gcp_icone_translator, 'get_ftp_file')
 @patch.object(gcp_icone_translator, 'parse_xml')
-@patch.object(gcp_icone_translator, 'get_wzdx_schema')
+@patch.object(gcp_tools, 'get_wzdx_schema')
 @patch.object(icone_translator, 'wzdx_creator')
 @patch.object(wzdx_translator, 'validate_wzdx')
 @patch.dict(os.environ, {
     'project_id': 'project_id',
     'wzdx_topic_id': 'wzdx_topic_id',
+    'publish_source': 'publish_source'
 })
 def test_main_validation_failed(validate_wzdx, wzdx_creator, get_wzdx_schema, parse_xml, get_ftp_file, get_ftp_url, pubsub):
     # the intent of this magic mock fuction is that we give a valid input ,that publishes data
     gcp_icone_translator.get_ftp_url = MagicMock(return_value='url')
     gcp_icone_translator.get_ftp_file = MagicMock(return_value='')
     gcp_icone_translator.parse_xml = MagicMock(return_value='')
-    gcp_icone_translator.get_wzdx_schema = MagicMock(return_value='')
+    gcp_tools.get_wzdx_schema = MagicMock(return_value='')
     icone_translator.wzdx_creator = MagicMock(return_value='WZDx')
     wzdx_translator.validate_wzdx = MagicMock(
         return_value=False)
@@ -75,7 +77,7 @@ def test_main_validation_failed(validate_wzdx, wzdx_creator, get_wzdx_schema, pa
 @patch.object(gcp_icone_translator, 'get_ftp_url')
 @patch.object(gcp_icone_translator, 'get_ftp_file')
 @patch.object(gcp_icone_translator, 'parse_xml')
-@patch.object(gcp_icone_translator, 'get_wzdx_schema')
+@patch.object(gcp_tools, 'get_wzdx_schema')
 @patch.dict(os.environ, {
     'project_id': 'project_id',
     'wzdx_topic_id': 'wzdx_topic_id',
@@ -92,7 +94,7 @@ def test_main_no_ftp_url(get_wzdx_schema, parse_xml, get_ftp_file, get_ftp_url, 
 @patch.object(gcp_icone_translator, 'get_ftp_url')
 @patch.object(gcp_icone_translator, 'get_ftp_file')
 @patch.object(gcp_icone_translator, 'parse_xml')
-@patch.object(gcp_icone_translator, 'get_wzdx_schema')
+@patch.object(gcp_tools, 'get_wzdx_schema')
 @patch.dict(os.environ, {
     'project_id': 'project_id',
     'wzdx_topic_id': 'wzdx_topic_id',
@@ -218,112 +220,3 @@ def fake_secret_client(request):
 
     else:
         raise RuntimeError('secret does not exist!')
-
-
-# --------------------------------------------------------------------------------unit test for get_wzdx_schema function--------------------------------------------------------------------------------
-def test_get_wzdx_schema():
-    expected_schema = json.loads(
-        open('translator/sample files/validation_schema/wzdx_v3.1_feed.json').read())
-    actual = gcp_icone_translator.get_wzdx_schema(
-        'translator/sample files/validation_schema/wzdx_v3.1_feed.json')
-    assert actual == expected_schema
-
-
-def test_get_wzdx_schema_invalid_data():
-
-    with pytest.raises(RuntimeError) as runtimeErr:
-        gcp_icone_translator.get_wzdx_schema('tests/docs/invalid_schema.json')
-    assert 'invalid schema: not valid json' in str(runtimeErr.value)
-
-
-def test_get_wzdx_schema_not_exist():
-
-    with pytest.raises(RuntimeError) as runtimeErr:
-        gcp_icone_translator.get_wzdx_schema('not_exist.json')
-    assert 'invalid schema: file does not exist' in str(runtimeErr.value)
-
-
-# --------------------------------------------------------------------------------unit test for unsupported_messages_callback function--------------------------------------------------------------------------------
-@patch('google.cloud.pubsub_v1.PublisherClient')
-@patch.dict(os.environ, {'project_id': 'project_id',
-                         'unsupported_messages_topic_id': 'unsupported_messages_topic_id'})
-def test_unsupported_messages_callback_dict(pubsub):
-    output = gcp_icone_translator.unsupported_messages_callback(
-        {'messages': 'unsupported_messages'})
-    publisher = pubsub().publish
-    publisher.assert_called_with(pubsub().topic_path('project_id', 'unsupported_messages_topic_id'), str.encode(
-        json.dumps({'messages': 'unsupported_messages'}, indent=2)), origin='auto_icone_translator_ftp cloud function')
-
-
-@patch('google.cloud.pubsub_v1.PublisherClient')
-@patch.dict(os.environ, {'project_id': 'project_id',
-                         'unsupported_messages_topic_id': 'unsupported_messages_topic_id'})
-def test_unsupported_messages_callback_string(pubsub):
-    output = gcp_icone_translator.unsupported_messages_callback(
-        'unsupported_messages')
-    publisher = pubsub().publish
-    publisher.assert_called_with(pubsub().topic_path('project_id', 'unsupported_messages_topic_id'), str.encode(
-        json.dumps('unsupported_messages')), origin='auto_icone_translator_ftp cloud function')
-
-
-@patch('google.cloud.pubsub_v1.PublisherClient')
-@patch.dict(os.environ, {})
-def test_unsupported_messages_callback_no_environment_variable(pubsub):
-    output = gcp_icone_translator.unsupported_messages_callback(
-        'unsupported_messages')
-    publisher = pubsub().publish
-    publisher.assert_not_called()
-
-# --------------------------------------------------------------------------------unit test for formatMessage function--------------------------------------------------------------------------------
-
-
-def test_formatMessage_dict_type():
-    test_message = {'type': 'PCMS',
-                    'id': 'I-75 NB - MP 48.3',
-                    'timestamp': '2020-08-21T15:48:25Z'}
-
-    actual = gcp_icone_translator.formatMessage(test_message)
-    expected_output = '{\n  "type": "PCMS",\n  "id": "I-75 NB - MP 48.3",\n  "timestamp": "2020-08-21T15:48:25Z"\n}'
-    assert actual == expected_output
-
-
-def test_formatMessage_string_type():
-    test_message = 'string_type_message'
-    actual = gcp_icone_translator.formatMessage(test_message)
-    expected_output = '"string_type_message"'
-    assert actual == expected_output
-
-
-def test_formatMessage_list_type():
-    test_message = ['message', 'type', 'list', 12345]
-    actual = gcp_icone_translator.formatMessage(test_message)
-    expected_output = '[\n  "message",\n  "type",\n  "list",\n  12345\n]'
-    assert actual == expected_output
-
-
-def test_formatMessage_None_type():
-    test_message = None
-    actual = gcp_icone_translator.formatMessage(test_message)
-    expected_output = 'null'
-    assert actual == expected_output
-
-
-def test_formatMessage_int_type():
-    test_message = 12345
-    actual = gcp_icone_translator.formatMessage(test_message)
-    expected_output = '12345'
-    assert actual == expected_output
-
-
-def test_formatMessage_float_type():
-    test_message = 12345.67
-    actual = gcp_icone_translator.formatMessage(test_message)
-    expected_output = '12345.67'
-    assert actual == expected_output
-
-
-def test_formatMessage_byte_string():
-    test_message = b'byte_string_message'
-    actual = gcp_icone_translator.formatMessage(test_message)
-    expected_output = "b'byte_string_message'"
-    assert actual == expected_output
