@@ -31,6 +31,16 @@ CORRECT_KEY_NAMES = {
 
 NUMBERED_KEY_NAMES = [
     {
+        'street_name': 'streetNameFrom',
+        'mile_marker_start': 'mileMarkerStart',
+        'mile_marker_end': 'mileMarkerEnd',
+        'directions_of_traffic': 'directionOfTraffic',
+        'current_posted_speed': 'currentPostedSpeed',
+        'reduced_speed_limit': 'requestedTemporarySpeed',
+        'start_date': 'workStartDate',
+        'end_date': 'workEndDate',
+    },
+    {
         'street_name': 'streetNameFrom2',
         'mile_marker_start': 'mileMarkerStart2',
         'mile_marker_end': 'mileMarkerEnd2',
@@ -134,13 +144,14 @@ def get_wz_messages(message):
             continue
         new_message = copy.deepcopy(message)
         for key, value in key_set.items():
-            new_message.get('data', {})[CORRECT_KEY_NAMES[key]] = value
+            new_message.get('data', {})[CORRECT_KEY_NAMES[key]] = message.get(
+                'data', {}).get(value)
 
         directions = new_message.get('data', {}).get('directionOfTraffic')
         for direction in get_directions_from_string(directions):
             new_message_dir = copy.deepcopy(new_message)
             if new_message_dir.get('data', {}).get('directionOfTraffic'):
-                del new_message_dir['directionOfTraffic']
+                del new_message_dir.get('data', {})['directionOfTraffic']
             new_message_dir.get('data', {})['direction'] = direction
             messages.append(new_message_dir)
     return messages
@@ -403,9 +414,25 @@ def get_types_of_work(field):
 
     types_of_work = []
 
-    if 'restriping' in field or 'crack seal' in field:
+    if 'crack seal' in field:
+        types_of_work.append({'type_name': 'minor-road-defect-repair',
+                              'is_architectural_change': False})
+    if 'restriping' in field:
+        types_of_work.append({'type_name': 'painting',
+                              'is_architectural_change': False})
+    if 'repaving' in field:
         types_of_work.append({'type_name': 'surface-work',
                               'is_architectural_change': False})
+    if 'bridge' in field:
+        types_of_work.append({'type_name': 'below-road-work',
+                              'is_architectural_change': False})
+    if 'traffic signal' in field:
+        types_of_work.append({'type_name': 'overhead-work',
+                              'is_architectural_change': False})
+    if 'lane expansion' in field:
+        types_of_work.append({'type_name': 'surface-work',
+                              'is_architectural_change': True})
+
     return types_of_work
 
 
