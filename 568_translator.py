@@ -23,7 +23,7 @@ from translator.tools import wzdx_translator
 
 def get_new_568_data():
     response = requests.get(os.environ['navjoy_568_endpoint'])
-    return response.content().decode("utf-8")
+    return response.content.decode("utf-8")
 
 
 def main(request):
