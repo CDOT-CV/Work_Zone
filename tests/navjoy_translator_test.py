@@ -1077,7 +1077,7 @@ def test_get_types_of_work_empty():
     assert actual == expected
 
 
-def test_get_wz_messages_1():
+def test_expand_speed_zone_1():
     event = {
         "sys_gUid": "Form568-cb0fdaf0-c27a-4bef-aabd-442615dfb2d6",
         "data": {
@@ -1172,12 +1172,12 @@ def test_get_wz_messages_1():
             'mileMarkerStart': None,
         }
     }]
-    actual = navjoy_translator.get_wz_messages(event)
+    actual = navjoy_translator.expand_speed_zone(event)
 
     assert expected == actual
 
 
-def test_get_wz_messages_2():
+def test_expand_speed_zone_2():
     event = {
         "sys_gUid": "Form568-cb0fdaf0-c27a-4bef-aabd-442615dfb2d6",
         "data": {
@@ -1291,13 +1291,13 @@ def test_get_wz_messages_2():
             'mileMarkerStart2': None,
         }
     }]
-    actual = navjoy_translator.get_wz_messages(event)
+    actual = navjoy_translator.expand_speed_zone(event)
 
     assert expected == actual
 
 
 # I hate how long this test is, but this is what is has to be to test all 4 at the same time
-def test_get_wz_messages_2_3_4():
+def test_expand_speed_zone_2_3_4():
     event = {
         "sys_gUid": "Form568-cb0fdaf0-c27a-4bef-aabd-442615dfb2d6",
         "data": {
@@ -1683,6 +1683,6 @@ def test_get_wz_messages_2_3_4():
             'mileMarkerStart4': None,
         }
     }]
-    actual = navjoy_translator.get_wz_messages(event)
+    actual = navjoy_translator.expand_speed_zone(event)
 
     assert expected == actual

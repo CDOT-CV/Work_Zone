@@ -122,7 +122,7 @@ def wzdx_creator(messages, info=None, unsupported_message_callback=None):
 
     for message in messages:
 
-        separated_messages = get_wz_messages(message)
+        separated_messages = expand_speed_zone(message)
         for msg in separated_messages:
             feature = parse_reduction_zone(
                 copy.deepcopy(msg), callback_function=unsupported_message_callback)
@@ -136,7 +136,14 @@ def wzdx_creator(messages, info=None, unsupported_message_callback=None):
 
 
 # take in individual message, spit out list of altered unique messages to be translated
-def get_wz_messages(message):
+# This function iterates over the list of NUMBERED_KEY_NAMES and correlates them to CORRECT_KEY_NAMES. For each
+# set of numbered key names, generate a copy of the original message, check if the numbered keys exist, if they do
+# then copy those values to the leys in CORRECT_KEY_NAMES. After, if directionOfTraffic yields more than one direction,
+# generate a new message for each direction and save them with the key 'direction'
+
+# TODO: consider deleting all numbered keys after they are copied
+# TODO: consider removing duplicate messages
+def expand_speed_zone(message):
     messages = []
 
     for key_set in NUMBERED_KEY_NAMES:
