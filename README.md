@@ -147,7 +147,7 @@ All of the translators featured in this repo are hosted in the CDOT GCP Cloud as
 
 The iCone cloud function is triggered once per day by a pub/sub topic. The cloud function downloads the latest iCone incidents data from the iCone FTP server to translate.
 
-![alt text](translator/GCP_cloud_function/iCone%20Translator%20block%20diagram.png)
+![alt text](translator/docs/iCone%20Translator%20block%20diagram.png)
 
 #### COTrip/SalesForce
 [https://console.cloud.google.com/functions/details/us-central1/salesforce_data?folder=&organizationId=&project=cdot-oim-wzdx-prod](https://console.cloud.google.com/functions/details/us-central1/salesforce_data?folder=&organizationId=&project=cdot-oim-wzdx-prod)
