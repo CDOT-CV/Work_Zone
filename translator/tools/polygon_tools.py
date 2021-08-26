@@ -104,7 +104,6 @@ def get_road_direction_from_coordinates(coordinates):
     if not coordinates or type(coordinates) != list or len(coordinates) < 2:
         return None
 
-    print(coordinates)
     try:
         long_dif = coordinates[-1][0] - coordinates[0][0]
         lat_dif = coordinates[-1][1] - coordinates[0][1]
@@ -218,8 +217,6 @@ def polygon_to_polyline_corners(coordinates):
         net_angle = abs(angle_1 + angle_2)
         if abs(net_angle - 180) < CORNER_PRECISION_DEGREES:
             corners.append([i1, i2, net_angle, distance_2])
-
-    print(corners)
 
     # If 4 corners, assume the polygon is a rectangle. Select shortest 2 sides as ends
     if len(corners) == 4:
