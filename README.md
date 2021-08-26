@@ -115,23 +115,6 @@ python -m pytest 'tests/' -v
 
 Ensure you have your environment configured correctly (as described above).
 
-### Google Cloud Functions
-
-iCone, COTrip, and NavJoy 568 message translators have been hosted in the GCP as cloud functions. All functions will publish generated messages to the wzdx_messages pub/sub topic in their respective environments, and will publish unsupported/invalid messages to a sepate topic, specified in the environment variables of each function. 
-
-#### iCone
-The iCone cloud function is triggered once per day by a pub/sub topic. The cloud function is located at [https://console.cloud.google.com/functions/details/us-central1/auto_icone_translator_ftp?project=cdot-oim-wzdx-dev](https://console.cloud.google.com/functions/details/us-central1/auto_icone_translator_ftp?project=cdot-oim-wzdx-dev)
-
-A system was created in google cloud platform to automatically translate iCone data to WZDx message. This system consists of two pubsub topics and a cloud function. A cloud scheduler automatically sends a message to a pubsub topic which triggers the cloud function. The cloud function retrieves iCone data from an ftp server (ftp://iconetraffic.com:42663) and translates to WZDx message. It validates the WZDx message with json schema and publishes the message to a pubsub topic.
-
-![alt text](translator/GCP_cloud_function/iCone%20Translator%20block%20diagram.png)
-
-#### COTrip/SalesForce
-The cotrip cloud function does not exist. It will be triggered when a new cotrip alert is placed in the CDOT RTDH cotrip-alerts-raw-oim-wzdx-integration pub/sub topic. The function will be located at [https://console.cloud.google.com/functions/details/us-central1/salesforce_data?folder=&organizationId=&project=cdot-oim-wzdx-prod](https://console.cloud.google.com/functions/details/us-central1/salesforce_data?folder=&organizationId=&project=cdot-oim-wzdx-prod)
-
-#### NavJoy 568
-
-
 ### Message Combination Logic:
 
 The `combine_wzdx` script file combines the output from the iCone and COtrip translators, based on overlapping geography, into a single improved WZDx message. The COtrip message set contains significantly more data, and is used as the base for this new combined message. The script then finds any geographically co-located messages from the iCone data set, pulls in the additional information (comprised of vehicle impact data and data sources) and publishes a new, combined WZDx message. Future state of this script will include additional data fields from the iCone data set as they become available.
@@ -140,21 +123,19 @@ The `combine_wzdx` script file combines the output from the iCone and COtrip tra
 # Google Cloud Hosting
 All of the translators featured in this repo are hosted in the CDOT GCP Cloud as function apps. Each function is triggered by an event (either a message being generated in the RTDH or time of day), translates the given message to WZDx, and publishes that WZDx message to a pub/sub topic. The triggers for each GCP function are listed above, by translator. 
 
-## Triggers
-
-#### iCone
+### iCone
 [https://console.cloud.google.com/functions/details/us-central1/auto_icone_translator_ftp?project=cdot-oim-wzdx-dev](https://console.cloud.google.com/functions/details/us-central1/auto_icone_translator_ftp?project=cdot-oim-wzdx-dev)
 
 The iCone cloud function is triggered once per day by a pub/sub topic. The cloud function downloads the latest iCone incidents data from the iCone FTP server to translate.
 
 ![alt text](translator/docs/iCone%20Translator%20block%20diagram.png)
 
-#### COTrip/SalesForce
+### COTrip/SalesForce
 [https://console.cloud.google.com/functions/details/us-central1/salesforce_data?folder=&organizationId=&project=cdot-oim-wzdx-prod](https://console.cloud.google.com/functions/details/us-central1/salesforce_data?folder=&organizationId=&project=cdot-oim-wzdx-prod)
 
 The cotrip cloud function does not exist. It will be triggered when a new cotrip alert is placed in the CDOT RTDH cotrip-alerts-raw-oim-wzdx-integration pub/sub topic. The cloud function downloads the latest iCone incidents data from the iCone FTP server to translate.
 
-#### NavJoy 568
+### NavJoy 568
 [https://console.cloud.google.com/functions/details/us-central1/navjoy-568-translator?project=cdot-oim-wzdx-dev](https://console.cloud.google.com/functions/details/us-central1/navjoy-568-translator?project=cdot-oim-wzdx-dev)
 
 The navjoy cloud function is triggered once per day by a pub/sub topic. The cloud function downloads the latest Navjoy 568 JSON data from the [NavJoy REST API](https://proxy.assetgov.com/napi/open-api/Form568?api_key=d0c2feba6d38df6fdd284d370cbd69636f337d48&limit=1000&skip=0).
@@ -198,12 +179,11 @@ Build Environment Variables
 | GOOGLE_FUNCTION_SOURCE | gcp_cotrip_translator.py | GCP function script name at root of Work_Zone |
 
 Runtime Environment Variables
-| Name                          |                                                        Value                                                        |                                              Description |
-| :---------------------------- | :-----------------------------------------------------------------------------------------------------------------: | -------------------------------------------------------: |
-| unsupported_messages_topic_id |                                             unsupported_messages_cotrip                                             | pub/sub topic id to send unsupported/invalid messages to |
-| project_id                    |                                                 cdot-oim-wzdx-prod                                                  |                                           GCP project ID |
-| wzdx_topic_id                 |                                                wzdx_messages_cotrip                                                 |                          Generated WZDx pub/sub topic ID |
-| navjoy_568_endpoint           | https://proxy.assetgov.com/napi/open-api/Form568?api_key=d0c2feba6d38df6fdd284d370cbd69636f337d48&limit=1000&skip=0 |                     GCP script name at root of Work_Zone |
+| Name                          |            Value            |                                              Description |
+| :---------------------------- | :-------------------------: | -------------------------------------------------------: |
+| unsupported_messages_topic_id | unsupported_messages_cotrip | pub/sub topic id to send unsupported/invalid messages to |
+| project_id                    |     cdot-oim-wzdx-prod      |                                           GCP project ID |
+| wzdx_topic_id                 |    wzdx_messages_cotrip     |                          Generated WZDx pub/sub topic ID |
 
 ### NavJOY 568: navjoy-568-translator
 Build Environment Variables
