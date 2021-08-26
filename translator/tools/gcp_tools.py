@@ -3,7 +3,6 @@ import logging
 import os
 import jsonschema
 
-from flask import abort
 from google.cloud import pubsub_v1
 
 
