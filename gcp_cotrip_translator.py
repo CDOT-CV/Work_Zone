@@ -4,7 +4,6 @@ import os
 
 import json
 from google.cloud import pubsub_v1
-from google.cloud import storage
 from datetime import datetime, timedelta
 
 from translator import cotrip_translator
@@ -15,8 +14,8 @@ def pull_recent_messages():
     project_id = "cdot-rtdh-prod"
     #subscription_id = "salesforce-events-standard-oim-wzdx-integration"
     #subscription_id = "cotrip-events-standard-oim-wzdx-integration"
-    # subscription_id = "cotrip-alerts-standard-oim-wzdx-integration"
-    subscription_id = "cotrip-alerts-raw-oim-wzdx-integration"
+    subscription_id = "cotrip-alerts-standard-oim-wzdx-integration"
+    # subscription_id = "cotrip-alerts-raw-oim-wzdx-integration"
     subscriber = pubsub_v1.SubscriberClient()
     timeout = 60
     NUM_MESSAGES = 10
@@ -42,8 +41,6 @@ def pull_recent_messages():
                 "max_messages": 5
             }
         )
-        storage_client = storage.Client()
-        bucket = storage_client.bucket(bucket_name)
 
         for msg in response.received_messages:
             print("Received message:", msg.message.data)
