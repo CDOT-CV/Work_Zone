@@ -23,5 +23,5 @@ steps:
 
 - script:
     # gcloud auth activate-service-account --key-file $(authkey.secureFilePath)
-    gcloud functions deploy navjoy-568-translator--region=us-central1 --project=cdot-oim-wzdx-dev
+    gcloud functions deploy navjoy-568-translator --region=us-central1 --project=cdot-oim-wzdx-dev
   displayName: 'deploy navjoy function'
