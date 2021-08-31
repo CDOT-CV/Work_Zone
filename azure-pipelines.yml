@@ -1,0 +1,27 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- 64097-GCP-hosting
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+
+# - script:
+#     gcloud auth activate-service-account --key-file $(authkey.secureFilePath)
+#     gcloud functions deploy auto_icone_translator_ftp--region=us-central1 --project=cdot-oim-wzdx-dev
+#   displayName: 'deploy icone function'
+
+# - script:
+#     gcloud auth activate-service-account --key-file $(authkey.secureFilePath)
+#     gcloud functions deploy salesforce-data --runtime--region=us-central1 --project=cdot-oim-wzdx-prod
+#   displayName: 'deploy cotrip function'
+
+- script:
+    # gcloud auth activate-service-account --key-file $(authkey.secureFilePath)
+    gcloud functions deploy navjoy-568-translator--region=us-central1 --project=cdot-oim-wzdx-dev
+  displayName: 'deploy navjoy function'
