@@ -1,8 +1,3 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
 - 64097-GCP-hosting
 
@@ -10,6 +5,13 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+
+- task: DownloadSecureFile@1
+  name: authkey
+  displayName: 'Download Service Account Key'
+  inputs:
+    secureFile: 'GoogleServiceAccountKey.json'
+    retryCount: '2'
 
 # - script:
 #     gcloud auth activate-service-account --key-file $(authkey.secureFilePath)
@@ -22,6 +24,9 @@ steps:
 #   displayName: 'deploy cotrip function'
 
 - script:
-    # gcloud auth activate-service-account --key-file $(authkey.secureFilePath)
+    gcloud auth activate-service-account --key-file $(authkey.secureFilePath)
+
+
+    
     gcloud functions deploy navjoy-568-translator --region=us-central1 --project=cdot-oim-wzdx-dev
   displayName: 'deploy navjoy function'
