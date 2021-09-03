@@ -29,6 +29,7 @@ steps:
 
 - script:
     gcloud auth activate-service-account --key-file $(authkey.secureFilePath)
+    
     gcloud functions deploy $(icone_function_name) --region=us-central1 --project=$(icone_project_name)
   displayName: 'deploy icone function'
 
