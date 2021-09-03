@@ -102,27 +102,3 @@ def test_get_wzdx_schema_not_exist():
     with pytest.raises(RuntimeError) as runtimeErr:
         gcp_tools.get_wzdx_schema('not_exist.json')
     assert 'invalid schema: file does not exist' in str(runtimeErr.value)
-
-
-# @patch('google.cloud.pubsub_v1.PublisherClient')
-# @patch.object(gcp_568_translator, 'get_new_568_data')
-# @patch.object(gcp_tools, 'get_wzdx_schema')
-# @patch.object(navjoy_translator, 'wzdx_creator')
-# @patch.object(wzdx_translator, 'validate_wzdx')
-# @patch.dict(os.environ, {
-#     'project_id': 'project_id',
-#     'wzdx_topic_id': 'wzdx_topic_id',
-#     'publish_source': 'publish_source'
-# })
-# def test_main_success(validate_wzdx, wzdx_creator, get_wzdx_schema, get_new_568_data, pubsub):
-#     # the intent of this magic mock fuction is that we give a valid input, that publishes data
-#     gcp_568_translator.get_new_568_data = MagicMock(return_value='')
-#     gcp_tools.get_wzdx_schema = MagicMock(return_value='')
-#     navjoy_translator.wzdx_creator = MagicMock(return_value='WZDx')
-#     wzdx_translator.validate_wzdx = MagicMock(
-#         return_value=True)
-
-#     gcp_568_translator.main(None, None)
-#     publisher = pubsub().publish
-#     publisher.assert_called_with(pubsub().topic_path('project_id', 'wzdx_topic_id'), str.encode(
-#         json.dumps('WZDx', indent=2)), origin='publish_source')
