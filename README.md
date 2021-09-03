@@ -152,7 +152,7 @@ The iCone cloud function is triggered once per day by a pub/sub topic. The cloud
 #### COTrip/SalesForce
 [https://console.cloud.google.com/functions/details/us-central1/salesforce_data?folder=&organizationId=&project=cdot-oim-wzdx-prod](https://console.cloud.google.com/functions/details/us-central1/salesforce_data?folder=&organizationId=&project=cdot-oim-wzdx-prod)
 
-The cotrip cloud function does not exist. It will be triggered when a new cotrip alert is placed in the CDOT RTDH cotrip-alerts-raw-oim-wzdx-integration pub/sub topic. The cloud function downloads the latest iCone incidents data from the iCone FTP server to translate.
+The cotrip cloud function is triggered manually (for now) by an HTTP request. retrieves the most recent alert messages from the CDOT RTDH cotrip-alerts-raw-oim-wzdx-integration pub/sub topic.
 
 #### NavJoy 568
 [https://console.cloud.google.com/functions/details/us-central1/navjoy-568-translator?project=cdot-oim-wzdx-dev](https://console.cloud.google.com/functions/details/us-central1/navjoy-568-translator?project=cdot-oim-wzdx-dev)
