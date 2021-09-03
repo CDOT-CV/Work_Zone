@@ -16,7 +16,6 @@ def test_parse_datetime_from_unix_decimal():
     time = 1615866698.393723
     expected = datetime(2021, 3, 16, 3, 51, 38, tzinfo=timezone.utc)
     actual = date_tools.parse_datetime_from_unix(time)
-    print(actual - expected)
     assert (actual - expected) < timedelta(seconds=1)
 
 
