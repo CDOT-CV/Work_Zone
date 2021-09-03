@@ -18,6 +18,60 @@ STRING_DIRECTION_MAP = {'north': 'northbound', 'south': 'southbound',
 REVERSED_DIRECTION_MAP = {'northbound': 'southbound', 'southbound': 'northbound',
                           'eastbound': 'westbound', 'westbound': 'eastbound'}
 
+CORRECT_KEY_NAMES = {
+    'street_name': 'streetNameFrom',
+    'mile_marker_start': 'mileMarkerStart',
+    'mile_marker_end': 'mileMarkerEnd',
+    'directions_of_traffic': 'directionOfTraffic',
+    'current_posted_speed': 'currentPostedSpeed',
+    'reduced_speed_limit': 'requestedTemporarySpeed',
+    'start_date': 'workStartDate',
+    'end_date': 'workEndDate',
+}
+
+NUMBERED_KEY_NAMES = [
+    {
+        'street_name': 'streetNameFrom',
+        'mile_marker_start': 'mileMarkerStart',
+        'mile_marker_end': 'mileMarkerEnd',
+        'directions_of_traffic': 'directionOfTraffic',
+        'current_posted_speed': 'currentPostedSpeed',
+        'reduced_speed_limit': 'requestedTemporarySpeed',
+        'start_date': 'workStartDate',
+        'end_date': 'workEndDate',
+    },
+    {
+        'street_name': 'streetNameFrom2',
+        'mile_marker_start': 'mileMarkerStart2',
+        'mile_marker_end': 'mileMarkerEnd2',
+        'directions_of_traffic': 'directionOfTraffic2',
+        'current_posted_speed': 'currentPostedSpeed2',
+        'reduced_speed_limit': 'requestedTemporarySpeed2',
+        'start_date': 'workStartDate2',
+        'end_date': 'workEndDate2',
+    },
+    {
+        'street_name': 'streetNameFrom3',
+        'mile_marker_start': 'mileMarkerStart3',
+        'mile_marker_end': 'mileMarkerEnd3',
+        'directions_of_traffic': 'directionOfTraffic3',
+        'current_posted_speed': 'currentPostedSpeed3',
+        'reduced_speed_limit': 'requestedTemporarySpeed3',
+        'start_date': 'workStartDate3',
+        'end_date': 'workEndDate3',
+    },
+    {
+        'street_name': 'streetNameFrom4',
+        'mile_marker_start': 'mileMarkerStart4',
+        'mile_marker_end': 'mileMarkerEnd4',
+        'directions_of_traffic': 'directionOfTraffic4',
+        'current_posted_speed': 'currentPostedSpeed4',
+        'reduced_speed_limit': 'requestedTemporarySpeed4',
+        'start_date': 'workStartDate4',
+        'end_date': 'workEndDate4',
+    }
+]
+
 
 def main():
     inputfile, outputfile = parse_navjoy_arguments()
@@ -67,19 +121,47 @@ def wzdx_creator(messages, info=None, unsupported_message_callback=None):
     wzd = wzdx_translator.initialize_wzdx_object(info)
 
     for message in messages:
-        # closures can cover both directions
-        directions = message.get('data', {}).get('directionOfTraffic')
 
-        for direction in get_directions_from_string(directions):
-            # Parse closure to WZDx Feature
+        separated_messages = expand_speed_zone(message)
+        for msg in separated_messages:
             feature = parse_reduction_zone(
-                copy.deepcopy(message), direction, callback_function=unsupported_message_callback)
+                msg, callback_function=unsupported_message_callback)
             if feature:
                 wzd.get('features').append(feature)
+
     if not wzd.get('features'):
         return None
     wzd = wzdx_translator.add_ids(wzd)
     return wzd
+
+
+# take in individual message, spit out list of altered unique messages to be translated
+# This function iterates over the list of NUMBERED_KEY_NAMES and correlates them to CORRECT_KEY_NAMES. For each
+# set of numbered key names, generate a copy of the original message, check if the numbered keys exist, if they do
+# then copy those values to the leys in CORRECT_KEY_NAMES. After, if directionOfTraffic yields more than one direction,
+# generate a new message for each direction and save them with the key 'direction'
+
+# TODO: consider deleting all numbered keys after they are copied
+# TODO: consider removing duplicate messages
+def expand_speed_zone(message):
+    messages = []
+
+    for key_set in NUMBERED_KEY_NAMES:
+        if not message.get('data', {}).get(key_set['street_name']):
+            continue
+        new_message = copy.deepcopy(message)
+        for key, value in key_set.items():
+            new_message.get('data', {})[CORRECT_KEY_NAMES[key]] = message.get(
+                'data', {}).get(value)
+
+        directions = new_message.get('data', {}).get('directionOfTraffic')
+        for direction in get_directions_from_string(directions):
+            new_message_dir = copy.deepcopy(new_message)
+            if new_message_dir.get('data', {}).get('directionOfTraffic'):
+                del new_message_dir.get('data', {})['directionOfTraffic']
+            new_message_dir.get('data', {})['direction'] = direction
+            messages.append(new_message_dir)
+    return messages
 
 
 def get_linestring_index(map):
@@ -112,7 +194,7 @@ def get_directions_from_string(directions_string) -> list:
 
 # TODO: Support additional zones per message (streetNameFrom2, ...)
 # Convert individual Navjoy 658 speed reduction zone to WZDx feature
-def parse_reduction_zone(obj, direction, callback_function=None):
+def parse_reduction_zone(obj, callback_function=None):
     if not validate_closure(obj):
         if callback_function:
             callback_function(obj)
@@ -142,6 +224,8 @@ def parse_reduction_zone(obj, direction, callback_function=None):
         logging.warning(
             f"Invalid event with id = {obj.get('sys_gUid')}. No valid coordinates found")
         return None
+
+    direction = data.get('direction')
 
     # Reverse polygon if it is in the opposite direction as the message
     polyline_direction = polygon_tools.get_road_direction_from_coordinates(
@@ -278,8 +362,9 @@ def validate_closure(obj):
     starttime_string = data.get('workStartDate')
     endtime_string = data.get('workEndDate')
     description = data.get('descriptionForProject')
+    direction = data.get('direction')
 
-    required_fields = [street, starttime_string, description]
+    required_fields = [street, starttime_string, description, direction]
     for field in required_fields:
         if not field:
             logging.warning(
@@ -336,9 +421,25 @@ def get_types_of_work(field):
 
     types_of_work = []
 
-    if 'restriping' in field or 'crack seal' in field:
+    if 'crack seal' in field:
+        types_of_work.append({'type_name': 'minor-road-defect-repair',
+                              'is_architectural_change': False})
+    if 'restriping' in field:
+        types_of_work.append({'type_name': 'painting',
+                              'is_architectural_change': False})
+    if 'repaving' in field:
         types_of_work.append({'type_name': 'surface-work',
                               'is_architectural_change': False})
+    if 'bridge' in field:
+        types_of_work.append({'type_name': 'below-road-work',
+                              'is_architectural_change': False})
+    if 'traffic signal' in field:
+        types_of_work.append({'type_name': 'overhead-work',
+                              'is_architectural_change': False})
+    if 'lane expansion' in field:
+        types_of_work.append({'type_name': 'surface-work',
+                              'is_architectural_change': True})
+
     return types_of_work
 
 

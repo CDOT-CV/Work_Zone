@@ -1,5 +1,145 @@
 [
     {
+        "sys_gUid": "Form568-44819108-703c-4d6d-ae0d-7dca7319e5b0",
+        "data": {
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "cdotSection/DepartmentName": "Engineering",
+            "cdotPatrolNumber/Id": "4",
+            "subAccountNumber": "M765",
+            "mpaCode": "GI467",
+            "descriptionForProject": "Maintenance for lane expansion",
+            "srzmap": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -104.82213676457492,
+                                39.74276350983931
+                            ],
+                            [
+                                -104.82248008732883,
+                                39.73616347829257
+                            ],
+                            [
+                                -104.79398429875461,
+                                39.73589946388361
+                            ],
+                            [
+                                -104.79467094426242,
+                                39.74329148505714
+                            ],
+                            [
+                                -104.82213676457492,
+                                39.74276350983931
+                            ]
+                        ]
+                    ],
+                    "className": "Form568"
+                }
+            ],
+            "streetNameFrom": "287",
+            "mileMarkerStart": "70.2",
+            "mileMarkerEnd": "70.9",
+            "directionOfTraffic": "East",
+            "currentPostedSpeed": "60 MPH",
+            "requestedTemporarySpeed": "45 MPH",
+            "reductionJustification": "Lane expansion - maintenance work",
+            "document": [],
+            "approval": {
+                "description": "",
+                "value": "Approved"
+            },
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-08-17T11:13:07.226Z",
+                "name": "Jonathan Woodworth"
+            },
+            "permitNumber": "Permit-749",
+            "workStartDate": "2021-08-30T02:30:00.000Z",
+            "workEndDate": "2021-09-03T12:30:00.000Z",
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-e4ffad1a-dc92-4cdb-bc31-14d29ca85fb1",
+                "firstName": "Donald",
+                "lastName": "Michalik",
+                "title": "TIM II"
+            },
+            "requestorName": {
+                "sys_gUid": "User-bef14589-18fb-4b69-aef4-372c462d3f7a",
+                "username": "rodrick.dudley@state.co.us",
+                "firstName": "Rodrick",
+                "lastName": "Dudley",
+                "department": "Maintenance",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "Signal Maintenance Manager",
+                "email": "rodrick.dudley@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Maintenance Manager"
+            },
+            "taskChecklist": [
+                "Have you filled Project Engineer details?",
+                "Have you filled Requestor details?",
+                "Have you filled Project Information?"
+            ]
+        }
+    },
+    {
+        "sys_gUid": "Form568-e63c0b39-383d-41ec-a922-0fc5d6722ef9",
+        "data": {
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "cdotSection/DepartmentName": "test",
+            "cdotPatrolNumber/Id": "test",
+            "subAccountNumber": "test",
+            "mpaCode": "test",
+            "descriptionForProject": "test",
+            "streetNameFrom": "023",
+            "mileMarkerStart": "12.00",
+            "mileMarkerEnd": "21.00",
+            "directionOfTraffic": "North",
+            "currentPostedSpeed": "45",
+            "requestedTemporarySpeed": "25",
+            "workStartDate": "2021-08-06T09:17:07.997Z",
+            "workEndDate": "2021-08-06T09:17:10.124Z",
+            "reductionJustification": "test",
+            "document": [],
+            "approval": {
+                "description": "",
+                "value": "Update Requested"
+            },
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-79645c94-42f0-4c8f-be58-4648f05dc0d4",
+                "firstName": "Jonathan",
+                "lastName": "Woodworth",
+                "title": "Traffic Operations Engineer"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "taskChecklist": [
+                "Is the Required Information tab complete?"
+            ],
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-08-06T09:18:05.830Z",
+                "name": "Jonathan Woodworth"
+            }
+        }
+    },
+    {
         "sys_gUid": "Form568-d7c32f68-1d90-4e09-9422-c47309fa54d3",
         "data": {
             "cdotEngineeringRegionNumber": "4",
@@ -75,7 +215,7 @@
             "descriptionForProject": "Bridge Repairs",
             "srzmap": [
                 {
-                    "type": "LineString",
+                    "type": "Polygon",
                     "coordinates": [
                         [
                             [
