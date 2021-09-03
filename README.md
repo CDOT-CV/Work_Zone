@@ -203,6 +203,8 @@ Runtime Environment Variables
 | unsupported_messages_topic_id |                                             unsupported_messages_cotrip                                             | pub/sub topic id to send unsupported/invalid messages to |
 | project_id                    |                                                 cdot-oim-wzdx-prod                                                  |                                           GCP project ID |
 | wzdx_topic_id                 |                                                wzdx_messages_cotrip                                                 |                          Generated WZDx pub/sub topic ID |
+| rtdh_project_id               |                                                   cdot-rtdh-prod                                                    |                    Real time data hub project identifier |
+| rtdh_cotrip_alerts_topic_id   |                                     cotrip-alerts-standard-oim-wzdx-integration                                     |                   Cotrip alerts topic id within the RTDH |
 | navjoy_568_endpoint           | https://proxy.assetgov.com/napi/open-api/Form568?api_key=d0c2feba6d38df6fdd284d370cbd69636f337d48&limit=1000&skip=0 |                     GCP script name at root of Work_Zone |
 
 ### NavJOY 568: navjoy-568-translator

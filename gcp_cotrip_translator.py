@@ -11,25 +11,15 @@ from translator.tools import gcp_tools, wzdx_translator
 
 
 def pull_recent_messages():
-    project_id = "cdot-rtdh-prod"
-    #subscription_id = "salesforce-events-standard-oim-wzdx-integration"
-    #subscription_id = "cotrip-events-standard-oim-wzdx-integration"
-    subscription_id = "cotrip-alerts-standard-oim-wzdx-integration"
-    # subscription_id = "cotrip-alerts-raw-oim-wzdx-integration"
-    subscriber = pubsub_v1.SubscriberClient()
-    timeout = 60
-    NUM_MESSAGES = 10
+    project_id = os.environ['rtdh_project_id']  # "cdot-rtdh-prod"
 
-    bucket_name = 'data_salesforce'
+    # "cotrip-alerts-standard-oim-wzdx-integration"
+    subscription_id = os.environ['rtdh_cotrip_alerts_topic_id']
+    subscriber = pubsub_v1.SubscriberClient()
+    NUM_MESSAGES = 5
 
     subscription_path = subscriber.subscription_path(
         project_id, subscription_id)
-    # streaming_pull_future = subscriber.subscribe(subscription_path, callback=callback)
-    print('--------------------------------------------------------------')
-    print(f"Listening for messages on {subscription_path}..\n")
-
-    time_7_days_ago = datetime.now() - timedelta(days=7)
-    # Wrap subscriber in a 'with' block to automatically call close() when done.
 
     messages = []
 
@@ -38,16 +28,12 @@ def pull_recent_messages():
         response = subscriber.pull(
             request={
                 "subscription": subscription_path,
-                "max_messages": 5
+                "max_messages": NUM_MESSAGES
             }
         )
 
         for msg in response.received_messages:
             print("Received message:", msg.message.data)
-
-            # destination_blob_name = project_id + '_' + subscription_id + '_' + datetime.now().strftime("%Y%m%d-%H%M%S-%f")
-            # blob = bucket.blob(destination_blob_name)
-            # blob.upload_from_string(msg.message.data.decode('utf-8'))
             messages.append(json.loads(msg.message.data.decode('utf-8')))
 
         ack_ids = [msg.ack_id for msg in response.received_messages]
@@ -71,7 +57,7 @@ def main(event):
         if not wzdx_translator.validate_wzdx(wzdx_obj, wzdx_schema):
             logging.error(
                 'validation error more message are printed above. output file is not created because the message failed validation.')
-            # return 'WZDx message failed validation. Exiting Application !', 500
+            return 'WZDx message failed validation. Exiting Application !', 500
         print("Generated WZDx message")
 
         gcp_tools.publish_wzdx_message(wzdx_obj)
