@@ -37,6 +37,7 @@ def pull_recent_messages():
             messages.append(json.loads(msg.message.data.decode('utf-8')))
 
         ack_ids = [msg.ack_id for msg in response.received_messages]
+    return messages
 
 
 def main(event):
