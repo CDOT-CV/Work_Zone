@@ -125,7 +125,7 @@ def wzdx_creator(messages, info=None, unsupported_message_callback=None):
         separated_messages = expand_speed_zone(message)
         for msg in separated_messages:
             feature = parse_reduction_zone(
-                copy.deepcopy(msg), callback_function=unsupported_message_callback)
+                msg, callback_function=unsupported_message_callback)
             if feature:
                 wzd.get('features').append(feature)
 
