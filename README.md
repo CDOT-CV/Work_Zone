@@ -19,6 +19,18 @@ Requires:
 - Python 3.6 (or higher)
 - All libraries present in requirement.txt
 
+## Build Python Package
+
+Build
+```
+python setup.py sdist bdist_wheel
+```
+
+Import
+```
+pip install git+https://github.com/CDOT-CV/Work_Zone@test-package
+```
+
 ## Environment Setup
 
 This code requires Python 3.6 or a higher version. If you haven’t already, download Python and pip. You can install the required packages by running the following command:
