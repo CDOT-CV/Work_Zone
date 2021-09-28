@@ -6,6 +6,7 @@ from unittest.mock import MagicMock, Mock, patch
 
 import time_machine
 from translator import navjoy_translator
+from tests import navjoy_translator_test_expected_results as expected_results
 
 # Unit testing code for navjoy_translator.py
 # --------------------------------------------------------------------------------Unit test for parse_incident function--------------------------------------------------------------------------------
@@ -61,7 +62,7 @@ def test_parse_reduction_zone_linestring(mock_dt, mock_dt_2, mock_dt_3):
                 },
             ],
             "streetNameFrom": "US-34",
-            "directionOfTraffic": " East/West ",
+            "direction": "eastbound",
             "requestedTemporarySpeed": "45",
             "workStartDate": "2021-08-09T13:00:00.000Z",
             "workEndDate": "2021-09-24T23:00:00.000Z",
@@ -70,7 +71,7 @@ def test_parse_reduction_zone_linestring(mock_dt, mock_dt_2, mock_dt_3):
     }
 
     test_feature = navjoy_translator.parse_reduction_zone(
-        event, 'eastbound')
+        event)
 
     expected_feature = {
         "type": "Feature",
@@ -89,6 +90,8 @@ def test_parse_reduction_zone_linestring(mock_dt, mock_dt_2, mock_dt_3):
             "vehicle_impact": "all-lanes-open",
             "event_status": "planned",
             "reduced_speed_limit": 45,
+            'types_of_work': [{'type_name': 'below-road-work',
+                               'is_architectural_change': False}],
             "description": "Bridge Repairs. Crews roadside.",
             "creation_date": "2021-04-13T00:00:00Z",
             "update_date": "2021-04-13T00:00:00Z"
@@ -169,7 +172,7 @@ def test_parse_reduction_zone_polygon(mock_dt, mock_dt_2, mock_dt_3):
                 },
             ],
             "streetNameFrom": "US-34",
-            "directionOfTraffic": " East/West ",
+            "direction": "eastbound",
             "requestedTemporarySpeed": "45",
             "workStartDate": "2021-08-09T13:00:00.000Z",
             "workEndDate": "2021-09-24T23:00:00.000Z",
@@ -178,7 +181,7 @@ def test_parse_reduction_zone_polygon(mock_dt, mock_dt_2, mock_dt_3):
     }
 
     test_feature = navjoy_translator.parse_reduction_zone(
-        event, 'eastbound')
+        event)
 
     expected_feature = {
         "type": "Feature",
@@ -197,6 +200,8 @@ def test_parse_reduction_zone_polygon(mock_dt, mock_dt_2, mock_dt_3):
             "vehicle_impact": "all-lanes-open",
             "event_status": "planned",
             "reduced_speed_limit": 45,
+            'types_of_work': [{'type_name': 'below-road-work',
+                               'is_architectural_change': False}],
             "description": "Bridge Repairs. Crews roadside.",
             "creation_date": "2021-04-13T00:00:00Z",
             "update_date": "2021-04-13T00:00:00Z"
@@ -219,7 +224,7 @@ def test_parse_reduction_zone_polygon(mock_dt, mock_dt_2, mock_dt_3):
 
 
 def test_parse_reduction_zone_no_data():
-    test_feature = navjoy_translator.parse_reduction_zone(None, None)
+    test_feature = navjoy_translator.parse_reduction_zone(None)
     expected_feature = None
     assert test_feature == expected_feature
 
@@ -228,7 +233,7 @@ def test_parse_reduction_zone_invalid_data():
     test_var = 'a,b,c,d'
     callback = MagicMock()
     test_feature = navjoy_translator.parse_reduction_zone(
-        test_var, 'eastbound', callback_function=callback)
+        test_var, callback_function=callback)
     assert callback.called and test_feature == None
 
 
@@ -256,7 +261,7 @@ def test_validate_closure_valid_data():
                 },
             ],
             "streetNameFrom": "US-34",
-            "directionOfTraffic": " East/West ",
+            "direction": "eastbound",
             "requestedTemporarySpeed": "45",
             "workStartDate": "2021-08-09T13:00:00.000Z",
             "workEndDate": "2021-09-24T23:00:00.000Z",
@@ -508,6 +513,8 @@ def test_wzdx_creator(mock_dt, mock_dt_2, mock_dt_3, mockuuid):
                     "vehicle_impact": "all-lanes-open",
                     "event_status": "planned",
                     "reduced_speed_limit": 45,
+                    'types_of_work': [{'type_name': 'below-road-work',
+                                       'is_architectural_change': False}],
                     "description": "Bridge Repairs. Crews roadside.",
                     "creation_date": "2021-04-13T00:00:00Z",
                     "update_date": "2021-04-13T00:00:00Z"
@@ -555,6 +562,8 @@ def test_wzdx_creator(mock_dt, mock_dt_2, mock_dt_3, mockuuid):
                     "vehicle_impact": "all-lanes-open",
                     "event_status": "planned",
                     "reduced_speed_limit": 45,
+                    'types_of_work': [{'type_name': 'below-road-work',
+                                       'is_architectural_change': False}],
                     "description": "Bridge Repairs. Crews roadside.",
                     "creation_date": "2021-04-13T00:00:00Z",
                     "update_date": "2021-04-13T00:00:00Z"
@@ -819,6 +828,8 @@ def test_wzdx_creator_valid_and_invalid(mock_dt, mock_dt_2, mock_dt_3, mockuuid)
                     "vehicle_impact": "all-lanes-open",
                     "event_status": "planned",
                     "reduced_speed_limit": 45,
+                    'types_of_work': [{'is_architectural_change': False,
+                                       'type_name': 'below-road-work'}],
                     "description": "Bridge Repairs. Crews roadside.",
                     "creation_date": "2021-04-13T00:00:00Z",
                     "update_date": "2021-04-13T00:00:00Z"
@@ -866,6 +877,8 @@ def test_wzdx_creator_valid_and_invalid(mock_dt, mock_dt_2, mock_dt_3, mockuuid)
                     "vehicle_impact": "all-lanes-open",
                     "event_status": "planned",
                     "reduced_speed_limit": 45,
+                    'types_of_work': [{'is_architectural_change': False,
+                                       'type_name': 'below-road-work'}],
                     "description": "Bridge Repairs. Crews roadside.",
                     "creation_date": "2021-04-13T00:00:00Z",
                     "update_date": "2021-04-13T00:00:00Z"
@@ -1040,8 +1053,10 @@ def test_get_polygon_no_polygon():
 # ----------------------------------------- get_types_of_work -----------------------------------------
 def test_get_types_of_work_restriping():
     field = 'Restriping and crack seal operations.'
-    expected = [{'type_name': 'surface-work',
-                              'is_architectural_change': False}]
+    expected = [{'type_name': 'minor-road-defect-repair',
+                              'is_architectural_change': False},
+                {'type_name': 'painting',
+                 'is_architectural_change': False}]
     actual = navjoy_translator.get_types_of_work(field)
 
     assert actual == expected
@@ -1061,3 +1076,131 @@ def test_get_types_of_work_empty():
     actual = navjoy_translator.get_types_of_work(field)
 
     assert actual == expected
+
+
+def test_expand_speed_zone_1():
+    event = {
+        "sys_gUid": "Form568-cb0fdaf0-c27a-4bef-aabd-442615dfb2d6",
+        "data": {
+            "srzmap": [
+                {
+                    "type": "LineString",
+                    "coordinates": [
+                        [
+                            [
+                                -103.17130040113868,
+                                40.625392709715676
+                            ],
+                            [
+                                -103.17889641706886,
+                                40.61979008921054
+                            ]
+                        ]
+                    ],
+                },
+            ],
+            "streetNameFrom": "US-34",
+            "directionOfTraffic": " East/West ",
+            "requestedTemporarySpeed": "45",
+            "workStartDate": "2021-08-09T13:00:00.000Z",
+            "workEndDate": "2021-09-24T23:00:00.000Z",
+            "reductionJustification": "Crews roadside.",
+            'currentPostedSpeed': None,
+            'mileMarkerEnd': None,
+            'mileMarkerStart': None,
+        }
+    }
+
+    actual = navjoy_translator.expand_speed_zone(event)
+
+    assert expected_results.test_expand_speed_zone_1_expected == actual
+
+
+def test_expand_speed_zone_2():
+    event = {
+        "sys_gUid": "Form568-cb0fdaf0-c27a-4bef-aabd-442615dfb2d6",
+        "data": {
+            "srzmap": [
+                {
+                    "type": "LineString",
+                    "coordinates": [
+                        [
+                            [
+                                -103.17130040113868,
+                                40.625392709715676
+                            ],
+                            [
+                                -103.17889641706886,
+                                40.61979008921054
+                            ]
+                        ]
+                    ],
+                },
+            ],
+            "reductionJustification": "Crews roadside.",
+
+            "streetNameFrom2": "US-34",
+            "directionOfTraffic2": " East/West ",
+            "requestedTemporarySpeed2": "45",
+            "workStartDate2": "2021-08-09T13:00:00.000Z",
+            "workEndDate2": "2021-09-24T23:00:00.000Z",
+            'currentPostedSpeed2': None,
+            'mileMarkerEnd2': None,
+            'mileMarkerStart2': None,
+        }
+    }
+
+    actual = navjoy_translator.expand_speed_zone(event)
+
+    assert expected_results.test_expand_speed_zone_2_expected == actual
+
+
+# I hate how long this test is, but this is what is has to be to test all 4 at the same time
+def test_expand_speed_zone_2_3_4():
+    event = {
+        "sys_gUid": "Form568-cb0fdaf0-c27a-4bef-aabd-442615dfb2d6",
+        "data": {
+            "srzmap": [
+            ],
+            "reductionJustification": "Crews roadside.",
+            "streetNameFrom": "US-34",
+            "directionOfTraffic": " East/West ",
+            "requestedTemporarySpeed": "1",
+            "workStartDate": "2021-08-09T13:00:00.000Z",
+            "workEndDate": "2021-09-24T23:00:00.000Z",
+            'currentPostedSpeed': None,
+            'mileMarkerEnd': None,
+            'mileMarkerStart': None,
+
+            "streetNameFrom2": "US-34",
+            "directionOfTraffic2": " East/West ",
+            "requestedTemporarySpeed2": "2",
+            "workStartDate2": "2021-08-09T13:00:00.000Z",
+            "workEndDate2": "2021-09-24T23:00:00.000Z",
+            'currentPostedSpeed2': None,
+            'mileMarkerEnd2': None,
+            'mileMarkerStart2': None,
+
+            "streetNameFrom3": "US-34",
+            "directionOfTraffic3": " East/West ",
+            "requestedTemporarySpeed3": "3",
+            "workStartDate3": "2021-08-09T13:00:00.000Z",
+            "workEndDate3": "2021-09-24T23:00:00.000Z",
+            'currentPostedSpeed3': None,
+            'mileMarkerEnd3': None,
+            'mileMarkerStart3': None,
+
+            "streetNameFrom4": "US-34",
+            "directionOfTraffic4": " East/West ",
+            "requestedTemporarySpeed4": "4",
+            "workStartDate4": "2021-08-09T13:00:00.000Z",
+            "workEndDate4": "2021-09-24T23:00:00.000Z",
+            'currentPostedSpeed4': None,
+            'mileMarkerEnd4': None,
+            'mileMarkerStart4': None,
+        }
+    }
+
+    actual = navjoy_translator.expand_speed_zone(event)
+
+    assert expected_results.test_expand_speed_zone_2_3_4_expected == actual
