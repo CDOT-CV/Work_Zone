@@ -1,4 +1,4 @@
-from translator.tools import array_tools
+from wzdx.tools import array_tools
 
 
 # --------------------------------------------- dim ---------------------------------------------

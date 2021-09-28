@@ -3,8 +3,8 @@ import os
 from unittest.mock import MagicMock, patch
 
 import gcp_568_translator
-from translator import navjoy_translator
-from translator.tools import wzdx_translator, gcp_tools
+from wzdx import navjoy_translator
+from wzdx.tools import wzdx_translator, gcp_tools
 
 
 # --------------------------------------------------------------------------------unit test for main function--------------------------------------------------------------------------------

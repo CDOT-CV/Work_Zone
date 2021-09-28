@@ -4,7 +4,7 @@ import json
 import logging
 from collections import OrderedDict
 
-from translator.tools import date_tools, polygon_tools, wzdx_translator
+from wzdx.tools import date_tools, polygon_tools, wzdx_translator
 
 PROGRAM_NAME = 'IconeTranslator'
 PROGRAM_VERSION = '1.0'
@@ -19,7 +19,7 @@ def main():
 
     icone_obj = wzdx_translator.parse_xml(inputfile)
     wzdx = wzdx_creator(icone_obj)
-    location_schema = 'translator/sample files/validation_schema/wzdx_v3.1_feed.json'
+    location_schema = 'wzdx/sample files/validation_schema/wzdx_v3.1_feed.json'
     wzdx_schema = json.loads(open(location_schema).read())
 
     if not wzdx_translator.validate_wzdx(wzdx, wzdx_schema):

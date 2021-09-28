@@ -4,8 +4,8 @@ import os
 
 import requests
 
-from translator import navjoy_translator
-from translator.tools import gcp_tools, wzdx_translator
+from wzdx import navjoy_translator
+from wzdx.tools import gcp_tools, wzdx_translator
 
 
 def get_new_568_data():
@@ -24,7 +24,7 @@ def main(request, context):
         navjoy_obj, unsupported_message_callback=gcp_tools.unsupported_messages_callback)
 
     wzdx_schema = gcp_tools.get_wzdx_schema(
-        'translator/sample files/validation_schema/wzdx_v3.1_feed.json')
+        'wzdx/sample files/validation_schema/wzdx_v3.1_feed.json')
 
     if not wzdx_translator.validate_wzdx(wzdx_obj, wzdx_schema):
         logging.error(

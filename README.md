@@ -10,7 +10,7 @@ Work zone code and documentation for WZDx, iCone, etc.
 
 ## Project Description
 
-This is an open source, proof of concept solution for translating work zone data in the form of COtrip/Salesforce, iCone, and NavJOY messages to the standardized WZDx 3.1 format. This project was developed for CDOT. A unique translator has been developed for each of these message types. These translators read in the source message, parse out specific fields, and generate a WZDx 3.1 message. For more information on these message formats and the data mappings between these messages and the WZDx format, see the [documentation](translator/docs). Sample files are located [here](translator/sample%20files). All these translators are built to run from the command line and from GCP cloud functions, hosted within the CDOT OIM WZDX environment, connected to the RTDH (real time data hub). For more information on cloud hosting, see [GCP_cloud_function](translator/GCP_cloud_function). 
+This is an open source, proof of concept solution for translating work zone data in the form of COtrip/Salesforce, iCone, and NavJOY messages to the standardized WZDx 3.1 format. This project was developed for CDOT. A unique translator has been developed for each of these message types. These translators read in the source message, parse out specific fields, and generate a WZDx 3.1 message. For more information on these message formats and the data mappings between these messages and the WZDx format, see the [documentation](wzdx/docs). Sample files are located [here](wzdx/sample%20files). All these translators are built to run from the command line and from GCP cloud functions, hosted within the CDOT OIM WZDX environment, connected to the RTDH (real time data hub). For more information on cloud hosting, see [GCP_cloud_function](wzdx/GCP_cloud_function). 
 
 ## Prerequisites
 
@@ -51,13 +51,13 @@ env_var.sh
 #### Run the translator script (from Work_Zone)
 
 ```
-python -m translator.icone_translator inputfile.xml --outputFile outputfile.geojson
+python -m wzdx.icone_translator inputfile.xml --outputFile outputfile.geojson
 ```
 
 Example usage:
 
 ```
-python -m translator.icone_translator 'translator/sample files/icone data/incidents_extended.xml' 
+python -m wzdx.icone_translator 'wzdx/sample files/icone data/incidents_extended.xml' 
 ```
 
 ### Execution for COtrip translator
@@ -65,35 +65,35 @@ python -m translator.icone_translator 'translator/sample files/icone data/incide
 #### Run the translator script (from Work_Zone)
 
 ```
-python -m translator.cotrip_translator inputfile.json --outputFile outputfile.geojson
+python -m wzdx.cotrip_translator inputfile.json --outputFile outputfile.geojson
 ```
 
 Example usage:
 
 ```
-python -m translator.cotrip_translator 'translator/sample files/cotrip_data/cotrip_1.json'
+python -m wzdx.cotrip_translator 'wzdx/sample files/cotrip_data/cotrip_1.json'
 ```
 
 ### Execution for NavJoy 568 translator
 This translator reads in a NavJoy 568 speed reduction form and translates it into a WZDx message. Many of the 568 messages cover 2 directions of traffic, and are thus expanded into 2 WZDx messages, one for each direction. 
 
-The NavJoy Work Zone feed is being translated into WZDx by NavJoy themselves, the source and WZDx example messages are located here: [Navjoy Sample Data](translator/sample%20files/navjoy_data)
+The NavJoy Work Zone feed is being translated into WZDx by NavJoy themselves, the source and WZDx example messages are located here: [Navjoy Sample Data](wzdx/sample%20files/navjoy_data)
 
 #### Run the translator script (from Work_Zone)
 
 ```
-python -m translator.navjoy_translator inputfile.json --outputFile outputfile.geojson
+python -m wzdx.navjoy_translator inputfile.json --outputFile outputfile.geojson
 ```
 
 Example usage:
 
 ```
-python -m translator.navjoy_translator 'translator/sample files/navjoy_data/568_data.json'
+python -m wzdx.navjoy_translator 'wzdx/sample files/navjoy_data/568_data.json'
 ```
 
 ### Execution for Combine_wzdx
 
-#### Run the translator script (from Work_Zone/translator)
+#### Run the translator script (from Work_Zone/wzdx)
 
 ```
 python combine_wzdx.py icone_wzdx_output_message_file cotrip_wzdx_output_message_file --outputFile outputfile.geojson
@@ -121,14 +121,14 @@ The `combine_wzdx` script file combines the output from the iCone and COtrip tra
 
 
 # Google Cloud Hosting
-All of the translators featured in this repo are hosted in the CDOT GCP Cloud as function apps. Each function is triggered by an event (either a message being generated in the RTDH or time of day), translates the given message to WZDx, and publishes that WZDx message to a pub/sub topic. The triggers for each GCP function are listed above, by translator. 
+All of the translators featured in this repo are hosted in the CDOT GCP Cloud as function apps. Each function is triggered by an event (either a message being generated in the RTDH or time of day), translates the given message to WZDx, and publishes that WZDx message to a pub/sub topic. The triggers for each GCP function are listed above, by wzdx. 
 
 ### iCone
 [https://console.cloud.google.com/functions/details/us-central1/auto_icone_translator_ftp?project=cdot-oim-wzdx-dev](https://console.cloud.google.com/functions/details/us-central1/auto_icone_translator_ftp?project=cdot-oim-wzdx-dev)
 
 The iCone cloud function is triggered once per day by a pub/sub topic. The cloud function downloads the latest iCone incidents data from the iCone FTP server to translate.
 
-![alt text](translator/docs/iCone%20Translator%20block%20diagram.png)
+![alt text](wzdx/docs/iCone%20Translator%20block%20diagram.png)
 
 ### COTrip/SalesForce
 [https://console.cloud.google.com/functions/details/us-central1/salesforce_data?folder=&organizationId=&project=cdot-oim-wzdx-prod](https://console.cloud.google.com/functions/details/us-central1/salesforce_data?folder=&organizationId=&project=cdot-oim-wzdx-prod)
@@ -202,7 +202,7 @@ Runtime Environment Variables
 
 ### Documentation
 
-documentation for iCone to WZDx translator is located here: [docs](translator/docs)
+documentation for iCone to WZDx translator is located here: [docs](wzdx/docs)
 
 ### Guidelines
 

@@ -4,7 +4,7 @@ from datetime import datetime
 from unittest.mock import MagicMock, Mock, patch
 
 import time_machine
-from translator import cotrip_translator
+from wzdx import cotrip_translator
 
 
 @patch.dict(os.environ, {

@@ -6,8 +6,8 @@ import urllib
 import xmltodict
 from google.cloud import secretmanager
 
-from translator import icone_translator
-from translator.tools import gcp_tools, wzdx_translator
+from wzdx import icone_translator
+from wzdx.tools import gcp_tools, wzdx_translator
 
 
 def get_ftp_url():
@@ -41,7 +41,7 @@ def main(event, context):
         icone_obj, unsupported_message_callback=gcp_tools.unsupported_messages_callback)
 
     wzdx_schema = gcp_tools.get_wzdx_schema(
-        'translator/sample files/validation_schema/wzdx_v3.1_feed.json')
+        'wzdx/sample files/validation_schema/wzdx_v3.1_feed.json')
     if not wzdx_translator.validate_wzdx(wzdx_obj, wzdx_schema):
         logging.error(RuntimeError(
             'WZDx message failed validation. Exiting Application !'))

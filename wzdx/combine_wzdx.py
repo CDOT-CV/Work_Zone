@@ -6,7 +6,7 @@ import logging
 from shapely.geometry import Point
 from shapely.geometry.polygon import Polygon
 
-from translator.tools import polygon_tools
+from wzdx.tools import polygon_tools
 
 PROGRAM_NAME = 'WZDxCombiner'
 PROGRAM_VERSION = '1.0'

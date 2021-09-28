@@ -5,7 +5,7 @@ import logging
 import re
 from collections import OrderedDict
 
-from translator.tools import date_tools, wzdx_translator
+from wzdx.tools import date_tools, wzdx_translator
 
 PROGRAM_NAME = 'CotripTranslator'
 PROGRAM_VERSION = '1.0'
@@ -22,7 +22,7 @@ def main():
         raise ValueError(
             'Invalid file type. Please specify a valid Json file!') from None
     wzdx_obj = wzdx_creator(cotrip_obj)
-    location_schema = 'translator/sample files/validation_schema/wzdx_v3.1_feed.json'
+    location_schema = 'wzdx/sample files/validation_schema/wzdx_v3.1_feed.json'
     wzdx_schema = json.loads(open(location_schema).read())
 
     if not wzdx_translator.validate_wzdx(wzdx_obj, wzdx_schema):

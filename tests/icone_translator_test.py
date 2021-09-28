@@ -5,7 +5,7 @@ from unittest.mock import MagicMock, Mock, patch
 
 import time_machine
 import xmltodict
-from translator import icone_translator
+from wzdx import icone_translator
 
 # Unit testing code for icone_translator.py
 # --------------------------------------------------------------------------------Unit test for parse_incident function--------------------------------------------------------------------------------

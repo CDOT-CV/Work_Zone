@@ -5,8 +5,8 @@ import json
 import os
 import sys
 from unittest.mock import MagicMock, patch, Mock
-from translator import icone_translator
-from translator.tools import wzdx_translator, gcp_tools
+from wzdx import icone_translator
+from wzdx.tools import wzdx_translator, gcp_tools
 
 
 # --------------------------------------------------------------------------------unit test for get_ftp_file function--------------------------------------------------------------------------------

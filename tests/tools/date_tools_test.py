@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta, timezone
 
 import time_machine
-from translator.tools import date_tools
+from wzdx.tools import date_tools
 
 
 # --------------------------------------------------------------------------------unit test for parse_datetime_from_unix function--------------------------------------------------------------------------------

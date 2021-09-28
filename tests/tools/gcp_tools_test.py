@@ -2,7 +2,7 @@ import json
 import pytest
 import os
 from unittest.mock import patch
-from translator.tools import gcp_tools
+from wzdx.tools import gcp_tools
 
 
 # --------------------------------------------------------------------------------unit test for unsupported_messages_callback function--------------------------------------------------------------------------------
@@ -86,9 +86,9 @@ def test_formatMessage_byte_string():
 # --------------------------------------------------------------------------------unit test for get_wzdx_schema function--------------------------------------------------------------------------------
 def test_get_wzdx_schema():
     expected_schema = json.loads(
-        open('translator/sample files/validation_schema/wzdx_v3.1_feed.json').read())
+        open('wzdx/sample files/validation_schema/wzdx_v3.1_feed.json').read())
     actual = gcp_tools.get_wzdx_schema(
-        'translator/sample files/validation_schema/wzdx_v3.1_feed.json')
+        'wzdx/sample files/validation_schema/wzdx_v3.1_feed.json')
     assert actual == expected_schema
 
 

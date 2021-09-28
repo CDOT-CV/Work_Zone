@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 from unittest.mock import MagicMock, Mock, patch
 
 import time_machine
-from translator import navjoy_translator
+from wzdx import navjoy_translator
 from tests import navjoy_translator_test_expected_results as expected_results
 
 # Unit testing code for navjoy_translator.py
@@ -23,9 +23,9 @@ def init_datetime_mocks(mock_dts):
         i.strptime = datetime.strptime
 
 
-@unittest.mock.patch('translator.navjoy_translator.datetime')
-@unittest.mock.patch('translator.tools.date_tools.datetime')
-@unittest.mock.patch('translator.tools.wzdx_translator.datetime')
+@unittest.mock.patch('wzdx.navjoy_translator.datetime')
+@unittest.mock.patch('wzdx.tools.date_tools.datetime')
+@unittest.mock.patch('wzdx.tools.wzdx_translator.datetime')
 def test_parse_reduction_zone_linestring(mock_dt, mock_dt_2, mock_dt_3):
     init_datetime_mocks([mock_dt, mock_dt_2, mock_dt_3])
     event = {
@@ -125,9 +125,9 @@ def test_parse_reduction_zone_linestring(mock_dt, mock_dt_2, mock_dt_3):
     assert test_feature == expected_feature
 
 
-@unittest.mock.patch('translator.navjoy_translator.datetime')
-@unittest.mock.patch('translator.tools.date_tools.datetime')
-@unittest.mock.patch('translator.tools.wzdx_translator.datetime')
+@unittest.mock.patch('wzdx.navjoy_translator.datetime')
+@unittest.mock.patch('wzdx.tools.date_tools.datetime')
+@unittest.mock.patch('wzdx.tools.wzdx_translator.datetime')
 def test_parse_reduction_zone_polygon(mock_dt, mock_dt_2, mock_dt_3):
     init_datetime_mocks([mock_dt, mock_dt_2, mock_dt_3])
     event = {
@@ -421,9 +421,9 @@ def test_get_vehicle_impact_all_lanes_open():
     'issuing_organization': 'CDOT'
 })
 @patch('uuid.uuid4')
-@unittest.mock.patch('translator.navjoy_translator.datetime')
-@unittest.mock.patch('translator.tools.date_tools.datetime')
-@unittest.mock.patch('translator.tools.wzdx_translator.datetime')
+@unittest.mock.patch('wzdx.navjoy_translator.datetime')
+@unittest.mock.patch('wzdx.tools.date_tools.datetime')
+@unittest.mock.patch('wzdx.tools.wzdx_translator.datetime')
 def test_wzdx_creator(mock_dt, mock_dt_2, mock_dt_3, mockuuid):
     init_datetime_mocks([mock_dt, mock_dt_2, mock_dt_3])
     uuid.uuid4 = Mock()
@@ -707,9 +707,9 @@ def test_wzdx_creator_invalid_info_object():
     'issuing_organization': 'CDOT'
 })
 @patch('uuid.uuid4')
-@unittest.mock.patch('translator.navjoy_translator.datetime')
-@unittest.mock.patch('translator.tools.date_tools.datetime')
-@unittest.mock.patch('translator.tools.wzdx_translator.datetime')
+@unittest.mock.patch('wzdx.navjoy_translator.datetime')
+@unittest.mock.patch('wzdx.tools.date_tools.datetime')
+@unittest.mock.patch('wzdx.tools.wzdx_translator.datetime')
 def test_wzdx_creator_valid_and_invalid(mock_dt, mock_dt_2, mock_dt_3, mockuuid):
     init_datetime_mocks([mock_dt, mock_dt_2, mock_dt_3])
     uuid.uuid4 = Mock()
