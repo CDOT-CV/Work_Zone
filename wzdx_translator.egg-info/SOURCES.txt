@@ -13,6 +13,8 @@ wzdx/combine_wzdx.py
 wzdx/cotrip_translator.py
 wzdx/icone_translator.py
 wzdx/navjoy_translator.py
+wzdx/sample files/__init__.py
+wzdx/sample files/validation_schema/__init__.py
 wzdx/tools/__init__.py
 wzdx/tools/array_tools.py
 wzdx/tools/date_tools.py
