@@ -82,7 +82,7 @@ def main():
             'Invalid file type. Please specify a valid Json file!') from None
     wzdx_obj = wzdx_creator(navjoy_obj)
 
-    location_schema = 'wzdx/sample files/validation_schema/wzdx_v3.1_feed.json'
+    location_schema = 'wzdx/sample_files/validation_schema/wzdx_v3.1_feed.json'
     wzdx_schema = json.loads(open(location_schema).read())
 
     if not wzdx_translator.validate_wzdx(wzdx_obj, wzdx_schema):

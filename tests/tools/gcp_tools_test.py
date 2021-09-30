@@ -86,9 +86,9 @@ def test_formatMessage_byte_string():
 # --------------------------------------------------------------------------------unit test for get_wzdx_schema function--------------------------------------------------------------------------------
 def test_get_wzdx_schema():
     expected_schema = json.loads(
-        open('wzdx/sample files/validation_schema/wzdx_v3.1_feed.json').read())
+        open('wzdx/sample_files/validation_schema/wzdx_v3.1_feed.json').read())
     actual = wzdx_translator.get_wzdx_schema(
-        'wzdx/sample files/validation_schema/wzdx_v3.1_feed.json')
+        'wzdx/sample_files/validation_schema/wzdx_v3.1_feed.json')
     assert actual == expected_schema
 
 

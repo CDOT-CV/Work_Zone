@@ -19,7 +19,7 @@ def main():
 
     icone_obj = wzdx_translator.parse_xml(inputfile)
     wzdx = wzdx_creator(icone_obj)
-    location_schema = 'wzdx/sample files/validation_schema/wzdx_v3.1_feed.json'
+    location_schema = 'wzdx/sample_files/validation_schema/wzdx_v3.1_feed.json'
     wzdx_schema = json.loads(open(location_schema).read())
 
     if not wzdx_translator.validate_wzdx(wzdx, wzdx_schema):
