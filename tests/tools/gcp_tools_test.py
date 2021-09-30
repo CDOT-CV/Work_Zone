@@ -87,18 +87,18 @@ def test_formatMessage_byte_string():
 def test_get_wzdx_schema():
     expected_schema = json.loads(
         open('wzdx/sample files/validation_schema/wzdx_v3.1_feed.json').read())
-    actual = gcp_tools.get_wzdx_schema(
+    actual = wzdx_translator.get_wzdx_schema(
         'wzdx/sample files/validation_schema/wzdx_v3.1_feed.json')
     assert actual == expected_schema
 
 
 def test_get_wzdx_schema_invalid_data():
     with pytest.raises(RuntimeError) as runtimeErr:
-        gcp_tools.get_wzdx_schema('tests/docs/invalid_schema.json')
+        wzdx_translator.get_wzdx_schema('tests/docs/invalid_schema.json')
     assert 'invalid schema: not valid json' in str(runtimeErr.value)
 
 
 def test_get_wzdx_schema_not_exist():
     with pytest.raises(RuntimeError) as runtimeErr:
-        gcp_tools.get_wzdx_schema('not_exist.json')
+        wzdx_translator.get_wzdx_schema('not_exist.json')
     assert 'invalid schema: file does not exist' in str(runtimeErr.value)

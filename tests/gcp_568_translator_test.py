@@ -22,7 +22,7 @@ from wzdx.tools import wzdx_translator, gcp_tools
 def test_main_success(validate_wzdx, wzdx_creator, publish_wzdx_message, get_wzdx_schema, get_new_568_data, pubsub):
     # the intent of this magic mock fuction is that we give a valid input, that publishes data
     gcp_568_translator.get_new_568_data = MagicMock(return_value='{}')
-    gcp_tools.get_wzdx_schema = MagicMock(return_value='')
+    wzdx_translator.get_wzdx_schema = MagicMock(return_value='')
     gcp_tools.publish_wzdx_message = MagicMock()
     navjoy_translator.wzdx_creator = MagicMock(return_value='WZDx')
     wzdx_translator.validate_wzdx = MagicMock(
@@ -46,7 +46,7 @@ def test_main_success(validate_wzdx, wzdx_creator, publish_wzdx_message, get_wzd
 def test_main_validation_failed(validate_wzdx, wzdx_creator, get_wzdx_schema, publish_wzdx_message, get_new_568_data, pubsub):
     # the intent of this magic mock fuction is that we give a valid input, that publishes data
     gcp_568_translator.get_new_568_data = MagicMock(return_value='')
-    gcp_tools.get_wzdx_schema = MagicMock(return_value='')
+    wzdx_translator.get_wzdx_schema = MagicMock(return_value='')
     gcp_tools.publish_wzdx_message = MagicMock()
     navjoy_translator.wzdx_creator = MagicMock(return_value='WZDx')
     wzdx_translator.validate_wzdx = MagicMock(

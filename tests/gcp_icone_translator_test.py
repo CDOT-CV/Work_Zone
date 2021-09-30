@@ -35,7 +35,7 @@ def test_main_success(validate_wzdx, wzdx_creator, get_wzdx_schema, parse_xml, g
     gcp_icone_translator.get_ftp_url = MagicMock(return_value='url')
     gcp_icone_translator.get_ftp_file = MagicMock(return_value='')
     gcp_icone_translator.parse_xml = MagicMock(return_value='')
-    gcp_tools.get_wzdx_schema = MagicMock(return_value='')
+    wzdx_translator.get_wzdx_schema = MagicMock(return_value='')
     icone_translator.wzdx_creator = MagicMock(return_value='WZDx')
     wzdx_translator.validate_wzdx = MagicMock(
         return_value=True)
@@ -63,7 +63,7 @@ def test_main_validation_failed(validate_wzdx, wzdx_creator, get_wzdx_schema, pa
     gcp_icone_translator.get_ftp_url = MagicMock(return_value='url')
     gcp_icone_translator.get_ftp_file = MagicMock(return_value='')
     gcp_icone_translator.parse_xml = MagicMock(return_value='')
-    gcp_tools.get_wzdx_schema = MagicMock(return_value='')
+    wzdx_translator.get_wzdx_schema = MagicMock(return_value='')
     icone_translator.wzdx_creator = MagicMock(return_value='WZDx')
     wzdx_translator.validate_wzdx = MagicMock(
         return_value=False)

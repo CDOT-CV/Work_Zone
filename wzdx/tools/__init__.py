@@ -3,3 +3,4 @@
 # import gcp_tools
 # import polygon_tools
 # import wzdx_translator
+from wzdx.tools.wzdx_translator import get_wzdx_schema

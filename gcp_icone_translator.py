@@ -40,7 +40,7 @@ def main(event, context):
     wzdx_obj = icone_translator.wzdx_creator(
         icone_obj, unsupported_message_callback=gcp_tools.unsupported_messages_callback)
 
-    wzdx_schema = gcp_tools.get_wzdx_schema(
+    wzdx_schema = wzdx_translator.get_wzdx_schema(
         'wzdx/sample files/validation_schema/wzdx_v3.1_feed.json')
     if not wzdx_translator.validate_wzdx(wzdx_obj, wzdx_schema):
         logging.error(RuntimeError(
