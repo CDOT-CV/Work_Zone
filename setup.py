@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 VERSION = '0.0.1'
 DESCRIPTION = 'CDOT Work Zone WZDx Translators'
-LONG_DESCRIPTION = 'My first Python package with a slightly longer description'
+LONG_DESCRIPTION = 'WZDx v3.1 translators from iCone, COTrip/Salesforce, and navjoy 568'
 
 # Setting up
 setup(

@@ -199,6 +199,26 @@ def string_to_number(field):
             return None
 
 
+# function to parse direction from street name
+def parse_direction_from_street_name(street):
+    if not street or type(street) != str:
+        return None
+    street_char = street[-1]
+    street_chars = street[-2:]
+    if street_char == 'N' or street_chars == 'NB':
+        direction = 'northbound'
+    elif street_char == 'S' or street_chars == 'SB':
+        direction = 'southbound'
+    elif street_char == 'W' or street_chars == 'WB':
+        direction = 'westbound'
+    elif street_char == 'E' or street_chars == 'EB':
+        direction = 'eastbound'
+    else:
+        direction = None
+
+    return direction
+
+
 def get_wzdx_schema(schema_file_name):
     try:
         schema_string = open(schema_file_name, 'r').read()
@@ -216,3 +236,19 @@ def get_wzdx_schema(schema_file_name):
     except jsonschema.ValidationError:
         return schema_obj
     return schema_obj
+
+
+# function to parse polyline to geometry line string
+def parse_polyline(poly):
+    if not poly or type(poly) != str:
+        return None
+    poly = poly[len('LINESTRING ('): -1]
+    polyline = poly.split(', ')
+    coordinates = []
+    for i in polyline:
+        coords = i.split(' ')
+
+        # the regular rexpression '^-?([0-9]*[.])?[0-9]+$ matches an integer or decimals
+        if len(coords) >= 2 and re.match('^-?([0-9]*[.])?[0-9]+$', coords[0]) and re.match('^-?([0-9]*[.])?[0-9]+$', coords[1]):
+            coordinates.append([float(coords[0]), float(coords[1])])
+    return coordinates
