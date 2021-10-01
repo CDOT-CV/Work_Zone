@@ -18,7 +18,7 @@ def main():
     # Added encoding argument because of weird character at start of incidents.xml file
 
     icone_obj = wzdx_translator.parse_xml(inputfile)
-    wzdx = wzdx_creator(icone_obj)
+    wzdx = wzdx_creator_multiple(icone_obj)
     location_schema = 'wzdx/sample_files/validation_schema/wzdx_v3.1_feed.json'
     wzdx_schema = json.loads(open(location_schema).read())
 
@@ -45,8 +45,8 @@ def parse_icone_arguments():
     return args.iconeFile, args.outputFile
 
 
-def wzdx_creator(messages, info=None, unsupported_message_callback=None):
-    if not messages or not messages.get('incidents', {}).get('incident'):
+def wzdx_creator(message, info=None):
+    if not message:
         return None
    # verify info obj
     if not info:
@@ -57,12 +57,11 @@ def wzdx_creator(messages, info=None, unsupported_message_callback=None):
 
     wzd = wzdx_translator.initialize_wzdx_object(info)
 
-    for incident in messages.get('incidents').get('incident'):
-        # Parse Incident to WZDx Feature
-        feature = parse_incident(
-            incident, callback_function=unsupported_message_callback)
-        if feature:
-            wzd.get('features').append(feature)
+    # Parse Incident to WZDx Feature
+    feature = parse_incident(message)
+    if feature:
+        wzd.get('features').append(feature)
+
     if not wzd.get('features'):
         return None
     wzd = wzdx_translator.add_ids(wzd)
@@ -212,11 +211,7 @@ def parse_pcms_sensor(sensor):
 
 
 # Parse Icone Incident to WZDx
-def parse_incident(incident, callback_function=None):
-    # if not validate_incident(incident):
-    #     if callback_function:  # Note :a call back fucnction , which will trigger every time the invalid data is given
-    #         callback_function(incident)
-    #     return None
+def parse_incident(incident):
 
     event = incident.get('event')
 
