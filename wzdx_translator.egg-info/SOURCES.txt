@@ -8,6 +8,12 @@ tests/gcp_icone_translator_test.py
 tests/icone_translator_test.py
 tests/navjoy_translator_test.py
 tests/navjoy_translator_test_expected_results.py
+tests/tools/__init__.py
+tests/tools/array_tools_test.py
+tests/tools/date_tools_test.py
+tests/tools/gcp_tools_test.py
+tests/tools/polygon_tools_test.py
+tests/tools/wzdx_translator_test.py
 wzdx/__init__.py
 wzdx/combine_wzdx.py
 wzdx/cotrip_translator.py
