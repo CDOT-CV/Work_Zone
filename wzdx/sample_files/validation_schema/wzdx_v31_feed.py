@@ -1,4 +1,4 @@
-wzdx_v31_schema_string = """{
+wzdx_v31_schema_string = {
     "$id": "https://raw.githubusercontent.com/usdot-jpo-ode/wzdx/master/create-feed/schemas/wzdx_v3.1_feed.json",
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "WZDx v3.1 Feed",
@@ -302,7 +302,7 @@ wzdx_v31_schema_string = """{
                     "items": {
                         "$ref": "#/definitions/RoadRestriction"
                     },
-                    "uniqueItems": true
+                    "uniqueItems": True
                 },
                 "description": {
                     "description": "Short free text description of the road event",
@@ -644,4 +644,4 @@ wzdx_v31_schema_string = """{
             ]
         }
     }
-}"""
+}
