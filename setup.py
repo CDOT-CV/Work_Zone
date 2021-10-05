@@ -13,7 +13,7 @@ setup(
     author_email="jfrye@neaeraconsulting.com",
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
-    packages=find_packages(),
+    packages=find_packages(exclude=("tests",)),
     install_requires=[
         'xmltodict',
         'jsonschema',
@@ -25,7 +25,8 @@ setup(
         'requests',
         'pytz'],  # add any additional packages that
     # needs to be installed along with your package. Eg: 'caer'
-    data_files=['./wzdx/sample_files/validation_schema/wzdx_v3.1_feed.json'],
+    data_files=[('wzdx/sample_files/validation_schema',
+                 ['wzdx/sample_files/validation_schema/wzdx_v3.1_feed.json'])],
 
     keywords=['python', 'wzdx'],
     classifiers=[
