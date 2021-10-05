@@ -1,0 +1,9 @@
+xmltodict
+jsonschema
+python-dateutil
+shapely
+geopy
+pyproj
+numpy
+requests
+pytz
