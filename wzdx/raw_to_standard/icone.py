@@ -20,22 +20,26 @@ PROGRAM_VERSION = '1.0'
 
 
 def main():
-    input_file, output_file = parse_rtdh_arguments()
-    if generate_standard_messages_from_file(input_file, output_file):
-        print(f"Successfully generated stanadrd message file: {output_file}")
+    input_file, output_dir = parse_rtdh_arguments()
+    generated_files_list = generate_standard_messages_from_file(
+        input_file, output_dir)
+    if generated_files_list:
+        print(
+            f"Successfully generated standard message files: {generated_files_list}")
     else:
         logging.warning(
             "Standard message generation failed. See messages printed above")
 
 
-def generate_standard_messages_from_file(input_file, output_file):
+def generate_standard_messages_from_file(input_file, output_dir):
     input_file_contents = open(input_file, 'r').read()
     raw_messages = generate_raw_messages(input_file_contents)
     standard_messages = []
     for message in raw_messages:
-        standard_messages.append(
-            generate_rtdh_standard_message_from_raw_single(message))
-    open(output_file, 'w+').write(json.dumps(standard_messages, indent=2))
+        std_msg = generate_rtdh_standard_message_from_raw_single(message)
+        output_path = f"{output_dir}/standard_icone_{std_msg['event']['source']['id']}_{round(std_msg['rtdh_timestamp'])}.json"
+        open(output_path, 'w+').write(json.dumps(std_msg, indent=2))
+        standard_messages.append(output_path)
     return standard_messages
 
 
@@ -71,11 +75,11 @@ def parse_rtdh_arguments():
     parser.add_argument('--version', action='version',
                         version=f'{PROGRAM_NAME} {PROGRAM_VERSION}')
     parser.add_argument('iconeFile', help='icone file path')
-    parser.add_argument('--outputFile', required=False,
-                        default='icone_rtdh_standard.json', help='output file path')
+    parser.add_argument('--outputDir', required=False,
+                        default='./', help='output directory')
 
     args = parser.parse_args()
-    return args.iconeFile, args.outputFile
+    return args.iconeFile, args.outputDir
 
 
 def create_rtdh_standard_msg(pd):

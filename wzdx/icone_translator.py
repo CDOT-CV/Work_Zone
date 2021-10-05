@@ -14,11 +14,11 @@ DEFAULT_ICONE_FEED_INFO_ID = '104d7746-688c-44ed-b195-2ee948bf9dfa'
 
 
 def main():
-    inputfile, outputfile = parse_icone_arguments()
+    input_file, output_file = parse_icone_arguments()
     # Added encoding argument because of weird character at start of incidents.xml file
 
-    icone_obj = wzdx_translator.parse_xml(inputfile)
-    wzdx = wzdx_creator_multiple(icone_obj)
+    icone_obj = json.loads(open(input_file, 'r').read())
+    wzdx = wzdx_creator(icone_obj)
     location_schema = 'wzdx/sample_files/validation_schema/wzdx_v3.1_feed.json'
     wzdx_schema = json.loads(open(location_schema).read())
 
@@ -26,9 +26,9 @@ def main():
         logging.error(
             'validation error more message are printed above. output file is not created because the message failed validation.')
         return
-    with open(outputfile, 'w') as fwzdx:
+    with open(output_file, 'w') as fwzdx:
         fwzdx.write(json.dumps(wzdx, indent=2))
-        print('Your wzdx message was successfully generated and is located here: ' + str(outputfile))
+        print('Your wzdx message was successfully generated and is located here: ' + str(output_file))
 
 
 # parse script command line arguments
@@ -221,8 +221,7 @@ def parse_incident(incident):
 
     geometry = {}
     geometry['type'] = "LineString"
-    geometry['coordinates'] = wzdx_translator.parse_polyline(
-        event.get('geometry'))
+    geometry['coordinates'] = event.get('geometry')
     properties = {}
 
     # I included a skeleton of the message, fill out all required fields and as many optional fields as you can. Below is a link to the spec page for a road event
@@ -239,11 +238,20 @@ def parse_incident(incident):
     # Leave this empty, it will be populated by add_ids
     properties['data_source_id'] = ''
 
+    start_time = date_tools.parse_datetime_from_unix(
+        header.get('start_timestamp'))
+    end_time = date_tools.parse_datetime_from_unix(header.get('end_timestamp'))
+
     # start_date
-    properties['start_date'] = header.get('start_timestamp')
+    properties['start_date'] = date_tools.get_iso_string_from_datetime(
+        start_time)
 
     # end_date
-    properties['end_date'] = header.get('end_timestamp')
+    if end_time:
+        properties['end_date'] = date_tools.get_iso_string_from_datetime(
+            end_time)
+    else:
+        properties['end_date'] = ''
 
     # start_date_accuracy
     properties['start_date_accuracy'] = "estimated"
@@ -291,10 +299,6 @@ def parse_incident(incident):
     properties['ending_cross_street'] = ""
 
     # event status
-    start_time = date_tools.parse_datetime_from_iso_string(
-        header.get('start_timestamp'))
-    end_time = date_tools.parse_datetime_from_iso_string(
-        header.get('end_timestamp'))
     properties['event_status'] = date_tools.get_event_status(
         start_time, end_time)
 
@@ -310,10 +314,12 @@ def parse_incident(incident):
         'description')  # create_description(incident)
 
     # creation_date
-    properties['creation_date'] = round(incident.get('rtdh_timestamp'))
+    properties['creation_date'] = date_tools.get_iso_string_from_datetime(date_tools.parse_datetime_from_unix(
+        incident.get('rtdh_timestamp')))
 
     # update_date
-    properties['update_date'] = source.get('last_updated_timestamp')
+    properties['update_date'] = date_tools.get_iso_string_from_datetime(date_tools.parse_datetime_from_unix(
+        source.get('last_updated_timestamp')))
 
     feature = {}
     feature['type'] = "Feature"
