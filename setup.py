@@ -25,8 +25,6 @@ setup(
         'requests',
         'pytz'],  # add any additional packages that
     # needs to be installed along with your package. Eg: 'caer'
-    data_files=[('wzdx/sample_files/validation_schema',
-                 ['wzdx/sample_files/validation_schema/wzdx_v3.1_feed.json'])],
 
     keywords=['python', 'wzdx'],
     classifiers=[
