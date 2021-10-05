@@ -23,7 +23,7 @@ def main():
     input_file, output_dir = parse_rtdh_arguments()
     input_file_contents = open(input_file, 'r').read()
     generated_messages = generate_standard_messages_from_string(
-        input_file, output_dir)
+        input_file_contents, output_dir)
 
     generated_files_list = []
     for message in generated_messages:
