@@ -13,7 +13,7 @@ setup(
     author_email="jfrye@neaeraconsulting.com",
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
-    packages=find_packages(exclude=("tests",)),
+    packages=find_packages(exclude=("wzdx")),
     install_requires=[
         'xmltodict',
         'jsonschema',

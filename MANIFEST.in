@@ -1,1 +1,2 @@
 include wzdx/sample_files/validation_schema/wzdx_v3.1_feed.json
+recursive-exclude tests *
