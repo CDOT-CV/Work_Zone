@@ -21,7 +21,7 @@ def main():
     icone_obj = json.loads(open(input_file, 'r').read())
     wzdx = wzdx_creator(icone_obj)
     location_schema = path.join(path.dirname(
-        __file__), 'wzdx.sample_files.validation_schema') + '/wzdx_v3.1_feed.json'
+        __file__), '\\sample_files\\validation_schema\\wzdx_v3.1_feed.json')
     # location_schema = 'wzdx/sample_files/validation_schema/wzdx_v3.1_feed.json'
     wzdx_schema = json.loads(open(location_schema).read())
 
