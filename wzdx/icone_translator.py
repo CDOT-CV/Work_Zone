@@ -3,6 +3,7 @@ import argparse
 import json
 import logging
 from collections import OrderedDict
+from os import path
 
 from wzdx.tools import date_tools, polygon_tools, wzdx_translator
 
@@ -19,7 +20,9 @@ def main():
 
     icone_obj = json.loads(open(input_file, 'r').read())
     wzdx = wzdx_creator(icone_obj)
-    location_schema = 'wzdx/sample_files/validation_schema/wzdx_v3.1_feed.json'
+    location_schema = path.join(path.dirname(
+        __file__), 'wzdx.sample_files.validation_schema') + '/wzdx_v3.1_feed.json'
+    # location_schema = 'wzdx/sample_files/validation_schema/wzdx_v3.1_feed.json'
     wzdx_schema = json.loads(open(location_schema).read())
 
     if not wzdx_translator.validate_wzdx(wzdx, wzdx_schema):
