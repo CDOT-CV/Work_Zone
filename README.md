@@ -63,13 +63,13 @@ env_var.sh
 #### Run the translator script (from Work_Zone)
 
 ```
-python -m wzdx.icone_translator inputfile.xml --outputFile outputfile.geojson
+python -m wzdx.icone_translator inputfile.json --outputFile outputfile.geojson
 ```
 
 Example usage:
 
 ```
-python -m wzdx.icone_translator 'wzdx/sample_files/raw/icone/incidents_extended.xml' 
+python -m wzdx.icone_translator 'wzdx/sample_files/standard/icone/standard_icone_1245_1633444335.json' 
 ```
 
 ### Execution for COtrip translator

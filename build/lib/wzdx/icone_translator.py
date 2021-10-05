@@ -14,10 +14,10 @@ DEFAULT_ICONE_FEED_INFO_ID = '104d7746-688c-44ed-b195-2ee948bf9dfa'
 
 
 def main():
-    inputfile, outputfile = parse_icone_arguments()
+    input_file, output_file = parse_icone_arguments()
     # Added encoding argument because of weird character at start of incidents.xml file
 
-    icone_obj = wzdx_translator.parse_xml(inputfile)
+    icone_obj = json.loads(open(input_file, 'r').read())
     wzdx = wzdx_creator(icone_obj)
     location_schema = 'wzdx/sample_files/validation_schema/wzdx_v3.1_feed.json'
     wzdx_schema = json.loads(open(location_schema).read())
@@ -26,9 +26,9 @@ def main():
         logging.error(
             'validation error more message are printed above. output file is not created because the message failed validation.')
         return
-    with open(outputfile, 'w') as fwzdx:
+    with open(output_file, 'w') as fwzdx:
         fwzdx.write(json.dumps(wzdx, indent=2))
-        print('Your wzdx message was successfully generated and is located here: ' + str(outputfile))
+        print('Your wzdx message was successfully generated and is located here: ' + str(output_file))
 
 
 # parse script command line arguments
@@ -45,8 +45,8 @@ def parse_icone_arguments():
     return args.iconeFile, args.outputFile
 
 
-def wzdx_creator(messages, info=None, unsupported_message_callback=None):
-    if not messages or not messages.get('incidents', {}).get('incident'):
+def wzdx_creator(message, info=None):
+    if not message:
         return None
    # verify info obj
     if not info:
@@ -57,12 +57,11 @@ def wzdx_creator(messages, info=None, unsupported_message_callback=None):
 
     wzd = wzdx_translator.initialize_wzdx_object(info)
 
-    for incident in messages.get('incidents').get('incident'):
-        # Parse Incident to WZDx Feature
-        feature = parse_incident(
-            incident, callback_function=unsupported_message_callback)
-        if feature:
-            wzd.get('features').append(feature)
+    # Parse Incident to WZDx Feature
+    feature = parse_incident(message)
+    if feature:
+        wzd.get('features').append(feature)
+
     if not wzd.get('features'):
         return None
     wzd = wzdx_translator.add_ids(wzd)
@@ -83,48 +82,36 @@ def wzdx_creator(messages, info=None, unsupported_message_callback=None):
 #   </incident>
 
 
+# {
+#     "rtdh_timestamp": 1633097202.1872184,
+#     "rtdh_message_id": "bffd71cd-d35a-45c2-ba4d-a86e1ff12847",
+#     "event": {
+#         "type": "CONSTRUCTION",
+#         "source": {
+#         "id": 1245,
+#         "last_updated_timestamp": 1598046722
+#         },
+#         "geometry": "",
+#         "header": {
+#         "description": "19-1245: Roadwork between MP 40 and MP 48",
+#         "start_timestamp": 1581725296,
+#         "end_timestamp": null
+#         },
+#         "detail": {
+#         "road_name": "I-75 N",
+#         "road_number": "I-75 N",
+#         "direction": null
+#         }
+#     }
+# }
+
+
 # function to calculate vehicle impact
 def get_vehicle_impact(description):
     vehicle_impact = 'all-lanes-open'
     if 'lane closed' in description.lower():
         vehicle_impact = 'some-lanes-closed'
     return vehicle_impact
-
-
-# function to parse polyline to geometry line string
-def parse_polyline(polylinestring):
-    if not polylinestring or type(polylinestring) != str:
-        return None
-    # polyline rightnow is a list which has an empty string in it.
-    polyline = polylinestring.split(',')
-    coordinates = []
-    for i in range(0, len(polyline)-1, 2):
-        try:
-            coordinates.append([float(polyline[i + 1]), float(polyline[i])])
-        except ValueError as e:
-            logging.warning('failed to parse polyline!')
-            return []
-    return coordinates
-
-
-# function to parse direction from street name
-def parse_direction_from_street_name(street):
-    if not street or type(street) != str:
-        return None
-    street_char = street[-1]
-    street_chars = street[-2:]
-    if street_char == 'N' or street_chars == 'NB':
-        direction = 'northbound'
-    elif street_char == 'S' or street_chars == 'SB':
-        direction = 'southbound'
-    elif street_char == 'W' or street_chars == 'WB':
-        direction = 'westbound'
-    elif street_char == 'E' or street_chars == 'EB':
-        direction = 'eastbound'
-    else:
-        direction = None
-
-    return direction
 
 
 # function to get description
@@ -224,15 +211,17 @@ def parse_pcms_sensor(sensor):
 
 
 # Parse Icone Incident to WZDx
-def parse_incident(incident, callback_function=None):
-    if not validate_incident(incident):
-        if callback_function:  # Note :a call back fucnction , which will trigger every time the invalid data is given
-            callback_function(incident)
-        return None
+def parse_incident(incident):
+
+    event = incident.get('event')
+
+    source = event.get('source')
+    header = event.get('header')
+    detail = event.get('detail')
+
     geometry = {}
     geometry['type'] = "LineString"
-    geometry['coordinates'] = parse_polyline(
-        incident.get('location').get('polyline'))
+    geometry['coordinates'] = event.get('geometry')
     properties = {}
 
     # I included a skeleton of the message, fill out all required fields and as many optional fields as you can. Below is a link to the spec page for a road event
@@ -249,11 +238,20 @@ def parse_incident(incident, callback_function=None):
     # Leave this empty, it will be populated by add_ids
     properties['data_source_id'] = ''
 
+    start_time = date_tools.parse_datetime_from_unix(
+        header.get('start_timestamp'))
+    end_time = date_tools.parse_datetime_from_unix(header.get('end_timestamp'))
+
     # start_date
-    properties['start_date'] = incident.get('starttime')
+    properties['start_date'] = date_tools.get_iso_string_from_datetime(
+        start_time)
 
     # end_date
-    properties['end_date'] = incident.get('endtime', '')
+    if end_time:
+        properties['end_date'] = date_tools.get_iso_string_from_datetime(
+            end_time)
+    else:
+        properties['end_date'] = ''
 
     # start_date_accuracy
     properties['start_date_accuracy'] = "estimated"
@@ -268,13 +266,13 @@ def parse_incident(incident, callback_function=None):
     properties['ending_accuracy'] = "estimated"
 
     # road_name
-    road_names = [incident.get('location').get('street')]
+    road_names = [detail.get('road_name')]
     properties['road_names'] = road_names
 
     # direction
     direction = None
     for road_name in road_names:
-        direction = parse_direction_from_street_name(road_name)
+        direction = wzdx_translator.parse_direction_from_street_name(road_name)
         if direction:
             break
     if not direction:
@@ -286,7 +284,7 @@ def parse_incident(incident, callback_function=None):
 
     # vehicle impact
     properties['vehicle_impact'] = get_vehicle_impact(
-        incident.get('description'))
+        header.get('description'))
 
     # Relationship
     properties['relationship'] = {}
@@ -301,10 +299,6 @@ def parse_incident(incident, callback_function=None):
     properties['ending_cross_street'] = ""
 
     # event status
-    start_time = date_tools.parse_datetime_from_iso_string(
-        incident.get('starttime'))
-    end_time = date_tools.parse_datetime_from_iso_string(
-        incident.get('endtime'))
     properties['event_status'] = date_tools.get_event_status(
         start_time, end_time)
 
@@ -316,13 +310,16 @@ def parse_incident(incident, callback_function=None):
     properties['restrictions'] = []
 
     # description
-    properties['description'] = create_description(incident)
+    properties['description'] = header.get(
+        'description')  # create_description(incident)
 
     # creation_date
-    properties['creation_date'] = incident.get('creationtime')
+    properties['creation_date'] = date_tools.get_iso_string_from_datetime(date_tools.parse_datetime_from_unix(
+        incident.get('rtdh_timestamp')))
 
     # update_date
-    properties['update_date'] = incident.get('updatetime')
+    properties['update_date'] = date_tools.get_iso_string_from_datetime(date_tools.parse_datetime_from_unix(
+        source.get('last_updated_timestamp')))
 
     feature = {}
     feature['type'] = "Feature"
@@ -330,60 +327,6 @@ def parse_incident(incident, callback_function=None):
     feature['geometry'] = geometry
 
     return feature
-
-# function to validate the incident
-
-
-def validate_incident(incident):
-    if not incident or (type(incident) != dict and type(incident) != OrderedDict):
-        logging.warning('incident is empty or has invalid type')
-        return False
-
-    id = incident.get("@id")
-
-    location = incident.get('location')
-    if not location:
-        logging.warning(
-            f'Invalid incident with id = {id}. Location object not present')
-        return False
-
-    polyline = location.get('polyline')
-    coords = parse_polyline(polyline)
-    street = location.get('street', '')
-
-    starttime_string = incident.get('starttime')
-    endtime_string = incident.get('endtime')
-    description = incident.get('description')
-    creationtime = incident.get('creationtime')
-    updatetime = incident.get('updatetime')
-    direction = parse_direction_from_street_name(street)
-    if not direction:
-        direction = polygon_tools.get_road_direction_from_coordinates(coords)
-        if not direction:
-            logging.warning(
-                f'Invalid incident with id = {id}. unable to parse direction from street name or polyline')
-            return False
-    required_fields = [location, polyline, coords, street,
-                       starttime_string, description, creationtime, updatetime, direction]
-    for field in required_fields:
-        if not field:
-            logging.warning(
-                f'''Invalid incident with id = {id}. Not all required fields are present. Required fields are: 
-                location, polyline, street, starttime, description, creationtime, and updatetime''')
-            return False
-
-    start_time = date_tools.parse_datetime_from_iso_string(starttime_string)
-    end_time = date_tools.parse_datetime_from_iso_string(endtime_string)
-    if not start_time:
-        logging.warning(
-            f'Invalid incident with id = {id}. Unsupported start time format: {start_time}')
-        return False
-    elif endtime_string and not end_time:
-        logging.warning(
-            f'Invalid incident with id = {id}. Unsupported end time format: {end_time}')
-        return False
-
-    return True
 
 
 if __name__ == "__main__":
