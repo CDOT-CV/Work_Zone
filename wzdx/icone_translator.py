@@ -5,6 +5,8 @@ import logging
 from collections import OrderedDict
 from os import path
 
+from wzdx.sample_files.validation_schema import wzdx_v31_feed
+
 from wzdx.tools import date_tools, polygon_tools, wzdx_translator
 
 PROGRAM_NAME = 'IconeTranslator'
@@ -20,10 +22,7 @@ def main():
 
     icone_obj = json.loads(open(input_file, 'r').read())
     wzdx = wzdx_creator(icone_obj)
-    location_schema = path.join(path.dirname(
-        __file__), 'sample_files') + '\\validation_schema\\wzdx_v3.1_feed.json'
-    # location_schema = 'wzdx/sample_files/validation_schema/wzdx_v3.1_feed.json'
-    wzdx_schema = json.loads(open(location_schema).read())
+    wzdx_schema = wzdx_v31_feed.wzdx_v31_schema_string
 
     if not wzdx_translator.validate_wzdx(wzdx, wzdx_schema):
         logging.error(
