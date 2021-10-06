@@ -46,7 +46,7 @@
       <message verified="2020-08-21T15:48:16Z" latitude="37.0647220" longitude="-84.0980650" text=" ROADWORK / 6 MILES / AHEAD // 22 MILES / OF WORK / MP 40-62" />
     </display>
   </incident>
-   <incident id="1246">
+  <incident id="1246">
     <creationtime>2019-11-05T01:32:44Z</creationtime>
     <updatetime>2020-08-21T15:52:02Z</updatetime>
     <type>CONSTRUCTION</type>
