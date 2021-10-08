@@ -133,7 +133,7 @@ The iCone cloud function is triggered once per day by a pub/sub topic. The cloud
 ### COTrip/SalesForce
 [https://console.cloud.google.com/functions/details/us-central1/salesforce_data?folder=&organizationId=&project=cdot-oim-wzdx-prod](https://console.cloud.google.com/functions/details/us-central1/salesforce_data?folder=&organizationId=&project=cdot-oim-wzdx-prod)
 
-The cotrip cloud function does not exist. It will be triggered when a new cotrip alert is placed in the CDOT RTDH cotrip-alerts-raw-oim-wzdx-integration pub/sub topic. The cloud function downloads the latest iCone incidents data from the iCone FTP server to translate.
+The cotrip cloud function is triggered manually (for now) by an HTTP request. retrieves the most recent alert messages from the CDOT RTDH cotrip-alerts-raw-oim-wzdx-integration pub/sub topic.
 
 ### NavJoy 568
 [https://console.cloud.google.com/functions/details/us-central1/navjoy-568-translator?project=cdot-oim-wzdx-dev](https://console.cloud.google.com/functions/details/us-central1/navjoy-568-translator?project=cdot-oim-wzdx-dev)
@@ -179,11 +179,13 @@ Build Environment Variables
 | GOOGLE_FUNCTION_SOURCE | gcp_cotrip_translator.py | GCP function script name at root of Work_Zone |
 
 Runtime Environment Variables
-| Name                          |            Value            |                                              Description |
-| :---------------------------- | :-------------------------: | -------------------------------------------------------: |
-| unsupported_messages_topic_id | unsupported_messages_cotrip | pub/sub topic id to send unsupported/invalid messages to |
-| project_id                    |     cdot-oim-wzdx-prod      |                                           GCP project ID |
-| wzdx_topic_id                 |    wzdx_messages_cotrip     |                          Generated WZDx pub/sub topic ID |
+| Name                          |                    Value                    |                                              Description |
+| :---------------------------- | :-----------------------------------------: | -------------------------------------------------------: |
+| unsupported_messages_topic_id |         unsupported_messages_cotrip         | pub/sub topic id to send unsupported/invalid messages to |
+| project_id                    |             cdot-oim-wzdx-prod              |                                           GCP project ID |
+| wzdx_topic_id                 |            wzdx_messages_cotrip             |                          Generated WZDx pub/sub topic ID |
+| rtdh_project_id               |               cdot-rtdh-prod                |                    Real time data hub project identifier |
+| rtdh_cotrip_alerts_topic_id   | cotrip-alerts-standard-oim-wzdx-integration |                   Cotrip alerts topic id within the RTDH |
 
 ### NavJOY 568: navjoy-568-translator
 Build Environment Variables
