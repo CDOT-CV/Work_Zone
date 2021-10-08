@@ -68,7 +68,7 @@ A system was created in google cloud platform to automatically translate iCone d
 
 
 #### Deployment
-The azure functions are deployed automatically by an azure pipeline (https://dev.azure.com/SOC-OIT/CDOT/_build?definitionId=961). This pipeline is described in [azure-pipelines.yml](azure-pipelines.yml)
+The azure functions are deployed automatically by an azure pipeline (https://dev.azure.com/SOC-OIT/CDOT/_build?definitionId=961), which is triggered on commits and PRs. This pipeline is described in [azure-pipelines.yml](azure-pipelines.yml)
 
 ### Documentation
 
