@@ -23,12 +23,13 @@ Requires:
 
 Build
 ```
-python setup.py sdist bdist_wheel
+pip install build
+python -m build
 ```
 
 Import
 ```
-pip install git+https://github.com/CDOT-CV/Work_Zone@test-package
+pip install git+https://github.com/CDOT-CV/Work_Zone@dev
 ```
 
 ## Environment Setup
