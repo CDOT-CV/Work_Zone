@@ -4,10 +4,19 @@
 # https://aka.ms/yaml
 
 trigger:
-- 64097-GCP-hosting
+- dev
 
 pool:
   vmImage: ubuntu-latest
+
+variables:
+  icone_project_name: 'cdot-oim-wzdx-dev'
+  cotrip_project_name: 'cdot-oim-wzdx-prod'
+  navjoy_project_name: 'cdot-oim-wzdx-dev'
+
+  icone_function_name: 'auto_icone_translator_ftp'
+  cotrip_function_name: 'salesforce-data'
+  navjoy_function_name: 'navjoy-568-translator'
 
 steps:
 
@@ -18,20 +27,19 @@ steps:
     secureFile: 'GoogleServiceAccountKey.json'
     retryCount: '2'
 
-# - script:
-#     gcloud auth activate-service-account --key-file $(authkey.secureFilePath)
-#     gcloud functions deploy auto_icone_translator_ftp--region=us-central1 --project=cdot-oim-wzdx-dev
-#   displayName: 'deploy icone function'
+- script:
+    gcloud auth activate-service-account --key-file $(authkey.secureFilePath)
+    
+    gcloud functions deploy $(icone_function_name) --region=us-central1 --project=$(icone_project_name)
+  displayName: 'deploy icone function'
 
 # - script:
 #     gcloud auth activate-service-account --key-file $(authkey.secureFilePath)
-#     gcloud functions deploy salesforce-data --runtime--region=us-central1 --project=cdot-oim-wzdx-prod
+#     gcloud functions deploy $(cotrip_function_name) --region=us-central1 --project=$(cotrip_project_name)
 #   displayName: 'deploy cotrip function'
 
 - script:
     gcloud auth activate-service-account --key-file $(authkey.secureFilePath)
-
-
     
-    gcloud functions deploy navjoy-568-translator --region=us-central1 --project=cdot-oim-wzdx-dev
+    gcloud functions deploy $(navjoy_function_name) --region=us-central1 --project=$(navjoy_project_name)
   displayName: 'deploy navjoy function'

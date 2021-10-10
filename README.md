@@ -2,9 +2,9 @@
 Work zone code and documentation for WZDx, iCone, etc.
 
 
-| Build       | Quality Gate     | Code Coverage     |
-| :------------- | :----------: | -----------: |
-| [![Build Status](https://travis-ci.com/CDOT-CV/Work_Zone.svg?branch=dev)](https://travis-ci.com/CDOT-CV/Work_Zone)| [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?branch=dev&project=CDOT-CV_Work_Zone&metric=alert_status)](https://sonarcloud.io/dashboard?id=CDOT-CV_Work_Zone&branch=dev) | [![Coverage](https://sonarcloud.io/api/project_badges/measure?branch=dev&project=CDOT-CV_Work_Zone&metric=coverage)](https://sonarcloud.io/dashboard?id=CDOT-CV_Work_Zone&branch=dev)   |
+| Build                                                                                                              |                                                                                             Quality Gate                                                                                             |                                                                                                                                                                         Code Coverage |
+| :----------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| [![Build Status](https://travis-ci.com/CDOT-CV/Work_Zone.svg?branch=dev)](https://travis-ci.com/CDOT-CV/Work_Zone) | [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?branch=dev&project=CDOT-CV_Work_Zone&metric=alert_status)](https://sonarcloud.io/dashboard?id=CDOT-CV_Work_Zone&branch=dev) | [![Coverage](https://sonarcloud.io/api/project_badges/measure?branch=dev&project=CDOT-CV_Work_Zone&metric=coverage)](https://sonarcloud.io/dashboard?id=CDOT-CV_Work_Zone&branch=dev) |
 
 
 
@@ -31,6 +31,8 @@ This code requires Python 3.6 or a higher version. If you haven’t already, dow
 ```
 pip install -r requirements.txt
 ```
+
+
 
 
 
@@ -63,6 +65,10 @@ A system was created in google cloud platform to automatically translate iCone d
 
 
 ![alt text](translator/GCP_cloud_function/iCone%20Translator%20block%20diagram.png)
+
+
+#### Deployment
+The azure functions are deployed automatically by an azure pipeline (https://dev.azure.com/SOC-OIT/CDOT/_build?definitionId=961), which is triggered on commits and PRs. This pipeline is described in [azure-pipelines.yml](azure-pipelines.yml)
 
 ### Documentation
 
