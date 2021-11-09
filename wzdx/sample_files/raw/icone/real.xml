@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf8'?>
+<incident id="1245">
+    <creationtime>2019-11-05T01:22:20Z</creationtime>
+    <updatetime>2021-11-05T19:56:03Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>19-1245: Roadwork between MP 40 and MP 48</description>
+    <location>
+        <street>I-75 N</street>
+        <direction>ONE_DIRECTION</direction>
+        <polyline>37.1686478,-84.1238971,37.1686478,-84.1238971,37.1913000,-84.1458610,37.1913000,-84.1458610,37.2011970,-84.1571050,37.2060790,-84.1670330,37.2193100,-84.2040740</polyline>
+    </location>
+    <starttime>2021-06-08T20:15:01Z</starttime>
+</incident>

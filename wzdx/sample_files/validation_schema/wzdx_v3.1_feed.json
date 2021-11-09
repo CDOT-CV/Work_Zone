@@ -64,7 +64,7 @@
                     "minimum": 1
                 },
                 "update_date": {
-                    "description": "The UTC date and time when the data feed was last updated",
+                    "description": "The UTC date and time when the GeoJSON file (representing the instance of the feed) was generated",
                     "type": "string",
                     "format": "date-time"
                 },
@@ -166,7 +166,7 @@
             "description": "The container object for a WZDx road event; an instance of a GeoJSON Feature",
             "type": "object",
             "properties": {
-                "road_event_id": {
+                "id": {
                     "description": "A unique identifier issued by the data feed provider to identify the WZDx road event",
                     "type": "string"
                 },
@@ -205,7 +205,7 @@
                 },
                 {
                     "required": [
-                        "road_event_id"
+                        "id"
                     ]
                 }
             ],

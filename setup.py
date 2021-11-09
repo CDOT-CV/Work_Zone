@@ -1,18 +1,20 @@
+import pathlib
 from setuptools import setup, find_packages
 
-VERSION = '0.0.1'
+VERSION = '0.1.1'
 DESCRIPTION = 'CDOT Work Zone WZDx Translators'
-LONG_DESCRIPTION = 'WZDx v3.1 translators from iCone, COTrip/Salesforce, and navjoy 568'
+HERE = pathlib.Path(__file__).parent
+README = (HERE / "README.md").read_text()
 
 # Setting up
 setup(
     # the name must match the folder name 'verysimplemodule'
-    name="wzdx-translator",
+    name="wzdx-translator-jacob6838",
     version=VERSION,
     author="Jacob Frye",
     author_email="jfrye@neaeraconsulting.com",
     description=DESCRIPTION,
-    long_description=LONG_DESCRIPTION,
+    long_description=README,
     packages=find_packages(exclude=("wzdx")),
     install_requires=[
         'xmltodict',
