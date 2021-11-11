@@ -27,9 +27,14 @@ pip install build
 python -m build
 ```
 
+Upload (Requires PyPi account)
+```
+python -m twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
+```
+
 Import
 ```
-pip install git+https://github.com/CDOT-CV/Work_Zone@dev
+pip install wzdx-translator-jacob6838
 ```
 
 ## Environment Setup

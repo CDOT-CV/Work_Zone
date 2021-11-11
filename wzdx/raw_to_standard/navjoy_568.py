@@ -2,13 +2,11 @@ from collections import OrderedDict
 import json
 import time
 import uuid
-import xmltodict
 import argparse
 import logging
+import copy
 
-import xml.etree.ElementTree as ET
-
-from wzdx.tools import wzdx_translator, polygon_tools, date_tools
+from wzdx.tools import polygon_tools, date_tools, array_tools
 
 from wzdx.util.transformations import rfc_to_unix
 from wzdx.util.transformations import int_or_none
@@ -18,12 +16,72 @@ from wzdx.util.collections import PathDict
 PROGRAM_NAME = 'Navjoy568RawToStandard'
 PROGRAM_VERSION = '1.0'
 
+STRING_DIRECTION_MAP = {'north': 'northbound', 'south': 'southbound',
+                        'west': 'westbound', 'east': 'eastbound'}
+
+REVERSED_DIRECTION_MAP = {'northbound': 'southbound', 'southbound': 'northbound',
+                          'eastbound': 'westbound', 'westbound': 'eastbound'}
+
+CORRECT_KEY_NAMES = {
+    'street_name': 'streetNameFrom',
+    'mile_marker_start': 'mileMarkerStart',
+    'mile_marker_end': 'mileMarkerEnd',
+    'directions_of_traffic': 'directionOfTraffic',
+    'current_posted_speed': 'currentPostedSpeed',
+    'reduced_speed_limit': 'requestedTemporarySpeed',
+    'start_date': 'workStartDate',
+    'end_date': 'workEndDate',
+}
+
+NUMBERED_KEY_NAMES = [
+    {
+        'street_name': 'streetNameFrom',
+        'mile_marker_start': 'mileMarkerStart',
+        'mile_marker_end': 'mileMarkerEnd',
+        'directions_of_traffic': 'directionOfTraffic',
+        'current_posted_speed': 'currentPostedSpeed',
+        'reduced_speed_limit': 'requestedTemporarySpeed',
+        'start_date': 'workStartDate',
+        'end_date': 'workEndDate',
+    },
+    {
+        'street_name': 'streetNameFrom2',
+        'mile_marker_start': 'mileMarkerStart2',
+        'mile_marker_end': 'mileMarkerEnd2',
+        'directions_of_traffic': 'directionOfTraffic2',
+        'current_posted_speed': 'currentPostedSpeed2',
+        'reduced_speed_limit': 'requestedTemporarySpeed2',
+        'start_date': 'workStartDate2',
+        'end_date': 'workEndDate2',
+    },
+    {
+        'street_name': 'streetNameFrom3',
+        'mile_marker_start': 'mileMarkerStart3',
+        'mile_marker_end': 'mileMarkerEnd3',
+        'directions_of_traffic': 'directionOfTraffic3',
+        'current_posted_speed': 'currentPostedSpeed3',
+        'reduced_speed_limit': 'requestedTemporarySpeed3',
+        'start_date': 'workStartDate3',
+        'end_date': 'workEndDate3',
+    },
+    {
+        'street_name': 'streetNameFrom4',
+        'mile_marker_start': 'mileMarkerStart4',
+        'mile_marker_end': 'mileMarkerEnd4',
+        'directions_of_traffic': 'directionOfTraffic4',
+        'current_posted_speed': 'currentPostedSpeed4',
+        'reduced_speed_limit': 'requestedTemporarySpeed4',
+        'start_date': 'workStartDate4',
+        'end_date': 'workEndDate4',
+    }
+]
+
 
 def main():
-    input_file, output_dir = parse_rtdh_arguments()
-    input_file_contents = open(input_file, 'r').read()
+    navjoy_file, output_dir = parse_rtdh_arguments()
+    input_file_contents = open(navjoy_file, 'r').read()
     generated_messages = generate_standard_messages_from_string(
-        input_file_contents, output_dir)
+        input_file_contents)
 
     generated_files_list = []
     for message in generated_messages:
@@ -39,7 +97,78 @@ def main():
             "Standard message generation failed. See messages printed above")
 
 
-def generate_standard_messages_from_string(input_file_contents, output_dir):
+# parse script command line arguments
+def parse_rtdh_arguments():
+    parser = argparse.ArgumentParser(
+        description='Translate NavJoy 568 data to RTDH Standard')
+    parser.add_argument('--version', action='version',
+                        version=f'{PROGRAM_NAME} {PROGRAM_VERSION}')
+    parser.add_argument('navjoyFile', help='navjoy file path')
+    parser.add_argument('--outputDir', required=False,
+                        default='./', help='output directory')
+
+    args = parser.parse_args()
+    return args.navjoyFile, args.outputDir
+
+
+# take in individual message, spit out list of altered unique messages to be translated
+# This function iterates over the list of NUMBERED_KEY_NAMES and correlates them to CORRECT_KEY_NAMES. For each
+# set of numbered key names, generate a copy of the original message, check if the numbered keys exist, if they do
+# then copy those values to the leys in CORRECT_KEY_NAMES. After, if directionOfTraffic yields more than one direction,
+# generate a new message for each direction and save them with the key 'direction'
+
+# TODO: consider deleting all numbered keys after they are copied
+# TODO: consider removing duplicate messages
+def expand_speed_zone(message):
+    messages = []
+
+    for key_set in NUMBERED_KEY_NAMES:
+        if not message.get('data', {}).get(key_set['street_name']):
+            continue
+        new_message = copy.deepcopy(message)
+        for key, value in key_set.items():
+            new_message.get('data', {})[CORRECT_KEY_NAMES[key]] = message.get(
+                'data', {}).get(value)
+
+        directions = new_message.get('data', {}).get('directionOfTraffic')
+        for direction in get_directions_from_string(directions):
+            new_message_dir = copy.deepcopy(new_message)
+            if new_message_dir.get('data', {}).get('directionOfTraffic'):
+                del new_message_dir.get('data', {})['directionOfTraffic']
+            new_message_dir.get('data', {})['direction'] = direction
+            messages.append(new_message_dir)
+    return messages
+
+
+def get_linestring_index(map):
+    for i in range(len(map)):
+        if map[i].get("type") == "LineString":
+            return i
+
+
+def get_polygon_index(map):
+    for i in range(len(map)):
+        if map[i].get("type") == "Polygon":
+            return i
+
+
+def get_directions_from_string(directions_string) -> list:
+    if not directions_string or type(directions_string) != str:
+        return []
+
+    directions = []
+
+    # iterate over directions and convert short direction names to WZDx enum directions
+    directions_string = directions_string.strip()
+    for dir in directions_string.split('/'):
+        direction = STRING_DIRECTION_MAP.get(dir.lower())
+        if direction:
+            directions.append(direction)
+
+    return directions
+
+
+def generate_standard_messages_from_string(input_file_contents):
     raw_messages = generate_raw_messages(input_file_contents)
     standard_messages = []
     for message in raw_messages:
@@ -54,11 +183,13 @@ def generate_raw_messages(message_string, invalid_messages_callback=None):
 
     # Loop through all elements and print each element to PubSub
     for obj in msg_lst:
-        if not validate_closure(obj):
-            if invalid_messages_callback:
-                invalid_messages_callback(obj)
-        else:
-            messages.append(obj)
+        separated_messages = expand_speed_zone(obj)
+        for msg in separated_messages:
+            if not validate_closure(msg):
+                if invalid_messages_callback:
+                    invalid_messages_callback(msg)
+            else:
+                messages.append(msg)
 
     return messages
 
@@ -82,69 +213,54 @@ def get_polygon_index(map):
             return i
 
 
-# parse script command line arguments
-def parse_rtdh_arguments():
-    parser = argparse.ArgumentParser(
-        description='Translate NavJoy 568 data to RTDH Standard')
-    parser.add_argument('--version', action='version',
-                        version=f'{PROGRAM_NAME} {PROGRAM_VERSION}')
-    parser.add_argument('iconeFile', help='icone file path')
-    parser.add_argument('--outputDir', required=False,
-                        default='./', help='output directory')
-
-    args = parser.parse_args()
-    return args.iconeFile, args.outputDir
-
-
 def create_rtdh_standard_msg(pd):
+    map = pd.get("data/srzmap", default=[])
+    index = get_linestring_index(map)
+    if index != None:
+        coordinates = map[index].get("coordinates")
+        coordinates = array_tools.get_2d_list(coordinates)
+    else:
+        index = get_polygon_index(map)
+        if index != None:
+            polygon = map[index].get("coordinates")
+            coordinates = array_tools.get_2d_list(polygon)
+            if coordinates:
+                coordinates = polygon_tools.polygon_to_polyline_center(
+                    coordinates)
+
+    direction = pd.get("data/direction", default='unknown')
+
+    # Reverse polygon if it is in the opposite direction as the message
+    polyline_direction = polygon_tools.get_road_direction_from_coordinates(
+        coordinates)
+    if direction == REVERSED_DIRECTION_MAP.get(polyline_direction):
+        coordinates.reverse()
+
     return {
         "rtdh_timestamp": time.time(),
         "rtdh_message_id": str(uuid.uuid4()),
         "event": {
-            "type": pd.get("incident/type", default=""),
+            "type": pd.get("data/constructionType", default=""),
             "source": {
-                "id": pd.get("incident/@id", default=""),
-                "last_updated_timestamp": pd.get("incident/updatetime", rfc_to_unix, default=0),
+                "id": pd.get("sys_gUid", default=""),
+                "last_updated_timestamp": time.time(),
             },
-            "geometry": pd.get("incident/location/polyline", parse_polyline),
+            "geometry": coordinates,
             "header": {
-                "description": pd.get("incident/description", default=""),
-                "start_timestamp": pd.get("incident/starttime", rfc_to_unix, default=None),
-                "end_timestamp": pd.get("incident/endtime", rfc_to_unix, default=None)
+                "description": pd.get("data/description", default=""),
+                "start_timestamp": pd.get("data/workStartDate", date_tools.parse_datetime_from_iso_string, default=None),
+                "end_timestamp": pd.get("data/workEndDate", date_tools.parse_datetime_from_iso_string, default=None)
             },
             "detail": {
-                "road_name": pd.get("incident/location/street"),
-                "road_number": pd.get("incident/location/street"),
-                "direction": get_direction(pd.get("incident/location/street"), pd.get("incident/location/polyline"))
+                "road_name": pd.get("data/streetNameFrom"),
+                "road_number": pd.get("data/streetNameFrom"),
+                "direction": direction
             },
             # "additional_info": [
             #
             # ]
         }
     }
-
-
-def get_direction(street, coords):
-    direction = wzdx_translator.parse_direction_from_street_name(street)
-    if not direction:
-        direction = polygon_tools.get_road_direction_from_coordinates(coords)
-    return direction
-
-
-# function to parse polyline to geometry line string
-def parse_polyline(polylinestring):
-    if not polylinestring or type(polylinestring) != str:
-        return None
-    # polyline rightnow is a list which has an empty string in it.
-    polyline = polylinestring.split(',')
-    coordinates = []
-    for i in range(0, len(polyline)-1, 2):
-        try:
-            coordinates.append([float(polyline[i + 1]), float(polyline[i])])
-        except ValueError as e:
-            logging.warning('failed to parse polyline!')
-            return []
-    return coordinates
 
 
 def validate_closure(obj):

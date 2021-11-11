@@ -23,7 +23,7 @@ def main():
     input_file, output_dir = parse_rtdh_arguments()
     input_file_contents = open(input_file, 'r').read()
     generated_messages = generate_standard_messages_from_string(
-        input_file_contents, output_dir)
+        input_file_contents)
 
     generated_files_list = []
     for message in generated_messages:
@@ -39,7 +39,7 @@ def main():
             "Standard message generation failed. See messages printed above")
 
 
-def generate_standard_messages_from_string(input_file_contents, output_dir):
+def generate_standard_messages_from_string(input_file_contents):
     raw_messages = generate_raw_messages(input_file_contents)
     standard_messages = []
     for message in raw_messages:
