@@ -39,6 +39,13 @@ def parse_datetime_from_unix(time):
         return datetime.fromtimestamp(time, tz=timezone.utc)
 
 
+def date_to_unix(time: datetime):
+    if not time or type(time) != datetime:
+        return None
+
+    return time.timestamp() * 1000
+
+
 # function to get event status from start and end datetimes
 def get_event_status(start_time, end_time):
     if not start_time or type(start_time) != dt.datetime:

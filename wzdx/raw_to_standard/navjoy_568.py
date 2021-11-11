@@ -236,6 +236,11 @@ def create_rtdh_standard_msg(pd):
     if direction == REVERSED_DIRECTION_MAP.get(polyline_direction):
         coordinates.reverse()
 
+    start_date = pd.get("data/workStartDate",
+                        date_tools.parse_datetime_from_iso_string)
+    end_date = pd.get("data/workStartDate",
+                      date_tools.parse_datetime_from_iso_string)
+
     return {
         "rtdh_timestamp": time.time(),
         "rtdh_message_id": str(uuid.uuid4()),
@@ -247,14 +252,15 @@ def create_rtdh_standard_msg(pd):
             },
             "geometry": coordinates,
             "header": {
-                "description": pd.get("data/description", default=""),
-                "start_timestamp": pd.get("data/workStartDate", date_tools.parse_datetime_from_iso_string, default=None),
-                "end_timestamp": pd.get("data/workEndDate", date_tools.parse_datetime_from_iso_string, default=None)
+                "description": pd.get("data/descriptionForProject", default=""),
+                "justification": pd.get("data/reductionJustification"),
+                "start_timestamp": date_tools.date_to_unix(start_date),
+                "end_timestamp": date_tools.date_to_unix(end_date),
             },
             "detail": {
                 "road_name": pd.get("data/streetNameFrom"),
                 "road_number": pd.get("data/streetNameFrom"),
-                "direction": direction
+                "direction": direction,
             },
             # "additional_info": [
             #

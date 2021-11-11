@@ -12,66 +12,6 @@ PROGRAM_VERSION = '1.0'
 
 DEFAULT_NAVJOY_FEED_INFO_ID = '2ed141dc-b998-4f7a-8395-9ae9dc7df2f8'
 
-STRING_DIRECTION_MAP = {'north': 'northbound', 'south': 'southbound',
-                        'west': 'westbound', 'east': 'eastbound'}
-
-REVERSED_DIRECTION_MAP = {'northbound': 'southbound', 'southbound': 'northbound',
-                          'eastbound': 'westbound', 'westbound': 'eastbound'}
-
-CORRECT_KEY_NAMES = {
-    'street_name': 'streetNameFrom',
-    'mile_marker_start': 'mileMarkerStart',
-    'mile_marker_end': 'mileMarkerEnd',
-    'directions_of_traffic': 'directionOfTraffic',
-    'current_posted_speed': 'currentPostedSpeed',
-    'reduced_speed_limit': 'requestedTemporarySpeed',
-    'start_date': 'workStartDate',
-    'end_date': 'workEndDate',
-}
-
-NUMBERED_KEY_NAMES = [
-    {
-        'street_name': 'streetNameFrom',
-        'mile_marker_start': 'mileMarkerStart',
-        'mile_marker_end': 'mileMarkerEnd',
-        'directions_of_traffic': 'directionOfTraffic',
-        'current_posted_speed': 'currentPostedSpeed',
-        'reduced_speed_limit': 'requestedTemporarySpeed',
-        'start_date': 'workStartDate',
-        'end_date': 'workEndDate',
-    },
-    {
-        'street_name': 'streetNameFrom2',
-        'mile_marker_start': 'mileMarkerStart2',
-        'mile_marker_end': 'mileMarkerEnd2',
-        'directions_of_traffic': 'directionOfTraffic2',
-        'current_posted_speed': 'currentPostedSpeed2',
-        'reduced_speed_limit': 'requestedTemporarySpeed2',
-        'start_date': 'workStartDate2',
-        'end_date': 'workEndDate2',
-    },
-    {
-        'street_name': 'streetNameFrom3',
-        'mile_marker_start': 'mileMarkerStart3',
-        'mile_marker_end': 'mileMarkerEnd3',
-        'directions_of_traffic': 'directionOfTraffic3',
-        'current_posted_speed': 'currentPostedSpeed3',
-        'reduced_speed_limit': 'requestedTemporarySpeed3',
-        'start_date': 'workStartDate3',
-        'end_date': 'workEndDate3',
-    },
-    {
-        'street_name': 'streetNameFrom4',
-        'mile_marker_start': 'mileMarkerStart4',
-        'mile_marker_end': 'mileMarkerEnd4',
-        'directions_of_traffic': 'directionOfTraffic4',
-        'current_posted_speed': 'currentPostedSpeed4',
-        'reduced_speed_limit': 'requestedTemporarySpeed4',
-        'start_date': 'workStartDate4',
-        'end_date': 'workEndDate4',
-    }
-]
-
 
 def main():
     inputfile, outputfile = parse_navjoy_arguments()
@@ -109,8 +49,8 @@ def parse_navjoy_arguments():
     return args.navjoyFile, args.outputFile
 
 
-def wzdx_creator(messages, info=None, unsupported_message_callback=None):
-    if not messages:
+def wzdx_creator(message, info=None):
+    if not message:
         return None
    # verify info obj
     if not info:
@@ -120,14 +60,9 @@ def wzdx_creator(messages, info=None, unsupported_message_callback=None):
 
     wzd = wzdx_translator.initialize_wzdx_object(info)
 
-    for message in messages:
-
-        separated_messages = expand_speed_zone(message)
-        for msg in separated_messages:
-            feature = parse_reduction_zone(
-                msg, callback_function=unsupported_message_callback)
-            if feature:
-                wzd.get('features').append(feature)
+    feature = parse_reduction_zone(message)
+    if feature:
+        wzd.get('features').append(feature)
 
     if not wzd.get('features'):
         return None
@@ -135,128 +70,43 @@ def wzdx_creator(messages, info=None, unsupported_message_callback=None):
     return wzd
 
 
-# take in individual message, spit out list of altered unique messages to be translated
-# This function iterates over the list of NUMBERED_KEY_NAMES and correlates them to CORRECT_KEY_NAMES. For each
-# set of numbered key names, generate a copy of the original message, check if the numbered keys exist, if they do
-# then copy those values to the leys in CORRECT_KEY_NAMES. After, if directionOfTraffic yields more than one direction,
-# generate a new message for each direction and save them with the key 'direction'
+# Parse standard Navjoy 568 form to WZDx
+def parse_reduction_zone(incident):
 
-# TODO: consider deleting all numbered keys after they are copied
-# TODO: consider removing duplicate messages
-def expand_speed_zone(message):
-    messages = []
+    event = incident.get('event')
 
-    for key_set in NUMBERED_KEY_NAMES:
-        if not message.get('data', {}).get(key_set['street_name']):
-            continue
-        new_message = copy.deepcopy(message)
-        for key, value in key_set.items():
-            new_message.get('data', {})[CORRECT_KEY_NAMES[key]] = message.get(
-                'data', {}).get(value)
-
-        directions = new_message.get('data', {}).get('directionOfTraffic')
-        for direction in get_directions_from_string(directions):
-            new_message_dir = copy.deepcopy(new_message)
-            if new_message_dir.get('data', {}).get('directionOfTraffic'):
-                del new_message_dir.get('data', {})['directionOfTraffic']
-            new_message_dir.get('data', {})['direction'] = direction
-            messages.append(new_message_dir)
-    return messages
-
-
-def get_linestring_index(map):
-    for i in range(len(map)):
-        if map[i].get("type") == "LineString":
-            return i
-
-
-def get_polygon_index(map):
-    for i in range(len(map)):
-        if map[i].get("type") == "Polygon":
-            return i
-
-
-def get_directions_from_string(directions_string) -> list:
-    if not directions_string or type(directions_string) != str:
-        return []
-
-    directions = []
-
-    # iterate over directions and convert short direction names to WZDx enum directions
-    directions_string = directions_string.strip()
-    for dir in directions_string.split('/'):
-        direction = STRING_DIRECTION_MAP.get(dir.lower())
-        if direction:
-            directions.append(direction)
-
-    return directions
-
-
-# TODO: Support additional zones per message (streetNameFrom2, ...)
-# Convert individual Navjoy 658 speed reduction zone to WZDx feature
-def parse_reduction_zone(obj, callback_function=None):
-    if not validate_closure(obj):
-        if callback_function:
-            callback_function(obj)
-        return None
-
-    data = obj.get('data', {})
-
-    map = data.get('srzmap')
-    index = get_linestring_index(map)
-    if index != None:
-        coordinates = map[index].get("coordinates")
-        coordinates = array_tools.get_2d_list(coordinates)
-    else:
-        index = get_polygon_index(map)
-        if index != None:
-            polygon = map[index].get("coordinates")
-            coordinates = array_tools.get_2d_list(polygon)
-            if coordinates:
-                coordinates = polygon_tools.polygon_to_polyline_center(
-                    coordinates)
-        else:
-            logging.warning(
-                f"Invalid event with id = {obj.get('sys_gUid')}. No polygon or linestring")
-            return None
-
-    if not coordinates:
-        logging.warning(
-            f"Invalid event with id = {obj.get('sys_gUid')}. No valid coordinates found")
-        return None
-
-    direction = data.get('direction')
-
-    # Reverse polygon if it is in the opposite direction as the message
-    polyline_direction = polygon_tools.get_road_direction_from_coordinates(
-        coordinates)
-    if direction == REVERSED_DIRECTION_MAP.get(polyline_direction):
-        coordinates.reverse()
+    source = event.get('source')
+    header = event.get('header')
+    detail = event.get('detail')
 
     geometry = {}
-    if len(coordinates) > 2:
-        geometry['type'] = "LineString"
-    else:
-        geometry['type'] = "MultiPoint"
+    geometry['type'] = "LineString"
+    geometry['coordinates'] = event.get('geometry')
+    properties = {}
 
-    geometry['coordinates'] = coordinates
-    properties = wzdx_translator.initialize_feature_properties()
+    # id
+    # Leave this empty, it will be populated by add_ids
+    properties['road_event_id'] = ''
 
     # Event Type ['work-zone', 'detour']
     properties['event_type'] = 'work-zone'
 
+    # data_source_id
+    # Leave this empty, it will be populated by add_ids
+    properties['data_source_id'] = ''
+
+    start_time = date_tools.parse_datetime_from_unix(
+        header.get('start_timestamp'))
+    end_time = date_tools.parse_datetime_from_unix(header.get('end_timestamp'))
+
     # start_date
-    start_date = date_tools.parse_datetime_from_iso_string(
-        data.get('workStartDate'))
     properties['start_date'] = date_tools.get_iso_string_from_datetime(
-        start_date)
+        start_time)
 
     # end_date
-    end_date = date_tools.parse_datetime_from_iso_string(
-        data.get('workEndDate'))
-    if end_date:
+    if end_time:
         properties['end_date'] = date_tools.get_iso_string_from_datetime(
-            end_date)
+            end_time)
     else:
         properties['end_date'] = ''
 
@@ -273,117 +123,60 @@ def parse_reduction_zone(obj, callback_function=None):
     properties['ending_accuracy'] = "estimated"
 
     # road_name
-    properties['road_names'] = [data.get('streetNameFrom')]
+    road_names = [detail.get('road_name')]
+    properties['road_names'] = road_names
 
     # direction
-    properties['direction'] = direction
+    properties['direction'] = detail.get('direction')
 
     # vehicle impact
     properties['vehicle_impact'] = get_vehicle_impact(
-        data.get('reductionJustification'))
+        header.get('justification'))
+
+    # Relationship
+    properties['relationship'] = {}
+
+    # lanes
+    properties['lanes'] = []
+
+    # beginning_cross_street
+    properties['beginning_cross_street'] = ""
+
+    # beginning_cross_street
+    properties['ending_cross_street'] = ""
 
     # event status
     properties['event_status'] = date_tools.get_event_status(
-        start_date, end_date)
+        start_time, end_time)
 
     # type_of_work
     # maintenance, minor-road-defect-repair, roadside-work, overhead-work, below-road-work, barrier-work, surface-work, painting, roadway-relocation, roadway-creation
-    projectDescription = data.get('descriptionForProject')
+    projectDescription = header.get('description')
     types_of_work = get_types_of_work(projectDescription)
     if types_of_work:
         properties['types_of_work'] = types_of_work
 
-    # reduced_speed_limit
-    properties['reduced_speed_limit'] = wzdx_translator.string_to_number(
-        data.get('requestedTemporarySpeed'))
+    # restrictions
+    properties['restrictions'] = []
 
     # description
-    reductionJustification = data.get('reductionJustification')
-    properties['description'] = data.get(
-        'descriptionForProject', '') + '. ' + reductionJustification
+    properties['description'] = header.get(
+        'description', '') + '. ' + header.get('justification', '')
 
     # creation_date
-    properties['creation_date'] = date_tools.get_iso_string_from_datetime(
-        datetime.utcnow())
+    properties['creation_date'] = date_tools.get_iso_string_from_datetime(date_tools.parse_datetime_from_unix(
+        incident.get('rtdh_timestamp')))
 
     # update_date
-    properties['update_date'] = date_tools.get_iso_string_from_datetime(
-        datetime.utcnow())
-
-    filtered_properties = copy.deepcopy(properties)
-
-    for key, value in properties.items():
-        if value == None and key not in ['road_event_id', 'data_source_id']:
-            del filtered_properties[key]
+    properties['update_date'] = date_tools.get_iso_string_from_datetime(date_tools.parse_datetime_from_unix(
+        source.get('last_updated_timestamp')))
 
     feature = {}
     feature['type'] = "Feature"
-    feature['properties'] = filtered_properties
+    feature['properties'] = properties
     feature['geometry'] = geometry
 
     return feature
-
-
-# function to validate the alert
-def validate_closure(obj):
-    if not obj or (type(obj) != dict and type(obj) != OrderedDict):
-        logging.warning('alert is empty or has invalid type')
-        return False
-
-    id = obj.get("sys_gUid")
-
-    data = obj.get('data', {})
-    street = data.get('streetNameFrom')
-
-    map = data.get('srzmap', [{}])
-    if type(map) != list or len(map) == 0:
-        logging.warning(
-            f'Invalid event with id = {id}. ConstructionWorkZonePlan object is either invalid or empty')
-
-    # TODO: Support MultiPoint
-    index = get_linestring_index(map)
-    if index != None:
-        coordinates = map[index].get("coordinates", [None])[0]
-    else:
-        index = get_polygon_index(map)
-        if index != None:
-            polygon = map[index].get("coordinates", [None])[0]
-            coordinates = polygon_tools.polygon_to_polyline_center(polygon)
-        else:
-            logging.warning(
-                f"Invalid event with id = {id}. No LineString or Polygon found")
-            return False
-
-    if not coordinates:
-        logging.warning(
-            f"Invalid event with id = {obj.get('sys_gUid')}. No valid coordinates found")
-        return False
-
-    starttime_string = data.get('workStartDate')
-    endtime_string = data.get('workEndDate')
-    description = data.get('descriptionForProject')
-    direction = data.get('direction')
-
-    required_fields = [street, starttime_string, description, direction]
-    for field in required_fields:
-        if not field:
-            logging.warning(
-                f'''Invalid event with id = {id}. not all required fields are present. Required fields are: 
-                streetNameFrom, workStartDate, and descriptionForProject''')
-            return False
-
-    start_time = date_tools.parse_datetime_from_iso_string(starttime_string)
-    end_time = date_tools.parse_datetime_from_iso_string(endtime_string)
-    if not start_time:
-        logging.error(
-            f'Invalid incident with id = {id}. Unsupported start time format: {start_time}')
-        return False
-    elif endtime_string and not end_time:
-        logging.error(
-            f'Invalid incident with id = {id}. Unsupported end time format: {end_time}')
-        return False
-
-    return True
 
 
 # function to calculate vehicle impact
