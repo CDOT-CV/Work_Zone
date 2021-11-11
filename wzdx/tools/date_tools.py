@@ -32,11 +32,22 @@ def parse_datetime_from_unix(time):
 
     if type(time) == str:
         try:
-            return datetime.fromtimestamp(float(time), tz=timezone.utc)
+            return datetime_from_unix(float(time))
         except ValueError:
             return None
     elif type(time) == int or type(time) == float:
+        return datetime_from_unix(time)
+
+
+def datetime_from_unix(time):
+    try:
+        # Fails for milliseconds
         return datetime.fromtimestamp(time, tz=timezone.utc)
+    except OSError:
+        try:
+            return datetime.fromtimestamp(time/1000, tz=timezone.utc)
+        except OSError:
+            return None
 
 
 def date_to_unix(time: datetime):

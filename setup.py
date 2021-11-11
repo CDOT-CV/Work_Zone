@@ -1,7 +1,7 @@
 import pathlib
 from setuptools import setup, find_packages
 
-VERSION = '0.1.2'
+VERSION = '0.2.0'
 DESCRIPTION = 'CDOT Work Zone WZDx Translators'
 HERE = pathlib.Path(__file__).parent
 README = (HERE / "README.md").read_text()
@@ -15,7 +15,7 @@ setup(
     author_email="jfrye@neaeraconsulting.com",
     description=DESCRIPTION,
     long_description=README,
-    packages=find_packages(exclude=("wzdx")),
+    packages=find_packages(exclude=["tests"]),
     install_requires=[
         'xmltodict',
         'jsonschema',

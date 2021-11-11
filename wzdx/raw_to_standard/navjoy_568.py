@@ -5,6 +5,7 @@ import uuid
 import argparse
 import logging
 import copy
+from datetime import datetime
 
 from wzdx.tools import polygon_tools, date_tools, array_tools
 
@@ -121,9 +122,12 @@ def parse_rtdh_arguments():
 # TODO: consider removing duplicate messages
 def expand_speed_zone(message):
     messages = []
-
     for key_set in NUMBERED_KEY_NAMES:
+        # print(key_set)
         if not message.get('data', {}).get(key_set['street_name']):
+            # print(key_set['street_name'])
+            # # print(message.get('data', {}))
+            # print("EXITING")
             continue
         new_message = copy.deepcopy(message)
         for key, value in key_set.items():
@@ -194,8 +198,7 @@ def generate_raw_messages(message_string, invalid_messages_callback=None):
     return messages
 
 
-def generate_rtdh_standard_message_from_raw_single(raw_message_xml):
-    obj = to_dict(raw_message_xml)
+def generate_rtdh_standard_message_from_raw_single(obj):
     pd = PathDict(obj)
     standard_message = create_rtdh_standard_msg(pd)
     return standard_message
