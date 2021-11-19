@@ -94,7 +94,7 @@ def create_rtdh_standard_msg(pd):
         "event": {
             "type": pd.get("incident/type", default=""),
             "source": {
-                "id": pd.get("incident/@id", int_or_none, default=""),
+                "id": pd.get("incident/@id", default=""),
                 "last_updated_timestamp": pd.get("incident/updatetime", rfc_to_unix, default=0),
             },
             "geometry": pd.get("incident/location/polyline", parse_polyline),
