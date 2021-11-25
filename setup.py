@@ -1,7 +1,7 @@
 import pathlib
 from setuptools import setup, find_packages
 
-VERSION = {{__BuildNumber__}}
+VERSION = "0.2.2"
 DESCRIPTION = 'CDOT Work Zone WZDx Translators'
 HERE = pathlib.Path(__file__).parent
 README = (HERE / "README.md").read_text()
