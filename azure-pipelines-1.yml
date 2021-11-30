@@ -24,10 +24,10 @@ steps:
     pip install -r requirements.txt
   displayName: 'Install dependencies'
 
-# - script: |
-#     pip install pytest
-#     python -m pytest 'tests/'
-#   displayName: 'Run Tests'
+- script: |
+    pip install pytest
+    python -m pytest 'tests/'
+  displayName: 'Run Tests'
 
 - script: |
     pip install build
