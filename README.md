@@ -218,6 +218,10 @@ Runtime Environment Variables
 | navjoy_568_endpoint           | https://proxy.assetgov.com/napi/open-api/Form568?api_key=d0c2feba6d38df6fdd284d370cbd69636f337d48&limit=1000&skip=0 |                     GCP script name at root of Work_Zone |
 
 
+
+#### Deployment
+The azure functions are deployed automatically by an azure pipeline (https://dev.azure.com/SOC-OIT/CDOT/_build?definitionId=961), which is triggered on commits and PRs. This pipeline is described in [azure-pipelines.yml](azure-pipelines.yml)
+
 ### Documentation
 
 documentation for iCone to WZDx translator is located here: [docs](wzdx/docs)
