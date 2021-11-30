@@ -1,0 +1,55 @@
+The assets XML is a report of all current status information for units that are accessible to a given user - generally
+as defined by access on iconetraffic.com.
+
+optional configurations:
+ - displayed timezone (Default=GMT/UTC) :: all timestamps are provided in ISO 8601 format.
+ - activeONLY (Default=true) :: whether or not units that are currently OFF are included in the feed.
+ - oldestLocMin (Default=1440/24 hours) :: the oldest possible GPS location to include in the feed.
+ - oldestEvtMin (Default=720/12 hours) :: the oldest possible Event/Status to include in the feed.
+ - mustHaveLoc (Default=false) :: whether or not units that have a current status, but not a current GPS
+	location are included in the feed.
+
+"Assets" element - list of all iCone Connected Tech units
+	:"time" attribute - the timestamp for when this XML was generated
+	:"user" attribute - the specific iconetraffic.com username this XML was generated for
+	:"asset" child elements
+
+"asset" element - an individual iCone Connected Tech units
+	:"road_event_id" attribute - the unique device serial number for the unit
+	:"name" attribute - the user defined name for the unit
+	:"grpID" attribute - the unique id for the set of units this unit currently belongs to
+	:"grpName" attribute - the defined name for the grpID
+	:"status" child elements
+
+"status" element - a current status of the unit
+	:"starttime" attribute - the timestamp that the current status first became true
+	:"updated" attribute - the timestamp for the last time this status was confirmed
+	:"lat" attribute - the reported GPS latitude of the unit
+	:"lng" attribute - the reported GPS longitude of the unit
+	:"loctime" attribute - the timestamp of the reported GPS lat/lng
+	:"arrow" attribute - the reported state of an arrow board, if available for this unit:
+		* OFF
+		* Caution - Bar
+		* Caution - Corners
+		* Caution - Diamonds
+		* Left Arrow
+		* Left Chevron
+		* Right Arrow
+		* Right Chevron
+		* Double Arrow
+	:"beacon" attribute - the reported state of a beacon, if available for this unit:
+		* OFF
+		* ACTIVE
+	:"flashers" attribute - the reported state of flashers, if available for this unit:
+		* OFF
+		* ACTIVE
+	:"updown" attribute - the reported state of an up/down switch, if available for this unit:
+		* Down
+		* Up
+	:"tma" attribute - the reported state of a TMA stowed/deployed switch, if available for this unit:
+		* Stowed
+		* Deployed
+	:"signal" attribute - the reported state of a portable traffic signal, if available for this unit:
+		* OFF
+		* ACTIVE
+		* FAULT

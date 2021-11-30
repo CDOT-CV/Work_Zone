@@ -1,0 +1,15 @@
+[build-system]
+requires = [
+    "setuptools>=42",
+    "wheel",
+    "xmltodict",
+    "jsonschema",
+    "python-dateutil",
+    "shapely",
+    "geopy",
+    "pyproj",
+    "numpy",
+    "requests",
+    "pytz"
+]
+build-backend = "setuptools.build_meta"

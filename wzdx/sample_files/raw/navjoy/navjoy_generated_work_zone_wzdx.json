@@ -1,0 +1,2054 @@
+{
+    "road_event_feed_info": {
+        "data_sources": [
+            {
+                "update_frequency": 0,
+                "data_source_id": "RE-001",
+                "organization_name": "Navjoy",
+                "location_method": "channel-device-method"
+            }
+        ],
+        "license": "www.navjoy.com",
+        "publisher": "CDOT Region 1 agency",
+        "version": "1.0.2",
+        "contact_name": "Navin Nageli",
+        "contact_email": "nnageli@navjoyinc.com"
+    },
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "id": "RE-00001",
+            "type": "Feature",
+            "properties": {
+                "data_source_id": "1",
+                "direction": "eastbound",
+                "road_names": [
+                    "Street 1",
+                    "Street 2",
+                    "Street 3"
+                ],
+                "beginning_milepost": 2,
+                "ending_milepost": 3,
+                "types_of_work": [
+                    {
+                        "id": "9877cd06-eda9-4e85-9cc1-a08194e5b1e1",
+                        "type_name": "barrier-work",
+                        "is_architectural_change": true
+                    }
+                ],
+                "creation_date": "2021-07-17T06:30:15.607Z",
+                "update_date": "2021-07-17T06:30:16.909Z",
+                "lanes": [
+                    {
+                        "id": "30b1c2c9-47c8-4f1c-a158-cac27a2e4b69",
+                        "order": 1,
+                        "type": "right-turning-lane",
+                        "status": "shift-left",
+                        "lane_number": 1,
+                        "restrictions": [
+                            {
+                                "restriction_type": "gross-weight-limit",
+                                "restriction_value": 120,
+                                "restriction_units": "pounds"
+                            },
+                            {
+                                "restriction_type": "axle-load-limit",
+                                "restriction_value": 1,
+                                "restriction_units": "pounds"
+                            },
+                            {
+                                "restriction_type": "travel-peak-hours-only",
+                                "restriction_value": "",
+                                "restriction_units": "feet"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "9364906b-c85d-49b5-8f7a-fffba9693433",
+                        "order": 2,
+                        "type": "left-turning-lane",
+                        "status": "closed",
+                        "lane_number": 22,
+                        "restrictions": [
+                            {
+                                "restriction_type": "axle-load-limit",
+                                "restriction_value": "",
+                                "restriction_units": "centimeters"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "5e1015fd-1796-422f-8e88-3c2971ebb213",
+                        "order": 3,
+                        "type": "left-turning-lane",
+                        "status": "closed",
+                        "lane_number": 3,
+                        "restrictions": [
+                            {
+                                "restriction_type": "",
+                                "restriction_value": "",
+                                "restriction_units": null
+                            }
+                        ]
+                    }
+                ],
+                "workers_present": true,
+                "start_date": "2021-07-17T05:39:37.771Z",
+                "end_date": "2021-07-17T05:39:39.625Z",
+                "restrictions": [
+                    "reduced-weight",
+                    "no-parking",
+                    "reduced-length",
+                    "reduced-height",
+                    "reduced-width"
+                ],
+                "reduced_speed_limit": 45,
+                "vehicle_impact": "some-lanes-closed",
+                "event_status": "planned",
+                "event_type": "work-zone",
+                "start_date_accuracy": "verified",
+                "end_date_accuracy": "verified",
+                "beginning_accuracy": "estimated",
+                "ending_accuracy": "estimated"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -105.00956092909749,
+                        39.78337735724475
+                    ],
+                    [
+                        -105.00840401870038,
+                        39.783284261330024
+                    ],
+                    [
+                        -105.00764407523745,
+                        39.78321589969204
+                    ],
+                    [
+                        -105.00707725082361,
+                        39.783139293178046
+                    ],
+                    [
+                        -105.0068752068358,
+                        39.78315337951431
+                    ],
+                    [
+                        -105.0054089640903,
+                        39.78322277618365
+                    ],
+                    [
+                        -105.00437187478714,
+                        39.78337462063619
+                    ],
+                    [
+                        -105.00371029474606,
+                        39.783476996162726
+                    ],
+                    [
+                        -105.0028126803117,
+                        39.783488679162744
+                    ],
+                    [
+                        -105.0020867272543,
+                        39.783401424905826
+                    ],
+                    [
+                        -105.00141441837717,
+                        39.78324821220553
+                    ],
+                    [
+                        -104.99832821593448,
+                        39.78238801147943
+                    ],
+                    [
+                        -104.9952742,
+                        39.7815278
+                    ],
+                    [
+                        -104.9949256,
+                        39.781427099999995
+                    ],
+                    [
+                        -104.9949256,
+                        39.781427099999995
+                    ],
+                    [
+                        -104.99488923272276,
+                        39.78141699368203
+                    ],
+                    [
+                        -104.99327593582696,
+                        39.78096579098153
+                    ],
+                    [
+                        -104.99198009999999,
+                        39.7806012
+                    ],
+                    [
+                        -104.9915997,
+                        39.7805033
+                    ],
+                    [
+                        -104.9915997,
+                        39.7805033
+                    ],
+                    [
+                        -104.99151667714368,
+                        39.78048146343187
+                    ],
+                    [
+                        -104.98967417301031,
+                        39.780089264006286
+                    ],
+                    [
+                        -104.989045,
+                        39.7799905
+                    ],
+                    [
+                        -104.989045,
+                        39.7799905
+                    ],
+                    [
+                        -104.98866609999999,
+                        39.7799366
+                    ],
+                    [
+                        -104.98866609999999,
+                        39.7799366
+                    ],
+                    [
+                        -104.98835199999999,
+                        39.779899
+                    ],
+                    [
+                        -104.98835199999999,
+                        39.779899
+                    ],
+                    [
+                        -104.98765614575872,
+                        39.7798267827426
+                    ],
+                    [
+                        -104.98561644611992,
+                        39.77970848913253
+                    ],
+                    [
+                        -104.9838852332827,
+                        39.7797041530899
+                    ],
+                    [
+                        -104.98386409999999,
+                        39.779704100000004
+                    ],
+                    [
+                        -104.982795,
+                        39.7797045
+                    ],
+                    [
+                        -104.9826374,
+                        39.7797014
+                    ],
+                    [
+                        -104.9823346,
+                        39.7796875
+                    ],
+                    [
+                        -104.9823346,
+                        39.7796875
+                    ],
+                    [
+                        -104.98215591660409,
+                        39.77967930853066
+                    ],
+                    [
+                        -104.98043593812743,
+                        39.77955722189979
+                    ],
+                    [
+                        -104.9800021,
+                        39.7795211
+                    ],
+                    [
+                        -104.9794867,
+                        39.779486399999996
+                    ],
+                    [
+                        -104.9790598869281,
+                        39.7794694000894
+                    ],
+                    [
+                        -104.97767593919559,
+                        39.77945146339736
+                    ],
+                    [
+                        -104.9771011,
+                        39.7794542
+                    ],
+                    [
+                        -104.9770025,
+                        39.7794563
+                    ],
+                    [
+                        -104.9770025,
+                        39.7794563
+                    ],
+                    [
+                        -104.97676059999999,
+                        39.7794586
+                    ],
+                    [
+                        -104.976683,
+                        39.7794608
+                    ],
+                    [
+                        -104.976683,
+                        39.7794608
+                    ],
+                    [
+                        -104.97642466943076,
+                        39.779466943688455
+                    ],
+                    [
+                        -104.97559697949839,
+                        39.77953337091996
+                    ],
+                    [
+                        -104.97451179750061,
+                        39.77955857191159
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "44th ",
+                "ending_cross_street": "41st St.",
+                "start_date": "2020-12-17T17:35:00.000Z",
+                "end_date": "2020-12-17T17:35:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -105.02533595924113,
+                        39.772992341804944
+                    ],
+                    [
+                        -105.0253289422457,
+                        39.77364294580442
+                    ],
+                    [
+                        -105.0253400153147,
+                        39.776511506428236
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "44 St.",
+                "ending_cross_street": "41th St.",
+                "start_date": "2020-12-22T17:35:00.000Z",
+                "end_date": "2020-12-22T17:35:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -105.02511990205899,
+                        39.772985258398535
+                    ],
+                    [
+                        -105.02511047044716,
+                        39.77659988814244
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "44 St.",
+                "ending_cross_street": "41th St.",
+                "start_date": "2020-12-28T17:35:00.000Z",
+                "end_date": "2020-12-28T17:35:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -105.02533447878018,
+                        39.772985258398535
+                    ],
+                    [
+                        -105.02532504716835,
+                        39.77659988814242
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "41 st.",
+                "ending_cross_street": "44th St.",
+                "start_date": "2020-12-28T17:35:00.000Z",
+                "end_date": "2020-12-28T17:35:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -105.02511990205899,
+                        39.772985258398535
+                    ],
+                    [
+                        -105.02511047044716,
+                        39.77659988814242
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "41 st.",
+                "ending_cross_street": "44th St.",
+                "start_date": "2020-12-30T17:35:00.000Z",
+                "end_date": "2021-06-30T16:35:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "Federal Blvd and 42nd Ave. NB Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -105.02523523704663,
+                        39.77302215830998
+                    ],
+                    [
+                        -105.02515070358238,
+                        39.776620294938674
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "Krameria St.",
+                "ending_cross_street": "Hudson St.",
+                "start_date": "2021-01-04T22:15:00.000Z",
+                "end_date": "2021-01-04T22:15:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "E. Colfax Ave. and Ivy St. WB Intersection Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -104.91902529204978,
+                        39.74013961197621
+                    ],
+                    [
+                        -104.92097794021262,
+                        39.740123112057226
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "Hudson St.",
+                "ending_cross_street": "Krameria St.",
+                "start_date": "2021-01-04T22:15:00.000Z",
+                "end_date": "2021-01-04T22:15:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "E. Colfax Ave. and Ivy St. EB Intersection Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -104.9190467497219,
+                        39.7402262364861
+                    ],
+                    [
+                        -104.92099939788474,
+                        39.74020973658785
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "Hudson St.",
+                "ending_cross_street": "Krameria St.",
+                "start_date": "2021-01-05T17:05:00.000Z",
+                "end_date": "2021-01-05T17:05:11.748Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "E. Colfax Ave. and Ivy St. EB Intersection Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -104.9235569842864,
+                        39.74006993404114
+                    ],
+                    [
+                        -104.9164277079954,
+                        39.740090351664364
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "Hudson St.",
+                "ending_cross_street": "Krameria St.",
+                "start_date": "2021-01-06T22:15:00.000Z",
+                "end_date": "2021-01-06T22:15:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "WB E. Colfax Ave. and Ivy St.  Intersection Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -104.91902529204978,
+                        39.74013961197621
+                    ],
+                    [
+                        -104.92097794021262,
+                        39.740123112057226
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "W. Kentucky Ave",
+                "ending_cross_street": "W. Mississippi Ave  ",
+                "start_date": "2021-04-21T14:02:00.000Z",
+                "end_date": "2021-04-21T14:02:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "SB - Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -105.15640122326342,
+                        39.62741459972588
+                    ],
+                    [
+                        -105.15412088134724,
+                        39.624910989421046
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "Krameria St.",
+                "ending_cross_street": "Hudson St.",
+                "start_date": "2021-01-11T17:05:00.000Z",
+                "end_date": "2021-06-30T16:05:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "WB E. Colfax Ave. and Ivy St. Intersection Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -104.92356234870444,
+                        39.74019162094469
+                    ],
+                    [
+                        -104.91644916566752,
+                        39.740197601118126
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "Hudson St.",
+                "ending_cross_street": "Jersey St.",
+                "start_date": "2020-12-14T17:05:00.000Z",
+                "end_date": "2021-06-30T16:05:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "EB E. Colfax Ave. and Ivy St.  Intersection Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -104.9235569842864,
+                        39.74006993404114
+                    ],
+                    [
+                        -104.9164277079954,
+                        39.740090351664364
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "Hudson St.",
+                "ending_cross_street": "Jersey St.",
+                "start_date": "2020-12-14T17:05:00.000Z",
+                "end_date": "2021-06-30T16:05:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "EB E. Colfax Ave. and Ivy St.  Intersection Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -104.9235569842864,
+                        39.74006993404114
+                    ],
+                    [
+                        -104.9164277079954,
+                        39.740090351664364
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "start_date": "2020-12-16T17:35:00.000Z",
+                "end_date": "2020-12-16T17:35:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -105.02533595924113,
+                        39.772992341804944
+                    ],
+                    [
+                        -105.0253289422457,
+                        39.77364294580442
+                    ],
+                    [
+                        -105.0253400153147,
+                        39.776511506428236
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "start_date": "2020-12-14T22:15:00.000Z",
+                "end_date": "2021-05-15T21:15:00.000Z",
+                "event_status": "planned",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -104.91902529204978,
+                        39.74013961197621
+                    ],
+                    [
+                        -104.92097794021262,
+                        39.740123112057226
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "W. Kentucky Ave",
+                "ending_cross_street": "W. Mississippi Ave. ",
+                "start_date": "2021-04-05T21:23:00.000Z",
+                "end_date": "2021-04-05T18:24:51.717Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "SB Right Lane Closure on Federal Blvd. "
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -105.02505017766062,
+                        39.697978929201255
+                    ],
+                    [
+                        -105.02505742491653,
+                        39.69894597899453
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "41 st.",
+                "ending_cross_street": "44th St.",
+                "start_date": "2020-12-17T17:35:00.000Z",
+                "end_date": "2020-12-17T17:35:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -105.02512235194445,
+                        39.772981924787544
+                    ],
+                    [
+                        -105.02511047044716,
+                        39.77659988814242
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "44 St.",
+                "ending_cross_street": "41th St.",
+                "start_date": "2020-12-18T17:35:00.000Z",
+                "end_date": "2020-12-18T17:35:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -105.02511990205899,
+                        39.772985258398535
+                    ],
+                    [
+                        -105.02511047044716,
+                        39.77659988814242
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "41 st.",
+                "ending_cross_street": "44th St.",
+                "start_date": "2020-12-18T17:35:00.000Z",
+                "end_date": "2020-12-18T17:35:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -105.02511990205899,
+                        39.772985258398535
+                    ],
+                    [
+                        -105.02511047044716,
+                        39.77659988814242
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "41 st.",
+                "ending_cross_street": "44th St.",
+                "start_date": "2020-12-21T17:35:00.000Z",
+                "end_date": "2020-12-21T17:35:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -105.02511990205899,
+                        39.772985258398535
+                    ],
+                    [
+                        -105.02511047044716,
+                        39.77659988814242
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "44 St.",
+                "ending_cross_street": "41th St.",
+                "start_date": "2020-12-21T17:35:00.000Z",
+                "end_date": "2020-12-21T17:35:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -105.02511990205899,
+                        39.772985258398535
+                    ],
+                    [
+                        -105.02511047044716,
+                        39.77659988814242
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "44 St.",
+                "ending_cross_street": "41th St.",
+                "start_date": "2020-12-22T17:35:00.000Z",
+                "end_date": "2020-12-22T14:39:03.053Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -105.02511990205899,
+                        39.772985258398535
+                    ],
+                    [
+                        -105.02511047044716,
+                        39.77659988814242
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "44 St.",
+                "ending_cross_street": "41th St.",
+                "start_date": "2020-12-30T17:35:00.000Z",
+                "end_date": "2020-12-30T17:35:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "Federal Blvd and 42nd Ave SB. Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -105.02533179657117,
+                        39.77297213905168
+                    ],
+                    [
+                        -105.02532236495934,
+                        39.77658676948455
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "Krameria St.",
+                "ending_cross_street": "Hudson St.",
+                "start_date": "2021-01-05T22:15:00.000Z",
+                "end_date": "2021-01-05T22:15:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "E. Colfax Ave. and Ivy St. WB Intersection Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -104.91902529204978,
+                        39.74013961197621
+                    ],
+                    [
+                        -104.92097794021262,
+                        39.740123112057226
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "Hudson St.",
+                "ending_cross_street": "Krameria St.",
+                "start_date": "2021-01-05T22:15:00.000Z",
+                "end_date": "2021-01-05T22:15:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "E. Colfax Ave. and Ivy St. EB Intersection Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -104.9190467497219,
+                        39.7402262364861
+                    ],
+                    [
+                        -104.92332487310065,
+                        39.74020354912499
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "Exposition",
+                "ending_cross_street": "Tennessee Ave",
+                "start_date": "2021-02-08T17:18:00.000Z",
+                "end_date": "2021-02-08T17:18:00.000Z",
+                "event_status": "planned",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "South Bound Federal and Tennessee Ave.  "
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -105.02516333172186,
+                        39.69895548322654
+                    ],
+                    [
+                        -105.02514187404974,
+                        39.697971080976124
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "Hudson St.",
+                "ending_cross_street": "Krameria St.",
+                "start_date": "2021-01-06T17:05:00.000Z",
+                "end_date": "2021-01-06T17:05:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "E. Colfax Ave. and Ivy St. EB Intersection Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -104.9235569842864,
+                        39.74006993404114
+                    ],
+                    [
+                        -104.9164277079954,
+                        39.740090351664364
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "Krameria St.",
+                "ending_cross_street": "Hudson St.",
+                "start_date": "2021-01-07T17:05:00.000Z",
+                "end_date": "2021-01-07T17:05:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "WB E. Colfax Ave. and Ivy St. Intersection Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -104.92356234870444,
+                        39.74019162094469
+                    ],
+                    [
+                        -104.91644916566752,
+                        39.740197601118126
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "Hudson St.",
+                "ending_cross_street": "Jersey St.",
+                "start_date": "2021-01-07T17:05:00.000Z",
+                "end_date": "2021-01-07T17:05:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "EB E. Colfax Ave. and Ivy St.  Intersection Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -104.9235569842864,
+                        39.74006993404114
+                    ],
+                    [
+                        -104.9164277079954,
+                        39.740090351664364
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "Hudson St.",
+                "ending_cross_street": "Jersey St.",
+                "start_date": "2021-01-08T17:05:00.000Z",
+                "end_date": "2021-01-08T17:05:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "EB E. Colfax Ave. and Ivy St.  Intersection Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -104.9235569842864,
+                        39.74006993404114
+                    ],
+                    [
+                        -104.9164277079954,
+                        39.740090351664364
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "Krameria St.",
+                "ending_cross_street": "Hudson St.",
+                "start_date": "2021-01-08T17:05:00.000Z",
+                "end_date": "2021-01-08T17:05:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "WB E. Colfax Ave. and Ivy St. Intersection Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -104.92356234870444,
+                        39.74019162094469
+                    ],
+                    [
+                        -104.91644916566752,
+                        39.740197601118126
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "Hudson St.",
+                "ending_cross_street": "Jersey St.",
+                "start_date": "2021-01-12T17:05:00.000Z",
+                "end_date": "2021-01-12T17:05:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "EB E. Colfax Ave. and Ivy St.  Intersection Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -104.9235569842864,
+                        39.74006993404114
+                    ],
+                    [
+                        -104.9164277079954,
+                        39.740090351664364
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "Krameria St.",
+                "ending_cross_street": "Hudson St.",
+                "start_date": "2021-01-11T17:05:00.000Z",
+                "end_date": "2021-01-11T17:05:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "WB E. Colfax Ave. and Ivy St. Intersection Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -104.92356234870444,
+                        39.74019162094469
+                    ],
+                    [
+                        -104.91644916566752,
+                        39.740197601118126
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "Krameria St.",
+                "ending_cross_street": "Hudson St.",
+                "start_date": "2021-01-12T17:05:00.000Z",
+                "end_date": "2021-01-12T17:05:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "WB E. Colfax Ave. and Ivy St. Intersection Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -104.92356234870444,
+                        39.74019162094469
+                    ],
+                    [
+                        -104.91644916566752,
+                        39.740197601118126
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "Krameria St.",
+                "ending_cross_street": "Hudson St.",
+                "start_date": "2021-01-13T17:05:00.000Z",
+                "end_date": "2021-01-13T17:05:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "WB E. Colfax Ave. and Ivy St. Intersection Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -104.92356234870444,
+                        39.74019162094469
+                    ],
+                    [
+                        -104.91644916566752,
+                        39.740197601118126
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "Hudson St.",
+                "ending_cross_street": "Jersey St.",
+                "start_date": "2021-01-14T17:05:00.000Z",
+                "end_date": "2021-01-14T17:05:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "EB E. Colfax Ave. and Ivy St.  Intersection Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -104.9235569842864,
+                        39.74006993404114
+                    ],
+                    [
+                        -104.9164277079954,
+                        39.740090351664364
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "Krameria St.",
+                "ending_cross_street": "Hudson St.",
+                "start_date": "2021-01-14T17:05:00.000Z",
+                "end_date": "2021-01-14T17:05:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "WB E. Colfax Ave. and Ivy St. Intersection Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -104.92356234870444,
+                        39.74019162094469
+                    ],
+                    [
+                        -104.91644916566752,
+                        39.740197601118126
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "Krameria St.",
+                "ending_cross_street": "Hudson St.",
+                "start_date": "2021-01-20T17:05:00.000Z",
+                "end_date": "2021-01-20T17:05:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "WB E. Colfax Ave. and Ivy St. Intersection Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -104.92356234870444,
+                        39.74019162094469
+                    ],
+                    [
+                        -104.91644916566752,
+                        39.740197601118126
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "Hudson St.",
+                "ending_cross_street": "Jersey St.",
+                "start_date": "2021-01-19T17:05:00.000Z",
+                "end_date": "2021-01-19T17:05:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "EB E. Colfax Ave. and Ivy St.  Intersection Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -104.9235569842864,
+                        39.74006993404114
+                    ],
+                    [
+                        -104.9164277079954,
+                        39.740090351664364
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "Belleview Ave",
+                "ending_cross_street": "W.Cross Drive",
+                "start_date": "2021-02-23T15:02:00.000Z",
+                "end_date": "2021-02-23T15:02:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "EB - Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -105.15640122326342,
+                        39.62741459972588
+                    ],
+                    [
+                        -105.15412088134724,
+                        39.624910989421046
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "W. Mississippi Ave",
+                "ending_cross_street": "W. Kentucky Ave",
+                "start_date": "2021-04-21T14:02:00.000Z",
+                "end_date": "2021-04-21T14:02:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "NB - Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -105.15640122326342,
+                        39.62741459972588
+                    ],
+                    [
+                        -105.15412088134724,
+                        39.624910989421046
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "W. Mississippi Ave",
+                "ending_cross_street": "W. Kentucky Ave",
+                "start_date": "2021-04-22T14:02:00.000Z",
+                "end_date": "2021-04-22T14:02:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "NB - Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -105.15640122326342,
+                        39.62741459972588
+                    ],
+                    [
+                        -105.15412088134724,
+                        39.624910989421046
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "W. Kentucky Ave",
+                "ending_cross_street": "W. Mississippi Ave  ",
+                "start_date": "2021-04-22T14:02:00.000Z",
+                "end_date": "2021-04-22T14:02:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "SB - Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -105.15640122326342,
+                        39.62741459972588
+                    ],
+                    [
+                        -105.15412088134724,
+                        39.624910989421046
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "Hudson St.",
+                "ending_cross_street": "Jersey St.",
+                "start_date": "2020-12-14T17:05:00.000Z",
+                "end_date": "2021-06-30T16:05:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "EB E. Colfax Ave. and Ivy St.  Intersection Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -104.9235569842864,
+                        39.74006993404114
+                    ],
+                    [
+                        -104.9164277079954,
+                        39.740090351664364
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "Krameria St.",
+                "ending_cross_street": "Hudson St.",
+                "start_date": "2021-01-11T17:05:00.000Z",
+                "end_date": "2021-06-30T16:05:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "WB E. Colfax Ave. and Ivy St. Intersection Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -104.92356234870444,
+                        39.74019162094469
+                    ],
+                    [
+                        -104.91644916566752,
+                        39.740197601118126
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "Krameria St.",
+                "ending_cross_street": "Hudson St.",
+                "start_date": "2021-01-11T17:05:00.000Z",
+                "end_date": "2021-06-30T16:05:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "WB E. Colfax Ave. and Ivy St. Intersection Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -104.92356234870444,
+                        39.74019162094469
+                    ],
+                    [
+                        -104.91644916566752,
+                        39.740197601118126
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "Hudson St.",
+                "ending_cross_street": "Jersey St.",
+                "start_date": "2020-12-14T17:05:00.000Z",
+                "end_date": "2021-06-30T16:05:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "EB E. Colfax Ave. and Ivy St.  Intersection Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -104.9235569842864,
+                        39.74006993404114
+                    ],
+                    [
+                        -104.9164277079954,
+                        39.740090351664364
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "W. Mississippi Ave",
+                "ending_cross_street": "W. Kentucky Ave",
+                "start_date": "2021-04-22T14:02:00.000Z",
+                "end_date": "2021-04-22T14:02:00.000Z",
+                "event_status": "planned",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "NB - Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -105.15640122326342,
+                        39.62741459972588
+                    ],
+                    [
+                        -105.15412088134724,
+                        39.624910989421046
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "44 St.",
+                "ending_cross_street": "41th St.",
+                "start_date": "2020-12-30T17:35:00.000Z",
+                "end_date": "2021-06-30T16:35:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "Federal Blvd and 42nd Ave SB. Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -105.02533179657117,
+                        39.77297213905168
+                    ],
+                    [
+                        -105.02532236495934,
+                        39.77658676948455
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "41 st.",
+                "ending_cross_street": "44th St.",
+                "start_date": "2020-12-30T17:35:00.000Z",
+                "end_date": "2021-06-30T16:35:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "Federal Blvd and 42nd Ave. NB Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -105.02523523704663,
+                        39.77302215830998
+                    ],
+                    [
+                        -105.02515070358238,
+                        39.776620294938674
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "41 st.",
+                "ending_cross_street": "44th St.",
+                "start_date": "2020-12-30T17:35:00.000Z",
+                "end_date": "2021-06-30T16:35:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "Federal Blvd and 42nd Ave. NB Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -105.02523523704663,
+                        39.77302215830998
+                    ],
+                    [
+                        -105.02515070358238,
+                        39.776620294938674
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "44 St.",
+                "ending_cross_street": "41th St.",
+                "start_date": "2020-12-30T17:35:00.000Z",
+                "end_date": "2021-06-30T16:35:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "Federal Blvd and 42nd Ave SB. Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -105.02533179657117,
+                        39.77297213905168
+                    ],
+                    [
+                        -105.02532236495934,
+                        39.77658676948455
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "44 St.",
+                "ending_cross_street": "41th St.",
+                "start_date": "2020-12-30T17:35:00.000Z",
+                "end_date": "2021-06-30T16:35:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "Federal Blvd and 42nd Ave SB. Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -105.02533179657117,
+                        39.77297213905168
+                    ],
+                    [
+                        -105.02532236495934,
+                        39.77658676948455
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "44 St.",
+                "ending_cross_street": "41th St.",
+                "start_date": "2020-12-30T17:35:00.000Z",
+                "end_date": "2021-06-30T16:35:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "Federal Blvd and 42nd Ave SB. Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -105.02533179657117,
+                        39.77297213905168
+                    ],
+                    [
+                        -105.02532236495934,
+                        39.77658676948455
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "44 St.",
+                "ending_cross_street": "41th St.",
+                "start_date": "2020-12-30T17:35:00.000Z",
+                "end_date": "2021-06-30T16:35:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "Federal Blvd and 42nd Ave SB. Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -105.02533179657117,
+                        39.77297213905168
+                    ],
+                    [
+                        -105.02532236495934,
+                        39.77658676948455
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "41 st.",
+                "ending_cross_street": "44th St.",
+                "start_date": "2020-12-30T17:35:00.000Z",
+                "end_date": "2021-06-30T16:35:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "Federal Blvd and 42nd Ave. NB Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -105.02523523704663,
+                        39.77302215830998
+                    ],
+                    [
+                        -105.02515070358238,
+                        39.776620294938674
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "41 st.",
+                "ending_cross_street": "44th St.",
+                "start_date": "2020-12-30T17:35:00.000Z",
+                "end_date": "2021-06-30T16:35:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "Federal Blvd and 42nd Ave. NB Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -105.02523523704663,
+                        39.77302215830998
+                    ],
+                    [
+                        -105.02515070358238,
+                        39.776620294938674
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "44 St.",
+                "ending_cross_street": "41th St.",
+                "start_date": "2020-12-30T17:35:00.000Z",
+                "end_date": "2021-06-30T16:35:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "Federal Blvd and 42nd Ave SB. Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -105.02533179657117,
+                        39.77297213905168
+                    ],
+                    [
+                        -105.02532236495934,
+                        39.77658676948455
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "Testing"
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "41 st.",
+                "ending_cross_street": "44th St.",
+                "start_date": "2020-12-30T17:35:00.000Z",
+                "end_date": "2021-06-30T16:35:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "Federal Blvd and 42nd Ave. NB Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -105.02523523704663,
+                        39.77302215830998
+                    ],
+                    [
+                        -105.02515070358238,
+                        39.776620294938674
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "44 St.",
+                "ending_cross_street": "41th St.",
+                "start_date": "2020-12-30T17:35:00.000Z",
+                "end_date": "2021-06-30T16:35:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "Federal Blvd and 42nd Ave SB. Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -105.02533179657117,
+                        39.77297213905168
+                    ],
+                    [
+                        -105.02532236495934,
+                        39.77658676948455
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "Hudson St.",
+                "ending_cross_street": "Jersey St.",
+                "start_date": "2020-12-14T17:05:00.000Z",
+                "end_date": "2021-06-30T16:05:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "EB E. Colfax Ave. and Ivy St.  Intersection Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -104.9235569842864,
+                        39.74006993404114
+                    ],
+                    [
+                        -104.9164277079954,
+                        39.740090351664364
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "Krameria St.",
+                "ending_cross_street": "Hudson St.",
+                "start_date": "2021-01-11T17:05:00.000Z",
+                "end_date": "2021-06-30T16:05:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "WB E. Colfax Ave. and Ivy St. Intersection Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -104.92356234870444,
+                        39.74019162094469
+                    ],
+                    [
+                        -104.91644916566752,
+                        39.740197601118126
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "Hudson St.",
+                "ending_cross_street": "Jersey St.",
+                "start_date": "2020-12-14T17:05:00.000Z",
+                "end_date": "2021-06-30T16:05:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "EB E. Colfax Ave. and Ivy St.  Intersection Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -104.9235569842864,
+                        39.74006993404114
+                    ],
+                    [
+                        -104.9164277079954,
+                        39.740090351664364
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "Krameria St.",
+                "ending_cross_street": "Hudson St.",
+                "start_date": "2021-01-11T17:05:00.000Z",
+                "end_date": "2021-06-30T16:05:00.000Z",
+                "event_status": "planned",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "WB E. Colfax Ave. and Ivy St. Intersection Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -104.92356234870444,
+                        39.74019162094469
+                    ],
+                    [
+                        -104.91644916566752,
+                        39.740197601118126
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "44 St.",
+                "ending_cross_street": "41th St.",
+                "start_date": "2020-12-30T17:35:00.000Z",
+                "end_date": "2021-06-30T16:35:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "Federal Blvd and 42nd Ave SB. Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -105.02533179657117,
+                        39.77297213905168
+                    ],
+                    [
+                        -105.02532236495934,
+                        39.77658676948455
+                    ]
+                ]
+            }
+        },
+        {
+            "properties": {
+                "beginning_cross_street": "41 st.",
+                "ending_cross_street": "44th St.",
+                "start_date": "2020-12-30T17:35:00.000Z",
+                "end_date": "2021-06-30T16:35:00.000Z",
+                "event_status": "completed",
+                "event_type": "work-zone",
+                "start_date_accuracy": "estimated",
+                "end_date_accuracy": "estimated",
+                "description": "Federal Blvd and 42nd Ave. NB Right Lane Closure"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -105.02523523704663,
+                        39.77302215830998
+                    ],
+                    [
+                        -105.02515070358238,
+                        39.776620294938674
+                    ]
+                ]
+            }
+        }
+    ]
+}

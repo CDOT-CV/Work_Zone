@@ -1,0 +1,88 @@
+[
+  {
+    "rtdh_timestamp": 1633100866.41226,
+    "rtdh_message_id": "5fa4fcc0-b569-4fbb-8b76-6f57188ee291",
+    "event": {
+      "type": "CONSTRUCTION",
+      "source": {
+        "id": 1245,
+        "last_updated_timestamp": 1598046722
+      },
+      "geometry": [
+        [
+          -84.112854,
+          37.157199
+        ],
+        [
+          -84.1238971,
+          37.1686478
+        ],
+        [
+          -84.145861,
+          37.1913
+        ],
+        [
+          -84.175297,
+          37.209348
+        ],
+        [
+          -84.201303,
+          37.216837
+        ]
+      ],
+      "header": {
+        "description": "19-1245: Roadwork between MP 40 and MP 48",
+        "start_timestamp": 1581725296,
+        "end_timestamp": null
+      },
+      "detail": {
+        "road_name": "I-75 N",
+        "road_number": "I-75 N",
+        "direction": "northbound"
+      }
+    }
+  },
+  {
+    "rtdh_timestamp": 1633100866.4132617,
+    "rtdh_message_id": "649baf48-69ff-4d29-b50f-8c80fcbbaee6",
+    "event": {
+      "type": "CONSTRUCTION",
+      "source": {
+        "id": 1246,
+        "last_updated_timestamp": 1598046722
+      },
+      "geometry": [
+        [
+          -84.169129,
+          37.20667
+        ],
+        [
+          -84.157346,
+          37.201223
+        ],
+        [
+          -84.140482,
+          37.185815
+        ],
+        [
+          -84.121425,
+          37.166345
+        ],
+        [
+          -84.111588,
+          37.147808
+        ]
+      ],
+      "header": {
+        "description": "19-1245: Roadwork between MP 48 and MP 40",
+        "start_timestamp": 1574488941,
+        "end_timestamp": null
+      },
+      "detail": {
+        "road_name": "I-75 S",
+        "road_number": "I-75 S",
+        "direction": "southbound"
+      }
+    }
+  }
+]
