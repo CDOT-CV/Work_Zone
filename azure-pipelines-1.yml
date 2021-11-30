@@ -21,13 +21,20 @@ steps:
 
 - script: |
     python -m pip install --upgrade pip
+    pip install -r requirements.txt
   displayName: 'Install dependencies'
+
+# - script: |
+#     pip install pytest
+#     python -m pytest 'tests/'
+#   displayName: 'Run Tests'
 
 - script: |
     pip install build
     python -m build
-  displayName: 'build'
+  displayName: 'Build'
 
 - script: |
     pip install twine
     python -m twine upload --repository-url https://upload.pypi.org/legacy/ dist/* -u __token__ -p $(password)
+  displayName: 'Upload'
