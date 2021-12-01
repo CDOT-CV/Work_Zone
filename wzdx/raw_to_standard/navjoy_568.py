@@ -86,7 +86,7 @@ def main():
 
     generated_files_list = []
     for message in generated_messages:
-        output_path = f"{output_dir}/standard_568_{message['event']['source']['id']}_{round(message['rtdh_timestamp'])}.json"
+        output_path = f"{output_dir}/standard_568_{message['event']['source']['id']}_{round(message['rtdh_timestamp'])}_{message['event']['detail']['direction']}.json"
         open(output_path, 'w+').write(json.dumps(message, indent=2))
         generated_files_list.append(output_path)
 
@@ -121,27 +121,32 @@ def parse_rtdh_arguments():
 # TODO: consider deleting all numbered keys after they are copied
 # TODO: consider removing duplicate messages
 def expand_speed_zone(message):
-    messages = []
-    for key_set in NUMBERED_KEY_NAMES:
-        # print(key_set)
-        if not message.get('data', {}).get(key_set['street_name']):
-            # print(key_set['street_name'])
-            # # print(message.get('data', {}))
-            # print("EXITING")
-            continue
-        new_message = copy.deepcopy(message)
-        for key, value in key_set.items():
-            new_message.get('data', {})[CORRECT_KEY_NAMES[key]] = message.get(
-                'data', {}).get(value)
+    try:
+        messages = []
+        for key_set in NUMBERED_KEY_NAMES:
+            # print(key_set)
+            print(message)
+            if not message.get('data', {}).get(key_set['street_name']):
+                # print(key_set['street_name'])
+                # # print(message.get('data', {}))
+                # print("EXITING")
+                continue
+            new_message = copy.deepcopy(message)
+            for key, value in key_set.items():
+                new_message.get('data', {})[CORRECT_KEY_NAMES[key]] = message.get(
+                    'data', {}).get(value)
 
-        directions = new_message.get('data', {}).get('directionOfTraffic')
-        for direction in get_directions_from_string(directions):
-            new_message_dir = copy.deepcopy(new_message)
-            if new_message_dir.get('data', {}).get('directionOfTraffic'):
-                del new_message_dir.get('data', {})['directionOfTraffic']
-            new_message_dir.get('data', {})['direction'] = direction
-            messages.append(new_message_dir)
-    return messages
+            directions = new_message.get('data', {}).get('directionOfTraffic')
+            for direction in get_directions_from_string(directions):
+                new_message_dir = copy.deepcopy(new_message)
+                if new_message_dir.get('data', {}).get('directionOfTraffic'):
+                    del new_message_dir.get('data', {})['directionOfTraffic']
+                new_message_dir.get('data', {})['direction'] = direction
+                messages.append(new_message_dir)
+        return messages
+    except Exception as e:
+        logging.error(e)
+        return [message]
 
 
 def get_linestring_index(map):
@@ -251,7 +256,7 @@ def create_rtdh_standard_msg(pd):
             "type": pd.get("data/constructionType", default=""),
             "source": {
                 "id": pd.get("sys_gUid", default=""),
-                "last_updated_timestamp": time.time(),
+                "last_updated_timestamp": date_tools.date_to_unix(datetime.utcnow()),
             },
             "geometry": coordinates,
             "header": {

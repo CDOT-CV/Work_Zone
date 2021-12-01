@@ -1,0 +1,106 @@
+[
+    {
+        "sys_gUid": "Form568-cb0fdaf0-c27a-4bef-aabd-442615dfb2d6",
+        "data": {
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [
+                {
+                    "documentName": "MHT East/West",
+                    "doc_url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/CDOT%20Region%204/Files/92a33e02-79c2-4f21-a7e8-01943542f9b2MHT%20East/West",
+                    "UniqueDocName": "92a33e02-79c2-4f21-a7e8-01943542f9b2MHT East/West",
+                    "s3FileName": "Documents/CDOT Region 4/Files/92a33e02-79c2-4f21-a7e8-01943542f9b2MHT East/West",
+                    "uploadedDate": "2021-07-15T15:06:20.452Z",
+                    "contentType": "image/png"
+                }
+            ],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "cdotSection/DepartmentName": "Projects",
+            "cdotPatrolNumber/Id": "1",
+            "subAccountNumber": "12345",
+            "mpaCode": "12345",
+            "descriptionForProject": "Bridge Repairs",
+            "srzmap": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -104.65225365171561,
+                                40.39393671703483
+                            ],
+                            [
+                                -104.65228583822379,
+                                40.39342193227279
+                            ],
+                            [
+                                -104.64946415434012,
+                                40.39348730198451
+                            ],
+                            [
+                                -104.64953925619254,
+                                40.394108311080984
+                            ],
+                            [
+                                -104.65225365171561,
+                                40.39393671703483
+                            ]
+                        ]
+                    ],
+                    "className": "Form568"
+                },
+                {
+                    "type": "Point",
+                    "coordinates": [
+                        -104.64936759481559,
+                        40.3937120098846
+                    ],
+                    "className": "text"
+                }
+            ],
+            "streetNameFrom": "US-34",
+            "mileMarkerStart": "56",
+            "mileMarkerEnd": "56.4",
+            "directionOfTraffic": " East/West ",
+            "currentPostedSpeed": "50",
+            "requestedTemporarySpeed": "45",
+            "workStartDate": "2021-08-09T13:00:00.000Z",
+            "workEndDate": "2021-09-24T23:00:00.000Z",
+            "reductionJustification": "Crews roadside.",
+            "document": [],
+            "approval": {
+                "description": "",
+                "value": "Approved"
+            },
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "requestorName": {
+                "sys_gUid": "User-905f1bf6-05fb-4354-beb8-8f095203f7d8",
+                "username": "bryce.reeves@state.co.us",
+                "firstName": "Bryce",
+                "lastName": "Reeves",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "CDOT Projects Requestor",
+                "email": "bryce.reeves@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Traffic Design and LA Projects Manager"
+            },
+            "taskChecklist": [
+                "Is the Required Information tab complete?",
+                "Is/are the MHT(s) signed prior to submission per CDOT Requirements?",
+                "Is the requested speed reduction valid based on the criteria shown in the Authority tab?",
+                "Are the speed reduction details and the SRZ polygon accurate?",
+                "Are the requester and CDOT Engineer details accurate?"
+            ],
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-07-15T15:16:11.559Z",
+                "name": "Jonathan Woodworth"
+            }
+        }
+    }
+]

@@ -98,19 +98,12 @@ def initialize_info(feed_info_id):
     info['metadata'] = {}
     info['metadata']['wz_location_method'] = "channel-device-method"
     info['metadata']['lrs_type'] = "lrs_type"
-    info['metadata']['contact_name'] = os.getenv('contact_name')
-    if info['metadata']['contact_name'] == None:
-        raise RuntimeError(
-            'The environment variable contact_name is not present')
-    info['metadata']['contact_email'] = os.getenv('contact_email')
-    if info['metadata']['contact_email'] == None:
-        raise RuntimeError(
-            'The environment variable contact_email is not present')
+    info['metadata']['contact_name'] = os.getenv(
+        'contact_name', 'Ashley Nylen')
+    info['metadata']['contact_email'] = os.getenv(
+        'contact_email', 'ashley.nylen@state.co.us')
     info['metadata']['issuing_organization'] = os.getenv(
-        'issuing_organization')
-    if info['metadata']['issuing_organization'] == None:
-        raise RuntimeError(
-            'The environment variable issuing_organization is not present')
+        'issuing_organization', 'CDOT')
 
     return info
 
