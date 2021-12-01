@@ -25,11 +25,6 @@ steps:
   displayName: 'Install dependencies'
 
 - script: |
-    pip install pytest
-    python -m pytest 'tests/'
-  displayName: 'Run Tests'
-
-- script: |
     pip install build
     python -m build
   displayName: 'Build'
