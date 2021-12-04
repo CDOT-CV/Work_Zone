@@ -203,3 +203,45 @@ def test_add_ids_empty_message(mockuuid):
     expected = None
 
     assert actual == expected
+
+
+# --------------------------------------------------------------------------------Unit test for parse_polyline function--------------------------------------------------------------------------------
+def test_parse_polyline_valid_data():
+    test_polyline = "LINESTRING (-104.828415 37.735142, -104.830933 37.741074)"
+    test_coordinates = wzdx_translator.parse_polyline(
+        test_polyline)
+    valid_coordinates = [
+        [
+            -104.828415,
+            37.735142
+        ],
+        [
+            -104.830933,
+            37.741074
+        ]
+    ]
+    assert test_coordinates == valid_coordinates
+
+
+def test_parse_polyline_null_parameter():
+    test_polyline = None
+    test_coordinates = wzdx_translator.parse_polyline(
+        test_polyline)
+    expected_coordinates = None
+    assert test_coordinates == expected_coordinates
+
+
+def test_parse_polyline_invalid_data():
+    test_polyline = 'invalid'
+    test_coordinates = wzdx_translator.parse_polyline(
+        test_polyline)
+    expected_coordinates = []
+    assert test_coordinates == expected_coordinates
+
+
+def test_parse_polyline_invalid_coordinates():
+    test_polyline = 'a,b,c,d'
+    test_coordinates = wzdx_translator.parse_polyline(
+        test_polyline)
+    expected_coordinates = []
+    assert test_coordinates == expected_coordinates

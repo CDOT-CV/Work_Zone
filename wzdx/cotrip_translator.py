@@ -72,22 +72,6 @@ def wzdx_creator(message, info=None, unsupported_message_callback=None):
     return wzd
 
 
-# function to parse polyline to geometry line string
-def parse_polyline(poly):
-    if not poly or type(poly) != str:
-        return None
-    poly = poly[len('LINESTRING ('): -1]
-    polyline = poly.split(', ')
-    coordinates = []
-    for i in polyline:
-        coords = i.split(' ')
-
-        # the regular rexpression '^-?([0-9]*[.])?[0-9]+$ matches an integer or decimals
-        if len(coords) >= 2 and re.match('^-?([0-9]*[.])?[0-9]+$', coords[0]) and re.match('^-?([0-9]*[.])?[0-9]+$', coords[1]):
-            coordinates.append([float(coords[0]), float(coords[1])])
-    return coordinates
-
-
 # Parse COtrip alert to WZDx
 def parse_alert(alert, callback_function=None):
     if not validate_alert(alert):
@@ -98,7 +82,7 @@ def parse_alert(alert, callback_function=None):
     event = alert.get('event', {})
     geometry = {}
     geometry['type'] = "LineString"
-    geometry['coordinates'] = parse_polyline(event.get('geometry'))
+    geometry['coordinates'] = wzdx_translator.parse_polyline(event.get('geometry'))
     properties = wzdx_translator.initialize_feature_properties()
 
     header = event.get('header', {})
@@ -210,7 +194,7 @@ def validate_alert(alert):
     detail = event.get('detail', {})
 
     polyline = event.get('geometry')
-    coords = parse_polyline(polyline)
+    coords = wzdx_translator.parse_cotrip_polyline(polyline)
     street = detail.get('road_name')
 
     starttime_string = header.get('start_timestamp')

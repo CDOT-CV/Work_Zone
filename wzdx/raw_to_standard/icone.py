@@ -8,7 +8,7 @@ import logging
 
 import xml.etree.ElementTree as ET
 
-from wzdx.tools import wzdx_translator, polygon_tools, date_tools
+from wzdx.tools import wzdx_translator, polygon_tools, date_tools, wzdx_translator
 
 from wzdx.util.transformations import rfc_to_unix
 from wzdx.util.transformations import int_or_none
@@ -97,7 +97,7 @@ def create_rtdh_standard_msg(pd):
                 "id": pd.get("incident/@id", default=""),
                 "last_updated_timestamp": pd.get("incident/updatetime", rfc_to_unix, default=0),
             },
-            "geometry": pd.get("incident/location/polyline", parse_polyline),
+            "geometry": pd.get("incident/location/polyline", wzdx_translator.parse_polyline),
             "header": {
                 "description": pd.get("incident/description", default=""),
                 "start_timestamp": pd.get("incident/starttime", rfc_to_unix, default=None),
@@ -123,7 +123,7 @@ def get_direction(street, coords):
 
 
 # function to parse polyline to geometry line string
-def parse_polyline(polylinestring):
+def parse_icone_polyline(polylinestring):
     if not polylinestring or type(polylinestring) != str:
         return None
     # polyline rightnow is a list which has an empty string in it.
@@ -153,7 +153,7 @@ def validate_incident(incident):
         return False
 
     polyline = location.get('polyline')
-    coords = parse_polyline(polyline)
+    coords = parse_icone_polyline(polyline)
     street = location.get('street', '')
 
     starttime_string = incident.get('starttime')

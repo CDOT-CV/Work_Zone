@@ -177,44 +177,6 @@ def test_wzdx_creator_invalid_info_object():
     assert test_wzdx == None
 
 
-# --------------------------------------------------------------------------------Unit test for parse_polyline function--------------------------------------------------------------------------------
-def test_parse_polyline_valid_data():
-    test_polyline = "LINESTRING (-104.828415 37.735142, -104.830933 37.741074)"
-    test_coordinates = cotrip_translator.parse_polyline(test_polyline)
-    valid_coordinates = [
-        [
-            -104.828415,
-            37.735142
-        ],
-        [
-            -104.830933,
-            37.741074
-        ]
-    ]
-    assert test_coordinates == valid_coordinates
-
-
-def test_parse_polyline_null_parameter():
-    test_polyline = None
-    test_coordinates = cotrip_translator.parse_polyline(test_polyline)
-    expected_coordinates = None
-    assert test_coordinates == expected_coordinates
-
-
-def test_parse_polyline_invalid_data():
-    test_polyline = 'invalid'
-    test_coordinates = cotrip_translator.parse_polyline(test_polyline)
-    expected_coordinates = []
-    assert test_coordinates == expected_coordinates
-
-
-def test_parse_polyline_invalid_coordinates():
-    test_polyline = 'a,b,c,d'
-    test_coordinates = cotrip_translator.parse_polyline(test_polyline)
-    expected_coordinates = []
-    assert test_coordinates == expected_coordinates
-
-
 # --------------------------------------------------------------------------------Unit test for parse_incident function--------------------------------------------------------------------------------
 def test_parse_alert_success():
     cotrip_obj = {

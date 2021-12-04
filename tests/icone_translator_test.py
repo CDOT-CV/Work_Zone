@@ -187,9 +187,10 @@ def test_parse_incident_no_direction():
 
 
 # --------------------------------------------------------------------------------Unit test for parse_polyline function--------------------------------------------------------------------------------
-def test_parse_polyline_valid_data():
+def test_parse_icone_polyline_valid_data():
     test_polyline = "34.8380671,-114.1450650,34.8380671,-114.1450650"
-    test_coordinates = icone_translator.parse_polyline(test_polyline)
+    test_coordinates = icone_translator.parse_icone_polyline(
+        test_polyline)
     valid_coordinates = [
         [
             -114.145065,
@@ -205,21 +206,24 @@ def test_parse_polyline_valid_data():
 
 def test_parse_polyline_null_parameter():
     test_polyline = None
-    test_coordinates = icone_translator.parse_polyline(test_polyline)
+    test_coordinates = icone_translator.parse_icone_polyline(
+        test_polyline)
     expected_coordinates = None
     assert test_coordinates == expected_coordinates
 
 
 def test_parse_polyline_invalid_data():
     test_polyline = 'invalid'
-    test_coordinates = icone_translator.parse_polyline(test_polyline)
+    test_coordinates = icone_translator.parse_icone_polyline(
+        test_polyline)
     expected_coordinates = []
     assert test_coordinates == expected_coordinates
 
 
 def test_parse_polyline_invalid_coordinates():
     test_polyline = 'a,b,c,d'
-    test_coordinates = icone_translator.parse_polyline(test_polyline)
+    test_coordinates = icone_translator.wzdx_translator.parse_polyline(
+        test_polyline)
     expected_coordinates = []
     assert test_coordinates == expected_coordinates
 
