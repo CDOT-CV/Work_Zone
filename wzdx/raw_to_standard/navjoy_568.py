@@ -124,12 +124,7 @@ def expand_speed_zone(message):
     try:
         messages = []
         for key_set in NUMBERED_KEY_NAMES:
-            # print(key_set)
-            print(message)
             if not message.get('data', {}).get(key_set['street_name']):
-                # print(key_set['street_name'])
-                # # print(message.get('data', {}))
-                # print("EXITING")
                 continue
             new_message = copy.deepcopy(message)
             for key, value in key_set.items():
@@ -147,18 +142,6 @@ def expand_speed_zone(message):
     except Exception as e:
         logging.error(e)
         return [message]
-
-
-def get_linestring_index(map):
-    for i in range(len(map)):
-        if map[i].get("type") == "LineString":
-            return i
-
-
-def get_polygon_index(map):
-    for i in range(len(map)):
-        if map[i].get("type") == "Polygon":
-            return i
 
 
 def get_directions_from_string(directions_string) -> list:

@@ -72,6 +72,8 @@ def wzdx_creator(message, info=None):
 
 # Parse standard Navjoy 568 form to WZDx
 def parse_reduction_zone(incident):
+    if not incident or type(incident) != dict:
+        return None
 
     event = incident.get('event')
 
@@ -86,14 +88,14 @@ def parse_reduction_zone(incident):
 
     # id
     # Leave this empty, it will be populated by add_ids
-    properties['road_event_id'] = ''
+    properties['road_event_id'] = None
 
     # Event Type ['work-zone', 'detour']
     properties['event_type'] = 'work-zone'
 
     # data_source_id
     # Leave this empty, it will be populated by add_ids
-    properties['data_source_id'] = ''
+    properties['data_source_id'] = None
 
     start_time = date_tools.parse_datetime_from_unix(
         header.get('start_timestamp'))
@@ -149,6 +151,10 @@ def parse_reduction_zone(incident):
     properties['event_status'] = date_tools.get_event_status(
         start_time, end_time)
 
+    # reduced_speed_limit
+    if header.get('reduced_speed_limit'):
+        properties['reduced_speed_limit'] = header.get('reduced_speed_limit')
+
     # type_of_work
     # maintenance, minor-road-defect-repair, roadside-work, overhead-work, below-road-work, barrier-work, surface-work, painting, roadway-relocation, roadway-creation
     projectDescription = header.get('description')
@@ -171,9 +177,15 @@ def parse_reduction_zone(incident):
     properties['update_date'] = date_tools.get_iso_string_from_datetime(date_tools.parse_datetime_from_unix(
         source.get('last_updated_timestamp')))
 
+    filtered_properties = copy.deepcopy(properties)
+
+    for key, value in properties.items():
+        if not value and key not in ['road_event_id', 'data_source_id']:
+            del filtered_properties[key]
+
     feature = {}
     feature['type'] = "Feature"
-    feature['properties'] = properties
+    feature['properties'] = filtered_properties
     feature['geometry'] = geometry
 
     return feature

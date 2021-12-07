@@ -245,3 +245,32 @@ def test_parse_polyline_invalid_coordinates():
         test_polyline)
     expected_coordinates = []
     assert test_coordinates == expected_coordinates
+
+
+# --------------------------------------------------------------------------------unit test for parse_direction_from_street_name function--------------------------------------------------------------------------------
+def test_parse_direction_from_street_name_southbound():
+    test_road_name = 'I-75 S'
+    output_direction = wzdx_translator.parse_direction_from_street_name(
+        test_road_name)
+    assert output_direction == 'southbound'
+
+
+def test_parse_direction_from_street_name_northbound():
+    test_road_name = 'I-75 NB'
+    output_direction = wzdx_translator.parse_direction_from_street_name(
+        test_road_name)
+    assert output_direction == 'northbound'
+
+
+def test_parse_direction_from_street_name_eastbound():
+    test_road_name = 'I-75 EB'
+    output_direction = wzdx_translator.parse_direction_from_street_name(
+        test_road_name)
+    assert output_direction == 'eastbound'
+
+
+def test_parse_direction_from_street_name_westbound():
+    test_road_name = 'I-75 W'
+    output_direction = wzdx_translator.parse_direction_from_street_name(
+        test_road_name)
+    assert output_direction == 'westbound'

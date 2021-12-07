@@ -6,7 +6,7 @@ from unittest.mock import MagicMock, Mock, patch
 
 import time_machine
 from wzdx import navjoy_translator
-from tests import navjoy_translator_test_expected_results as expected_results
+from wzdx.tools import date_tools
 
 # Unit testing code for navjoy_translator.py
 # --------------------------------------------------------------------------------Unit test for parse_incident function--------------------------------------------------------------------------------
@@ -24,54 +24,38 @@ def init_datetime_mocks(mock_dts):
 
 
 @unittest.mock.patch('wzdx.navjoy_translator.datetime')
-@unittest.mock.patch('wzdx.tools.date_tools.datetime')
 @unittest.mock.patch('wzdx.tools.wzdx_translator.datetime')
-def test_parse_reduction_zone_linestring(mock_dt, mock_dt_2, mock_dt_3):
-    init_datetime_mocks([mock_dt, mock_dt_2, mock_dt_3])
-    event = {
-        "sys_gUid": "Form568-cb0fdaf0-c27a-4bef-aabd-442615dfb2d6",
-        "data": {
-            "descriptionForProject": "Bridge Repairs",
-            "srzmap": [
-                {
-                    "type": "LineString",
-                    "coordinates": [
-                        [
-                            [
-                                -104.65225365171561,
-                                40.39393671703483
-                            ],
-                            [
-                                -104.65228583822379,
-                                40.39342193227279
-                            ],
-                            [
-                                -104.64946415434012,
-                                40.39348730198451
-                            ],
-                            [
-                                -104.64953925619254,
-                                40.394108311080984
-                            ],
-                            [
-                                -104.65225365171561,
-                                40.39393671703483
-                            ]
-                        ]
-                    ],
-                },
+def test_parse_reduction_zone_linestring(mock_dt, mock_dt_3):
+    init_datetime_mocks([mock_dt, mock_dt_3])
+    standard = {
+        'rtdh_timestamp': 1638846301.4691865,
+        'rtdh_message_id': 'e5bba2f6-bbd0-4a61-8d64-b7c33657d35a',
+        'event': {
+            'type': '',
+            'source': {
+                'id': 'Form568-44819108-703c-4d6d-ae0d-7dca7319e5b0',
+                'last_updated_timestamp': 1638871501469
+            },
+            'geometry': [
+                [-104.82230842595187, 39.73946349406594],
+                [-104.79432762150851, 39.73959547447038]
             ],
-            "streetNameFrom": "US-34",
-            "direction": "eastbound",
-            "requestedTemporarySpeed": "45",
-            "workStartDate": "2021-08-09T13:00:00.000Z",
-            "workEndDate": "2021-09-24T23:00:00.000Z",
-            "reductionJustification": "Crews roadside.",
+            'header': {
+                'description': 'Maintenance for lane expansion',
+                'justification': 'Lane expansion - maintenance work',
+                'reduced_speed_limit': 45,
+                'start_timestamp': 1630290600000,
+                'end_timestamp': 1630290600000
+            },
+            'detail': {
+                'road_name': '287',
+                'road_number': '287',
+                'direction': 'eastbound'
+            }
         }
     }
 
-    test_feature = navjoy_translator.parse_reduction_zone(
-        event)
+    test_feature = navjoy_translator.parse_reduction_zone(standard)
 
     expected_feature = {
         "type": "Feature",
@@ -79,144 +63,34 @@ def test_parse_reduction_zone_linestring(mock_dt, mock_dt_2, mock_dt_3):
             "road_event_id": None,
             "event_type": "work-zone",
             "data_source_id": None,
-            "start_date": "2021-08-09T13:00:00Z",
-            "end_date": "2021-09-24T23:00:00Z",
+            "start_date": "2021-08-30T02:30:00Z",
+            "end_date": "2021-08-30T02:30:00Z",
             "start_date_accuracy": "estimated",
             "end_date_accuracy": "estimated",
             "beginning_accuracy": "estimated",
             "ending_accuracy": "estimated",
-            "road_names": ["US-34"],
+            "road_names": ["287"],
             "direction": "eastbound",
             "vehicle_impact": "all-lanes-open",
-            "event_status": "planned",
+            "event_status": "completed",
             "reduced_speed_limit": 45,
-            'types_of_work': [{'type_name': 'below-road-work',
-                               'is_architectural_change': False}],
-            "description": "Bridge Repairs. Crews roadside.",
-            "creation_date": "2021-04-13T00:00:00Z",
-            "update_date": "2021-04-13T00:00:00Z"
+            'types_of_work': [{'type_name': 'surface-work',
+                               'is_architectural_change': True}],
+            "description": "Maintenance for lane expansion. Lane expansion - maintenance work",
+            "creation_date": "2021-12-07T03:05:01Z",
+            "update_date": "2021-12-07T10:05:01Z"
         },
         "geometry": {
             "type": "LineString",
             "coordinates": [
                 [
-                    -104.65225365171561,
-                    40.39393671703483
+                    -104.82230842595187,
+                    39.73946349406594
                 ],
                 [
-                    -104.65228583822379,
-                    40.39342193227279
+                    -104.79432762150851,
+                    39.73959547447038
                 ],
-                [
-                    -104.64946415434012,
-                    40.39348730198451
-                ],
-                [
-                    -104.64953925619254,
-                    40.394108311080984
-                ],
-                [
-                    -104.65225365171561,
-                    40.39393671703483
-                ]
-            ]
-        }
-    }
-    assert test_feature == expected_feature
-
-
-@unittest.mock.patch('wzdx.navjoy_translator.datetime')
-@unittest.mock.patch('wzdx.tools.date_tools.datetime')
-@unittest.mock.patch('wzdx.tools.wzdx_translator.datetime')
-def test_parse_reduction_zone_polygon(mock_dt, mock_dt_2, mock_dt_3):
-    init_datetime_mocks([mock_dt, mock_dt_2, mock_dt_3])
-    event = {
-        "sys_gUid": "Form568-cb0fdaf0-c27a-4bef-aabd-442615dfb2d6",
-        "data": {
-            "descriptionForProject": "Bridge Repairs",
-            "srzmap": [
-                {
-                    "type": "Polygon",
-                    "coordinates": [
-                        [
-                            [
-                                -103.17130040113868,
-                                40.625392709715676
-                            ],
-                            [
-                                -103.17889641706886,
-                                40.61979008921054
-                            ],
-                            [
-                                -103.17567776625098,
-                                40.61724921108253
-                            ],
-                            [
-                                -103.17396115248145,
-                                40.616206771586256
-                            ],
-                            [
-                                -103.16709469740333,
-                                40.62167939747747
-                            ],
-                            [
-                                -103.16851090376319,
-                                40.62477383867882
-                            ],
-                            [
-                                -103.17130040113868,
-                                40.625392709715676
-                            ]
-                        ]
-                    ],
-                },
-            ],
-            "streetNameFrom": "US-34",
-            "direction": "eastbound",
-            "requestedTemporarySpeed": "45",
-            "workStartDate": "2021-08-09T13:00:00.000Z",
-            "workEndDate": "2021-09-24T23:00:00.000Z",
-            "reductionJustification": "Crews roadside.",
-        }
-    }
-
-    test_feature = navjoy_translator.parse_reduction_zone(
-        event)
-
-    expected_feature = {
-        "type": "Feature",
-        "properties": {
-            "road_event_id": None,
-            "event_type": "work-zone",
-            "data_source_id": None,
-            "start_date": "2021-08-09T13:00:00Z",
-            "end_date": "2021-09-24T23:00:00Z",
-            "start_date_accuracy": "estimated",
-            "end_date_accuracy": "estimated",
-            "beginning_accuracy": "estimated",
-            "ending_accuracy": "estimated",
-            "road_names": ["US-34"],
-            "direction": "eastbound",
-            "vehicle_impact": "all-lanes-open",
-            "event_status": "planned",
-            "reduced_speed_limit": 45,
-            'types_of_work': [{'type_name': 'below-road-work',
-                               'is_architectural_change': False}],
-            "description": "Bridge Repairs. Crews roadside.",
-            "creation_date": "2021-04-13T00:00:00Z",
-            "update_date": "2021-04-13T00:00:00Z"
-        },
-        "geometry": {
-            "type": "MultiPoint",
-            "coordinates": [
-                [
-                    -103.17728709165992,
-                    40.61851965014654
-                ],
-                [
-                    -103.17481945936622,
-                    40.61672799133439
-                ]
             ]
         }
     }
@@ -231,162 +105,8 @@ def test_parse_reduction_zone_no_data():
 
 def test_parse_reduction_zone_invalid_data():
     test_var = 'a,b,c,d'
-    callback = MagicMock()
-    test_feature = navjoy_translator.parse_reduction_zone(
-        test_var, callback_function=callback)
-    assert callback.called and test_feature == None
-
-
-# --------------------------------------------------------------------------------Unit test for validate_closure function--------------------------------------------------------------------------------
-def test_validate_closure_valid_data():
-    event = {
-        "sys_gUid": "Form568-cb0fdaf0-c27a-4bef-aabd-442615dfb2d6",
-        "data": {
-            "descriptionForProject": "Bridge Repairs",
-            "srzmap": [
-                {
-                    "type": "LineString",
-                    "coordinates": [
-                        [
-                            [
-                                -103.17130040113868,
-                                40.625392709715676
-                            ],
-                            [
-                                -103.17889641706886,
-                                40.61979008921054
-                            ]
-                        ]
-                    ],
-                },
-            ],
-            "streetNameFrom": "US-34",
-            "direction": "eastbound",
-            "requestedTemporarySpeed": "45",
-            "workStartDate": "2021-08-09T13:00:00.000Z",
-            "workEndDate": "2021-09-24T23:00:00.000Z",
-            "reductionJustification": "Crews roadside.",
-        }
-    }
-    assert navjoy_translator.validate_closure(event) == True
-
-
-def test_validate_closure_missing_required_field_description():
-    event = {
-        "sys_gUid": "Form568-cb0fdaf0-c27a-4bef-aabd-442615dfb2d6",
-        "data": {
-            "srzmap": [
-                {
-                    "type": "LineString",
-                    "coordinates": [
-                        [
-                            [
-                                -103.17130040113868,
-                                40.625392709715676
-                            ],
-                            [
-                                -103.17889641706886,
-                                40.61979008921054
-                            ]
-                        ]
-                    ],
-                },
-            ],
-            "streetNameFrom": "US-34",
-            "directionOfTraffic": " East/West ",
-            "requestedTemporarySpeed": "45",
-            "workStartDate": "2021-08-09T13:00:00.000Z",
-            "workEndDate": "2021-09-24T23:00:00.000Z",
-            "reductionJustification": "Crews roadside.",
-        }
-    }
-    assert navjoy_translator.validate_closure(event) == False
-
-
-def test_validate_closure_invalid_start_time():
-    event = {
-        "sys_gUid": "Form568-cb0fdaf0-c27a-4bef-aabd-442615dfb2d6",
-        "data": {
-            "descriptionForProject": "Bridge Repairs",
-            "srzmap": [
-                {
-                    "type": "LineString",
-                    "coordinates": [
-                        [
-                            [
-                                -103.17130040113868,
-                                40.625392709715676
-                            ],
-                            [
-                                -103.17889641706886,
-                                40.61979008921054
-                            ]
-                        ]
-                    ],
-                },
-            ],
-            "streetNameFrom": "US-34",
-            "directionOfTraffic": " East/West ",
-            "requestedTemporarySpeed": "45",
-            "workStartDate": 1713004011,
-            "workEndDate": "2021-09-24T23:00:00.000Z",
-            "reductionJustification": "Crews roadside.",
-        }
-    }
-    assert navjoy_translator.validate_closure(event) == False
-
-
-def test_validate_closure_invalid():
-    event = 'invalid output'
-    assert navjoy_translator.validate_closure(event) == False
-
-
-def test_validate_closure_no_data():
-    event = None
-    assert navjoy_translator.validate_closure(event) == False
-
-
-def test_validate_closure_no_coordinates():
-    event = {
-        "sys_gUid": "Form568-cb0fdaf0-c27a-4bef-aabd-442615dfb2d6",
-        "data": {
-            "descriptionForProject": "Bridge Repairs",
-            "srzmap": [
-                {
-                    "type": "Point",
-                    "coordinates":
-                        [
-                            -103.17130040113868,
-                            40.625392709715676
-                        ],
-                },
-            ],
-            "streetNameFrom": "US-34",
-            "directionOfTraffic": " East/West ",
-            "requestedTemporarySpeed": "45",
-            "workStartDate": "2021-08-09T13:00:00.000Z",
-            "workEndDate": "2021-09-24T23:00:00.000Z",
-            "reductionJustification": "Crews roadside.",
-        }
-    }
-    assert navjoy_translator.validate_closure(event) == False
-
-
-def test_validate_closure_no_polygon_or_linestring():
-    event = {
-        "sys_gUid": "Form568-cb0fdaf0-c27a-4bef-aabd-442615dfb2d6",
-        "data": {
-            "descriptionForProject": "Bridge Repairs",
-            "srzmap": [],
-            "streetNameFrom": "US-34",
-            "directionOfTraffic": " East/West ",
-            "requestedTemporarySpeed": "45",
-            "workStartDate": "2021-08-09T13:00:00.000Z",
-            "workEndDate": "2021-09-24T23:00:00.000Z",
-            "reductionJustification": "Crews roadside.",
-        }
-    }
-    assert navjoy_translator.validate_closure(event) == False
+    test_feature = navjoy_translator.parse_reduction_zone(test_var)
+    assert test_feature == None
 
 
 # --------------------------------------------------------------------------------Unit test for get_vehicle_impact function--------------------------------------------------------------------------------
@@ -422,55 +142,39 @@ def test_get_vehicle_impact_all_lanes_open():
 })
 @patch('uuid.uuid4')
 @unittest.mock.patch('wzdx.navjoy_translator.datetime')
-@unittest.mock.patch('wzdx.tools.date_tools.datetime')
 @unittest.mock.patch('wzdx.tools.wzdx_translator.datetime')
-def test_wzdx_creator(mock_dt, mock_dt_2, mock_dt_3, mockuuid):
-    init_datetime_mocks([mock_dt, mock_dt_2, mock_dt_3])
+def test_wzdx_creator(mock_dt, mock_dt_3, mockuuid):
+    init_datetime_mocks([mock_dt, mock_dt_3])
     uuid.uuid4 = Mock()
     uuid.uuid4.side_effect = 'we234de'
-    obj = [
-        {
-            "sys_gUid": "Form568-cb0fdaf0-c27a-4bef-aabd-442615dfb2d6",
-            "data": {
-                "descriptionForProject": "Bridge Repairs",
-                "srzmap": [
-                    {
-                        "type": "LineString",
-                        "coordinates": [
-                            [
-                                [
-                                    -104.65225365171561,
-                                    40.39393671703483
-                                ],
-                                [
-                                    -104.65228583822379,
-                                    40.39342193227279
-                                ],
-                                [
-                                    -104.64946415434012,
-                                    40.39348730198451
-                                ],
-                                [
-                                    -104.64953925619254,
-                                    40.394108311080984
-                                ],
-                                [
-                                    -104.65225365171561,
-                                    40.39393671703483
-                                ]
-                            ]
-                        ],
-                    },
-                ],
-                "streetNameFrom": "US-34",
-                "directionOfTraffic": " East/West ",
-                "requestedTemporarySpeed": "45",
-                "workStartDate": "2021-08-09T13:00:00.000Z",
-                "workEndDate": "2021-09-24T23:00:00.000Z",
-                "reductionJustification": "Crews roadside.",
+
+    standard = {
+        'rtdh_timestamp': 1638846301.4691865,
+        'rtdh_message_id': 'e5bba2f6-bbd0-4a61-8d64-b7c33657d35a',
+        'event': {
+            'type': '',
+            'source': {
+                'id': 'Form568-44819108-703c-4d6d-ae0d-7dca7319e5b0',
+                'last_updated_timestamp': 1638871501469
+            },
+            'geometry': [
+                [-104.82230842595187, 39.73946349406594],
+                [-104.79432762150851, 39.73959547447038]
+            ],
+            'header': {
+                'description': 'Maintenance for lane expansion',
+                'justification': 'Lane expansion - maintenance work',
+                'reduced_speed_limit': 45,
+                'start_timestamp': 1630290600000,
+                'end_timestamp': 1630290600000
+            },
+            'detail': {
+                'road_name': '287',
+                'road_number': '287',
+                'direction': 'eastbound'
             }
         }
-    ]
+    }
 
     expected_wzdx = {
         'road_event_feed_info': {
@@ -497,100 +201,37 @@ def test_wzdx_creator(mock_dt, mock_dt_2, mock_dt_3, mockuuid):
         'type': 'FeatureCollection',
         'features': [
             {
-                "type": "Feature",
-                "properties": {
-                    "road_event_id": '2',
-                    "event_type": "work-zone",
-                    "data_source_id": 'w',
-                    "start_date": "2021-08-09T13:00:00Z",
-                    "end_date": "2021-09-24T23:00:00Z",
-                    "start_date_accuracy": "estimated",
-                    "end_date_accuracy": "estimated",
-                    "beginning_accuracy": "estimated",
-                    "ending_accuracy": "estimated",
-                    "road_names": ["US-34"],
-                    "direction": "eastbound",
-                    "vehicle_impact": "all-lanes-open",
-                    "event_status": "planned",
-                    "reduced_speed_limit": 45,
-                    'types_of_work': [{'type_name': 'below-road-work',
-                                       'is_architectural_change': False}],
-                    "description": "Bridge Repairs. Crews roadside.",
-                    "creation_date": "2021-04-13T00:00:00Z",
-                    "update_date": "2021-04-13T00:00:00Z"
+                'type': 'Feature',
+                'properties': {
+                    'road_event_id': '2',
+                    'event_type': 'work-zone',
+                    'reduced_speed_limit': 45,
+                    'data_source_id': 'w',
+                    'start_date': "2021-08-30T02:30:00Z",
+                    'end_date': "2021-08-30T02:30:00Z",
+                    'start_date_accuracy': 'estimated',
+                    'end_date_accuracy': 'estimated',
+                    'beginning_accuracy': 'estimated',
+                    'ending_accuracy': 'estimated',
+                    'road_names': ['287'],
+                    'direction': 'eastbound',
+                    'vehicle_impact': 'all-lanes-open',
+                    'event_status': 'planned',
+                    'types_of_work': [
+                        {
+                            'type_name': 'surface-work',
+                            'is_architectural_change': True
+                        }
+                    ],
+                    'description': 'Maintenance for lane expansion. Lane expansion - maintenance work',
+                    'creation_date': "2021-12-07T03:05:01Z",
+                    'update_date': "2021-12-07T10:05:01Z"
                 },
-                "geometry": {
-                    "type": "LineString",
-                    "coordinates": [
-                        [
-                            -104.65225365171561,
-                            40.39393671703483
-                        ],
-                        [
-                            -104.65228583822379,
-                            40.39342193227279
-                        ],
-                        [
-                            -104.64946415434012,
-                            40.39348730198451
-                        ],
-                        [
-                            -104.64953925619254,
-                            40.394108311080984
-                        ],
-                        [
-                            -104.65225365171561,
-                            40.39393671703483
-                        ]
-                    ]
-                }
-            },
-            {
-                "type": "Feature",
-                "properties": {
-                    "road_event_id": '3',
-                    "event_type": "work-zone",
-                    "data_source_id": 'w',
-                    "start_date": "2021-08-09T13:00:00Z",
-                    "end_date": "2021-09-24T23:00:00Z",
-                    "start_date_accuracy": "estimated",
-                    "end_date_accuracy": "estimated",
-                    "beginning_accuracy": "estimated",
-                    "ending_accuracy": "estimated",
-                    "road_names": ["US-34"],
-                    "direction": "westbound",
-                    "vehicle_impact": "all-lanes-open",
-                    "event_status": "planned",
-                    "reduced_speed_limit": 45,
-                    'types_of_work': [{'type_name': 'below-road-work',
-                                       'is_architectural_change': False}],
-                    "description": "Bridge Repairs. Crews roadside.",
-                    "creation_date": "2021-04-13T00:00:00Z",
-                    "update_date": "2021-04-13T00:00:00Z"
-                },
-                "geometry": {
-                    "type": "LineString",
-                    "coordinates": [
-                        [
-                            -104.65225365171561,
-                            40.39393671703483
-                        ],
-                        [
-                            -104.65228583822379,
-                            40.39342193227279
-                        ],
-                        [
-                            -104.64946415434012,
-                            40.39348730198451
-                        ],
-                        [
-                            -104.64953925619254,
-                            40.394108311080984
-                        ],
-                        [
-                            -104.65225365171561,
-                            40.39393671703483
-                        ]
+                'geometry': {
+                    'type': 'LineString',
+                    'coordinates': [
+                        [-104.82230842595187, 39.73946349406594],
+                        [-104.79432762150851, 39.73959547447038]
                     ]
                 }
             }
@@ -598,8 +239,8 @@ def test_wzdx_creator(mock_dt, mock_dt_2, mock_dt_3, mockuuid):
     }
 
     with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
-        test_wzdx = navjoy_translator.wzdx_creator(obj)
-
+        test_wzdx = navjoy_translator.wzdx_creator(standard)
+    print(test_wzdx)
     assert expected_wzdx == test_wzdx
 
 
@@ -615,75 +256,9 @@ def test_wzdx_creator_no_incidents():
     assert test_wzdx == None
 
 
-@patch.dict(os.environ, {
-    'contact_name': 'Ashley Nylen',
-    'contact_email': 'ashley.nylen@state.co.us',
-    'issuing_organization': 'CDOT'
-})
-def test_wzdx_creator_invalid_incidents_no_description():
-    event = {
-        "sys_gUid": "Form568-cb0fdaf0-c27a-4bef-aabd-442615dfb2d6",
-        "data": {
-            # No description
-            "srzmap": [
-                {
-                    "type": "LineString",
-                    "coordinates": [
-                        [
-                            [
-                                -103.17130040113868,
-                                40.625392709715676
-                            ],
-                            [
-                                -103.17889641706886,
-                                40.61979008921054
-                            ]
-                        ]
-                    ],
-                },
-            ],
-            "streetNameFrom": "US-34",
-            "directionOfTraffic": " East/West ",
-            "requestedTemporarySpeed": "45",
-            "workStartDate": "2021-08-09T13:00:00.000Z",
-            "workEndDate": "2021-09-24T23:00:00.000Z",
-            "reductionJustification": "Crews roadside.",
-        }
-    }
-    test_wzdx = navjoy_translator.wzdx_creator(event, 'eastbound')
-    assert test_wzdx == None
-
-
 def test_wzdx_creator_invalid_info_object():
-    event = {
-        "sys_gUid": "Form568-cb0fdaf0-c27a-4bef-aabd-442615dfb2d6",
-        "data": {
-            "descriptionForProject": "Bridge Repairs",
-            "srzmap": [
-                {
-                    "type": "LineString",
-                    "coordinates": [
-                        [
-                            [
-                                -103.17130040113868,
-                                40.625392709715676
-                            ],
-                            [
-                                -103.17889641706886,
-                                40.61979008921054
-                            ]
-                        ]
-                    ],
-                },
-            ],
-            "streetNameFrom": "US-34",
-            "directionOfTraffic": " East/West ",
-            "requestedTemporarySpeed": "45",
-            "workStartDate": "2021-08-09T13:00:00.000Z",
-            "workEndDate": "2021-09-24T23:00:00.000Z",
-            "reductionJustification": "Crews roadside.",
-        }
-    }
+    standard = {'rtdh_timestamp': 1638846301.4691865, 'rtdh_message_id': 'e5bba2f6-bbd0-4a61-8d64-b7c33657d35a', 'event': {'type': '', 'source': {'id': 'Form568-44819108-703c-4d6d-ae0d-7dca7319e5b0', 'last_updated_timestamp': 1638871501469}, 'geometry': [[-104.82230842595187, 39.73946349406594],
+                                                                                                                                                                                                                                                               [-104.79432762150851, 39.73959547447038]], 'header': {'description': 'Maintenance for lane expansion', 'justification': 'Lane expansion - maintenance work', 'start_timestamp': 1630290600000, 'end_timestamp': 1630290600000}, 'detail': {'road_name': '287', 'road_number': '287', 'direction': 'eastbound'}}}
 
     test_invalid_info_object = {
         'feed_info_id': "104d7746-e948bf9dfa",
@@ -697,357 +272,8 @@ def test_wzdx_creator_invalid_info_object():
     }
 
     test_wzdx = navjoy_translator.wzdx_creator(
-        event, 'eastbound', test_invalid_info_object)
+        standard, test_invalid_info_object)
     assert test_wzdx == None
-
-
-@patch.dict(os.environ, {
-    'contact_name': 'Ashley Nylen',
-    'contact_email': 'ashley.nylen@state.co.us',
-    'issuing_organization': 'CDOT'
-})
-@patch('uuid.uuid4')
-@unittest.mock.patch('wzdx.navjoy_translator.datetime')
-@unittest.mock.patch('wzdx.tools.date_tools.datetime')
-@unittest.mock.patch('wzdx.tools.wzdx_translator.datetime')
-def test_wzdx_creator_valid_and_invalid(mock_dt, mock_dt_2, mock_dt_3, mockuuid):
-    init_datetime_mocks([mock_dt, mock_dt_2, mock_dt_3])
-    uuid.uuid4 = Mock()
-    uuid.uuid4.side_effect = 'we234de'
-    obj = [
-        {
-            "sys_gUid": "Form568-cb0fdaf0-c27a-4bef-aabd-442615dfb2d6",
-            "data": {
-                "descriptionForProject": "Bridge Repairs",
-                "srzmap": [
-                    {
-                        "type": "LineString",
-                        "coordinates": [
-                            [
-                                [
-                                    -104.65225365171561,
-                                    40.39393671703483
-                                ],
-                                [
-                                    -104.65228583822379,
-                                    40.39342193227279
-                                ],
-                                [
-                                    -104.64946415434012,
-                                    40.39348730198451
-                                ],
-                                [
-                                    -104.64953925619254,
-                                    40.394108311080984
-                                ],
-                                [
-                                    -104.65225365171561,
-                                    40.39393671703483
-                                ]
-                            ]
-                        ],
-                    },
-                ],
-                "streetNameFrom": "US-34",
-                "directionOfTraffic": " East/West ",
-                "requestedTemporarySpeed": "45",
-                "workStartDate": "2021-08-09T13:00:00.000Z",
-                "workEndDate": "2021-09-24T23:00:00.000Z",
-                "reductionJustification": "Crews roadside.",
-            }
-        },
-        {
-            "sys_gUid": "Form568-cb0fdaf0-c27a-4bef-aabd-442615dfb2d6",
-            "data": {
-                # No description
-                "srzmap": [
-                    {
-                        "type": "LineString",
-                        "coordinates": [
-                            [
-                                [
-                                    -104.65225365171561,
-                                    40.39393671703483
-                                ],
-                                [
-                                    -104.65228583822379,
-                                    40.39342193227279
-                                ]
-                            ]
-                        ],
-                    },
-                ],
-                "streetNameFrom": "US-34",
-                "directionOfTraffic": " East/West ",
-                "requestedTemporarySpeed": "45",
-                "workStartDate": "2021-08-09T13:00:00.000Z",
-                "workEndDate": "2021-09-24T23:00:00.000Z",
-                "reductionJustification": "Crews roadside.",
-            }
-        }
-    ]
-
-    expected_wzdx = {
-        'road_event_feed_info': {
-            'feed_info_id': '2ed141dc-b998-4f7a-8395-9ae9dc7df2f8',
-            'update_date': '2021-04-13T00:00:00Z',
-            'publisher': 'CDOT',
-            'contact_name': 'Ashley Nylen',
-            'contact_email': 'ashley.nylen@state.co.us',
-            'version': '3.1',
-            'license': 'https://creativecommons.org/publicdomain/zero/1.0/',
-            'data_sources': [
-                {
-                    'data_source_id': 'w',
-                    'feed_info_id': '2ed141dc-b998-4f7a-8395-9ae9dc7df2f8',
-                    'organization_name': 'CDOT',
-                    'contact_name': 'Ashley Nylen',
-                    'contact_email': 'ashley.nylen@state.co.us',
-                    'update_date': '2021-04-13T00:00:00Z',
-                    'location_method': 'channel-device-method',
-                    'lrs_type': 'lrs_type'
-                }
-            ]
-        },
-        'type': 'FeatureCollection',
-        'features': [
-            {
-                "type": "Feature",
-                "properties": {
-                    "road_event_id": '2',
-                    "event_type": "work-zone",
-                    "data_source_id": 'w',
-                    "start_date": "2021-08-09T13:00:00Z",
-                    "end_date": "2021-09-24T23:00:00Z",
-                    "start_date_accuracy": "estimated",
-                    "end_date_accuracy": "estimated",
-                    "beginning_accuracy": "estimated",
-                    "ending_accuracy": "estimated",
-                    "road_names": ["US-34"],
-                    "direction": "eastbound",
-                    "vehicle_impact": "all-lanes-open",
-                    "event_status": "planned",
-                    "reduced_speed_limit": 45,
-                    'types_of_work': [{'is_architectural_change': False,
-                                       'type_name': 'below-road-work'}],
-                    "description": "Bridge Repairs. Crews roadside.",
-                    "creation_date": "2021-04-13T00:00:00Z",
-                    "update_date": "2021-04-13T00:00:00Z"
-                },
-                "geometry": {
-                    "type": "LineString",
-                    "coordinates": [
-                        [
-                            -104.65225365171561,
-                            40.39393671703483
-                        ],
-                        [
-                            -104.65228583822379,
-                            40.39342193227279
-                        ],
-                        [
-                            -104.64946415434012,
-                            40.39348730198451
-                        ],
-                        [
-                            -104.64953925619254,
-                            40.394108311080984
-                        ],
-                        [
-                            -104.65225365171561,
-                            40.39393671703483
-                        ]
-                    ]
-                }
-            },
-            {
-                "type": "Feature",
-                "properties": {
-                    "road_event_id": '3',
-                    "event_type": "work-zone",
-                    "data_source_id": 'w',
-                    "start_date": "2021-08-09T13:00:00Z",
-                    "end_date": "2021-09-24T23:00:00Z",
-                    "start_date_accuracy": "estimated",
-                    "end_date_accuracy": "estimated",
-                    "beginning_accuracy": "estimated",
-                    "ending_accuracy": "estimated",
-                    "road_names": ["US-34"],
-                    "direction": "westbound",
-                    "vehicle_impact": "all-lanes-open",
-                    "event_status": "planned",
-                    "reduced_speed_limit": 45,
-                    'types_of_work': [{'is_architectural_change': False,
-                                       'type_name': 'below-road-work'}],
-                    "description": "Bridge Repairs. Crews roadside.",
-                    "creation_date": "2021-04-13T00:00:00Z",
-                    "update_date": "2021-04-13T00:00:00Z"
-                },
-                "geometry": {
-                    "type": "LineString",
-                    "coordinates": [
-                        [
-                            -104.65225365171561,
-                            40.39393671703483
-                        ],
-                        [
-                            -104.65228583822379,
-                            40.39342193227279
-                        ],
-                        [
-                            -104.64946415434012,
-                            40.39348730198451
-                        ],
-                        [
-                            -104.64953925619254,
-                            40.394108311080984
-                        ],
-                        [
-                            -104.65225365171561,
-                            40.39393671703483
-                        ]
-                    ]
-                }
-            }
-        ]
-    }
-
-    with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
-        test_wzdx = navjoy_translator.wzdx_creator(obj)
-    assert expected_wzdx == test_wzdx
-
-
-# ----------------------------------------- get_directions_from_string -----------------------------------------
-def test_get_directions_from_string_valid():
-    directions_string = ' East/West '
-    expected = ['eastbound', 'westbound']
-    actual = navjoy_translator.get_directions_from_string(directions_string)
-
-    assert actual == expected
-
-
-def test_get_directions_from_string_invalid():
-    directions_string = ' Easasdt/dWest '
-    expected = []
-    actual = navjoy_translator.get_directions_from_string(directions_string)
-
-    assert actual == expected
-
-
-def test_get_directions_from_string_none():
-    directions_string = None
-    expected = []
-    actual = navjoy_translator.get_directions_from_string(directions_string)
-
-    assert actual == expected
-
-
-def test_get_directions_from_string_empty_string():
-    directions_string = ''
-    expected = []
-    actual = navjoy_translator.get_directions_from_string(directions_string)
-
-    assert actual == expected
-
-# ----------------------------------------- get_linestring_index -----------------------------------------
-
-
-def test_get_linestring_index_valid():
-    map = [
-        {
-            "type": "LineString",
-            "coordinates": [
-                [
-                    [
-                        -103.17130040113868,
-                        40.625392709715676
-                    ],
-                    [
-                        -103.17889641706886,
-                        40.61979008921054
-                    ]
-                ]
-            ],
-        },
-    ]
-    expected = 0
-    actual = navjoy_translator.get_linestring_index(map)
-
-    assert actual == expected
-
-
-def test_get_linestring_no_linestring():
-    map = [
-        {
-            "type": "Polygon",
-            "coordinates": [
-                [
-                    [
-                        -103.17130040113868,
-                        40.625392709715676
-                    ],
-                    [
-                        -103.17889641706886,
-                        40.61979008921054
-                    ]
-                ]
-            ],
-        },
-    ]
-    expected = None
-    actual = navjoy_translator.get_linestring_index(map)
-
-    assert actual == expected
-
-# ----------------------------------------- get_polygon_index -----------------------------------------
-
-
-def test_get_polygon_index_valid():
-    map = [
-        {
-            "type": "Polygon",
-            "coordinates": [
-                [
-                    [
-                        -103.17130040113868,
-                        40.625392709715676
-                    ],
-                    [
-                        -103.17889641706886,
-                        40.61979008921054
-                    ]
-                ]
-            ],
-        },
-    ]
-    expected = 0
-    actual = navjoy_translator.get_polygon_index(map)
-
-    assert actual == expected
-
-
-def test_get_polygon_no_polygon():
-    map = [
-        {
-            "type": "Linestring",
-            "coordinates": [
-                [
-                    [
-                        -103.17130040113868,
-                        40.625392709715676
-                    ],
-                    [
-                        -103.17889641706886,
-                        40.61979008921054
-                    ]
-                ]
-            ],
-        },
-    ]
-    expected = None
-    actual = navjoy_translator.get_polygon_index(map)
-
-    assert actual == expected
 
 
 # ----------------------------------------- get_types_of_work -----------------------------------------
@@ -1076,131 +302,3 @@ def test_get_types_of_work_empty():
     actual = navjoy_translator.get_types_of_work(field)
 
     assert actual == expected
-
-
-def test_expand_speed_zone_1():
-    event = {
-        "sys_gUid": "Form568-cb0fdaf0-c27a-4bef-aabd-442615dfb2d6",
-        "data": {
-            "srzmap": [
-                {
-                    "type": "LineString",
-                    "coordinates": [
-                        [
-                            [
-                                -103.17130040113868,
-                                40.625392709715676
-                            ],
-                            [
-                                -103.17889641706886,
-                                40.61979008921054
-                            ]
-                        ]
-                    ],
-                },
-            ],
-            "streetNameFrom": "US-34",
-            "directionOfTraffic": " East/West ",
-            "requestedTemporarySpeed": "45",
-            "workStartDate": "2021-08-09T13:00:00.000Z",
-            "workEndDate": "2021-09-24T23:00:00.000Z",
-            "reductionJustification": "Crews roadside.",
-            'currentPostedSpeed': None,
-            'mileMarkerEnd': None,
-            'mileMarkerStart': None,
-        }
-    }
-
-    actual = navjoy_translator.expand_speed_zone(event)
-
-    assert expected_results.test_expand_speed_zone_1_expected == actual
-
-
-def test_expand_speed_zone_2():
-    event = {
-        "sys_gUid": "Form568-cb0fdaf0-c27a-4bef-aabd-442615dfb2d6",
-        "data": {
-            "srzmap": [
-                {
-                    "type": "LineString",
-                    "coordinates": [
-                        [
-                            [
-                                -103.17130040113868,
-                                40.625392709715676
-                            ],
-                            [
-                                -103.17889641706886,
-                                40.61979008921054
-                            ]
-                        ]
-                    ],
-                },
-            ],
-            "reductionJustification": "Crews roadside.",
-
-            "streetNameFrom2": "US-34",
-            "directionOfTraffic2": " East/West ",
-            "requestedTemporarySpeed2": "45",
-            "workStartDate2": "2021-08-09T13:00:00.000Z",
-            "workEndDate2": "2021-09-24T23:00:00.000Z",
-            'currentPostedSpeed2': None,
-            'mileMarkerEnd2': None,
-            'mileMarkerStart2': None,
-        }
-    }
-
-    actual = navjoy_translator.expand_speed_zone(event)
-
-    assert expected_results.test_expand_speed_zone_2_expected == actual
-
-
-# I hate how long this test is, but this is what is has to be to test all 4 at the same time
-def test_expand_speed_zone_2_3_4():
-    event = {
-        "sys_gUid": "Form568-cb0fdaf0-c27a-4bef-aabd-442615dfb2d6",
-        "data": {
-            "srzmap": [
-            ],
-            "reductionJustification": "Crews roadside.",
-            "streetNameFrom": "US-34",
-            "directionOfTraffic": " East/West ",
-            "requestedTemporarySpeed": "1",
-            "workStartDate": "2021-08-09T13:00:00.000Z",
-            "workEndDate": "2021-09-24T23:00:00.000Z",
-            'currentPostedSpeed': None,
-            'mileMarkerEnd': None,
-            'mileMarkerStart': None,
-
-            "streetNameFrom2": "US-34",
-            "directionOfTraffic2": " East/West ",
-            "requestedTemporarySpeed2": "2",
-            "workStartDate2": "2021-08-09T13:00:00.000Z",
-            "workEndDate2": "2021-09-24T23:00:00.000Z",
-            'currentPostedSpeed2': None,
-            'mileMarkerEnd2': None,
-            'mileMarkerStart2': None,
-
-            "streetNameFrom3": "US-34",
-            "directionOfTraffic3": " East/West ",
-            "requestedTemporarySpeed3": "3",
-            "workStartDate3": "2021-08-09T13:00:00.000Z",
-            "workEndDate3": "2021-09-24T23:00:00.000Z",
-            'currentPostedSpeed3': None,
-            'mileMarkerEnd3': None,
-            'mileMarkerStart3': None,
-
-            "streetNameFrom4": "US-34",
-            "directionOfTraffic4": " East/West ",
-            "requestedTemporarySpeed4": "4",
-            "workStartDate4": "2021-08-09T13:00:00.000Z",
-            "workEndDate4": "2021-09-24T23:00:00.000Z",
-            'currentPostedSpeed4': None,
-            'mileMarkerEnd4': None,
-            'mileMarkerStart4': None,
-        }
-    }
-
-    actual = navjoy_translator.expand_speed_zone(event)
-
-    assert expected_results.test_expand_speed_zone_2_3_4_expected == actual

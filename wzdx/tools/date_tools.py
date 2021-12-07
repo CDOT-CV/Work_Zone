@@ -2,6 +2,7 @@ from datetime import datetime, timedelta, timezone
 import datetime as dt
 import logging
 from dateutil import parser
+import unittest
 
 
 ISO_8601_FORMAT_STRING = "%Y-%m-%dT%H:%M:%SZ"
@@ -9,7 +10,8 @@ ISO_8601_FORMAT_STRING = "%Y-%m-%dT%H:%M:%SZ"
 
 def get_iso_string_from_datetime(date):
     # This is added for unit test mocking (dt.datetime instead of just datetime)
-    if not date or type(date) != dt.datetime:
+    print(type(date))
+    if (not date or type(date) != dt.datetime):
         return None
     return date.astimezone(timezone.utc).strftime(ISO_8601_FORMAT_STRING)
 
