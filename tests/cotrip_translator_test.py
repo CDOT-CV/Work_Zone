@@ -218,8 +218,6 @@ def test_parse_alert_success():
 
     test_feature = cotrip_translator.parse_alert(cotrip_obj)
     expected_feature = {
-
-
         "type": "Feature",
         "properties": {
             "road_event_id": None,

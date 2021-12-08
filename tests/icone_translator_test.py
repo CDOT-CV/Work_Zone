@@ -7,184 +7,6 @@ import time_machine
 import xmltodict
 from wzdx import icone_translator
 
-# Unit testing code for icone_translator.py
-# --------------------------------------------------------------------------------Unit test for parse_incident function--------------------------------------------------------------------------------
-
-
-def test_parse_incident_from_street_success():
-    test_var = """ <incident id="1245">
-    <creationtime>2019-11-05T01:22:20Z</creationtime>
-    <updatetime>2020-08-21T15:52:02Z</updatetime>
-    <type>CONSTRUCTION</type>
-    <description>19-1245: Roadwork between MP 40 and MP 48</description>
-    <location>
-      <street>I-75 N</street>
-      <direction>ONE_DIRECTION</direction>
-      <polyline>37.1571990,-84.1128540,37.1686478,-84.1238971,37.1913000,-84.1458610,37.2093480,-84.1752970,37.2168370,-84.2013030</polyline>
-    </location>
-    <starttime>2020-02-14T17:08:16Z</starttime>
-    </incident>  """
-
-    icone_obj = xmltodict.parse(test_var)
-    test_feature = icone_translator.parse_incident(icone_obj['incident'])
-    expected_feature = {
-        "type": "Feature",
-        "properties": {
-            "road_event_id": "",
-            "event_type": "work-zone",
-            "data_source_id": "",
-            "start_date": "2020-02-14T17:08:16Z",
-            "end_date": "",
-            "start_date_accuracy": "estimated",
-            "end_date_accuracy": "estimated",
-            "beginning_accuracy": "estimated",
-            "ending_accuracy": "estimated",
-            "road_names": ["I-75 N"],
-            "direction": "northbound",
-            "vehicle_impact": "all-lanes-open",
-            "relationship": {},
-            "lanes": [],
-            "beginning_cross_street": "",
-            "ending_cross_street": "",
-            "event_status": "active",
-            "types_of_work": [],
-            "restrictions": [],
-            "description": "19-1245: Roadwork between MP 40 and MP 48",
-            "creation_date": "2019-11-05T01:22:20Z",
-            "update_date": "2020-08-21T15:52:02Z"
-        },
-        "geometry": {
-            "type": "LineString",
-            "coordinates": [
-                [
-                    -84.112854,
-                    37.157199
-                ],
-                [
-                    -84.1238971,
-                    37.1686478
-                ],
-                [
-                    -84.145861,
-                    37.1913
-                ],
-                [
-                    -84.175297,
-                    37.209348
-                ],
-                [
-                    -84.201303,
-                    37.216837
-                ]
-            ]
-        }
-    }
-    assert test_feature == expected_feature
-
-
-def test_parse_incident_from_coordinates_success():
-    test_var = """ <incident id="1245">
-    <creationtime>2019-11-05T01:22:20Z</creationtime>
-    <updatetime>2020-08-21T15:52:02Z</updatetime>
-    <type>CONSTRUCTION</type>
-    <description>19-1245: Roadwork between MP 40 and MP 48</description>
-    <location>
-      <street>I-75</street>
-      <direction>ONE_DIRECTION</direction>
-      <polyline>37.1571990,-84.1128540,37.1686478,-84.1238971,37.1913000,-84.1458610,37.2093480,-84.1752970,37.2168370,-84.2013030</polyline>
-    </location>
-    <starttime>2020-02-14T17:08:16Z</starttime>
-    </incident>  """
-
-    icone_obj = xmltodict.parse(test_var)
-    test_feature = icone_translator.parse_incident(icone_obj['incident'])
-    expected_feature = {
-        "type": "Feature",
-        "properties": {
-            "road_event_id": "",
-            "event_type": "work-zone",
-            "data_source_id": "",
-            "start_date": "2020-02-14T17:08:16Z",
-            "end_date": "",
-            "start_date_accuracy": "estimated",
-            "end_date_accuracy": "estimated",
-            "beginning_accuracy": "estimated",
-            "ending_accuracy": "estimated",
-            "road_names": ["I-75"],
-            "direction": "westbound",
-            "vehicle_impact": "all-lanes-open",
-            "relationship": {},
-            "lanes": [],
-            "beginning_cross_street": "",
-            "ending_cross_street": "",
-            "event_status": "active",
-            "types_of_work": [],
-            "restrictions": [],
-            "description": "19-1245: Roadwork between MP 40 and MP 48",
-            "creation_date": "2019-11-05T01:22:20Z",
-            "update_date": "2020-08-21T15:52:02Z"
-        },
-        "geometry": {
-            "type": "LineString",
-            "coordinates": [
-                [
-                    -84.112854,
-                    37.157199
-                ],
-                [
-                    -84.1238971,
-                    37.1686478
-                ],
-                [
-                    -84.145861,
-                    37.1913
-                ],
-                [
-                    -84.175297,
-                    37.209348
-                ],
-                [
-                    -84.201303,
-                    37.216837
-                ]
-            ]
-        }
-    }
-    assert test_feature == expected_feature
-
-
-def test_parse_incident_no_data():
-    test_feature = icone_translator.parse_incident(None)
-    expected_feature = None
-    assert test_feature == expected_feature
-
-
-def test_parse_incident_invalid_data():
-    test_var = 'a,b,c,d'
-    callback = MagicMock()
-    test_feature = icone_translator.parse_incident(
-        test_var, callback_function=callback)
-    assert callback.called and test_feature == None
-
-
-def test_parse_incident_no_direction():
-    test_var = """ <incident id="U13631595_202012160845">
-           <creationtime>2020-12-16T08:45:03Z</creationtime>
-           <updatetime>2020-12-16T17:18:00Z</updatetime>
-           <type>CONSTRUCTION</type>
-           <description>Roadwork - Lane Closed, MERGE LEFT [Trafficade, iCone]</description>
-           <location>
-           <street>I-75</street>
-             <direction>ONE_DIRECTION</direction>
-             <polyline>34.8380671,-114.1450650,34.8380671,-114.1450650</polyline>
-           </location>
-           <starttime>2020-12-16T08:45:03Z</starttime>
-           </incident> """
-
-    icone_obj = xmltodict.parse(test_var)
-    test_feature = icone_translator.parse_incident(icone_obj['incident'])
-    assert test_feature == None
-
 
 # --------------------------------------------------------------------------------Unit test for get_vehicle_impact function--------------------------------------------------------------------------------
 def test_get_vehicle_impact_some_lanes_closed():
@@ -202,198 +24,65 @@ def test_get_vehicle_impact_all_lanes_open():
 
 
 # --------------------------------------------------------------------------------Unit test for wzdx_creator function--------------------------------------------------------------------------------
-@patch.dict(os.environ, {
-    'contact_name': 'Ashley Nylen',
-    'contact_email': 'ashley.nylen@state.co.us',
-    'issuing_organization': 'CDOT'
-})
-@patch('uuid.uuid4')
-def test_wzdx_creator(mockuuid):
-    uuid.uuid4 = Mock()
-    uuid.uuid4.side_effect = 'we234de'
-    icone_obj = {'incidents': {'incident': [{
-        '@id': 'U13631595_202012160845',
-        'updatetime': '2020-12-16T17:18:00Z',
-        'starttime': '2020-12-07T14:18:00Z',
-        'creationtime': '2020-12-13T14:18:00Z',
-        'description': 'Road constructions are going on',
-        'location': {
-            'polyline': '34.8380671,-114.1450650,34.8380671,-114.1450650',
-            'street': 'I-70 N'
-        }
-    }]}}
-
-    expected_wzdx = {
-        'road_event_feed_info': {
-            'feed_info_id': '104d7746-688c-44ed-b195-2ee948bf9dfa',
-            'update_date': '2021-04-13T00:00:00Z',
-            'publisher': 'CDOT',
-            'contact_name': 'Ashley Nylen',
-            'contact_email': 'ashley.nylen@state.co.us',
-            'version': '3.1',
-            'license': 'https://creativecommons.org/publicdomain/zero/1.0/',
-            'data_sources': [{
-                'data_source_id': 'w',
-                'feed_info_id': '104d7746-688c-44ed-b195-2ee948bf9dfa',
-                'organization_name': 'CDOT',
-                'contact_name': 'Ashley Nylen',
-                'contact_email': 'ashley.nylen@state.co.us',
-                'update_date': '2021-04-13T00:00:00Z',
-                'location_method': 'channel-device-method',
-                'lrs_type': 'lrs_type'}]},
-        'type': 'FeatureCollection',
-        'features': [{
-            'type': 'Feature',
-            'properties': {
-
-                'road_event_id': '2',
-                'event_type': 'work-zone',
-                'data_source_id': 'w',
-                'start_date': '2020-12-07T14:18:00Z',
-                'end_date': '',
-                'start_date_accuracy': 'estimated',
-                'end_date_accuracy': 'estimated',
-                'beginning_accuracy': 'estimated',
-                'ending_accuracy': 'estimated',
-                'road_names': ['I-70 N'],
-                'direction': 'northbound',
-                'vehicle_impact': 'all-lanes-open',
-                'relationship': {},
-                'lanes': [],
-                'beginning_cross_street': '',
-                'ending_cross_street': '',
-                'event_status': 'active',
-                'types_of_work': [],
-                'restrictions': [],
-                'description': 'Road constructions are going on',
-                'creation_date': '2020-12-13T14:18:00Z',
-                'update_date': '2020-12-16T17:18:00Z'},
-            'geometry': {
-                'type': 'LineString',
-                'coordinates': [[-114.145065, 34.8380671], [-114.145065, 34.8380671]]}}]}
-
-    with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
-        test_wzdx = icone_translator.wzdx_creator(icone_obj)
-
-    assert expected_wzdx == test_wzdx
-
-
 def test_wzdx_creator_empty_icone_object():
     icone_obj = None
     test_wzdx = icone_translator.wzdx_creator(icone_obj)
     assert test_wzdx == None
 
 
-@patch.dict(os.environ, {
-    'contact_name': 'Ashley Nylen',
-    'contact_email': 'ashley.nylen@state.co.us',
-    'issuing_organization': 'CDOT'
-})
-@patch('uuid.uuid4')
-def test_wzdx_creator_no_info_object(mockuuid):
-    uuid.uuid4 = Mock()
-    uuid.uuid4.side_effect = 'we234de'
-    icone_obj = {'incidents': {'incident': [{
-        '@id': 'U13631595_202012160845',
-        'updatetime': '2020-12-16T17:18:00Z',
-        'starttime': '2020-12-07T14:18:00Z',
-        'creationtime': '2020-12-13T14:18:00Z',
-        'description': 'Road constructions are going on',
-        'location': {
-            'polyline': '34.8380671,-114.1450650,34.8380671,-114.1450650',
-            'street': 'I-70 N'
-        }
-    }]}}
-    expected_wzdx = {
-        'road_event_feed_info': {
-            'feed_info_id': '104d7746-688c-44ed-b195-2ee948bf9dfa',
-            'update_date': '2021-04-13T00:00:00Z',
-            'publisher': 'CDOT',
-            'contact_name': 'Ashley Nylen',
-            'contact_email': 'ashley.nylen@state.co.us',
-            'version': '3.1',
-            'license': 'https://creativecommons.org/publicdomain/zero/1.0/',
-            'data_sources': [{
-                'data_source_id': 'w',
-                'feed_info_id': '104d7746-688c-44ed-b195-2ee948bf9dfa',
-                'organization_name': 'CDOT',
-                'contact_name': 'Ashley Nylen',
-                'contact_email': 'ashley.nylen@state.co.us',
-                'update_date': '2021-04-13T00:00:00Z',
-                'location_method': 'channel-device-method',
-                'lrs_type': 'lrs_type'}]},
-        'type': 'FeatureCollection',
-        'features': [{
-            'type': 'Feature',
-            'properties': {
-
-                'road_event_id': '2',
-                'event_type': 'work-zone',
-                'data_source_id': 'w',
-                'start_date': '2020-12-07T14:18:00Z',
-                'end_date': '',
-                'start_date_accuracy': 'estimated',
-                'end_date_accuracy': 'estimated',
-                'beginning_accuracy': 'estimated',
-                'ending_accuracy': 'estimated',
-                'road_names': ['I-70 N'],
-                'direction': 'northbound',
-                'vehicle_impact': 'all-lanes-open',
-                'relationship': {},
-                'lanes': [],
-                'beginning_cross_street': '',
-                'ending_cross_street': '',
-                'event_status': 'active',
-                'types_of_work': [],
-                'restrictions': [],
-                'description': 'Road constructions are going on',
-                'creation_date': '2020-12-13T14:18:00Z',
-                'update_date': '2020-12-16T17:18:00Z'},
-            'geometry': {
-                'type': 'LineString',
-                'coordinates': [[-114.145065, 34.8380671], [-114.145065, 34.8380671]]}}]}
-    with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
-        test_wzdx = icone_translator.wzdx_creator(icone_obj)
-    assert expected_wzdx == test_wzdx
-
-
-def test_wzdx_creator_no_incidents():
-    icone_obj = {'incidents': {'@timestamp': '2020-12-16T17:18:00Z'}}
-    test_wzdx = icone_translator.wzdx_creator(icone_obj)
-    assert test_wzdx == None
-
-
-@patch.dict(os.environ, {
-    'contact_name': 'Ashley Nylen',
-    'contact_email': 'ashley.nylen@state.co.us',
-    'issuing_organization': 'CDOT'
-})
-def test_wzdx_creator_invalid_incidents_no_description():
-    icone_obj = {'incidents': {'incident': [{
-        '@id': 'U13631595_202012160845',
-        'updatetime': '2020-12-16T17:18:00Z',
-        'starttime': '2020-12-07T14:18:00Z',
-        'creationtime': '2020-12-13T14:18:00Z',
-        'location': {
-            'polyline': '34.8380671,-114.1450650,34.8380671,-114.1450650',
-            'street': 'I-70 N'
-        }
-    }]}}
-    test_wzdx = icone_translator.wzdx_creator(icone_obj)
-    assert test_wzdx == None
-
-
 def test_wzdx_creator_invalid_info_object():
-    icone_obj = {'incidents': {'incident': [{
-        '@id': 'U13631595_202012160845',
-        'updatetime': '2020-12-16T17:18:00Z',
-        'starttime': '2020-12-07T14:18:00Z',
-        'creationtime': '2020-12-13T14:18:00Z',
-        'location': {
-            'polyline': '34.8380671,-114.1450650,34.8380671,-114.1450650',
-            'street': 'I-70 N'
+    icone_obj = {
+        "rtdh_timestamp": 1638894543.6077065,
+        "rtdh_message_id": "b33b2851-0475-4c8c-8bb7-c63e449190a9",
+        "event": {
+            "type": "CONSTRUCTION",
+            "source": {
+                "id": "1245",
+                "creation_timestamp": 1572916940000,
+                "last_updated_timestamp": 1636142163000
+            },
+            "geometry": [
+                [
+                    -84.1238971,
+                    37.1686478
+                ],
+                [
+                    -84.1238971,
+                    37.1686478
+                ],
+                [
+                    -84.145861,
+                    37.1913
+                ],
+                [
+                    -84.145861,
+                    37.1913
+                ],
+                [
+                    -84.157105,
+                    37.201197
+                ],
+                [
+                    -84.167033,
+                    37.206079
+                ],
+                [
+                    -84.204074,
+                    37.21931
+                ]
+            ],
+            "header": {
+                "description": "19-1245: Roadwork between MP 40 and MP 48",
+                "start_timestamp": 1623183301000,
+                "end_timestamp": "None"
+            },
+            "detail": {
+                "road_name": "I-75 N",
+                "road_number": "I-75 N",
+                "direction": "northbound"
+            }
         }
-    }]}}
+    }
 
     test_invalid_info_object = {
         'feed_info_id': "104d7746-e948bf9dfa",
@@ -417,85 +106,140 @@ def test_wzdx_creator_invalid_info_object():
     'issuing_organization': 'CDOT'
 })
 @patch('uuid.uuid4')
-def test_wzdx_creator_valid_and_invalid(mockuuid):
+def test_wzdx_creator(mockuuid):
     uuid.uuid4 = Mock()
     uuid.uuid4.side_effect = 'we234de'
-    icone_obj = {'incidents': {'incident': [{
-        '@id': 'U13631595_202012160845',
-        'updatetime': '2020-12-16T17:18:00Z',
-        'starttime': '2020-12-07T14:18:00Z',
-        'creationtime': '2020-12-13T14:18:00Z',
-        'description': 'Road constructions are going on',
-        'location': {
-            'polyline': '34.8380671,-114.1450650,34.8380671,-114.1450650',
-            'street': 'I-70 N'
-        }
-    }, {
-        '@id': 'U13631595_202012160845',
-        'updatetime': '2020-12-16T17:18:00Z',
-        'starttime': '2020-12-07T14:18:00Z',
-        'creationtime': '2020-12-13T14:18:00Z',
-        'location': {
-            'polyline': '34.8380671,-114.1450650,34.8380671,-114.1450650',
-            'street': 'I-70 N'
-        }
-    }]}}
 
-    expected_wzdx = {'road_event_feed_info': {
-        'feed_info_id': '104d7746-688c-44ed-b195-2ee948bf9dfa',
-        'update_date': '2021-04-13T00:00:00Z',
-        'publisher': 'CDOT',
-        'contact_name':
-        'Ashley Nylen',
-        'contact_email':
-        'ashley.nylen@state.co.us',
-        'version': '3.1',
-        'license': 'https://creativecommons.org/publicdomain/zero/1.0/',
-        'data_sources': [
-            {'data_source_id': 'w',
-             'feed_info_id': '104d7746-688c-44ed-b195-2ee948bf9dfa',
-             'organization_name': 'CDOT',
-             'contact_name': 'Ashley Nylen',
-             'contact_email': 'ashley.nylen@state.co.us',
-             'update_date': '2021-04-13T00:00:00Z',
-             'location_method': 'channel-device-method',
-             'lrs_type': 'lrs_type'}
-        ]
-    },
+    icone_obj = {
+        "rtdh_timestamp": 1638894543.6077065,
+        "rtdh_message_id": "b33b2851-0475-4c8c-8bb7-c63e449190a9",
+        "event": {
+            "type": "CONSTRUCTION",
+            "source": {
+                "id": "1245",
+                "creation_timestamp": 1572916940000,
+                "last_updated_timestamp": 1636142163000
+            },
+            "geometry": [
+                [
+                    -84.1238971,
+                    37.1686478
+                ],
+                [
+                    -84.1238971,
+                    37.1686478
+                ],
+                [
+                    -84.145861,
+                    37.1913
+                ],
+                [
+                    -84.145861,
+                    37.1913
+                ],
+                [
+                    -84.157105,
+                    37.201197
+                ],
+                [
+                    -84.167033,
+                    37.206079
+                ],
+                [
+                    -84.204074,
+                    37.21931
+                ]
+            ],
+            "header": {
+                "description": "19-1245: Roadwork between MP 40 and MP 48",
+                "start_timestamp": 1623183301000,
+                "end_timestamp": "None"
+            },
+            "detail": {
+                "road_name": "I-75 N",
+                "road_number": "I-75 N",
+                "direction": "northbound"
+            }
+        }
+    }
+
+    expected_wzdx = {
+        'road_event_feed_info': {
+            'feed_info_id': '104d7746-688c-44ed-b195-2ee948bf9dfa',
+            'update_date': '2021-04-13T00:00:00Z',
+            'publisher': 'CDOT',
+            'contact_name': 'Ashley Nylen',
+            'contact_email': 'ashley.nylen@state.co.us',
+            'version': '3.1',
+            'license': 'https://creativecommons.org/publicdomain/zero/1.0/',
+            'data_sources': [
+                {'data_source_id': 'w',
+                 'feed_info_id': '104d7746-688c-44ed-b195-2ee948bf9dfa',
+                 'organization_name': 'CDOT',
+                 'contact_name': 'Ashley Nylen',
+                 'contact_email': 'ashley.nylen@state.co.us',
+                 'update_date': '2021-04-13T00:00:00Z',
+                 'location_method': 'channel-device-method',
+                 'lrs_type': 'lrs_type'}
+            ]
+        },
         'type': 'FeatureCollection',
         'features': [
-            {'type': 'Feature', 'properties': {
-                'road_event_id': '2',
-                'event_type':
-                'work-zone',
-                'data_source_id': 'w',
-                'start_date': '2020-12-07T14:18:00Z',
-                'end_date': '',
-                'start_date_accuracy': 'estimated',
-                'end_date_accuracy': 'estimated',
-                'beginning_accuracy': 'estimated',
-                'ending_accuracy': 'estimated',
-                'road_names': ['I-70 N'],
-                'direction': 'northbound',
-                'vehicle_impact': 'all-lanes-open',
-                'relationship': {}, 'lanes': [],
-                'beginning_cross_street': '',
-                'ending_cross_street': '',
-                'event_status': 'active',
-                'types_of_work': [],
-                'restrictions': [],
-                'description': 'Road constructions are going on',
-                'creation_date': '2020-12-13T14:18:00Z',
-                'update_date': '2020-12-16T17:18:00Z'},
-                'geometry': {
-                    'type': 'LineString',
-                    'coordinates': [
-                        [-114.145065, 34.8380671],
-                        [-114.145065, 34.8380671]
-                    ]
-            }
-            }
-    ]
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'road_event_id': '2',
+                        'event_type': 'work-zone',
+                        'data_source_id': 'w',
+                        'start_date': '2021-06-08T20:15:01Z',
+                        'end_date': None,
+                        'start_date_accuracy': 'estimated',
+                        'end_date_accuracy': 'estimated',
+                        'beginning_accuracy': 'estimated',
+                        'ending_accuracy': 'estimated',
+                        'road_names': ['I-75 N'],
+                        'direction': 'northbound',
+                        'vehicle_impact': 'all-lanes-open',
+                        'event_status': 'planned',
+                        'description': '19-1245: Roadwork between MP 40 and MP 48',
+                        'creation_date': '2019-11-05T01:22:20Z',
+                        'update_date': '2021-11-05T19:56:03Z'
+                    },
+                    'geometry': {
+                        'type': 'LineString',
+                        'coordinates': [
+                            [
+                                -84.1238971,
+                                37.1686478
+                            ],
+                            [
+                                -84.1238971,
+                                37.1686478
+                            ],
+                            [
+                                -84.145861,
+                                37.1913
+                            ],
+                            [
+                                -84.145861,
+                                37.1913
+                            ],
+                            [
+                                -84.157105,
+                                37.201197
+                            ],
+                            [
+                                -84.167033,
+                                37.206079
+                            ],
+                            [
+                                -84.204074,
+                                37.21931
+                            ]
+                        ]
+                    }
+                }
+        ]
     }
 
     with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):

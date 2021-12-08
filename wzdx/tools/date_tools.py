@@ -8,9 +8,16 @@ import unittest
 ISO_8601_FORMAT_STRING = "%Y-%m-%dT%H:%M:%SZ"
 
 
+def get_unix_from_iso_string(time_string):
+    return date_to_unix(parse_datetime_from_iso_string(time_string))
+
+
+def get_iso_string_from_unix(time_string):
+    return get_iso_string_from_datetime(parse_datetime_from_unix(time_string))
+
+
 def get_iso_string_from_datetime(date):
     # This is added for unit test mocking (dt.datetime instead of just datetime)
-    print(type(date))
     if (not date or type(date) != dt.datetime):
         return None
     return date.astimezone(timezone.utc).strftime(ISO_8601_FORMAT_STRING)

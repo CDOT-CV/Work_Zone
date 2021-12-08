@@ -180,7 +180,7 @@ def parse_reduction_zone(incident):
     filtered_properties = copy.deepcopy(properties)
 
     for key, value in properties.items():
-        if not value and key not in ['road_event_id', 'data_source_id']:
+        if not value and key not in ['road_event_id', 'data_source_id', 'end_time']:
             del filtered_properties[key]
 
     feature = {}

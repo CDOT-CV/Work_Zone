@@ -81,6 +81,11 @@ def parse_xml(inputfile):
         return inputfile_obj
 
 
+def parse_xml_to_dict(xml_string):
+    d = xmltodict.parse(xml_string)
+    return d
+
+
 def validate_wzdx(wzdx_obj, wzdx_schema):
     if not wzdx_schema or not wzdx_obj:
         return False

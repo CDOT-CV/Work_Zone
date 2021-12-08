@@ -2,7 +2,6 @@ from collections import OrderedDict
 import json
 import time
 import uuid
-import xmltodict
 import argparse
 import logging
 
@@ -10,9 +9,6 @@ import xml.etree.ElementTree as ET
 
 from wzdx.tools import wzdx_translator, polygon_tools, date_tools, wzdx_translator
 
-from wzdx.util.transformations import rfc_to_unix
-from wzdx.util.transformations import int_or_none
-from wzdx.util.transformations import to_dict
 from wzdx.util.collections import PathDict
 
 PROGRAM_NAME = 'iConeRawToStandard'
@@ -55,8 +51,9 @@ def generate_raw_messages(message, invalid_messages_callback=None):
 
     # Loop through all elements and print each element to PubSub
     for msg in msg_lst:
+        print(msg)
         message = ET.tostring(msg, encoding='utf8')
-        obj = to_dict(message)
+        obj = wzdx_translator.parse_xml_to_dict(message)
         if not validate_incident(obj.get('incident', {})):
             if invalid_messages_callback:
                 invalid_messages_callback(obj)
@@ -67,7 +64,7 @@ def generate_raw_messages(message, invalid_messages_callback=None):
 
 
 def generate_rtdh_standard_message_from_raw_single(raw_message_xml):
-    obj = to_dict(raw_message_xml)
+    obj = wzdx_translator.parse_xml_to_dict(raw_message_xml)
     pd = PathDict(obj)
     standard_message = create_rtdh_standard_msg(pd)
     return standard_message
@@ -87,6 +84,22 @@ def parse_rtdh_arguments():
     return args.iconeFile, args.outputDir
 
 
+# function to parse polyline to geometry line string
+def parse_icone_polyline(polylinestring):
+    if not polylinestring or type(polylinestring) != str:
+        return None
+    # polyline rightnow is a list which has an empty string in it.
+    polyline = polylinestring.split(',')
+    coordinates = []
+    for i in range(0, len(polyline)-1, 2):
+        try:
+            coordinates.append([float(polyline[i + 1]), float(polyline[i])])
+        except ValueError as e:
+            logging.warning('failed to parse polyline!')
+            return []
+    return coordinates
+
+
 def create_rtdh_standard_msg(pd):
     return {
         "rtdh_timestamp": time.time(),
@@ -95,13 +108,14 @@ def create_rtdh_standard_msg(pd):
             "type": pd.get("incident/type", default=""),
             "source": {
                 "id": pd.get("incident/@id", default=""),
-                "last_updated_timestamp": pd.get("incident/updatetime", rfc_to_unix, default=0),
+                "creation_timestamp": pd.get("incident/creationtime", date_tools.get_unix_from_iso_string, default=0),
+                "last_updated_timestamp": pd.get("incident/updatetime", date_tools.get_unix_from_iso_string, default=0),
             },
-            "geometry": pd.get("incident/location/polyline", wzdx_translator.parse_polyline),
+            "geometry": pd.get("incident/location/polyline", parse_icone_polyline),
             "header": {
                 "description": pd.get("incident/description", default=""),
-                "start_timestamp": pd.get("incident/starttime", rfc_to_unix, default=None),
-                "end_timestamp": pd.get("incident/endtime", rfc_to_unix, default=None)
+                "start_timestamp": pd.get("incident/starttime", date_tools.get_unix_from_iso_string, default=None),
+                "end_timestamp": pd.get("incident/endtime", date_tools.get_unix_from_iso_string, default=None)
             },
             "detail": {
                 "road_name": pd.get("incident/location/street"),

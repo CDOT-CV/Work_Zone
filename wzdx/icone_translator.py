@@ -2,6 +2,7 @@
 import argparse
 import json
 import logging
+import copy
 from collections import OrderedDict
 from os import path
 
@@ -253,7 +254,7 @@ def parse_incident(incident):
         properties['end_date'] = date_tools.get_iso_string_from_datetime(
             end_time)
     else:
-        properties['end_date'] = ''
+        properties['end_date'] = None
 
     # start_date_accuracy
     properties['start_date_accuracy'] = "estimated"
@@ -316,16 +317,22 @@ def parse_incident(incident):
         'description')  # create_description(incident)
 
     # creation_date
-    properties['creation_date'] = date_tools.get_iso_string_from_datetime(date_tools.parse_datetime_from_unix(
-        incident.get('rtdh_timestamp')))
+    properties['creation_date'] = date_tools.get_iso_string_from_unix(
+        source.get('creation_timestamp'))
 
     # update_date
-    properties['update_date'] = date_tools.get_iso_string_from_datetime(date_tools.parse_datetime_from_unix(
-        source.get('last_updated_timestamp')))
+    properties['update_date'] = date_tools.get_iso_string_from_unix(
+        source.get('last_updated_timestamp'))
+
+    filtered_properties = copy.deepcopy(properties)
+
+    for key, value in properties.items():
+        if not value and key not in ['road_event_id', 'data_source_id', 'end_date']:
+            del filtered_properties[key]
 
     feature = {}
     feature['type'] = "Feature"
-    feature['properties'] = properties
+    feature['properties'] = filtered_properties
     feature['geometry'] = geometry
 
     return feature

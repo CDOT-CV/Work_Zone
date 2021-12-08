@@ -9,9 +9,6 @@ from datetime import datetime
 
 from wzdx.tools import polygon_tools, date_tools, array_tools
 
-from wzdx.util.transformations import rfc_to_unix
-from wzdx.util.transformations import int_or_none
-from wzdx.util.transformations import to_dict
 from wzdx.util.collections import PathDict
 
 PROGRAM_NAME = 'Navjoy568RawToStandard'
@@ -239,6 +236,7 @@ def create_rtdh_standard_msg(pd):
             "type": pd.get("data/constructionType", default=""),
             "source": {
                 "id": pd.get("sys_gUid", default=""),
+                "creation_timestamp": pd.get("data/signature/date", date_tools.get_unix_from_iso_string, default=0),
                 "last_updated_timestamp": date_tools.date_to_unix(datetime.utcnow()),
             },
             "geometry": coordinates,
