@@ -1,0 +1,310 @@
+{
+  "rtdh_timestamp": 1639063513.0998375,
+  "rtdh_message_id": "14fda67f-2936-423f-88bb-a5da51a7b205",
+  "event": {
+    "type": "CONSTRUCTION",
+    "source": {
+      "id": "1246",
+      "creation_timestamp": 1572917564000,
+      "last_updated_timestamp": 1598025122000
+    },
+    "geometry": [
+      [
+        -84.169129,
+        37.20667
+      ],
+      [
+        -84.157346,
+        37.201223
+      ],
+      [
+        -84.140482,
+        37.185815
+      ],
+      [
+        -84.121425,
+        37.166345
+      ],
+      [
+        -84.111588,
+        37.147808
+      ]
+    ],
+    "header": {
+      "description": "19-1245: Roadwork between MP 48 and MP 40",
+      "start_timestamp": 1574463741000,
+      "end_timestamp": null
+    },
+    "detail": {
+      "road_name": "I-75 S",
+      "road_number": "I-75 S",
+      "direction": "southbound"
+    },
+    "additional_info": {
+      "devices": [
+        {
+          "sensor_type": "sensor",
+          "details": {
+            "@id": "SB 1 - MP 40.8",
+            "@latitude": "37.1478080",
+            "@longitude": "-84.1115880",
+            "@type": "iCone"
+          }
+        },
+        {
+          "sensor_type": "sensor",
+          "details": {
+            "@id": "SB 2 - MP 42.1",
+            "@latitude": "37.1663450",
+            "@longitude": "-84.1214250",
+            "@type": "iCone",
+            "radar": [
+              {
+                "@avgSpeed": "67.43",
+                "@devID": "1614",
+                "@intervalEnd": "2020-08-21T15:45:00Z",
+                "@latitude": "37.1663422",
+                "@longitude": "-84.1214254",
+                "@numReads": "67",
+                "@stDevSpeed": "6.5561"
+              },
+              {
+                "@avgSpeed": "68.54",
+                "@devID": "1614",
+                "@intervalEnd": "2020-08-21T15:50:00Z",
+                "@latitude": "37.1663422",
+                "@longitude": "-84.1214254",
+                "@numReads": "48",
+                "@stDevSpeed": "6.2738"
+              },
+              {
+                "@avgSpeed": "66.84",
+                "@devID": "1614",
+                "@intervalEnd": "2020-08-21T15:55:00Z",
+                "@latitude": "37.1663422",
+                "@longitude": "-84.1214254",
+                "@numReads": "38",
+                "@stDevSpeed": "6.4339"
+              }
+            ]
+          }
+        },
+        {
+          "sensor_type": "sensor",
+          "details": {
+            "@id": "SB 3 - MP 44.0",
+            "@latitude": "37.1858150",
+            "@longitude": "-84.1404820",
+            "@type": "iCone",
+            "radar": [
+              {
+                "@avgSpeed": "61.39",
+                "@devID": "1740",
+                "@intervalEnd": "2020-08-21T15:40:00Z",
+                "@latitude": "37.1857562",
+                "@longitude": "-84.1404956",
+                "@numReads": "9",
+                "@stDevSpeed": "6.3463"
+              },
+              {
+                "@avgSpeed": "65.51",
+                "@devID": "1740",
+                "@intervalEnd": "2020-08-21T15:45:00Z",
+                "@latitude": "37.1857562",
+                "@longitude": "-84.1404956",
+                "@numReads": "68",
+                "@stDevSpeed": "6.5987"
+              },
+              {
+                "@avgSpeed": "66.59",
+                "@devID": "1740",
+                "@intervalEnd": "2020-08-21T15:50:00Z",
+                "@latitude": "37.1857562",
+                "@longitude": "-84.1404956",
+                "@numReads": "33",
+                "@stDevSpeed": "6.6288"
+              }
+            ]
+          }
+        },
+        {
+          "sensor_type": "sensor",
+          "details": {
+            "@id": "SB 4 - MP 45.7",
+            "@latitude": "37.2012230",
+            "@longitude": "-84.1573460",
+            "@type": "iCone",
+            "radar": [
+              {
+                "@avgSpeed": "64.64",
+                "@devID": "1724",
+                "@intervalEnd": "2020-08-21T15:40:00Z",
+                "@latitude": "37.2012256",
+                "@longitude": "-84.1573747",
+                "@numReads": "21",
+                "@stDevSpeed": "5.6432"
+              },
+              {
+                "@avgSpeed": "69.21",
+                "@devID": "1724",
+                "@intervalEnd": "2020-08-21T15:45:00Z",
+                "@latitude": "37.2012256",
+                "@longitude": "-84.1573747",
+                "@numReads": "38",
+                "@stDevSpeed": "6.9488"
+              },
+              {
+                "@avgSpeed": "64.11",
+                "@devID": "1724",
+                "@intervalEnd": "2020-08-21T15:50:00Z",
+                "@latitude": "37.2012256",
+                "@longitude": "-84.1573747",
+                "@numReads": "62",
+                "@stDevSpeed": "9.0186"
+              },
+              {
+                "@avgSpeed": "66.91",
+                "@devID": "1724",
+                "@intervalEnd": "2020-08-21T15:55:00Z",
+                "@latitude": "37.2012256",
+                "@longitude": "-84.1573747",
+                "@numReads": "17",
+                "@stDevSpeed": "5.3667"
+              }
+            ]
+          }
+        },
+        {
+          "sensor_type": "sensor",
+          "details": {
+            "@id": "SB 5 - MP 47.5",
+            "@latitude": "37.2066700",
+            "@longitude": "-84.1691290",
+            "@type": "iCone",
+            "radar": [
+              {
+                "@avgSpeed": "67.00",
+                "@devID": "1735",
+                "@intervalEnd": "2020-08-21T15:45:00Z",
+                "@latitude": "37.2066724",
+                "@longitude": "-84.1691283",
+                "@numReads": "70",
+                "@stDevSpeed": "6.2133"
+              },
+              {
+                "@avgSpeed": "64.05",
+                "@devID": "1735",
+                "@intervalEnd": "2020-08-21T15:50:00Z",
+                "@latitude": "37.2066724",
+                "@longitude": "-84.1691283",
+                "@numReads": "42",
+                "@stDevSpeed": "7.6332"
+              },
+              {
+                "@avgSpeed": "62.17",
+                "@devID": "1735",
+                "@intervalEnd": "2020-08-21T15:55:00Z",
+                "@latitude": "37.2066724",
+                "@longitude": "-84.1691283",
+                "@numReads": "45",
+                "@stDevSpeed": "6.7055"
+              }
+            ]
+          }
+        },
+        {
+          "sensor_type": "sensor",
+          "details": {
+            "@id": "SB 6 - MP 48.5",
+            "@latitude": "37.2193130",
+            "@longitude": "-84.2046600",
+            "@type": "iCone"
+          }
+        },
+        {
+          "sensor_type": "sensor",
+          "details": {
+            "@id": "SB 7 - MP 49.5",
+            "@latitude": "37.2299854",
+            "@longitude": "-84.2221508",
+            "@type": "iCone",
+            "radar": [
+              {
+                "@avgSpeed": "67.24",
+                "@devID": "1719",
+                "@intervalEnd": "2020-08-21T15:40:00Z",
+                "@numReads": "19",
+                "@stDevSpeed": "4.9229"
+              },
+              {
+                "@avgSpeed": "65.00",
+                "@devID": "1719",
+                "@intervalEnd": "2020-08-21T15:45:00Z",
+                "@numReads": "38",
+                "@stDevSpeed": "10.7934"
+              },
+              {
+                "@avgSpeed": "62.82",
+                "@devID": "1719",
+                "@intervalEnd": "2020-08-21T15:50:00Z",
+                "@numReads": "62",
+                "@stDevSpeed": "9.7647"
+              },
+              {
+                "@avgSpeed": "59.57",
+                "@devID": "1719",
+                "@intervalEnd": "2020-08-21T15:55:00Z",
+                "@numReads": "41",
+                "@stDevSpeed": "8.8250"
+              }
+            ]
+          }
+        },
+        {
+          "sensor_type": "sensor",
+          "details": {
+            "@id": "SB 8 - MP 50.5",
+            "@latitude": "37.2378880",
+            "@longitude": "-84.2359180",
+            "@type": "iCone"
+          }
+        },
+        {
+          "sensor_type": "display",
+          "details": {
+            "@id": "I-75 SB - MP 50",
+            "@latitude": "37.2339700",
+            "@longitude": "-84.2290798",
+            "@type": "PCMS",
+            "message": [
+              {
+                "@text": " ROADWORK / 4 MILES / AHEAD // 19 MILES / OF WORK / MP 48-29",
+                "@verified": "2020-08-21T15:42:27Z"
+              },
+              {
+                "@text": " ROADWORK / 4 MILES / AHEAD // 19 MILES / OF WORK / MP 48-29",
+                "@verified": "2020-08-21T15:52:27Z"
+              }
+            ]
+          }
+        },
+        {
+          "sensor_type": "display",
+          "details": {
+            "@id": "I-75 SB - MP 46",
+            "@latitude": "37.2059920",
+            "@longitude": "-84.1672690",
+            "@type": "PCMS",
+            "message": {
+              "@latitude": "37.2060070",
+              "@longitude": "-84.1673050",
+              "@text": " ROADWORK / NEXT / 5 MILES // 19 MILES / OF WORK / MP 48-29",
+              "@verified": "2020-08-21T15:48:32Z"
+            }
+          }
+        }
+      ],
+      "directionality": "ONE_DIRECTION"
+    }
+  }
+}
