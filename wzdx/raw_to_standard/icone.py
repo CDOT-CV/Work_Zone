@@ -1,6 +1,7 @@
 from collections import OrderedDict
 import json
 import time
+from typing import Union
 import uuid
 import argparse
 import logging
@@ -100,7 +101,24 @@ def parse_icone_polyline(polylinestring):
     return coordinates
 
 
+def get_sensor_list(incident):
+    devices = []
+    for key in ['sensor', 'radar', 'display', 'message', 'marker', 'status']:
+        obj = incident.get(f"{key}")
+        print("-------------------")
+        print(key)
+        print(obj)
+        print(type(obj))
+        if type(obj) in [dict, OrderedDict]:
+            devices.append({'sensor_type': key, 'details': obj})
+        elif type(obj) == list:
+            for i in obj:
+                devices.append({'sensor_type': key, 'details': i})
+    return devices
+
+
 def create_rtdh_standard_msg(pd):
+    devices = get_sensor_list(pd.get(f"incident"))
     return {
         "rtdh_timestamp": time.time(),
         "rtdh_message_id": str(uuid.uuid4()),
@@ -122,9 +140,10 @@ def create_rtdh_standard_msg(pd):
                 "road_number": pd.get("incident/location/street"),
                 "direction": get_direction(pd.get("incident/location/street"), pd.get("incident/location/polyline"))
             },
-            # "additional_info": [
-            #
-            # ]
+            "additional_info": {
+                "devices": devices,
+                "directionality": pd.get("incident/location/direction")
+            }
         }
     }
 

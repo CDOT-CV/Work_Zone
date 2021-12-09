@@ -243,6 +243,7 @@ def create_rtdh_standard_msg(pd):
             "header": {
                 "description": pd.get("data/descriptionForProject", default=""),
                 "justification": pd.get("data/reductionJustification"),
+                "reduced_speed_limit": pd.get("data/requestedTemporarySpeed"),
                 "start_timestamp": date_tools.date_to_unix(start_date),
                 "end_timestamp": date_tools.date_to_unix(end_date),
             },
@@ -251,9 +252,12 @@ def create_rtdh_standard_msg(pd):
                 "road_number": pd.get("data/streetNameFrom"),
                 "direction": direction,
             },
-            # "additional_info": [
-            #
-            # ]
+            "additional_info": {
+                "normal_speed_limit": pd.get("data/currentPostedSpeed"),
+                "mileMarkerStart": pd.get("data/mileMarkerStart"),
+                "mileMarkerEnd": pd.get("data/mileMarkerEnd"),
+                "mileMarkerEnd": pd.get("data/mileMarkerEnd"),
+            }
         }
     }
 

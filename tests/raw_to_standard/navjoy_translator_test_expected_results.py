@@ -484,3 +484,162 @@ test_expand_speed_zone_2_3_4_expected = [{
             'mileMarkerStart4': None,
         }
 }]
+
+test_generate_standard_messages_from_string_expected = [
+    {
+        "rtdh_timestamp": 1639062865.0398643,
+        "rtdh_message_id": "we234de",
+        "event": {
+            "type": "",
+            "source": {
+                "id": "Form568-6ab4408e-d9c1-4ac0-ab1d-b16feb17f18d",
+                "creation_timestamp": 1620750345352,
+                "last_updated_timestamp": 1639088065040
+            },
+            "geometry": [
+                [
+                    -104.67872140544365,
+                    40.42252930726312
+                ],
+                [
+                    -104.67870531218956,
+                    40.42358701413087
+                ]
+            ],
+            "header": {
+                "description": "Bridge Repair and replacement.",
+                "justification": "Repairing and replacing the bridge. Crews will be roadside, various alternating single lane closures.",
+                "reduced_speed_limit": "35",
+                "start_timestamp": 1627905600000,
+                "end_timestamp": 1627905600000
+            },
+            "detail": {
+                "road_name": "US-85",
+                "road_number": "US-85",
+                "direction": "northbound"
+            },
+            "additional_info": {
+                "normal_speed_limit": "45",
+                "mileMarkerStart": "47.25",
+                "mileMarkerEnd": "47.30"
+            }
+        }
+    },
+    {
+        "rtdh_timestamp": 1639062865.0398643,
+        "rtdh_message_id": "23wsg54h",
+        "event": {
+            "type": "",
+            "source": {
+                "id": "Form568-6ab4408e-d9c1-4ac0-ab1d-b16feb17f18d",
+                "creation_timestamp": 1620750345352,
+                "last_updated_timestamp": 1639088065040
+            },
+            "geometry": [
+                [
+                    -104.67870531218956,
+                    40.42358701413087
+                ],
+                [
+                    -104.67872140544365,
+                    40.42252930726312
+                ]
+            ],
+            "header": {
+                "description": "Bridge Repair and replacement.",
+                "justification": "Repairing and replacing the bridge. Crews will be roadside, various alternating single lane closures.",
+                "reduced_speed_limit": "35",
+                "start_timestamp": 1627905600000,
+                "end_timestamp": 1627905600000
+            },
+            "detail": {
+                "road_name": "US-85",
+                "road_number": "US-85",
+                "direction": "southbound"
+            },
+            "additional_info": {
+                "normal_speed_limit": "45",
+                "mileMarkerStart": "47.25",
+                "mileMarkerEnd": "47.30"
+            }
+        }
+    },
+    {
+        "rtdh_timestamp": 1639062865.0398643,
+        "rtdh_message_id": "7fa1dfas",
+        "event": {
+            "type": "",
+            "source": {
+                "id": "Form568-2f560979-b6e9-4d28-a6e1-6120066ee992",
+                "creation_timestamp": 1620749795783,
+                "last_updated_timestamp": 1639088065040
+            },
+            "geometry": [
+                [
+                    -104.68001838896744,
+                    40.40980683657896
+                ],
+                [
+                    -104.67976089690201,
+                    40.418367644368814
+                ]
+            ],
+            "header": {
+                "description": "Restriping operations.",
+                "justification": "Crews will be roadside restriping in various alternating lane closures.",
+                "reduced_speed_limit": "35",
+                "start_timestamp": 1623070800000,
+                "end_timestamp": 1623070800000
+            },
+            "detail": {
+                "road_name": "US-85",
+                "road_number": "US-85",
+                "direction": "northbound"
+            },
+            "additional_info": {
+                "normal_speed_limit": "45",
+                "mileMarkerStart": "48",
+                "mileMarkerEnd": "50"
+            }
+        }
+    },
+    {
+        "rtdh_timestamp": 1639062865.0408645,
+        "rtdh_message_id": "23h327j",
+        "event": {
+            "type": "",
+            "source": {
+                "id": "Form568-2f560979-b6e9-4d28-a6e1-6120066ee992",
+                "creation_timestamp": 1620749795783,
+                "last_updated_timestamp": 1639088065041
+            },
+            "geometry": [
+                [
+                    -104.67976089690201,
+                    40.418367644368814
+                ],
+                [
+                    -104.68001838896744,
+                    40.40980683657896
+                ]
+            ],
+            "header": {
+                "description": "Restriping operations.",
+                "justification": "Crews will be roadside restriping in various alternating lane closures.",
+                "reduced_speed_limit": "35",
+                "start_timestamp": 1623070800000,
+                "end_timestamp": 1623070800000
+            },
+            "detail": {
+                "road_name": "US-85",
+                "road_number": "US-85",
+                "direction": "southbound"
+            },
+            "additional_info": {
+                "normal_speed_limit": "45",
+                "mileMarkerStart": "48",
+                "mileMarkerEnd": "50"
+            }
+        }
+    }
+]
