@@ -5,7 +5,7 @@ from unittest.mock import MagicMock, Mock, patch
 
 import time_machine
 import xmltodict
-from wzdx import icone_translator
+from wzdx.standard_to_enhanced import icone_translator
 
 
 # --------------------------------------------------------------------------------Unit test for get_vehicle_impact function--------------------------------------------------------------------------------

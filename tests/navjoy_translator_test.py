@@ -5,8 +5,7 @@ from datetime import datetime, timezone
 from unittest.mock import MagicMock, Mock, patch
 
 import time_machine
-from wzdx import navjoy_translator
-from wzdx.tools import date_tools
+from wzdx.standard_to_enhanced import navjoy_translator
 
 # Unit testing code for navjoy_translator.py
 # --------------------------------------------------------------------------------Unit test for parse_incident function--------------------------------------------------------------------------------

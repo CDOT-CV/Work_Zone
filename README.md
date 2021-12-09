@@ -9,36 +9,22 @@ Work zone code and documentation for WZDx, iCone, etc.
 # WZDX Translator
 
 ## Project Description
-
 This is an open source, proof of concept solution for translating work zone data in the form of COtrip/Salesforce, iCone, and NavJOY messages to the standardized WZDx 3.1 format. This project was developed for CDOT. A unique translator has been developed for each of these message types. These translators read in the source message, parse out specific fields, and generate a WZDx 3.1 message. For more information on these message formats and the data mappings between these messages and the WZDx format, see the [documentation](wzdx/docs). sample_files are located [here](wzdx/sample_files). All these translators are built to run from the command line and from GCP cloud functions, hosted within the CDOT OIM WZDX environment, connected to the RTDH (real time data hub). For more information on cloud hosting, see [GCP_cloud_function](wzdx/GCP_cloud_function). 
 
-## Prerequisites
-
-Requires:
-
-- Python 3.6 (or higher)
-- All libraries present in requirement.txt
-
-## Build Python Package
-
-Build
-```
-pip install build
-python -m build
-```
-
-Upload (Requires PyPi account)
-```
-python -m twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
-```
-
-Import
+## Installation
 ```
 pip install wzdx-translator-jacob6838
 ```
 
-## Environment Setup
+### Prerequisites
+Requires:
 
+- Python 3.6 (or higher)
+
+## Translators
+This set of WZDx message translators is set up to be implemented in GCP with App Engines and Dataflows. It is also set up with raw, standard, and enhanced (WZDx) data feeds. This means that to take a raw icone document and generate a WZDx message, the raw icone xml document must first be converted to 1 or multiple standard json messages (based on CDOT RTDH specification), and then each standard message may be converted into a single WZDx message. The next step in the data flow is to combine all of the WZDx messages together using the combination script. The GCP layout for this is described in the Google Cloud Hosting section below
+
+### Environment Setup
 This code requires Python 3.6 or a higher version. If you haven’t already, download Python and pip. You can install the required packages by running the following command:
 
 ```
@@ -46,7 +32,6 @@ pip install -r requirements.txt
 ```
 
 #### Environment variable
-
 Please set up the following environment variable for your local computer before running the script.
 
 Runtime Environment Variables:
@@ -64,10 +49,10 @@ for mac computer run the following script to initialize the environment variable
 env_var.sh
 ```
 
+
 ### Execution for iCone translator
 
 #### Raw to Standard Conversion
-
 ```
 python -m wzdx.raw_to_standard.icone inputfile.json --outputDir outputDirectory
 ```
@@ -78,29 +63,26 @@ Example usage:
 python -m wzdx.raw_to_standard.icone 'wzdx/sample_files/raw/icone/incident_short.xml'
 ```
 #### Standard to WZDx Conversion
-
 ```
-python -m wzdx.icone_translator inputfile.json --outputFile outputfile.geojson
+python -m wzdx.standard_to_enhanced.icone_translator inputfile.json --outputFile outputfile.geojson
 ```
 
 Example usage:
 
 ```
-python -m wzdx.icone_translator 'wzdx/sample_files/standard/icone/standard_icone_1245_1633444335.json' 
+python -m wzdx.standard_to_enhanced.icone_translator 'wzdx/sample_files/standard/icone/standard_icone_1245_1633444335.json' 
 ```
 
 ### Execution for COtrip translator
-
 #### Run the translator script (from Work_Zone)
-
 ```
-python -m wzdx.cotrip_translator inputfile.json --outputFile outputfile.geojson
+python -m wzdx.standard_to_enhanced.cotrip_translator inputfile.json --outputFile outputfile.geojson
 ```
 
 Example usage:
 
 ```
-python -m wzdx.cotrip_translator 'wzdx/sample_files/raw/cotrip/cotrip_1.json'
+python -m wzdx.standard_to_enhanced.cotrip_translator 'wzdx/sample_files/raw/cotrip/cotrip_1.json'
 ```
 
 ### Execution for NavJoy 568 translator
@@ -122,25 +104,13 @@ python -m wzdx.raw_to_standard.navjoy_568 'wzdx/sample_files/raw/navjoy/directio
 #### Standard to WZDx Conversion
 
 ```
-python -m wzdx.navjoy_translator inputfile.json --outputFile outputfile.geojson
+python -m wzdx.standard_to_enhanced.navjoy_translator inputfile.json --outputFile outputfile.geojson
 ```
 
 Example usage:
 
 ```
-python -m wzdx.navjoy_translator 'wzdx/sample_files/standard/navjoy/standard_568_Form568-cb0fdaf0-c27a-4bef-aabd-442615dfb2d6_1638373455_westbound.json' 
-```
-
-#### Run the translator script (from Work_Zone)
-
-```
-python -m wzdx.navjoy_translator inputfile.json --outputFile outputfile.geojson
-```
-
-Example usage:
-
-```
-python -m wzdx.navjoy_translator 'wzdx/sample_files/raw/navjoy/568_data.json'
+python -m wzdx.standard_to_enhanced.navjoy_translator 'wzdx/sample_files/standard/navjoy/standard_568_Form568-cb0fdaf0-c27a-4bef-aabd-442615dfb2d6_1638373455_westbound.json' 
 ```
 
 ### Execution for Combine_wzdx
@@ -172,10 +142,29 @@ Ensure you have your environment configured correctly (as described above).
 The `combine_wzdx` script file combines the output from the iCone and COtrip translators, based on overlapping geography, into a single improved WZDx message. The COtrip message set contains significantly more data, and is used as the base for this new combined message. The script then finds any geographically co-located messages from the iCone data set, pulls in the additional information (comprised of vehicle impact data and data sources) and publishes a new, combined WZDx message. Future state of this script will include additional data fields from the iCone data set as they become available.
 
 
-# Google Cloud Hosting
+## Google Cloud Hosting
 All of the translators featured in this repo are hosted in the CDOT GCP Cloud as Dataflows. The workflow begins with App Engines which retrieve raw data and drop it onto raw pub/sub topics. These are picked up by the raw_to_standard translator running as a Dataflow pipeline, which drops the generated standard message(s) onto a standard topic. These are processed into valid WZDx messages by the enhanced Dataflow pipeline. The final step is to store all of the WZDx files in BigQuery, and combine them into one single WZDx data feed. 
 
 ![GCP Processing](wzdx/docs/CDOT%20WZDx%20translators%20-%20Processing.png)
+
+
+## Build Python Package
+
+Build
+```
+pip install build
+python -m build
+```
+
+Upload (Requires PyPi account)
+```
+python -m twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
+```
+
+Import
+```
+pip install wzdx-translator-jacob6838
+```
 
 ### Documentation
 

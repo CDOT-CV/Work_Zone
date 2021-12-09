@@ -2,7 +2,7 @@ from unittest.mock import MagicMock, patch
 
 from shapely.geometry import Point
 from shapely.geometry.polygon import Polygon
-from wzdx import combine_wzdx
+from wzdx.combination import combine_wzdx
 from wzdx.tools import polygon_tools
 
 # --------------------------------------------------------------------------------Unit test for combine_wzdx function--------------------------------------------------------------------------------
