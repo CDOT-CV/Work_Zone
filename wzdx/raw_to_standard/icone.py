@@ -1,15 +1,12 @@
-from collections import OrderedDict
-import json
-import time
-from typing import Union
-import uuid
 import argparse
+import json
 import logging
-
+import time
+import uuid
 import xml.etree.ElementTree as ET
+from collections import OrderedDict
 
-from wzdx.tools import wzdx_translator, polygon_tools, date_tools, wzdx_translator
-
+from wzdx.tools import date_tools, polygon_tools, wzdx_translator
 from wzdx.util.collections import PathDict
 
 PROGRAM_NAME = 'iConeRawToStandard'

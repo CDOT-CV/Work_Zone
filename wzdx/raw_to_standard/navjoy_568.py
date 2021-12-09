@@ -1,14 +1,13 @@
-from collections import OrderedDict
+import argparse
+import copy
 import json
+import logging
 import time
 import uuid
-import argparse
-import logging
-import copy
+from collections import OrderedDict
 from datetime import datetime
 
-from wzdx.tools import polygon_tools, date_tools, array_tools
-
+from wzdx.tools import array_tools, date_tools, polygon_tools
 from wzdx.util.collections import PathDict
 
 PROGRAM_NAME = 'Navjoy568RawToStandard'

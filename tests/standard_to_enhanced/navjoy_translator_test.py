@@ -22,7 +22,7 @@ def init_datetime_mocks(mock_dts):
         i.strptime = datetime.strptime
 
 
-@unittest.mock.patch('wzdx.navjoy_translator.datetime')
+@unittest.mock.patch('wzdx.standard_to_enhanced.navjoy_translator.datetime')
 @unittest.mock.patch('wzdx.tools.wzdx_translator.datetime')
 def test_parse_reduction_zone_linestring(mock_dt, mock_dt_3):
     init_datetime_mocks([mock_dt, mock_dt_3])
@@ -140,7 +140,7 @@ def test_get_vehicle_impact_all_lanes_open():
     'issuing_organization': 'CDOT'
 })
 @patch('uuid.uuid4')
-@unittest.mock.patch('wzdx.navjoy_translator.datetime')
+@unittest.mock.patch('wzdx.standard_to_enhanced.navjoy_translator.datetime')
 @unittest.mock.patch('wzdx.tools.wzdx_translator.datetime')
 def test_wzdx_creator(mock_dt, mock_dt_3, mockuuid):
     init_datetime_mocks([mock_dt, mock_dt_3])
