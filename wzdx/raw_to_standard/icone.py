@@ -50,13 +50,13 @@ def generate_raw_messages(message, invalid_messages_callback=None):
     # Loop through all elements and print each element to PubSub
     for msg in msg_lst:
         print(msg)
-        message = ET.tostring(msg, encoding='utf8')
-        obj = wzdx_translator.parse_xml_to_dict(message)
+        incident = ET.tostring(msg, encoding='utf8')
+        obj = wzdx_translator.parse_xml_to_dict(incident)
         if not validate_incident(obj.get('incident', {})):
             if invalid_messages_callback:
                 invalid_messages_callback(obj)
         else:
-            messages.append(message)
+            messages.append(incident)
 
     return messages
 
@@ -83,6 +83,8 @@ def parse_rtdh_arguments():
 
 
 # function to parse polyline to geometry line string
+# input: "37.1571990,-84.1128540,37.1686478,-84.1238971" (lat, long)
+# output: [[-84.1128540, 37.1571990], [-84.1238971, 37.1686478]] (long, lat)
 def parse_icone_polyline(polylinestring):
     if not polylinestring or type(polylinestring) != str:
         return None
@@ -152,22 +154,6 @@ def get_direction(street, coords):
     return direction
 
 
-# function to parse polyline to geometry line string
-def parse_icone_polyline(polylinestring):
-    if not polylinestring or type(polylinestring) != str:
-        return None
-    # polyline rightnow is a list which has an empty string in it.
-    polyline = polylinestring.split(',')
-    coordinates = []
-    for i in range(0, len(polyline)-1, 2):
-        try:
-            coordinates.append([float(polyline[i + 1]), float(polyline[i])])
-        except ValueError as e:
-            logging.warning('failed to parse polyline!')
-            return []
-    return coordinates
-
-
 # function to validate the incident
 def validate_incident(incident):
     if not incident or (type(incident) != dict and type(incident) != OrderedDict):
@@ -197,7 +183,7 @@ def validate_incident(incident):
             f'Invalid incident with id = {id}. unable to parse direction from street name or polyline')
         return False
     required_fields = [location, polyline, coords, street,
-                       starttime_string, description, creationtime, updatetime, direction]
+                       starttime_string, description, creationtime, updatetime]
     for field in required_fields:
         if not field:
             logging.warning(
