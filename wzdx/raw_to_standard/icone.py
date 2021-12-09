@@ -49,7 +49,6 @@ def generate_raw_messages(message, invalid_messages_callback=None):
 
     # Loop through all elements and print each element to PubSub
     for msg in msg_lst:
-        print(msg)
         incident = ET.tostring(msg, encoding='utf8')
         obj = wzdx_translator.parse_xml_to_dict(incident)
         if not validate_incident(obj.get('incident', {})):
@@ -104,10 +103,6 @@ def get_sensor_list(incident):
     devices = []
     for key in ['sensor', 'radar', 'display', 'message', 'marker', 'status']:
         obj = incident.get(f"{key}")
-        print("-------------------")
-        print(key)
-        print(obj)
-        print(type(obj))
         if type(obj) in [dict, OrderedDict]:
             devices.append({'sensor_type': key, 'details': obj})
         elif type(obj) == list:
