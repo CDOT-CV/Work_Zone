@@ -21,7 +21,7 @@ steps:
 
 - script: |
     python -m pip install --upgrade pip
-    pip install -r reqwuirements.txt
+    pip install -r requirements.txt
     pip install pytest
     pip install build
   displayName: 'Install dependencies'
