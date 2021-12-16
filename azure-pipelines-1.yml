@@ -21,7 +21,6 @@ steps:
 
 - script: |
     python -m pip install --upgrade pip
-    pip install -r requirements.txt
   displayName: 'Install dependencies'
 
 - script: |
@@ -32,9 +31,14 @@ steps:
 - script: |
     pip install build
     python -m build
-  displayName: 'Build'
+  displayName: 'Artifact Creation'
+
+- task: CopyFiles@2
+  inputs:
+    targetFolder: $(Build.ArtifactStagingDirectory)
 
 - task: PublishBuildArtifacts@1
   inputs:
-    pathToPublish: $(Build.ArtifactStagingDirectory)/dist
-    artifactName: wzdx-translator-dist
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'dist'
+    publishLocation: 'Container'
