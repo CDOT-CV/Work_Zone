@@ -34,7 +34,7 @@ steps:
     python -m build
   displayName: 'Build'
 
-- script: |
-    pip install twine
-    python -m twine upload --repository-url https://upload.pypi.org/legacy/ dist/* -u __token__ -p $(password)
-  displayName: 'Upload'
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: $(Build.ArtifactStagingDirectory)
+    artifactName: wzdx-translator-dist
