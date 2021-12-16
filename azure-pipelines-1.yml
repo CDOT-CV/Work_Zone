@@ -36,5 +36,5 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    pathToPublish: $(Build.ArtifactStagingDirectory)/dist
+    pathToPublish: $(Build.ArtifactStagingDirectory)
     artifactName: wzdx-translator-dist
