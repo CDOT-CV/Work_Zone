@@ -21,15 +21,16 @@ steps:
 
 - script: |
     python -m pip install --upgrade pip
+    pip install -r reqwuirements.txt
+    pip install pytest
+    pip install build
   displayName: 'Install dependencies'
 
 - script: |
-    pip install pytest
     python -m pytest
   displayName: 'pytest'
 
 - script: |
-    pip install build
     python -m build
   displayName: 'Artifact Creation'
 
