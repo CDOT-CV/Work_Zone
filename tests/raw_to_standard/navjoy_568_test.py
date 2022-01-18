@@ -1,5 +1,5 @@
 from wzdx.raw_to_standard import navjoy_568
-from tests.raw_to_standard import navjoy_translator_test_expected_results as expected_results
+from tests.raw_to_standard import navjoy_568_test_expected_results as expected_results
 import uuid
 import json
 from unittest.mock import MagicMock, Mock, patch

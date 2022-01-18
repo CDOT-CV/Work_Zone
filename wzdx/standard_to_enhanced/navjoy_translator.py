@@ -58,7 +58,7 @@ def wzdx_creator(message, info=None):
     if not wzdx_translator.validate_info(info):
         return None
 
-    wzd = wzdx_translator.initialize_wzdx_object(info)
+    wzd = wzdx_translator.initialize_wzdx_object_v3(info)
 
     feature = parse_reduction_zone(message)
     if feature:
@@ -66,7 +66,7 @@ def wzdx_creator(message, info=None):
 
     if not wzd.get('features'):
         return None
-    wzd = wzdx_translator.add_ids(wzd)
+    wzd = wzdx_translator.add_ids_v3(wzd)
     return wzd
 
 
@@ -87,14 +87,14 @@ def parse_reduction_zone(incident):
     properties = {}
 
     # id
-    # Leave this empty, it will be populated by add_ids
+    # Leave this empty, it will be populated by add_ids_v3
     properties['road_event_id'] = None
 
     # Event Type ['work-zone', 'detour']
     properties['event_type'] = 'work-zone'
 
     # data_source_id
-    # Leave this empty, it will be populated by add_ids
+    # Leave this empty, it will be populated by add_ids_v3
     properties['data_source_id'] = None
 
     start_time = date_tools.parse_datetime_from_unix(

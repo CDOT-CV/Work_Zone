@@ -1,0 +1,64 @@
+{
+  "rtdh_timestamp": 1638373608.6035204,
+  "rtdh_message_id": "403bf74c-4c60-44b5-8cd6-4d45de09b0d5",
+  "event": {
+    "type": "",
+    "source": {
+      "id": "Form568-44819108-703c-4d6d-ae0d-7dca7319e5b0",
+      "last_updated_timestamp": 1638398808604
+    },
+    "geometry": [
+      [
+        -104.82230842595187,
+        39.73946349406594
+      ],
+      [
+        -104.79432762150851,
+        39.73959547447038
+      ]
+    ],
+    "header": {
+      "description": "Maintenance for lane expansion",
+      "justification": "Lane expansion - maintenance work",
+      "start_timestamp": 1630290600000,
+      "end_timestamp": 1630290600000
+    },
+    "detail": {
+      "road_name": "287",
+      "road_number": "287",
+      "direction": "eastbound"
+    }
+  }
+}
+{
+  "rtdh_timestamp": 1638387427.410131,
+  "rtdh_message_id": "884c2941-464a-40cc-963a-c69cbde92a72",
+  "event": {
+    "type": "",
+    "source": {
+      "id": "Form568-f5b7ff0e-509f-47fa-a043-1cecb34b8c37",
+      "last_updated_timestamp": 1638387427410
+    },
+    "geometry": [
+      [
+        -105.077115337592,
+        40.52306894424795
+      ],
+      [
+        -105.07660840008819,
+        40.52347671488502
+      ]
+    ],
+    "header": {
+      "description": "Test 18",
+      "justification": "Test 18",
+      "start_timestamp": 1627337520000,
+      "end_timestamp": 1627337520000
+    },
+    "detail": {
+      "road_name": "US-287",
+      "road_number": "US-287",
+      "direction": "unknown"
+    }
+  }
+}
