@@ -140,12 +140,17 @@ def add_ids_v3(message):
 
 # Add ids to message
 # This function may fail if some optional fields are not present (lanes, types_of_work, relationship, ...)
-def add_ids(message):
+def add_ids(message, event_type):
     if not message or type(message) != dict:
         return None
 
-    data_source_id = message.get('road_event_feed_info').get(
-        'data_sources')[0].get('data_source_id')
+    if event_type == 'work-zone':
+        data_source_id = message.get('road_event_feed_info').get(
+            'data_sources')[0].get('data_source_id')
+    elif event_type == 'restriction':
+        data_source_id = message.get('feed_info').get(
+            'data_sources')[0].get('data_source_id')
+
     road_event_length = len(message.get('features'))
     road_event_ids = []
     for i in range(road_event_length):
@@ -212,7 +217,7 @@ def initialize_wzdx_object_v3(info):
     return wzd
 
 
-def initialize_wzdx_object_v3(info):
+def initialize_wzdx_object(info):
     wzd = {}
     wzd['road_event_feed_info'] = {}
     # hardcode
@@ -228,7 +233,7 @@ def initialize_wzdx_object_v3(info):
     if info['metadata'].get('datafeed_frequency_update', False):
         wzd['road_event_feed_info']['update_frequency'] = info.get('metadata')[
             'datafeed_frequency_update']  # Verify data type
-    wzd['road_event_feed_info']['version'] = '3.1'
+    wzd['road_event_feed_info']['version'] = '4.0'
     wzd['road_event_feed_info']['license'] = "https://creativecommons.org/publicdomain/zero/1.0/"
 
     data_source = {}
@@ -247,6 +252,55 @@ def initialize_wzdx_object_v3(info):
         'metadata').get('wz_location_method')
     data_source['lrs_type'] = info.get('metadata').get('lrs_type')
     wzd['road_event_feed_info']['data_sources'] = [data_source]
+
+    wzd['type'] = 'FeatureCollection'
+    sub_identifier = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in
+                             range(6))  # Create random 6 character digit/letter string
+    id = str(uuid.uuid4())
+    ids = {}
+    ids['sub_identifier'] = sub_identifier
+    ids['id'] = id
+
+    wzd['features'] = []
+
+    return wzd
+
+
+def initialize_wzdx_object_restriction(info):
+    wzd = {}
+    wzd['feed_info'] = {}
+    # hardcode
+    wzd['feed_info']['feed_info_id'] = info.get('feed_info_id')
+    wzd['feed_info']['update_date'] = datetime.utcnow().strftime(
+        "%Y-%m-%dT%H:%M:%SZ")
+    wzd['feed_info']['publisher'] = info.get(
+        'metadata').get('issuing_organization')
+    wzd['feed_info']['contact_name'] = info.get(
+        'metadata').get('contact_name')
+    wzd['feed_info']['contact_email'] = info.get(
+        'metadata').get('contact_email')
+    if info['metadata'].get('datafeed_frequency_update', False):
+        wzd['feed_info']['update_frequency'] = info.get('metadata')[
+            'datafeed_frequency_update']  # Verify data type
+    wzd['feed_info']['version'] = '4.0'
+    wzd['feed_info']['license'] = "https://creativecommons.org/publicdomain/zero/1.0/"
+
+    data_source = {}
+    data_source['data_source_id'] = str(uuid.uuid4())
+    data_source['feed_info_id'] = info.get('feed_info_id')
+    data_source['organization_name'] = info.get(
+        'metadata').get('issuing_organization')
+    data_source['contact_name'] = info.get('metadata').get('contact_name')
+    data_source['contact_email'] = info.get('metadata').get('contact_email')
+    if info['metadata'].get('datafeed_frequency_update', False):
+        data_source['update_frequency'] = info.get(
+            'metadata').get('datafeed_frequency_update')
+    data_source['update_date'] = datetime.utcnow().strftime(
+        "%Y-%m-%dT%H:%M:%SZ")
+    data_source['location_method'] = info.get(
+        'metadata').get('wz_location_method')
+    data_source['lrs_type'] = info.get('metadata').get('lrs_type')
+    wzd['feed_info']['data_sources'] = [data_source]
 
     wzd['type'] = 'FeatureCollection'
     sub_identifier = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in

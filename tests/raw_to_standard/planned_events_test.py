@@ -427,6 +427,7 @@ def test_generate_standard_messages_from_string(mockuuid):
         del i['rtdh_timestamp']
         del i['event']['source']['last_updated_timestamp']
     # actual_standard = [dict(x) for x in actual_standard]
+    print(actual_standard)
     assert actual_standard == expected
 
 

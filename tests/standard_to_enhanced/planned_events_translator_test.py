@@ -24,16 +24,13 @@ def init_datetime_mocks(mock_dts):
 
 @unittest.mock.patch('wzdx.standard_to_enhanced.navjoy_translator.datetime')
 @unittest.mock.patch('wzdx.tools.wzdx_translator.datetime')
-def test_parse_event_linestring(mock_dt, mock_dt_3):
+def test_parse_work_zone_linestring(mock_dt, mock_dt_3):
     init_datetime_mocks([mock_dt, mock_dt_3])
     standard = {
         "rtdh_timestamp": 1642036259.3099449,
         "rtdh_message_id": "42fe21b8-102b-43e8-8668-23c55334a201",
         "event": {
-            "type": {
-                "type_name": "below-road-work",
-                "is_architectural_change": True
-            },
+            "type": 'work-zone',
             "source": {
                 "id": "OpenTMS-Event1689408506",
                 "creation_timestamp": 1635531964000,
@@ -69,12 +66,12 @@ def test_parse_event_linestring(mock_dt, mock_dt_3):
                     {
                         "order": 2,
                         "type": "general",
-                        "status": "open"
+                        "status": "closed"
                     },
                     {
                         "order": 3,
                         "type": "general",
-                        "status": "open"
+                        "status": "closed"
                     },
                     {
                         "order": 4,
@@ -84,19 +81,23 @@ def test_parse_event_linestring(mock_dt, mock_dt_3):
                 ],
                 "restrictions": [],
                 "beginning_milepost": 50.0,
-                "ending_milepost": 60.0
+                "ending_milepost": 60.0,
+                "types_of_work": [{
+                    "type_name": "below-road-work",
+                    "is_architectural_change": True
+                }]
             }
         }
     }
 
-    test_feature = planned_events_translator.parse_event(standard)
+    test_feature = planned_events_translator.parse_work_zone(standard)
 
     expected_feature = {
         "id": "OpenTMS-Event1689408506",
         "type": "Feature",
         "properties": {
             "core_details": {
-              "data_source_id": "97763d2c-1e39-4ae4-b079-9bd9c77ccf47",
+              "data_source_id": "",
               "event_type": "work-zone",
               "road_names": [
                   "I-70E"
@@ -106,7 +107,6 @@ def test_parse_event_linestring(mock_dt, mock_dt_3):
                 "description": "Between Exit 49: CO 65; Grand Mesa (5 miles east of the Palisade area) and US 6 (Debeque) from Mile Point 50 to Mile Point 60. Road closed expect delays due to bridge construction. Until May 1, 2022 at about 12:26PM MDT.",
                 "creation_date": "2021-10-29T18:26:04Z",
                 "update_date": "2021-10-29T18:35:01Z",
-                "road_event_id": "58662dea-43e2-4271-b16b-7c6ce72a5fcc"
             },
             "start_date": "2021-10-29T18:26:04Z",
             "end_date": "2022-05-01T18:26:04Z",
@@ -116,6 +116,8 @@ def test_parse_event_linestring(mock_dt, mock_dt_3):
             "beginning_accuracy": "estimated",
             "ending_accuracy": "estimated",
             "vehicle_impact": "some-lanes-closed",
+            "beginning_milepost": 50.0,
+            "ending_milepost": 60.0,
             "lanes": [
                 {
                     "order": 1,
@@ -157,15 +159,15 @@ def test_parse_event_linestring(mock_dt, mock_dt_3):
     assert test_feature == expected_feature
 
 
-def test_parse_event_no_data():
-    test_feature = planned_events_translator.parse_event(None)
+def test_parse_work_zone_no_data():
+    test_feature = planned_events_translator.parse_work_zone(None)
     expected_feature = None
     assert test_feature == expected_feature
 
 
-def test_parse_event_invalid_data():
+def test_parse_work_zone_invalid_data():
     test_var = 'a,b,c,d'
-    test_feature = planned_events_translator.parse_event(test_var)
+    test_feature = planned_events_translator.parse_work_zone(test_var)
     assert test_feature == None
 
 
@@ -269,7 +271,8 @@ def test_wzdx_creator(mock_dt, mock_dt_3, mockuuid):
         "rtdh_timestamp": 1642036259.3099449,
         "rtdh_message_id": "42fe21b8-102b-43e8-8668-23c55334a201",
         "event": {
-            "type": {
+            "type": "work-zone",
+            "types_of_lanes": {
                 "type_name": "below-road-work",
                 "is_architectural_change": True
             },

@@ -87,10 +87,13 @@ test_generate_standard_messages_from_string_expected = [
         "rtdh_timestamp": 1639062865.0398643,
         "rtdh_message_id": "we234de",
         "event": {
-            "type": {
-                "type_name": "below-road-work",
-                "is_architectural_change": True
-            },
+            "type": 'work-zone',
+            "types_of_work": [
+                {
+                    "type_name": "below-road-work",
+                    "is_architectural_change": True
+                }
+            ],
             "source": {
                 "id": "OpenTMS-Event1689408506",
                 "creation_timestamp": 1635531964000,
@@ -149,10 +152,13 @@ test_generate_standard_messages_from_string_expected = [
         "rtdh_timestamp": 1639062865.0398643,
         "rtdh_message_id": "23wsg54h",
         "event": {
-            "type": {
-                "type_name": "below-road-work",
-                "is_architectural_change": True
-            },
+            "type": 'work-zone',
+            "types_of_work": [
+                {
+                    "type_name": "below-road-work",
+                    "is_architectural_change": True
+                }
+            ],
             "source": {
                 "id": "OpenTMS-Event1689408506",
                 "creation_timestamp": 1635531964000,

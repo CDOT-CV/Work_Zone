@@ -7,7 +7,7 @@ from collections import OrderedDict
 from os import path
 import uuid
 
-from wzdx.sample_files.validation_schema import wzdx_v40_feed
+from wzdx.sample_files.validation_schema import wzdx_v40_feed, road_restriction_v40_feed
 
 from wzdx.tools import date_tools, polygon_tools, wzdx_translator
 
@@ -23,11 +23,18 @@ def main():
     # Added encoding argument because of weird character at start of incidents.xml file
 
     planned_events_obj = json.loads(open(input_file, 'r').read())
-    wzdx = wzdx_creator(planned_events_obj)
-    wzdx_schema = wzdx_v40_feed.wzdx_v40_schema_string
-    # wzdx = json.loads(invalid_msg_str)
+    wzdx, event_type = wzdx_creator(planned_events_obj)
+    try:
+        event_type = wzdx.get('road_event_feed_info', wzdx['feed_info'])[
+            'features'][0]['properties']['core_details']['event_type']
+    except:
+        event_type = ''
+    schemas = {
+        'work-zone': wzdx_v40_feed.wzdx_v40_schema_string,
+        'restriction': road_restriction_v40_feed.road_restriction_v40_schema_string
+    }
 
-    if not wzdx_translator.validate_wzdx(wzdx, wzdx_schema):
+    if not wzdx_translator.validate_wzdx(wzdx, schemas[event_type]):
         logging.error(
             'validation error more message are printed above. output file is not created because the message failed validation.')
         return
@@ -53,6 +60,8 @@ def parse_planned_events_arguments():
 def wzdx_creator(message, info=None):
     if not message:
         return None
+    event_type = message['event']['type']
+
    # verify info obj
     if not info:
         info = wzdx_translator.initialize_info(
@@ -60,22 +69,22 @@ def wzdx_creator(message, info=None):
     if not wzdx_translator.validate_info(info):
         return None
 
-    wzd = wzdx_translator.initialize_wzdx_object_v3(info)
-
-    # Parse Incident to WZDx Feature
-    if message['event']['type'] == 'work-zone':
+    if event_type == 'work-zone':
+        wzd = wzdx_translator.initialize_wzdx_object(info)
         feature = parse_work_zone(message)
-    elif message['event']['type'] == 'restriction':
-        feature = parse_road_restriction
+    elif event_type == 'restriction':
+        wzd = wzdx_translator.initialize_wzdx_object_restriction(info)
+        feature = parse_road_restriction(message)
     else:
         logging.warning(f"Unrecognized event type: {message['event']['type']}")
+        return None
 
     if feature:
-        wzd.get('features').append(feature)
-
+        wzd.get('features', []).append(feature)
     if not wzd.get('features'):
         return None
-    wzd = wzdx_translator.add_ids(wzd)
+
+    wzd = wzdx_translator.add_ids(wzd, event_type)
     return wzd
 
 # {
