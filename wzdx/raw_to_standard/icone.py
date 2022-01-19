@@ -42,7 +42,7 @@ def generate_standard_messages_from_string(input_file_contents):
     return standard_messages
 
 
-def generate_raw_messages(message, invalid_messages_callback=None):
+def generate_raw_messages(message):
     response_xml = ET.fromstring(message)
     msg_lst = response_xml.findall('incident')
     messages = []
@@ -51,10 +51,7 @@ def generate_raw_messages(message, invalid_messages_callback=None):
     for msg in msg_lst:
         incident = ET.tostring(msg, encoding='utf8')
         obj = wzdx_translator.parse_xml_to_dict(incident)
-        if not validate_incident(obj.get('incident', {})):
-            if invalid_messages_callback:
-                invalid_messages_callback(obj)
-        else:
+        if validate_incident(obj.get('incident', {})):
             messages.append(incident)
 
     return messages

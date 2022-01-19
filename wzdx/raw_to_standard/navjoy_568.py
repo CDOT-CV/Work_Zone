@@ -165,7 +165,7 @@ def generate_standard_messages_from_string(input_file_contents):
     return standard_messages
 
 
-def generate_raw_messages(message_string, invalid_messages_callback=None):
+def generate_raw_messages(message_string):
     msg_lst = json.loads(message_string)
     messages = []
 
@@ -173,10 +173,7 @@ def generate_raw_messages(message_string, invalid_messages_callback=None):
     for obj in msg_lst:
         separated_messages = expand_speed_zone(obj)
         for msg in separated_messages:
-            if not validate_closure(msg):
-                if invalid_messages_callback:
-                    invalid_messages_callback(msg)
-            else:
+            if validate_closure(msg):
                 messages.append(msg)
 
     return messages
