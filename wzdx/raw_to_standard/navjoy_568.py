@@ -128,10 +128,10 @@ def expand_speed_zone(message):
                     'data', {}).get(value)
 
             directions = new_message.get('data', {}).get('directionOfTraffic')
+            if directions:
+                del new_message.get('data', {})['directionOfTraffic']
             for direction in get_directions_from_string(directions):
                 new_message_dir = copy.deepcopy(new_message)
-                if new_message_dir.get('data', {}).get('directionOfTraffic'):
-                    del new_message_dir.get('data', {})['directionOfTraffic']
                 new_message_dir.get('data', {})['direction'] = direction
                 messages.append(new_message_dir)
         return messages
