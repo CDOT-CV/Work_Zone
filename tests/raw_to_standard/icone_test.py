@@ -2,10 +2,7 @@ from wzdx.raw_to_standard import icone
 import icone_test_expected_results
 import uuid
 import json
-from unittest.mock import MagicMock, Mock, patch
-from datetime import datetime
-import time_machine
-import time
+from unittest.mock import Mock, patch
 
 # --------------------------------------------------------------------------------Unit test for parse_polyline function--------------------------------------------------------------------------------
 

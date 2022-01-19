@@ -2,10 +2,7 @@ from wzdx.raw_to_standard import navjoy_568
 from tests.raw_to_standard import navjoy_translator_test_expected_results as expected_results
 import uuid
 import json
-from unittest.mock import MagicMock, Mock, patch
-from datetime import datetime
-import time_machine
-import time
+from unittest.mock import Mock, patch
 
 
 # --------------------------------------------------------------------------------Unit test for validate_closure function--------------------------------------------------------------------------------
@@ -117,7 +114,7 @@ def test_validate_closure_no_data():
     assert navjoy_568.validate_closure(event) == False
 
 
-def test_validate_closure_no_coordinates():
+def test_validate_closure_invalid_coordinates():
     event = {
         "sys_gUid": "Form568-cb0fdaf0-c27a-4bef-aabd-442615dfb2d6",
         "data": {
