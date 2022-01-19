@@ -48,14 +48,11 @@ def parse_datetime_from_unix(time):
 
 
 def datetime_from_unix(time):
-    try:
-        # Fails for milliseconds
+    # I tested this method, and this value makes it fail (3001, 1, 19, 21, 59, 59)
+    if time > 32536850399:
+        return datetime.fromtimestamp(time/1000, tz=timezone.utc)
+    else:
         return datetime.fromtimestamp(time, tz=timezone.utc)
-    except:
-        try:
-            return datetime.fromtimestamp(time/1000, tz=timezone.utc)
-        except:
-            return None
 
 
 def date_to_unix(time: datetime):
