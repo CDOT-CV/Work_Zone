@@ -2,7 +2,6 @@ from datetime import datetime, timedelta, timezone
 import datetime as dt
 import logging
 from dateutil import parser
-import unittest
 
 
 ISO_8601_FORMAT_STRING = "%Y-%m-%dT%H:%M:%SZ"

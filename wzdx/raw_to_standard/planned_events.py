@@ -5,9 +5,8 @@ import logging
 import time
 import uuid
 from collections import OrderedDict
-from datetime import datetime
 
-from wzdx.tools import array_tools, date_tools, polygon_tools
+from wzdx.tools import date_tools, polygon_tools
 from wzdx.util.collections import PathDict
 
 PROGRAM_NAME = 'PlannedEventsRawToStandard'

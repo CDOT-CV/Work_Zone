@@ -4,7 +4,7 @@ import uuid
 import json
 from unittest.mock import Mock, patch
 
-# --------------------------------------------------------------------------------Unit test for parse_polyline function--------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------Unit test for parse_polyline_from_linestring function--------------------------------------------------------------------------------
 
 
 def test_parse_icone_polyline_valid_data():
@@ -24,7 +24,7 @@ def test_parse_icone_polyline_valid_data():
     assert test_coordinates == valid_coordinates
 
 
-def test_parse_polyline_null_parameter():
+def test_parse_polyline_from_linestring_null_parameter():
     test_polyline = None
     test_coordinates = icone.parse_icone_polyline(
         test_polyline)
@@ -32,7 +32,7 @@ def test_parse_polyline_null_parameter():
     assert test_coordinates == expected_coordinates
 
 
-def test_parse_polyline_invalid_data():
+def test_parse_polyline_from_linestring_invalid_data():
     test_polyline = 'invalid'
     test_coordinates = icone.parse_icone_polyline(
         test_polyline)
@@ -40,9 +40,9 @@ def test_parse_polyline_invalid_data():
     assert test_coordinates == expected_coordinates
 
 
-def test_parse_polyline_invalid_coordinates():
+def test_parse_polyline_from_linestring_invalid_coordinates():
     test_polyline = 'a,b,c,d'
-    test_coordinates = icone.wzdx_translator.parse_polyline(
+    test_coordinates = icone.wzdx_translator.parse_polyline_from_linestring(
         test_polyline)
     expected_coordinates = []
     assert test_coordinates == expected_coordinates

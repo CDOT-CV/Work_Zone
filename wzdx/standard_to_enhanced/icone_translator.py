@@ -3,9 +3,6 @@ import argparse
 import json
 import logging
 import copy
-from collections import OrderedDict
-from os import path
-
 from wzdx.sample_files.validation_schema import wzdx_v31_feed
 
 from wzdx.tools import date_tools, polygon_tools, wzdx_translator

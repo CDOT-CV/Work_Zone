@@ -82,7 +82,7 @@ def parse_alert(alert, callback_function=None):
     event = alert.get('event', {})
     geometry = {}
     geometry['type'] = "LineString"
-    geometry['coordinates'] = wzdx_translator.parse_polyline(
+    geometry['coordinates'] = wzdx_translator.parse_polyline_from_linestring(
         event.get('geometry'))
     properties = wzdx_translator.initialize_feature_properties()
 
@@ -195,7 +195,7 @@ def validate_alert(alert):
     detail = event.get('detail', {})
 
     polyline = event.get('geometry')
-    coords = wzdx_translator.parse_polyline(polyline)
+    coords = wzdx_translator.parse_polyline_from_linestring(polyline)
     street = detail.get('road_name')
 
     starttime_string = header.get('start_timestamp')

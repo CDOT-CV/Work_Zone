@@ -2,10 +2,8 @@ import argparse
 import copy
 import json
 import logging
-from collections import OrderedDict
-from datetime import datetime
-
-from wzdx.tools import array_tools, date_tools, polygon_tools, wzdx_translator
+from datetime import datetime  # This is necessary for unit test mocking
+from wzdx.tools import date_tools, wzdx_translator
 
 PROGRAM_NAME = 'NavJoy568Translator'
 PROGRAM_VERSION = '1.0'
