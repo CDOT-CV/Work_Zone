@@ -167,7 +167,7 @@ pip install wzdx-translator-jacob6838
 ```
 
 ### Notes
-This project utilized a python package to make the code more accessible. The setup.py describes the core properties of the package (name, description, included files, ...), the pyproject.toml describes the required pre-requisite packages for running this package. The MANIFEST.in is used to exclude unit testing files from the package. More information on building a python package can be found at [python-packaging-tutorial](https://python-packaging-tutorial.readthedocs.io/en/latest/setup_py.html)
+This project utilized a python package to make the code more accessible. The setup.py file describes the core properties of the package (name, description, included files, ...), the pyproject.toml file describes the required pre-requisite packages for running this package. The MANIFEST.in file is used to exclude unit testing files from the package. More information on building a python package can be found at [python-packaging-tutorial](https://python-packaging-tutorial.readthedocs.io/en/latest/setup_py.html)
 
 ## Documentation
 
