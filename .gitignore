@@ -3,7 +3,7 @@
 .idea/*
 **/__pycache__/**
 .DS_Store
-./translator/source_code/*.geojson
+./wzdx/source_code/*.geojson
 icone_to_wzdx_test.geojson
 icone_wzdx_translated_output_message.geojson
 cotrip_translated_output_message.geojson
@@ -12,3 +12,8 @@ cotrip_wzdx_translated_output_message.geojson
 *.pyc
 *.geojson
 test-output.xml
+build/**
+dist/**
+wzdx_translator_jacob6838.egg-info/*
+translate_icone.py
+translate_navjoy.py

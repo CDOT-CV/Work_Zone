@@ -1,0 +1,17 @@
+{
+  "rtdh_timestamp": 1633444335.4228568,
+  "rtdh_message_id": "7320c4fd-ce27-4170-a3f4-2b6dd2ebd288",
+  "event": {
+    "type": "CONSTRUCTION",
+    "source": {
+      "id": 1245,
+      "last_updated_timestamp": 1598046722
+    },
+    "header": {
+      "description": "19-1245: Roadwork between MP 40 and MP 48"
+    },
+    "detail": {
+      "road_name": "I-75 N"
+    }
+  }
+}

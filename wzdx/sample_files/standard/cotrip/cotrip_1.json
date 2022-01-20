@@ -1,0 +1,108 @@
+{
+    "rtdh_timestamp": 1615866698.393723,
+    "rtdh_message_id": "dd962abd-0afa-4810-aac0-165edb834e71",
+    "event": {
+        "type": "Construction",
+        "sub_type": "Work Zone:roadway-relocation",
+        "source": {
+            "road_event_id": "349611",
+            "id2": "30675",
+            "name": "CDOT ITS",
+            "type": "Road Work",
+            "sub_type": "Road Construction",
+            "collection_timestamp": 1615482720
+        },
+        "lrs": null,
+        "geometry": "LINESTRING (-104.48011 37.007645, -104.480103 37.008034, -104.480125 37.008469, -104.480202 37.008904, -104.48024 37.009048, -104.480324 37.009338, -104.482475 37.015327, -104.482712 37.015945, -104.48288 37.016335, -104.482979 37.016521, -104.483208 37.016884, -104.483467 37.01722, -104.483612 37.01738, -104.483925 37.017681, -104.484253 37.017948, -104.484772 37.018295, -104.485138 37.01849, -104.485504 37.018661, -104.485886 37.01881, -104.486473 37.019005, -104.488014 37.019493)",
+        "header": {
+            "name": "I-25 Northbound / Southbound I-25 (Main St.) business loop from MP 1-2 (Milemarker 1-2) (through November 2021)",
+            "description": "Road Construction - I-25 (Main St.) business loop from MP 1-2",
+            "location_description": "I-25 (Main St.) business loop from MP 1-2",
+            "severity": "Moderate",
+            "language": "English",
+            "external_reference_url": "https://www.codot.gov/projects/us160-walsenburg-ada-ramps",
+            "start_timestamp": 1615813200,
+            "end_timestamp": 1638255600
+        },
+        "detail": {
+            "description": "Ramps will be installed at 23 intersections on US 160 starting at Mile Point 304 and will continue for two miles to MP 306, and on Main Street/I-25 business loop from MP 1-2.",
+            "work_updates": [
+                {
+                    "road_event_id": "62410",
+                    "description": "Work will consist of HMA removal and patching, concrete removals and pouring ada ramps, curb and gutter.",
+                    "restrictions": [
+                        {
+                            "type": "Flagger Operations"
+                        }
+                    ],
+                    "schedules": [
+                        {
+                            "road_event_id": "186695",
+                            "start_date": "2021-03-19T07:00:00.000-06:00",
+                            "end_date": "2021-03-19T18:00:00.000-06:00",
+                            "type": "planned",
+                            "road_name": "I-25",
+                            "road_number": "I-25",
+                            "direction": "South",
+                            "description": "I-25C/Main Street from Cedar Street to 10th Street",
+                            "lrs": null,
+                            "geometry": "POINT (-104.48011 37.00765)"
+                        },
+                        {
+                            "road_event_id": "186694",
+                            "start_date": "2021-03-18T07:00:00.000-06:00",
+                            "end_date": "2021-03-18T18:00:00.000-06:00",
+                            "type": "planned",
+                            "road_name": "I-25",
+                            "road_number": "I-25",
+                            "direction": "South",
+                            "description": "I-25C/Main Street from Cedar Street to 10th Street",
+                            "lrs": null,
+                            "geometry": "POINT (-104.48011 37.00765)"
+                        },
+                        {
+                            "road_event_id": "186697",
+                            "start_date": "2021-03-15T07:00:00.000-06:00",
+                            "end_date": "2021-03-15T18:00:00.000-06:00",
+                            "type": "planned",
+                            "road_name": "I-25",
+                            "road_number": "I-25",
+                            "direction": "South",
+                            "description": "I-25C/Main Street from Cedar Street to 10th Street",
+                            "lrs": null,
+                            "geometry": "POINT (-104.48011 37.00765)"
+                        },
+                        {
+                            "road_event_id": "186696",
+                            "start_date": "2021-03-17T07:00:00.000-06:00",
+                            "end_date": "2021-03-17T18:00:00.000-06:00",
+                            "type": "planned",
+                            "road_name": "I-25",
+                            "road_number": "I-25",
+                            "direction": "South",
+                            "description": "I-25C/Main Street from Cedar Street to 10th Street",
+                            "lrs": null,
+                            "geometry": "POINT (-104.48011 37.00765)"
+                        },
+                        {
+                            "road_event_id": "186693",
+                            "start_date": "2021-03-16T07:00:00.000-06:00",
+                            "end_date": "2021-03-16T18:00:00.000-06:00",
+                            "type": "planned",
+                            "road_name": "I-25",
+                            "road_number": "I-25",
+                            "direction": "South",
+                            "description": "I-25C/Main Street from Cedar Street to 10th Street",
+                            "lrs": null,
+                            "geometry": "POINT (-104.48011 37.00765)"
+                        }
+                    ]
+                }
+            ],
+            "road_name": "I-25",
+            "road_number": "I-25",
+            "direction": "North"
+        },
+        "additional_info": null
+    }
+}

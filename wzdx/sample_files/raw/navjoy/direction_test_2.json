@@ -1,0 +1,89 @@
+[
+    {
+        "sys_gUid": "Form568-44819108-703c-4d6d-ae0d-7dca7319e5b0",
+        "data": {
+            "cdotEngineeringRegionNumber": "4",
+            "methodOfHandlingTraffic": [],
+            "professionalEngineerStamp/Certification": [],
+            "permits": [],
+            "cdotSection/DepartmentName": "Engineering",
+            "cdotPatrolNumber/Id": "4",
+            "subAccountNumber": "M765",
+            "mpaCode": "GI467",
+            "descriptionForProject": "Maintenance for lane expansion",
+            "srzmap": [
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -104.82213676457492,
+                                39.74276350983931
+                            ],
+                            [
+                                -104.82248008732883,
+                                39.73616347829257
+                            ],
+                            [
+                                -104.79398429875461,
+                                39.73589946388361
+                            ],
+                            [
+                                -104.79467094426242,
+                                39.74329148505714
+                            ],
+                            [
+                                -104.82213676457492,
+                                39.74276350983931
+                            ]
+                        ]
+                    ],
+                    "className": "Form568"
+                }
+            ],
+            "streetNameFrom": "287",
+            "mileMarkerStart": "70.2",
+            "mileMarkerEnd": "70.9",
+            "directionOfTraffic": "East",
+            "currentPostedSpeed": "60 MPH",
+            "requestedTemporarySpeed": "45 MPH",
+            "reductionJustification": "Lane expansion - maintenance work",
+            "document": [],
+            "approval": {
+                "description": "",
+                "value": "Approved"
+            },
+            "signature": {
+                "url": "https://assetgovprod.s3-us-west-2.amazonaws.com/Documents/Signature/Files/signature--938878001",
+                "date": "2021-08-17T11:13:07.226Z",
+                "name": "Jonathan Woodworth"
+            },
+            "permitNumber": "Permit-749",
+            "workStartDate": "2021-08-30T02:30:00.000Z",
+            "workEndDate": "2021-09-03T12:30:00.000Z",
+            "cdotProjectEngineerName": {
+                "sys_gUid": "User-e4ffad1a-dc92-4cdb-bc31-14d29ca85fb1",
+                "firstName": "Donald",
+                "lastName": "Michalik",
+                "title": "TIM II"
+            },
+            "requestorName": {
+                "sys_gUid": "User-bef14589-18fb-4b69-aef4-372c462d3f7a",
+                "username": "rodrick.dudley@state.co.us",
+                "firstName": "Rodrick",
+                "lastName": "Dudley",
+                "department": "Maintenance",
+                "agencyuser": "CDOT Region 4",
+                "roleName": "Signal Maintenance Manager",
+                "email": "rodrick.dudley@state.co.us",
+                "Name": "CDOT Region 4",
+                "title": "Maintenance Manager"
+            },
+            "taskChecklist": [
+                "Have you filled Project Engineer details?",
+                "Have you filled Requestor details?",
+                "Have you filled Project Information?"
+            ]
+        }
+    }
+]
