@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/python
 
 trigger:
-- test-package
+- dev
 
 pool:
   vmImage: ubuntu-latest
@@ -22,19 +22,24 @@ steps:
 - script: |
     python -m pip install --upgrade pip
     pip install -r requirements.txt
+    pip install pytest
+    pip install build
   displayName: 'Install dependencies'
 
 - script: |
-    pip install pytest
     python -m pytest
   displayName: 'pytest'
 
 - script: |
-    pip install build
     python -m build
-  displayName: 'Build'
+  displayName: 'Artifact Creation'
+
+- task: CopyFiles@2
+  inputs:
+    targetFolder: $(Build.ArtifactStagingDirectory)
 
 - task: PublishBuildArtifacts@1
   inputs:
-    pathToPublish: $(Build.ArtifactStagingDirectory)
-    artifactName: wzdx-translator-dist
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'dist'
+    publishLocation: 'Container'

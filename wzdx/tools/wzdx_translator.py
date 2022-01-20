@@ -72,15 +72,6 @@ def validate_info(info):
     return True
 
 
-def parse_xml(inputfile):
-    if not inputfile or not os.path.isfile(inputfile):
-        return None
-    with open(inputfile, encoding='utf-8-sig') as f:
-        xml_string = f.read()
-        inputfile_obj = xmltodict.parse(xml_string)
-        return inputfile_obj
-
-
 def parse_xml_to_dict(xml_string):
     d = xmltodict.parse(xml_string)
     return d
@@ -345,27 +336,8 @@ def parse_direction_from_street_name(street):
     return direction
 
 
-def get_wzdx_schema(schema_file_name):
-    try:
-        schema_string = open(schema_file_name, 'r').read()
-    except FileNotFoundError as e:
-        raise RuntimeError('invalid schema: file does not exist')
-    if not schema_string:
-        raise RuntimeError('invalid schema: empty schema')
-    try:
-        schema_obj = json.loads(schema_string)
-        jsonschema.validate('', schema_obj)
-    except json.decoder.JSONDecodeError as e:
-        raise RuntimeError('invalid schema: not valid json') from e
-    except jsonschema.SchemaError as e:
-        raise RuntimeError('invalid schema: schema failed validation') from e
-    except jsonschema.ValidationError:
-        return schema_obj
-    return schema_obj
-
-
 # function to parse polyline to geometry line string
-def parse_polyline(poly):
+def parse_polyline_from_linestring(poly):
     if not poly or type(poly) != str:
         return None
     poly = poly[len('LINESTRING ('): -1]

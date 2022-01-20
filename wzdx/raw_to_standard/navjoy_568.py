@@ -111,7 +111,7 @@ def parse_rtdh_arguments():
 # take in individual message, spit out list of altered unique messages to be translated
 # This function iterates over the list of NUMBERED_KEY_NAMES and correlates them to CORRECT_KEY_NAMES. For each
 # set of numbered key names, generate a copy of the original message, check if the numbered keys exist, if they do
-# then copy those values to the leys in CORRECT_KEY_NAMES. After, if directionOfTraffic yields more than one direction,
+# then copy those values to the keys in CORRECT_KEY_NAMES. After, if directionOfTraffic yields more than one direction,
 # generate a new message for each direction and save them with the key 'direction'
 
 # TODO: consider deleting all numbered keys after they are copied
@@ -128,10 +128,10 @@ def expand_speed_zone(message):
                     'data', {}).get(value)
 
             directions = new_message.get('data', {}).get('directionOfTraffic')
+            if directions:
+                del new_message.get('data', {})['directionOfTraffic']
             for direction in get_directions_from_string(directions):
                 new_message_dir = copy.deepcopy(new_message)
-                if new_message_dir.get('data', {}).get('directionOfTraffic'):
-                    del new_message_dir.get('data', {})['directionOfTraffic']
                 new_message_dir.get('data', {})['direction'] = direction
                 messages.append(new_message_dir)
         return messages
@@ -165,18 +165,14 @@ def generate_standard_messages_from_string(input_file_contents):
     return standard_messages
 
 
-def generate_raw_messages(message_string, invalid_messages_callback=None):
+def generate_raw_messages(message_string):
     msg_lst = json.loads(message_string)
     messages = []
 
-    # Loop through all elements and print each element to PubSub
     for obj in msg_lst:
         separated_messages = expand_speed_zone(obj)
         for msg in separated_messages:
-            if not validate_closure(msg):
-                if invalid_messages_callback:
-                    invalid_messages_callback(msg)
-            else:
+            if validate_closure(msg):
                 messages.append(msg)
 
     return messages
@@ -292,7 +288,7 @@ def validate_closure(obj):
 
     if not coordinates:
         logging.warning(
-            f"Invalid event with id = {obj.get('sys_gUid')}. No valid coordinates found")
+            f"Invalid event with id = {id}. No valid coordinates found")
         return False
 
     starttime_string = data.get('workStartDate')

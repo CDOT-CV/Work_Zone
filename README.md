@@ -166,11 +166,14 @@ Import
 pip install wzdx-translator-jacob6838
 ```
 
-### Documentation
+### Notes
+This project utilized a python package to make the code more accessible. The setup.py file describes the core properties of the package (name, description, included files, ...), the pyproject.toml file describes the required pre-requisite packages for running this package. The MANIFEST.in file is used to exclude unit testing files from the package. More information on building a python package can be found at [python-packaging-tutorial](https://python-packaging-tutorial.readthedocs.io/en/latest/setup_py.html)
 
-documentation for iCone to WZDx translator is located here: [docs](wzdx/docs)
+## Documentation
 
-### Guidelines
+documentation for the included WZDx translator is located here: [docs](wzdx/docs)
+
+## Guidelines
 
 - Issues
   - Create issues using the SMART goals outline (Specific, Measurable, Actionable, Realistic and Time-Aware)
