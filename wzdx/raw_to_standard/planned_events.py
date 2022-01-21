@@ -62,28 +62,13 @@ def generate_standard_messages_from_string(input_file_contents):
     return standard_messages
 
 
-<< << << < HEAD
-def generate_raw_messages(message_string, invalid_messages_callback=None):
-
-
-== == == =
 def generate_raw_messages(message_string):
-
-
->>>>>> > dev
     msg = json.loads(message_string)
     messages = []
 
     separated_messages = expand_event_directions(msg)
     for indiv_msg in separated_messages:
-<< << << < HEAD
-        if not validate_closure(indiv_msg):
-            if invalid_messages_callback:
-                invalid_messages_callback(indiv_msg)
-        else:
-== == == =
         if validate_closure(indiv_msg):
->>>>>> > dev
             messages.append(indiv_msg)
 
     return messages
