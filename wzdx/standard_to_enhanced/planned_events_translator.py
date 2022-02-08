@@ -178,7 +178,6 @@ def parse_road_restriction(incident):
     feature['properties'] = filtered_properties
     feature['geometry'] = geometry
     feature['id'] = event.get('source', {}).get('id', uuid.uuid4())
-    print(feature)
 
     return feature
 
@@ -204,10 +203,6 @@ def parse_work_zone(incident):
     # https://github.com/usdot-jpo-ode/jpo-wzdx/blob/master/spec-content/objects/RoadEvent.md
 
     core_details = {}
-
-    # # id
-    # # Leave this empty, it will be populated by add_ids_v3
-    # core_details['road_event_id'] = ''
 
     # data_source_id
     # Leave this empty, it will be populated by add_ids_v3
@@ -320,7 +315,6 @@ def parse_work_zone(incident):
     feature['properties'] = filtered_properties
     feature['geometry'] = geometry
     feature['id'] = event.get('source', {}).get('id', uuid.uuid4())
-    print(feature)
 
     return feature
 
