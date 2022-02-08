@@ -2,10 +2,7 @@ from wzdx.raw_to_standard import planned_events
 from tests.raw_to_standard import planned_events_test_expected_results as expected_results
 import uuid
 import json
-from unittest.mock import MagicMock, Mock, patch
-from datetime import datetime
-import time_machine
-import time
+from unittest.mock import Mock, patch
 
 
 # --------------------------------------------------------------------------------Unit test for validate_closure function--------------------------------------------------------------------------------
@@ -175,7 +172,7 @@ def test_generate_standard_messages_from_string(mockuuid):
     assert actual_standard == expected
 
 
-def test_get_lanes_list():
+def test_get_lanes_list_1():
     lane_closures_hex = '6000'
     num_lanes = 2
     closedLaneTypes = ["left lane", "right lane"]
@@ -204,7 +201,7 @@ def test_get_lanes_list():
         lane_closures_hex, num_lanes, closedLaneTypes) == expected
 
 
-def test_get_lanes_list():
+def test_get_lanes_list_2():
     lane_closures_hex = 'F001'
     num_lanes = 3
     closedLaneTypes = ["left shoulder", "left lane",

@@ -7,11 +7,6 @@ from unittest.mock import MagicMock, Mock, patch
 import time_machine
 from wzdx.standard_to_enhanced import planned_events_translator
 
-# Unit testing code for navjoy_translator.py
-# --------------------------------------------------------------------------------Unit test for parse_incident function--------------------------------------------------------------------------------
-
-# utc_time_zone = ZoneInfo("America/Los_Angeles")
-
 
 def init_datetime_mocks(mock_dts):
     for i in mock_dts:
