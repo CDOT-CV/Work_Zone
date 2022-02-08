@@ -3,8 +3,6 @@ import argparse
 import json
 import logging
 import copy
-from collections import OrderedDict
-from os import path
 import uuid
 
 from wzdx.sample_files.validation_schema import wzdx_v40_feed, road_restriction_v40_feed
@@ -23,7 +21,7 @@ def main():
     # Added encoding argument because of weird character at start of incidents.xml file
 
     planned_events_obj = json.loads(open(input_file, 'r').read())
-    wzdx, event_type = wzdx_creator(planned_events_obj)
+    wzdx = wzdx_creator(planned_events_obj)
     try:
         event_type = wzdx.get('road_event_feed_info', wzdx['feed_info'])[
             'features'][0]['properties']['core_details']['event_type']
@@ -70,7 +68,7 @@ def wzdx_creator(message, info=None):
         return None
 
     if event_type == 'work-zone':
-        wzd = wzdx_translator.initialize_wzdx_object(info)
+        wzd = wzdx_translator.initialize_wzdx_object_v4(info)
         feature = parse_work_zone(message)
     elif event_type == 'restriction':
         wzd = wzdx_translator.initialize_wzdx_object_restriction(info)
@@ -84,70 +82,8 @@ def wzdx_creator(message, info=None):
     if not wzd.get('features'):
         return None
 
-    wzd = wzdx_translator.add_ids(wzd, event_type)
+    wzd = wzdx_translator.add_ids_v4(wzd, event_type)
     return wzd
-
-# {
-#   "rtdh_timestamp": 1641915055.3268929,
-#   "rtdh_message_id": "abcbc502-09ca-4c4b-a499-8a2bd9872411",
-#   "event": {
-#     "type": {
-#       "type_name": "below-road-work",
-#       "is_architectural_change": true
-#     },
-#     "source": {
-#       "id": "OpenTMS-Event1689408506",
-#       "creation_timestamp": 1635531964000,
-#       "last_updated_timestamp": 1635532501835
-#     },
-#     "geometry": [
-#       [
-#         -108.279106,
-#         39.195663
-#       ],
-#       [
-#         -108.218549,
-#         39.302392
-#       ]
-#     ],
-#     "header": {
-#       "description": "Between Exit 49: CO 65; Grand Mesa (5 miles east of the Palisade area) and US 6 (Debeque) from Mile Point 50 to Mile Point 60. Road closed expect delays due to bridge construction. Until May 1, 2022 at about 12:26PM MDT.",
-#       "start_timestamp": 1635531964000,
-#       "end_timestamp": 1651429564000
-#     },
-#     "detail": {
-#       "road_name": "I-70E",
-#       "road_number": "I-70E",
-#       "direction": "westbound"
-#     },
-#     "additional_info": {
-#       "lanes": [
-#         {
-#           "order": 0,
-#           "type": "shoulder",
-#           "status": "open"
-#         },
-#         {
-#           "order": 1,
-#           "type": "general",
-#           "status": "open"
-#         },
-#         {
-#           "order": 2,
-#           "type": "general",
-#           "status": "open"
-#         },
-#         {
-#           "order": 3,
-#           "type": "shoulder",
-#           "status": "open"
-#         }
-#       ]
-#     }
-#   }
-# }
-
-# function to calculate vehicle impact
 
 
 def get_vehicle_impact(lanes):

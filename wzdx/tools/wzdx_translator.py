@@ -5,7 +5,6 @@ import random
 import re
 import string
 import uuid
-import json
 from collections import OrderedDict
 from datetime import datetime
 
@@ -131,7 +130,7 @@ def add_ids_v3(message):
 
 # Add ids to message
 # This function may fail if some optional fields are not present (lanes, types_of_work, relationship, ...)
-def add_ids(message, event_type):
+def add_ids_v4(message, event_type):
     if not message or type(message) != dict:
         return None
 
@@ -208,7 +207,7 @@ def initialize_wzdx_object_v3(info):
     return wzd
 
 
-def initialize_wzdx_object(info):
+def initialize_wzdx_object_v4(info):
     wzd = {}
     wzd['road_event_feed_info'] = {}
     # hardcode
