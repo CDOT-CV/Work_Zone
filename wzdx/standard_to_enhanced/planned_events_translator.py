@@ -18,15 +18,14 @@ DEFAULT_PLANNED_EVENTS_FEED_INFO_ID = '49253be7-0c6a-4a65-8113-450f9041f989'
 
 def main():
     input_file, output_file = parse_planned_events_arguments()
-    # Added encoding argument because of weird character at start of incidents.xml file
 
     planned_events_obj = json.loads(open(input_file, 'r').read())
     wzdx = wzdx_creator(planned_events_obj)
+    print(wzdx['road_event_feed_info'])
     try:
-        event_type = wzdx.get('road_event_feed_info', wzdx['feed_info'])[
-            'features'][0]['properties']['core_details']['event_type']
+        event_type = wzdx['features'][0]['properties']['core_details']['event_type']
     except:
-        event_type = ''
+        event_type = 'work-zone'
     schemas = {
         'work-zone': wzdx_v40_feed.wzdx_v40_schema_string,
         'restriction': road_restriction_v40_feed.road_restriction_v40_schema_string
@@ -60,7 +59,7 @@ def wzdx_creator(message, info=None):
         return None
     event_type = message['event']['type']
 
-   # verify info obj
+    # verify info obj
     if not info:
         info = wzdx_translator.initialize_info(
             DEFAULT_PLANNED_EVENTS_FEED_INFO_ID)
@@ -134,17 +133,7 @@ def parse_road_restriction(incident):
     core_details['road_names'] = road_names
 
     # direction
-    direction = None
-    for road_name in road_names:
-        direction = wzdx_translator.parse_direction_from_street_name(road_name)
-        if direction:
-            break
-    if not direction:
-        direction = polygon_tools.get_road_direction_from_coordinates(
-            geometry.get('coordinates'))
-    if not direction:
-        return None
-    core_details['direction'] = direction
+    core_details['direction'] = detail.get('direction')
 
     # Relationship
     core_details['relationship'] = {}
@@ -216,17 +205,7 @@ def parse_work_zone(incident):
     core_details['road_names'] = road_names
 
     # direction
-    direction = None
-    for road_name in road_names:
-        direction = wzdx_translator.parse_direction_from_street_name(road_name)
-        if direction:
-            break
-    if not direction:
-        direction = polygon_tools.get_road_direction_from_coordinates(
-            geometry.get('coordinates'))
-    if not direction:
-        return None
-    core_details['direction'] = direction
+    core_details['direction'] = detail.get('direction')
 
     # Relationship
     core_details['relationship'] = {}

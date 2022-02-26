@@ -1,0 +1,66 @@
+{
+    "rtdh_timestamp": 1644874364.2971916,
+    "rtdh_message_id": "44a4f250-bbbe-4683-85b5-51157e80271d",
+    "event": {
+        "type": "work-zone",
+        "types_of_work": [
+            {
+                "type_name": "below-road-work",
+                "is_architectural_change": false
+            }
+        ],
+        "source": {
+            "id": "OpenTMS-Event1943488363",
+            "creation_timestamp": 1644768000000,
+            "last_updated_timestamp": 1644517184690
+        },
+        "geometry": [
+            [
+                -104.699362,
+                39.740098
+            ],
+            [
+                -104.630073,
+                39.739571
+            ]
+        ],
+        "header": {
+            "description": "Between E-470 and Exit 295: I-70 Business North (near Aurora) from Mile Point 290 to Mile Point 295. Road closed due to bridge repair work. Starting Sunday at 9:00AM MST until Sunday, at about 9:55AM MST.",
+            "start_timestamp": 1644768000000,
+            "end_timestamp": 1644771300000
+        },
+        "detail": {
+            "road_name": "I-70E",
+            "road_number": "I-70E",
+            "direction": "eastbound"
+        },
+        "additional_info": {
+            "lanes": [
+                {
+                    "order": 1,
+                    "type": "shoulder",
+                    "status": "open"
+                },
+                {
+                    "order": 2,
+                    "type": "general",
+                    "status": "closed"
+                },
+                {
+                    "order": 3,
+                    "type": "general",
+                    "status": "closed"
+                },
+                {
+                    "order": 4,
+                    "type": "shoulder",
+                    "status": "open"
+                }
+            ],
+            "restrictions": [],
+            "beginning_milepost": 290.0,
+            "ending_milepost": 295.0,
+            "condition_1": true
+        }
+    }
+}

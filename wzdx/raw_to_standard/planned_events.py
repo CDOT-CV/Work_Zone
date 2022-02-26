@@ -6,7 +6,7 @@ import time
 import uuid
 from collections import OrderedDict
 
-from wzdx.tools import date_tools, polygon_tools
+from wzdx.tools import date_tools, polygon_tools, wzdx_translator
 from wzdx.util.collections import PathDict
 
 PROGRAM_NAME = 'PlannedEventsRawToStandard'
@@ -86,6 +86,7 @@ def expand_event_directions(message):
             for laneImpact2 in new_message['properties']['laneImpacts']:
                 if direction_string == laneImpact2['direction']:
                     new_message['properties']['laneImpacts'] = [laneImpact2]
+                    new_message['properties']['laneImpacts'][0]['recorded_direction'] = new_message['properties']['laneImpacts'][0]['direction']
                     new_message['properties']['laneImpacts'][0]['direction'] = direction
                     break
             new_message['properties'][
@@ -148,8 +149,8 @@ def hex_to_binary(hex_string):
 
 
 # TODO: Consider support road closures
-DEFAULT_EVENT_TYPE = {'type_name': 'roadside-work',
-                      'is_architectural_change': False}
+DEFAULT_EVENT_TYPE = ('work-zone', [{'type_name': 'roadside-work',
+                      'is_architectural_change': False}])
 EVENT_TYPE_MAPPING = {
     "Bridge Construction":              ('work-zone', [{'type_name': 'below-road-work',            'is_architectural_change': True}]),
     "Road Construction":                ('work-zone', [{'type_name': 'roadway-creation',           'is_architectural_change': True}]),
@@ -275,11 +276,15 @@ def create_rtdh_standard_msg(pd):
 
     direction = pd.get("properties/direction", default='unknown')
 
-    # Reverse polygon if it is in the opposite direction as the message
-    polyline_direction = polygon_tools.get_road_direction_from_coordinates(
-        coordinates)
-    if direction == REVERSED_DIRECTION_MAP.get(polyline_direction):
+    beginning_milepost = pd.get("properties/startMarker", default="")
+    ending_milepost = pd.get("properties/endMarker", default="")
+    if direction == REVERSED_DIRECTION_MAP.get(pd.get("properties/recorded_direction")):
         coordinates.reverse()
+        beginning_milepost = pd.get("properties/endMarker", default="")
+        ending_milepost = pd.get("properties/startMarker", default="")
+
+    roadName = wzdx_translator.remove_direction_from_street_name(
+        pd.get("properties/routeName"))
 
     start_date = pd.get("properties/startTime",
                         date_tools.parse_datetime_from_iso_string)
@@ -300,7 +305,7 @@ def create_rtdh_standard_msg(pd):
             "type": event_type,
             "types_of_work": types_of_work,
             "source": {
-                "id": pd.get("properties/id", default=""),
+                "id": pd.get("properties/id", default="") + '_' + direction,
                 "creation_timestamp": pd.get("properties/startTime", date_tools.get_unix_from_iso_string, default=0),
                 "last_updated_timestamp": pd.get('properties/lastUpdated', date_tools.get_unix_from_iso_string, default=0),
             },
@@ -311,15 +316,15 @@ def create_rtdh_standard_msg(pd):
                 "end_timestamp": date_tools.date_to_unix(end_date),
             },
             "detail": {
-                "road_name": pd.get("properties/routeName"),
-                "road_number": pd.get("properties/routeName"),
+                "road_name": roadName,
+                "road_number": roadName,
                 "direction": direction,
             },
             "additional_info": {
                 "lanes": get_lane_impacts(pd.get("properties/laneImpacts"), pd.get("properties/direction")),
                 "restrictions": restrictions,
-                "beginning_milepost": pd.get("properties/startMarker", default=""),
-                "ending_milepost": pd.get("properties/endMarker", default=""),
+                "beginning_milepost": beginning_milepost,
+                "ending_milepost": ending_milepost,
             }
         }
     }

@@ -335,6 +335,23 @@ def parse_direction_from_street_name(street):
     return direction
 
 
+# function to remove direction from street name
+def remove_direction_from_street_name(street):
+    SINGLE_CHARACTER_DIRECTIONS = ['N', 'E', 'S', 'W']
+    MULTIPLE_CHARACTER_DIRECTIONS = ['NB', 'EB', 'SB', 'WB']
+
+    if not street or type(street) != str:
+        return None
+    street_char = street[-1]
+    street_chars = street[-2:]
+    if street_char in SINGLE_CHARACTER_DIRECTIONS:
+        street = street[:-1]
+    if street_chars in MULTIPLE_CHARACTER_DIRECTIONS:
+        street = street[:-2]
+
+    return street
+
+
 # function to parse polyline to geometry line string
 def parse_polyline_from_linestring(poly):
     if not poly or type(poly) != str:

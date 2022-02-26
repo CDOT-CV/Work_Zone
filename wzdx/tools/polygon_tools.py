@@ -126,6 +126,35 @@ def get_road_direction_from_coordinates(coordinates):
     return direction
 
 
+# function to get road direction by using geometry coordinates
+def get_road_directions_from_coordinates(coordinates):
+    if not coordinates or type(coordinates) != list or len(coordinates) < 2:
+        return None
+
+    directions = []
+
+    try:
+        long_dif = coordinates[-1][0] - coordinates[0][0]
+        lat_dif = coordinates[-1][1] - coordinates[0][1]
+    except ValueError as e:
+        return None
+
+    if abs(long_dif) > abs(lat_dif):
+        if long_dif > 0:
+            directions.append('eastbound')
+        else:
+            directions.append('westbound')
+    elif lat_dif > 0:
+        directions.append('northbound')
+    else:
+        directions.append('southbound')
+
+    if lat_dif == 0 and long_dif == 0:
+        directions = None
+
+    return directions
+
+
 def angle_between_vectors_degrees(u, v):
     """Return the angle between two vectors in any dimension space,
     in degrees."""
