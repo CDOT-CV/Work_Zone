@@ -249,8 +249,6 @@ def test_get_vehicle_impact_all_lanes_open():
 
 
 # --------------------------------------------------------------------------------Unit test for wzdx_creator function--------------------------------------------------------------------------------
-
-
 @patch.dict(os.environ, {
     'contact_name': 'Ashley Nylen',
     'contact_email': 'ashley.nylen@state.co.us',
