@@ -175,7 +175,8 @@ test_expand_speed_zone_1_expected = [
                     ]
                 }
             ],
-            "direction": "eastbound"
+            "direction": "eastbound",
+            "recorded_direction": "eastbound"
         }
     },
     {
@@ -188,7 +189,8 @@ test_expand_speed_zone_1_expected = [
                     "closedLaneTypes": []
                 }
             ],
-            "direction": "westbound"
+            "direction": "westbound",
+            "recorded_direction": "eastbound"
         }
     }
 ]
@@ -239,7 +241,8 @@ test_expand_speed_zone_2_expected = [{
         "startTime": "2021-10-29T18:26:04.000+00:00",
         "id": "OpenTMS-Event1689408506",
         "travelerInformationMessage": "Between Exit 49: CO 65; Grand Mesa (5 miles east of the Palisade area) and US 6 (Debeque) from Mile Point 50 to Mile Point 60. Road closed expect delays due to bridge construction. Until May 1, 2022 at about 12:26PM MDT.",
-        "direction": "eastbound"
+        "direction": "eastbound",
+        "recorded_direction": "eastbound"
     },
     "attributes": {}
 }]
@@ -282,8 +285,9 @@ test_validate_closure_no_coordinates_input = {
         ],
         "endMarker": 60.0,
         "startTime": 1713004011,
-        "id": "OpenTMS-Event1689408506",
-        "direction": "east"
+        "id": "OpenTMS-Event1689408506_eastbound",
+        "direction": "east",
+        "recorded_direction": "eastbound"
     },
     "attributes": {}
 }
@@ -301,7 +305,7 @@ test_generate_standard_messages_from_string_expected = [
                 }
             ],
             "source": {
-                "id": "OpenTMS-Event1689408506",
+                "id": "OpenTMS-Event1689408506_eastbound",
                 "creation_timestamp": 1635531964000,
                 "last_updated_timestamp": 1635532501835
             },
@@ -321,8 +325,8 @@ test_generate_standard_messages_from_string_expected = [
                 "end_timestamp": 1651429564000
             },
             "detail": {
-                "road_name": "I-70E",
-                "road_number": "I-70E",
+                "road_name": "I-70",
+                "road_number": "I-70",
                 "direction": "eastbound"
             },
             "additional_info": {
@@ -366,18 +370,18 @@ test_generate_standard_messages_from_string_expected = [
                 }
             ],
             "source": {
-                "id": "OpenTMS-Event1689408506",
+                "id": "OpenTMS-Event1689408506_westbound",
                 "creation_timestamp": 1635531964000,
                 "last_updated_timestamp": 1635532501835
             },
             "geometry": [
                 [
-                    -108.279106,
-                    39.195663
-                ],
-                [
                     -108.218549,
                     39.302392
+                ],
+                [
+                    -108.279106,
+                    39.195663
                 ]
             ],
             "header": {
@@ -386,8 +390,8 @@ test_generate_standard_messages_from_string_expected = [
                 "end_timestamp": 1651429564000
             },
             "detail": {
-                "road_name": "I-70E",
-                "road_number": "I-70E",
+                "road_name": "I-70",
+                "road_number": "I-70",
                 "direction": "westbound"
             },
             "additional_info": {
@@ -414,8 +418,8 @@ test_generate_standard_messages_from_string_expected = [
                     }
                 ],
                 "restrictions": [{'type': 'permitted-oversize-loads-prohibited'}],
-                "beginning_milepost": 50.0,
-                "ending_milepost": 60.0
+                "beginning_milepost": 60.0,
+                "ending_milepost": 50.0
             }
         }
     }
@@ -434,7 +438,7 @@ test_validate_closure_missing_required_field_description_expected = [
                 }
             ],
             "source": {
-                "id": "OpenTMS-Event1689408506",
+                "id": "OpenTMS-Event1689408506_eastbound",
                 "creation_timestamp": 1635531964000,
                 "last_updated_timestamp": 1635532501835
             },
@@ -454,8 +458,8 @@ test_validate_closure_missing_required_field_description_expected = [
                 "end_timestamp": 1651429564000
             },
             "detail": {
-                "road_name": "I-70E",
-                "road_number": "I-70E",
+                "road_name": "I-70",
+                "road_number": "I-70",
                 "direction": "eastbound"
             },
             "additional_info": {
@@ -499,18 +503,18 @@ test_validate_closure_missing_required_field_description_expected = [
                 }
             ],
             "source": {
-                "id": "OpenTMS-Event1689408506",
+                "id": "OpenTMS-Event1689408506_westbound",
                 "creation_timestamp": 1635531964000,
                 "last_updated_timestamp": 1635532501835
             },
             "geometry": [
                 [
-                    -108.279106,
-                    39.195663
-                ],
-                [
                     -108.218549,
                     39.302392
+                ],
+                [
+                    -108.279106,
+                    39.195663
                 ]
             ],
             "header": {
@@ -519,8 +523,8 @@ test_validate_closure_missing_required_field_description_expected = [
                 "end_timestamp": 1651429564000
             },
             "detail": {
-                "road_name": "I-70E",
-                "road_number": "I-70E",
+                "road_name": "I-70",
+                "road_number": "I-70",
                 "direction": "westbound"
             },
             "additional_info": {
@@ -547,8 +551,8 @@ test_validate_closure_missing_required_field_description_expected = [
                     }
                 ],
                 "restrictions": [{'type': 'permitted-oversize-loads-prohibited'}],
-                "beginning_milepost": 50.0,
-                "ending_milepost": 60.0
+                "beginning_milepost": 60.0,
+                "ending_milepost": 50.0
             }
         }
     }

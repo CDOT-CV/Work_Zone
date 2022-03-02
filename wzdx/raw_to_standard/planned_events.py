@@ -86,7 +86,8 @@ def expand_event_directions(message):
             for laneImpact2 in new_message['properties']['laneImpacts']:
                 if direction_string == laneImpact2['direction']:
                     new_message['properties']['laneImpacts'] = [laneImpact2]
-                    new_message['properties']['laneImpacts'][0]['recorded_direction'] = new_message['properties']['laneImpacts'][0]['direction']
+                    new_message['properties']['recorded_direction'] = map_direction_string(
+                        message['properties']['direction'])
                     new_message['properties']['laneImpacts'][0]['direction'] = direction
                     break
             new_message['properties'][
@@ -278,7 +279,8 @@ def create_rtdh_standard_msg(pd):
 
     beginning_milepost = pd.get("properties/startMarker", default="")
     ending_milepost = pd.get("properties/endMarker", default="")
-    if direction == REVERSED_DIRECTION_MAP.get(pd.get("properties/recorded_direction")):
+    recorded_direction = pd.get("properties/recorded_direction")
+    if direction == REVERSED_DIRECTION_MAP.get(recorded_direction):
         coordinates.reverse()
         beginning_milepost = pd.get("properties/endMarker", default="")
         ending_milepost = pd.get("properties/startMarker", default="")
