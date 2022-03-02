@@ -249,18 +249,19 @@ def test_get_vehicle_impact_all_lanes_open():
 
 
 # --------------------------------------------------------------------------------Unit test for wzdx_creator function--------------------------------------------------------------------------------
+
+
 @patch.dict(os.environ, {
     'contact_name': 'Ashley Nylen',
     'contact_email': 'ashley.nylen@state.co.us',
     'issuing_organization': 'CDOT'
 })
-@patch('uuid.uuid4')
+# first is for data source id, second is for a default id that is not used in this example, and the third is the road_event_id
+@patch.object(uuid, 'uuid4', side_effect=['w', '', '3'])
 @unittest.mock.patch('wzdx.standard_to_enhanced.navjoy_translator.datetime')
 @unittest.mock.patch('wzdx.tools.wzdx_translator.datetime')
-def test_wzdx_creator(mock_dt, mock_dt_3, mockuuid):
+def test_wzdx_creator(mock_dt, mock_dt_3, _):
     init_datetime_mocks([mock_dt, mock_dt_3])
-    uuid.uuid4 = Mock()
-    uuid.uuid4.side_effect = 'we234de'
 
     standard = {
         "rtdh_timestamp": 1642036259.3099449,

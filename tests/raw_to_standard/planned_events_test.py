@@ -154,10 +154,8 @@ def test_expand_event_directions_2():
     assert expected_results.test_expand_speed_zone_2_expected == actual
 
 
-@patch('uuid.uuid4')
-def test_generate_standard_messages_from_string(mockuuid):
-    uuid.uuid4 = Mock()
-    uuid.uuid4.side_effect = ['we234de', '23wsg54h']
+@patch.object(uuid, 'uuid4', side_effect=['we234de', '23wsg54h'])
+def test_generate_standard_messages_from_string(_):
     actual_standard = json.loads(json.dumps(planned_events.generate_standard_messages_from_string(
         expected_results.test_generate_standard_messages_from_string_input)))
     for i in actual_standard:
