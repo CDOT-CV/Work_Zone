@@ -7,7 +7,7 @@ import uuid
 
 from wzdx.sample_files.validation_schema import wzdx_v40_feed, road_restriction_v40_feed
 
-from wzdx.tools import date_tools, polygon_tools, wzdx_translator
+from wzdx.tools import date_tools, wzdx_translator
 
 PROGRAM_NAME = 'PlannedEventsTranslator'
 PROGRAM_VERSION = '1.0'
