@@ -21,7 +21,6 @@ def main():
 
     planned_events_obj = json.loads(open(input_file, 'r').read())
     wzdx = wzdx_creator(planned_events_obj)
-    print(wzdx['road_event_feed_info'])
     try:
         event_type = wzdx['features'][0]['properties']['core_details']['event_type']
     except:
