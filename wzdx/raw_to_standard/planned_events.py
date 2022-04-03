@@ -57,8 +57,9 @@ def generate_standard_messages_from_string(input_file_contents):
     raw_messages = generate_raw_messages(input_file_contents)
     standard_messages = []
     for message in raw_messages:
-        standard_messages.append(
-            generate_rtdh_standard_message_from_raw_single(message))
+        standard_message = generate_rtdh_standard_message_from_raw_single(message)
+        if standard_message:
+            standard_messages.append(standard_message)
     return standard_messages
 
 
@@ -272,6 +273,13 @@ def get_lane_impacts(lane_impacts, direction):
             return get_lanes_list(impact['laneClosures'], impact['laneCount'], impact['closedLaneTypes'])
 
 
+def all_lanes_open(lanes):
+    for i in lanes:
+        if i['status'] != 'open':
+            return False
+    return True
+
+
 def create_rtdh_standard_msg(pd):
     coordinates = get_linestring(pd.get('geometry', default={'type': None}))
 
@@ -300,6 +308,11 @@ def create_rtdh_standard_msg(pd):
     if pd.get('properties/isOversizedLoadsProhibited'):
         restrictions.append({'type': 'permitted-oversize-loads-prohibited'})
 
+    lane_impacts = get_lane_impacts(pd.get("properties/laneImpacts"), pd.get("properties/direction"))
+    if direction != recorded_direction and all_lanes_open(lane_impacts):
+        return {}
+
+
     return {
         "rtdh_timestamp": time.time(),
         "rtdh_message_id": str(uuid.uuid4()),
@@ -323,7 +336,7 @@ def create_rtdh_standard_msg(pd):
                 "direction": direction,
             },
             "additional_info": {
-                "lanes": get_lane_impacts(pd.get("properties/laneImpacts"), pd.get("properties/direction")),
+                "lanes": lane_impacts,
                 "restrictions": restrictions,
                 "beginning_milepost": beginning_milepost,
                 "ending_milepost": ending_milepost,
