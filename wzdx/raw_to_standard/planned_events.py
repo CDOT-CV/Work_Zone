@@ -203,7 +203,7 @@ LANE_TYPE_MAPPING = {
     "left lane": 'general',
     "center lane": 'general',
     "middle two lanes": 'general',
-    'general': 'general',
+    "general": 'general',
     # this is a weird one
     "middle lanes": 'general',
     "right lane": 'general',
