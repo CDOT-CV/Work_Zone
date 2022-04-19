@@ -140,9 +140,9 @@ def parse_road_restriction(incident):
     # description
     core_details['description'] = header.get('description')
 
-    # creation_date
-    core_details['creation_date'] = date_tools.get_iso_string_from_unix(
-        source.get('creation_timestamp'))
+    # # creation_date
+    # core_details['creation_date'] = date_tools.get_iso_string_from_unix(
+    #     source.get('creation_timestamp'))
 
     # update_date
     core_details['update_date'] = date_tools.get_iso_string_from_unix(
@@ -212,9 +212,9 @@ def parse_work_zone(incident):
     # description
     core_details['description'] = header.get('description')
 
-    # creation_date
-    core_details['creation_date'] = date_tools.get_iso_string_from_unix(
-        source.get('creation_timestamp'))
+    # # creation_date
+    # core_details['creation_date'] = date_tools.get_iso_string_from_unix(
+    #     source.get('creation_timestamp'))
 
     # update_date
     core_details['update_date'] = date_tools.get_iso_string_from_unix(

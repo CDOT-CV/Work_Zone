@@ -57,7 +57,8 @@ def generate_standard_messages_from_string(input_file_contents):
     raw_messages = generate_raw_messages(input_file_contents)
     standard_messages = []
     for message in raw_messages:
-        standard_message = generate_rtdh_standard_message_from_raw_single(message)
+        standard_message = generate_rtdh_standard_message_from_raw_single(
+            message)
         if standard_message:
             standard_messages.append(standard_message)
     return standard_messages
@@ -202,6 +203,7 @@ LANE_TYPE_MAPPING = {
     "left lane": 'general',
     "center lane": 'general',
     "middle two lanes": 'general',
+    'general': 'general',
     # this is a weird one
     "middle lanes": 'general',
     "right lane": 'general',
@@ -210,6 +212,8 @@ LANE_TYPE_MAPPING = {
     "right entrance ramp": 'exit-ramp',
     "right exit ramp": 'exit-ramp'
 }
+
+INVALID_EVENT_DESCRIPTION = "511 event cannot be created in CARS because route does not exist."
 
 
 def map_lane_type(lane_type):
@@ -245,25 +249,29 @@ def get_lanes_list(lane_closures_hex, num_lanes, closedLaneTypes):
     lanes_affected = hex_to_binary(lane_closures_hex)
     lane_bits = lanes_affected[1:(num_lanes+1)]
     lanes = []
-    lanes.append({
-        'order': 1,
-        'type': 'shoulder',
-        'status': map_lane_status(lanes_affected[0]),
-    })
-    for i in closedLaneTypes:
-        if 'shoulder' in i:
-            closedLaneTypes.remove(i)
+    order = 1
+    if map_lane_status(lanes_affected[0]) == 'closed':
+        lanes.append({
+            'order': order,
+            'type': 'shoulder',
+            'status': map_lane_status(lanes_affected[0]),
+        })
+        order += 1
+    closedLaneTypes = [i for i in closedLaneTypes if 'shoulder' not in i]
     for i, bit in enumerate([char for char in lane_bits]):
         lanes.append({
-            'order': i+2,
-            'type': map_lane_type(closedLaneTypes[i] if (len(closedLaneTypes) > i) else ''),
+            'order': order,
+            'type': map_lane_type(closedLaneTypes[i] if (len(closedLaneTypes) > i) else 'general'),
             'status': map_lane_status(bit),
         })
-    lanes.append({
-        'order': len(lanes) + 1,
-        'type': 'shoulder',
-        'status': map_lane_status(lanes_affected[15]),
-    })
+        order += 1
+    if map_lane_status(lanes_affected[15]) == 'closed':
+        lanes.append({
+            'order': order,
+            'type': 'shoulder',
+            'status': map_lane_status(lanes_affected[15]),
+        })
+        order += 1
     return lanes
 
 
@@ -281,6 +289,11 @@ def all_lanes_open(lanes):
 
 
 def create_rtdh_standard_msg(pd):
+    if pd.get('properties/travelerInformationMessage') == INVALID_EVENT_DESCRIPTION:
+        logging.warning(
+            f"Invalid message with id: '{pd.get('properties/id')}'' because description matches invalid event description: '{INVALID_EVENT_DESCRIPTION}'")
+        return {}
+
     coordinates = get_linestring(pd.get('geometry', default={'type': None}))
 
     direction = pd.get("properties/direction", default='unknown')
@@ -308,10 +321,10 @@ def create_rtdh_standard_msg(pd):
     if pd.get('properties/isOversizedLoadsProhibited'):
         restrictions.append({'type': 'permitted-oversize-loads-prohibited'})
 
-    lane_impacts = get_lane_impacts(pd.get("properties/laneImpacts"), pd.get("properties/direction"))
+    lane_impacts = get_lane_impacts(
+        pd.get("properties/laneImpacts"), pd.get("properties/direction"))
     if direction != recorded_direction and all_lanes_open(lane_impacts):
         return {}
-
 
     return {
         "rtdh_timestamp": time.time(),
@@ -321,7 +334,6 @@ def create_rtdh_standard_msg(pd):
             "types_of_work": types_of_work,
             "source": {
                 "id": pd.get("properties/id", default="") + '_' + direction,
-                "creation_timestamp": pd.get("properties/startTime", date_tools.get_unix_from_iso_string, default=0),
                 "last_updated_timestamp": pd.get('properties/lastUpdated', date_tools.get_unix_from_iso_string, default=0),
             },
             "geometry": coordinates,
@@ -340,6 +352,7 @@ def create_rtdh_standard_msg(pd):
                 "restrictions": restrictions,
                 "beginning_milepost": beginning_milepost,
                 "ending_milepost": ending_milepost,
+                "valid": False,
             }
         }
     }
