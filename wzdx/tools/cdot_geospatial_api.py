@@ -15,6 +15,9 @@ def get_route_details(routeId=None):
 
     url = f"{BASE_URL}/{GET_ROUTES}?{'&'.join(parameters)}"
 
+    #https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded/Routes?f=pjson
+    #https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded/Route?routeId=070A&outSR=4326&f=pjson
+
     # response = requests.get(url)
     response = [{'routeID': '070A', 'MMin': 0, 'MMax': 499}]
     return response
