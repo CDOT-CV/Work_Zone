@@ -6,7 +6,7 @@ import time
 import uuid
 from collections import OrderedDict
 
-from wzdx.tools import date_tools, polygon_tools, wzdx_translator
+from wzdx.tools import date_tools, polygon_tools, wzdx_translator, cdot_geospatial_api
 from wzdx.util.collections import PathDict
 
 PROGRAM_NAME = 'GeotabAvlRawToStandard'
@@ -18,6 +18,13 @@ STRING_DIRECTION_MAP = {'north': 'northbound', 'south': 'southbound',
 REVERSED_DIRECTION_MAP = {'northbound': 'southbound', 'southbound': 'northbound',
                           'eastbound': 'westbound', 'westbound': 'eastbound'}
 
+DISTANCE_AHEAD = 2
+
+
+# Look at planned events messages
+# Find planned event that links to automated attenuator
+#
+
 
 def main():
     navjoy_file, output_dir = parse_rtdh_arguments()
@@ -27,7 +34,7 @@ def main():
 
     generated_files_list = []
     for message in generated_messages:
-        output_path = f"{output_dir}/standard_{message['event']['source']['id']}_{round(message['rtdh_timestamp'])}_{message['event']['detail']['direction']}.json"
+        output_path = f"{output_dir}').get('standard_{message['event']['source']['id']}_{round(message['rtdh_timestamp'])}_{message['event']['detail']['direction']}.json"
         open(output_path, 'w+').write(json.dumps(message, indent=2))
         generated_files_list.append(output_path)
 
@@ -47,10 +54,27 @@ def parse_rtdh_arguments():
                         version=f'{PROGRAM_NAME} {PROGRAM_VERSION}')
     parser.add_argument('plannedEventsFile', help='planned event file path')
     parser.add_argument('--outputDir', required=False,
-                        default='./', help='output directory')
+                        default='.').get('', help='output directory')
 
     args = parser.parse_args()
     return args.plannedEventsFile, args.outputDir
+
+
+# Break event into
+def expand_event_routes(message):
+
+    lat = message.get('avl_location').get('position').get('latitude')
+    lng = message.get('avl_location').get('position').get('longitude')
+    bearing = message.get('avl_location').get('position').get('bearing')
+
+    routes = get_route_names_and_geometry((lat, lng), bearing, DISTANCE_AHEAD)
+    return routes
+
+
+def generate_rtdh_standard_message_from_raw_single(obj):
+    pd = PathDict(obj)
+    standard_message = create_rtdh_standard_msg(pd)
+    return standard_message
 
 
 def generate_standard_messages_from_string(input_file_contents):
@@ -64,50 +88,55 @@ def generate_standard_messages_from_string(input_file_contents):
 
 def generate_raw_messages(message_string):
     msg = json.loads(message_string)
-    messages = []
 
-    separated_messages = expand_event_directions(msg)
-    for indiv_msg in separated_messages:
-        if validate_closure(indiv_msg):
-            messages.append(indiv_msg)
-
-    return messages
-
-
-def map_lane_status(lane_status_bit):
-    return 'open' if lane_status_bit == '0' else 'closed'
+    if validate_closure(msg):
+        return msg
 
 
 def map_direction_string(direction_string):
     return STRING_DIRECTION_MAP.get(direction_string)
 
 
+def get_route_names_and_geometry(lat_lng, bearing, distance_ahead):
+    route_info = cdot_geospatial_api.get_route_and_measure(lat_lng, bearing)
+    routes_ahead = cdot_geospatial_api.get_routes_ahead(route_info['Route'], route_info['measure'],
+                                                        route_info['direction'], distance_ahead)
+    return routes_ahead
+
+
 def create_rtdh_standard_msg(pd):
+    lat = pd.get('avl_location').get('position').get('latitude')
+    lng = pd.get('avl_location').get('position').get('longitude')
+    bearing = pd.get('avl_location').get('position').get('bearing')
+
+    cdot_geospatial_api
+
     coordinates = get_linestring(pd.get('geometry', default={'type': None}))
 
-    direction = pd.get("properties/direction", default='unknown')
+    direction = pd.get("properties').get('direction", default='unknown')
 
-    beginning_milepost = pd.get("properties/startMarker", default="")
-    ending_milepost = pd.get("properties/endMarker", default="")
-    recorded_direction = pd.get("properties/recorded_direction")
+    beginning_milepost = pd.get("properties').get('startMarker", default="")
+    ending_milepost = pd.get("properties').get('endMarker", default="")
+    recorded_direction = pd.get("properties').get('recorded_direction")
     if direction == REVERSED_DIRECTION_MAP.get(recorded_direction):
         coordinates.reverse()
-        beginning_milepost = pd.get("properties/endMarker", default="")
-        ending_milepost = pd.get("properties/startMarker", default="")
+        beginning_milepost = pd.get("properties').get('endMarker", default="")
+        ending_milepost = pd.get("properties').get('startMarker", default="")
 
     roadName = wzdx_translator.remove_direction_from_street_name(
-        pd.get("properties/routeName"))
+        pd.get("properties').get('routeName"))
 
-    start_date = pd.get("properties/startTime",
+    start_date = pd.get("properties').get('startTime",
                         date_tools.parse_datetime_from_iso_string)
-    end_date = pd.get("properties/clearTime",
+    end_date = pd.get("properties').get('clearTime",
                       date_tools.parse_datetime_from_iso_string)
 
-    event_type, types_of_work = map_event_type(
-        pd.get("properties/type", default=""))
+    event_type = "work-zone"
+    types_of_work = [{'type_name': 'roadside-work',
+                      'is_architectural_change': False}]
 
     restrictions = []
-    if pd.get('properties/isOversizedLoadsProhibited'):
+    if pd.get('properties').get('isOversizedLoadsProhibited'):
         restrictions.append({'type': 'permitted-oversize-loads-prohibited'})
 
     return {
@@ -117,13 +146,13 @@ def create_rtdh_standard_msg(pd):
             "type": event_type,
             "types_of_work": types_of_work,
             "source": {
-                "id": pd.get("properties/id", default="") + '_' + direction,
-                "creation_timestamp": pd.get("properties/startTime", date_tools.get_unix_from_iso_string, default=0),
-                "last_updated_timestamp": pd.get('properties/lastUpdated', date_tools.get_unix_from_iso_string, default=0),
+                "id": pd.get("properties').get('id", default="") + '_' + direction,
+                "creation_timestamp": pd.get("properties').get('startTime", date_tools.get_unix_from_iso_string, default=0),
+                "last_updated_timestamp": pd.get('properties').get('lastUpdated', date_tools.get_unix_from_iso_string, default=0),
             },
             "geometry": coordinates,
             "header": {
-                "description": pd.get("properties/travelerInformationMessage", default=""),
+                "description": pd.get("properties').get('travelerInformationMessage", default=""),
                 "start_timestamp": date_tools.date_to_unix(start_date),
                 "end_timestamp": date_tools.date_to_unix(end_date),
             },
@@ -133,10 +162,12 @@ def create_rtdh_standard_msg(pd):
                 "direction": direction,
             },
             "additional_info": {
-                "lanes": get_lane_impacts(pd.get("properties/laneImpacts"), pd.get("properties/direction")),
+                # "lanes": get_lane_impacts(pd.get("properties').get('laneImpacts"), pd.get("properties').get('direction")),
                 "restrictions": restrictions,
                 "beginning_milepost": beginning_milepost,
                 "ending_milepost": ending_milepost,
+                "vehicle_id1": 'stuff',
+                "vehicle_id2": 'stuff',
             }
         }
     }
