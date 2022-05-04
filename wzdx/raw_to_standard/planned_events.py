@@ -152,8 +152,7 @@ def hex_to_binary(hex_string):
 
 
 # TODO: Consider support road closures
-DEFAULT_EVENT_TYPE = ('work-zone', [{'type_name': 'roadside-work',
-                      'is_architectural_change': False}])
+DEFAULT_EVENT_TYPE = ('work-zone', [])
 EVENT_TYPE_MAPPING = {
     "Bridge Construction":              ('work-zone', [{'type_name': 'below-road-work',            'is_architectural_change': True}]),
     "Road Construction":                ('work-zone', [{'type_name': 'roadway-creation',           'is_architectural_change': True}]),
@@ -182,11 +181,11 @@ EVENT_TYPE_MAPPING = {
     "Utility Work":                     ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}]),
     "Utility Installation":             ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}]),
     "Wall Maintenance":                 ('work-zone', [{'type_name': 'barrier-work',               'is_architectural_change': False}]),
+    "Other":                            ('work-zone', []),
 
     "BAN Message":                      ('restriction', []),
     "Safety Campaign":                  ('restriction', []),
     "Smoke/Control Burn":               ('restriction', []),
-    "Other":                            ('restriction', []),
     "Avalanche Control":                ('restriction', []),
     "Closed for the Season":            ('restriction', []),
     "Funeral Procession":               ('restriction', []),
