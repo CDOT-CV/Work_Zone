@@ -87,7 +87,7 @@ def get_routes_ahead(route, startMeasure, direction, distanceAhead):
     return resp
 
 
-def get_route_between_measures(routeId, startMeasure, endMeasure, pointsToSkip=1):
+def get_route_between_measures(routeId, startMeasure, endMeasure, pointsToSkip=0):
     # Get lat/long points between two mile markers on route
 
     parameters = []
