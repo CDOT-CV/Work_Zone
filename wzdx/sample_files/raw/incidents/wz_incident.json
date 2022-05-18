@@ -1,0 +1,56 @@
+{
+    "type": "Feature",
+    "geometry": {
+        "srid": 4326,
+        "type": "MultiPoint",
+        "coordinates": [
+            [
+                -107.103013,
+                39.630198
+            ],
+            [
+                -107.088207,
+                39.639026
+            ]
+        ]
+    },
+    "properties": {
+        "severity": "minor",
+        "injuries": 0,
+        "startMarker": 131.0,
+        "type": "Emergency Roadwork",
+        "laneImpacts": [
+            {
+                "direction": "east",
+                "laneCount": 2,
+                "laneClosures": "4000",
+                "closedLaneTypes": [
+                    "left lane"
+                ]
+            },
+            {
+                "direction": "west",
+                "laneCount": 2,
+                "laneClosures": "0",
+                "closedLaneTypes": []
+            }
+        ],
+        "routeName": "I-70E",
+        "isOversizedLoadsProhibited": false,
+        "lastUpdated": "2022-01-06T08:10:11.610+00:00",
+        "endMarker": 132.0,
+        "vehiclesInvolved": 0,
+        "fatalities": 0,
+        "hasRampRestriction": false,
+        "startTime": "2022-01-06T07:57:34.631+00:00",
+        "id": "OpenTMS-Incident1468818709",
+        "travelerInformationMessage": "Between Exit 129: Bair Ranch (near Glenwood Springs) and Exit 133: Dotsero (1 mile west of Dotsero) from Mile Point 131 to Mile Point 132. The left lane is closed due to emergency road work.",
+        "responseLevel": "Intermediate",
+        "jurisdictions": [
+            "EAGLE (COUNTY)"
+        ],
+        "status": "confirmed report",
+        "direction": "east"
+    },
+    "attributes": {}
+}

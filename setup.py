@@ -1,7 +1,7 @@
 import pathlib
 from setuptools import setup, find_packages
 
-VERSION = "0.3.16"
+VERSION = "0.3.20"
 DESCRIPTION = 'CDOT Work Zone WZDx Translators'
 HERE = pathlib.Path(__file__).parent
 README = (HERE / "README.md").read_text()
@@ -30,11 +30,8 @@ setup(
 
     keywords=['python', 'wzdx'],
     classifiers=[
-        "Development Status :: 3 - Alpha",
-        "Intended Audience :: Education",
-        "Programming Language :: Python :: 2",
+        "Development Status :: 4 - Beta",
         "Programming Language :: Python :: 3",
-        "Operating System :: MacOS :: MacOS X",
         "Operating System :: Microsoft :: Windows",
     ]
 )

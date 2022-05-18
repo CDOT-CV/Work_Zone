@@ -1,0 +1,55 @@
+{
+    "type": "Feature",
+    "geometry": {
+        "srid": 4326,
+        "type": "MultiPoint",
+        "coordinates": [
+            [
+                -106.052796,
+                39.393357
+            ],
+            [
+                -106.057125,
+                39.316284
+            ]
+        ]
+    },
+    "properties": {
+        "severity": "minor",
+        "clearTime": "2022-03-30T18:56:50.687+00:00",
+        "injuries": 0,
+        "startMarker": 80.0,
+        "type": "Chain Law Code 18 Lifted",
+        "laneImpacts": [
+            {
+                "direction": "north",
+                "laneCount": 1,
+                "laneClosures": "0",
+                "closedLaneTypes": []
+            },
+            {
+                "direction": "south",
+                "laneCount": 1,
+                "laneClosures": "0",
+                "closedLaneTypes": []
+            }
+        ],
+        "routeName": "CO-9S",
+        "isOversizedLoadsProhibited": false,
+        "lastUpdated": "2022-03-30T18:56:52.126+00:00",
+        "endMarker": 73.0,
+        "vehiclesInvolved": 0,
+        "fatalities": 0,
+        "hasRampRestriction": false,
+        "startTime": "2022-03-30T01:15:52.047+00:00",
+        "id": "OpenTMS-Incident2832331596",
+        "travelerInformationMessage": "",
+        "responseLevel": "Minor",
+        "jurisdictions": [
+            "SUMMIT (COUNTY)"
+        ],
+        "status": "event cleared",
+        "direction": "south"
+    },
+    "attributes": {}
+}
