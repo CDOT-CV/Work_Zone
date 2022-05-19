@@ -2,7 +2,7 @@ from wzdx.raw_to_standard import planned_events
 from tests.raw_to_standard import planned_events_test_expected_results as expected_results
 import uuid
 import json
-from unittest.mock import Mock, patch
+from unittest.mock import MagicMock, patch
 
 
 # --------------------------------------------------------------------------------Unit test for validate_closure function--------------------------------------------------------------------------------
@@ -244,3 +244,31 @@ def test_is_incident_false_false():
     expected = (False, False)
     actual = planned_events.is_incident(msg)
     assert actual == expected
+
+
+@patch.object(planned_events, 'create_rtdh_standard_msg')
+def test_generate_rtdh_standard_message_from_raw_single_incident_valid(mocked_create_rtdh_standard_msg):
+    planned_events.create_rtdh_standard_msg = MagicMock(return_value=True)
+
+    msg = {
+        "properties": {
+            "id": "OpenTMS-Incident2028603626",
+            "type": "Emergency Roadwork"
+        }
+    }
+    actual = planned_events.generate_rtdh_standard_message_from_raw_single(msg)
+    assert actual != {}
+
+
+@patch.object(planned_events, 'create_rtdh_standard_msg')
+def test_generate_rtdh_standard_message_from_raw_single_incident_invalid(mocked_create_rtdh_standard_msg):
+    planned_events.create_rtdh_standard_msg = MagicMock(return_value=True)
+
+    msg = {
+        "properties": {
+            "id": "OpenTMS-Incident2028603626",
+            "type": "Chain Law Code 18"
+        }
+    }
+    actual = planned_events.generate_rtdh_standard_message_from_raw_single(msg)
+    assert actual == {}
