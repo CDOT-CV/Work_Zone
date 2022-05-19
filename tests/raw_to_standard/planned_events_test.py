@@ -175,26 +175,18 @@ def test_get_lanes_list_1():
     num_lanes = 2
     closedLaneTypes = ["left lane", "right lane"]
 
-    expected = [{
-        "order": 1,
-        "type": "shoulder",
-        "status": "open"
-    },
+    expected = [
         {
-        "order": 2,
-        "type": "general",
-        "status": "closed"
-    },
+            "order": 1,
+            "type": "general",
+            "status": "closed"
+        },
         {
-        "order": 3,
-        "type": "general",
-        "status": "closed"
-    },
-        {
-        "order": 4,
-        "type": "shoulder",
-        "status": "open"
-    }]
+            "order": 2,
+            "type": "general",
+            "status": "closed"
+        }
+    ]
     assert planned_events.get_lanes_list(
         lane_closures_hex, num_lanes, closedLaneTypes) == expected
 
@@ -215,3 +207,40 @@ def test_get_lanes_list_2():
         lane_closures_hex, num_lanes, closedLaneTypes))
     assert planned_events.get_lanes_list(
         lane_closures_hex, num_lanes, closedLaneTypes) == expected
+
+
+def test_is_incident_true_true():
+    msg = {
+        "properties": {
+            "id": "OpenTMS-Incident2028603626",
+            "type": "Emergency Roadwork"
+        }
+    }
+    # is_incident, is_wz
+    expected = (True, True)
+    actual = planned_events.is_incident(msg)
+    assert actual == expected
+
+
+def test_is_incident_true_false():
+    msg = {
+        "properties": {
+            "id": "OpenTMS-Incident2028603626",
+            "type": "Chain Law Code 18"
+        }
+    }
+    expected = (True, False)
+    actual = planned_events.is_incident(msg)
+    assert actual == expected
+
+
+def test_is_incident_false_false():
+    msg = {
+        "properties": {
+            "id": "OpenTMS-Event2702170538",
+            "type": "Chain Law Code 18"
+        }
+    }
+    expected = (False, False)
+    actual = planned_events.is_incident(msg)
+    assert actual == expected

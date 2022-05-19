@@ -100,7 +100,6 @@ def test_parse_work_zone_linestring(mock_dt, mock_dt_3):
                 "direction": "westbound",
                 "relationship": {},
                 "description": "Between Exit 49: CO 65; Grand Mesa (5 miles east of the Palisade area) and US 6 (Debeque) from Mile Point 50 to Mile Point 60. Road closed expect delays due to bridge construction. Until May 1, 2022 at about 12:26PM MDT.",
-                "creation_date": "2021-10-29T18:26:04Z",
                 "update_date": "2021-10-29T18:35:01Z",
             },
             "start_date": "2021-10-29T18:26:04Z",
@@ -135,7 +134,7 @@ def test_parse_work_zone_linestring(mock_dt, mock_dt_3):
                     "status": "open"
                 }
             ],
-            "event_status": "active"
+            "event_status": "completed"
         },
         "geometry": {
             "type": "LineString",
@@ -362,7 +361,6 @@ def test_wzdx_creator(mock_dt, mock_dt_3, _):
                         "direction": "westbound",
                         "relationship": {},
                         "description": "Between Exit 49: CO 65; Grand Mesa (5 miles east of the Palisade area) and US 6 (Debeque) from Mile Point 50 to Mile Point 60. Road closed expect delays due to bridge construction. Until May 1, 2022 at about 12:26PM MDT.",
-                        'creation_date': "2021-10-29T18:26:04Z",
                         'update_date': "2021-10-29T18:35:01Z",
                         "road_event_id": "3"
                     },
