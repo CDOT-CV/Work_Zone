@@ -36,7 +36,7 @@ def main():
 
     generated_files_list = []
     for message in generated_messages:
-        output_path = f"{output_dir}/standard_568_{message['event']['source']['id']}_{round(message['rtdh_timestamp'])}_{message['event']['detail']['direction']}.json"
+        output_path = f"{output_dir}/standard_planned_event_{message['event']['source']['id']}.json"
         open(output_path, 'w+').write(json.dumps(message, indent=2))
         generated_files_list.append(output_path)
 
