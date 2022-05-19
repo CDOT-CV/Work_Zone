@@ -118,9 +118,9 @@ def test_initialize_info():
     assert actual == expected
 
 
-# --------------------------------------------------------------------------------Unit test for add_ids function--------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------Unit test for add_ids_v3 function--------------------------------------------------------------------------------
 @patch('uuid.uuid4')
-def test_add_ids(mockuuid):
+def test_add_ids_v3(mockuuid):
     uuid.uuid4 = Mock()
     uuid.uuid4.side_effect = ['we234de', '23wsg54h']
     input_message = {
@@ -144,7 +144,7 @@ def test_add_ids(mockuuid):
             }
         ]
     }
-    actual = wzdx_translator.add_ids(input_message)
+    actual = wzdx_translator.add_ids_v3(input_message)
     expected = {
         'road_event_feed_info': {
             'data_sources': [
@@ -171,22 +171,22 @@ def test_add_ids(mockuuid):
 
 
 @patch('uuid.uuid4')
-def test_add_ids_invalid_message_type(mockuuid):
+def test_add_ids_v3_invalid_message_type(mockuuid):
     uuid.uuid4 = Mock()
     uuid.uuid4.side_effect = ['we234de', '23wsg54h']
     input_message = 'invalid message'
-    actual = wzdx_translator.add_ids(input_message)
+    actual = wzdx_translator.add_ids_v3(input_message)
     expected = None
 
     assert actual == expected
 
 
 @patch('uuid.uuid4')
-def test_add_ids_empty_message(mockuuid):
+def test_add_ids_v3_empty_message(mockuuid):
     uuid.uuid4 = Mock()
     uuid.uuid4.side_effect = ['we234de', '23wsg54h']
     input_message = None
-    actual = wzdx_translator.add_ids(input_message)
+    actual = wzdx_translator.add_ids_v3(input_message)
     expected = None
 
     assert actual == expected
