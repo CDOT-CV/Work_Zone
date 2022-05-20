@@ -74,7 +74,7 @@ def generate_standard_messages_from_string(input_file_contents):
 
 
 # TODO: Integrate Category
-def is_incident(msg):
+def is_incident_wz(msg):
     id = msg.get('properties', {}).get('id', '')
     type = msg.get('properties', {}).get('type', '')
     # category = msg.get('properties', {}).get('Category')
@@ -86,13 +86,7 @@ def is_incident(msg):
 
 def generate_raw_messages(message_string):
     msg = json.loads(message_string)
-    messages = []
-
-    separated_messages = expand_event_directions(msg)
-    for indiv_msg in separated_messages:
-        # add any validation or checks here
-        messages.append(indiv_msg)
-    return messages
+    return expand_event_directions(msg)
 
 
 # Break event into
@@ -121,7 +115,7 @@ def expand_event_directions(message):
 
 
 def generate_rtdh_standard_message_from_raw_single(obj):
-    is_incident_msg, is_wz = is_incident(obj)
+    is_incident_msg, is_wz = is_incident_wz(obj)
     if is_incident_msg and not is_wz:
         id = obj.get('properties', {}).get('id')
         dir = obj.get('properties', {}).get('direction')
@@ -323,6 +317,7 @@ def create_description(name, roadName, startMarker, endMarker, typeOfWork, start
     return f"Event {name}, on {roadName}, between mile markers {startMarker} and {endMarker}. {typeOfWork}. Running between {startTime} and {endTime}"
 
 
+# isIncident is unused, could be useful later though
 def create_rtdh_standard_msg(pd, isIncident):
     description = pd.get('properties/travelerInformationMessage')
     if description == INVALID_EVENT_DESCRIPTION:
@@ -385,7 +380,7 @@ def create_rtdh_standard_msg(pd, isIncident):
             },
             "geometry": coordinates,
             "header": {
-                "description": pd.get("properties/travelerInformationMessage", default=""),
+                "description": description,
                 "start_timestamp": date_tools.date_to_unix(start_date),
                 "end_timestamp": date_tools.date_to_unix(end_date),
             },
