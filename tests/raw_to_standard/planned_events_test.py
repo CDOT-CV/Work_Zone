@@ -218,7 +218,7 @@ def test_is_incident_true_true():
     }
     # is_incident, is_wz
     expected = (True, True)
-    actual = planned_events.is_incident(msg)
+    actual = planned_events.is_incident_wz(msg)
     assert actual == expected
 
 
@@ -230,7 +230,7 @@ def test_is_incident_true_false():
         }
     }
     expected = (True, False)
-    actual = planned_events.is_incident(msg)
+    actual = planned_events.is_incident_wz(msg)
     assert actual == expected
 
 
@@ -242,7 +242,7 @@ def test_is_incident_false_false():
         }
     }
     expected = (False, False)
-    actual = planned_events.is_incident(msg)
+    actual = planned_events.is_incident_wz(msg)
     assert actual == expected
 
 
