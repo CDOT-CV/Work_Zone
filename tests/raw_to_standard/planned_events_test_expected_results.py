@@ -33,7 +33,7 @@ test_validate_closure_valid_data_input = {
                     "laneCount": 2,
                     "laneClosures": "0",
                     "closedLaneTypes": []
-                    }
+            }
         ],
         "routeName": "I-70E",
         "isOversizedLoadsProhibited": True,
@@ -88,7 +88,7 @@ test_validate_closure_missing_required_field_description_input = {
                     "laneCount": 2,
                     "laneClosures": "0",
                     "closedLaneTypes": []
-            }
+                }
         ],
         "routeName": "I-70E",
         "isOversizedLoadsProhibited": True,
@@ -142,7 +142,7 @@ test_validate_closure_invalid_start_time_input = {
                     "laneCount": 2,
                     "laneClosures": "0",
                     "closedLaneTypes": []
-            }
+                }
         ],
         "routeName": "I-70E",
         "isOversizedLoadsProhibited": True,
@@ -272,7 +272,7 @@ test_validate_closure_no_coordinates_input = {
                     "laneCount": 2,
                     "laneClosures": "0",
                     "closedLaneTypes": []
-            }
+                }
         ],
         "routeName": "I-70E",
         "isOversizedLoadsProhibited": True,
@@ -306,7 +306,6 @@ test_generate_standard_messages_from_string_expected = [
             ],
             "source": {
                 "id": "OpenTMS-Event1689408506_eastbound",
-                "creation_timestamp": 1635531964000,
                 "last_updated_timestamp": 1635532501835
             },
             "geometry": [
@@ -333,93 +332,19 @@ test_generate_standard_messages_from_string_expected = [
                 "lanes": [
                     {
                         "order": 1,
-                        "type": "shoulder",
-                        "status": "open"
+                        "type": "general",
+                        "status": "closed"
                     },
                     {
                         "order": 2,
                         "type": "general",
                         "status": "closed"
-                    },
-                    {
-                        "order": 3,
-                        "type": "general",
-                        "status": "closed"
-                    },
-                    {
-                        "order": 4,
-                        "type": "shoulder",
-                        "status": "open"
                     }
                 ],
                 "restrictions": [{'type': 'permitted-oversize-loads-prohibited'}],
                 "beginning_milepost": 50.0,
-                "ending_milepost": 60.0
-            }
-        }
-    },
-    {
-        "rtdh_timestamp": 1639062865.0398643,
-        "rtdh_message_id": "23wsg54h",
-        "event": {
-            "type": 'work-zone',
-            "types_of_work": [
-                {
-                    "type_name": "below-road-work",
-                    "is_architectural_change": True
-                }
-            ],
-            "source": {
-                "id": "OpenTMS-Event1689408506_westbound",
-                "creation_timestamp": 1635531964000,
-                "last_updated_timestamp": 1635532501835
-            },
-            "geometry": [
-                [
-                    -108.218549,
-                    39.302392
-                ],
-                [
-                    -108.279106,
-                    39.195663
-                ]
-            ],
-            "header": {
-                "description": "Between Exit 49: CO 65; Grand Mesa (5 miles east of the Palisade area) and US 6 (Debeque) from Mile Point 50 to Mile Point 60. Road closed expect delays due to bridge construction. Until May 1, 2022 at about 12:26PM MDT.",
-                "start_timestamp": 1635531964000,
-                "end_timestamp": 1651429564000
-            },
-            "detail": {
-                "road_name": "I-70",
-                "road_number": "I-70",
-                "direction": "westbound"
-            },
-            "additional_info": {
-                "lanes": [
-                    {
-                        "order": 1,
-                        "type": "shoulder",
-                        "status": "open"
-                    },
-                    {
-                        "order": 2,
-                        "type": "general",
-                        "status": "open"
-                    },
-                    {
-                        "order": 3,
-                        "type": "general",
-                        "status": "open"
-                    },
-                    {
-                        "order": 4,
-                        "type": "shoulder",
-                        "status": "open"
-                    }
-                ],
-                "restrictions": [{'type': 'permitted-oversize-loads-prohibited'}],
-                "beginning_milepost": 60.0,
-                "ending_milepost": 50.0
+                "ending_milepost": 60.0,
+                "valid": False
             }
         }
     }

@@ -1,0 +1,2532 @@
+{
+    "incident": {
+        "type": "FeatureCollection",
+        "features": [
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "MultiPoint",
+                    "coordinates": [
+                        [
+                            -105.71462,
+                            39.457282
+                        ],
+                        [
+                            -105.967592,
+                            38.924923
+                        ]
+                    ]
+                },
+                "properties": {
+                    "severity": "major",
+                    "injuries": 0,
+                    "startMarker": 208.0,
+                    "type": "Safety Closure",
+                    "laneImpacts": [
+                        {
+                            "direction": "north",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        },
+                        {
+                            "direction": "south",
+                            "laneCount": 1,
+                            "laneClosures": "c001",
+                            "closedLaneTypes": [
+                                "through lanes",
+                                "right shoulder",
+                                "left shoulder"
+                            ]
+                        }
+                    ],
+                    "routeName": "US-285S",
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-06T20:34:14.337+00:00",
+                    "endMarker": 162.0,
+                    "vehiclesInvolved": 0,
+                    "responseSigns": [
+                        {
+                            "id": "467169",
+                            "message": "[pt30o0][jp3][jl3][fo2]US-285 CLOSED[nl1][jl3][fo2]208 TO 161[np][pt30o0][jp3][jl3][fo2]USE ALTERNATE[nl1][jl3][fo2]ROUTE[nl1][jl3][fo2]EXPECT DELAYS"
+                        }
+                    ],
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2022-01-06T19:20:50.891+00:00",
+                    "id": "OpenTMS-Incident1476897318",
+                    "travelerInformationMessage": "Between Geneva Creek (near Kenosha Pass) and US 24 (Antero Junction) from Mile Point 208 to Mile Point 162. Road closed expect delays due to safety concerns. Comment: Due to poor visibility and adverse conditions, both directions closed. Seek alternate route.",
+                    "responseLevel": "Major",
+                    "jurisdictions": [
+                        "PARK (COUNTY)"
+                    ],
+                    "status": "confirmed report",
+                    "direction": "south"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "MultiPoint",
+                    "coordinates": [
+                        [
+                            -105.202048,
+                            39.702355
+                        ],
+                        [
+                            -105.49606,
+                            39.741285
+                        ]
+                    ]
+                },
+                "properties": {
+                    "severity": "minor",
+                    "injuries": 0,
+                    "startMarker": 259.0,
+                    "type": "Traction Law Code 15",
+                    "laneImpacts": [
+                        {
+                            "direction": "east",
+                            "laneCount": 2,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        },
+                        {
+                            "direction": "west",
+                            "laneCount": 3,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        }
+                    ],
+                    "routeName": "I-70W",
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-05T22:59:39.857+00:00",
+                    "endMarker": 241.0,
+                    "vehiclesInvolved": 0,
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2022-01-05T22:58:40.595+00:00",
+                    "id": "OpenTMS-Incident1462393760",
+                    "travelerInformationMessage": "Between Exit 260: C-470; C-470; Morrison (Mount Vernon Canyon) and Exit 240: CO 103; Idaho Springs (Idaho Springs) from Mile Point 259 to Mile Point 241. Passenger vehicles are required to have mud or snow tires or use chains or alternative traction devices or be a four wheel drive or all wheel drive vehicle.",
+                    "responseLevel": "Intermediate",
+                    "jurisdictions": [
+                        "JEFFERSON (COUNTY)"
+                    ],
+                    "status": "confirmed report",
+                    "direction": "west"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "Point",
+                    "coordinates": [
+                        -105.054352,
+                        37.417973
+                    ]
+                },
+                "properties": {
+                    "severity": "minor",
+                    "injuries": 0,
+                    "type": "Vehicle Recovery",
+                    "laneImpacts": [
+                        {
+                            "direction": "east",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        },
+                        {
+                            "direction": "west",
+                            "laneCount": 1,
+                            "laneClosures": "c001",
+                            "closedLaneTypes": [
+                                "through lanes",
+                                "right shoulder",
+                                "left shoulder"
+                            ]
+                        }
+                    ],
+                    "routeName": "CO-12W",
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-05T23:29:16.512+00:00",
+                    "vehiclesInvolved": 1,
+                    "marker": 12.0,
+                    "responseSigns": [
+                        {
+                            "id": "468939",
+                            "message": "[pt30o0][jp2][jl3][fo2]CO-12 CLOSURE[nl][jl3][fo2]MP 15[nl][jl3][fo2]01/07/2022[np][pt30o0][jp2][jl3][nl][jl3][fo1]8 AM - 430 PM"
+                        },
+                        {
+                            "id": "468954",
+                            "message": "[pt30o0][jp2][jl3][fo2]CO-12 CLOSURE[nl][jl3][fo2]MP 15[nl][jl3][fo2]01/07/2022[np][pt30o0][jp2][jl3][nl][jl3][fo1]8 AM - 430 PM"
+                        }
+                    ],
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2022-01-05T20:29:44.387+00:00",
+                    "id": "OpenTMS-Incident1460641888",
+                    "travelerInformationMessage": "Between County Road 401 and Echo Canyon (4 miles east of the La Veta area) at Mile Point 12. Road closed expect delays due to vehicle recovery.",
+                    "responseLevel": "Minor",
+                    "jurisdictions": [
+                        "HUERFANO (COUNTY)"
+                    ],
+                    "status": "confirmed report",
+                    "direction": "west"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "MultiPoint",
+                    "coordinates": [
+                        [
+                            -105.882127,
+                            39.677592
+                        ],
+                        [
+                            -105.894478,
+                            39.635084
+                        ]
+                    ]
+                },
+                "properties": {
+                    "severity": "minor",
+                    "injuries": 0,
+                    "startMarker": 228.0,
+                    "type": "Safety Closure",
+                    "laneImpacts": [
+                        {
+                            "direction": "east",
+                            "laneCount": 2,
+                            "laneClosures": "6000",
+                            "closedLaneTypes": [
+                                "left lane",
+                                "right lane"
+                            ]
+                        },
+                        {
+                            "direction": "west",
+                            "laneCount": 1,
+                            "laneClosures": "4000",
+                            "closedLaneTypes": [
+                                "through lanes"
+                            ]
+                        }
+                    ],
+                    "routeName": "US-6E",
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-06T16:27:33.506+00:00",
+                    "endMarker": 220.0,
+                    "vehiclesInvolved": 0,
+                    "responseSigns": [
+                        {
+                            "id": "467919",
+                            "message": "[pt30o0][jp3][jl3][fo1]LOVELAND[nl][jl3][fo1]PASS[nl][jl3][fo1]CLOSED[np][pt30o0][jp2][jl3][fo1]SKI AREA[nl][jl3][nl][jl3][fo1]OPEN"
+                        }
+                    ],
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2022-01-05T02:41:59.907+00:00",
+                    "id": "OpenTMS-Incident1448119418",
+                    "travelerInformationMessage": "Between Montezuma Road and I-70 (Loveland Pass) from Mile Point 220 to Mile Point 228. Road closed expect delays due to safety concerns.<br/>Between I-70 and Montezuma Road (Loveland Pass) from Mile Point 228 to Mile Point 220. Road closed expect delays due to safety concerns.",
+                    "responseLevel": "Minor",
+                    "jurisdictions": [
+                        "CLEAR CREEK (COUNTY)"
+                    ],
+                    "status": "confirmed report",
+                    "direction": "east"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "MultiPoint",
+                    "coordinates": [
+                        [
+                            -106.763146,
+                            37.566777
+                        ],
+                        [
+                            -106.893306,
+                            37.422128
+                        ]
+                    ]
+                },
+                "properties": {
+                    "severity": "minor",
+                    "injuries": 0,
+                    "startMarker": 176.0,
+                    "type": "Other",
+                    "laneImpacts": [
+                        {
+                            "direction": "east",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        },
+                        {
+                            "direction": "west",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        }
+                    ],
+                    "routeName": "US-160W",
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-06T23:18:30.576+00:00",
+                    "endMarker": 157.0,
+                    "vehiclesInvolved": 0,
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2021-12-23T18:25:17.270+00:00",
+                    "id": "OpenTMS-Incident1238060284",
+                    "travelerInformationMessage": "Between FS Rd. 380 and USFS 667 (3 miles east of the Wolf Creek Pass area) from Mile Point 176 to Mile Point 157. Traffic impacts. Comment: Rising avalanche danger, Wolf Creek Pass. Check forecast.",
+                    "responseLevel": "Minor",
+                    "jurisdictions": [
+                        "MINERAL (COUNTY)"
+                    ],
+                    "status": "confirmed report",
+                    "direction": "west"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "MultiPoint",
+                    "coordinates": [
+                        [
+                            -106.291014,
+                            40.915018
+                        ],
+                        [
+                            -106.203349,
+                            40.997575
+                        ]
+                    ]
+                },
+                "properties": {
+                    "severity": "minor",
+                    "additionalImpacts": [
+                        "Slower speeds advised"
+                    ],
+                    "injuries": 0,
+                    "startMarker": 0.0,
+                    "type": "Other",
+                    "laneImpacts": [
+                        {
+                            "direction": "north",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        },
+                        {
+                            "direction": "south",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        }
+                    ],
+                    "routeName": "CO-127N",
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-05T05:14:49.212+00:00",
+                    "endMarker": 9.2,
+                    "vehiclesInvolved": 0,
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2022-01-05T05:01:52.044+00:00",
+                    "id": "OpenTMS-Incident1449806599",
+                    "travelerInformationMessage": "Between CO 125 and the Wyoming Border from Mile Point 0 to Mile Point 9.2. Traffic impacts. Slower speeds are advised. Comment: Only travel if necessary. Winter driving conditions continue into Wyoming on Highway 230.",
+                    "responseLevel": "Intermediate",
+                    "jurisdictions": [
+                        "JACKSON (COUNTY)"
+                    ],
+                    "status": "confirmed report",
+                    "direction": "north"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "MultiPoint",
+                    "coordinates": [
+                        [
+                            -106.320597,
+                            39.422067
+                        ],
+                        [
+                            -106.311793,
+                            39.361609
+                        ]
+                    ]
+                },
+                "properties": {
+                    "severity": "minor",
+                    "injuries": 0,
+                    "startMarker": 161.0,
+                    "type": "Traction Law Code 15",
+                    "laneImpacts": [
+                        {
+                            "direction": "east",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        },
+                        {
+                            "direction": "west",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        }
+                    ],
+                    "routeName": "US-24E",
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-06T20:54:55.270+00:00",
+                    "endMarker": 166.0,
+                    "vehiclesInvolved": 0,
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2022-01-06T20:48:17.819+00:00",
+                    "id": "OpenTMS-Incident1477964599",
+                    "travelerInformationMessage": "Between Camp Hale Pond and County Road 21A (Tennesee Pass) from Mile Point 161 to Mile Point 166. Passenger vehicles are required to have mud or snow tires or use chains or alternative traction devices or be a four wheel drive or all wheel drive vehicle.",
+                    "responseLevel": "Intermediate",
+                    "jurisdictions": [
+                        "EAGLE (COUNTY)"
+                    ],
+                    "status": "confirmed report",
+                    "direction": "east"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "Point",
+                    "coordinates": [
+                        -105.498742,
+                        39.907161
+                    ]
+                },
+                "properties": {
+                    "severity": "minor",
+                    "communicationActivity": [
+                        {
+                            "type": "incoming",
+                            "communicationTime": "2022-01-06T23:05:49.000Z",
+                            "details": "Plow vs Car with no injuries. The plow is damaged and the other vehicle is undrivable. Blocking both lanes, but in different spots so traffic is getting by. He will do traffic control. 9P2 en route.",
+                            "name": "9P37-2 "
+                        },
+                        {
+                            "type": "incoming",
+                            "communicationTime": "2022-01-06T23:13:42.000Z",
+                            "details": "Can plow move out of his lane. No, it is a bad corner and the plow is providing advance warning for traffic control. CSP en route with drive time from Denver/Golden area.",
+                            "name": "CSPD "
+                        }
+                    ],
+                    "injuries": 0,
+                    "type": "2 Vehicle Crash",
+                    "laneImpacts": [
+                        {
+                            "direction": "north",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        },
+                        {
+                            "direction": "south",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        }
+                    ],
+                    "routeName": "CO-119N",
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-06T23:30:51.325+00:00",
+                    "vehiclesInvolved": 0,
+                    "marker": 20.0,
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2022-01-06T23:23:54.805+00:00",
+                    "id": "OpenTMS-Incident1479745652",
+                    "travelerInformationMessage": "At Gilpin Road (2 miles south of the Nederland area) at Mile Point 20. Crash expect delays.",
+                    "responseLevel": "Intermediate",
+                    "landmark": "GILPIN RD",
+                    "jurisdictions": [
+                        "GILPIN (COUNTY)"
+                    ],
+                    "status": "confirmed report",
+                    "direction": "north"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "MultiPoint",
+                    "coordinates": [
+                        [
+                            -106.311793,
+                            39.361609
+                        ],
+                        [
+                            -106.320597,
+                            39.422067
+                        ]
+                    ]
+                },
+                "properties": {
+                    "severity": "minor",
+                    "injuries": 0,
+                    "startMarker": 166.0,
+                    "type": "Traction Law Code 15",
+                    "laneImpacts": [
+                        {
+                            "direction": "east",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        },
+                        {
+                            "direction": "west",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        }
+                    ],
+                    "routeName": "US-24W",
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-06T21:01:28.593+00:00",
+                    "endMarker": 161.0,
+                    "vehiclesInvolved": 0,
+                    "responseSigns": [
+                        {
+                            "id": "468324",
+                            "message": "[jp3][jl3][fo2]PASS. VEHICLE[nl1][jl3][fo2]TRACTION LAW[nl1][jl3][fo2]IN EFFECT"
+                        }
+                    ],
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2022-01-06T20:54:54.767+00:00",
+                    "id": "OpenTMS-Incident1478040773",
+                    "travelerInformationMessage": "Between County Road 21A and Camp Hale Pond (Tennesee Pass) from Mile Point 166 to Mile Point 161. Passenger vehicles are required to have mud or snow tires or use chains or alternative traction devices or be a four wheel drive or all wheel drive vehicle.",
+                    "responseLevel": "Intermediate",
+                    "jurisdictions": [
+                        "LAKE (COUNTY)"
+                    ],
+                    "status": "confirmed report",
+                    "direction": "west"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "MultiPoint",
+                    "coordinates": [
+                        [
+                            -105.900296,
+                            39.297436
+                        ],
+                        [
+                            -105.756084,
+                            39.408722
+                        ]
+                    ]
+                },
+                "properties": {
+                    "severity": "minor",
+                    "clearTime": "2022-01-06T23:53:03.107+00:00",
+                    "injuries": 0,
+                    "startMarker": 191.0,
+                    "type": "Chain Law Code 18 Lifted",
+                    "laneImpacts": [
+                        {
+                            "direction": "north",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        },
+                        {
+                            "direction": "south",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        }
+                    ],
+                    "routeName": "US-285N",
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-06T23:53:04.521+00:00",
+                    "endMarker": 203.0,
+                    "vehiclesInvolved": 0,
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2022-01-06T00:32:06.354+00:00",
+                    "id": "OpenTMS-Incident1463483541",
+                    "travelerInformationMessage": "Between County Road 7 (near Red Hill Pass) and County Road 872 (near Kenosha Pass) from Mile Point 191 to Mile Point 203. Chain law lifted for all commercial vehicles.",
+                    "responseLevel": "Minor",
+                    "jurisdictions": [
+                        "PARK (COUNTY)"
+                    ],
+                    "status": "event cleared",
+                    "direction": "north"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "MultiPoint",
+                    "coordinates": [
+                        [
+                            -106.579222,
+                            40.380019
+                        ],
+                        [
+                            -106.313395,
+                            40.715648
+                        ]
+                    ]
+                },
+                "properties": {
+                    "severity": "minor",
+                    "responseAgencies": [
+                        {
+                            "name": "ReadyOp Craig Supervisors",
+                            "assignedTime": "2022-01-05T20:13:00.000Z"
+                        }
+                    ],
+                    "injuries": 0,
+                    "startMarker": 0.0,
+                    "type": "Safety Closure",
+                    "laneImpacts": [
+                        {
+                            "direction": "east",
+                            "laneCount": 1,
+                            "laneClosures": "c001",
+                            "closedLaneTypes": [
+                                "through lanes",
+                                "right shoulder",
+                                "left shoulder"
+                            ]
+                        },
+                        {
+                            "direction": "west",
+                            "laneCount": 1,
+                            "laneClosures": "c001",
+                            "closedLaneTypes": [
+                                "through lanes",
+                                "right shoulder",
+                                "left shoulder"
+                            ]
+                        }
+                    ],
+                    "routeName": "CO-14E",
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-05T20:18:34.002+00:00",
+                    "endMarker": 32.0,
+                    "vehiclesInvolved": 0,
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2022-01-05T19:57:09.396+00:00",
+                    "id": "OpenTMS-Incident1460290204",
+                    "travelerInformationMessage": "Between US 40 and Eagle Drive (31 miles west of the Walden area) from Mile Point 0 to Mile Point 32. Road closed expect delays due to safety concerns.<br/>Between Eagle Drive and US 40 (31 miles west of the Walden area) from Mile Point 32 to Mile Point 0. Road closed expect delays due to safety concerns.",
+                    "responseLevel": "Intermediate",
+                    "jurisdictions": [
+                        "JACKSON (COUNTY)"
+                    ],
+                    "status": "confirmed report",
+                    "direction": "east"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "MultiPoint",
+                    "coordinates": [
+                        [
+                            -106.288156,
+                            38.551268
+                        ],
+                        [
+                            -106.410652,
+                            38.416516
+                        ]
+                    ]
+                },
+                "properties": {
+                    "severity": "minor",
+                    "additionalImpacts": [
+                        "Slower speeds advised"
+                    ],
+                    "injuries": 0,
+                    "startMarker": 205.0,
+                    "type": "Safety Closure",
+                    "laneImpacts": [
+                        {
+                            "direction": "east",
+                            "laneCount": 1,
+                            "laneClosures": "4000",
+                            "closedLaneTypes": [
+                                "through lanes"
+                            ]
+                        },
+                        {
+                            "direction": "west",
+                            "laneCount": 1,
+                            "laneClosures": "4000",
+                            "closedLaneTypes": [
+                                "through lanes"
+                            ]
+                        }
+                    ],
+                    "routeName": "US-50W",
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-06T23:55:20.036+00:00",
+                    "endMarker": 190.0,
+                    "vehiclesInvolved": 0,
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2022-01-06T20:37:18.078+00:00",
+                    "id": "OpenTMS-Incident1477795077",
+                    "travelerInformationMessage": "Between Marshall Pass Road (1 mile west of the Monarch Pass area) and County Road 228 (near Monarch Pass) from Mile Point 190 to Mile Point 205. Road closed expect delays due to safety concerns. Slower speeds are advised. Comment: Road will be closed 1-6-2022 from 5:00pm until 7:00pm for winter maintenance operations, use alternate route<br/>Between County Road 228 (near Monarch Pass) and Marshall Pass Road (1 mile west of the Monarch Pass area) from Mile Point 205 to Mile Point 190. Road closed expect delays due to safety concerns. Slower speeds are advised. Comment: Road will be closed 1-6-2022 from 5:00pm until 7:00pm for winter maintenance operations, use alternate route",
+                    "responseLevel": "Minor",
+                    "jurisdictions": [
+                        "CHAFFEE (COUNTY)"
+                    ],
+                    "status": "confirmed report",
+                    "direction": "west"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "MultiPoint",
+                    "coordinates": [
+                        [
+                            -106.285702,
+                            40.726591
+                        ],
+                        [
+                            -105.981397,
+                            40.10904
+                        ]
+                    ]
+                },
+                "properties": {
+                    "severity": "minor",
+                    "responseAgencies": [
+                        {
+                            "name": "ReadyOp Craig Supervisors",
+                            "assignedTime": "2022-01-05T20:15:00.000Z"
+                        }
+                    ],
+                    "injuries": 0,
+                    "startMarker": 53.0,
+                    "type": "Safety Closure",
+                    "laneImpacts": [
+                        {
+                            "direction": "north",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        },
+                        {
+                            "direction": "south",
+                            "laneCount": 1,
+                            "laneClosures": "c001",
+                            "closedLaneTypes": [
+                                "through lanes",
+                                "right shoulder",
+                                "left shoulder"
+                            ]
+                        }
+                    ],
+                    "routeName": "CO-125S",
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-05T20:22:42.973+00:00",
+                    "endMarker": 0.0,
+                    "vehiclesInvolved": 0,
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2022-01-05T20:06:39.268+00:00",
+                    "id": "OpenTMS-Incident1460400097",
+                    "travelerInformationMessage": "Between Logan Street (near Walden) and US 40 (12 miles south of Willowcreek Pass) from Mile Point 53 to Mile Point 0. Road closed expect delays due to safety concerns.",
+                    "responseLevel": "Intermediate",
+                    "jurisdictions": [
+                        "JACKSON (COUNTY)"
+                    ],
+                    "status": "confirmed report",
+                    "direction": "south"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "Point",
+                    "coordinates": [
+                        -106.341754,
+                        39.644135
+                    ]
+                },
+                "properties": {
+                    "severity": "minor",
+                    "additionalImpacts": [
+                        "CMV Involved"
+                    ],
+                    "responseAgencies": [
+                        {
+                            "name": "Local Fire/EMS",
+                            "arrivalTime": "2022-01-06T23:30:00.000Z"
+                        },
+                        {
+                            "name": "Local LEA (Law Enforcement Agency)",
+                            "arrivalTime": "2022-01-06T23:38:00.000Z"
+                        }
+                    ],
+                    "injuries": 0,
+                    "type": "3+ Vehicle Crash",
+                    "laneImpacts": [
+                        {
+                            "direction": "east",
+                            "laneCount": 2,
+                            "laneClosures": "2001",
+                            "closedLaneTypes": [
+                                "right lane",
+                                "right shoulder"
+                            ]
+                        },
+                        {
+                            "direction": "west",
+                            "laneCount": 2,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        }
+                    ],
+                    "routeName": "I-70E",
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-06T23:51:29.784+00:00",
+                    "vehiclesInvolved": 0,
+                    "marker": 178.0,
+                    "responseSigns": [
+                        {
+                            "id": "475014",
+                            "message": "[pt30o0][jp3][jl3][fo1]CRASH[nl2][jl3][fo1]AHEAD[nl1][jl3][fo1]USE CAUTION[np][pt30o0][jp3][jl3][fo1]RIGHT[nl2][jl3][fo1]LANE[nl2][jl3][fo1]CLOSED"
+                        },
+                        {
+                            "id": "474999",
+                            "message": "[pt30o0][jp2][jl3][fo1]CRASH[nl][jl3][fo1]AHEAD[np][pt30o0][jp2][jl3][fo1]RIGHT[nl][jl3][fo1]LANE[nl][jl3][fo1]CLOSED"
+                        },
+                        {
+                            "id": "474984",
+                            "message": "[pt30o0][jp3][jl3][fo1]CRASH[nl2][jl3][fo1]AHEAD[nl1][jl3][fo1]MP 178[np][pt30o0][jp3][jl3][fo1]RIGHT[nl2][jl3][fo1]LANE[nl2][jl3][fo1]CLOSED"
+                        }
+                    ],
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2022-01-06T23:28:12.276+00:00",
+                    "id": "OpenTMS-Incident1479792982",
+                    "travelerInformationMessage": "Between Exit 176: Vail and Exit 180: East Vail (Vail) at Mile Point 178. The right lane is closed due to a crash.",
+                    "responseLevel": "Intermediate",
+                    "jurisdictions": [
+                        "EAGLE (COUNTY)"
+                    ],
+                    "status": "confirmed report",
+                    "direction": "east"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "MultiPoint",
+                    "coordinates": [
+                        [
+                            -106.410652,
+                            38.416516
+                        ],
+                        [
+                            -106.288156,
+                            38.551268
+                        ]
+                    ]
+                },
+                "properties": {
+                    "severity": "minor",
+                    "additionalImpacts": [
+                        "Slower speeds advised"
+                    ],
+                    "injuries": 0,
+                    "startMarker": 190.0,
+                    "type": "Safety Closure",
+                    "laneImpacts": [
+                        {
+                            "direction": "east",
+                            "laneCount": 1,
+                            "laneClosures": "4000",
+                            "closedLaneTypes": [
+                                "through lanes"
+                            ]
+                        },
+                        {
+                            "direction": "west",
+                            "laneCount": 1,
+                            "laneClosures": "4000",
+                            "closedLaneTypes": [
+                                "through lanes"
+                            ]
+                        }
+                    ],
+                    "routeName": "US-50E",
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-06T23:55:48.198+00:00",
+                    "endMarker": 205.0,
+                    "vehiclesInvolved": 0,
+                    "responseSigns": [
+                        {
+                            "id": "474474",
+                            "message": "[pt30o0][jp2][jl3][fo2]US 50 CLOSURE [nl0][jl3][fo2]THRUS 1-06-22[nl0][jl3][fo2]MONARCH PASS[np][pt30o0][jp2][jl3][fo1]5PM-7PM[nl0][jl3][fo1]WINTER [nl0][jl3][fo2]MAINTENANCE "
+                        },
+                        {
+                            "id": "474309",
+                            "message": "[pt30o0][jp3][jl3][fo2]US 50 CLOSURE [nl1][jl3][fo1]MP 190-205[nl1][jl3][fo2]1-6-22 5PM-7PM[np][pt30o0][jp3][jl3][fo1]FOR WINTER[nl1][jl3][fo2]MAINTENANCE[nl1][jl3][fo1]OPERATIONS"
+                        }
+                    ],
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2022-01-06T21:07:57.972+00:00",
+                    "id": "OpenTMS-Incident1478153443",
+                    "travelerInformationMessage": "Between Marshall Pass Road (1 mile west of the Monarch Pass area) and County Road 228 (near Monarch Pass) from Mile Point 190 to Mile Point 205. Road closed expect delays due to safety concerns. Slower speeds are advised. Comment: Road will be closed 1-06-2022 from 5pm - 7pm for winter maintenance operations, use alternate route<br/>Between County Road 228 (near Monarch Pass) and Marshall Pass Road (1 mile west of the Monarch Pass area) from Mile Point 205 to Mile Point 190. Road closed expect delays due to safety concerns. Slower speeds are advised. Comment: Road will be closed 1-06-2022 from 5pm - 7pm for winter maintenance operations, use alternate route",
+                    "responseLevel": "Minor",
+                    "jurisdictions": [
+                        "SAGUACHE (COUNTY)"
+                    ],
+                    "status": "confirmed report",
+                    "direction": "east"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "MultiPoint",
+                    "coordinates": [
+                        [
+                            -105.756084,
+                            39.408722
+                        ],
+                        [
+                            -105.900296,
+                            39.297436
+                        ]
+                    ]
+                },
+                "properties": {
+                    "severity": "minor",
+                    "clearTime": "2022-01-06T23:54:33.261+00:00",
+                    "injuries": 0,
+                    "startMarker": 203.0,
+                    "type": "Chain Law Code 18 Lifted",
+                    "laneImpacts": [
+                        {
+                            "direction": "north",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        },
+                        {
+                            "direction": "south",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        }
+                    ],
+                    "routeName": "US-285S",
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-06T23:54:34.827+00:00",
+                    "endMarker": 191.0,
+                    "vehiclesInvolved": 0,
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2022-01-06T00:33:53.409+00:00",
+                    "id": "OpenTMS-Incident1463506711",
+                    "travelerInformationMessage": "Between County Road 872 (near Kenosha Pass) and County Road 7 (near Red Hill Pass) from Mile Point 203 to Mile Point 191. Chain law lifted for all commercial vehicles.",
+                    "responseLevel": "Minor",
+                    "jurisdictions": [
+                        "PARK (COUNTY)"
+                    ],
+                    "status": "event cleared",
+                    "direction": "south"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "MultiPoint",
+                    "coordinates": [
+                        [
+                            -105.891951,
+                            39.681116
+                        ],
+                        [
+                            -105.894478,
+                            39.635084
+                        ]
+                    ]
+                },
+                "properties": {
+                    "severity": "minor",
+                    "injuries": 0,
+                    "startMarker": 229.0,
+                    "type": "Chain Law Code 18",
+                    "laneImpacts": [
+                        {
+                            "direction": "east",
+                            "laneCount": 2,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        },
+                        {
+                            "direction": "west",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        }
+                    ],
+                    "routeName": "US-6W",
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-04T18:11:56.075+00:00",
+                    "endMarker": 220.0,
+                    "vehiclesInvolved": 0,
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2022-01-04T18:11:19.204+00:00",
+                    "id": "OpenTMS-Incident1442123025",
+                    "travelerInformationMessage": "Between I-70 and Montezuma Road (Loveland Pass) from Mile Point 229 to Mile Point 220. Chains or alternative traction devices required for all commercial motor vehicles including buses and vans of 16 or more passenger capacity.",
+                    "responseLevel": "Intermediate",
+                    "jurisdictions": [
+                        "CLEAR CREEK (COUNTY)"
+                    ],
+                    "status": "confirmed report",
+                    "direction": "west"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "MultiPoint",
+                    "coordinates": [
+                        [
+                            -106.498874,
+                            36.994524
+                        ],
+                        [
+                            -106.354463,
+                            37.131039
+                        ]
+                    ]
+                },
+                "properties": {
+                    "severity": "minor",
+                    "communicationActivity": [
+                        {
+                            "type": "incoming",
+                            "communicationTime": "2022-01-01T18:48:33.000Z",
+                            "details": "crt / stop sign down. 7P07 notified. RE",
+                            "name": "Jaime ",
+                            "organization": "CSP Alamosa Communications Center"
+                        },
+                        {
+                            "type": "incoming",
+                            "communicationTime": "2022-01-02T00:25:04.000Z",
+                            "details": "crt / stop sign down. 7P07 notified. RE --- Stop sign fixed @ 17:13.  RLF",
+                            "name": "Jaime ",
+                            "organization": "CSP Alamosa Communications Center"
+                        }
+                    ],
+                    "injuries": 0,
+                    "startMarker": 0.0,
+                    "type": "Other",
+                    "laneImpacts": [
+                        {
+                            "direction": "north",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        },
+                        {
+                            "direction": "south",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        }
+                    ],
+                    "routeName": "CO-17N",
+                    "isOversizedLoadsProhibited": true,
+                    "lastUpdated": "2022-01-05T21:59:57.475+00:00",
+                    "endMarker": 17.0,
+                    "vehiclesInvolved": 0,
+                    "responseSigns": [
+                        {
+                            "id": "468174",
+                            "message": "[jp3][jl3][fo13]NO OVERSIZED[nl3][jl3][nl3][jl3][fo13]LOADS"
+                        }
+                    ],
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2021-12-26T13:33:52.510+00:00",
+                    "id": "OpenTMS-Incident1286138502",
+                    "travelerInformationMessage": "Between State Border New Mexico and Forest Service Road 250 (near Cumbres Pass) from Mile Point 0 to Mile Point 17. Traffic impacts. Permitted oversize loads are prohibited.",
+                    "responseLevel": "Minor",
+                    "jurisdictions": [
+                        "ARCHULETA (COUNTY)"
+                    ],
+                    "status": "confirmed report",
+                    "direction": "north"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "MultiPoint",
+                    "coordinates": [
+                        [
+                            -106.354463,
+                            37.131039
+                        ],
+                        [
+                            -106.498874,
+                            36.994524
+                        ]
+                    ]
+                },
+                "properties": {
+                    "severity": "minor",
+                    "injuries": 0,
+                    "startMarker": 17.0,
+                    "type": "Other",
+                    "laneImpacts": [
+                        {
+                            "direction": "north",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        },
+                        {
+                            "direction": "south",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        }
+                    ],
+                    "routeName": "CO-17S",
+                    "isOversizedLoadsProhibited": true,
+                    "lastUpdated": "2022-01-06T01:05:20.860+00:00",
+                    "endMarker": 0.0,
+                    "vehiclesInvolved": 0,
+                    "responseSigns": [
+                        {
+                            "id": "468204",
+                            "message": "[jp3][jl3][fo20]NO OVERSIZED[nl3][jl3][nl3][jl3][fo20]LOADS"
+                        }
+                    ],
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2021-12-26T13:35:46.822+00:00",
+                    "id": "OpenTMS-Incident1286161290",
+                    "travelerInformationMessage": "Between Forest Service Road 250 and State Border New Mexico (near Cumbres Pass) from Mile Point 17 to Mile Point 0. Traffic impacts. Permitted oversize loads are prohibited.",
+                    "responseLevel": "Minor",
+                    "jurisdictions": [
+                        "CONEJOS (COUNTY)"
+                    ],
+                    "status": "confirmed report",
+                    "direction": "south"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "MultiPoint",
+                    "coordinates": [
+                        [
+                            -105.894478,
+                            39.635084
+                        ],
+                        [
+                            -105.891951,
+                            39.681116
+                        ]
+                    ]
+                },
+                "properties": {
+                    "severity": "minor",
+                    "injuries": 0,
+                    "startMarker": 220.0,
+                    "type": "Chain Law Code 18",
+                    "laneImpacts": [
+                        {
+                            "direction": "east",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        },
+                        {
+                            "direction": "west",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        }
+                    ],
+                    "routeName": "US-6E",
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-04T18:16:09.973+00:00",
+                    "endMarker": 229.0,
+                    "vehiclesInvolved": 0,
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2022-01-04T18:10:11.468+00:00",
+                    "id": "OpenTMS-Incident1442108648",
+                    "travelerInformationMessage": "Between Montezuma Road and I-70 (Loveland Pass) from Mile Point 220 to Mile Point 229. Chains or alternative traction devices required for all commercial motor vehicles including buses and vans of 16 or more passenger capacity.",
+                    "responseLevel": "Intermediate",
+                    "jurisdictions": [
+                        "SUMMIT (COUNTY)"
+                    ],
+                    "status": "confirmed report",
+                    "direction": "east"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "MultiPoint",
+                    "coordinates": [
+                        [
+                            -106.071963,
+                            39.625099
+                        ],
+                        [
+                            -105.946024,
+                            39.676831
+                        ]
+                    ]
+                },
+                "properties": {
+                    "severity": "minor",
+                    "injuries": 0,
+                    "startMarker": 205.0,
+                    "type": "Chain Law Code 18",
+                    "laneImpacts": [
+                        {
+                            "direction": "east",
+                            "laneCount": 2,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        },
+                        {
+                            "direction": "west",
+                            "laneCount": 2,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        }
+                    ],
+                    "routeName": "I-70E",
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-05T11:30:18.668+00:00",
+                    "endMarker": 213.0,
+                    "vehiclesInvolved": 0,
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2022-01-05T01:12:44.330+00:00",
+                    "id": "OpenTMS-Incident1447069822",
+                    "travelerInformationMessage": "Between Exit 203: CO 9; East Frisco (Silverthorne) and Exit 216: US 6; Loveland Pass (Eisenhower Tunnel) from Mile Point 205 to Mile Point 213. Chains or alternative traction devices required for all commercial motor vehicles including buses and vans of 16 or more passenger capacity.",
+                    "responseLevel": "Minor",
+                    "jurisdictions": [
+                        "SUMMIT (COUNTY)"
+                    ],
+                    "status": "confirmed report",
+                    "direction": "east"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "MultiPoint",
+                    "coordinates": [
+                        [
+                            -106.057125,
+                            39.316284
+                        ],
+                        [
+                            -106.052796,
+                            39.393357
+                        ]
+                    ]
+                },
+                "properties": {
+                    "severity": "minor",
+                    "injuries": 0,
+                    "startMarker": 73.0,
+                    "type": "Chain Law Code 18",
+                    "laneImpacts": [
+                        {
+                            "direction": "north",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        },
+                        {
+                            "direction": "south",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        }
+                    ],
+                    "routeName": "CO-9N",
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-05T12:44:56.396+00:00",
+                    "endMarker": 80.0,
+                    "vehiclesInvolved": 0,
+                    "responseSigns": [
+                        {
+                            "id": "468069",
+                            "message": "[pt30o0][jp2][jl3][fo1]ALL CMV[nl][jl3][fo1]MUST[nl][jl3][fo1]CHAIN UP[np][pt30o0][jp2][jl3][fo1]PASS VEH[nl][jl3][fo2]TRACTION LAW[nl][jl3][fo1]IN EFFECT[np][pt30o0][jp2][jl3][fo1]HOOSIER[nl][jl3][fo1]PASS[nl][jl3][fo1]MP 73-80"
+                        }
+                    ],
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2022-01-05T12:30:25.138+00:00",
+                    "id": "OpenTMS-Incident1455032876",
+                    "travelerInformationMessage": "Between County Road 4 and Quandary Drive (near Hoosier Pass) from Mile Point 73 to Mile Point 80. Chains or alternative traction devices required for all commercial motor vehicles including buses and vans of 16 or more passenger capacity.",
+                    "responseLevel": "Intermediate",
+                    "jurisdictions": [
+                        "PARK (COUNTY)"
+                    ],
+                    "status": "confirmed report",
+                    "direction": "north"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "MultiPoint",
+                    "coordinates": [
+                        [
+                            -106.071963,
+                            39.625099
+                        ],
+                        [
+                            -105.696342,
+                            39.716704
+                        ]
+                    ]
+                },
+                "properties": {
+                    "severity": "major",
+                    "injuries": 0,
+                    "startMarker": 205.0,
+                    "type": "Traction Law Code 15",
+                    "laneImpacts": [
+                        {
+                            "direction": "east",
+                            "laneCount": 2,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        },
+                        {
+                            "direction": "west",
+                            "laneCount": 2,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        }
+                    ],
+                    "routeName": "I-70E",
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-05T12:27:01.987+00:00",
+                    "endMarker": 228.0,
+                    "vehiclesInvolved": 0,
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2022-01-05T11:32:17.574+00:00",
+                    "id": "OpenTMS-Incident1454351169",
+                    "travelerInformationMessage": "Between Exit 203: CO 9; East Frisco (Silverthorne) and Empire Junction (Georgetown) from Mile Point 205 to Mile Point 228. Passenger vehicles are required to have mud or snow tires or use chains or alternative traction devices or be a four wheel drive or all wheel drive vehicle.",
+                    "responseLevel": "Major",
+                    "jurisdictions": [
+                        "SUMMIT (COUNTY)"
+                    ],
+                    "status": "confirmed report",
+                    "direction": "east"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "MultiPoint",
+                    "coordinates": [
+                        [
+                            -105.696559,
+                            39.716723
+                        ],
+                        [
+                            -106.072389,
+                            39.625189
+                        ]
+                    ]
+                },
+                "properties": {
+                    "severity": "major",
+                    "injuries": 0,
+                    "startMarker": 228.0,
+                    "type": "Traction Law Code 15",
+                    "laneImpacts": [
+                        {
+                            "direction": "east",
+                            "laneCount": 2,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        },
+                        {
+                            "direction": "west",
+                            "laneCount": 2,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        }
+                    ],
+                    "routeName": "I-70W",
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-05T12:27:14.600+00:00",
+                    "endMarker": 205.0,
+                    "vehiclesInvolved": 0,
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2022-01-05T11:33:04.394+00:00",
+                    "id": "OpenTMS-Incident1454359544",
+                    "travelerInformationMessage": "Between Empire Junction (Georgetown) and Exit 203: CO 9; East Frisco (Silverthorne) from Mile Point 228 to Mile Point 205. Passenger vehicles are required to have mud or snow tires or use chains or alternative traction devices or be a four wheel drive or all wheel drive vehicle.",
+                    "responseLevel": "Major",
+                    "jurisdictions": [
+                        "CLEAR CREEK (COUNTY)"
+                    ],
+                    "status": "confirmed report",
+                    "direction": "west"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "MultiPoint",
+                    "coordinates": [
+                        [
+                            -105.967592,
+                            38.924923
+                        ],
+                        [
+                            -105.71462,
+                            39.457282
+                        ]
+                    ]
+                },
+                "properties": {
+                    "severity": "major",
+                    "injuries": 0,
+                    "startMarker": 162.0,
+                    "type": "Safety Closure",
+                    "laneImpacts": [
+                        {
+                            "direction": "north",
+                            "laneCount": 1,
+                            "laneClosures": "c001",
+                            "closedLaneTypes": [
+                                "through lanes",
+                                "right shoulder",
+                                "left shoulder"
+                            ]
+                        },
+                        {
+                            "direction": "south",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        }
+                    ],
+                    "routeName": "US-285N",
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-06T20:24:33.182+00:00",
+                    "endMarker": 208.0,
+                    "vehiclesInvolved": 0,
+                    "responseSigns": [
+                        {
+                            "id": "466974",
+                            "message": "[jp2][jl3][fo2]US-285 CLOSED[nl][jl3][fo2]MP 182-208[nl][jl3][fo2]EXPECT DELAYS"
+                        }
+                    ],
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2022-01-06T19:19:37.943+00:00",
+                    "id": "OpenTMS-Incident1476880580",
+                    "travelerInformationMessage": "Between US 24 (Antero Junction) and Geneva Creek (near Kenosha Pass) from Mile Point 162 to Mile Point 208. Road closed expect delays due to safety concerns. Comment: Due to poor visibility and adverse conditions, both directions closed. Seek alternate route.",
+                    "responseLevel": "Major",
+                    "jurisdictions": [
+                        "PARK (COUNTY)"
+                    ],
+                    "status": "confirmed report",
+                    "direction": "north"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "MultiPoint",
+                    "coordinates": [
+                        [
+                            -105.786732,
+                            40.673453
+                        ],
+                        [
+                            -106.275736,
+                            40.718944
+                        ]
+                    ]
+                },
+                "properties": {
+                    "severity": "minor",
+                    "injuries": 0,
+                    "startMarker": 78.0,
+                    "type": "Safety Closure",
+                    "laneImpacts": [
+                        {
+                            "direction": "east",
+                            "laneCount": 1,
+                            "laneClosures": "4000",
+                            "closedLaneTypes": [
+                                "through lanes"
+                            ]
+                        },
+                        {
+                            "direction": "west",
+                            "laneCount": 1,
+                            "laneClosures": "4000",
+                            "closedLaneTypes": [
+                                "through lanes"
+                            ]
+                        }
+                    ],
+                    "routeName": "CO-14E",
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-06T21:54:18.978+00:00",
+                    "endMarker": 35.0,
+                    "vehiclesInvolved": 0,
+                    "responseSigns": [
+                        {
+                            "id": "467274",
+                            "message": "[pt30o0][jp2][jl3][fo1]CO 14[nl][jl3][fo1]CLOSED[nl][jl3][fo1]TO WALDEN[np][pt30o0][jp2][jl3][fo2]287 CLOSED[nl][jl3][fo2]IN[nl][jl3][fo2]WYOMING"
+                        }
+                    ],
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2022-01-06T01:32:35.848+00:00",
+                    "id": "OpenTMS-Incident1464201828",
+                    "travelerInformationMessage": "Between County Road 36 (near Walden) and Sleepin Elephant (9 miles east of Cameron Pass) from Mile Point 35 to Mile Point 78. Road closed expect delays due to safety concerns. Comment: Closed both directions Poudre Canyon to Walden.<br/>Between Sleepin Elephant (9 miles east of Cameron Pass) and County Road 36 (near Walden) from Mile Point 78 to Mile Point 35. Road closed expect delays due to safety concerns. Comment: Closed both directions Poudre Canyon to Walden.",
+                    "responseLevel": "Minor",
+                    "jurisdictions": [
+                        "LARIMER (COUNTY)"
+                    ],
+                    "status": "confirmed report",
+                    "direction": "east"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "MultiPoint",
+                    "coordinates": [
+                        [
+                            -106.057125,
+                            39.316284
+                        ],
+                        [
+                            -106.052796,
+                            39.393357
+                        ]
+                    ]
+                },
+                "properties": {
+                    "severity": "minor",
+                    "injuries": 0,
+                    "startMarker": 73.0,
+                    "type": "Traction Law Code 15",
+                    "laneImpacts": [
+                        {
+                            "direction": "north",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        },
+                        {
+                            "direction": "south",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        }
+                    ],
+                    "routeName": "CO-9N",
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-05T12:34:37.883+00:00",
+                    "endMarker": 80.0,
+                    "vehiclesInvolved": 0,
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2021-12-26T13:48:05.631+00:00",
+                    "id": "OpenTMS-Incident1286304214",
+                    "travelerInformationMessage": "Between County Road 4 and Quandary Drive (near Hoosier Pass) from Mile Point 73 to Mile Point 80. Passenger vehicles are required to have mud or snow tires or use chains or alternative traction devices or be a four wheel drive or all wheel drive vehicle.",
+                    "responseLevel": "Minor",
+                    "jurisdictions": [
+                        "PARK (COUNTY)"
+                    ],
+                    "status": "confirmed report",
+                    "direction": "north"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "MultiPolygon",
+                    "coordinates": [
+                        [
+                            [
+                                [
+                                    -105.053991,
+                                    39.563452
+                                ],
+                                [
+                                    -103.706534,
+                                    39.563452
+                                ],
+                                [
+                                    -103.706534,
+                                    39.740554
+                                ],
+                                [
+                                    -105.053991,
+                                    39.740554
+                                ],
+                                [
+                                    -105.053991,
+                                    39.563452
+                                ]
+                            ]
+                        ],
+                        [
+                            [
+                                [
+                                    -105.398199,
+                                    39.129465
+                                ],
+                                [
+                                    -105.048791,
+                                    39.129465
+                                ],
+                                [
+                                    -105.048791,
+                                    39.914145
+                                ],
+                                [
+                                    -105.398199,
+                                    39.914145
+                                ],
+                                [
+                                    -105.398199,
+                                    39.129465
+                                ]
+                            ]
+                        ],
+                        [
+                            [
+                                [
+                                    -105.328498,
+                                    39.129455
+                                ],
+                                [
+                                    -104.660547,
+                                    39.129455
+                                ],
+                                [
+                                    -104.660547,
+                                    39.566916
+                                ],
+                                [
+                                    -105.328498,
+                                    39.566916
+                                ],
+                                [
+                                    -105.328498,
+                                    39.129455
+                                ]
+                            ]
+                        ],
+                        [
+                            [
+                                [
+                                    -105.0533,
+                                    39.738039
+                                ],
+                                [
+                                    -103.705691,
+                                    39.738039
+                                ],
+                                [
+                                    -103.705691,
+                                    40.001269
+                                ],
+                                [
+                                    -105.0533,
+                                    40.001269
+                                ],
+                                [
+                                    -105.0533,
+                                    39.738039
+                                ]
+                            ]
+                        ],
+                        [
+                            [
+                                [
+                                    -105.109966,
+                                    39.614312
+                                ],
+                                [
+                                    -104.599538,
+                                    39.614312
+                                ],
+                                [
+                                    -104.599538,
+                                    39.914209
+                                ],
+                                [
+                                    -105.109966,
+                                    39.914209
+                                ],
+                                [
+                                    -105.109966,
+                                    39.614312
+                                ]
+                            ]
+                        ]
+                    ]
+                },
+                "properties": {
+                    "severity": "minor",
+                    "injuries": 0,
+                    "locationDescription": "Denver Metro",
+                    "type": "Other",
+                    "laneImpacts": [],
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-06T01:13:33.071+00:00",
+                    "vehiclesInvolved": 0,
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2022-01-06T00:59:28.615+00:00",
+                    "id": "OpenTMS-Incident1463808715",
+                    "travelerInformationMessage": "Arapahoe Co, Jefferson Co, Douglas Co, Adams Co and Denver Co. Traffic impacts.",
+                    "responseLevel": "Intermediate",
+                    "jurisdictions": [
+                        "ARAPAHOE (COUNTY)",
+                        "JEFFERSON (COUNTY)",
+                        "DOUGLAS (COUNTY)",
+                        "ADAMS (COUNTY)",
+                        "DENVER (COUNTY)"
+                    ],
+                    "status": "confirmed report"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "MultiPoint",
+                    "coordinates": [
+                        [
+                            -106.341754,
+                            39.644135
+                        ],
+                        [
+                            -106.147038,
+                            39.503655
+                        ]
+                    ]
+                },
+                "properties": {
+                    "severity": "minor",
+                    "additionalImpacts": [
+                        "Slower speeds advised"
+                    ],
+                    "injuries": 0,
+                    "startMarker": 178.0,
+                    "type": "Traction Law Code 15",
+                    "laneImpacts": [
+                        {
+                            "direction": "east",
+                            "laneCount": 3,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        },
+                        {
+                            "direction": "west",
+                            "laneCount": 2,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        }
+                    ],
+                    "routeName": "I-70E",
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-05T01:35:29.829+00:00",
+                    "endMarker": 195.0,
+                    "vehiclesInvolved": 0,
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2022-01-05T01:28:46.978+00:00",
+                    "id": "OpenTMS-Incident1447296651",
+                    "travelerInformationMessage": "Between Exit 176: Vail (Vail) and Exit 195: CO 91; Copper Mountain (near Vail Pass) from Mile Point 178 to Mile Point 195. Passenger vehicles are required to have mud or snow tires or use chains or alternative traction devices or be a four wheel drive or all wheel drive vehicle. Slower speeds are advised.",
+                    "responseLevel": "Intermediate",
+                    "jurisdictions": [
+                        "EAGLE (COUNTY)"
+                    ],
+                    "status": "confirmed report",
+                    "direction": "east"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "MultiPoint",
+                    "coordinates": [
+                        [
+                            -106.052796,
+                            39.393357
+                        ],
+                        [
+                            -106.057125,
+                            39.316284
+                        ]
+                    ]
+                },
+                "properties": {
+                    "severity": "minor",
+                    "injuries": 0,
+                    "startMarker": 80.0,
+                    "type": "Traction Law Code 15",
+                    "laneImpacts": [
+                        {
+                            "direction": "north",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        },
+                        {
+                            "direction": "south",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        }
+                    ],
+                    "routeName": "CO-9S",
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-05T12:38:18.107+00:00",
+                    "endMarker": 73.0,
+                    "vehiclesInvolved": 0,
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2021-12-26T13:47:58.400+00:00",
+                    "id": "OpenTMS-Incident1286303973",
+                    "travelerInformationMessage": "Between Quandary Drive and County Road 4 (near Hoosier Pass) from Mile Point 80 to Mile Point 73. Passenger vehicles are required to have mud or snow tires or use chains or alternative traction devices or be a four wheel drive or all wheel drive vehicle.",
+                    "responseLevel": "Minor",
+                    "jurisdictions": [
+                        "SUMMIT (COUNTY)"
+                    ],
+                    "status": "confirmed report",
+                    "direction": "south"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "MultiPoint",
+                    "coordinates": [
+                        [
+                            -106.052796,
+                            39.393357
+                        ],
+                        [
+                            -106.057125,
+                            39.316284
+                        ]
+                    ]
+                },
+                "properties": {
+                    "severity": "minor",
+                    "injuries": 0,
+                    "startMarker": 80.0,
+                    "type": "Chain Law Code 18",
+                    "laneImpacts": [
+                        {
+                            "direction": "north",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        },
+                        {
+                            "direction": "south",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        }
+                    ],
+                    "routeName": "CO-9S",
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-05T12:45:10.496+00:00",
+                    "endMarker": 73.0,
+                    "vehiclesInvolved": 0,
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2022-01-05T12:34:44.102+00:00",
+                    "id": "OpenTMS-Incident1455084021",
+                    "travelerInformationMessage": "Between Quandary Drive and County Road 4 (near Hoosier Pass) from Mile Point 80 to Mile Point 73. Chains or alternative traction devices required for all commercial motor vehicles including buses and vans of 16 or more passenger capacity.",
+                    "responseLevel": "Intermediate",
+                    "jurisdictions": [
+                        "SUMMIT (COUNTY)"
+                    ],
+                    "status": "confirmed report",
+                    "direction": "south"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "MultiPoint",
+                    "coordinates": [
+                        [
+                            -107.103013,
+                            39.630198
+                        ],
+                        [
+                            -107.088207,
+                            39.639026
+                        ]
+                    ]
+                },
+                "properties": {
+                    "severity": "minor",
+                    "injuries": 0,
+                    "startMarker": 131.0,
+                    "type": "Emergency Roadwork",
+                    "laneImpacts": [
+                        {
+                            "direction": "east",
+                            "laneCount": 2,
+                            "laneClosures": "4000",
+                            "closedLaneTypes": [
+                                "left lane"
+                            ]
+                        },
+                        {
+                            "direction": "west",
+                            "laneCount": 2,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        }
+                    ],
+                    "routeName": "I-70E",
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-06T08:10:11.610+00:00",
+                    "endMarker": 132.0,
+                    "vehiclesInvolved": 0,
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2022-01-06T07:57:34.631+00:00",
+                    "id": "OpenTMS-Incident1468818709",
+                    "travelerInformationMessage": "Between Exit 129: Bair Ranch (near Glenwood Springs) and Exit 133: Dotsero (1 mile west of Dotsero) from Mile Point 131 to Mile Point 132. The left lane is closed due to emergency road work.",
+                    "responseLevel": "Intermediate",
+                    "jurisdictions": [
+                        "EAGLE (COUNTY)"
+                    ],
+                    "status": "confirmed report",
+                    "direction": "east"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "Point",
+                    "coordinates": [
+                        -105.054352,
+                        37.417973
+                    ]
+                },
+                "properties": {
+                    "severity": "minor",
+                    "injuries": 0,
+                    "type": "Vehicle Recovery",
+                    "laneImpacts": [
+                        {
+                            "direction": "east",
+                            "laneCount": 1,
+                            "laneClosures": "c001",
+                            "closedLaneTypes": [
+                                "through lanes",
+                                "right shoulder",
+                                "left shoulder"
+                            ]
+                        },
+                        {
+                            "direction": "west",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        }
+                    ],
+                    "routeName": "CO-12E",
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-06T01:45:14.329+00:00",
+                    "vehiclesInvolved": 0,
+                    "marker": 12.0,
+                    "responseSigns": [
+                        {
+                            "id": "468414",
+                            "message": "[pt30o0][jp3][pb0,0,0][jl3][fo20][cf255,255,0]CO-12 CLOSURE[nl6][jl3][fo20][cf255,255,0]MP 15[nl6][jl3][fo20][cf255,255,0]01/07/22[np][pt30o0][jp3][pb0,0,0][jl3][nl6][jl3][fo20][cf255,255,0]8 AM TO 430 PM"
+                        },
+                        {
+                            "id": "468399",
+                            "message": "[pt30o0][jp2][jl3][fo2]CO-12 CLOSURE[nl][jl3][fo2]MP 15[nl][jl3][fo2]01/07/2022[np][pt30o0][jp2][jl3][nl][jl3][fo1]8 AM - 430 PM"
+                        }
+                    ],
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2022-01-05T20:39:34.002+00:00",
+                    "id": "OpenTMS-Incident1460754233",
+                    "travelerInformationMessage": "Between Echo Canyon and County Road 401 (4 miles east of the La Veta area) at Mile Point 12. Road closed expect delays due to vehicle recovery.",
+                    "responseLevel": "Minor",
+                    "jurisdictions": [
+                        "HUERFANO (COUNTY)"
+                    ],
+                    "status": "confirmed report",
+                    "direction": "east"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "Point",
+                    "coordinates": [
+                        -104.521336,
+                        37.133487
+                    ]
+                },
+                "properties": {
+                    "severity": "minor",
+                    "additionalImpacts": [
+                        "Detour in place"
+                    ],
+                    "injuries": 0,
+                    "type": "Emergency Roadwork",
+                    "laneImpacts": [
+                        {
+                            "direction": "north",
+                            "laneCount": 2,
+                            "laneClosures": "e001",
+                            "closedLaneTypes": [
+                                "left lane",
+                                "right lane",
+                                "right shoulder",
+                                "left shoulder"
+                            ]
+                        },
+                        {
+                            "direction": "south",
+                            "laneCount": 2,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        }
+                    ],
+                    "routeName": "I-25N",
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-03T15:26:43.782+00:00",
+                    "vehiclesInvolved": 0,
+                    "marker": 11.0,
+                    "responseSigns": [
+                        {
+                            "id": "468384",
+                            "message": "[pt30o0][jp2][jl3][fo1]I-25 WILL BE[nl][jl3][fo1]CLOSED AT[nl][jl3][fo1]EXIT 11[np][pt30o0][jp2][jl3][fo1]1/04 TO 1/06[nl][jl3][fo1]6AM TO 6PM[nl][jl3][fo1]USE DETOUR"
+                        }
+                    ],
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2022-01-03T15:14:22.857+00:00",
+                    "id": "OpenTMS-Incident1423236085",
+                    "travelerInformationMessage": "At Exit 11: Santa Fe Trail (near Raton Pass) at Mile Point 11. Road closed expect delays due to emergency road work. Detour in place.",
+                    "responseLevel": "Intermediate",
+                    "landmark": "I 25 ML",
+                    "jurisdictions": [
+                        "LAS ANIMAS (COUNTY)"
+                    ],
+                    "status": "confirmed report",
+                    "direction": "north"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "Point",
+                    "coordinates": [
+                        -104.521548,
+                        37.133377
+                    ]
+                },
+                "properties": {
+                    "severity": "minor",
+                    "additionalImpacts": [
+                        "Detour in place"
+                    ],
+                    "injuries": 0,
+                    "type": "Emergency Roadwork",
+                    "laneImpacts": [
+                        {
+                            "direction": "north",
+                            "laneCount": 2,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        },
+                        {
+                            "direction": "south",
+                            "laneCount": 2,
+                            "laneClosures": "e001",
+                            "closedLaneTypes": [
+                                "left lane",
+                                "right lane",
+                                "right shoulder",
+                                "left shoulder"
+                            ]
+                        }
+                    ],
+                    "routeName": "I-25S",
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-04T13:52:06.400+00:00",
+                    "vehiclesInvolved": 0,
+                    "marker": 11.0,
+                    "responseSigns": [
+                        {
+                            "id": "468924",
+                            "message": "[pt30o0][jp2][jl3][fo1]I-25 WILL BE[nl][jl3][fo1]CLOSED AT[nl][jl3][fo1]EXIT 11[np][pt30o0][jp2][jl3][fo1]1/04 TO 1/06[nl][jl3][fo1]6AM TO 6PM[nl][jl3][fo1]USE DETOUR"
+                        },
+                        {
+                            "id": "468909",
+                            "message": "[pt30o0][jp3][jl3][fo1]I-25[nl1][jl3][fo1]CLOSED AT[nl1][jl3][fo1]EXIT 11[np][pt30o0][jp3][jl3][fo1]1/04 TO 1/06[nl1][jl3][fo1]6AM TO 6PM[nl1][jl3][fo1]USE DETOUR"
+                        }
+                    ],
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2022-01-03T15:26:48.967+00:00",
+                    "id": "OpenTMS-Incident1423378489",
+                    "travelerInformationMessage": "At Exit 11: Santa Fe Trail (near Raton Pass) at Mile Point 11. Road closed expect delays due to emergency road work. Detour in place.",
+                    "responseLevel": "Minor",
+                    "jurisdictions": [
+                        "LAS ANIMAS (COUNTY)"
+                    ],
+                    "status": "confirmed report",
+                    "direction": "south"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "MultiPoint",
+                    "coordinates": [
+                        [
+                            -105.189168,
+                            40.665097
+                        ],
+                        [
+                            -105.412197,
+                            40.995449
+                        ]
+                    ]
+                },
+                "properties": {
+                    "severity": "minor",
+                    "injuries": 0,
+                    "startMarker": 356.0,
+                    "type": "Safety Closure",
+                    "laneImpacts": [
+                        {
+                            "direction": "north",
+                            "laneCount": 2,
+                            "laneClosures": "6000",
+                            "closedLaneTypes": [
+                                "left lane",
+                                "right lane"
+                            ]
+                        },
+                        {
+                            "direction": "south",
+                            "laneCount": 2,
+                            "laneClosures": "6000",
+                            "closedLaneTypes": [
+                                "left lane",
+                                "right lane"
+                            ]
+                        }
+                    ],
+                    "routeName": "US-287N",
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-06T22:30:17.652+00:00",
+                    "endMarker": 385.0,
+                    "vehiclesInvolved": 0,
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2022-01-06T22:27:47.597+00:00",
+                    "id": "OpenTMS-Incident1479090275",
+                    "travelerInformationMessage": "Between CO 14 and the Wyoming Border (6 to 34 miles north of the Fort Collins area) from Mile Point 356 to Mile Point 385. Road closed expect delays due to safety concerns.<br/>Between the Wyoming Border and CO 14 (6 to 34 miles north of the Fort Collins area) from Mile Point 385 to Mile Point 356. Road closed expect delays due to safety concerns.",
+                    "responseLevel": "Intermediate",
+                    "jurisdictions": [
+                        "LARIMER (COUNTY)"
+                    ],
+                    "status": "confirmed report",
+                    "direction": "north"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "MultiPoint",
+                    "coordinates": [
+                        [
+                            -105.894478,
+                            39.635084
+                        ],
+                        [
+                            -105.891951,
+                            39.681116
+                        ]
+                    ]
+                },
+                "properties": {
+                    "severity": "minor",
+                    "injuries": 0,
+                    "startMarker": 220.0,
+                    "type": "Traction Law Code 15",
+                    "laneImpacts": [
+                        {
+                            "direction": "east",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        },
+                        {
+                            "direction": "west",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        }
+                    ],
+                    "routeName": "US-6E",
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-04T14:21:45.983+00:00",
+                    "endMarker": 229.0,
+                    "vehiclesInvolved": 0,
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2022-01-04T14:19:28.220+00:00",
+                    "id": "OpenTMS-Incident1439401126",
+                    "travelerInformationMessage": "Between Montezuma Road and I-70 (Loveland Pass) from Mile Point 220 to Mile Point 229. Passenger vehicles are required to have mud or snow tires or use chains or alternative traction devices or be a four wheel drive or all wheel drive vehicle.",
+                    "responseLevel": "Intermediate",
+                    "jurisdictions": [
+                        "SUMMIT (COUNTY)"
+                    ],
+                    "status": "confirmed report",
+                    "direction": "east"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "MultiPoint",
+                    "coordinates": [
+                        [
+                            -105.891951,
+                            39.681116
+                        ],
+                        [
+                            -105.894478,
+                            39.635084
+                        ]
+                    ]
+                },
+                "properties": {
+                    "severity": "minor",
+                    "injuries": 0,
+                    "startMarker": 229.0,
+                    "type": "Traction Law Code 15",
+                    "laneImpacts": [
+                        {
+                            "direction": "east",
+                            "laneCount": 2,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        },
+                        {
+                            "direction": "west",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        }
+                    ],
+                    "routeName": "US-6W",
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-04T14:23:34.719+00:00",
+                    "endMarker": 220.0,
+                    "vehiclesInvolved": 0,
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2022-01-04T14:22:56.958+00:00",
+                    "id": "OpenTMS-Incident1439443354",
+                    "travelerInformationMessage": "Between I-70 and Montezuma Road (Loveland Pass) from Mile Point 229 to Mile Point 220. Passenger vehicles are required to have mud or snow tires or use chains or alternative traction devices or be a four wheel drive or all wheel drive vehicle.",
+                    "responseLevel": "Intermediate",
+                    "jurisdictions": [
+                        "CLEAR CREEK (COUNTY)"
+                    ],
+                    "status": "confirmed report",
+                    "direction": "west"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "MultiPoint",
+                    "coordinates": [
+                        [
+                            -105.496,
+                            39.741206
+                        ],
+                        [
+                            -105.201748,
+                            39.702218
+                        ]
+                    ]
+                },
+                "properties": {
+                    "severity": "minor",
+                    "injuries": 0,
+                    "startMarker": 241.0,
+                    "type": "Traction Law Code 15",
+                    "laneImpacts": [
+                        {
+                            "direction": "east",
+                            "laneCount": 4,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        },
+                        {
+                            "direction": "west",
+                            "laneCount": 4,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        }
+                    ],
+                    "routeName": "I-70E",
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-05T22:57:12.722+00:00",
+                    "endMarker": 259.0,
+                    "vehiclesInvolved": 0,
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2022-01-05T22:56:16.838+00:00",
+                    "id": "OpenTMS-Incident1462362185",
+                    "travelerInformationMessage": "Between Exit 240: CO 103; Idaho Springs (Idaho Springs) and Exit 260: C-470; C-470; Morrison (Mount Vernon Canyon) from Mile Point 241 to Mile Point 259. Passenger vehicles are required to have mud or snow tires or use chains or alternative traction devices or be a four wheel drive or all wheel drive vehicle.",
+                    "responseLevel": "Intermediate",
+                    "jurisdictions": [
+                        "CLEAR CREEK (COUNTY)"
+                    ],
+                    "status": "confirmed report",
+                    "direction": "east"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "MultiPoint",
+                    "coordinates": [
+                        [
+                            -106.893306,
+                            37.422128
+                        ],
+                        [
+                            -106.763146,
+                            37.566777
+                        ]
+                    ]
+                },
+                "properties": {
+                    "severity": "minor",
+                    "injuries": 0,
+                    "startMarker": 157.0,
+                    "type": "Other",
+                    "laneImpacts": [
+                        {
+                            "direction": "east",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        },
+                        {
+                            "direction": "west",
+                            "laneCount": 1,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        }
+                    ],
+                    "routeName": "US-160E",
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-06T23:18:00.723+00:00",
+                    "endMarker": 176.0,
+                    "vehiclesInvolved": 0,
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2021-12-23T18:15:42.240+00:00",
+                    "id": "OpenTMS-Incident1237949983",
+                    "travelerInformationMessage": "Between USFS 667 and FS Rd. 380 (3 miles east of the Wolf Creek Pass area) from Mile Point 157 to Mile Point 176. Traffic impacts. Comment: Rising avalanche danger, Wolf Creek Pass. Check forecast.",
+                    "responseLevel": "Minor",
+                    "jurisdictions": [
+                        "MINERAL (COUNTY)"
+                    ],
+                    "status": "confirmed report",
+                    "direction": "east"
+                },
+                "attributes": {}
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "srid": 4326,
+                    "type": "MultiPoint",
+                    "coordinates": [
+                        [
+                            -105.696559,
+                            39.716723
+                        ],
+                        [
+                            -105.909028,
+                            39.679094
+                        ]
+                    ]
+                },
+                "properties": {
+                    "severity": "minor",
+                    "injuries": 0,
+                    "startMarker": 228.0,
+                    "type": "Chain Law Code 18",
+                    "laneImpacts": [
+                        {
+                            "direction": "east",
+                            "laneCount": 2,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        },
+                        {
+                            "direction": "west",
+                            "laneCount": 2,
+                            "laneClosures": "0",
+                            "closedLaneTypes": []
+                        }
+                    ],
+                    "routeName": "I-70W",
+                    "isOversizedLoadsProhibited": false,
+                    "lastUpdated": "2022-01-05T19:53:47.364+00:00",
+                    "endMarker": 215.0,
+                    "vehiclesInvolved": 0,
+                    "fatalities": 0,
+                    "hasRampRestriction": false,
+                    "startTime": "2022-01-05T01:14:46.295+00:00",
+                    "id": "OpenTMS-Incident1447095512",
+                    "travelerInformationMessage": "Between Empire Junction (Georgetown) and Exit 205: CO 9; US 6; Silverthorne (Eisenhower Tunnel) from Mile Point 228 to Mile Point 215. Chains or alternative traction devices required for all commercial motor vehicles including buses and vans of 16 or more passenger capacity.",
+                    "responseLevel": "Minor",
+                    "jurisdictions": [
+                        "CLEAR CREEK (COUNTY)"
+                    ],
+                    "status": "confirmed report",
+                    "direction": "west"
+                },
+                "attributes": {}
+            }
+        ]
+    },
+    "rtdh_message_id": "42c7b67d-003e-4e98-a98a-64dada3471b0",
+    "rtdh_timestamp": 1641513715.366901
+}

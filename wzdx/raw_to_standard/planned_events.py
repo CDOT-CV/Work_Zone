@@ -1,7 +1,9 @@
 import argparse
 import copy
+import datetime
 import json
 import logging
+import re
 import time
 import uuid
 from collections import OrderedDict
@@ -18,16 +20,23 @@ STRING_DIRECTION_MAP = {'north': 'northbound', 'south': 'southbound',
 REVERSED_DIRECTION_MAP = {'northbound': 'southbound', 'southbound': 'northbound',
                           'eastbound': 'westbound', 'westbound': 'eastbound'}
 
+WORK_ZONE_INCIDENT_TYPES = {
+    "Maintenance Operations":   {"Traffic": True},
+    "Other":                    {"Environmental": True},
+    "Emergency Roadwork":       {"Traffic": True},
+}
+INCIDENT_ID_REGEX = "^OpenTMS-Incident"
+
 
 def main():
-    navjoy_file, output_dir = parse_rtdh_arguments()
-    input_file_contents = open(navjoy_file, 'r').read()
+    source_file, output_dir = parse_rtdh_arguments()
+    input_file_contents = open(source_file, 'r').read()
     generated_messages = generate_standard_messages_from_string(
         input_file_contents)
 
     generated_files_list = []
     for message in generated_messages:
-        output_path = f"{output_dir}/standard_568_{message['event']['source']['id']}_{round(message['rtdh_timestamp'])}_{message['event']['detail']['direction']}.json"
+        output_path = f"{output_dir}/standard_planned_event_{message['event']['source']['id']}.json"
         open(output_path, 'w+').write(json.dumps(message, indent=2))
         generated_files_list.append(output_path)
 
@@ -57,21 +66,27 @@ def generate_standard_messages_from_string(input_file_contents):
     raw_messages = generate_raw_messages(input_file_contents)
     standard_messages = []
     for message in raw_messages:
-        standard_messages.append(
-            generate_rtdh_standard_message_from_raw_single(message))
+        standard_message = generate_rtdh_standard_message_from_raw_single(
+            message)
+        if standard_message:
+            standard_messages.append(standard_message)
     return standard_messages
+
+
+# TODO: Integrate Category
+def is_incident_wz(msg):
+    id = msg.get('properties', {}).get('id', '')
+    type = msg.get('properties', {}).get('type', '')
+    # category = msg.get('properties', {}).get('Category')
+    is_incident = re.match(INCIDENT_ID_REGEX, id) != None
+    # is_wz = WORK_ZONE_INCIDENT_TYPES.get(type, {}).get(category)
+    is_wz = WORK_ZONE_INCIDENT_TYPES.get(type, {}) != {}
+    return is_incident, is_wz
 
 
 def generate_raw_messages(message_string):
     msg = json.loads(message_string)
-    messages = []
-
-    separated_messages = expand_event_directions(msg)
-    for indiv_msg in separated_messages:
-        if validate_closure(indiv_msg):
-            messages.append(indiv_msg)
-
-    return messages
+    return expand_event_directions(msg)
 
 
 # Break event into
@@ -100,8 +115,15 @@ def expand_event_directions(message):
 
 
 def generate_rtdh_standard_message_from_raw_single(obj):
+    is_incident_msg, is_wz = is_incident_wz(obj)
+    if is_incident_msg and not is_wz:
+        id = obj.get('properties', {}).get('id')
+        dir = obj.get('properties', {}).get('direction')
+        logging.warning(
+            f"Ignoring non-work zone incident: {id}_{dir}")
+        return {}
     pd = PathDict(obj)
-    standard_message = create_rtdh_standard_msg(pd)
+    standard_message = create_rtdh_standard_msg(pd, is_incident_msg)
     return standard_message
 
 
@@ -150,9 +172,9 @@ def hex_to_binary(hex_string):
 
 
 # TODO: Consider support road closures
-DEFAULT_EVENT_TYPE = ('work-zone', [{'type_name': 'roadside-work',
-                      'is_architectural_change': False}])
+DEFAULT_EVENT_TYPE = ('work-zone', [])
 EVENT_TYPE_MAPPING = {
+    # Work Zones
     "Bridge Construction":              ('work-zone', [{'type_name': 'below-road-work',            'is_architectural_change': True}]),
     "Road Construction":                ('work-zone', [{'type_name': 'roadway-creation',           'is_architectural_change': True}]),
     "Bridge Maintenance Operations":    ('work-zone', [{'type_name': 'below-road-work',            'is_architectural_change': False}]),
@@ -180,11 +202,12 @@ EVENT_TYPE_MAPPING = {
     "Utility Work":                     ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}]),
     "Utility Installation":             ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}]),
     "Wall Maintenance":                 ('work-zone', [{'type_name': 'barrier-work',               'is_architectural_change': False}]),
+    "Other":                            ('work-zone', []),
 
+    # Road Closures
     "BAN Message":                      ('restriction', []),
     "Safety Campaign":                  ('restriction', []),
     "Smoke/Control Burn":               ('restriction', []),
-    "Other":                            ('restriction', []),
     "Avalanche Control":                ('restriction', []),
     "Closed for the Season":            ('restriction', []),
     "Funeral Procession":               ('restriction', []),
@@ -193,6 +216,10 @@ EVENT_TYPE_MAPPING = {
     "Local Event":                      ('restriction', []),
     "Military Movement":                ('restriction', []),
     "OS/OW Limit":                      ('restriction', []),
+
+    # Incidents (work zones)
+    "Emergency Roadwork":               ('work-zone', []),
+    "Maintenance Operations":           ('work-zone', []),
 }
 
 
@@ -201,14 +228,16 @@ LANE_TYPE_MAPPING = {
     "left lane": 'general',
     "center lane": 'general',
     "middle two lanes": 'general',
-    # this is a weird one
-    "middle lanes": 'general',
+    "general": 'general',
+    "middle lanes": 'general',     # this is a weird one
     "right lane": 'general',
     "right shoulder": 'shoulder',
     "through lanes": 'general',
     "right entrance ramp": 'exit-ramp',
     "right exit ramp": 'exit-ramp'
 }
+
+INVALID_EVENT_DESCRIPTION = "511 event cannot be created in CARS because route does not exist."
 
 
 def map_lane_type(lane_type):
@@ -244,25 +273,29 @@ def get_lanes_list(lane_closures_hex, num_lanes, closedLaneTypes):
     lanes_affected = hex_to_binary(lane_closures_hex)
     lane_bits = lanes_affected[1:(num_lanes+1)]
     lanes = []
-    lanes.append({
-        'order': 1,
-        'type': 'shoulder',
-        'status': map_lane_status(lanes_affected[0]),
-    })
-    for i in closedLaneTypes:
-        if 'shoulder' in i:
-            closedLaneTypes.remove(i)
+    order = 1
+    if map_lane_status(lanes_affected[0]) == 'closed':
+        lanes.append({
+            'order': order,
+            'type': 'shoulder',
+            'status': map_lane_status(lanes_affected[0]),
+        })
+        order += 1
+    closedLaneTypes = [i for i in closedLaneTypes if 'shoulder' not in i]
     for i, bit in enumerate([char for char in lane_bits]):
         lanes.append({
-            'order': i+2,
-            'type': map_lane_type(closedLaneTypes[i] if (len(closedLaneTypes) > i) else ''),
+            'order': order,
+            'type': map_lane_type(closedLaneTypes[i] if (len(closedLaneTypes) > i) else 'general'),
             'status': map_lane_status(bit),
         })
-    lanes.append({
-        'order': len(lanes) + 1,
-        'type': 'shoulder',
-        'status': map_lane_status(lanes_affected[15]),
-    })
+        order += 1
+    if map_lane_status(lanes_affected[15]) == 'closed':
+        lanes.append({
+            'order': order,
+            'type': 'shoulder',
+            'status': map_lane_status(lanes_affected[15]),
+        })
+        order += 1
     return lanes
 
 
@@ -272,8 +305,35 @@ def get_lane_impacts(lane_impacts, direction):
             return get_lanes_list(impact['laneClosures'], impact['laneCount'], impact['closedLaneTypes'])
 
 
-def create_rtdh_standard_msg(pd):
+def all_lanes_open(lanes):
+    for i in lanes:
+        if i['status'] != 'open':
+            return False
+    return True
+
+
+# On {roadName}, between mile markers {startMarker} and {endMarker}. {typeOfWork}. Running between {startTime} and {endTime}
+def create_description(name, roadName, startMarker, endMarker, typeOfWork, startTime, endTime):
+    return f"Event {name}, on {roadName}, between mile markers {startMarker} and {endMarker}. {typeOfWork}. Running between {startTime} and {endTime}"
+
+
+# isIncident is unused, could be useful later though
+def create_rtdh_standard_msg(pd, isIncident):
+    description = pd.get('properties/travelerInformationMessage')
+    if description == INVALID_EVENT_DESCRIPTION:
+        description = create_description(
+            pd.get('properties/name'),
+            pd.get('properties/routeName'),
+            pd.get('properties/startMarker'),
+            pd.get('properties/endMarker'),
+            pd.get('properties/type'),
+            pd.get('properties/startTime'),
+            pd.get('properties/clearTime'),
+        )
+
     coordinates = get_linestring(pd.get('geometry', default={'type': None}))
+    if not coordinates:
+        return {}
 
     direction = pd.get("properties/direction", default='unknown')
 
@@ -292,6 +352,12 @@ def create_rtdh_standard_msg(pd):
                         date_tools.parse_datetime_from_iso_string)
     end_date = pd.get("properties/clearTime",
                       date_tools.parse_datetime_from_iso_string)
+    if not end_date:
+        # Since there is no end date, assume still active, set end date in future (or 1 day after start date)
+        if start_date > datetime.datetime.utcnow():
+            end_date = start_date + datetime.timedelta(hours=24)
+        else:
+            end_date = datetime.datetime.utcnow() + datetime.timedelta(hours=24)
 
     event_type, types_of_work = map_event_type(
         pd.get("properties/type", default=""))
@@ -299,6 +365,11 @@ def create_rtdh_standard_msg(pd):
     restrictions = []
     if pd.get('properties/isOversizedLoadsProhibited'):
         restrictions.append({'type': 'permitted-oversize-loads-prohibited'})
+
+    lane_impacts = get_lane_impacts(
+        pd.get("properties/laneImpacts"), pd.get("properties/direction"))
+    if direction != recorded_direction and all_lanes_open(lane_impacts):
+        return {}
 
     return {
         "rtdh_timestamp": time.time(),
@@ -308,12 +379,11 @@ def create_rtdh_standard_msg(pd):
             "types_of_work": types_of_work,
             "source": {
                 "id": pd.get("properties/id", default="") + '_' + direction,
-                "creation_timestamp": pd.get("properties/startTime", date_tools.get_unix_from_iso_string, default=0),
                 "last_updated_timestamp": pd.get('properties/lastUpdated', date_tools.get_unix_from_iso_string, default=0),
             },
             "geometry": coordinates,
             "header": {
-                "description": pd.get("properties/travelerInformationMessage", default=""),
+                "description": description,
                 "start_timestamp": date_tools.date_to_unix(start_date),
                 "end_timestamp": date_tools.date_to_unix(end_date),
             },
@@ -323,10 +393,11 @@ def create_rtdh_standard_msg(pd):
                 "direction": direction,
             },
             "additional_info": {
-                "lanes": get_lane_impacts(pd.get("properties/laneImpacts"), pd.get("properties/direction")),
+                "lanes": lane_impacts,
                 "restrictions": restrictions,
                 "beginning_milepost": beginning_milepost,
                 "ending_milepost": ending_milepost,
+                "valid": False,
             }
         }
     }
