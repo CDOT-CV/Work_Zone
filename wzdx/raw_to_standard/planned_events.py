@@ -353,8 +353,11 @@ def create_rtdh_standard_msg(pd, isIncident):
     end_date = pd.get("properties/clearTime",
                       date_tools.parse_datetime_from_iso_string)
     if not end_date:
-        # Since there is no end date, assume still active, set end date in future
-        end_date = datetime.datetime.utcnow() + datetime.timedelta(hours=24)
+        # Since there is no end date, assume still active, set end date in future (or 1 day after start date)
+        if start_date > datetime.datetime.utcnow():
+            end_date = start_date + datetime.timedelta(hours=24)
+        else:
+            end_date = datetime.datetime.utcnow() + datetime.timedelta(hours=24)
 
     event_type, types_of_work = map_event_type(
         pd.get("properties/type", default=""))
