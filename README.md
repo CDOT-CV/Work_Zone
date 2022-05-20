@@ -9,7 +9,10 @@ Work zone code and documentation for WZDx, iCone, etc.
 # WZDX Translator
 
 ## Project Description
-This is an open source, proof of concept solution for translating work zone data in the form of COtrip/Salesforce, iCone, and NavJOY messages to the standardized WZDx 3.1 format. This project was developed for CDOT. A unique translator has been developed for each of these message types. These translators read in the source message, parse out specific fields, and generate a WZDx 3.1 message. For more information on these message formats and the data mappings between these messages and the WZDx format, see the [documentation](wzdx/docs). sample_files are located [here](wzdx/sample_files). All these translators are built to run from the command line and from GCP cloud functions, hosted within the CDOT OIM WZDX environment, connected to the RTDH (real time data hub). For more information on cloud hosting, see [GCP_cloud_function](wzdx/GCP_cloud_function). 
+This is an open source, proof of concept solution for translating work zone data in the form of CDOT Planned Events to the standardized WZDx 4.0 format, as well as having additional translators to translate COtrip/Salesforce, iCone, and NavJOY messages to the WZDx 4.0 format. This project was developed for CDOT. A unique translator has been developed for each of these message types. These translators read in the source message, parse out specific fields, and generate a WZDx message. For more information on these message formats and the data mappings between these messages and the WZDx format, see the [documentation](wzdx/docs). sample_files are located [here](wzdx/sample_files). All these translators are built to run from the command line and from GCP Dataflows, hosted within the CDOT OIM WZDX environment, connected to the RTDH (real time data hub). For more information on cloud hosting, see [GCP_cloud_function](wzdx/GCP_cloud_function). 
+
+
+This project is also a full python package hosted on [pypi](https://pypi.org/project/wzdx-translator-jacob6838/)
 
 ## Installation
 ```
@@ -48,7 +51,26 @@ for mac computer run the following script to initialize the environment variable
 ```
 env_var.sh
 ```
+### Execution for Translators
+```
+python -m wzdx.raw_to_standard.{raw translator} inputfile.json --outputDir outputDirectory
+```
 
+Example usage:
+
+```
+python -m wzdx.raw_to_standard.planned_events 'wzdx/sample_files/raw/planned_events/hwy_50.json'
+```
+#### Standard to WZDx Conversion
+```
+python -m wzdx.standard_to_enhanced.{standard translator} inputfile.json --outputFile outputfile.geojson
+```
+
+Example usage:
+
+```
+python -m wzdx.standard_to_enhanced.planned_events_translator 'wzdx/sample_files/standard/planned_events/standard_planned_event_OpenTMS-Event2702170538_eastbound.json' 
+```
 
 ### Execution for iCone translator
 

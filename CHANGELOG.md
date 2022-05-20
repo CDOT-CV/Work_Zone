@@ -1,3 +1,8 @@
+5/19/2022
+- Added planned events translator and updated to WZDx 4.0
+- Deployed to CDOT PROD and is live on FHWA WZDx site
+- Added incident filtering and translation to planned events translator
+
 10/8/2021
 - Created python package from project
 - Creating iCone 

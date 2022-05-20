@@ -1,0 +1,50 @@
+{
+  "rtdh_timestamp": 1652971444.0142555,
+  "rtdh_message_id": "a198ec0e-6d83-480a-8668-55cf06b308be",
+  "event": {
+    "type": "work-zone",
+    "types_of_work": [
+      {
+        "type_name": "roadway-creation",
+        "is_architectural_change": true
+      }
+    ],
+    "source": {
+      "id": "OpenTMS-Event2702170538_eastbound",
+      "last_updated_timestamp": 1647899851544
+    },
+    "geometry": [
+      [
+        -107.413016,
+        38.398904
+      ],
+      [
+        -107.385542,
+        38.438934
+      ]
+    ],
+    "header": {
+      "description": "Between County Road 66 and County Road 25 (2 to 6 miles east of Blue Mesa Summit) from Mile Point 123 to Mile Point 127. Road construction. Alternating traffic. Width limit in effect. Width limit 10'0\". Starting tomorrow at 8:30AM MDT until tomorrow at about 5:30PM MDT.",
+      "start_timestamp": 1647959400000,
+      "end_timestamp": 1647991800000
+    },
+    "detail": {
+      "road_name": "US-50",
+      "road_number": "US-50",
+      "direction": "eastbound"
+    },
+    "additional_info": {
+      "lanes": [
+        {
+          "order": 1,
+          "type": "general",
+          "status": "open"
+        }
+      ],
+      "restrictions": [],
+      "beginning_milepost": 123.0,
+      "ending_milepost": 127.0,
+      "valid": false
+    }
+  }
+}
