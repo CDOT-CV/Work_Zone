@@ -3,6 +3,7 @@ pytest-cov
 xmltodict
 jsonschema
 gcloud
+google-cloud-bigquery
 google-cloud-pubsub
 google-cloud-secret-manager
 python-dateutil

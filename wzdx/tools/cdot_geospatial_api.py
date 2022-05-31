@@ -23,7 +23,7 @@ def get_routes_list():
     return resp
 
 
-def get_route_details(routeId, pointsToSkip=1):
+def get_route_details(routeId):
     parameters = []
     parameters.append(f'routeId={routeId}')
     parameters.append(f"outSR={SR}")
@@ -46,7 +46,24 @@ def get_route_details(routeId, pointsToSkip=1):
     return route_details
 
 
-def get_route_and_measure(latLng, bearing):
+def get_route_and_measure(latLng):
+    # Get route ID and mile marker from lat/long and heading
+    lat, lng = latLng
+
+    parameters = []
+    parameters.append(f"latitude={lat}")
+    parameters.append(f"longitude={lng}")
+    parameters.append(f"inSR={SR}")
+    parameters.append(f"f=pjson")
+
+    url = f"{BASE_URL}/{GET_ROUTE_AND_MEASURE_API}?{'&'.join(parameters)}"
+
+    # response = requests.get(url).content
+    # raise NotImplementedError("No geospatial endpoint")
+    return {"Route": "070A", "Measure": 12}
+
+
+def get_route_measure_direction(latLng, bearing):
     # Get route ID and mile marker from lat/long and heading
     lat, lng = latLng
 
@@ -61,11 +78,28 @@ def get_route_and_measure(latLng, bearing):
 
     # response = requests.get(url).content
     # raise NotImplementedError("No geospatial endpoint")
-    return {"Route": "070A", "measure": 12, 'direction': 'N'}
+    return {"Route": "070A", "Measure": 12, 'Direction': 'N'}
+
+
+def get_route_geometry_ahead(routeId, startMeasure, direction, distanceAhead, pointsToSkip=0):
+    # Get list of routes and mile markers for a distance ahead and distance
+    # TODO: Integrate direction to determine whether to add/subtract distance
+    endMeasure = startMeasure + distanceAhead
+    routeDetails = get_route_details(routeId)
+    if (startMeasure > min(routeDetails['MMin'], routeDetails['MMax']) and
+        startMeasure < max(routeDetails['MMin'], routeDetails['MMax']) and
+        endMeasure > min(routeDetails['MMin'], routeDetails['MMax']) and
+            endMeasure < max(routeDetails['MMin'], routeDetails['MMax'])):
+
+        return get_route_between_measures(
+            routeId, startMeasure, endMeasure, pointsToSkip)
+    else:
+        return {}
 
 
 def get_routes_ahead(route, startMeasure, direction, distanceAhead):
     # Get list of routes and mile markers for a distance ahead and distance
+    raise NotImplementedError("No geospatial endpoint")
 
     parameters = []
     parameters.append(f"routeId={route}")
@@ -89,6 +123,10 @@ def get_routes_ahead(route, startMeasure, direction, distanceAhead):
 
 def get_route_between_measures(routeId, startMeasure, endMeasure, pointsToSkip=0):
     # Get lat/long points between two mile markers on route
+
+    routeId = "070A"
+    startMeasure = 10
+    endMeasure = 12
 
     parameters = []
     parameters.append(f"routeId={routeId}")

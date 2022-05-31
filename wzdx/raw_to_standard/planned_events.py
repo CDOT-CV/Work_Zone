@@ -8,7 +8,7 @@ import time
 import uuid
 from collections import OrderedDict
 
-from wzdx.tools import date_tools, polygon_tools, wzdx_translator
+from wzdx.tools import date_tools, polygon_tools, wzdx_translator, cdot_geospatial_api
 from wzdx.util.collections import PathDict
 
 PROGRAM_NAME = 'PlannedEventsRawToStandard'
@@ -317,6 +317,22 @@ def create_description(name, roadName, startMarker, endMarker, typeOfWork, start
     return f"Event {name}, on {roadName}, between mile markers {startMarker} and {endMarker}. {typeOfWork}. Running between {startTime} and {endTime}"
 
 
+def get_improved_geometry(coordinates):
+    startPoint = coordinates[0]
+    endPoint = coordinates[-1]
+
+    startRouteParams = cdot_geospatial_api.get_route_and_measure(startPoint)
+    endRouteParams = cdot_geospatial_api.get_route_and_measure(endPoint)
+
+    if startRouteParams['Route'] != endRouteParams['Route']:
+        return coordinates
+
+    return cdot_geospatial_api.get_route_between_measures(
+        startRouteParams['Route'],
+        startRouteParams['Measure'],
+        endRouteParams['Measure'])
+
+
 # isIncident is unused, could be useful later though
 def create_rtdh_standard_msg(pd, isIncident):
     description = pd.get('properties/travelerInformationMessage')
@@ -381,7 +397,7 @@ def create_rtdh_standard_msg(pd, isIncident):
                 "id": pd.get("properties/id", default="") + '_' + direction,
                 "last_updated_timestamp": pd.get('properties/lastUpdated', date_tools.get_unix_from_iso_string, default=0),
             },
-            "geometry": coordinates,
+            "geometry": get_improved_geometry(coordinates),
             "header": {
                 "description": description,
                 "start_timestamp": date_tools.date_to_unix(start_date),

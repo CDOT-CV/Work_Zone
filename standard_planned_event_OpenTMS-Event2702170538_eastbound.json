@@ -1,0 +1,106 @@
+{
+  "rtdh_timestamp": 1653447448.7700033,
+  "rtdh_message_id": "d1693ee6-1c7a-4659-ad09-38beea999a96",
+  "event": {
+    "type": "work-zone",
+    "types_of_work": [
+      {
+        "type_name": "roadway-creation",
+        "is_architectural_change": true
+      }
+    ],
+    "source": {
+      "id": "OpenTMS-Event2702170538_eastbound",
+      "last_updated_timestamp": 1647899851544
+    },
+    "geometry": [
+      [
+        -108.88481994499995,
+        39.220590136000055
+      ],
+      [
+        -108.87252823199998,
+        39.215757256000074
+      ],
+      [
+        -108.87188901699994,
+        39.215495470000064
+      ],
+      [
+        -108.87166122599996,
+        39.21540217800003
+      ],
+      [
+        -108.87088164499994,
+        39.215047827000035
+      ],
+      [
+        -108.87012464299994,
+        39.214656845000036
+      ],
+      [
+        -108.86963870599999,
+        39.21437719100004
+      ],
+      [
+        -108.86950079499996,
+        39.21428726500005
+      ],
+      [
+        -108.86918246699997,
+        39.214079696000056
+      ],
+      [
+        -108.86872224499996,
+        39.21377959800003
+      ],
+      [
+        -108.86849605399999,
+        39.21361418600003
+      ],
+      [
+        -108.86807325499996,
+        39.21330499100003
+      ],
+      [
+        -108.86744025099995,
+        39.21281630800007
+      ],
+      [
+        -108.86568741099995,
+        39.21141804200005
+      ],
+      [
+        -108.86462834799994,
+        39.21057316900004
+      ],
+      [
+        -108.85619965399997,
+        39.20384802900003
+      ]
+    ],
+    "header": {
+      "description": "Between County Road 66 and County Road 25 (2 to 6 miles east of Blue Mesa Summit) from Mile Point 123 to Mile Point 127. Road construction. Alternating traffic. Width limit in effect. Width limit 10'0\". Starting tomorrow at 8:30AM MDT until tomorrow at about 5:30PM MDT.",
+      "start_timestamp": 1647959400000,
+      "end_timestamp": 1647991800000
+    },
+    "detail": {
+      "road_name": "US-50",
+      "road_number": "US-50",
+      "direction": "eastbound"
+    },
+    "additional_info": {
+      "lanes": [
+        {
+          "order": 1,
+          "type": "general",
+          "status": "open"
+        }
+      ],
+      "restrictions": [],
+      "beginning_milepost": 123.0,
+      "ending_milepost": 127.0,
+      "valid": false
+    }
+  }
+}
