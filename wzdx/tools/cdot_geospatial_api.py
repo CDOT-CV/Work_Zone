@@ -83,6 +83,7 @@ def get_route_measure_direction(latLng, bearing):
 
 def get_route_geometry_ahead(routeId, startMeasure, direction, distanceAhead, pointsToSkip=0):
     # Get list of routes and mile markers for a distance ahead and distance
+
     # TODO: Integrate direction to determine whether to add/subtract distance
     endMeasure = startMeasure + distanceAhead
     routeDetails = get_route_details(routeId)

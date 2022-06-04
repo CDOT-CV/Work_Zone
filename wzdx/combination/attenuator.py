@@ -32,14 +32,10 @@ def combine_with_planned_event(planned_event_wzdx_feature, curr_long_lat, distan
 
 
 def get_geometry_for_distance_ahead(distance_ahead, curr_long_lat, bearing):
-    reoutId, startMeasure = itemgetter('Route', 'Measure')(
+    routeId, measure = itemgetter('Route', 'Measure')(
         cdot_geospatial_api.get_route_and_measure(curr_long_lat))
-    routes = cdot_geospatial_api.get_routes_ahead(
-        route['Route'], route['measure'], route['direction'], distance_ahead)
-    geometry = []
-    for route in routes:
-        geometry.extend(cdot_geospatial_api.get_route_between_measures(
-            route['Route'], route['MMin'], route['MMax']))
+    geometry = cdot_geospatial_api.get_route_geometry_ahead(
+        routeId, measure, bearing, distance_ahead)
     return geometry
 
 
