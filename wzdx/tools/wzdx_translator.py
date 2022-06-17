@@ -12,7 +12,7 @@ import jsonschema
 import xmltodict
 
 
-def initialize_feature_properties():
+def initialize_feature_properties_v3():
     properties = {}
     properties['road_event_id'] = None
     properties['event_type'] = None
@@ -40,6 +40,42 @@ def initialize_feature_properties():
     properties['description'] = None
     properties['creation_date'] = None
     properties['update_date'] = None
+
+    return properties
+
+
+def initialize_feature_properties():
+    properties = {}
+    properties['road_event_id'] = None
+    properties['data_source_id'] = None
+    properties['core_details'] = {
+        'event_type': None,
+        'data_source_id': None,
+        'road_names': None,
+        'direction': None,
+        'relationship': {},
+        'description': None,
+        # 'creation_date': None,
+        'update_date': None,
+    }
+    properties['start_date'] = None
+    properties['end_date'] = None
+    properties['start_date_accuracy'] = None
+    properties['end_date_accuracy'] = None
+    properties['beginning_accuracy'] = None
+    properties['ending_accuracy'] = None
+    properties['location_method'] = None
+    properties['vehicle_impact'] = None
+    properties['lanes'] = None
+    properties['beginning_cross_street'] = None
+    properties['ending_cross_street'] = None
+    properties['beginning_mile_post'] = None
+    properties['ending_mile_post'] = None
+    properties['event_status'] = None
+    properties['types_of_work'] = None
+    properties['worker_presence'] = None
+    properties['reduced_speed_limit_kph'] = None
+    properties['restrictions'] = None
 
     return properties
 

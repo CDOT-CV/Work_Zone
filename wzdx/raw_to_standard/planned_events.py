@@ -324,13 +324,28 @@ def get_improved_geometry(coordinates):
     startRouteParams = cdot_geospatial_api.get_route_and_measure(startPoint)
     endRouteParams = cdot_geospatial_api.get_route_and_measure(endPoint)
 
+    if not startRouteParams or not endRouteParams:
+        logging.info(
+            "1 or more routes not found, not generating improved geometry")
+        return coordinates
     if startRouteParams['Route'] != endRouteParams['Route']:
+        logging.info("Routes did not match, not generating improved geometry")
         return coordinates
 
-    return cdot_geospatial_api.get_route_between_measures(
+    initialDirection = polygon_tools.get_road_direction_from_coordinates(
+        coordinates)
+    newCoordinates = cdot_geospatial_api.get_route_between_measures(
         startRouteParams['Route'],
         startRouteParams['Measure'],
         endRouteParams['Measure'])
+    finalDirection = polygon_tools.get_road_direction_from_coordinates(
+        newCoordinates)
+
+    # TODO: Implement Bi-directional carriageway
+    if initialDirection == REVERSED_DIRECTION_MAP.get(finalDirection):
+        newCoordinates.reverse()
+
+    return newCoordinates
 
 
 # isIncident is unused, could be useful later though

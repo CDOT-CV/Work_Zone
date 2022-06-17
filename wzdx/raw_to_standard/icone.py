@@ -3,6 +3,7 @@ import json
 import logging
 import time
 import uuid
+import datetime
 import xml.etree.ElementTree as ET
 from collections import OrderedDict
 
@@ -110,6 +111,15 @@ def get_sensor_list(incident):
 
 def create_rtdh_standard_msg(pd):
     devices = get_sensor_list(pd.get(f"incident"))
+    start_time = pd.get("incident/starttime",
+                        date_tools.get_unix_from_iso_string, default=None)
+    end_time = pd.get(
+        "incident/endtime", date_tools.get_unix_from_iso_string, default=None)
+    if not end_time:
+        if start_time > datetime.datetime.utcnow():
+            end_time = start_time + datetime.timedelta(days=7)
+        else:
+            end_time = datetime.datetime.utcnow() + datetime.timedelta(days=7)
     return {
         "rtdh_timestamp": time.time(),
         "rtdh_message_id": str(uuid.uuid4()),
@@ -123,8 +133,8 @@ def create_rtdh_standard_msg(pd):
             "geometry": pd.get("incident/location/polyline", parse_icone_polyline),
             "header": {
                 "description": pd.get("incident/description", default=""),
-                "start_timestamp": pd.get("incident/starttime", date_tools.get_unix_from_iso_string, default=None),
-                "end_timestamp": pd.get("incident/endtime", date_tools.get_unix_from_iso_string, default=None)
+                "start_timestamp": start_time,
+                "end_timestamp": end_time
             },
             "detail": {
                 "road_name": pd.get("incident/location/street"),
