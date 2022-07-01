@@ -6,6 +6,7 @@ import logging
 import re
 import time
 import uuid
+import pytz
 from collections import OrderedDict
 
 from wzdx.tools import date_tools, polygon_tools, wzdx_translator, cdot_geospatial_api
@@ -317,19 +318,25 @@ def create_description(name, roadName, startMarker, endMarker, typeOfWork, start
     return f"Event {name}, on {roadName}, between mile markers {startMarker} and {endMarker}. {typeOfWork}. Running between {startTime} and {endTime}"
 
 
-def get_improved_geometry(coordinates):
-    startPoint = coordinates[0]
-    endPoint = coordinates[-1]
+def get_improved_geometry(coordinates, event_status, id):
+    if event_status == "completed":
+        return coordinates
 
-    startRouteParams = cdot_geospatial_api.get_route_and_measure(startPoint)
-    endRouteParams = cdot_geospatial_api.get_route_and_measure(endPoint)
+    startPoint = [coordinates[0][-1], coordinates[0][0]]
+    endPoint = [coordinates[-1][-1], coordinates[-1][0]]
+
+    startRouteParams = cdot_geospatial_api.get_route_and_measure(
+        startPoint)
+    endRouteParams = cdot_geospatial_api.get_route_and_measure(
+        endPoint)
 
     if not startRouteParams or not endRouteParams:
-        logging.info(
-            "1 or more routes not found, not generating improved geometry")
+        print(
+            f"1 or more routes not found, not generating improved geometry: {id}")
         return coordinates
     if startRouteParams['Route'] != endRouteParams['Route']:
-        logging.info("Routes did not match, not generating improved geometry")
+        print(
+            f"Routes did not match, not generating improved geometry: {id}")
         return coordinates
 
     initialDirection = polygon_tools.get_road_direction_from_coordinates(
@@ -338,6 +345,7 @@ def get_improved_geometry(coordinates):
         startRouteParams['Route'],
         startRouteParams['Measure'],
         endRouteParams['Measure'])
+
     finalDirection = polygon_tools.get_road_direction_from_coordinates(
         newCoordinates)
 
@@ -383,12 +391,18 @@ def create_rtdh_standard_msg(pd, isIncident):
                         date_tools.parse_datetime_from_iso_string)
     end_date = pd.get("properties/clearTime",
                       date_tools.parse_datetime_from_iso_string)
+
     if not end_date:
-        # Since there is no end date, assume still active, set end date in future (or 1 day after start date)
-        if start_date > datetime.datetime.utcnow():
-            end_date = start_date + datetime.timedelta(hours=24)
-        else:
-            end_date = datetime.datetime.utcnow() + datetime.timedelta(hours=24)
+        end_date = pd.get("properties/estimatedClearTime",
+                          date_tools.parse_datetime_from_iso_string)
+
+    now = datetime.datetime.utcnow().replace(tzinfo=pytz.utc)
+    if not end_date:
+        # Since there is no end date, assume still active, set end date in future (12 hours + n days until after current time)
+        end_date = start_date + datetime.timedelta(hours=12)
+
+        while end_date < now:
+            end_date = start_date + datetime.timedelta(days=1)
 
     event_type, types_of_work = map_event_type(
         pd.get("properties/type", default=""))
@@ -402,6 +416,8 @@ def create_rtdh_standard_msg(pd, isIncident):
     if direction != recorded_direction and all_lanes_open(lane_impacts):
         return {}
 
+    event_status = date_tools.get_event_status(start_date, end_date)
+
     return {
         "rtdh_timestamp": time.time(),
         "rtdh_message_id": str(uuid.uuid4()),
@@ -412,7 +428,7 @@ def create_rtdh_standard_msg(pd, isIncident):
                 "id": pd.get("properties/id", default="") + '_' + direction,
                 "last_updated_timestamp": pd.get('properties/lastUpdated', date_tools.get_unix_from_iso_string, default=0),
             },
-            "geometry": get_improved_geometry(coordinates),
+            "geometry": get_improved_geometry(coordinates, event_status, pd.get("properties/id", default="") + '_' + direction),
             "header": {
                 "description": description,
                 "start_timestamp": date_tools.date_to_unix(start_date),

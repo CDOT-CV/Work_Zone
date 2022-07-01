@@ -67,7 +67,7 @@ def get_route_and_measure(latLng, tolerance=10000):
     resp = json.loads(requests.get(url).content)
     # raise NotImplementedError("No geospatial endpoint")
 
-    if not resp['features']:
+    if not resp.get('features'):
         return None
     route_details = {
         'Route': resp['features'][0]['attributes']['Route'],
