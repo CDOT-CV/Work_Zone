@@ -1,7 +1,0 @@
-# Function dependencies, for example:
-# package>=version
-xmltodict
-jsonschema
-gcloud
-google-cloud-pubsub
-google-cloud-secret-manager

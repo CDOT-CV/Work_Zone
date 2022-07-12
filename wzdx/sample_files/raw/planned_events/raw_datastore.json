@@ -1,0 +1,7 @@
+{
+    "condition_1": true,
+    "label": "CachePlannedEventsStandard",
+    "label_id": "OpenTMS-Event1943488363",
+    "timestamp": "2022-02-10 (11:19:44.690) MST",
+    "value": "{\"type\": \"Feature\", \"geometry\": {\"srid\": 4326, \"type\": \"MultiPoint\", \"coordinates\": [[-104.699362, 39.740098], [-104.630073, 39.739571]]}, \"properties\": {\"clearTime\": \"2022-02-13T16:55:00.000+00:00\", \"startMarker\": 290.0, \"type\": \"Bridge Repair\", \"laneImpacts\": [{\"direction\": \"east\", \"laneCount\": 2, \"laneClosures\": \"6000\", \"closedLaneTypes\": [\"left lane\", \"right lane\"]}, {\"direction\": \"west\", \"laneCount\": 2, \"laneClosures\": \"0\", \"closedLaneTypes\": []}], \"routeName\": \"I-70E\", \"isOversizedLoadsProhibited\": false, \"lastUpdated\": \"2022-02-10T18:19:44.690+00:00\", \"schedule\": [{\"startTime\": \"2022-02-13T16:00:00.000Z\", \"endTime\": \"2022-02-13T16:55:00.000Z\"}], \"endMarker\": 295.0, \"hasRampRestriction\": false, \"name\": \"Eylem LCM Test Event Feb10-228\", \"startTime\": \"2022-02-13T16:00:00.000+00:00\", \"id\": \"OpenTMS-Event1943488363\", \"travelerInformationMessage\": \"Between E-470 and Exit 295: I-70 Business North (near Aurora) from Mile Point 290 to Mile Point 295. Road closed due to bridge repair work. Starting Sunday at 9:00AM MST until Sunday, at about 9:55AM MST.\", \"jurisdictions\": [\"ADAMS (COUNTY)\"], \"direction\": \"east\"}, \"attributes\": {}}"
+}

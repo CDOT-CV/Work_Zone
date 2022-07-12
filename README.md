@@ -1,80 +1,196 @@
 # Work_Zone
-Work zone code and documentation for WZDx, iCone, etc.
-
-
-| Build                                                                                                              |                                                                                             Quality Gate                                                                                             |                                                                                                                                                                         Code Coverage |
-| :----------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| [![Build Status](https://travis-ci.com/CDOT-CV/Work_Zone.svg?branch=dev)](https://travis-ci.com/CDOT-CV/Work_Zone) | [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?branch=dev&project=CDOT-CV_Work_Zone&metric=alert_status)](https://sonarcloud.io/dashboard?id=CDOT-CV_Work_Zone&branch=dev) | [![Coverage](https://sonarcloud.io/api/project_badges/measure?branch=dev&project=CDOT-CV_Work_Zone&metric=coverage)](https://sonarcloud.io/dashboard?id=CDOT-CV_Work_Zone&branch=dev) |
-
-
-
-# WZDX Translator
+Work zone code and documentation for WZDx, iCone, etc. 
 
 ## Project Description
+This is an open source, proof of concept solution for translating work zone data in the form of CDOT Planned Events to the standardized WZDx 4.0 format, as well as having additional translators to translate COtrip/Salesforce, iCone, and NavJOY messages to the WZDx 4.0 format. This project was developed for CDOT. A unique translator has been developed for each of these message types. These translators read in the source message, parse out specific fields, and generate a WZDx message. For more information on these message formats and the data mappings between these messages and the WZDx format, see the [documentation](wzdx/docs). sample_files are located [here](wzdx/sample_files). All these translators are built to run from the command line and from GCP Dataflows, hosted within the CDOT OIM WZDX environment, connected to the RTDH (real time data hub).
 
-This project is an open source, proof of concept for Work Zone Data Exchange message creation from CDOT data to include iCone. The purpose of this tool is to  build a translator from CDOT work zone data and iCone data to the WZDx message (3.0). The message will contain required data by WZDx that can be populated by iCone and other CDOT Work Zone resources. Basically, in this project, we run a python script to parse data from the iCone xml file and other CDOT data which genrates WXDx 3.0 messages in a geojson format.
+The Google CloudPlatform deployment is outlined below.
+![GCP Processing](wzdx/docs/CDOT%20WZDx%20translators%20-%20Planned%20Events.png)
 
-## Prerequisites
+This project is also a full python package hosted on [pypi](https://pypi.org/project/wzdx-translator-jacob6838/)
 
+## Installation
+```
+pip install wzdx-translator-jacob6838
+```
+
+### Prerequisites
 Requires:
 
 - Python 3.6 (or higher)
-  - xmltodict
-  - jsonschema
-  - shapely
-   
-  
-## Environment Setup
 
-This code requires Python 3.6 or a higher version. If you haven’t already, download Python and Pip. Next, you’ll need to install several packages that we’ll use throughout this tutorial. You can do this by opening terminal or command prompt on your operating system:
+## Translators
+This set of WZDx message translators is set up to be implemented in GCP with App Engines and Dataflows. It is also set up with raw, standard, and enhanced (WZDx) data feeds. This means that to take a raw icone document and generate a WZDx message, the raw icone xml document must first be converted to 1 or multiple standard json messages (based on CDOT RTDH specification), and then each standard message may be converted into a single WZDx message. The next step in the data flow is to combine all of the WZDx messages together using the combination script. The GCP layout for this is described in the Google Cloud Hosting section below
+
+### Environment Setup
+This code requires Python 3.6 or a higher version. If you haven’t already, download Python and pip. You can install the required packages by running the following command:
 
 ```
 pip install -r requirements.txt
 ```
 
+#### Environment variable
+Please set up the following environment variable for your local computer before running the script.
 
+Runtime Environment Variables:
 
+| Name                 |          Value           |                                    Description |
+| :------------------- | :----------------------: | ---------------------------------------------: |
+| contact_name         |       Ashley Nylen       |                      name of WZDx feed contact |
+| contact_email        | ashley.nylen@state.co.us |                     email of WZDx feed contact |
+| issuing_organization |           CDOT           | name of the organization issuing the WZDx feed |
 
-
-### Execution
-
-#### Step 1: Run the translator script (from Work_Zone/translator/source code/Folder)
-
-```
-python icone_translator.py -i inputfile.xml -o outputfile.geojson
-```
 Example usage:
+for mac computer run the following script to initialize the environment variable:
+
 ```
-python icone_translator.py -i '../sample files/icone data/incidents_extended.xml' 
+env_var.sh
+```
+### Execution for Translators
+```
+python -m wzdx.raw_to_standard.{raw translator} inputfile.json --outputDir outputDirectory
+```
+
+Example usage:
+
+```
+python -m wzdx.raw_to_standard.planned_events 'wzdx/sample_files/raw/planned_events/hwy_50.json'
+```
+#### Standard to WZDx Conversion
+```
+python -m wzdx.standard_to_enhanced.{standard translator} inputfile.json --outputFile outputfile.geojson
+```
+
+Example usage:
+
+```
+python -m wzdx.standard_to_enhanced.planned_events_translator 'wzdx/sample_files/standard/planned_events/standard_planned_event_OpenTMS-Event2702170538_eastbound.json' 
+```
+
+### Execution for iCone translator
+
+#### Raw to Standard Conversion
+```
+python -m wzdx.raw_to_standard.icone inputfile.json --outputDir outputDirectory
+```
+
+Example usage:
+
+```
+python -m wzdx.raw_to_standard.icone 'wzdx/sample_files/raw/icone/incident_short.xml'
+```
+#### Standard to WZDx Conversion
+```
+python -m wzdx.standard_to_enhanced.icone_translator inputfile.json --outputFile outputfile.geojson
+```
+
+Example usage:
+
+```
+python -m wzdx.standard_to_enhanced.icone_translator 'wzdx/sample_files/standard/icone/standard_icone_1245_1633444335.json' 
+```
+
+### Execution for COtrip translator
+#### Run the translator script (from Work_Zone)
+```
+python -m wzdx.standard_to_enhanced.cotrip_translator inputfile.json --outputFile outputfile.geojson
+```
+
+Example usage:
+
+```
+python -m wzdx.standard_to_enhanced.cotrip_translator 'wzdx/sample_files/raw/cotrip/cotrip_1.json'
+```
+
+### Execution for NavJoy 568 translator
+This translator reads in a NavJoy 568 speed reduction form and translates it into a WZDx message. Many of the 568 messages cover 2 directions of traffic, and are thus expanded into 2 WZDx messages, one for each direction. 
+
+The NavJoy Work Zone feed is being translated into WZDx by NavJoy themselves, the source and WZDx example messages are located here: [Navjoy Sample Data](wzdx/sample%20files/navjoy_data)
+
+#### Raw to Standard Conversion
+
+```
+python -m wzdx.raw_to_standard.navjoy_568 inputfile.json --outputDir outputDirectory
+```
+
+Example usage:
+
+```
+python -m wzdx.raw_to_standard.navjoy_568 'wzdx/sample_files/raw/navjoy/direction_test_2.json'
+```
+#### Standard to WZDx Conversion
+
+```
+python -m wzdx.standard_to_enhanced.navjoy_translator inputfile.json --outputFile outputfile.geojson
+```
+
+Example usage:
+
+```
+python -m wzdx.standard_to_enhanced.navjoy_translator 'wzdx/sample_files/standard/navjoy/standard_568_Form568-cb0fdaf0-c27a-4bef-aabd-442615dfb2d6_1638373455_westbound.json' 
+```
+
+### Execution for Combine_wzdx
+
+#### Run the translator script (from Work_Zone/wzdx)
+
+```
+python combine_wzdx.py icone_wzdx_output_message_file cotrip_wzdx_output_message_file --outputFile outputfile.geojson
+```
+
+Example usage:
+
+```
+python combine_wzdx.py '../sample_files/enhanced/icone_wzdx_translated_output_message.geojson' '../sample_files/enhanced/cotrip_wzdx_translated_output_message.geojson'
 ```
 
 ### Unit Testing
 
-
 #### Run the unit test for translator script (from root directory)
 
 ```
-$ python -m pytest 'test/' -v
+python -m pytest 'tests/' -v
 ```
+
 Ensure you have your environment configured correctly (as described above).
 
+### Message Combination Logic:
 
-### Google Cloud Function
-
-A system was created in google cloud platform to automatically translate iCone data to WZDx message. This system consists of two pubsub topics and a cloud function. A cloud scheduler automatically sends a message to a pubsub topic which triggers the cloud function. The cloud function retrieves iCone data from an ftp server (ftp://iconetraffic.com:42663) and translates to WZDx message. It validates the WZDx message with json schema and publishes the message to a pubsub topic.
-
-
-![alt text](translator/GCP_cloud_function/iCone%20Translator%20block%20diagram.png)
+The `combine_wzdx` script file combines the output from the iCone and COtrip translators, based on overlapping geography, into a single improved WZDx message. The COtrip message set contains significantly more data, and is used as the base for this new combined message. The script then finds any geographically co-located messages from the iCone data set, pulls in the additional information (comprised of vehicle impact data and data sources) and publishes a new, combined WZDx message. Future state of this script will include additional data fields from the iCone data set as they become available.
 
 
-#### Deployment
-The azure functions are deployed automatically by an azure pipeline (https://dev.azure.com/SOC-OIT/CDOT/_build?definitionId=961), which is triggered on commits and PRs. This pipeline is described in [azure-pipelines.yml](azure-pipelines.yml)
+## Google Cloud Hosting
+All of the translators featured in this repo are hosted in the CDOT GCP Cloud as Dataflows. The workflow begins with App Engines which retrieve raw data and drop it onto raw pub/sub topics. These are picked up by the raw_to_standard translator running as a Dataflow pipeline, which drops the generated standard message(s) onto a standard topic. These are processed into valid WZDx messages by the enhanced Dataflow pipeline. The final step is to store all of the WZDx files in BigQuery, and combine them into one single WZDx data feed. 
 
-### Documentation
+![GCP Processing](wzdx/docs/CDOT%20WZDx%20translators%20-%20Processing.png)
 
-documentation for iCone to WZDx translator is located here: [docs](translator/docs)
 
-### Guidelines
+## Build Python Package
+
+Build
+```
+pip install build
+python -m build
+```
+
+Upload (Requires PyPi account)
+```
+python -m twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
+```
+
+Import
+```
+pip install wzdx-translator-jacob6838
+```
+
+### Notes
+This project utilized a python package to make the code more accessible. The setup.py file describes the core properties of the package (name, description, included files, ...), the pyproject.toml file describes the required pre-requisite packages for running this package. The MANIFEST.in file is used to exclude unit testing files from the package. More information on building a python package can be found at [python-packaging-tutorial](https://python-packaging-tutorial.readthedocs.io/en/latest/setup_py.html)
+
+## Documentation
+
+documentation for the included WZDx translator is located here: [docs](wzdx/docs)
+
+## Guidelines
 
 - Issues
   - Create issues using the SMART goals outline (Specific, Measurable, Actionable, Realistic and Time-Aware)
@@ -82,14 +198,12 @@ documentation for iCone to WZDx translator is located here: [docs](translator/do
   - Create all pull requests from the master branch
   - Create small, narrowly focused PRs
   - Maintain a clean commit history so that they are easier to review
-  
-  
+
 ## Contact Information
 
-Contact Name: Abinash Konersman
-Contact Information: [abinash.konersman@state.co.us]
+Contact Name: Ashley Nylen
+Contact Information: ashley.nylen@state.co.us
 
 ## Abbreviations
 
 WZDx: Workzone Data Exchange
-
