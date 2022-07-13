@@ -9,6 +9,7 @@ from collections import OrderedDict
 
 from wzdx.tools import date_tools, polygon_tools, wzdx_translator
 from wzdx.util.collections import PathDict
+from wzdx.standard_to_enhanced import icone_translator
 
 PROGRAM_NAME = 'iConeRawToStandard'
 PROGRAM_VERSION = '1.0'
@@ -20,18 +21,28 @@ def main():
     generated_messages = generate_standard_messages_from_string(
         input_file_contents)
 
-    generated_files_list = []
+    wzdx_msg = {}
     for message in generated_messages:
-        output_path = f"{output_dir}/standard_icone_{message['event']['source']['id']}_{round(message['rtdh_timestamp'])}.json"
-        open(output_path, 'w+').write(json.dumps(message, indent=2))
-        generated_files_list.append(output_path)
+        wzdx = icone_translator.wzdx_creator(message)
+        if not wzdx_msg:
+            wzdx_msg = wzdx
+        else:
+            wzdx_msg['features'].extend(wzdx['features'])
 
-    if generated_files_list:
-        print(
-            f"Successfully generated standard message files: {generated_files_list}")
-    else:
-        logging.warning(
-            "Standard message generation failed. See messages printed above")
+    # generated_files_list = []
+    # for message in generated_messages:
+    #     output_path = f"{output_dir}/standard_icone_{message['event']['source']['id']}_{round(message['rtdh_timestamp'])}.json"
+    #     open(output_path, 'w+').write(json.dumps(message, indent=2))
+    #     generated_files_list.append(output_path)
+    output_path = input_file.replace('.xml', '.json')
+    open(output_path, 'w+').write(json.dumps(wzdx_msg, indent=2))
+
+    # if generated_files_list:
+    #     print(
+    #         f"Successfully generated standard message files: {generated_files_list}")
+    # else:
+    #     logging.warning(
+    #         "Standard message generation failed. See messages printed above")
 
 
 def generate_standard_messages_from_string(input_file_contents):
@@ -112,14 +123,15 @@ def get_sensor_list(incident):
 def create_rtdh_standard_msg(pd):
     devices = get_sensor_list(pd.get(f"incident"))
     start_time = pd.get("incident/starttime",
-                        date_tools.get_unix_from_iso_string, default=None)
+                        date_tools.parse_datetime_from_iso_string, default=None)
     end_time = pd.get(
-        "incident/endtime", date_tools.get_unix_from_iso_string, default=None)
+        "incident/endtime", date_tools.parse_datetime_from_iso_string, default=None)
     if not end_time:
-        if start_time > datetime.datetime.utcnow():
+        if start_time > datetime.datetime.utcnow().replace(tzinfo=datetime.timezone.utc):
             end_time = start_time + datetime.timedelta(days=7)
         else:
-            end_time = datetime.datetime.utcnow() + datetime.timedelta(days=7)
+            end_time = datetime.datetime.utcnow().replace(
+                tzinfo=datetime.timezone.utc) + datetime.timedelta(days=7)
     return {
         "rtdh_timestamp": time.time(),
         "rtdh_message_id": str(uuid.uuid4()),
@@ -133,8 +145,8 @@ def create_rtdh_standard_msg(pd):
             "geometry": pd.get("incident/location/polyline", parse_icone_polyline),
             "header": {
                 "description": pd.get("incident/description", default=""),
-                "start_timestamp": start_time,
-                "end_timestamp": end_time
+                "start_timestamp": date_tools.date_to_unix(start_time),
+                "end_timestamp": date_tools.date_to_unix(end_time)
             },
             "detail": {
                 "road_name": pd.get("incident/location/street"),
@@ -153,11 +165,13 @@ def get_direction(street, coords):
     direction = wzdx_translator.parse_direction_from_street_name(street)
     if not direction:
         direction = polygon_tools.get_road_direction_from_coordinates(coords)
+    direction = 'northbound'
     return direction
 
 
 # function to validate the incident
 def validate_incident(incident):
+    return True
     if not incident or (type(incident) != dict and type(incident) != OrderedDict):
         logging.warning('incident is empty or has invalid type')
         return False
