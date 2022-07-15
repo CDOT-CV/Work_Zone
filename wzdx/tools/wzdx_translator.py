@@ -166,7 +166,7 @@ def add_ids_v3(message):
 
 # Add ids to message
 # This function may fail if some optional fields are not present (lanes, types_of_work, relationship, ...)
-def add_ids_v4(message, event_type):
+def add_ids_v4(message, event_type="work-zone"):
     if not message or type(message) != dict:
         return None
 
