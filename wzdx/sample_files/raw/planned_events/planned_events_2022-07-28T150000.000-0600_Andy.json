@@ -1,0 +1,539 @@
+[
+  {
+    "type": "Feature",
+    "geometry": {
+      "srid": 4326,
+      "type": "MultiPoint",
+      "coordinates": [
+        [
+          -105.081457,
+          39.767605
+        ],
+        [
+          -105.081277,
+          39.788911
+        ]
+      ]
+    },
+    "properties": {
+      "clearTime": "2023-01-01T06:59:00.000+00:00",
+      "startMarker": 15.5,
+      "type": "Road Construction",
+      "laneImpacts": [
+        {
+          "direction": "north",
+          "laneCount": 2,
+          "laneClosures": "0",
+          "closedLaneTypes": []
+        },
+        {
+          "direction": "south",
+          "laneCount": 2,
+          "laneClosures": "0",
+          "closedLaneTypes": []
+        }
+      ],
+      "routeName": "CO-121N",
+      "isOversizedLoadsProhibited": false,
+      "lastUpdated": "2022-07-15T14:00:35.235+00:00",
+      "schedule": [
+        {
+          "startTime": "2022-05-31T06:00:00.000Z",
+          "endTime": "2023-01-01T06:59:00.000Z"
+        }
+      ],
+      "endMarker": 17.0,
+      "hasRampRestriction": false,
+      "name": "CO 121 Wadsworth Improvements Wheat Ridge-13807",
+      "startTime": "2022-05-31T06:00:00.000+00:00",
+      "id": "OpenTMS-Event3806126540",
+      "travelerInformationMessage": "Between 36th Place (Wheat Ridge) and 52nd Avenue (Arvada) from Mile Point 15.5 to Mile Point 17. Road construction. Until December 31, 2022 at about 11:59PM MDT.",
+      "jurisdictions": [
+        "JEFFERSON (COUNTY)"
+      ],
+      "direction": "north"
+    },
+    "attributes": {}
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+      "srid": 4326,
+      "type": "MultiPoint",
+      "coordinates": [
+        [
+          -104.766556,
+          39.127534
+        ],
+        [
+          -104.768741,
+          39.085188
+        ]
+      ]
+    },
+    "properties": {
+      "additionalImpacts": [
+        "Alternating traffic"
+      ],
+      "clearTime": "2022-07-29T04:00:00.000+00:00",
+      "startMarker": 30.24,
+      "type": "Chip Seal Operations",
+      "laneImpacts": [
+        {
+          "direction": "north",
+          "laneCount": 1,
+          "laneClosures": "c001",
+          "closedLaneTypes": [
+            "through lanes",
+            "right shoulder",
+            "left shoulder"
+          ]
+        },
+        {
+          "direction": "south",
+          "laneCount": 1,
+          "laneClosures": "c001",
+          "closedLaneTypes": [
+            "through lanes",
+            "right shoulder",
+            "left shoulder"
+          ]
+        }
+      ],
+      "routeName": "CO-83N",
+      "isOversizedLoadsProhibited": false,
+      "lastUpdated": "2022-07-19T14:50:56.663+00:00",
+      "schedule": [
+        {
+          "startTime": "2022-07-21T12:30:00.000Z",
+          "endTime": "2022-07-29T04:00:00.000Z"
+        }
+      ],
+      "endMarker": 27.0,
+      "hasRampRestriction": false,
+      "name": "Region 2 Section 4 King Area Maintenance-17702",
+      "startTime": "2022-07-21T12:30:00.000+00:00",
+      "id": "OpenTMS-Event4583562271",
+      "travelerInformationMessage": "Between Hodgen Road and Palmer Divide Avenue (2 to 5 miles north of the Colorado Springs area) from Mile Point 27 to Mile Point 30.24. Road closed due to chip seal operations. Alternating traffic. Starting Thursday at 6:30AM MDT until July 28, 2022 at about 10:00PM MDT.<br/>Between Palmer Divide Avenue and Hodgen Road (2 to 5 miles north of the Colorado Springs area) from Mile Point 30.24 to Mile Point 27. Road closed due to chip seal operations. Alternating traffic. Starting Thursday at 6:30AM MDT until July 28, 2022 at about 10:00PM MDT.",
+      "jurisdictions": [
+        "EL PASO (COUNTY)"
+      ],
+      "direction": "north"
+    },
+    "attributes": {}
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+      "srid": 4326,
+      "type": "MultiPoint",
+      "coordinates": [
+        [
+          -107.357229,
+          38.995558
+        ],
+        [
+          -107.361733,
+          39.009452
+        ]
+      ]
+    },
+    "properties": {
+      "additionalImpacts": [
+        "Alternating traffic"
+      ],
+      "clearTime": "2022-08-02T00:00:00.000+00:00",
+      "startMarker": 29.0,
+      "type": "Rock Work",
+      "laneImpacts": [
+        {
+          "direction": "north",
+          "laneCount": 1,
+          "laneClosures": "0",
+          "closedLaneTypes": []
+        },
+        {
+          "direction": "south",
+          "laneCount": 1,
+          "laneClosures": "0",
+          "closedLaneTypes": []
+        }
+      ],
+      "routeName": "CO-133S",
+      "isOversizedLoadsProhibited": false,
+      "lastUpdated": "2022-07-18T14:45:33.483+00:00",
+      "schedule": [
+        {
+          "startTime": "2022-07-18T14:31:58.000Z",
+          "endTime": "2022-08-02T00:00:00.000Z"
+        }
+      ],
+      "endMarker": 30.0,
+      "hasRampRestriction": false,
+      "name": "CO-133 SB MP 29-30 rock scaling project",
+      "startTime": "2022-07-18T14:31:58.000+00:00",
+      "id": "OpenTMS-Event4567550514",
+      "travelerInformationMessage": "Between County Road 79 and County Road 2 (13 to 14 miles south of McClure Pass) from Mile Point 30 to Mile Point 29. Rockfall mitigation. There is alternating traffic. Until August 1, 2022 at about 6:00PM MDT. Comment: reduce speed , crews on roadway, use caution",
+      "jurisdictions": [
+        "GUNNISON (COUNTY)"
+      ],
+      "direction": "south"
+    },
+    "attributes": {}
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+      "srid": 4326,
+      "type": "MultiPoint",
+      "coordinates": [
+        [
+          -105.926088,
+          39.679026
+        ],
+        [
+          -105.993038,
+          39.657452
+        ]
+      ]
+    },
+    "properties": {
+      "clearTime": "2022-07-30T06:00:00.000+00:00",
+      "startMarker": 214.0,
+      "type": "Bridge Construction",
+      "laneImpacts": [
+        {
+          "direction": "east",
+          "laneCount": 2,
+          "laneClosures": "0",
+          "closedLaneTypes": []
+        },
+        {
+          "direction": "west",
+          "laneCount": 3,
+          "laneClosures": "1001",
+          "closedLaneTypes": [
+            "right lane",
+            "right shoulder"
+          ]
+        }
+      ],
+      "routeName": "I-70W",
+      "isOversizedLoadsProhibited": false,
+      "lastUpdated": "2022-07-16T03:11:23.550+00:00",
+      "schedule": [
+        {
+          "startTime": "2022-07-21T06:00:00.000Z",
+          "endTime": "2022-07-30T06:00:00.000Z"
+        }
+      ],
+      "endMarker": 210.0,
+      "hasRampRestriction": false,
+      "name": "Lane Closures | I-70-17434",
+      "startTime": "2022-07-21T06:00:00.000+00:00",
+      "id": "OpenTMS-Event4507689733",
+      "travelerInformationMessage": "Between Exit 216: US 6; Loveland Pass and Exit 205: US 6; CO 9; Silverthorne (Eisenhower Tunnel) from Mile Point 214 to Mile Point 210. Right lane closed due to bridge construction. Starting July 21, 2022 at 12:00AM MDT until July 30, 2022 at about 12:00AM MDT.",
+      "jurisdictions": [
+        "SUMMIT (COUNTY)"
+      ],
+      "direction": "west"
+    },
+    "attributes": {}
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+      "srid": 4326,
+      "type": "MultiPoint",
+      "coordinates": [
+        [
+          -104.057825,
+          39.627127
+        ],
+        [
+          -104.057825,
+          39.627127
+        ]
+      ]
+    },
+    "properties": {
+      "clearTime": "2022-12-01T06:59:00.000+00:00",
+      "startMarker": 349.6,
+      "type": "Bridge Construction",
+      "laneImpacts": [
+        {
+          "direction": "east",
+          "laneCount": 1,
+          "laneClosures": "4000",
+          "closedLaneTypes": [
+            "through lanes"
+          ]
+        },
+        {
+          "direction": "west",
+          "laneCount": 1,
+          "laneClosures": "4000",
+          "closedLaneTypes": [
+            "through lanes"
+          ]
+        }
+      ],
+      "routeName": "US-40E",
+      "isOversizedLoadsProhibited": false,
+      "lastUpdated": "2022-07-15T14:51:32.444+00:00",
+      "schedule": [
+        {
+          "startTime": "2022-07-18T12:00:00.000Z",
+          "endTime": "2022-12-01T06:59:00.000Z"
+        }
+      ],
+      "endMarker": 349.6,
+      "hasRampRestriction": false,
+      "name": "US 40 Bridge Replacement near Peoria-17588",
+      "startTime": "2022-07-18T12:00:00.000+00:00",
+      "id": "OpenTMS-Event4519786378",
+      "travelerInformationMessage": "Between I-70 and I-70 (near Deer Trail) from Mile Point 349.6 to Mile Point 349.6. Road closed due to bridge construction. Starting Monday at 6:00AM MDT until November 30, 2022 at about 11:59PM MDT.<br/>Between I-70 and I-70 (near Deer Trail) from Mile Point 349.6 to Mile Point 349.6. Road closed due to bridge construction. Starting Monday at 6:00AM MDT until November 30, 2022 at about 11:59PM MDT.",
+      "jurisdictions": [
+        "ARAPAHOE (COUNTY)"
+      ],
+      "direction": "east"
+    },
+    "attributes": {}
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+      "srid": 4326,
+      "type": "MultiPoint",
+      "coordinates": [
+        [
+          -104.758427,
+          40.297988
+        ],
+        [
+          -104.734474,
+          40.318917
+        ]
+      ]
+    },
+    "properties": {
+      "clearTime": "2023-01-01T06:59:00.000+00:00",
+      "startMarker": 258.0,
+      "type": "Road Construction",
+      "laneImpacts": [
+        {
+          "direction": "north",
+          "laneCount": 2,
+          "laneClosures": "0",
+          "closedLaneTypes": []
+        },
+        {
+          "direction": "south",
+          "laneCount": 2,
+          "laneClosures": "0",
+          "closedLaneTypes": []
+        }
+      ],
+      "routeName": "US-85N",
+      "isOversizedLoadsProhibited": false,
+      "lastUpdated": "2022-07-08T20:33:20.518+00:00",
+      "schedule": [
+        {
+          "startTime": "2022-05-31T06:00:00.000Z",
+          "endTime": "2023-01-01T06:59:00.000Z"
+        }
+      ],
+      "endMarker": 259.5,
+      "hasRampRestriction": false,
+      "name": "US 85 / WCR 44 Interchange-13802",
+      "startTime": "2022-05-31T06:00:00.000+00:00",
+      "id": "OpenTMS-Event3806016045",
+      "travelerInformationMessage": "Between County Road 42 (near Gilcrest) and County Road 35 (near La Salle) from Mile Point 258 to Mile Point 259.5. Road construction. Until December 31, 2022 at about 11:59PM MDT.",
+      "jurisdictions": [
+        "WELD (COUNTY)"
+      ],
+      "direction": "north"
+    },
+    "attributes": {}
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+      "srid": 4326,
+      "type": "MultiPoint",
+      "coordinates": [
+        [
+          -107.840026,
+          37.227372
+        ],
+        [
+          -107.838478,
+          37.227666
+        ]
+      ]
+    },
+    "properties": {
+      "clearTime": "2023-08-31T07:00:00.000+00:00",
+      "startMarker": 88.85,
+      "type": "Bridge Maintenance Operations",
+      "laneImpacts": [
+        {
+          "direction": "east",
+          "laneCount": 3,
+          "laneClosures": "0",
+          "closedLaneTypes": []
+        },
+        {
+          "direction": "west",
+          "laneCount": 2,
+          "laneClosures": "0",
+          "closedLaneTypes": []
+        }
+      ],
+      "routeName": "US-160W",
+      "isOversizedLoadsProhibited": false,
+      "lastUpdated": "2022-07-07T22:10:51.391+00:00",
+      "schedule": [
+        {
+          "startTime": "2022-05-09T06:00:00.000Z",
+          "endTime": "2022-09-01T05:59:59.000Z"
+        },
+        {
+          "startTime": "2022-07-20T06:00:00.000Z",
+          "endTime": "2022-07-20T07:00:00.000Z"
+        },
+        {
+          "startTime": "2022-07-21T06:00:00.000Z",
+          "endTime": "2022-07-21T07:00:00.000Z"
+        },
+        {
+          "startTime": "2022-07-22T06:00:00.000Z",
+          "endTime": "2022-07-22T07:00:00.000Z"
+        },
+        {
+          "startTime": "2022-07-23T06:00:00.000Z",
+          "endTime": "2022-07-23T07:00:00.000Z"
+        },
+        {
+          "startTime": "2022-07-24T06:00:00.000Z",
+          "endTime": "2022-07-24T07:00:00.000Z"
+        },
+        {
+          "startTime": "2022-07-25T06:00:00.000Z",
+          "endTime": "2022-07-25T07:00:00.000Z"
+        },
+        {
+          "startTime": "2022-07-26T06:00:00.000Z",
+          "endTime": "2022-07-26T07:00:00.000Z"
+        },
+        {
+          "startTime": "2022-07-27T06:00:00.000Z",
+          "endTime": "2022-07-27T07:00:00.000Z"
+        },
+        {
+          "startTime": "2022-07-28T06:00:00.000Z",
+          "endTime": "2022-07-28T07:00:00.000Z"
+        },
+        {
+          "startTime": "2022-07-29T06:00:00.000Z",
+          "endTime": "2022-07-29T07:00:00.000Z"
+        },
+        {
+          "startTime": "2022-07-30T06:00:00.000Z",
+          "endTime": "2022-07-30T07:00:00.000Z"
+        },
+        {
+          "startTime": "2022-07-31T06:00:00.000Z",
+          "endTime": "2022-07-31T07:00:00.000Z"
+        },
+        {
+          "startTime": "2022-08-01T06:00:00.000Z",
+          "endTime": "2022-08-01T07:00:00.000Z"
+        },
+        {
+          "startTime": "2022-08-02T06:00:00.000Z",
+          "endTime": "2022-08-02T07:00:00.000Z"
+        },
+        {
+          "startTime": "2022-08-03T06:00:00.000Z",
+          "endTime": "2022-08-03T07:00:00.000Z"
+        },
+        {
+          "startTime": "2022-08-04T06:00:00.000Z",
+          "endTime": "2022-08-04T07:00:00.000Z"
+        },
+        {
+          "startTime": "2022-08-05T06:00:00.000Z",
+          "endTime": "2022-08-05T07:00:00.000Z"
+        },
+        {
+          "startTime": "2022-08-06T06:00:00.000Z",
+          "endTime": "2022-08-06T07:00:00.000Z"
+        },
+        {
+          "startTime": "2022-08-07T06:00:00.000Z",
+          "endTime": "2022-08-07T07:00:00.000Z"
+        },
+        {
+          "startTime": "2022-08-08T06:00:00.000Z",
+          "endTime": "2022-08-08T07:00:00.000Z"
+        },
+        {
+          "startTime": "2022-08-09T06:00:00.000Z",
+          "endTime": "2022-08-09T07:00:00.000Z"
+        },
+        {
+          "startTime": "2022-08-10T06:00:00.000Z",
+          "endTime": "2022-08-10T07:00:00.000Z"
+        },
+        {
+          "startTime": "2022-08-11T06:00:00.000Z",
+          "endTime": "2022-08-11T07:00:00.000Z"
+        },
+        {
+          "startTime": "2022-08-12T06:00:00.000Z",
+          "endTime": "2022-08-12T07:00:00.000Z"
+        },
+        {
+          "startTime": "2022-08-13T06:00:00.000Z",
+          "endTime": "2022-08-13T07:00:00.000Z"
+        },
+        {
+          "startTime": "2022-08-14T06:00:00.000Z",
+          "endTime": "2022-08-14T07:00:00.000Z"
+        },
+        {
+          "startTime": "2022-08-15T06:00:00.000Z",
+          "endTime": "2022-08-15T07:00:00.000Z"
+        },
+        {
+          "startTime": "2022-08-16T06:00:00.000Z",
+          "endTime": "2022-08-16T07:00:00.000Z"
+        },
+        {
+          "startTime": "2022-08-17T06:00:00.000Z",
+          "endTime": "2022-08-17T07:00:00.000Z"
+        },
+        {
+          "startTime": "2022-08-18T06:00:00.000Z",
+          "endTime": "2022-08-18T07:00:00.000Z"
+        },
+        {
+          "startTime": "2022-08-19T06:00:00.000Z",
+          "endTime": "2022-08-19T07:00:00.000Z"
+        }
+      ],
+      "endMarker": 88.9,
+      "hasRampRestriction": false,
+      "name": "US 160 Connection Bridge South Closure.",
+      "startTime": "2022-05-09T06:00:00.000+00:00",
+      "id": "OpenTMS-Event3473959836",
+      "travelerInformationMessage": "Between County Road 232 and US 550 (near Durango) from Mile Point 88.9 to Mile Point 88.85. Bridge maintenance operations. Until August 31, 2023 at about 1:00AM MDT. Comment: US 160 Connection South Bridge is closed. May 2022 through August 2023. Project hotline 970-880-2800.",
+      "jurisdictions": [
+        "LA PLATA (COUNTY)"
+      ],
+      "direction": "west"
+    },
+    "attributes": {}
+  }
+]
