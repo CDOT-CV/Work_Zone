@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents timestamp="2022-07-12T23:08:02Z">
+  <incident id="U13632527_202207122307">
+    <creationtime>2022-07-12T23:07:20Z</creationtime>
+    <updatetime>2022-07-12T23:07:20Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE LEFT [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>40.3103642,-104.9861788,40.3103642,-104.9861788</polyline>
+    </location>
+    <starttime>2022-07-12T23:07:20Z</starttime>
+    <display type="AB" id="13632527" latitude="40.3103642" longitude="-104.9861788">
+      <message verified="2022-07-12T23:07:20Z" indicator="Merge Left" latitude="40.3103791" longitude="-104.9861394" />
+      <status type="Arrow Panel" starttime="2022-07-12T23:07:20Z" verified="2022-07-12T23:07:20Z" state="Left Arrow" />
+    </display>
+  </incident>
+  <incident id="U13632281_202207122148">
+    <creationtime>2022-07-12T21:48:00Z</creationtime>
+    <updatetime>2022-07-12T23:04:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>39.7790696,-104.9217616,39.7790696,-104.9217616</polyline>
+    </location>
+    <starttime>2022-07-12T21:48:00Z</starttime>
+    <display type="AB" id="13632281" latitude="39.7790696" longitude="-104.9217616">
+      <message verified="2022-07-12T23:04:00Z" indicator="Caution" latitude="39.7790272" longitude="-104.9217216" />
+      <status type="Arrow Panel" starttime="2022-07-12T21:05:04Z" verified="2022-07-12T23:04:00Z" state="Caution - Corners" />
+    </display>
+  </incident>
+  <incident id="U13631771_202207122303">
+    <creationtime>2022-07-12T23:03:00Z</creationtime>
+    <updatetime>2022-07-12T23:03:00Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>39.5516352,-104.7923520,39.5516352,-104.7923520</polyline>
+    </location>
+    <starttime>2022-07-12T23:03:00Z</starttime>
+    <display type="AB" id="13631771" latitude="39.5516352" longitude="-104.7923520">
+      <message verified="2022-07-12T23:03:00Z" indicator="Caution" latitude="39.5516352" longitude="-104.7923520" />
+      <status type="Arrow Panel" starttime="2022-07-12T22:00:00Z" verified="2022-07-12T23:03:00Z" state="Caution - Bar" />
+    </display>
+  </incident>
+  <incident id="U13632657_202207122211">
+    <creationtime>2022-07-12T22:11:18Z</creationtime>
+    <updatetime>2022-07-12T23:07:03Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>37.5413432,-105.0630603,37.5413432,-105.0630603</polyline>
+    </location>
+    <starttime>2022-07-12T22:11:18Z</starttime>
+    <display type="AB" id="13632657" latitude="37.5413432" longitude="-105.0630603">
+      <message verified="2022-07-12T23:07:03Z" indicator="Caution" latitude="37.5413457" longitude="-105.0630995" />
+      <status type="Arrow Panel" starttime="2022-07-12T22:11:18Z" verified="2022-07-12T23:07:03Z" state="Caution - Diamonds" />
+    </display>
+  </incident>
+  <incident id="U13632410_202207122250">
+    <creationtime>2022-07-12T22:50:00Z</creationtime>
+    <updatetime>2022-07-12T23:05:11Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>37.5470899,-105.0907099,37.5470899,-105.0907099</polyline>
+    </location>
+    <starttime>2022-07-12T22:50:00Z</starttime>
+    <display type="AB" id="13632410" latitude="37.5470899" longitude="-105.0907099">
+      <message verified="2022-07-12T23:05:11Z" indicator="Caution" latitude="37.5470899" longitude="-105.0907099" />
+      <status type="Arrow Panel" starttime="2022-07-12T16:03:51Z" verified="2022-07-12T23:05:11Z" state="Caution - Diamonds" />
+    </display>
+  </incident>
+</incidents>

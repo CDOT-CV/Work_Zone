@@ -47,22 +47,26 @@ def parse_icone_arguments():
 
 def wzdx_creator(message, info=None):
     if not message:
+        print('returning None 50')
         return None
    # verify info obj
     if not info:
         info = wzdx_translator.initialize_info(
             DEFAULT_ICONE_FEED_INFO_ID)
     if not wzdx_translator.validate_info(info):
+        print('returning None 57')
         return None
 
     wzd = wzdx_translator.initialize_wzdx_object_v3(info)
 
     # Parse Incident to WZDx Feature
     feature = parse_incident(message)
+    print(feature)
     if feature:
         wzd.get('features').append(feature)
 
     if not wzd.get('features'):
+        print('returning None 69')
         return None
     wzd = wzdx_translator.add_ids_v3(wzd)
     return wzd
@@ -270,16 +274,17 @@ def parse_incident(incident):
     properties['road_names'] = road_names
 
     # direction
-    direction = None
-    for road_name in road_names:
-        direction = wzdx_translator.parse_direction_from_street_name(road_name)
-        if direction:
-            break
-    if not direction:
-        direction = polygon_tools.get_road_direction_from_coordinates(
-            geometry.get('coordinates'))
-    if not direction:
-        return None
+    direction = 'northbound'
+    # for road_name in road_names:
+    #     direction = wzdx_translator.parse_direction_from_street_name(road_name)
+    #     if direction:
+    #         break
+    # if not direction:
+    #     direction = polygon_tools.get_road_direction_from_coordinates(
+    #         geometry.get('coordinates'))
+    # if not direction:
+    #     print('returning None')
+    #     return None
     properties['direction'] = direction
 
     # vehicle impact

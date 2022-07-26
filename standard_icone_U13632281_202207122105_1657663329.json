@@ -1,0 +1,58 @@
+{
+  "rtdh_timestamp": 1657663329.0560842,
+  "rtdh_message_id": "da9a1526-6f6a-417c-9307-67486c32c259",
+  "event": {
+    "type": "CONSTRUCTION",
+    "source": {
+      "id": "U13632281_202207122105",
+      "creation_timestamp": 1657659904000,
+      "last_updated_timestamp": 1657662060000
+    },
+    "geometry": [
+      [
+        -104.9218415,
+        39.7791632
+      ],
+      [
+        -104.9218415,
+        39.7791632
+      ]
+    ],
+    "header": {
+      "description": "Roadwork - Caution [iCone]",
+      "start_timestamp": 1657659904000,
+      "end_timestamp": 1658268129056
+    },
+    "detail": {
+      "road_name": null,
+      "road_number": null,
+      "direction": "northbound"
+    },
+    "additional_info": {
+      "devices": [
+        {
+          "sensor_type": "display",
+          "details": {
+            "@type": "AB",
+            "@id": "13632281",
+            "@latitude": "39.7791632",
+            "@longitude": "-104.9218415",
+            "message": {
+              "@verified": "2022-07-12T21:41:00Z",
+              "@indicator": "Caution",
+              "@latitude": "39.7788416",
+              "@longitude": "-104.9222400"
+            },
+            "status": {
+              "@type": "Arrow Panel",
+              "@starttime": "2022-07-12T21:05:04Z",
+              "@verified": "2022-07-12T21:41:00Z",
+              "@state": "Caution - Corners"
+            }
+          }
+        }
+      ],
+      "directionality": "ONE_DIRECTION"
+    }
+  }
+}

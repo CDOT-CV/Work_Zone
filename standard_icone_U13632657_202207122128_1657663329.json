@@ -1,0 +1,58 @@
+{
+  "rtdh_timestamp": 1657663329.0570855,
+  "rtdh_message_id": "600ad6a5-e97a-4eef-a339-3b72ee83cb7c",
+  "event": {
+    "type": "CONSTRUCTION",
+    "source": {
+      "id": "U13632657_202207122128",
+      "creation_timestamp": 1657661301000,
+      "last_updated_timestamp": 1657662203000
+    },
+    "geometry": [
+      [
+        -105.0630228,
+        37.5413426
+      ],
+      [
+        -105.0630228,
+        37.5413426
+      ]
+    ],
+    "header": {
+      "description": "Roadwork - Caution [iCone]",
+      "start_timestamp": 1657661301000,
+      "end_timestamp": 1658268129057
+    },
+    "detail": {
+      "road_name": null,
+      "road_number": null,
+      "direction": "northbound"
+    },
+    "additional_info": {
+      "devices": [
+        {
+          "sensor_type": "display",
+          "details": {
+            "@type": "AB",
+            "@id": "13632657",
+            "@latitude": "37.5413426",
+            "@longitude": "-105.0630228",
+            "message": {
+              "@verified": "2022-07-12T21:43:23Z",
+              "@indicator": "Caution",
+              "@latitude": "37.5413379",
+              "@longitude": "-105.0630382"
+            },
+            "status": {
+              "@type": "Arrow Panel",
+              "@starttime": "2022-07-12T21:28:21Z",
+              "@verified": "2022-07-12T21:43:23Z",
+              "@state": "Caution - Diamonds"
+            }
+          }
+        }
+      ],
+      "directionality": "ONE_DIRECTION"
+    }
+  }
+}
