@@ -1,0 +1,531 @@
+{
+  "road_event_feed_info": {
+    "feed_info_id": "49253be7-0c6a-4a65-8113-450f9041f989",
+    "update_date": "2022-07-20T03:33:53Z",
+    "publisher": "CDOT",
+    "contact_name": "Ashley Nylen",
+    "contact_email": "ashley.nylen@state.co.us",
+    "version": "4.0",
+    "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "data_sources": [
+      {
+        "data_source_id": "7588306e-0f96-4e5e-b897-3f90be5ab4ac",
+        "feed_info_id": "49253be7-0c6a-4a65-8113-450f9041f989",
+        "organization_name": "CDOT",
+        "contact_name": "Ashley Nylen",
+        "contact_email": "ashley.nylen@state.co.us",
+        "update_date": "2022-07-20T03:33:53Z",
+        "location_method": "channel-device-method",
+        "lrs_type": "lrs_type"
+      }
+    ]
+  },
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": null,
+        "data_source_id": null,
+        "core_details": {
+          "event_type": "work-zone",
+          "data_source_id": "7588306e-0f96-4e5e-b897-3f90be5ab4ac",
+          "road_names": [
+            "US-285"
+          ],
+          "direction": "north",
+          "relationship": {},
+          "description": "Between Buffalo Peaks (9 miles north of Antero Junction) and County Road 24 (8 miles south of the Fairplay area) from Mile Point 171 to Mile Point 173. Road closed due to bridge repair work. Starting July 25, 2022 at 12:00AM MDT until July 25, 2022 at about 11:59PM MDT.<br/>Between County Road 24 (8 miles south of the Fairplay area) and Buffalo Peaks (9 miles north of Antero Junction) from Mile Point 173 to Mile Point 171. Road closed due to bridge repair work. Starting July 25, 2022 at 12:00AM MDT until July 25, 2022 at about 11:59PM MDT.",
+          "update_date": "2022-07-17T06:09:18Z",
+          "road_event_id": "103d1792-a579-4c5e-bc7f-e253f54df21d"
+        },
+        "start_date": "2022-07-25T06:00:00Z",
+        "end_date": "2022-07-26T05:59:00Z",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "location_method": "channel-device-method",
+        "vehicle_impact": "all-lanes-closed",
+        "lanes": [
+          {
+            "order": 1,
+            "type": "shoulder",
+            "status": "closed"
+          },
+          {
+            "order": 2,
+            "type": "general",
+            "status": "closed"
+          },
+          {
+            "order": 3,
+            "type": "shoulder",
+            "status": "closed"
+          }
+        ],
+        "event_status": "pending",
+        "types_of_work": [
+          {
+            "type_name": "below-road-work",
+            "is_architectural_change": false
+          }
+        ],
+        "beginning_milepost": 171.0,
+        "ending_milepost": 173.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -105.97649731199999,
+            39.05235540800004
+          ],
+          [
+            -105.97381747399999,
+            39.07696146100005
+          ]
+        ]
+      },
+      "id": "OpenTMS-Event4545954904_north"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": null,
+        "data_source_id": null,
+        "core_details": {
+          "event_type": "work-zone",
+          "data_source_id": "229b95f8-35b8-46ec-8f63-902c625b3192",
+          "road_names": [
+            "CO-83"
+          ],
+          "direction": "north",
+          "relationship": {},
+          "description": "Between Hodgen Road and Palmer Divide Avenue (2 to 5 miles north of the Colorado Springs area) from Mile Point 27 to Mile Point 30.24. Road closed due to chip seal operations. Alternating traffic. Starting Thursday at 6:30AM MDT until July 28, 2022 at about 10:00PM MDT.<br/>Between Palmer Divide Avenue and Hodgen Road (2 to 5 miles north of the Colorado Springs area) from Mile Point 30.24 to Mile Point 27. Road closed due to chip seal operations. Alternating traffic. Starting Thursday at 6:30AM MDT until July 28, 2022 at about 10:00PM MDT.",
+          "update_date": "2022-07-19T14:50:56Z",
+          "road_event_id": "a23d8a4c-864e-4941-bdaa-7c32b1eb9402"
+        },
+        "start_date": "2022-07-21T12:30:00Z",
+        "end_date": "2022-07-29T04:00:00Z",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "location_method": "channel-device-method",
+        "vehicle_impact": "all-lanes-closed",
+        "lanes": [
+          {
+            "order": 1,
+            "type": "shoulder",
+            "status": "closed"
+          },
+          {
+            "order": 2,
+            "type": "general",
+            "status": "closed"
+          },
+          {
+            "order": 3,
+            "type": "shoulder",
+            "status": "closed"
+          }
+        ],
+        "event_status": "pending",
+        "types_of_work": [
+          {
+            "type_name": "minor-road-defect-repair",
+            "is_architectural_change": false
+          }
+        ],
+        "beginning_milepost": 30.24,
+        "ending_milepost": 27.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -104.76654655499999,
+            39.12752805000008
+          ],
+          [
+            -104.77081188499994,
+            39.11373443300005
+          ],
+          [
+            -104.77062008299998,
+            39.09930426900007
+          ],
+          [
+            -104.77010764599999,
+            39.08703481900005
+          ]
+        ]
+      },
+      "id": "OpenTMS-Event4583562271_north"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": null,
+        "data_source_id": null,
+        "core_details": {
+          "event_type": "work-zone",
+          "data_source_id": "7fc9ddb0-9d33-42ef-9dce-a32c1bccd6cf",
+          "road_names": [
+            "CO-105"
+          ],
+          "direction": "north",
+          "relationship": {},
+          "description": "Between Westward Lane and Aurelia Street (Palmer Lake) from Mile Point 6.5 to Mile Point 9.48. Road closed due to chip seal operations. Alternating traffic. Starting July 25, 2022 at 6:30AM MDT until July 25, 2022 at about 10:00PM MDT.<br/>Between Aurelia Street and Westward Lane (Palmer Lake) from Mile Point 9.48 to Mile Point 6.5. Road closed due to chip seal operations. Alternating traffic. Starting July 25, 2022 at 6:30AM MDT until July 25, 2022 at about 10:00PM MDT.",
+          "update_date": "2022-07-19T14:50:57Z",
+          "road_event_id": "c2c09f2b-6170-4a96-92f1-af7f4870e251"
+        },
+        "start_date": "2022-07-25T12:30:00Z",
+        "end_date": "2022-07-26T04:00:00Z",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "location_method": "channel-device-method",
+        "vehicle_impact": "all-lanes-closed",
+        "lanes": [
+          {
+            "order": 1,
+            "type": "shoulder",
+            "status": "closed"
+          },
+          {
+            "order": 2,
+            "type": "general",
+            "status": "closed"
+          },
+          {
+            "order": 3,
+            "type": "shoulder",
+            "status": "closed"
+          }
+        ],
+        "event_status": "pending",
+        "types_of_work": [
+          {
+            "type_name": "minor-road-defect-repair",
+            "is_architectural_change": false
+          }
+        ],
+        "beginning_milepost": 9.48,
+        "ending_milepost": 6.5
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -104.91027538699996,
+            39.129107205000025
+          ],
+          [
+            -104.91261057199995,
+            39.12506282900006
+          ],
+          [
+            -104.91511424599997,
+            39.12093831000004
+          ],
+          [
+            -104.91106417199995,
+            39.118304883000064
+          ],
+          [
+            -104.89222692299995,
+            39.10689186900004
+          ]
+        ]
+      },
+      "id": "OpenTMS-Event4583562285_north"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": null,
+        "data_source_id": null,
+        "core_details": {
+          "event_type": "work-zone",
+          "data_source_id": "0a16e759-b75b-486e-96d9-3cdfd49d4bbf",
+          "road_names": [
+            "I-70"
+          ],
+          "direction": "west",
+          "relationship": {},
+          "description": "Between Exit 216: US 6; Loveland Pass and Exit 205: US 6; CO 9; Silverthorne (Eisenhower Tunnel) from Mile Point 214 to Mile Point 210. Right lane closed due to bridge construction. Starting July 21, 2022 at 12:00AM MDT until July 30, 2022 at about 12:00AM MDT.",
+          "update_date": "2022-07-16T03:11:23Z",
+          "road_event_id": "f8ad5b5a-cf18-442d-bd33-eda8b2ece246"
+        },
+        "start_date": "2022-07-21T06:00:00Z",
+        "end_date": "2022-07-30T06:00:00Z",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "location_method": "channel-device-method",
+        "vehicle_impact": "some-lanes-closed",
+        "lanes": [
+          {
+            "order": 1,
+            "type": "general",
+            "status": "open"
+          },
+          {
+            "order": 2,
+            "type": "general",
+            "status": "open"
+          },
+          {
+            "order": 3,
+            "type": "general",
+            "status": "closed"
+          },
+          {
+            "order": 4,
+            "type": "shoulder",
+            "status": "closed"
+          }
+        ],
+        "event_status": "pending",
+        "types_of_work": [
+          {
+            "type_name": "below-road-work",
+            "is_architectural_change": true
+          }
+        ],
+        "beginning_milepost": 214.0,
+        "ending_milepost": 210.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -105.97705763099998,
+            39.66629793900006
+          ],
+          [
+            -105.98214027499995,
+            39.66236390100005
+          ],
+          [
+            -105.98929124199998,
+            39.659320498000056
+          ],
+          [
+            -105.93495141099999,
+            39.67866788400005
+          ],
+          [
+            -105.94042075299996,
+            39.67698087500003
+          ],
+          [
+            -105.94494763799997,
+            39.676686362000055
+          ],
+          [
+            -105.95335506199996,
+            39.67695958500008
+          ],
+          [
+            -105.95910997699997,
+            39.674669719000065
+          ],
+          [
+            -105.96722212899999,
+            39.67374459600006
+          ],
+          [
+            -105.97232528699999,
+            39.67197798700005
+          ]
+        ]
+      },
+      "id": "OpenTMS-Event4507689733_west"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": null,
+        "data_source_id": null,
+        "core_details": {
+          "event_type": "work-zone",
+          "data_source_id": "4eb692e9-78bc-4336-861d-fc58186e8a61",
+          "road_names": [
+            "US-40"
+          ],
+          "direction": "east",
+          "relationship": {},
+          "description": "Between I-70 and I-70 (near Deer Trail) from Mile Point 349.6 to Mile Point 349.6. Road closed due to bridge construction. Starting Monday at 6:00AM MDT until November 30, 2022 at about 11:59PM MDT.<br/>Between I-70 and I-70 (near Deer Trail) from Mile Point 349.6 to Mile Point 349.6. Road closed due to bridge construction. Starting Monday at 6:00AM MDT until November 30, 2022 at about 11:59PM MDT.",
+          "update_date": "2022-07-15T14:51:32Z",
+          "road_event_id": "a8259322-e54a-4e62-a51d-d9e03669cf2a"
+        },
+        "start_date": "2022-07-18T12:00:00Z",
+        "end_date": "2022-12-01T06:59:00Z",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "location_method": "channel-device-method",
+        "vehicle_impact": "all-lanes-closed",
+        "lanes": [
+          {
+            "order": 1,
+            "type": "general",
+            "status": "closed"
+          }
+        ],
+        "event_status": "active",
+        "types_of_work": [
+          {
+            "type_name": "below-road-work",
+            "is_architectural_change": true
+          }
+        ],
+        "beginning_milepost": 349.6,
+        "ending_milepost": 349.6
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": []
+      },
+      "id": "OpenTMS-Event4519786378_east"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": null,
+        "data_source_id": null,
+        "core_details": {
+          "event_type": "work-zone",
+          "data_source_id": "ceab5b34-204a-4c7e-8599-6328d6b0c625",
+          "road_names": [
+            "I-25"
+          ],
+          "direction": "north",
+          "relationship": {},
+          "description": "Between Exit 8: Spring Creek and Exit 13A: Van Buren Street (near Raton Pass) from Mile Point 10 to Mile Point 12. Right lane closed due to bridge construction. Starting July 25, 2022 at 12:00AM MDT until July 25, 2022 at about 11:59PM MDT.",
+          "update_date": "2022-07-19T17:38:51Z",
+          "road_event_id": "16222a94-fb27-4d71-b6e7-2395ade168b5"
+        },
+        "start_date": "2022-07-25T06:00:00Z",
+        "end_date": "2022-07-26T05:59:00Z",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "location_method": "channel-device-method",
+        "vehicle_impact": "some-lanes-closed",
+        "lanes": [
+          {
+            "order": 1,
+            "type": "general",
+            "status": "open"
+          },
+          {
+            "order": 2,
+            "type": "general",
+            "status": "closed"
+          }
+        ],
+        "event_status": "pending",
+        "types_of_work": [
+          {
+            "type_name": "below-road-work",
+            "is_architectural_change": true
+          }
+        ],
+        "beginning_milepost": 10.0,
+        "ending_milepost": 12.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -104.52057809599995,
+            37.11874859100004
+          ],
+          [
+            -104.52128220999998,
+            37.13232724100004
+          ],
+          [
+            -104.52023505999995,
+            37.13852852900004
+          ]
+        ]
+      },
+      "id": "OpenTMS-Event4585390909_north"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_event_id": null,
+        "data_source_id": null,
+        "core_details": {
+          "event_type": "work-zone",
+          "data_source_id": "89d85064-5dca-4714-b10e-4e2cf64812fb",
+          "road_names": [
+            "I-25"
+          ],
+          "direction": "south",
+          "relationship": {},
+          "description": "Between Exit 13A: Van Buren Street and Exit 8: Spring Creek (near Raton Pass) from Mile Point 12 to Mile Point 10. Right lane closed due to bridge construction. Starting July 25, 2022 at 12:00AM MDT until July 25, 2022 at about 11:59PM MDT.",
+          "update_date": "2022-07-19T17:38:54Z",
+          "road_event_id": "375fae48-29bb-483e-90ac-78931d425b15"
+        },
+        "start_date": "2022-07-25T06:00:00Z",
+        "end_date": "2022-07-26T05:59:00Z",
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
+        "location_method": "channel-device-method",
+        "vehicle_impact": "some-lanes-closed",
+        "lanes": [
+          {
+            "order": 1,
+            "type": "general",
+            "status": "open"
+          },
+          {
+            "order": 2,
+            "type": "general",
+            "status": "closed"
+          }
+        ],
+        "event_status": "pending",
+        "types_of_work": [
+          {
+            "type_name": "below-road-work",
+            "is_architectural_change": true
+          }
+        ],
+        "beginning_milepost": 12.0,
+        "ending_milepost": 10.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -104.51950765499998,
+            37.14751311600003
+          ],
+          [
+            -104.52116445899998,
+            37.13463539000003
+          ],
+          [
+            -104.52101953699997,
+            37.13092841900004
+          ]
+        ]
+      },
+      "id": "OpenTMS-Event4585390990_south"
+    }
+  ]
+}

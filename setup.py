@@ -1,7 +1,7 @@
 import pathlib
 from setuptools import setup, find_packages
 
-VERSION = "0.4.4"
+VERSION = "1.0.2"
 DESCRIPTION = 'CDOT Work Zone WZDx Translators'
 HERE = pathlib.Path(__file__).parent
 README = (HERE / "README.md").read_text()
@@ -9,10 +9,10 @@ README = (HERE / "README.md").read_text()
 # Setting up
 setup(
     # the name must match the folder name 'verysimplemodule'
-    name="wzdx-translator-jacob6838",
+    name="cdot-wzdx-translator",
     version=VERSION,
-    author="Jacob Frye",
-    author_email="jfrye@neaeraconsulting.com",
+    author="CDOT",
+    author_email="CDOT_rtdh_prod@state.co.us",
     description=DESCRIPTION,
     long_description=README,
     packages=find_packages(exclude=["tests"]),
