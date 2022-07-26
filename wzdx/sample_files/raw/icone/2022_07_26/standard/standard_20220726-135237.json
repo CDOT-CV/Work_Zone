@@ -1,0 +1,281 @@
+[
+  {
+    "rtdh_timestamp": 1658865158.0472891,
+    "rtdh_message_id": "8209f310-c2ae-432c-9cf7-586aa725663e",
+    "event": {
+      "type": "CONSTRUCTION",
+      "source": {
+        "id": 12,
+        "creation_timestamp": 1658836551000,
+        "last_updated_timestamp": 1658864866000
+      },
+      "geometry": [
+        [
+          -84.169129,
+          37.20667
+        ],
+        [
+          -84.157346,
+          37.201223
+        ],
+        [
+          -84.140482,
+          37.185815
+        ],
+        [
+          -84.121425,
+          37.166345
+        ],
+        [
+          -84.111588,
+          37.147808
+        ]
+      ],
+      "header": {
+        "description": "Roadwork - Caution [iCone]",
+        "start_timestamp": 1658836551000,
+        "end_timestamp": 1659469958047
+      },
+      "detail": {
+        "road_name": "unknown",
+        "road_number": null,
+        "direction": "northbound"
+      },
+      "additional_info": {
+        "devices": [
+          {
+            "sensor_type": "display",
+            "details": {
+              "@type": "AB",
+              "@id": "13632530",
+              "@latitude": "40.3103116",
+              "@longitude": "-104.9863140",
+              "message": {
+                "@verified": "2022-07-26T19:47:46Z",
+                "@indicator": "Caution",
+                "@latitude": "40.3103426",
+                "@longitude": "-104.9863536"
+              },
+              "status": {
+                "@type": "Arrow Panel",
+                "@starttime": "2022-07-26T11:55:51Z",
+                "@verified": "2022-07-26T19:47:46Z",
+                "@state": "Caution - Corners"
+              }
+            }
+          }
+        ],
+        "directionality": "ONE_DIRECTION"
+      }
+    }
+  },
+  {
+    "rtdh_timestamp": 1658865158.0482893,
+    "rtdh_message_id": "d79acc1a-9c30-4b96-bf45-bb66c246f179",
+    "event": {
+      "type": "CONSTRUCTION",
+      "source": {
+        "id": 12,
+        "creation_timestamp": 1658853377000,
+        "last_updated_timestamp": 1658864880000
+      },
+      "geometry": [
+        [
+          -84.169129,
+          37.20667
+        ],
+        [
+          -84.157346,
+          37.201223
+        ],
+        [
+          -84.140482,
+          37.185815
+        ],
+        [
+          -84.121425,
+          37.166345
+        ],
+        [
+          -84.111588,
+          37.147808
+        ]
+      ],
+      "header": {
+        "description": "Roadwork - Lane Closed, MERGE LEFT [iCone]",
+        "start_timestamp": 1658853377000,
+        "end_timestamp": 1659469958048
+      },
+      "detail": {
+        "road_name": "unknown",
+        "road_number": null,
+        "direction": "northbound"
+      },
+      "additional_info": {
+        "devices": [
+          {
+            "sensor_type": "display",
+            "details": {
+              "@type": "AB",
+              "@id": "13631771",
+              "@latitude": "39.5719417",
+              "@longitude": "-104.8242855",
+              "message": {
+                "@verified": "2022-07-26T19:48:00Z",
+                "@indicator": "Merge Left",
+                "@latitude": "39.5721024",
+                "@longitude": "-104.8242432"
+              },
+              "status": {
+                "@type": "Arrow Panel",
+                "@starttime": "2022-07-26T16:36:17Z",
+                "@verified": "2022-07-26T19:48:00Z",
+                "@state": "Left Arrow"
+              }
+            }
+          }
+        ],
+        "directionality": "ONE_DIRECTION"
+      }
+    }
+  },
+  {
+    "rtdh_timestamp": 1658865158.0482893,
+    "rtdh_message_id": "760995cc-c4b3-42be-8ea3-bbaaf4627f94",
+    "event": {
+      "type": "CONSTRUCTION",
+      "source": {
+        "id": 12,
+        "creation_timestamp": 1658846520000,
+        "last_updated_timestamp": 1658865060000
+      },
+      "geometry": [
+        [
+          -84.169129,
+          37.20667
+        ],
+        [
+          -84.157346,
+          37.201223
+        ],
+        [
+          -84.140482,
+          37.185815
+        ],
+        [
+          -84.121425,
+          37.166345
+        ],
+        [
+          -84.111588,
+          37.147808
+        ]
+      ],
+      "header": {
+        "description": "Roadwork - Caution [iCone]",
+        "start_timestamp": 1658846520000,
+        "end_timestamp": 1659469958048
+      },
+      "detail": {
+        "road_name": "unknown",
+        "road_number": null,
+        "direction": "northbound"
+      },
+      "additional_info": {
+        "devices": [
+          {
+            "sensor_type": "display",
+            "details": {
+              "@type": "AB",
+              "@id": "13631863",
+              "@latitude": "39.7799638",
+              "@longitude": "-104.9413004",
+              "message": {
+                "@verified": "2022-07-26T19:51:00Z",
+                "@latitude": "39.7799072",
+                "@longitude": "-104.9412736"
+              },
+              "status": {
+                "@type": "Arrow Panel",
+                "@starttime": "2022-07-26T14:41:00Z",
+                "@verified": "2022-07-26T19:51:00Z",
+                "@state": "On"
+              }
+            }
+          }
+        ],
+        "directionality": "ONE_DIRECTION"
+      }
+    }
+  },
+  {
+    "rtdh_timestamp": 1658865158.0482893,
+    "rtdh_message_id": "815c3f53-5fb4-4152-94b9-5074207266fc",
+    "event": {
+      "type": "CONSTRUCTION",
+      "source": {
+        "id": 12,
+        "creation_timestamp": 1658864855000,
+        "last_updated_timestamp": 1658864855000
+      },
+      "geometry": [
+        [
+          -84.169129,
+          37.20667
+        ],
+        [
+          -84.157346,
+          37.201223
+        ],
+        [
+          -84.140482,
+          37.185815
+        ],
+        [
+          -84.121425,
+          37.166345
+        ],
+        [
+          -84.111588,
+          37.147808
+        ]
+      ],
+      "header": {
+        "description": "Roadwork - Caution [iCone]",
+        "start_timestamp": 1658864855000,
+        "end_timestamp": 1659469958048
+      },
+      "detail": {
+        "road_name": "unknown",
+        "road_number": null,
+        "direction": "northbound"
+      },
+      "additional_info": {
+        "devices": [
+          {
+            "sensor_type": "display",
+            "details": {
+              "@type": "AB",
+              "@id": "13632657",
+              "@latitude": "37.5607873",
+              "@longitude": "-105.1385443",
+              "message": {
+                "@verified": "2022-07-26T19:47:35Z",
+                "@indicator": "Caution",
+                "@latitude": "37.5607769",
+                "@longitude": "-105.1385253"
+              },
+              "status": {
+                "@type": "Arrow Panel",
+                "@starttime": "2022-07-26T19:47:35Z",
+                "@verified": "2022-07-26T19:47:35Z",
+                "@state": "Caution - Diamonds"
+              }
+            }
+          }
+        ],
+        "directionality": "ONE_DIRECTION"
+      }
+    }
+  }
+]
