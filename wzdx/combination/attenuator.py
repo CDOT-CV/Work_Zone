@@ -134,7 +134,13 @@ def main():
 
 
 def get_combined_events(gebtab_msgs, planned_events):
-    return [combine_geotab_with_planned_event(*i) for i in identify_overlapping_features(gebtab_msgs, planned_events)]
+    conmbined_events = []
+    for i in identify_overlapping_features(gebtab_msgs, planned_events):
+        feature = combine_geotab_with_planned_event(*i)
+        wzdx = i[1]
+        wzdx['features'] = [feature]
+        conmbined_events.append(wzdx)
+    return conmbined_events
 
 
 def identify_overlapping_features(gebtab_msgs, planned_events):
@@ -149,7 +155,8 @@ def identify_overlapping_features(gebtab_msgs, planned_events):
         geotab_route_details = cdot_geospatial_api.get_route_and_measure(
             (geometry['latitude'], geometry['longitude']))
         if not geotab_route_details:
-            logging.info(f"No geotab route info for {gebtab_msg['rtdh_message_id']}")
+            logging.info(
+                f"No geotab route info for {gebtab_msg['rtdh_message_id']}")
             continue
         if geotab_route_details['Route'] in geotab_routes:
             geotab_routes[geotab_route_details['Route']].append(gebtab_msg)
@@ -179,11 +186,11 @@ def identify_overlapping_features(gebtab_msgs, planned_events):
                 logging.debug("Mile markers. geotab: {}, planned_event start: {}, planned_event_end: {}".format(
                     geotab['route_details']['Measure'], planned_event['route_details_start']['Measure'], planned_event['route_details_end']['Measure']))
                 if planned_event['route_details_start']['Measure'] >= geotab['route_details']['Measure'] and planned_event['route_details_end']['Measure'] <= geotab['route_details']['Measure']:
-                    matching_routes.append([planned_event, geotab])
+                    matching_routes.append((geotab, planned_event))
                     return matching_routes
                     break
                 elif planned_event['route_details_start']['Measure'] <= geotab['route_details']['Measure'] and planned_event['route_details_end']['Measure'] >= geotab['route_details']['Measure']:
-                    matching_routes.append([planned_event, geotab])
+                    matching_routes.append((geotab, planned_event))
                     return matching_routes
                     break
 
@@ -203,7 +210,12 @@ def combine_geotab_with_planned_event(geotab_avl, planned_event_wzdx):
     route_details = geotab_avl['route_details']
     distance_ahead = get_distance_ahead(speed, ATTENUATOR_TIME_AHEAD_SECONDS)
     combined_event = combine_with_planned_event(
-        planned_event_wzdx_feature, route_details, distance_ahead, bearing)
+        planned_event_wzdx_feature,
+        route_details,
+        distance_ahead,
+        bearing,
+        planned_event_wzdx['route_details_start']['Measure'],
+        planned_event_wzdx['route_details_end']['Measure'])
 
     for i in ['route_details', 'route_details_start', 'route_details_end']:
         if i in combined_event:
@@ -211,11 +223,17 @@ def combine_geotab_with_planned_event(geotab_avl, planned_event_wzdx):
     return combined_event
 
 
-def combine_with_planned_event(planned_event_wzdx_feature, route_details, distance_ahead, bearing):
-    geometry, startMeasure, endMeasure = get_geometry_for_distance_ahead(
-        distance_ahead, route_details, bearing)
-    planned_event_wzdx_feature['properties']['beginning_milepost'] = startMeasure
-    planned_event_wzdx_feature['properties']['ending_milepost'] = endMeasure
+def combine_with_planned_event(planned_event_wzdx_feature, route_details, distance_ahead, bearing, event_start_marker, event_end_marker):
+    startMarker = min(max(
+        route_details['Measure'], event_start_marker), event_end_marker)
+    endMarker = max(min(
+        route_details['Measure'] + distance_ahead, event_end_marker), event_start_marker)
+    modified_distance_ahead = endMarker - startMarker
+    print(startMarker, endMarker, modified_distance_ahead)
+    geometry = get_geometry_for_distance_ahead(
+        modified_distance_ahead, route_details, bearing)
+    planned_event_wzdx_feature['properties']['beginning_milepost'] = startMarker
+    planned_event_wzdx_feature['properties']['ending_milepost'] = endMarker
     planned_event_wzdx_feature['geometry']['coordinates'] = geometry
 
     return planned_event_wzdx_feature
@@ -224,7 +242,7 @@ def combine_with_planned_event(planned_event_wzdx_feature, route_details, distan
 def get_geometry_for_distance_ahead(distance_ahead, route_details, bearing):
     route_ahead = cdot_geospatial_api.get_route_geometry_ahead(
         route_details['Route'], route_details['Measure'], bearing, distance_ahead, routeDetails=route_details)
-    return route_ahead['coordinates'], route_ahead['start_measure'], route_ahead['end_measure']
+    return route_ahead['coordinates']
 
 
 # Speed in mph, time in seconds

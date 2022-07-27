@@ -1,0 +1,92 @@
+[
+  {
+    "avl_location": {
+      "vehicle": {
+        "id": "bB9",
+        "id2": "G97VNEYDCJZN",
+        "fleet": "Heavy",
+        "type": "Vehicle",
+        "sub_type": "Unknown"
+      },
+      "position": {
+        "latitude": 37.0688515,
+        "longitude": -105.520897,
+        "bearing": 169.0,
+        "speed": 0.0,
+        "odometer": null
+      },
+      "confidence": null,
+      "current_status": {
+        "state": "Active",
+        "info": "Parked"
+      },
+      "additional_info": [],
+      "source": {
+        "name": "Geotab",
+        "collection_timestamp": "2022-07-27 17:08:04.960000+00:00"
+      }
+    },
+    "rtdh_message_id": "181628d3-31bb-48a8-addf-806605f55e26",
+    "rtdh_timestamp": "2022-07-27T17:08:59Z"
+  },
+  {
+    "avl_location": {
+      "vehicle": {
+        "id": "bFB",
+        "id2": "G90N60BYJT18",
+        "fleet": "Heavy",
+        "type": "Attenuator",
+        "sub_type": "Attenuator (ATMA)"
+      },
+      "position": {
+        "latitude": 37.0692101,
+        "longitude": -105.520897,
+        "bearing": null,
+        "speed": 0.0,
+        "odometer": null
+      },
+      "confidence": null,
+      "current_status": {
+        "state": "Active",
+        "info": "Parked"
+      },
+      "additional_info": [],
+      "source": {
+        "name": "Geotab",
+        "collection_timestamp": "2022-07-27 17:08:19+00:00"
+      }
+    },
+    "rtdh_message_id": "443b7735-198b-459a-97bc-01f9561094c7",
+    "rtdh_timestamp": "2022-07-27T17:08:23Z"
+  },
+  {
+    "avl_location": {
+      "vehicle": {
+        "id": "bB9",
+        "id2": "G97VNEYDCJZN",
+        "fleet": "Heavy",
+        "type": "Vehicle",
+        "sub_type": "Unknown"
+      },
+      "position": {
+        "latitude": 37.0694389,
+        "longitude": -105.520538,
+        "bearing": null,
+        "speed": 0.0,
+        "odometer": null
+      },
+      "confidence": null,
+      "current_status": {
+        "state": "Active",
+        "info": "Parked"
+      },
+      "additional_info": [],
+      "source": {
+        "name": "Geotab",
+        "collection_timestamp": "2022-07-27 17:05:44+00:00"
+      }
+    },
+    "rtdh_message_id": "6fdd0458-994c-4ebd-af9c-6d49c04ca6ce",
+    "rtdh_timestamp": "2022-07-27T17:06:44Z"
+  }
+]

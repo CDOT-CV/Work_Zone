@@ -1,0 +1,32 @@
+[
+  {
+    "avl_location": {
+      "vehicle": {
+        "id": "bFB",
+        "id2": "G90N60BYJT18",
+        "fleet": "Heavy",
+        "type": "Attenuator",
+        "sub_type": "Attenuator (ATMA)"
+      },
+      "position": {
+        "latitude": 37.0088196,
+        "longitude": -105.522102,
+        "bearing": 182.0,
+        "speed": 5.6,
+        "odometer": null
+      },
+      "confidence": null,
+      "current_status": {
+        "state": "Active",
+        "info": "Driving"
+      },
+      "additional_info": [],
+      "source": {
+        "name": "Geotab",
+        "collection_timestamp": "2022-07-27 18:03:19+00:00"
+      }
+    },
+    "rtdh_message_id": "1b43d63a-2a5a-4fc8-b421-305f1e22ade7",
+    "rtdh_timestamp": "2022-07-27T18:04:44Z"
+  }
+]

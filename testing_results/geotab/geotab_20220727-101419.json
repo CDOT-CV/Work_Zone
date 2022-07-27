@@ -1,0 +1,32 @@
+[
+  {
+    "avl_location": {
+      "vehicle": {
+        "id": "b73A",
+        "id2": "G9NSJ6703F6J",
+        "fleet": "Heavy",
+        "type": "Attenuator",
+        "sub_type": "Attenuator (ATMA)"
+      },
+      "position": {
+        "latitude": 39.2941055,
+        "longitude": -103.910835,
+        "bearing": 79.0,
+        "speed": 6.8,
+        "odometer": null
+      },
+      "confidence": null,
+      "current_status": {
+        "state": "Active",
+        "info": "Driving"
+      },
+      "additional_info": [],
+      "source": {
+        "name": "Geotab",
+        "collection_timestamp": "2022-07-27 16:09:33+00:00"
+      }
+    },
+    "rtdh_message_id": "fde82aaa-df12-40a6-8390-eea7e40ced34",
+    "rtdh_timestamp": "2022-07-27T16:09:58Z"
+  }
+]

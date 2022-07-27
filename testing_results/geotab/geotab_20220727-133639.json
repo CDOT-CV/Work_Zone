@@ -1,0 +1,182 @@
+[
+  {
+    "avl_location": {
+      "vehicle": {
+        "id": "bFB",
+        "id2": "G90N60BYJT18",
+        "fleet": "Heavy",
+        "type": "Attenuator",
+        "sub_type": "Attenuator (ATMA)"
+      },
+      "position": {
+        "latitude": 37.193573,
+        "longitude": -105.432419,
+        "bearing": 271.0,
+        "speed": 2.5,
+        "odometer": null
+      },
+      "confidence": null,
+      "current_status": {
+        "state": "Active",
+        "info": "Driving"
+      },
+      "additional_info": [],
+      "source": {
+        "name": "Geotab",
+        "collection_timestamp": "2022-07-27 19:34:49+00:00"
+      }
+    },
+    "rtdh_message_id": "ddd379f7-85fc-49a3-af64-a9e0500169b6",
+    "rtdh_timestamp": "2022-07-27T19:34:56Z"
+  },
+  {
+    "avl_location": {
+      "vehicle": {
+        "id": "bFB",
+        "id2": "G90N60BYJT18",
+        "fleet": "Heavy",
+        "type": "Attenuator",
+        "sub_type": "Attenuator (ATMA)"
+      },
+      "position": {
+        "latitude": 37.1950836,
+        "longitude": -105.428711,
+        "bearing": 214.0,
+        "speed": 4.3,
+        "odometer": null
+      },
+      "confidence": null,
+      "current_status": {
+        "state": "Active",
+        "info": "Driving"
+      },
+      "additional_info": [],
+      "source": {
+        "name": "Geotab",
+        "collection_timestamp": "2022-07-27 19:31:10+00:00"
+      }
+    },
+    "rtdh_message_id": "59375dc8-140b-47e9-9130-358c698617d3",
+    "rtdh_timestamp": "2022-07-27T19:32:02Z"
+  },
+  {
+    "avl_location": {
+      "vehicle": {
+        "id": "bB9",
+        "id2": "G97VNEYDCJZN",
+        "fleet": "Heavy",
+        "type": "Vehicle",
+        "sub_type": "Unknown"
+      },
+      "position": {
+        "latitude": 37.1934471,
+        "longitude": -105.431808,
+        "bearing": null,
+        "speed": 0.0,
+        "odometer": null
+      },
+      "confidence": null,
+      "current_status": {
+        "state": "Active",
+        "info": "Parked"
+      },
+      "additional_info": [],
+      "source": {
+        "name": "Geotab",
+        "collection_timestamp": "2022-07-27 19:33:43+00:00"
+      }
+    },
+    "rtdh_message_id": "eb9e2d66-5874-45a7-9b3e-92467fa15c8b",
+    "rtdh_timestamp": "2022-07-27T19:33:59Z"
+  },
+  {
+    "avl_location": {
+      "vehicle": {
+        "id": "bFB",
+        "id2": "G90N60BYJT18",
+        "fleet": "Heavy",
+        "type": "Attenuator",
+        "sub_type": "Attenuator (ATMA)"
+      },
+      "position": {
+        "latitude": 37.193573,
+        "longitude": -105.431862,
+        "bearing": 248.0,
+        "speed": 5.0,
+        "odometer": null
+      },
+      "confidence": null,
+      "current_status": {
+        "state": "Active",
+        "info": "Driving"
+      },
+      "additional_info": [],
+      "source": {
+        "name": "Geotab",
+        "collection_timestamp": "2022-07-27 19:33:39+00:00"
+      }
+    },
+    "rtdh_message_id": "b6092de1-6bc7-4cce-bc63-ae7f9278fb7d",
+    "rtdh_timestamp": "2022-07-27T19:33:47Z"
+  },
+  {
+    "avl_location": {
+      "vehicle": {
+        "id": "bFB",
+        "id2": "G90N60BYJT18",
+        "fleet": "Heavy",
+        "type": "Attenuator",
+        "sub_type": "Attenuator (ATMA)"
+      },
+      "position": {
+        "latitude": 37.1943932,
+        "longitude": -105.429558,
+        "bearing": 225.0,
+        "speed": 5.0,
+        "odometer": null
+      },
+      "confidence": null,
+      "current_status": {
+        "state": "Active",
+        "info": "Driving"
+      },
+      "additional_info": [],
+      "source": {
+        "name": "Geotab",
+        "collection_timestamp": "2022-07-27 19:31:59+00:00"
+      }
+    },
+    "rtdh_message_id": "81fb4714-a35a-4af1-913d-f454a7f1af58",
+    "rtdh_timestamp": "2022-07-27T19:32:50Z"
+  },
+  {
+    "avl_location": {
+      "vehicle": {
+        "id": "bB9",
+        "id2": "G97VNEYDCJZN",
+        "fleet": "Heavy",
+        "type": "Vehicle",
+        "sub_type": "Unknown"
+      },
+      "position": {
+        "latitude": 37.1941109,
+        "longitude": -105.430016,
+        "bearing": 234.0,
+        "speed": 5.0,
+        "odometer": null
+      },
+      "confidence": null,
+      "current_status": {
+        "state": "Active",
+        "info": "Driving"
+      },
+      "additional_info": [],
+      "source": {
+        "name": "Geotab",
+        "collection_timestamp": "2022-07-27 19:32:08+00:00"
+      }
+    },
+    "rtdh_message_id": "dd0a3beb-2771-4ed9-9d20-6e8480f7efcf",
+    "rtdh_timestamp": "2022-07-27T19:32:59Z"
+  }
+]

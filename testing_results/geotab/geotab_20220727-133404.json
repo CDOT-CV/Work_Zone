@@ -1,0 +1,32 @@
+[
+  {
+    "avl_location": {
+      "vehicle": {
+        "id": "bB9",
+        "id2": "G97VNEYDCJZN",
+        "fleet": "Heavy",
+        "type": "Vehicle",
+        "sub_type": "Unknown"
+      },
+      "position": {
+        "latitude": 37.1970062,
+        "longitude": -105.427536,
+        "bearing": 204.0,
+        "speed": 5.0,
+        "odometer": null
+      },
+      "confidence": null,
+      "current_status": {
+        "state": "Active",
+        "info": "Driving"
+      },
+      "additional_info": [],
+      "source": {
+        "name": "Geotab",
+        "collection_timestamp": "2022-07-27 19:29:05+00:00"
+      }
+    },
+    "rtdh_message_id": "cec099eb-d02e-4cc5-936f-957a4e268376",
+    "rtdh_timestamp": "2022-07-27T19:29:59Z"
+  }
+]

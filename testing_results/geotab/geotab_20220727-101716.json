@@ -1,0 +1,92 @@
+[
+  {
+    "avl_location": {
+      "vehicle": {
+        "id": "b739",
+        "id2": "G9JKY20FPPHV",
+        "fleet": "Heavy",
+        "type": "Large paint Stripper",
+        "sub_type": "Large paint Stripper"
+      },
+      "position": {
+        "latitude": 39.2943611,
+        "longitude": -103.906456,
+        "bearing": 86.0,
+        "speed": 6.8,
+        "odometer": null
+      },
+      "confidence": null,
+      "current_status": {
+        "state": "Active",
+        "info": "Driving"
+      },
+      "additional_info": [],
+      "source": {
+        "name": "Geotab",
+        "collection_timestamp": "2022-07-27 16:11:19+00:00"
+      }
+    },
+    "rtdh_message_id": "cca19006-9952-4d60-ab40-604416112cc0",
+    "rtdh_timestamp": "2022-07-27T16:12:16Z"
+  },
+  {
+    "avl_location": {
+      "vehicle": {
+        "id": "b73A",
+        "id2": "G9NSJ6703F6J",
+        "fleet": "Heavy",
+        "type": "Attenuator",
+        "sub_type": "Attenuator (ATMA)"
+      },
+      "position": {
+        "latitude": 39.2943611,
+        "longitude": -103.904541,
+        "bearing": 87.0,
+        "speed": 7.5,
+        "odometer": null
+      },
+      "confidence": null,
+      "current_status": {
+        "state": "Active",
+        "info": "Driving"
+      },
+      "additional_info": [],
+      "source": {
+        "name": "Geotab",
+        "collection_timestamp": "2022-07-27 16:12:22+00:00"
+      }
+    },
+    "rtdh_message_id": "dbcf738b-b2ec-4fa6-b187-93ccf20740a2",
+    "rtdh_timestamp": "2022-07-27T16:13:44Z"
+  },
+  {
+    "avl_location": {
+      "vehicle": {
+        "id": "b739",
+        "id2": "G9JKY20FPPHV",
+        "fleet": "Heavy",
+        "type": "Large paint Stripper",
+        "sub_type": "Large paint Stripper"
+      },
+      "position": {
+        "latitude": 39.2944374,
+        "longitude": -103.902794,
+        "bearing": 88.0,
+        "speed": 7.5,
+        "odometer": null
+      },
+      "confidence": null,
+      "current_status": {
+        "state": "Active",
+        "info": "Driving"
+      },
+      "additional_info": [],
+      "source": {
+        "name": "Geotab",
+        "collection_timestamp": "2022-07-27 16:12:58+00:00"
+      }
+    },
+    "rtdh_message_id": "274125d4-02e1-4372-b4e5-2aaae04cd6f1",
+    "rtdh_timestamp": "2022-07-27T16:14:32Z"
+  }
+]
