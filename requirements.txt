@@ -3,9 +3,9 @@ pytest-cov
 xmltodict
 jsonschema
 gcloud
-google-cloud-bigquery
-google-cloud-pubsub
-google-cloud-secret-manager
+google-cloud-bigquery==1.8.0
+google-cloud-pubsub==1.8.0
+google-cloud-secret-manager==1.8.0
 python-dateutil
 time_machine
 shapely

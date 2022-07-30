@@ -18,11 +18,11 @@ WZDX_REST_API_KEY_PROD = os.environ.get(
 BUCKET = os.environ.get(
     'BUCKET', f'cdot-rtdh-{ENVIRONMENT}-wzdx-planned-events-raw')
 
-QUERY_INTERVAL_MINUTES = os.environ.get('QUERY_INTERVAL_MINUTES', '5')
+QUERY_INTERVAL_MINUTES = os.environ.get('QUERY_INTERVAL_MINUTES', '480')
 
 EXPERIMENTAL_TOPIC = os.environ.get(
     'TOPIC', 'wzdx-planned-events-experimental')
 
 GEOTAB_AUTOMATED_ATTENUATOR_IDS = os.environ.get(
-    'GEOTAB_AUTOMATED_ATTENUATOR_IDS', 'G97VNEYDCJZN;G90N60BYJT18')
+    'GEOTAB_AUTOMATED_ATTENUATOR_IDS', 'G90N60BYJT18')
 # G97VNEYDCJZN;G90N60BYJT18

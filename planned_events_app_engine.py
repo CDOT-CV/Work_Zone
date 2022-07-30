@@ -4,16 +4,14 @@
 # warranty or representation for any use or purpose. Your use of it is
 # subject to your agreement with Google.
 
+from wsgiref.headers import tspecials
 from google.cloud import datastore, bigquery
 import settings
 import logging
-import flask
 import datetime
 from wzdx.tools import cdot_geospatial_api
 from wzdx.combination import attenuator
 import json
-
-app = flask.Flask(__name__)
 
 # Set Logging Object and Functionality
 logging.basicConfig(level=logging.DEBUG,
@@ -142,7 +140,22 @@ def get_query_results(query_str):
 
 def get_recent_geotab(attenuator_ids):
     query_str = create_geotab_query(attenuator_ids)
-    return [{'avl_location': i['avl_location'], 'rtdh_message_id': i['rtdh_message_id'], 'rtdh_timestamp': i['rtdh_timestamp'].strftime(ISO_8601_FORMAT_STRING)} for i in get_query_results(query_str)]
+    geotab = [{'avl_location': i['avl_location'], 'rtdh_message_id': i['rtdh_message_id'],
+               'rtdh_timestamp': i['rtdh_timestamp'].strftime(ISO_8601_FORMAT_STRING)} for i in get_query_results(query_str)]
+
+    with open(f'testing_results/geotab/geotab_all_{datetime.datetime.now().strftime("%Y%m%d-%H%M%S")}.json', 'w+', newline='') as f:
+        f.write(json.dumps(geotab, indent=2, default=str))
+
+    geotab_unique = {}
+    for i in geotab:
+        id = i['avl_location']['vehicle']['id2']
+        if id in geotab_unique:
+            ts = i['rtdh_timestamp']
+            if ts > geotab_unique[id]['rtdh_timestamp']:
+                geotab_unique[id] = i
+        else:
+            geotab_unique[id] = i
+    return list(geotab_unique.values())
 
 # Write API GET request response to PubSub topic
 
@@ -192,99 +205,21 @@ def main():
 
 
 def geotab():
+    # print(cdot_geospatial_api.get_route_and_measure((37.4595566, -105.877274)))
+    # return
 
     # now = datetime.datetime.now()
     # with open(f'testing_results/planned_events_{now.strftime("%Y%m%d-%H%M%S")}.json', 'w+', newline='') as f:
     #     f.write(json.dumps(get_planned_events(), indent=2, default=str))
     # return
-    planned_events = [
-        {
-            "road_event_feed_info": {
-                "feed_info_id": "49253be7-0c6a-4a65-8113-450f9041f989",
-                "update_date": "2022-07-27T16:36:55Z",
-                "publisher": "CDOT",
-                "contact_name": "Ashley Nylen",
-                "contact_email": "ashley.nylen@state.co.us",
-                "version": "4.0",
-                "license": "https://creativecommons.org/publicdomain/zero/1.0/",
-                "data_sources": [
-                    {
-                        "data_source_id": "15c4cc92-658c-4a58-ba08-dc6d36a0631b",
-                        "feed_info_id": "49253be7-0c6a-4a65-8113-450f9041f989",
-                        "organization_name": "CDOT",
-                        "contact_name": "Ashley Nylen",
-                        "contact_email": "ashley.nylen@state.co.us",
-                        "update_date": "2022-07-27T16:36:55Z",
-                        "location_method": "channel-device-method",
-                        "lrs_type": "lrs_type"
-                    }
-                ]
-            },
-            "type": "FeatureCollection",
-            "features": [
-                {
-                    "type": "Feature",
-                    "properties": {
-                        "road_event_id": None,
-                        "data_source_id": None,
-                        "core_details": {
-                            "event_type": "work-zone",
-                            "data_source_id": "15c4cc92-658c-4a58-ba08-dc6d36a0631b",
-                            "road_names": [
-                                "CO-159"
-                            ],
-                            "direction": "southbound",
-                            "relationship": {},
-                            "description": "Between West Jasper Drive (near San Luis) and County Road P7 (1 mile south of the San Luis area) from Mile Point 20 to Mile Point 14. Striping operations. Until today at about 3:11PM MDT.",
-                            "update_date": "2022-07-27T14:22:31Z",
-                            "road_event_id": "8d2c0b62-8d02-4bf4-9510-0614d93ce963"
-                        },
-                        "start_date": "2022-07-27T14:20:00Z",
-                        "end_date": "2022-07-27T21:11:00Z",
-                        "start_date_accuracy": "estimated",
-                        "end_date_accuracy": "estimated",
-                        "beginning_accuracy": "estimated",
-                        "ending_accuracy": "estimated",
-                        "location_method": "channel-device-method",
-                        "vehicle_impact": "all-lanes-open",
-                        "lanes": [
-                            {
-                                "order": 1,
-                                "type": "general",
-                                "status": "open"
-                            }
-                        ],
-                        "event_status": "completed",
-                        "types_of_work": [
-                            {
-                                "type_name": "painting",
-                                "is_architectural_change": True
-                            }
-                        ],
-                        "beginning_milepost": 14.0,
-                        "ending_milepost": 20.0
-                    },
-                    "geometry": {
-                        "type": "LineString",
-                        "coordinates": [
-                            [
-                                -105.491141,
-                                37.190608
-                            ],
-                            [
-                                -105.42735,
-                                37.228158
-                            ]
-                        ]
-                    },
-                    "id": "OpenTMS-Event4707772849_southbound"
-                }
-            ]
-        }
-    ]
+    planned_events = [json.loads(
+        open('./planned_event_wzdx_2022_07_28.json', 'r').read())]
 
     now = datetime.datetime.now()
-    geotab_msgs = get_recent_geotab(GEOTAB_AUTOMATED_ATTENUATOR_IDS)
+    # geotab_msgs = get_recent_geotab(GEOTAB_AUTOMATED_ATTENUATOR_IDS)
+    geotab_msgs = json.loads(
+        open('./geotab_2022_07_28.json', 'r').read())
+
     l.info(f"Grabbed attenuator messages: {len(geotab_msgs)}")
     with open(f'testing_results/geotab/geotab_{now.strftime("%Y%m%d-%H%M%S")}.json', 'w+', newline='') as f:
         f.write(json.dumps(geotab_msgs, indent=2, default=str))

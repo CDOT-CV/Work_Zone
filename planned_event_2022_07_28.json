@@ -1,0 +1,48 @@
+{
+  "type": "Feature",
+  "geometry": {
+    "srid": 4326,
+    "type": "MultiPoint",
+    "coordinates": [
+      [-106.075771, 37.400938],
+      [-106.039788, 37.386221]
+    ]
+  },
+  "properties": {
+    "clearTime": "2022-07-28T22:00:00.000+00:00",
+    "startMarker": 2.0,
+    "type": "Striping Operations",
+    "laneImpacts": [
+      {
+        "direction": "east",
+        "laneCount": 1,
+        "laneClosures": "0",
+        "closedLaneTypes": []
+      },
+      {
+        "direction": "west",
+        "laneCount": 1,
+        "laneClosures": "0",
+        "closedLaneTypes": []
+      }
+    ],
+    "routeName": "CO-368E",
+    "isOversizedLoadsProhibited": false,
+    "lastUpdated": "2022-07-28T15:35:25.631+00:00",
+    "schedule": [
+      {
+        "startTime": "2022-07-28T15:46:00.000Z",
+        "endTime": "2022-07-28T22:00:00.000Z"
+      }
+    ],
+    "endMarker": 5.0,
+    "hasRampRestriction": false,
+    "name": "HWY CO-368 Stirping Operations (slow moving)-18500",
+    "startTime": "2022-07-28T15:46:00.000+00:00",
+    "id": "OpenTMS-Event4723908503",
+    "travelerInformationMessage": "Between County Road 11S and County Road 13S from Mile Point 2 to Mile Point 5. Striping operations. Starting today at 9:46AM MDT until today at about 4:00PM MDT.",
+    "jurisdictions": ["CONEJOS (COUNTY)"],
+    "direction": "east"
+  },
+  "attributes": {}
+}

@@ -119,6 +119,18 @@ def isPointInPolygon(point: Point, polygon: Polygon) -> bool:
     return polygon.contains(point)
 
 
+def get_heading_from_coordinates(coordinates):
+    if not coordinates or type(coordinates) != list or len(coordinates) < 2:
+        return None
+
+    geodesic_pyproj = pyproj.Geod(ellps='WGS84')
+
+    fwd_heading, _, __ = geodesic_pyproj.inv(
+        coordinates[0][0], coordinates[0][1], coordinates[1][0], coordinates[1][1])
+
+    return fwd_heading
+
+
 # function to get road direction by using geometry coordinates
 def get_road_direction_from_coordinates(coordinates):
     if not coordinates or type(coordinates) != list or len(coordinates) < 2:

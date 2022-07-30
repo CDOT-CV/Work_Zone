@@ -319,6 +319,7 @@ def create_description(name, roadName, startMarker, endMarker, typeOfWork, start
 
 
 def get_improved_geometry(coordinates, event_status, id):
+    return coordinates
     if event_status == "completed":
         return coordinates
 
@@ -407,8 +408,9 @@ def create_rtdh_standard_msg(pd, isIncident):
             # Since there is no end date, assume still active, set end date in future (12 hours + n days until after current time)
             end_date = start_date + datetime.timedelta(hours=12)
 
-            while end_date < now:
-                end_date = start_date + datetime.timedelta(days=1)
+            delta_days = (start_date - end_date).days
+            if delta_days > 0:
+                end_date = start_date + datetime.timedelta(days=delta_days)
 
         event_type, types_of_work = map_event_type(
             pd.get("properties/type", default=""))

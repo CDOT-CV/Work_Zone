@@ -1,5 +1,6 @@
 import requests
 import json
+from wzdx.tools import polygon_tools
 
 BASE_URL = "https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded"
 ROUTE_BETWEEN_MEASURES_API = "RouteBetweenMeasures"
@@ -7,6 +8,8 @@ GET_ROUTE_AND_MEASURE_API = "MeasureAtPoint"
 GET_ROUTES_API = "ROUTES"
 GET_ROUTE_API = "ROUTE"
 SR = "4326"
+DIRECTION_MARKER = ["positive", "negative"]
+DIRECTION_MARKER_REVERSE = {"positive": "negative", "negative": "positive"}
 
 
 def get_routes_list():
@@ -48,7 +51,7 @@ def get_route_details(routeId):
     return route_details
 
 
-def get_route_and_measure(latLng, tolerance=10000):
+def get_route_and_measure(latLng, heading=None, tolerance=10000):
     # Get route ID and mile marker from lat/long and heading
     lat, lng = latLng
 
@@ -76,42 +79,91 @@ def get_route_and_measure(latLng, tolerance=10000):
         'MMax': float(resp['features'][0]['attributes']['MMax']),
         'Distance': float(resp['features'][0]['attributes']['Distance']),
     }
+
+    if heading:
+        step = 0.1  # 250 ft
+        route = route_details['Route']
+        measure = route_details['Measure']
+        mmin = route_details['MMin']
+        mmax = route_details['MMax']
+        startMeasure = measure - step
+        endMeasure = measure
+        if endMeasure < mmin:
+            # reverse order
+            startMeasure = measure
+            endMeasure = measure + step
+        coords = get_route_between_measures(route, startMeasure, endMeasure)
+        bearing = polygon_tools.get_heading_from_coordinates(coords)
+
+        if bearing > 180:
+            bearing -= 360
+        if abs(bearing - heading) < 90:
+            route_details['Direction'] = '+'
+        else:
+            route_details['Direction'] = '-'
+
     return route_details
 
 
-def get_route_measure_direction(latLng, bearing):
+def get_route_measure_direction(latLng, tolerance=10000):
     # Get route ID and mile marker from lat/long and heading
     lat, lng = latLng
 
     parameters = []
-    parameters.append(f"latitude={lat}")
-    parameters.append(f"longitude={lng}")
-    parameters.append(f"heading={bearing}")
+    parameters.append(f"x={lng}")
+    parameters.append(f"y={lat}")
+    parameters.append(f"tolerance={tolerance}")
     parameters.append(f"inSR={SR}")
+    parameters.append(f"outSR={SR}")
     parameters.append(f"f=pjson")
 
     url = f"{BASE_URL}/{GET_ROUTE_AND_MEASURE_API}?{'&'.join(parameters)}"
     print(url)
 
-    # response = requests.get(url).content
+    # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded/MeasureAtPoint?x=-105&y=39.5&inSR=4326&tolerance=10000&outSR=&f=html
+    resp = json.loads(requests.get(url).content)
+    # raise NotImplementedError("No geospatial endpoint")
+
+    if not resp.get('features'):
+        return None
+    route_details = {
+        'Route': resp['features'][0]['attributes']['Route'],
+        'Measure': float(resp['features'][0]['attributes']['Measure']),
+        'MMin': float(resp['features'][0]['attributes']['MMin']),
+        'MMax': float(resp['features'][0]['attributes']['MMax']),
+        'Distance': float(resp['features'][0]['attributes']['Distance']),
+    }
+
     # raise NotImplementedError("No geospatial endpoint")
     return {"Route": "070A", "Measure": 12, 'Direction': 'N'}
 
 
-def get_route_geometry_ahead(routeId, startMeasure, direction, distanceAhead, pointsToSkip=0, routeDetails=None):
+def get_route_geometry_ahead(routeId, startMeasure, heading, distanceAhead, pointsToSkip=0, routeDetails=None, mmin=None, mmax=None):
     # Get list of routes and mile markers for a distance ahead and distance
 
     # TODO: Integrate direction to determine whether to add/subtract distance
-    endMeasure = startMeasure + distanceAhead
     if not routeDetails:
-        routeDetails = get_route_details(routeId)
+        routeDetails = get_route_details(routeId, heading)
 
     # process direction here
-    if (direction):
-        # assume startMeasure is on road
+    if (routeDetails.get('Direction', '+') == '+'):
+        endMeasure = startMeasure + distanceAhead
         endMeasure = min(endMeasure, routeDetails['MMax'])
     else:
+        endMeasure = startMeasure - distanceAhead
         endMeasure = max(endMeasure, routeDetails['MMin'])
+
+    if mmin != None and mmax != None:
+        # Force mmin > mmax
+        if mmin > mmax:
+            temp = mmin
+            mmin = mmax
+            mmax = temp
+
+        # Force measures between bounds
+        startMeasure = min(max(startMeasure, mmin), mmax)
+        endMeasure = min(max(endMeasure, mmin), mmax)
+
     print(f"Measures: {startMeasure}, {endMeasure}")
 
     return {'start_measure': startMeasure, 'end_measure': endMeasure,

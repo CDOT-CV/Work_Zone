@@ -1,9 +1,7 @@
 import json
 from datetime import datetime, timedelta
 from wzdx.tools import cdot_geospatial_api, date_tools
-from operator import itemgetter
 from google.cloud import datastore, bigquery
-import pandas
 import logging
 
 _datastore_client = datastore.Client(project='cdot-rtdh-test')
@@ -148,7 +146,7 @@ def identify_overlapping_features(gebtab_msgs, planned_events):
     matching_routes = []
 
     for gebtab_msg in gebtab_msgs:
-        # assume 1 feture per wzdx planned_event
+        # assume 1 feature per wzdx planned_event
         geometry = gebtab_msg['avl_location']['position']
         gebtab_msg = add_route(
             gebtab_msg, geometry['latitude'], geometry['longitude'])
@@ -166,7 +164,7 @@ def identify_overlapping_features(gebtab_msgs, planned_events):
     if not geotab_routes:
         return []
     for planned_event in planned_events:
-        # assume 1 feture per wzdx planned_event
+        # assume 1 feature per wzdx planned_event
         coordinates = planned_event['features'][0]['geometry']['coordinates']
         planned_event = add_route(
             planned_event, coordinates[0][1], coordinates[0][0], 'route_details_start')
@@ -224,14 +222,11 @@ def combine_geotab_with_planned_event(geotab_avl, planned_event_wzdx):
 
 
 def combine_with_planned_event(planned_event_wzdx_feature, route_details, distance_ahead, bearing, event_start_marker, event_end_marker):
-    startMarker = min(max(
-        route_details['Measure'], event_start_marker), event_end_marker)
-    endMarker = max(min(
-        route_details['Measure'] + distance_ahead, event_end_marker), event_start_marker)
-    modified_distance_ahead = endMarker - startMarker
-    print(startMarker, endMarker, modified_distance_ahead)
-    geometry = get_geometry_for_distance_ahead(
-        modified_distance_ahead, route_details, bearing)
+    mmin = min(event_start_marker, event_end_marker)
+    mmax = max(event_start_marker, event_end_marker)
+    print("Mile Markers:", mmin, mmax)
+    geometry, startMarker, endMarker = get_geometry_for_distance_ahead(
+        distance_ahead, route_details, bearing, mmin, mmax)
     planned_event_wzdx_feature['properties']['beginning_milepost'] = startMarker
     planned_event_wzdx_feature['properties']['ending_milepost'] = endMarker
     planned_event_wzdx_feature['geometry']['coordinates'] = geometry
@@ -239,10 +234,10 @@ def combine_with_planned_event(planned_event_wzdx_feature, route_details, distan
     return planned_event_wzdx_feature
 
 
-def get_geometry_for_distance_ahead(distance_ahead, route_details, bearing):
+def get_geometry_for_distance_ahead(distance_ahead, route_details, bearing, mmin, mmax):
     route_ahead = cdot_geospatial_api.get_route_geometry_ahead(
-        route_details['Route'], route_details['Measure'], bearing, distance_ahead, routeDetails=route_details)
-    return route_ahead['coordinates']
+        route_details['Route'], route_details['Measure'], bearing, distance_ahead, routeDetails=route_details, mmin=mmin, mmax=mmax)
+    return route_ahead['coordinates'], route_ahead['start_measure'], route_ahead['end_maasure']
 
 
 # Speed in mph, time in seconds
