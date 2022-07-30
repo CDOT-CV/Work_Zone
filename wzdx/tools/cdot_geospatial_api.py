@@ -1,6 +1,8 @@
 import requests
 import json
 
+from wzdx.tools import path_history_compression
+
 BASE_URL = "https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded"
 ROUTE_BETWEEN_MEASURES_API = "RouteBetweenMeasures"
 GET_ROUTE_AND_MEASURE_API = "MeasureAtPoint"
@@ -143,7 +145,7 @@ def get_routes_ahead(route, startMeasure, direction, distanceAhead):
     return resp
 
 
-def get_route_between_measures(routeId, startMeasure, endMeasure, pointsToSkip=0):
+def get_route_between_measures(routeId, startMeasure, endMeasure, compressed=False):
     # Get lat/long points between two mile markers on route
 
     parameters = []
@@ -176,8 +178,12 @@ def get_route_between_measures(routeId, startMeasure, endMeasure, pointsToSkip=0
         for path in feature.get('geometry', {}).get('paths', []):
             linestring.extend(path)
 
-    linestring = [v for i, v in enumerate(
-        linestring) if i % (pointsToSkip+1) == 0]
+    # linestring = [v for i, v in enumerate(
+    #     linestring) if i % (pointsToSkip+1) == 0]
+
+    if compressed:
+        linestring = path_history_compression.generage_compressed_path(
+            linestring)
 
     return linestring
 

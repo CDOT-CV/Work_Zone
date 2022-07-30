@@ -19,3 +19,9 @@ print(len(path_comp))
 
 wzdx['features'][0]['geometry']['coordinates'] = path_comp
 open('path_concise.json', 'w').write(json.dumps(wzdx, indent=2))
+
+path_concise_2 = cdot_geospatial_api.get_route_between_measures(
+    route_details['Route'], 15, 30, compressed=True)
+
+wzdx['features'][0]['geometry']['coordinates'] = path_comp
+open('path_concise_2.json', 'w').write(json.dumps(wzdx, indent=2))

@@ -4,6 +4,7 @@ import json
 import logging
 import copy
 import uuid
+import datetime
 
 from wzdx.sample_files.validation_schema import wzdx_v40_feed, road_restriction_v40_feed
 
@@ -185,16 +186,12 @@ def parse_work_zone(incident):
     geometry = {}
     geometry['type'] = "LineString"
     geometry['coordinates'] = event.get('geometry')
-    properties = {}
+    properties = wzdx_translator.initialize_feature_properties()
 
     # I included a skeleton of the message, fill out all required fields and as many optional fields as you can. Below is a link to the spec page for a road event
     # https://github.com/usdot-jpo-ode/jpo-wzdx/blob/master/spec-content/objects/RoadEvent.md
 
-    core_details = {}
-
-    # data_source_id
-    # Leave this empty, it will be populated by add_ids_v3
-    core_details['data_source_id'] = ''
+    core_details = properties['core_details']
 
     # Event Type ['work-zone', 'detour']
     core_details['event_type'] = event.get('type')
@@ -205,9 +202,6 @@ def parse_work_zone(incident):
 
     # direction
     core_details['direction'] = detail.get('direction')
-
-    # Relationship
-    core_details['relationship'] = {}
 
     # description
     core_details['description'] = header.get('description')
@@ -231,11 +225,12 @@ def parse_work_zone(incident):
         start_time)
 
     # end_date
-    if end_time:
-        properties['end_date'] = date_tools.get_iso_string_from_datetime(
-            end_time)
-    else:
-        properties['end_date'] = None
+    if not end_time:
+        if start_time > datetime.datetime.utcnow():
+            end_time = start_time + datetime.timedelta(days=7)
+        else:
+            end_time = datetime.datetime.utcnow() + datetime.timedelta(days=7)
+    properties['end_date'] = date_tools.get_iso_string_from_datetime(end_time)
 
     properties["location_method"] = "channel-device-method"
 
