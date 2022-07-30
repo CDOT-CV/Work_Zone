@@ -3,6 +3,7 @@ import math
 import numpy as np
 import pyproj
 import logging
+import math
 
 import geopy
 import pyproj
@@ -12,6 +13,25 @@ from shapely.geometry.polygon import Polygon
 
 
 CORNER_PRECISION_DEGREES = 10
+
+ROAD_DIRECTIONS_MAP = {
+    0: "northbound",
+    1: "eastbound",
+    2: "southbound",
+    3: "westbound"
+}
+
+ROAD_ORIENTATIONS_MAP = {
+    "northbound": 0,
+    "eastbound": 180,
+    "southbound": 0,
+    "westbound": 180
+}
+
+ROAD_OREINTATIONS_DIRECTIONS_MAP = {
+    0: ["northbound", "southbound"],
+    180: ["eastbound", "westbound"]
+}
 
 
 def generate_buffer_polygon_from_linestring(geometry: list, polygon_width_in_meters: float):
@@ -155,6 +175,19 @@ def get_road_directions_from_coordinates(coordinates):
     return directions
 
 
+def get_heading_from_coordinates(coordinates):
+    """Return the heading between two long/lat coordinates"""
+    if not coordinates or type(coordinates) != list or len(coordinates) < 2:
+        return None
+
+    geodesic_pyproj = pyproj.Geod(ellps='WGS84')
+
+    fwd_heading, _, __ = geodesic_pyproj.inv(
+        coordinates[0][0], coordinates[0][1], coordinates[1][0], coordinates[1][1])
+
+    return fwd_heading
+
+
 def angle_between_vectors_degrees(u, v):
     """Return the angle between two vectors in any dimension space,
     in degrees."""
@@ -169,7 +202,7 @@ def average_coordinates(coord1: list, coord2: list) -> list:
 
 
 def average_symmetric_polygon_to_centerline(polygon):
-    """Take in correctly ordered polygon and average all points to get 
+    """Take in correctly ordered polygon and average all points to get
     centerline"""
     centerline = []
     for i in range(0, len(polygon), 2):
@@ -273,3 +306,14 @@ def polygon_to_polyline_corners(coordinates):
     rotated_coordinates = coordinates[:-1]
     rotated_coordinates = rotate(rotated_coordinates, corners[0][0])
     return average_symmetric_polygon_to_centerline(rotated_coordinates)
+
+
+# unecessarily condensed just because
+def get_direction_from_bearing(bearing):
+    return ROAD_DIRECTIONS_MAP[math.floor((bearing + 45)/90) % 4]
+
+
+# unecessarily condensed just because
+def get_closest_direction_from_bearing(bearing, road_orientation):
+    orientation = ROAD_ORIENTATIONS_MAP[road_orientation]
+    return ROAD_OREINTATIONS_DIRECTIONS_MAP[orientation][math.floor((orientation - (bearing % 360))/180)]
