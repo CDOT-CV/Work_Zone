@@ -44,14 +44,16 @@ with open(f'{date_directory}/raw/raw_{now.strftime("%Y%m%d-%H%M%S")}.xml', 'w', 
 
 standard_msgs = icone_raw_translator.generate_standard_messages_from_string(
     icone)
-
 with open(f'{date_directory}/standard/standard_{now.strftime("%Y%m%d-%H%M%S")}.json', 'w', newline='') as f:
     f.write(json.dumps(standard_msgs, indent=2))
 
 wzdx = {}
 for standard in standard_msgs:
-    print(f"ID: {standard['event']['source']['id']}, update_time: {date_tools.datetime_from_unix(standard['event']['source']['last_updated_timestamp']).strftime('%Y-%m-%dT%H:%M:%SZ')}, state: {standard['event']['additional_info']['devices'][0]['details']['status']['@state']}")
-
+    # print(standard)
+    try:
+        print(f"ID: {standard['event']['source']['id']}, update_time: {date_tools.datetime_from_unix(standard['event']['source']['last_updated_timestamp']).strftime('%Y-%m-%dT%H:%M:%SZ')}, state: {standard['event']['additional_info']['devices'][0]['details']['status']['@state']}")
+    except:
+        print(f"ID: {standard['event']['source']['id']}, update_time: {date_tools.datetime_from_unix(standard['event']['source']['last_updated_timestamp']).strftime('%Y-%m-%dT%H:%M:%SZ')}, state: {standard['event']['additional_info']['devices'][0]['details']['status'][0]['@state']}")
     wzdx_feature = wzdx_creator(standard)
     if not wzdx_feature:
         continue
