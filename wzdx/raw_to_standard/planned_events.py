@@ -398,7 +398,9 @@ def create_rtdh_standard_msg(pd, isIncident):
 
         if not start_date:
             logging.warn(
-                f'Unable to process event, no start date for event {pd.get("properties/id", default="")}')
+                f'Missing start date for event {pd.get("properties/id", default="")}. Setting it to current time')
+            start_date = datetime.datetime.utcnow().replace(tzinfo=pytz.utc)
+            return {}
         if not end_date:
             end_date = pd.get("properties/estimatedClearTime",
                               date_tools.parse_datetime_from_iso_string)
