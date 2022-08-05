@@ -390,10 +390,14 @@ def create_rtdh_standard_msg(pd, isIncident):
         roadName = wzdx_translator.remove_direction_from_street_name(
             pd.get("properties/routeName"))
 
+        now = datetime.datetime.utcnow().replace(tzinfo=pytz.utc)
         start_date = pd.get("properties/startTime",
                             date_tools.parse_datetime_from_iso_string)
         end_date = pd.get("properties/clearTime",
                           date_tools.parse_datetime_from_iso_string)
+
+        if not start_date and isIncident:
+            start_date = now
 
         if not start_date:
             logging.warn(
@@ -402,7 +406,6 @@ def create_rtdh_standard_msg(pd, isIncident):
             end_date = pd.get("properties/estimatedClearTime",
                               date_tools.parse_datetime_from_iso_string)
 
-        now = datetime.datetime.utcnow().replace(tzinfo=pytz.utc)
         if not end_date:
             # Since there is no end date, assume still active, set end date in future (12 hours + n days until after current time)
             end_date = start_date + datetime.timedelta(hours=12)
