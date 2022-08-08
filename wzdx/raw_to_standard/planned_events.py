@@ -344,7 +344,8 @@ def get_improved_geometry(coordinates, event_status, id):
     newCoordinates = cdot_geospatial_api.get_route_between_measures(
         startRouteParams['Route'],
         startRouteParams['Measure'],
-        endRouteParams['Measure'])
+        endRouteParams['Measure'],
+        10)
 
     finalDirection = polygon_tools.get_road_direction_from_coordinates(
         newCoordinates)
@@ -358,96 +359,106 @@ def get_improved_geometry(coordinates, event_status, id):
 
 # isIncident is unused, could be useful later though
 def create_rtdh_standard_msg(pd, isIncident):
-    description = pd.get('properties/travelerInformationMessage')
-    if description == INVALID_EVENT_DESCRIPTION:
-        description = create_description(
-            pd.get('properties/name'),
-            pd.get('properties/routeName'),
-            pd.get('properties/startMarker'),
-            pd.get('properties/endMarker'),
-            pd.get('properties/type'),
-            pd.get('properties/startTime'),
-            pd.get('properties/clearTime'),
-        )
+    try:
+        description = pd.get('properties/travelerInformationMessage')
+        if description == INVALID_EVENT_DESCRIPTION:
+            description = create_description(
+                pd.get('properties/name'),
+                pd.get('properties/routeName'),
+                pd.get('properties/startMarker'),
+                pd.get('properties/endMarker'),
+                pd.get('properties/type'),
+                pd.get('properties/startTime'),
+                pd.get('properties/clearTime'),
+            )
 
-    coordinates = get_linestring(pd.get('geometry', default={'type': None}))
-    if not coordinates:
-        return {}
+        coordinates = get_linestring(
+            pd.get('geometry', default={'type': None}))
+        if not coordinates:
+            return {}
 
-    direction = pd.get("properties/direction", default='unknown')
+        direction = pd.get("properties/direction", default='unknown')
 
-    beginning_milepost = pd.get("properties/startMarker", default="")
-    ending_milepost = pd.get("properties/endMarker", default="")
-    recorded_direction = pd.get("properties/recorded_direction")
-    if direction == REVERSED_DIRECTION_MAP.get(recorded_direction):
-        coordinates.reverse()
-        beginning_milepost = pd.get("properties/endMarker", default="")
-        ending_milepost = pd.get("properties/startMarker", default="")
+        beginning_milepost = pd.get("properties/startMarker", default="")
+        ending_milepost = pd.get("properties/endMarker", default="")
+        recorded_direction = pd.get("properties/recorded_direction")
+        if direction == REVERSED_DIRECTION_MAP.get(recorded_direction):
+            coordinates.reverse()
+            beginning_milepost = pd.get("properties/endMarker", default="")
+            ending_milepost = pd.get("properties/startMarker", default="")
 
-    roadName = wzdx_translator.remove_direction_from_street_name(
-        pd.get("properties/routeName"))
+        roadName = wzdx_translator.remove_direction_from_street_name(
+            pd.get("properties/routeName"))
 
-    start_date = pd.get("properties/startTime",
-                        date_tools.parse_datetime_from_iso_string)
-    end_date = pd.get("properties/clearTime",
-                      date_tools.parse_datetime_from_iso_string)
-
-    if not end_date:
-        end_date = pd.get("properties/estimatedClearTime",
+        start_date = pd.get("properties/startTime",
+                            date_tools.parse_datetime_from_iso_string)
+        end_date = pd.get("properties/clearTime",
                           date_tools.parse_datetime_from_iso_string)
 
-    now = datetime.datetime.utcnow().replace(tzinfo=pytz.utc)
-    if not end_date:
-        # Since there is no end date, assume still active, set end date in future (12 hours + n days until after current time)
-        end_date = start_date + datetime.timedelta(hours=12)
+        if not start_date:
+            logging.warn(
+                f'Unable to process event, no start date for event {pd.get("properties/id", default="")}')
+        if not end_date:
+            end_date = pd.get("properties/estimatedClearTime",
+                              date_tools.parse_datetime_from_iso_string)
 
-        while end_date < now:
-            end_date = start_date + datetime.timedelta(days=1)
+        now = datetime.datetime.utcnow().replace(tzinfo=pytz.utc)
+        if not end_date:
+            # Since there is no end date, assume still active, set end date in future (12 hours + n days until after current time)
+            end_date = start_date + datetime.timedelta(hours=12)
 
-    event_type, types_of_work = map_event_type(
-        pd.get("properties/type", default=""))
+            while end_date < now:
+                end_date = start_date + datetime.timedelta(days=1)
 
-    restrictions = []
-    if pd.get('properties/isOversizedLoadsProhibited'):
-        restrictions.append({'type': 'permitted-oversize-loads-prohibited'})
+        event_type, types_of_work = map_event_type(
+            pd.get("properties/type", default=""))
 
-    lane_impacts = get_lane_impacts(
-        pd.get("properties/laneImpacts"), pd.get("properties/direction"))
-    if direction != recorded_direction and all_lanes_open(lane_impacts):
-        return {}
+        restrictions = []
+        if pd.get('properties/isOversizedLoadsProhibited'):
+            restrictions.append(
+                {'type': 'permitted-oversize-loads-prohibited'})
 
-    event_status = date_tools.get_event_status(start_date, end_date)
+        event_status = date_tools.get_event_status(start_date, end_date)
 
-    return {
-        "rtdh_timestamp": time.time(),
-        "rtdh_message_id": str(uuid.uuid4()),
-        "event": {
-            "type": event_type,
-            "types_of_work": types_of_work,
-            "source": {
-                "id": pd.get("properties/id", default="") + '_' + direction,
-                "last_updated_timestamp": pd.get('properties/lastUpdated', date_tools.get_unix_from_iso_string, default=0),
-            },
-            "geometry": get_improved_geometry(coordinates, event_status, pd.get("properties/id", default="") + '_' + direction),
-            "header": {
-                "description": description,
-                "start_timestamp": date_tools.date_to_unix(start_date),
-                "end_timestamp": date_tools.date_to_unix(end_date),
-            },
-            "detail": {
-                "road_name": roadName,
-                "road_number": roadName,
-                "direction": direction,
-            },
-            "additional_info": {
-                "lanes": lane_impacts,
-                "restrictions": restrictions,
-                "beginning_milepost": beginning_milepost,
-                "ending_milepost": ending_milepost,
-                "valid": False,
+        lane_impacts = get_lane_impacts(
+            pd.get("properties/laneImpacts"), pd.get("properties/direction"))
+        if direction != recorded_direction and all_lanes_open(lane_impacts):
+            return {}
+
+        return {
+            "rtdh_timestamp": time.time(),
+            "rtdh_message_id": str(uuid.uuid4()),
+            "event": {
+                "type": event_type,
+                "types_of_work": types_of_work,
+                "source": {
+                    "id": pd.get("properties/id", default="") + '_' + direction,
+                    "last_updated_timestamp": pd.get('properties/lastUpdated', date_tools.get_unix_from_iso_string, default=0),
+                },
+                "geometry": get_improved_geometry(coordinates, event_status, pd.get("properties/id", default="") + '_' + direction),
+                "header": {
+                    "description": description,
+                    "start_timestamp": date_tools.date_to_unix(start_date),
+                    "end_timestamp": date_tools.date_to_unix(end_date),
+                },
+                "detail": {
+                    "road_name": roadName,
+                    "road_number": roadName,
+                    "direction": direction,
+                },
+                "additional_info": {
+                    "lanes": lane_impacts,
+                    "restrictions": restrictions,
+                    "beginning_milepost": beginning_milepost,
+                    "ending_milepost": ending_milepost,
+                    "valid": False,
+                }
             }
         }
-    }
+    except Exception as e:
+        logging.warn(
+            f'Error occured generating standard message for message {pd.get("properties/id", default="")}: {e}')
+        return {}
 
 
 def validate_closure(obj):

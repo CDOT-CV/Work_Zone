@@ -148,6 +148,9 @@ def identify_overlapping_features(gebtab_msgs, planned_events):
             gebtab_msg, geometry['latitude'], geometry['longitude'])
         geotab_route_details = cdot_geospatial_api.get_route_and_measure(
             (geometry['latitude'], geometry['longitude']))
+        if not geotab_route_details:
+            logging.info(f"No geotab route info for {gebtab_msg['rtdh_message_id']}")
+            continue
         if geotab_route_details['Route'] in geotab_routes:
             geotab_routes[geotab_route_details['Route']].append(gebtab_msg)
         else:

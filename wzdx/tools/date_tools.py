@@ -23,7 +23,7 @@ def get_iso_string_from_datetime(date):
 
 
 def parse_datetime_from_iso_string(time_string):
-    """Parse ISO string to datetime. Handles many differnet datetime formats"""
+    """Parse ISO string to datetime. Handles many different datetime formats"""
     if not time_string or type(time_string) != str:
         return None
 
