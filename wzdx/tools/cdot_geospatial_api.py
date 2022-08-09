@@ -1,6 +1,11 @@
+from wzdx.tools import path_history_compression
+from wzdx.tools import polygon_tools
 import requests
 import json
-from wzdx.tools import polygon_tools
+<< << << < HEAD
+== == == =
+
+>>>>>> > path_compression
 
 BASE_URL = "https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded"
 ROUTE_BETWEEN_MEASURES_API = "RouteBetweenMeasures"
@@ -8,8 +13,11 @@ GET_ROUTE_AND_MEASURE_API = "MeasureAtPoint"
 GET_ROUTES_API = "ROUTES"
 GET_ROUTE_API = "ROUTE"
 SR = "4326"
+<< << << < HEAD
 DIRECTION_MARKER = ["positive", "negative"]
 DIRECTION_MARKER_REVERSE = {"positive": "negative", "negative": "positive"}
+== == == =
+>>>>>> > path_compression
 
 
 def get_routes_list():
@@ -105,26 +113,36 @@ def get_route_and_measure(latLng, heading=None, tolerance=10000):
     return route_details
 
 
-def get_route_measure_direction(latLng, tolerance=10000):
+def get_route_measure_direction(latLng, bearing):
     # Get route ID and mile marker from lat/long and heading
     lat, lng = latLng
 
     parameters = []
-    parameters.append(f"x={lng}")
-    parameters.append(f"y={lat}")
+
+
+<< << << < HEAD
+  parameters.append(f"x={lng}")
+   parameters.append(f"y={lat}")
     parameters.append(f"tolerance={tolerance}")
     parameters.append(f"inSR={SR}")
     parameters.append(f"outSR={SR}")
-    parameters.append(f"f=pjson")
+== == == =
+  parameters.append(f"latitude={lat}")
+   parameters.append(f"longitude={lng}")
+    parameters.append(f"heading={bearing}")
+    parameters.append(f"inSR={SR}")
+>>>>>> > path_compression
+  parameters.append(f"f=pjson")
 
-    url = f"{BASE_URL}/{GET_ROUTE_AND_MEASURE_API}?{'&'.join(parameters)}"
+   url = f"{BASE_URL}/{GET_ROUTE_AND_MEASURE_API}?{'&'.join(parameters)}"
     print(url)
 
-    # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded/MeasureAtPoint?x=-105&y=39.5&inSR=4326&tolerance=10000&outSR=&f=html
-    resp = json.loads(requests.get(url).content)
-    # raise NotImplementedError("No geospatial endpoint")
+<< << << < HEAD
+  # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded/MeasureAtPoint?x=-105&y=39.5&inSR=4326&tolerance=10000&outSR=&f=html
+  resp = json.loads(requests.get(url).content)
+   # raise NotImplementedError("No geospatial endpoint")
 
-    if not resp.get('features'):
+   if not resp.get('features'):
         return None
     route_details = {
         'Route': resp['features'][0]['attributes']['Route'],
@@ -134,8 +152,14 @@ def get_route_measure_direction(latLng, tolerance=10000):
         'Distance': float(resp['features'][0]['attributes']['Distance']),
     }
 
-    # raise NotImplementedError("No geospatial endpoint")
-    return {"Route": "070A", "Measure": 12, 'Direction': 'N'}
+== == ===
+  # response = requests.get(url).content
+>>>>>> > path_compression
+  # raise NotImplementedError("No geospatial endpoint")
+  return {"Route": "070A", "Measure": 12, 'Direction': 'N'}
+
+
+<< <<<< < HEAD
 
 
 def get_route_geometry_ahead(routeId, startMeasure, heading, distanceAhead, pointsToSkip=0, routeDetails=None, mmin=None, mmax=None):
@@ -164,9 +188,28 @@ def get_route_geometry_ahead(routeId, startMeasure, heading, distanceAhead, poin
         startMeasure = min(max(startMeasure, mmin), mmax)
         endMeasure = min(max(endMeasure, mmin), mmax)
 
-    print(f"Measures: {startMeasure}, {endMeasure}")
+== == ===
 
-    return {'start_measure': startMeasure, 'end_measure': endMeasure,
+
+def get_route_geometry_ahead(routeId, startMeasure, direction, distanceAhead, pointsToSkip=0, routeDetails=None):
+    # Get list of routes and mile markers for a distance ahead and distance
+
+    # TODO: Integrate direction to determine whether to add/subtract distance
+    endMeasure = startMeasure + distanceAhead
+    if not routeDetails:
+        routeDetails = get_route_details(routeId)
+
+    # process direction here
+    if (direction):
+        # assume startMeasure is on road
+        endMeasure = min(endMeasure, routeDetails['MMax'])
+    else:
+        endMeasure = max(endMeasure, routeDetails['MMin'])
+
+>>>>>> > path_compression
+  print(f"Measures: {startMeasure}, {endMeasure}")
+
+   return {'start_measure': startMeasure, 'end_measure': endMeasure,
             'coordinates': get_route_between_measures(
                 routeId, startMeasure, endMeasure, pointsToSkip)}
 
@@ -195,11 +238,16 @@ def get_routes_ahead(route, startMeasure, direction, distanceAhead):
     return resp
 
 
+<< <<<< < HEAD
 def get_route_between_measures(routeId, startMeasure, endMeasure, pointsToSkip=0):
-    # Get lat/long points between two mile markers on route
+== == ===
+def get_route_between_measures(routeId, startMeasure, endMeasure, compressed=False):
 
-    parameters = []
-    parameters.append(f"routeId={routeId}")
+>>>>>> > path_compression
+  # Get lat/long points between two mile markers on route
+
+  parameters = []
+   parameters.append(f"routeId={routeId}")
     parameters.append(f"fromMeasure={startMeasure}")
     parameters.append(f"toMeasure={endMeasure}")
     parameters.append(f"outSR={SR}")
@@ -228,12 +276,21 @@ def get_route_between_measures(routeId, startMeasure, endMeasure, pointsToSkip=0
         for path in feature.get('geometry', {}).get('paths', []):
             linestring.extend(path)
 
-    linestring = [v for i, v in enumerate(
-        linestring) if i % (pointsToSkip+1) == 0]
+<< <<<< < HEAD
+  linestring = [v for i, v in enumerate(
+       linestring) if i % (pointsToSkip+1) == 0]
+== == ===
+  # linestring = [v for i, v in enumerate(
+  #     linestring) if i % (pointsToSkip+1) == 0]
 
-    return linestring
+  if compressed:
+       linestring = path_history_compression.generage_compressed_path(
+            linestring)
+>>>>>> > path_compression
 
-    # RouteBetweenMeasures?routeId=070A&fromMeasure=50&toMeasure=60&outSR=4326&f=pjson
+  return linestring
+
+   # RouteBetweenMeasures?routeId=070A&fromMeasure=50&toMeasure=60&outSR=4326&f=pjson
 
 
 def get_route_between_measures_dual_carriageway(routeId, startMeasure, endMeasure, direction, pointsToSkip=0):

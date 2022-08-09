@@ -321,7 +321,6 @@ def create_description(name, roadName, startMarker, endMarker, typeOfWork, start
 
 
 def get_improved_geometry(coordinates, event_status, id):
-    return coordinates
     if event_status == "completed":
         return coordinates
 
@@ -392,28 +391,29 @@ def create_rtdh_standard_msg(pd, isIncident):
         roadName = wzdx_translator.remove_direction_from_street_name(
             pd.get("properties/routeName"))
 
+        now = datetime.datetime.utcnow().replace(tzinfo=pytz.utc)
         start_date = pd.get("properties/startTime",
                             date_tools.parse_datetime_from_iso_string)
         end_date = pd.get("properties/clearTime",
                           date_tools.parse_datetime_from_iso_string)
 
+        if not start_date and isIncident:
+            start_date = now
+
         if not start_date:
             logging.warn(
-                f'Missing start date for event {pd.get("properties/id", default="")}. Setting it to current time')
-            start_date = datetime.datetime.utcnow().replace(tzinfo=pytz.utc)
-            return {}
+                f'Unable to process event, no start date for event {pd.get("properties/id", default="")}')
         if not end_date:
             end_date = pd.get("properties/estimatedClearTime",
                               date_tools.parse_datetime_from_iso_string)
 
-        now = datetime.datetime.utcnow().replace(tzinfo=pytz.utc)
         if not end_date:
             # Since there is no end date, assume still active, set end date in future (12 hours + n days until after current time)
             end_date = start_date + datetime.timedelta(hours=12)
 
-            delta_days = (start_date - end_date).days
+            delta_days = (now - end_date).days
             if delta_days > 0:
-                end_date = start_date + datetime.timedelta(days=delta_days)
+                end_date = end_date + datetime.timedelta(days=delta_days)
 
         event_type, types_of_work = map_event_type(
             pd.get("properties/type", default=""))
