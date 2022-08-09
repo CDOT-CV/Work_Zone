@@ -88,7 +88,7 @@ def get_route_and_measure(latLng, heading=None, tolerance=10000):
         mmax = route_details['MMax']
         startMeasure = measure - step
         endMeasure = measure
-        if endMeasure < mmin:
+        if startMeasure < mmin:
             # reverse order
             startMeasure = measure
             endMeasure = measure + step
@@ -143,7 +143,7 @@ def get_route_geometry_ahead(routeId, startMeasure, heading, distanceAhead, poin
 
     # TODO: Integrate direction to determine whether to add/subtract distance
     if not routeDetails:
-        routeDetails = get_route_details(routeId, heading)
+        routeDetails = get_route_and_measure(routeId, heading)
 
     # process direction here
     if (routeDetails.get('Direction', '+') == '+'):

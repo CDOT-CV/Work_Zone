@@ -1,6 +1,6 @@
 import json
 from datetime import datetime, timedelta
-from wzdx.tools import cdot_geospatial_api, date_tools
+from wzdx.tools import cdot_geospatial_api, date_tools, polygon_tools
 from google.cloud import datastore, bigquery
 import logging
 
@@ -111,29 +111,45 @@ def json_serial(obj):
 
 def main():
 
-    geotab_msgs = get_recent_geotab(ATMA_IDS)
-    print("writing to geotab")
-    with open('./wzdx/sample_files/raw/geotab_avl/geotab_all_2.json', 'w+') as f:
-        f.write(json.dumps(geotab_msgs, default=json_serial))
+    # geotab_msgs = get_recent_geotab(ATMA_IDS)
+    # print("writing to geotab")
+    # with open('./wzdx/sample_files/raw/geotab_avl/geotab_all_2.json', 'w+') as f:
+    #     f.write(json.dumps(geotab_msgs, default=json_serial))
     # planned_events = get_current_planned_events()
     # print("writing to planned_events")
     # with open('./wzdx/sample_files/enhanced/planned_events/planned_event_all.json', 'w+') as f:
     #     f.write(json.dumps(planned_events, default=json_serial))
 
-    # with open('./wzdx/sample_files/raw/geotab_avl/geotab_all.json') as f:
-    #     geotab_avl = json.loads(f.read())
-    # with open('./wzdx/sample_files/enhanced/planned_events/planned_event_all.json') as f:
-    #     planned_event = json.loads(f.read())
-    # combined_events = get_combined_events(geotab_avl, planned_event)
-    # with open('./wzdx/sample_files/enhanced/planned_events/planned_event_combined.json', 'w+') as f:
-    #     f.write(json.dumps(combined_events, indent='  '))
+    with open('./wzdx/sample_files/raw/geotab_avl/geotab_all.json') as f:
+        geotab_avl = json.loads(f.read())
+    with open('./wzdx/sample_files/enhanced/planned_events/planned_event_all.json') as f:
+        planned_event = json.loads(f.read())
+    combined_events = get_combined_events(geotab_avl, planned_event)
+    with open('./wzdx/sample_files/enhanced/planned_events/planned_event_combined.json', 'w+') as f:
+        f.write(json.dumps(combined_events, indent=2))
 
     # planned_event_wzdx_feature = planned_event['features'][0]
+
+
+def validate_directionality(geotab, planned_event):
+    geotab_bearing = geotab['avl_location']['position']['bearing']
+    planned_event_direction = planned_event['features'][0]['properties']['core_details']['direction']
+
+    geotab_direction = polygon_tools.get_closest_direction_from_bearing(
+        geotab_bearing, planned_event_direction)
+
+    print(geotab_direction, planned_event_direction)
+
+    return geotab_direction == planned_event_direction
 
 
 def get_combined_events(gebtab_msgs, planned_events):
     conmbined_events = []
     for i in identify_overlapping_features(gebtab_msgs, planned_events):
+        if not validate_directionality(*i):
+            logging.info(
+                "Ignoring matching Geotab message because the direction does not match the planned event")
+            continue
         feature = combine_geotab_with_planned_event(*i)
         wzdx = i[1]
         wzdx['features'] = [feature]
@@ -186,11 +202,9 @@ def identify_overlapping_features(gebtab_msgs, planned_events):
                 if planned_event['route_details_start']['Measure'] >= geotab['route_details']['Measure'] and planned_event['route_details_end']['Measure'] <= geotab['route_details']['Measure']:
                     matching_routes.append((geotab, planned_event))
                     return matching_routes
-                    break
                 elif planned_event['route_details_start']['Measure'] <= geotab['route_details']['Measure'] and planned_event['route_details_end']['Measure'] >= geotab['route_details']['Measure']:
                     matching_routes.append((geotab, planned_event))
                     return matching_routes
-                    break
 
     return matching_routes
 
@@ -237,7 +251,7 @@ def combine_with_planned_event(planned_event_wzdx_feature, route_details, distan
 def get_geometry_for_distance_ahead(distance_ahead, route_details, bearing, mmin, mmax):
     route_ahead = cdot_geospatial_api.get_route_geometry_ahead(
         route_details['Route'], route_details['Measure'], bearing, distance_ahead, routeDetails=route_details, mmin=mmin, mmax=mmax)
-    return route_ahead['coordinates'], route_ahead['start_measure'], route_ahead['end_maasure']
+    return route_ahead['coordinates'], route_ahead['start_measure'], route_ahead['end_measure']
 
 
 # Speed in mph, time in seconds

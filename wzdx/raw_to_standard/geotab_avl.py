@@ -34,7 +34,7 @@ def main():
 
     generated_files_list = []
     for message in generated_messages:
-        output_path = f"{output_dir}').get('standard_{message['event']['source']['id']}_{round(message['rtdh_timestamp'])}_{message['event']['detail']['direction']}.json"
+        output_path = f"{output_dir}/standard_{message['event']['source']['id']}_{round(message['rtdh_timestamp'])}_{message['event']['detail']['direction']}.json"
         open(output_path, 'w+').write(json.dumps(message, indent=2))
         generated_files_list.append(output_path)
 
@@ -104,34 +104,37 @@ def get_route_names_and_geometry(lat_lng, bearing, distance_ahead):
     return routes_ahead
 
 
+def get_linestring(geometry):
+    if geometry.get('type') == "MultiPoint":
+        return geometry['coordinates']
+    elif geometry.get('type') == "Polygon":
+        return polygon_tools.polygon_to_polyline_center(geometry['coordinates'])
+    else:
+        return []
+
+
 def create_rtdh_standard_msg(pd):
-    lat = pd.get('avl_location').get('position').get('latitude')
-    lng = pd.get('avl_location').get('position').get('longitude')
-    bearing = pd.get('avl_location').get('position').get('bearing')
+    coordinates = get_linestring(pd.get('geometry'))
 
-    cdot_geospatial_api
+    direction = pd.get('properties').get('direction', default='unknown')
 
-    coordinates = get_linestring(pd.get('geometry', default={'type': None}))
-
-    direction = pd.get("properties').get('direction", default='unknown')
-
-    beginning_milepost = pd.get("properties').get('startMarker", default="")
-    ending_milepost = pd.get("properties').get('endMarker", default="")
-    recorded_direction = pd.get("properties').get('recorded_direction")
+    beginning_milepost = pd.get('properties').get('startMarker', default='')
+    ending_milepost = pd.get('properties').get('endMarker', default='')
+    recorded_direction = pd.get('properties').get('recorded_direction')
     if direction == REVERSED_DIRECTION_MAP.get(recorded_direction):
         coordinates.reverse()
-        beginning_milepost = pd.get("properties').get('endMarker", default="")
-        ending_milepost = pd.get("properties').get('startMarker", default="")
+        beginning_milepost = pd.get('properties').get('endMarker', default='')
+        ending_milepost = pd.get('properties').get('startMarker', default='')
 
     roadName = wzdx_translator.remove_direction_from_street_name(
-        pd.get("properties').get('routeName"))
+        pd.get('properties').get('routeName'))
 
-    start_date = pd.get("properties').get('startTime",
-                        date_tools.parse_datetime_from_iso_string)
-    end_date = pd.get("properties').get('clearTime",
-                      date_tools.parse_datetime_from_iso_string)
+    start_date = pd.get('properties').get('startTime',
+                                          date_tools.parse_datetime_from_iso_string)
+    end_date = pd.get('properties').get('clearTime',
+                                        date_tools.parse_datetime_from_iso_string)
 
-    event_type = "work-zone"
+    event_type = 'work-zone'
     types_of_work = [{'type_name': 'roadside-work',
                       'is_architectural_change': False}]
 
@@ -146,7 +149,7 @@ def create_rtdh_standard_msg(pd):
             "type": event_type,
             "types_of_work": types_of_work,
             "source": {
-                "id": pd.get("properties').get('id", default="") + '_' + direction,
+                "id": pd.get('properties').get('id', default="") + '_' + direction,
                 "creation_timestamp": pd.get("properties').get('startTime", date_tools.get_unix_from_iso_string, default=0),
                 "last_updated_timestamp": pd.get('properties').get('lastUpdated', date_tools.get_unix_from_iso_string, default=0),
             },

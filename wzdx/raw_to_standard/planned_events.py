@@ -129,10 +129,12 @@ def generate_rtdh_standard_message_from_raw_single(obj):
 
 
 def get_linestring(geometry):
-    if geometry['type'] == "MultiPoint":
+    if geometry.get('type') == "MultiPoint":
         return geometry['coordinates']
-    elif geometry['type'] == "Polygon":
+    elif geometry.get('type') == "Polygon":
         return polygon_tools.polygon_to_polyline_center(geometry['coordinates'])
+    else:
+        return []
 
 # input:
 # "laneImpacts": [
@@ -373,8 +375,7 @@ def create_rtdh_standard_msg(pd, isIncident):
                 pd.get('properties/clearTime'),
             )
 
-        coordinates = get_linestring(
-            pd.get('geometry', default={'type': None}))
+        coordinates = get_linestring(pd.get('geometry'))
         if not coordinates:
             return {}
 

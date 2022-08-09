@@ -30,9 +30,7 @@
         "core_details": {
           "event_type": "work-zone",
           "data_source_id": "8df91de0-0377-4945-a4d9-414cc3a423d7",
-          "road_names": [
-            "CO-368"
-          ],
+          "road_names": ["CO-368"],
           "direction": "eastbound",
           "relationship": {},
           "description": "Between County Road 11S and County Road 13S from Mile Point 2 to Mile Point 5. Striping operations. Starting today at 9:46AM MDT until today at about 4:00PM MDT.",
@@ -67,14 +65,8 @@
       "geometry": {
         "type": "LineString",
         "coordinates": [
-          [
-            -106.075771,
-            37.400938
-          ],
-          [
-            -106.039788,
-            37.386221
-          ]
+          [-106.075771, 37.400938],
+          [-106.039788, 37.386221]
         ]
       },
       "id": "OpenTMS-Event4723908503_eastbound"
