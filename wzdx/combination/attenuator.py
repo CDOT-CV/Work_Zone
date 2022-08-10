@@ -4,26 +4,8 @@ from wzdx.tools import cdot_geospatial_api, date_tools, polygon_tools
 from google.cloud import datastore, bigquery
 import logging
 
-_datastore_client = datastore.Client(project='cdot-rtdh-test')
-_bigquery_client = bigquery.Client(project=f'cdot-adap-dev')
-
 ATTENUATOR_TIME_AHEAD_SECONDS = 30 * 60
 ISO_8601_FORMAT_STRING = "%Y-%m-%dT%H:%M:%SZ"
-QUERY_INTERVAL_MINUTES = 30
-ATMA_IDS = ['G9NSJ6703F6J']
-
-
-def get_current_planned_events():
-    query = _datastore_client.query(
-        namespace='rtdh_cache_latest', kind='RTDHCache')
-    query.add_filter('label', '=', 'CacheWZDxPlannedEventsStandard')
-    query.add_filter('condition_1', '=', True)
-    # query.add_filter('timestamp', '>', datetime.utcnow(
-    # ) - timedelta(minutes=QUERY_INTERVAL_MINUTES))
-
-    resp = query.fetch()
-    resp = list(resp)
-    return [json.loads(i['value']) for i in resp]
 
 
 def get_route_info_planned_event(planned_event):
@@ -54,51 +36,6 @@ def get_route_info_geotab(geotab):
             'start_measure': start['Measure'],
             'end_measure': end['Measure']
         }
-
-
-def create_geotab_query(attenuator_ids):
-    queries = []
-    now = datetime.utcnow()
-    start = now
-    if now.hour == 0 and now.minute < QUERY_INTERVAL_MINUTES:
-        start1 = now - \
-            timedelta(minutes=QUERY_INTERVAL_MINUTES)
-        end1 = start1.replace(minute=59, second=59, microsecond=99999)
-        start2 = now.replace(minute=0, second=0, microsecond=0)
-        end2 = now
-        queries.append({'year': start1.year, 'month': start1.month, 'day': start1.day, 'startTimestamp': start1.strftime(
-            ISO_8601_FORMAT_STRING), 'endTimestamp': end1.strftime(ISO_8601_FORMAT_STRING)})
-        queries.append({'year': start2.year, 'month': start2.month, 'day': start2.day, 'startTimestamp': start2.strftime(
-            ISO_8601_FORMAT_STRING), 'endTimestamp': end2.strftime(ISO_8601_FORMAT_STRING)})
-    else:
-        start = now - \
-            timedelta(minutes=QUERY_INTERVAL_MINUTES)
-        queries.append({'year': now.year, 'month': now.month, 'day': now.day, 'startTimestamp': start.strftime(
-            ISO_8601_FORMAT_STRING), 'endTimestamp': now.strftime(ISO_8601_FORMAT_STRING)})
-    query_where_format = '(year = {year} and month = {month} and day = {day} and rtdh_timestamp BETWEEN TIMESTAMP("{startTimestamp}") and TIMESTAMP("{endTimestamp}"))'
-    query_where = ' or '.join([query_where_format.format(
-        **query_params) for query_params in queries])
-    query_ids = ' or '.join(
-        [f'avl_location.vehicle.id2 = "{id}"' for id in attenuator_ids])
-    query_str = f'''
-        SELECT *
-        FROM `cdot-adap-prod.raw_from_rtdh_standard.geotab_avl_standard_v3` 
-        where ({query_where}) 
-        and ({query_ids})
-    '''
-    return query_str
-
-
-def get_query_results(query_str):
-    print(query_str)
-    query_job = _bigquery_client.query(query_str)
-    return list(query_job)
-
-
-def get_recent_geotab(attenuator_ids):
-    query_str = create_geotab_query(attenuator_ids)
-    return [{'avl_location': i['avl_location'], 'rtdh_message_id': i['rtdh_message_id'], 'rtdh_timestamp': i['rtdh_timestamp'].strftime(ISO_8601_FORMAT_STRING)}
-            for i in get_query_results(query_str)]
 
 
 def json_serial(obj):
