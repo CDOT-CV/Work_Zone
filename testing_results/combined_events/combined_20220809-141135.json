@@ -1,0 +1,151 @@
+[
+  {
+    "road_event_feed_info": {
+      "feed_info_id": "49253be7-0c6a-4a65-8113-450f9041f989",
+      "update_date": "2022-07-28T16:25:57Z",
+      "publisher": "CDOT",
+      "contact_name": "Ashley Nylen",
+      "contact_email": "ashley.nylen@state.co.us",
+      "version": "4.0",
+      "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "data_sources": [
+        {
+          "data_source_id": "8df91de0-0377-4945-a4d9-414cc3a423d7",
+          "feed_info_id": "49253be7-0c6a-4a65-8113-450f9041f989",
+          "organization_name": "CDOT",
+          "contact_name": "Ashley Nylen",
+          "contact_email": "ashley.nylen@state.co.us",
+          "update_date": "2022-07-28T16:25:57Z",
+          "location_method": "channel-device-method",
+          "lrs_type": "lrs_type"
+        }
+      ]
+    },
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "road_event_id": null,
+          "data_source_id": null,
+          "core_details": {
+            "event_type": "work-zone",
+            "data_source_id": "8df91de0-0377-4945-a4d9-414cc3a423d7",
+            "road_names": [
+              "CO-368"
+            ],
+            "direction": "westbound",
+            "relationship": {},
+            "description": "Between County Road 11S and County Road 13S from Mile Point 2 to Mile Point 5. Striping operations. Starting today at 9:46AM MDT until today at about 4:00PM MDT.",
+            "update_date": "2022-07-28T15:35:25Z",
+            "road_event_id": "560ec1c1-d855-45f4-8504-2f8fd406c1b2"
+          },
+          "start_date": "2022-07-28T15:46:00Z",
+          "end_date": "2022-07-28T22:00:00Z",
+          "start_date_accuracy": "estimated",
+          "end_date_accuracy": "estimated",
+          "beginning_accuracy": "estimated",
+          "ending_accuracy": "estimated",
+          "location_method": "channel-device-method",
+          "vehicle_impact": "all-lanes-open",
+          "lanes": [
+            {
+              "order": 1,
+              "type": "general",
+              "status": "open"
+            }
+          ],
+          "event_status": "completed",
+          "types_of_work": [
+            {
+              "type_name": "painting",
+              "is_architectural_change": true
+            }
+          ],
+          "beginning_milepost": 3.028,
+          "ending_milepost": 5.0
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [
+              -106.07511150699997,
+              37.38661992600004
+            ],
+            [
+              -106.07504283199995,
+              37.386578461000056
+            ],
+            [
+              -106.07483742699998,
+              37.386485967000056
+            ],
+            [
+              -106.07461640899999,
+              37.38641513600004
+            ],
+            [
+              -106.07438275799996,
+              37.386365571000056
+            ],
+            [
+              -106.07413897599997,
+              37.38633588700003
+            ],
+            [
+              -106.07364656599998,
+              37.386312660000044
+            ],
+            [
+              -106.06802588699998,
+              37.38630442400006
+            ],
+            [
+              -106.06606707199995,
+              37.38633080000005
+            ],
+            [
+              -106.06425563799996,
+              37.38630103000003
+            ],
+            [
+              -106.05778930199995,
+              37.386293032000026
+            ],
+            [
+              -106.05742910699996,
+              37.38629257600007
+            ],
+            [
+              -106.05723383599997,
+              37.386292328000025
+            ],
+            [
+              -106.03999600699996,
+              37.386225909000075
+            ],
+            [
+              -106.03977816399998,
+              37.38621499300007
+            ]
+          ]
+        },
+        "id": "OpenTMS-Event4723908503_eastbound"
+      }
+    ],
+    "route_details_start": {
+      "Route": "368A",
+      "Measure": 2.01,
+      "MMin": 0.0,
+      "MMax": 14.115,
+      "Distance": 0.89
+    },
+    "route_details_end": {
+      "Route": "368A",
+      "Measure": 5.0,
+      "MMin": 0.0,
+      "MMax": 14.115,
+      "Distance": 0.61
+    }
+  }
+]

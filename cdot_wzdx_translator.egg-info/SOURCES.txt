@@ -33,6 +33,7 @@ wzdx/tools/array_tools.py
 wzdx/tools/cdot_geospatial_api.py
 wzdx/tools/count_datastore.py
 wzdx/tools/date_tools.py
+wzdx/tools/path_history_compression.py
 wzdx/tools/polygon_tools.py
 wzdx/tools/test_cdot_geospatial_api.py
 wzdx/tools/wzdx_translator.py
