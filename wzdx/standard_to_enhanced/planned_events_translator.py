@@ -121,8 +121,7 @@ def parse_road_restriction(incident):
 
     core_details = {}
 
-    # data_source_id
-    # Leave this empty, it will be populated by add_ids_v3
+    # data_source_id - Leave this empty, it will be populated by add_ids_v3
     core_details['data_source_id'] = ''
 
     # Event Type ['work-zone', 'detour']
@@ -196,6 +195,9 @@ def parse_work_zone(incident):
     # Event Type ['work-zone', 'detour']
     core_details['event_type'] = event.get('type')
 
+    # data_source_id - Leave this empty, it will be populated by add_ids_v3
+    core_details['data_source_id'] = ''
+
     # road_name
     road_names = [detail.get('road_name')]
     core_details['road_names'] = road_names
@@ -203,13 +205,19 @@ def parse_work_zone(incident):
     # direction
     core_details['direction'] = detail.get('direction')
 
+    # relationship
+    core_details['relationship'] = {}
+
     # description
     core_details['description'] = header.get('description')
+
+    # creation_date - not available
 
     # update_date
     core_details['update_date'] = date_tools.get_iso_string_from_unix(
         source.get('last_updated_timestamp'))
 
+    # core_details
     properties['core_details'] = core_details
 
     start_time = date_tools.parse_datetime_from_unix(
@@ -221,21 +229,7 @@ def parse_work_zone(incident):
         start_time)
 
     # end_date
-    if not end_time:
-        if start_time > datetime.datetime.utcnow():
-            end_time = start_time + datetime.timedelta(days=7)
-        else:
-            end_time = datetime.datetime.utcnow() + datetime.timedelta(days=7)
     properties['end_date'] = date_tools.get_iso_string_from_datetime(end_time)
-
-    properties["location_method"] = "channel-device-method"
-
-    # mileposts
-    properties['beginning_milepost'] = additional_info.get(
-        'beginning_milepost')
-
-    # start_date_accuracy
-    properties['ending_milepost'] = additional_info.get('ending_milepost')
 
     # start_date_accuracy
     properties['start_date_accuracy'] = "estimated"
@@ -248,6 +242,9 @@ def parse_work_zone(incident):
 
     # ending_accuracy
     properties['ending_accuracy'] = "estimated"
+
+    # location_method
+    properties["location_method"] = "channel-device-method"
 
     # vehicle impact
     lanes = additional_info.get('lanes', [])
@@ -262,6 +259,13 @@ def parse_work_zone(incident):
     # beginning_cross_street
     properties['ending_cross_street'] = ""
 
+    # mileposts
+    properties['beginning_milepost'] = additional_info.get(
+        'beginning_milepost')
+
+    # start_date_accuracy
+    properties['ending_milepost'] = additional_info.get('ending_milepost')
+
     # event status
     properties['event_status'] = date_tools.get_event_status(
         start_time, end_time)
@@ -269,6 +273,10 @@ def parse_work_zone(incident):
     # type_of_work
     # maintenance, minor-road-defect-repair, roadside-work, overhead-work, below-road-work, barrier-work, surface-work, painting, roadway-relocation, roadway-creation
     properties['types_of_work'] = event.get('types_of_work', [])
+
+    # worker_presence - not available
+
+    # reduced_speed_limit_kph - not available
 
     # restrictions
     properties['restrictions'] = additional_info.get('restrictions', [])
@@ -280,10 +288,11 @@ def parse_work_zone(incident):
             del filtered_properties[key]
 
     feature = {}
+    feature['id'] = event.get('source', {}).get('id', uuid.uuid4())
     feature['type'] = "Feature"
     feature['properties'] = filtered_properties
     feature['geometry'] = geometry
-    feature['id'] = event.get('source', {}).get('id', uuid.uuid4())
+    # feature['bbox'] = geometry
 
     return feature
 

@@ -347,7 +347,7 @@ def get_improved_geometry(coordinates, event_status, id):
         startRouteParams['Route'],
         startRouteParams['Measure'],
         endRouteParams['Measure'],
-        10)
+        compressed=True)
 
     finalDirection = polygon_tools.get_road_direction_from_coordinates(
         newCoordinates)
@@ -402,7 +402,7 @@ def create_rtdh_standard_msg(pd, isIncident):
 
         if not start_date:
             logging.warn(
-                f'Unable to process event, no start date for event {pd.get("properties/id", default="")}')
+                f'Unable to process event, no start date for event: {pd.get("properties/id", default="")}')
         if not end_date:
             end_date = pd.get("properties/estimatedClearTime",
                               date_tools.parse_datetime_from_iso_string)
