@@ -4,6 +4,7 @@ import json
 import logging
 import copy
 from wzdx.sample_files.validation_schema import wzdx_v31_feed
+import uuid
 
 from wzdx.tools import date_tools, polygon_tools, wzdx_translator
 
@@ -55,7 +56,7 @@ def wzdx_creator(message, info=None):
     if not wzdx_translator.validate_info(info):
         return None
 
-    wzd = wzdx_translator.initialize_wzdx_object_v3(info)
+    wzd = wzdx_translator.initialize_wzdx_object_v4(info)
 
     # Parse Incident to WZDx Feature
     feature = parse_incident(message)
@@ -64,7 +65,7 @@ def wzdx_creator(message, info=None):
 
     if not wzd.get('features'):
         return None
-    wzd = wzdx_translator.add_ids_v3(wzd)
+    wzd = wzdx_translator.add_ids_v4(wzd)
     return wzd
 
 
@@ -227,16 +228,43 @@ def parse_incident(incident):
     # I included a skeleton of the message, fill out all required fields and as many optional fields as you can. Below is a link to the spec page for a road event
     # https://github.com/usdot-jpo-ode/jpo-wzdx/blob/master/spec-content/objects/RoadEvent.md
 
-    # id
-    # Leave this empty, it will be populated by add_ids_v3
-    properties['road_event_id'] = ''
-
-    # Event Type ['work-zone', 'detour']
-    properties['event_type'] = 'work-zone'
+    core_details = {}
 
     # data_source_id
     # Leave this empty, it will be populated by add_ids_v3
-    properties['data_source_id'] = ''
+    core_details['data_source_id'] = ''
+
+    # Event Type ['work-zone', 'detour']
+    core_details['event_type'] = 'work-zone'
+
+    # road_name
+    road_names = [detail.get('road_name')]
+    core_details['road_names'] = road_names
+
+    # direction
+    direction = None
+    for road_name in road_names:
+        direction = wzdx_translator.parse_direction_from_street_name(road_name)
+        if direction:
+            break
+    if not direction:
+        direction = polygon_tools.get_road_direction_from_coordinates(
+            geometry.get('coordinates'))
+    if not direction:
+        return None
+    properties['direction'] = direction
+
+    # Relationship
+    core_details['relationship'] = {}
+
+    # description
+    core_details['description'] = header.get('description')
+
+    # update_date
+    core_details['update_date'] = date_tools.get_iso_string_from_unix(
+        source.get('last_updated_timestamp'))
+
+    properties['core_details'] = core_details
 
     start_time = date_tools.parse_datetime_from_unix(
         header.get('start_timestamp'))
@@ -253,6 +281,8 @@ def parse_incident(incident):
     else:
         properties['end_date'] = None
 
+    properties["location_method"] = "channel-device-method"
+
     # start_date_accuracy
     properties['start_date_accuracy'] = "estimated"
 
@@ -265,29 +295,9 @@ def parse_incident(incident):
     # ending_accuracy
     properties['ending_accuracy'] = "estimated"
 
-    # road_name
-    road_names = [detail.get('road_name')]
-    properties['road_names'] = road_names
-
-    # direction
-    direction = None
-    for road_name in road_names:
-        direction = wzdx_translator.parse_direction_from_street_name(road_name)
-        if direction:
-            break
-    if not direction:
-        direction = polygon_tools.get_road_direction_from_coordinates(
-            geometry.get('coordinates'))
-    if not direction:
-        return None
-    properties['direction'] = direction
-
     # vehicle impact
     properties['vehicle_impact'] = get_vehicle_impact(
         header.get('description'))
-
-    # Relationship
-    properties['relationship'] = {}
 
     # lanes
     properties['lanes'] = []
@@ -309,18 +319,6 @@ def parse_incident(incident):
     # restrictions
     properties['restrictions'] = []
 
-    # description
-    properties['description'] = header.get(
-        'description')  # create_description(incident)
-
-    # creation_date
-    properties['creation_date'] = date_tools.get_iso_string_from_unix(
-        source.get('creation_timestamp'))
-
-    # update_date
-    properties['update_date'] = date_tools.get_iso_string_from_unix(
-        source.get('last_updated_timestamp'))
-
     filtered_properties = copy.deepcopy(properties)
 
     for key, value in properties.items():
@@ -331,6 +329,7 @@ def parse_incident(incident):
     feature['type'] = "Feature"
     feature['properties'] = filtered_properties
     feature['geometry'] = geometry
+    feature['id'] = event.get('source', {}).get('id', uuid.uuid4())
 
     return feature
 

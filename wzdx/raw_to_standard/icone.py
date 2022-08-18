@@ -7,7 +7,7 @@ import datetime
 import xml.etree.ElementTree as ET
 from collections import OrderedDict
 
-from wzdx.tools import date_tools, polygon_tools, wzdx_translator
+from wzdx.tools import date_tools, polygon_tools, wzdx_translator, cdot_geospatial_api
 from wzdx.util.collections import PathDict
 from wzdx.standard_to_enhanced import icone_translator
 
@@ -132,6 +132,18 @@ def create_rtdh_standard_msg(pd):
         else:
             end_time = datetime.datetime.utcnow().replace(
                 tzinfo=datetime.timezone.utc) + datetime.timedelta(days=7)
+
+    coordinates = pd.get("incident/location/polyline", parse_icone_polyline)
+    route_details_start = get_route_details(coordinates[0])
+    route_details_end = get_route_details(coordinates[-1])
+
+    direction = get_direction(
+        pd.get("incident/location/street"), coordinates, route_details_start)
+
+    road_name = pd.get("incident/location/street")
+    if not road_name:
+        road_name = get_road_name(route_details_start)
+
     return {
         "rtdh_timestamp": time.time(),
         "rtdh_message_id": str(uuid.uuid4()),
@@ -149,9 +161,9 @@ def create_rtdh_standard_msg(pd):
                 "end_timestamp": date_tools.date_to_unix(end_time)
             },
             "detail": {
-                "road_name": pd.get("incident/location/street"),
-                "road_number": pd.get("incident/location/street"),
-                "direction": get_direction(pd.get("incident/location/street"), pd.get("incident/location/polyline"))
+                "road_name": road_name,
+                "road_number": road_name,
+                "direction": direction
             },
             "additional_info": {
                 "devices": devices,
@@ -161,17 +173,29 @@ def create_rtdh_standard_msg(pd):
     }
 
 
-def get_direction(street, coords):
+def get_direction(street, coords, route_details):
     direction = wzdx_translator.parse_direction_from_street_name(street)
     if not direction:
+        direction = get_direction_from_route_details(route_details)
+    if not direction:
         direction = polygon_tools.get_road_direction_from_coordinates(coords)
-    direction = 'northbound'
     return direction
+
+
+def get_route_details(latLng):
+    return cdot_geospatial_api.get_route_and_measure(latLng)
+
+
+def get_road_name(route_details):
+    return route_details.get('Route')
+
+
+def get_direction_from_route_details(route_details):
+    return route_details.get('Direction')
 
 
 # function to validate the incident
 def validate_incident(incident):
-    return True
     if not incident or (type(incident) != dict and type(incident) != OrderedDict):
         logging.warning('incident is empty or has invalid type')
         return False
