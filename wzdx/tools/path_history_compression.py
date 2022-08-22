@@ -94,7 +94,7 @@ def generage_compressed_path(path):
         logging.error("Work zone is too short")
         return path
 
-    ALLOWABLEERROR = 50
+    ALLOWABLEERROR = 30
     SMALLDELTAPHI = 0.01
     CHORDLENGTHTHRESHOLD = 10000
     MAXESTIMATEDRADIUS = 8388607  # 7FFFFF

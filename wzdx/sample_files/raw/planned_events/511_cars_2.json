@@ -1,0 +1,49 @@
+{
+  "type": "Feature",
+  "geometry": {
+    "srid": 4326,
+    "type": "MultiPoint",
+    "coordinates": [
+      [-107.19685, 37.974706],
+      [0.0, 0.0]
+    ]
+  },
+  "properties": {
+    "additionalImpacts": ["Alternating traffic"],
+    "clearTime": "2022-08-16T00:30:00.000+00:00",
+    "startMarker": 60.0,
+    "type": "Paving Operations",
+    "laneImpacts": [
+      {
+        "direction": "north",
+        "laneCount": 1,
+        "laneClosures": "0",
+        "closedLaneTypes": []
+      },
+      {
+        "direction": "south",
+        "laneCount": 1,
+        "laneClosures": "0",
+        "closedLaneTypes": []
+      }
+    ],
+    "routeName": "CO-149N",
+    "isOversizedLoadsProhibited": false,
+    "lastUpdated": "2022-08-15T11:50:14.377+00:00",
+    "schedule": [
+      {
+        "startTime": "2022-08-15T11:46:10.000Z",
+        "endTime": "2022-08-16T00:30:00.000Z"
+      }
+    ],
+    "endMarker": 61.0,
+    "hasRampRestriction": false,
+    "name": "co-149 MP60 Paving",
+    "startTime": "2022-08-15T11:46:10.000+00:00",
+    "id": "OpenTMS-Event4829729279",
+    "travelerInformationMessage": "511 event cannot be created in CARS because route does not exist.",
+    "jurisdictions": ["HINSDALE (COUNTY)"],
+    "direction": "north"
+  },
+  "attributes": {}
+}

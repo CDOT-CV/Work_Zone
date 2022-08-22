@@ -1,0 +1,52 @@
+{
+  "rtdh_timestamp": 1660849808.4642956,
+  "rtdh_message_id": "04e04fb3-bf1a-44f3-8023-979fe623b8a6",
+  "event": {
+    "type": "work-zone",
+    "types_of_work": [
+      {
+        "type_name": "surface-work",
+        "is_architectural_change": true
+      }
+    ],
+    "source": {
+      "id": "OpenTMS-Event4829729279_northbound",
+      "last_updated_timestamp": 1660564214377
+    },
+    "geometry": [
+      [
+        -107.19685,
+        37.974706
+      ],
+      [
+        0.0,
+        0.0
+      ]
+    ],
+    "header": {
+      "description": "Event co-149 MP60 Paving, on CO-149N, between mile markers 60.0 and 61.0. Paving Operations. Running between 2022-08-15T11:46:10.000+00:00 and 2022-08-16T00:30:00.000+00:00",
+      "start_timestamp": 1660563970000,
+      "end_timestamp": 1660609800000
+    },
+    "detail": {
+      "road_name": "CO-149",
+      "road_number": "CO-149",
+      "direction": "northbound"
+    },
+    "additional_info": {
+      "lanes": [
+        {
+          "order": 1,
+          "type": "general",
+          "status": "open"
+        }
+      ],
+      "restrictions": [],
+      "beginning_milepost": 60.0,
+      "ending_milepost": 61.0,
+      "beginning_cross_street": "",
+      "ending_cross_street": "",
+      "valid": false
+    }
+  }
+}

@@ -254,10 +254,12 @@ def parse_work_zone(incident):
     properties['lanes'] = lanes
 
     # beginning_cross_street
-    properties['beginning_cross_street'] = ""
+    properties['beginning_cross_street'] = additional_info.get(
+        'beginning_cross_street')
 
     # beginning_cross_street
-    properties['ending_cross_street'] = ""
+    properties['ending_cross_street'] = additional_info.get(
+        'ending_cross_street')
 
     # mileposts
     properties['beginning_milepost'] = additional_info.get(
@@ -284,8 +286,12 @@ def parse_work_zone(incident):
     filtered_properties = copy.deepcopy(properties)
 
     for key, value in properties.items():
-        if not value and key not in ['road_event_id', 'data_source_id', 'end_date']:
+        if not value:
             del filtered_properties[key]
+
+    for key, value in properties['core_details'].items():
+        if not value and key not in ['data_source_id']:
+            del filtered_properties['core_details'][key]
 
     feature = {}
     feature['id'] = event.get('source', {}).get('id', uuid.uuid4())

@@ -4,7 +4,7 @@
 # warranty or representation for any use or purpose. Your use of it is
 # subject to your agreement with Google.
 
-from google.cloud import pubsub_v1, secretmanager_v1, storage, datastore, bigquery
+from google.cloud import bigquery
 import settings
 import logging
 import flask

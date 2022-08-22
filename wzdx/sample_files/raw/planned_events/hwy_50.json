@@ -1,60 +1,50 @@
 {
-    "type": "Feature",
-    "geometry": {
-        "srid": 4326,
-        "type": "MultiPoint",
-        "coordinates": [
-            [
-                -107.413016,
-                38.398904
-            ],
-            [
-                -107.385542,
-                38.438934
-            ]
-        ]
-    },
-    "properties": {
-        "additionalImpacts": [
-            "Alternating traffic"
-        ],
-        "clearTime": "2022-03-22T23:30:00.000+00:00",
-        "startMarker": 123.0,
-        "type": "Road Construction",
-        "laneImpacts": [
-            {
-                "direction": "east",
-                "laneCount": 1,
-                "laneClosures": "0",
-                "closedLaneTypes": []
-            },
-            {
-                "direction": "west",
-                "laneCount": 1,
-                "laneClosures": "0",
-                "closedLaneTypes": []
-            }
-        ],
-        "routeName": "US-50E",
-        "isOversizedLoadsProhibited": false,
-        "lastUpdated": "2022-03-21T21:57:31.544+00:00",
-        "widthRestriction": 305,
-        "schedule": [
-            {
-                "startTime": "2022-03-22T14:30:00.000Z",
-                "endTime": "2022-03-22T23:30:00.000Z"
-            }
-        ],
-        "endMarker": 127.0,
-        "hasRampRestriction": false,
-        "name": "Constuction-US 50 LBCC-9221",
-        "startTime": "2022-03-22T14:30:00.000+00:00",
-        "id": "OpenTMS-Event2702170538",
-        "travelerInformationMessage": "Between County Road 66 and County Road 25 (2 to 6 miles east of Blue Mesa Summit) from Mile Point 123 to Mile Point 127. Road construction. Alternating traffic. Width limit in effect. Width limit 10'0\". Starting tomorrow at 8:30AM MDT until tomorrow at about 5:30PM MDT.",
-        "jurisdictions": [
-            "GUNNISON (COUNTY)"
-        ],
-        "direction": "east"
-    },
-    "attributes": {}
+  "type": "Feature",
+  "geometry": {
+    "srid": 4326,
+    "type": "MultiPoint",
+    "coordinates": [
+      [-107.413016, 38.398904],
+      [-107.385542, 38.438934]
+    ]
+  },
+  "properties": {
+    "additionalImpacts": ["Alternating traffic"],
+    "clearTime": "2022-08-22T23:30:00.000+00:00",
+    "startMarker": 123.0,
+    "type": "Road Construction",
+    "laneImpacts": [
+      {
+        "direction": "east",
+        "laneCount": 1,
+        "laneClosures": "0",
+        "closedLaneTypes": []
+      },
+      {
+        "direction": "west",
+        "laneCount": 1,
+        "laneClosures": "0",
+        "closedLaneTypes": []
+      }
+    ],
+    "routeName": "US-50E",
+    "isOversizedLoadsProhibited": false,
+    "lastUpdated": "2022-03-21T21:57:31.544+00:00",
+    "widthRestriction": 305,
+    "schedule": [
+      {
+        "startTime": "2022-03-22T14:30:00.000Z",
+        "endTime": "2022-03-22T23:30:00.000Z"
+      }
+    ],
+    "endMarker": 127.0,
+    "hasRampRestriction": false,
+    "name": "Constuction-US 50 LBCC-9221",
+    "startTime": "2022-07-22T14:30:00.000+00:00",
+    "id": "OpenTMS-Event2702170538",
+    "travelerInformationMessage": "Between County Road 66 and County Road 25 (2 to 6 miles east of Blue Mesa Summit) from Mile Point 123 to Mile Point 127. Road construction. Alternating traffic. Width limit in effect. Width limit 10'0\". Starting tomorrow at 8:30AM MDT until tomorrow at about 5:30PM MDT.",
+    "jurisdictions": ["GUNNISON (COUNTY)"],
+    "direction": "east"
+  },
+  "attributes": {}
 }

@@ -1,0 +1,52 @@
+{
+  "rtdh_timestamp": 1660849770.884193,
+  "rtdh_message_id": "7012eee2-01a0-403b-adde-19a0405e594a",
+  "event": {
+    "type": "work-zone",
+    "types_of_work": [
+      {
+        "type_name": "roadway-creation",
+        "is_architectural_change": true
+      }
+    ],
+    "source": {
+      "id": "OpenTMS-Event2843552682_westbound",
+      "last_updated_timestamp": 1648748974783
+    },
+    "geometry": [
+      [
+        -105.054498,
+        39.578466
+      ],
+      [
+        -105.05556,
+        39.578461
+      ]
+    ],
+    "header": {
+      "description": "Event C-470 Ken Caryl Intersection Improvements-9510, on KEN CARYL AV, between mile markers 0.0 and 0.07. Road Construction. Running between 2022-04-01T13:00:00.000+00:00 and 2022-04-01T23:00:00.000+00:00",
+      "start_timestamp": 1648818000000,
+      "end_timestamp": 1648854000000
+    },
+    "detail": {
+      "road_name": "KEN CARYL AV",
+      "road_number": "KEN CARYL AV",
+      "direction": "westbound"
+    },
+    "additional_info": {
+      "lanes": [
+        {
+          "order": 1,
+          "type": "general",
+          "status": "closed"
+        }
+      ],
+      "restrictions": [],
+      "beginning_milepost": 0.07,
+      "ending_milepost": 0.0,
+      "beginning_cross_street": "",
+      "ending_cross_street": "",
+      "valid": false
+    }
+  }
+}

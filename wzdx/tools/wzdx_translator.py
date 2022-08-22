@@ -244,9 +244,9 @@ def initialize_wzdx_object_v3(info):
 def initialize_wzdx_object_v4(info):
     wzd = {}
     wzd['road_event_feed_info'] = {}
+    wzd['road_event_feed_info']['publisher'] = 'CDOT'
     wzd['road_event_feed_info']['version'] = '4.0'
     wzd['road_event_feed_info']['license'] = "https://creativecommons.org/publicdomain/zero/1.0/"
-    
 
     data_source = {}
     data_source['data_source_id'] = str(uuid.uuid4())
@@ -259,8 +259,7 @@ def initialize_wzdx_object_v4(info):
     data_source['contact_name'] = info.get('metadata').get('contact_name')
     data_source['contact_email'] = info.get('metadata').get('contact_email')
     wzd['road_event_feed_info']['data_sources'] = [data_source]
-    
-    
+
     wzd['road_event_feed_info']['update_date'] = datetime.utcnow().strftime(
         "%Y-%m-%dT%H:%M:%SZ")
     wzd['road_event_feed_info']['update_frequency'] = info.get(

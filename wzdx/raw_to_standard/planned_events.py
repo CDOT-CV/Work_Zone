@@ -8,6 +8,7 @@ import time
 import uuid
 import pytz
 from collections import OrderedDict
+import regex
 
 from wzdx.tools import date_tools, polygon_tools, wzdx_translator, cdot_geospatial_api
 from wzdx.util.collections import PathDict
@@ -120,8 +121,6 @@ def generate_rtdh_standard_message_from_raw_single(obj):
     if is_incident_msg and not is_wz:
         id = obj.get('properties', {}).get('id')
         dir = obj.get('properties', {}).get('direction')
-        logging.warning(
-            f"Ignoring non-work zone incident: {id}_{dir}")
         return {}
     pd = PathDict(obj)
     standard_message = create_rtdh_standard_msg(pd, is_incident_msg)
@@ -359,10 +358,18 @@ def get_improved_geometry(coordinates, event_status, id):
     return newCoordinates
 
 
+def get_cross_streets_from_description(description):
+    desc_regex = '^Between (.*?) and (.*?)(?= from)'
+    m = regex.search(desc_regex, description)
+    try:
+        return m.group(1, 2)
+    except:
+        return ('', '')
+
 # isIncident is unused, could be useful later though
 def create_rtdh_standard_msg(pd, isIncident):
     try:
-        description = pd.get('properties/travelerInformationMessage')
+        description = pd.get('properties/travelerInformationMessage', '')
         if description == INVALID_EVENT_DESCRIPTION:
             description = create_description(
                 pd.get('properties/name'),
@@ -373,6 +380,8 @@ def create_rtdh_standard_msg(pd, isIncident):
                 pd.get('properties/startTime'),
                 pd.get('properties/clearTime'),
             )
+            
+        begin_cross_street, end_cross_street = get_cross_streets_from_description(description)
 
         coordinates = get_linestring(pd.get('geometry'))
         if not coordinates:
@@ -456,6 +465,8 @@ def create_rtdh_standard_msg(pd, isIncident):
                     "restrictions": restrictions,
                     "beginning_milepost": beginning_milepost,
                     "ending_milepost": ending_milepost,
+                    "beginning_cross_street": begin_cross_street,
+                    "ending_cross_street": end_cross_street,
                     "valid": False,
                 }
             }

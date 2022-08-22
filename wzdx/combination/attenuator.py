@@ -1,7 +1,6 @@
 import json
 from datetime import datetime, timedelta
 from wzdx.tools import cdot_geospatial_api, date_tools, polygon_tools
-from google.cloud import datastore, bigquery
 import logging
 
 ATTENUATOR_TIME_AHEAD_SECONDS = 30 * 60
