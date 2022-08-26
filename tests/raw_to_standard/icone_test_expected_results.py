@@ -34,7 +34,7 @@ test_generate_standard_messages_from_string_expected = [
             "header": {
                 "description": "19-1245: Roadwork between MP 40 and MP 48",
                 "start_timestamp": 1581700096000,
-                "end_timestamp": None
+                "end_timestamp": 1618876800000
             },
             "detail": {
                 "road_name": "I-75 N",
@@ -317,7 +317,7 @@ test_generate_standard_messages_from_string_expected = [
             "header": {
                 "description": "19-1245: Roadwork between MP 48 and MP 40",
                 "start_timestamp": 1574463741000,
-                "end_timestamp": None
+                "end_timestamp": 1618876800000
             },
             "detail": {
                 "road_name": "I-75 S",

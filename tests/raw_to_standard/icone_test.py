@@ -3,6 +3,8 @@ import icone_test_expected_results as expected_results
 import uuid
 import json
 from unittest.mock import Mock, patch
+import time_machine
+from datetime import datetime
 
 # --------------------------------------------------------------------------------Unit test for parse_polyline_from_linestring function--------------------------------------------------------------------------------
 
@@ -106,8 +108,10 @@ def test_validate_incident_no_data():
 def test_generate_standard_messages_from_string(mockuuid):
     uuid.uuid4 = Mock()
     uuid.uuid4.side_effect = ['we234de', '23wsg54h']
-    actual_standard = json.loads(json.dumps(icone.generate_standard_messages_from_string(
-        expected_results.test_generate_standard_messages_from_string_input)))
+
+    with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0, 0)):
+        actual_standard = json.loads(json.dumps(icone.generate_standard_messages_from_string(
+            expected_results.test_generate_standard_messages_from_string_input)))
 
     print(actual_standard)
 

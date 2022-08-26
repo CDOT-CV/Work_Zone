@@ -165,45 +165,46 @@ def test_wzdx_creator(mockuuid):
 
     expected_wzdx = {
         'road_event_feed_info': {
-            'feed_info_id': '104d7746-688c-44ed-b195-2ee948bf9dfa',
             'update_date': '2021-04-13T00:00:00Z',
             'publisher': 'CDOT',
             'contact_name': 'Ashley Nylen',
             'contact_email': 'ashley.nylen@state.co.us',
-            'version': '3.1',
+            'update_frequency': 300,
+            'version': '4.0',
             'license': 'https://creativecommons.org/publicdomain/zero/1.0/',
             'data_sources': [
                 {'data_source_id': 'w',
-                 'feed_info_id': '104d7746-688c-44ed-b195-2ee948bf9dfa',
                  'organization_name': 'CDOT',
                  'contact_name': 'Ashley Nylen',
                  'contact_email': 'ashley.nylen@state.co.us',
                  'update_date': '2021-04-13T00:00:00Z',
-                 'location_method': 'channel-device-method',
-                 'lrs_type': 'lrs_type'}
+                 'update_frequency': 300}
             ]
         },
         'type': 'FeatureCollection',
         'features': [
                 {
+                    'id': '1245',
                     'type': 'Feature',
                     'properties': {
-                        'road_event_id': '2',
-                        'event_type': 'work-zone',
-                        'data_source_id': 'w',
+                        "core_details": {
+                            "data_source_id": "w",
+                            "event_type": "work-zone",
+                            "road_names": [
+                                'I-75 N'
+                            ],
+                            "direction": "northbound",
+                            "description": "19-1245: Roadwork between MP 40 and MP 48",
+                            "update_date": "2021-11-05T19:56:03Z",
+                        },
                         'start_date': '2021-06-08T20:15:01Z',
-                        'end_date': None,
                         'start_date_accuracy': 'estimated',
                         'end_date_accuracy': 'estimated',
                         'beginning_accuracy': 'estimated',
                         'ending_accuracy': 'estimated',
-                        'road_names': ['I-75 N'],
-                        'direction': 'northbound',
+                        'location_method': 'channel-device-method',
                         'vehicle_impact': 'all-lanes-open',
                         'event_status': 'planned',
-                        'description': '19-1245: Roadwork between MP 40 and MP 48',
-                        'creation_date': '2019-11-05T01:22:20Z',
-                        'update_date': '2021-11-05T19:56:03Z'
                     },
                     'geometry': {
                         'type': 'LineString',

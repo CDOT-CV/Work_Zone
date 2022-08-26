@@ -132,6 +132,8 @@ def create_rtdh_standard_msg(pd):
         else:
             end_time = datetime.datetime.utcnow().replace(
                 tzinfo=datetime.timezone.utc) + datetime.timedelta(days=7)
+        # Added for unit test
+        end_time = end_time.replace(microsecond=0)
 
     coordinates = pd.get("incident/location/polyline", parse_icone_polyline)
     route_details_start = get_route_details(coordinates[0])
@@ -173,9 +175,9 @@ def create_rtdh_standard_msg(pd):
     }
 
 
-def get_direction(street, coords, route_details):
+def get_direction(street, coords, route_details=None):
     direction = wzdx_translator.parse_direction_from_street_name(street)
-    if not direction:
+    if not direction and route_details:
         direction = get_direction_from_route_details(route_details)
     if not direction:
         direction = polygon_tools.get_road_direction_from_coordinates(coords)

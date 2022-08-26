@@ -272,3 +272,36 @@ def test_generate_rtdh_standard_message_from_raw_single_incident_invalid(mocked_
     }
     actual = planned_events.generate_rtdh_standard_message_from_raw_single(msg)
     assert actual == {}
+
+
+def test_is_incident_wz_true_1():
+    msg = {}
+    msg['properties'] = {}
+    msg['properties']['id'] = 'OpenTMS-Incident2028603626'
+    msg['properties']['type'] = 'Maintenance Operations'
+
+    actual = planned_events.is_incident_wz(msg)
+
+    assert actual == (True, True)
+
+
+def test_is_incident_wz_false_1():
+    msg = {}
+    msg['properties'] = {}
+    msg['properties']['id'] = 'OpenTMS-Incident2028603626'
+    msg['properties']['type'] = 'Crash Unknown'
+
+    actual = planned_events.is_incident_wz(msg)
+
+    assert actual == (True, False)
+
+
+def test_is_incident_wz_false_2():
+    msg = {}
+    msg['properties'] = {}
+    msg['properties']['id'] = 'OpenTMS-Event2843552682'
+    msg['properties']['type'] = 'Road Construction'
+
+    actual = planned_events.is_incident_wz(msg)
+
+    assert actual == (False, False)

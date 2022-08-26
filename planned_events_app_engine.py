@@ -208,32 +208,38 @@ def geotab():
     # print(cdot_geospatial_api.get_route_and_measure((37.4595566, -105.877274)))
     # return
 
-    # now = datetime.datetime.now()
+    now = datetime.datetime.now()
     # with open(f'testing_results/planned_events_{now.strftime("%Y%m%d-%H%M%S")}.json', 'w+', newline='') as f:
     #     f.write(json.dumps(get_planned_events(), indent=2, default=str))
     # return
     # planned_events = [json.loads(
     #     open('./planned_event_wzdx_2022_07_28.json', 'r').read())]
 
-    now = datetime.datetime.now()
-    geotab_msgs = get_recent_geotab(GEOTAB_AUTOMATED_ATTENUATOR_IDS)
+    # now = datetime.datetime.now()
+    # geotab_msgs = get_recent_geotab(GEOTAB_AUTOMATED_ATTENUATOR_IDS)
     # geotab_msgs = json.loads(
     #     open('./geotab_2022_07_28.json', 'r').read())
+    geotab_msgs = json.loads(
+        open('./example_geotab.json', 'r').read())
+    planned_events = [json.loads(
+        open('./example_wzdx.json', 'r').read())]
 
     # l.info(f"Grabbed attenuator messages: {len(geotab_msgs)}")
-    with open(f'testing_results/geotab/geotab_{now.strftime("%Y%m%d-%H%M%S")}.json', 'w+', newline='') as f:
-        f.write(json.dumps(geotab_msgs, indent=2, default=str))
-    # if geotab_msgs:
-    #     # planned_events = get_current_planned_events()
-    #     with open(f'testing_results/planned_events/planned_events_{now.strftime("%Y%m%d-%H%M%S")}.json', 'w+', newline='') as f:
-    #         f.write(json.dumps(planned_events, indent=2, default=str))
-    #     l.info(f"Grabbed planned events wzdx messages: {len(planned_events)}")
-    #     combined_events = attenuator.get_combined_events(
-    #         geotab_msgs, planned_events)
-    #     l.info(f"Generated combined events: {len(combined_events)}")
+    # with open(f'testing_results/geotab/geotab_{now.strftime("%Y%m%d-%H%M%S")}.json', 'w+', newline='') as f:
+    #     f.write(json.dumps(geotab_msgs, indent=2, default=str))
+    if geotab_msgs:
+        # planned_events = get_current_planned_events()
+        # with open(f'testing_results/planned_events/planned_events_{now.strftime("%Y%m%d-%H%M%S")}.json', 'w+', newline='') as f:
+        #     f.write(json.dumps(planned_events, indent=2, default=str))
+        l.info(f"Grabbed planned events wzdx messages: {len(planned_events)}")
+        combined_events = attenuator.get_combined_events(
+            geotab_msgs, planned_events)
+        l.info(f"Generated combined events: {len(combined_events)}")
 
-    #     with open(f'testing_results/combined_events/combined_{now.strftime("%Y%m%d-%H%M%S")}.json', 'w+', newline='') as f:
-    #         f.write(json.dumps(combined_events, indent=2, default=str))
+        # with open(f'testing_results/combined_events/combined_{now.strftime("%Y%m%d-%H%M%S")}.json', 'w+', newline='') as f:
+        #     f.write(json.dumps(combined_events, indent=2, default=str))
+        with open(f'example_combined.json', 'w+', newline='') as f:
+            f.write(json.dumps(combined_events, indent=2, default=str))
 
 
 if __name__ == "__main__":

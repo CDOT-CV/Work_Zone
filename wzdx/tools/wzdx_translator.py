@@ -183,12 +183,11 @@ def add_ids_v4(message, event_type="work-zone"):
     for i in range(road_event_length):
         feature = message.get('features')[i]
         id = road_event_ids[i]
-        feature['properties']['core_details']['road_event_id'] = id
         feature['properties']['core_details']['data_source_id'] = data_source_id
         if feature['properties']['core_details'].get('relationship'):
             feature['properties']['core_details']['relationship']['relationship_id'] = str(
                 uuid.uuid4())
-            feature['properties']['core_details']['relationship']['road_event_id'] = id
+            feature['properties']['core_details']['relationship']['road_event_id'] = feature.get('id', id)
     return message
 
 

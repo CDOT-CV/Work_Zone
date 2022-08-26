@@ -98,7 +98,6 @@ def test_parse_work_zone_linestring(mock_dt, mock_dt_3):
                   "I-70E"
               ],
                 "direction": "westbound",
-                "relationship": {},
                 "description": "Between Exit 49: CO 65; Grand Mesa (5 miles east of the Palisade area) and US 6 (Debeque) from Mile Point 50 to Mile Point 60. Road closed expect delays due to bridge construction. Until May 1, 2022 at about 12:26PM MDT.",
                 "update_date": "2021-10-29T18:35:01Z",
             },
@@ -326,23 +325,21 @@ def test_wzdx_creator(mock_dt, mock_dt_3, _):
 
     expected_wzdx = {
         "road_event_feed_info": {
-            "feed_info_id": "49253be7-0c6a-4a65-8113-450f9041f989",
             "update_date": "2021-04-13T00:00:00Z",
             "publisher": "CDOT",
             "contact_name": "Ashley Nylen",
             "contact_email": "ashley.nylen@state.co.us",
+            'update_frequency': 300,
             "version": "4.0",
             "license": "https://creativecommons.org/publicdomain/zero/1.0/",
             "data_sources": [
                 {
                     "data_source_id": "w",
-                    "feed_info_id": "49253be7-0c6a-4a65-8113-450f9041f989",
                     "organization_name": "CDOT",
                     "contact_name": "Ashley Nylen",
                     "contact_email": "ashley.nylen@state.co.us",
                     "update_date": "2021-04-13T00:00:00Z",
-                    "location_method": "channel-device-method",
-                    "lrs_type": "lrs_type"
+                    'update_frequency': 300,
                 }
             ]
         },
@@ -359,10 +356,8 @@ def test_wzdx_creator(mock_dt, mock_dt_3, _):
                             "I-70E"
                         ],
                         "direction": "westbound",
-                        "relationship": {},
                         "description": "Between Exit 49: CO 65; Grand Mesa (5 miles east of the Palisade area) and US 6 (Debeque) from Mile Point 50 to Mile Point 60. Road closed expect delays due to bridge construction. Until May 1, 2022 at about 12:26PM MDT.",
                         'update_date': "2021-10-29T18:35:01Z",
-                        "road_event_id": "3"
                     },
                     "start_date": "2021-10-29T18:26:04Z",
                     "end_date": "2022-05-01T18:26:04Z",

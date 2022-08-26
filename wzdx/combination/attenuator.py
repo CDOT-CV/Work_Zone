@@ -192,7 +192,7 @@ def get_geometry_for_distance_ahead(distance_ahead, route_details, bearing, mmin
 
 # Speed in mph, time in seconds
 def get_distance_ahead(speed, time):
-    speed = max(speed, 10)
+    speed = max(speed, 5)
     return speed * time / 3600
 
 
