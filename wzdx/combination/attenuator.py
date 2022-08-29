@@ -1,6 +1,6 @@
 import json
-from datetime import datetime, timedelta
-from wzdx.tools import cdot_geospatial_api, date_tools, polygon_tools
+from datetime import datetime
+from wzdx.tools import cdot_geospatial_api, polygon_tools
 import logging
 
 ATTENUATOR_TIME_AHEAD_SECONDS = 30 * 60
@@ -46,25 +46,15 @@ def json_serial(obj):
 
 
 def main():
-
-    # geotab_msgs = get_recent_geotab(ATMA_IDS)
-    # print("writing to geotab")
-    # with open('./wzdx/sample_files/raw/geotab_avl/geotab_all_2.json', 'w+') as f:
-    #     f.write(json.dumps(geotab_msgs, default=json_serial))
-    # planned_events = get_current_planned_events()
-    # print("writing to planned_events")
-    # with open('./wzdx/sample_files/enhanced/planned_events/planned_event_all.json', 'w+') as f:
-    #     f.write(json.dumps(planned_events, default=json_serial))
-
     with open('./wzdx/sample_files/raw/geotab_avl/geotab_all.json') as f:
         geotab_avl = json.loads(f.read())
     with open('./wzdx/sample_files/enhanced/planned_events/planned_event_all.json') as f:
         planned_event = json.loads(f.read())
+
     combined_events = get_combined_events(geotab_avl, planned_event)
+
     with open('./wzdx/sample_files/enhanced/planned_events/planned_event_combined.json', 'w+') as f:
         f.write(json.dumps(combined_events, indent=2))
-
-    # planned_event_wzdx_feature = planned_event['features'][0]
 
 
 def validate_directionality(geotab, planned_event):
