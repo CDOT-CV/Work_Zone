@@ -25,7 +25,6 @@ def test_validate_directionality_invalid():
 
 
 @patch.object(attenuator, 'get_geometry_for_distance_ahead')
-# @patch(attenuator, 'get_geometry_for_distance_ahead')
 def test_combine_with_planned_event_ordered(atten_patch):
     attenuator.get_geometry_for_distance_ahead = MagicMock(
         return_value=([], 0, 1))
@@ -35,7 +34,7 @@ def test_combine_with_planned_event_ordered(atten_patch):
     bearing = 0
     event_start_marker = 5
     event_end_marker = 10
-    actual = attenuator.combine_with_planned_event(
+    attenuator.combine_with_planned_event(
         planned_event_wzdx_feature, route_details, distance_ahead, bearing, event_start_marker, event_end_marker)
 
     attenuator.get_geometry_for_distance_ahead.assert_called_with(
@@ -43,7 +42,6 @@ def test_combine_with_planned_event_ordered(atten_patch):
 
 
 @patch.object(attenuator, 'get_geometry_for_distance_ahead')
-# @patch(attenuator, 'get_geometry_for_distance_ahead')
 def test_combine_with_planned_event_reversed(atten_patch):
     attenuator.get_geometry_for_distance_ahead = MagicMock(
         return_value=([], 0, 1))
@@ -53,7 +51,7 @@ def test_combine_with_planned_event_reversed(atten_patch):
     bearing = 0
     event_start_marker = 10
     event_end_marker = 5
-    actual = attenuator.combine_with_planned_event(
+    attenuator.combine_with_planned_event(
         planned_event_wzdx_feature, route_details, distance_ahead, bearing, event_start_marker, event_end_marker)
 
     attenuator.get_geometry_for_distance_ahead.assert_called_with(
