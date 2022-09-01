@@ -59,15 +59,15 @@ def test_combine_with_planned_event_reversed(atten_patch):
 
 
 def test_get_distance_ahead_normal():
-    actual = attenuator.get_distance_ahead(25, 30*60)
+    actual = attenuator.get_distance_ahead_miles(25, 30*60)
     assert actual == 12.5
 
 
 def test_get_distance_ahead_normal_2():
-    actual = attenuator.get_distance_ahead(10, 30*60)
+    actual = attenuator.get_distance_ahead_miles(10, 30*60)
     assert actual == 5
 
 
 def test_get_distance_ahead_default():
-    actual = attenuator.get_distance_ahead(0, 30*60)
+    actual = attenuator.get_distance_ahead_miles(0, 30*60)
     assert actual == 2.5

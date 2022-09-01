@@ -1,6 +1,7 @@
 import requests
 import json
 from wzdx.tools import polygon_tools, path_history_compression
+import logging
 
 BASE_URL = "https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded"
 ROUTE_BETWEEN_MEASURES_API = "RouteBetweenMeasures"
@@ -15,7 +16,7 @@ def get_routes_list():
     parameters.append(f"f=pjson")
 
     url = f"{BASE_URL}/{GET_ROUTES_API}?{'&'.join(parameters)}"
-    print(url)
+    logging.debug(url)
 
     # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded/Routes?f=pjson
     # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded/Route?routeId=070A&outSR=4326&f=pjson
@@ -32,7 +33,7 @@ def get_route_details(routeId):
     parameters.append(f"f=pjson")
 
     url = f"{BASE_URL}/{GET_ROUTE_API}?{'&'.join(parameters)}"
-    print(url)
+    logging.debug(url)
 
     # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded/Routes?f=pjson
     # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded/Route?routeId=070A&outSR=4326&f=pjson
@@ -62,7 +63,7 @@ def get_route_and_measure(latLng, heading=None, tolerance=10000):
     parameters.append(f"f=pjson")
 
     url = f"{BASE_URL}/{GET_ROUTE_AND_MEASURE_API}?{'&'.join(parameters)}"
-    print(url)
+    logging.debug(url)
 
     # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded/MeasureAtPoint?x=-105&y=39.5&inSR=4326&tolerance=10000&outSR=&f=html
     resp = json.loads(requests.get(url).content)
@@ -116,7 +117,7 @@ def get_route_measure_direction(latLng, tolerance=10000):
     parameters.append(f"f=pjson")
 
     url = f"{BASE_URL}/{GET_ROUTE_AND_MEASURE_API}?{'&'.join(parameters)}"
-    print(url)
+    logging.debug(url)
 
     # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded/MeasureAtPoint?x=-105&y=39.5&inSR=4326&tolerance=10000&outSR=&f=html
     resp = json.loads(requests.get(url).content)
@@ -162,8 +163,6 @@ def get_route_geometry_ahead(routeId, startMeasure, heading, distanceAhead, poin
         startMeasure = min(max(startMeasure, mmin), mmax)
         endMeasure = min(max(endMeasure, mmin), mmax)
 
-    print(f"Measures: {startMeasure}, {endMeasure}")
-
     return {'start_measure': startMeasure, 'end_measure': endMeasure,
             'coordinates': get_route_between_measures(
                 routeId, startMeasure, endMeasure, pointsToSkip)}
@@ -204,7 +203,7 @@ def get_route_between_measures(routeId, startMeasure, endMeasure, compressed=Fal
     parameters.append(f"f=pjson")
 
     url = f"{BASE_URL}/{ROUTE_BETWEEN_MEASURES_API}?{'&'.join(parameters)}"
-    print(url)
+    logging.debug(url)
 
     # call api
     response = json.loads(requests.get(url).content)
@@ -238,6 +237,7 @@ def get_route_between_measures_dual_carriageway(routeId, startMeasure, endMeasur
     parameters.append(f"f=pjson")
 
     url = f"{BASE_URL}/{ROUTE_BETWEEN_MEASURES_API}?{'&'.join(parameters)}"
+    logging.debug(url)
 
     # call api
     response = json.loads(requests.get(url).content)

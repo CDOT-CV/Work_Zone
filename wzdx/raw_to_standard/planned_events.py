@@ -332,11 +332,11 @@ def get_improved_geometry(coordinates, event_status, id):
         endPoint)
 
     if not startRouteParams or not endRouteParams:
-        print(
+        logging.warn(
             f"1 or more routes not found, not generating improved geometry: {id}")
         return coordinates
     if startRouteParams['Route'] != endRouteParams['Route']:
-        print(
+        logging.warn(
             f"Routes did not match, not generating improved geometry: {id}")
         return coordinates
 
@@ -367,6 +367,8 @@ def get_cross_streets_from_description(description):
         return ('', '')
 
 # isIncident is unused, could be useful later though
+
+
 def create_rtdh_standard_msg(pd, isIncident):
     try:
         description = pd.get('properties/travelerInformationMessage', '')
@@ -380,8 +382,9 @@ def create_rtdh_standard_msg(pd, isIncident):
                 pd.get('properties/startTime'),
                 pd.get('properties/clearTime'),
             )
-            
-        begin_cross_street, end_cross_street = get_cross_streets_from_description(description)
+
+        begin_cross_street, end_cross_street = get_cross_streets_from_description(
+            description)
 
         coordinates = get_linestring(pd.get('geometry'))
         if not coordinates:

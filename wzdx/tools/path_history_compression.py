@@ -2,59 +2,6 @@ import math
 import logging
 from wzdx.tools import polygon_tools
 
-###
-#   The following function computes lat and lon for a point distance "d" meters and bearing (heading)from an origin
-#   with known lat1, lat2.
-#
-#   See https://www.movable-type.co.uk/scripts/latlong.html for more detail.
-#
-#   The function computes node point lat/lon for the adjacent lane's lane width (d) apart and 90 degree bearing
-#   from the vehicle path data lane.
-#
-#   lat1    = Latitude of origin
-#   lon1    = Longitude of origin
-#   bearing = Destination direction in degree
-#   dist    = Destination distance in km
-###
-
-
-def getEndPoint(lat1, lon1, bearing, d):
-    R = 6371.0*1000  # Radius of the Earth in meters
-    brng = math.radians(bearing)  # convert degrees to radians
-    dist = d  # convert distance in meters
-    lat1 = math.radians(lat1)  # Current lat point converted to radians
-    lon1 = math.radians(lon1)  # Current long point converted to radians
-    lat2 = math.asin(math.sin(lat1)*math.cos(d/R) +
-                     math.cos(lat1)*math.sin(d/R)*math.cos(brng))
-    lon2 = lon1 + math.atan2(math.sin(brng)*math.sin(d/R) *
-                             math.cos(lat1), math.cos(d/R)-math.sin(lat1)*math.sin(lat2))
-    lat2 = math.degrees(lat2)
-    lon2 = math.degrees(lon2)
-    return lat2, lon2
-
-# ------------------------------------------------------------------------------------
-
-###
-#   Following function computes distance between two lat/lon points in meters...
-#   Added on - 8-28-2017...
-###
-
-
-def getDist(origin, destination):
-    lon1, lat1 = origin  # lon/lat of origin
-    lon2, lat2 = destination  # lonlat of dest
-    radius = 6371.0*1000  # meters
-
-    dlat = math.radians(lat2-lat1)  # in radians
-    dlon = math.radians(lon2-lon1)
-
-    a = math.sin(dlat/2) * math.sin(dlat/2) + math.cos(math.radians(lat1)) \
-        * math.cos(math.radians(lat2)) * math.sin(dlon/2) * math.sin(dlon/2)
-    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
-    d = radius * c
-
-    return d
-
 
 def getChordLength(pt1, pt2):
     lon1 = math.radians(pt1[0])
@@ -76,8 +23,6 @@ def getChordLength(pt1, pt2):
         d = radius * c
     return d
 
-# ------------------------------------------------------------------------------------
-
 
 ###
 # Generate concise path history based on SAE J2945/1 2016-03, Section A.5
@@ -87,8 +32,6 @@ def getChordLength(pt1, pt2):
 #
 #
 ###
-
-
 def generage_compressed_path(path):
     if len(path) <= 3:
         logging.error("Work zone is too short")

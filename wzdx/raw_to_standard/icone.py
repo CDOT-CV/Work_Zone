@@ -29,6 +29,7 @@ def main():
         else:
             wzdx_msg['features'].extend(wzdx['features'])
 
+    # TODO: Sort these comments out
     # generated_files_list = []
     # for message in generated_messages:
     #     output_path = f"{output_dir}/standard_icone_{message['event']['source']['id']}_{round(message['rtdh_timestamp'])}.json"
