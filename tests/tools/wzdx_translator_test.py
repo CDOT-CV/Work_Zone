@@ -120,7 +120,7 @@ def test_initialize_info():
 
 # --------------------------------------------------------------------------------Unit test for add_ids_v3 function--------------------------------------------------------------------------------
 @patch('uuid.uuid4')
-def test_add_ids_v3(mockuuid):
+def test_add_ids(mockuuid):
     uuid.uuid4 = Mock()
     uuid.uuid4.side_effect = ['we234de', '23wsg54h']
     input_message = {
@@ -135,12 +135,11 @@ def test_add_ids_v3(mockuuid):
             {
                 'properties': {
                     'core_details': {
-                    'road_event_id': "",
-                    'data_source_id': "",
-                    'relationship': {
-                        'relationship_id': "",
-                        'road_event_id': ""
-                    }
+                        'data_source_id': "",
+                        'relationship': {
+                            'relationship_id': "",
+                            'road_event_id': ""
+                        }
                     }
                 }
             }
@@ -158,11 +157,12 @@ def test_add_ids_v3(mockuuid):
         'features': [
             {
                 'properties': {
-                    'road_event_id': "we234de",
-                    'data_source_id': "u12s5grt",
-                    'relationship': {
-                        'relationship_id': "23wsg54h",
-                        'road_event_id': "we234de"
+                    'core_details': {
+                        'data_source_id': "u12s5grt",
+                        'relationship': {
+                            'relationship_id': "23wsg54h",
+                            'road_event_id': "we234de"
+                        }
                     }
                 }
             }
@@ -173,7 +173,7 @@ def test_add_ids_v3(mockuuid):
 
 
 @patch('uuid.uuid4')
-def test_add_ids_v3_invalid_message_type(mockuuid):
+def test_add_ids_invalid_message_type(mockuuid):
     uuid.uuid4 = Mock()
     uuid.uuid4.side_effect = ['we234de', '23wsg54h']
     input_message = 'invalid message'
@@ -184,7 +184,7 @@ def test_add_ids_v3_invalid_message_type(mockuuid):
 
 
 @patch('uuid.uuid4')
-def test_add_ids_v3_empty_message(mockuuid):
+def test_add_ids_empty_message(mockuuid):
     uuid.uuid4 = Mock()
     uuid.uuid4.side_effect = ['we234de', '23wsg54h']
     input_message = None

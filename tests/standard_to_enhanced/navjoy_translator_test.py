@@ -52,27 +52,28 @@ def test_parse_reduction_zone_linestring(mock_dt, mock_dt_3):
     test_feature = navjoy_translator.parse_reduction_zone(standard)
 
     expected_feature = {
+        'id': 'Form568-44819108-703c-4d6d-ae0d-7dca7319e5b0',
         "type": "Feature",
         "properties": {
-            "road_event_id": None,
-            "event_type": "work-zone",
-            "data_source_id": None,
+            "core_details": {
+                "data_source_id": '',
+                "event_type": "work-zone",
+                "road_names": ["287"],
+                "direction": "eastbound",
+                "description": "Maintenance for lane expansion. Lane expansion - maintenance work",
+                "update_date": "2021-12-07T10:05:01Z"
+            },
             "start_date": "2021-08-30T02:30:00Z",
             "end_date": "2021-08-30T02:30:00Z",
             "start_date_accuracy": "estimated",
             "end_date_accuracy": "estimated",
             "beginning_accuracy": "estimated",
             "ending_accuracy": "estimated",
-            "road_names": ["287"],
-            "direction": "eastbound",
             "vehicle_impact": "all-lanes-open",
             "event_status": "completed",
             "reduced_speed_limit": 45,
             'types_of_work': [{'type_name': 'surface-work',
                                'is_architectural_change': True}],
-            "description": "Maintenance for lane expansion. Lane expansion - maintenance work",
-            "creation_date": "2021-12-07T03:05:01Z",
-            "update_date": "2021-12-07T10:05:01Z"
         },
         "geometry": {
             "type": "LineString",
@@ -172,29 +173,28 @@ def test_wzdx_creator(mock_dt, mock_dt_3, mockuuid):
 
     expected_wzdx = {
         'road_event_feed_info': {
-            'feed_info_id': '2ed141dc-b998-4f7a-8395-9ae9dc7df2f8',
             'update_date': '2021-04-13T00:00:00Z',
             'publisher': 'CDOT',
             'contact_name': 'Ashley Nylen',
             'contact_email': 'ashley.nylen@state.co.us',
-            'version': '3.1',
+            'version': '4.0',
+            "update_frequency": 300,
             'license': 'https://creativecommons.org/publicdomain/zero/1.0/',
             'data_sources': [
                 {
                     'data_source_id': 'w',
-                    'feed_info_id': '2ed141dc-b998-4f7a-8395-9ae9dc7df2f8',
                     'organization_name': 'CDOT',
                     'contact_name': 'Ashley Nylen',
                     'contact_email': 'ashley.nylen@state.co.us',
                     'update_date': '2021-04-13T00:00:00Z',
-                    'location_method': 'channel-device-method',
-                    'lrs_type': 'lrs_type'
+                    "update_frequency": 300,
                 }
             ]
         },
         'type': 'FeatureCollection',
         'features': [
             {
+                'id': 'Form568-44819108-703c-4d6d-ae0d-7dca7319e5b0',
                 'type': 'Feature',
                 'properties': {
                     'core_details': {
@@ -203,7 +203,6 @@ def test_wzdx_creator(mock_dt, mock_dt_3, mockuuid):
                         'road_names': ['287'],
                         'direction': 'eastbound',
                         'description': 'Maintenance for lane expansion. Lane expansion - maintenance work',
-                        'creation_date': "2021-12-07T03:05:01Z",
                         'update_date': "2021-12-07T10:05:01Z"
                     },
                     'reduced_speed_limit': 45,
@@ -229,7 +228,6 @@ def test_wzdx_creator(mock_dt, mock_dt_3, mockuuid):
                         [-104.79432762150851, 39.73959547447038]
                     ]
                 },
-                'id': '2',
             }
         ]
     }

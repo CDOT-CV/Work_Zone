@@ -6,7 +6,7 @@ import copy
 from wzdx.sample_files.validation_schema import wzdx_v40_feed
 import uuid
 
-from wzdx.tools import date_tools, polygon_tools, wzdx_translator
+from wzdx.tools import date_tools, geospatial_tools, wzdx_translator
 
 PROGRAM_NAME = 'IconeTranslator'
 PROGRAM_VERSION = '1.0'
@@ -252,9 +252,6 @@ def parse_incident(incident):
     if not direction:
         return None
     core_details['direction'] = direction
-
-    # Relationship
-    core_details['relationship'] = {}
 
     # description
     core_details['description'] = header.get('description')
