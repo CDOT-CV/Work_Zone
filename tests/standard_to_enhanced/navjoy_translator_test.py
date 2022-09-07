@@ -197,18 +197,22 @@ def test_wzdx_creator(mock_dt, mock_dt_3, mockuuid):
             {
                 'type': 'Feature',
                 'properties': {
-                    'road_event_id': '2',
-                    'event_type': 'work-zone',
+                    'core_details': {
+                        'data_source_id': 'w',
+                        'event_type': 'work-zone',
+                        'road_names': ['287'],
+                        'direction': 'eastbound',
+                        'description': 'Maintenance for lane expansion. Lane expansion - maintenance work',
+                        'creation_date': "2021-12-07T03:05:01Z",
+                        'update_date': "2021-12-07T10:05:01Z"
+                    },
                     'reduced_speed_limit': 45,
-                    'data_source_id': 'w',
                     'start_date': "2021-08-30T02:30:00Z",
                     'end_date': "2021-08-30T02:30:00Z",
                     'start_date_accuracy': 'estimated',
                     'end_date_accuracy': 'estimated',
                     'beginning_accuracy': 'estimated',
                     'ending_accuracy': 'estimated',
-                    'road_names': ['287'],
-                    'direction': 'eastbound',
                     'vehicle_impact': 'all-lanes-open',
                     'event_status': 'planned',
                     'types_of_work': [
@@ -216,10 +220,7 @@ def test_wzdx_creator(mock_dt, mock_dt_3, mockuuid):
                             'type_name': 'surface-work',
                             'is_architectural_change': True
                         }
-                    ],
-                    'description': 'Maintenance for lane expansion. Lane expansion - maintenance work',
-                    'creation_date': "2021-12-07T03:05:01Z",
-                    'update_date': "2021-12-07T10:05:01Z"
+                    ]
                 },
                 'geometry': {
                     'type': 'LineString',
@@ -227,7 +228,8 @@ def test_wzdx_creator(mock_dt, mock_dt_3, mockuuid):
                         [-104.82230842595187, 39.73946349406594],
                         [-104.79432762150851, 39.73959547447038]
                     ]
-                }
+                },
+                'id': '2',
             }
         ]
     }

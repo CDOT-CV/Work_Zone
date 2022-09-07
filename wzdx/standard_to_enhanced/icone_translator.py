@@ -56,7 +56,7 @@ def wzdx_creator(message, info=None):
     if not wzdx_translator.validate_info(info):
         return None
 
-    wzd = wzdx_translator.initialize_wzdx_object_v4(info)
+    wzd = wzdx_translator.initialize_wzdx_object(info)
 
     # Parse Incident to WZDx Feature
     feature = parse_incident(message)
@@ -65,7 +65,7 @@ def wzdx_creator(message, info=None):
 
     if not wzd.get('features'):
         return None
-    wzd = wzdx_translator.add_ids_v4(wzd)
+    wzd = wzdx_translator.add_ids(wzd)
     return wzd
 
 

@@ -33,6 +33,8 @@ def get_road_direction_from_coordinates(coordinates):
         lat_dif = coordinates[-1][1] - coordinates[0][1]
     except ValueError as e:
         return None
+    except IndexError as e:
+        return None
 
     if abs(long_dif) > abs(lat_dif):
         if long_dif > 0:
@@ -60,7 +62,7 @@ def get_heading_from_coordinates(coordinates):
     fwd_heading, _, __ = geodesic_pyproj.inv(
         coordinates[0][0], coordinates[0][1], coordinates[1][0], coordinates[1][1])
 
-    return fwd_heading
+    return fwd_heading % 360
 
 
 # unecessarily condensed just because

@@ -35,6 +35,14 @@ def test_get_road_direction_empty_coordinates():
     assert test_direction == valid_direction
 
 
+def test_get_road_direction_short_coordinates():
+    test_coordinates = [[], []]
+    test_direction = geospatial_tools.get_road_direction_from_coordinates(
+        test_coordinates)
+    valid_direction = None
+    assert test_direction == valid_direction
+
+
 def test_get_road_direction_null_coordinates():
     test_coordinates = None
     test_direction = geospatial_tools.get_road_direction_from_coordinates(
@@ -94,23 +102,40 @@ def test_get_road_direction_westbound_direction():
     assert test_direction == valid_direction
 
 
+def test_get_heading_from_coordinates_invalid():
+    coordinates = []
+    actual = geospatial_tools.get_heading_from_coordinates(coordinates)
+    expected = None
+    assert actual == expected
+
+    coordinates = {}
+    actual = geospatial_tools.get_heading_from_coordinates(coordinates)
+    expected = None
+    assert actual == expected
+
+    coordinates = [[0, 0]]
+    actual = geospatial_tools.get_heading_from_coordinates(coordinates)
+    expected = None
+    assert actual == expected
+
+
 def test_get_heading_from_coordinates_north():
     coordinates = [[0, 0], [0, 1]]
-    actual = geospatial_tools.get_heading_from_coordinates(coordinates) % 360
+    actual = geospatial_tools.get_heading_from_coordinates(coordinates)
     expected = 0
     assert abs(actual - expected) < 0.1
 
 
 def test_get_heading_from_coordinates_east():
     coordinates = [[0, 0], [1, 0]]
-    actual = geospatial_tools.get_heading_from_coordinates(coordinates) % 360
+    actual = geospatial_tools.get_heading_from_coordinates(coordinates)
     expected = 90
     assert abs(actual - expected) < 0.1
 
 
 def test_get_heading_from_coordinates_south():
     coordinates = [[0, 0], [0, -1]]
-    actual = geospatial_tools.get_heading_from_coordinates(coordinates) % 360
+    actual = geospatial_tools.get_heading_from_coordinates(coordinates)
     expected = 180
     assert abs(actual - expected) < 0.1
 
@@ -165,3 +190,24 @@ def test_get_closest_direction_from_bearing_all_southbound():
         print(i)
         assert geospatial_tools.get_closest_direction_from_bearing(
             i, 'northbound') == 'southbound'
+
+
+def test_getEndPoint():
+    start = (37.19060215300004, -105.49113132299999)
+    bearing = 21.6697
+    distance = 13.88 * 1000
+    expected = (37.30655150100006, -105.43320319899999)
+
+    actual = geospatial_tools.getEndPoint(*start, bearing, distance)
+    assert abs(actual[0] - expected[0]
+               ) < 0.0001 and abs(actual[1] - expected[1]) < 0.0001
+
+
+def test_getDist():
+    start = (-105.49113132299999, 37.19060215300004)
+    end = (-105.43320319899999, 37.30655150100006)
+
+    expected = 13.88 * 1000
+
+    actual = geospatial_tools.getDist(start, end)
+    assert abs(actual - expected) < 5

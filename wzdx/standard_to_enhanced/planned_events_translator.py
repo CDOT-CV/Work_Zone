@@ -67,7 +67,7 @@ def wzdx_creator(message, info=None):
         return None
 
     if event_type == 'work-zone':
-        wzd = wzdx_translator.initialize_wzdx_object_v4(info)
+        wzd = wzdx_translator.initialize_wzdx_object(info)
         feature = parse_work_zone(message)
     elif event_type == 'restriction':
         wzd = wzdx_translator.initialize_wzdx_object_restriction(info)
@@ -81,7 +81,7 @@ def wzdx_creator(message, info=None):
     if not wzd.get('features'):
         return None
 
-    wzd = wzdx_translator.add_ids_v4(wzd, event_type)
+    wzd = wzdx_translator.add_ids(wzd, event_type)
     return wzd
 
 
