@@ -2,7 +2,7 @@ from unittest.mock import MagicMock, patch
 
 from shapely.geometry import Point
 from shapely.geometry.polygon import Polygon
-from wzdx.combination import combine_wzdx
+from wzdx.experimental_combination import icone_cotrip
 from wzdx.tools import polygon_tools
 
 # --------------------------------------------------------------------------------Unit test for combine_wzdx function--------------------------------------------------------------------------------
@@ -66,7 +66,7 @@ def test_combine_wzdx():
         ]
     }
 
-    actual = combine_wzdx.combine_wzdx(
+    actual = icone_cotrip.combine_wzdx(
         test_cotrip_data, 0, test_icone_data, 0)
 
     assert expected_combined_wzdx == actual
@@ -182,7 +182,7 @@ def test_find_overlapping_features_and_combine():
         ]
     }
 
-    actual = combine_wzdx.find_overlapping_features_and_combine(
+    actual = icone_cotrip.find_overlapping_features_and_combine(
         test_icone_data, test_cotrip_data)
 
     assert expected_combined_wzdx == actual
@@ -248,7 +248,7 @@ def test_find_overlapping_features_and_combine_no_duplicates():
 
     expected_combined_wzdx = None
 
-    actual = combine_wzdx.find_overlapping_features_and_combine(
+    actual = icone_cotrip.find_overlapping_features_and_combine(
         test_icone_data, test_cotrip_data)
 
     assert expected_combined_wzdx == actual
@@ -297,7 +297,7 @@ def test_iterate_feature(mocked_combine_wzdx):
 
     expected = [0, 1]
 
-    actual = combine_wzdx.iterate_feature('polygon', test_wzdx_message)
+    actual = icone_cotrip.iterate_feature('polygon', test_wzdx_message)
 
     assert actual == expected
 
@@ -328,7 +328,7 @@ def test_iterate_feature_no_match_feature(mocked_combine_wzdx):
 
     expected = []
 
-    actual = combine_wzdx.iterate_feature('polygon', test_wzdx_message)
+    actual = icone_cotrip.iterate_feature('polygon', test_wzdx_message)
 
     assert actual == expected
 

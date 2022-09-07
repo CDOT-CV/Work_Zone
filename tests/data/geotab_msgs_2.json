@@ -1,0 +1,62 @@
+[
+  {
+    "avl_location": {
+      "vehicle": {
+        "id": "bFB",
+        "id2": "G90N60BYJT18",
+        "fleet": "Heavy",
+        "type": "Attenuator",
+        "sub_type": "Attenuator (ATMA)"
+      },
+      "position": {
+        "latitude": 37.1957245,
+        "longitude": -105.428146,
+        "bearing": 45,
+        "speed": 5,
+        "odometer": null
+      },
+      "confidence": null,
+      "current_status": {
+        "state": "Active",
+        "info": "Driving"
+      },
+      "additional_info": [],
+      "source": {
+        "name": "Geotab",
+        "collection_timestamp": "2022-07-28 21:04:43.847000+00:00"
+      }
+    },
+    "rtdh_message_id": "110e5ecc-cd7f-48dc-8e59-ac6ef49fc1d0",
+    "rtdh_timestamp": "2022-07-28T21:05:53Z"
+  },
+  {
+    "avl_location": {
+      "vehicle": {
+        "id": "bFB",
+        "id2": "G90N60BYJT18",
+        "fleet": "Heavy",
+        "type": "Attenuator",
+        "sub_type": "Attenuator (ATMA)"
+      },
+      "position": {
+        "latitude": 37.3709297,
+        "longitude": -105.941093,
+        "bearing": 45,
+        "speed": 3,
+        "odometer": null
+      },
+      "confidence": null,
+      "current_status": {
+        "state": "Active",
+        "info": "Driving"
+      },
+      "additional_info": [],
+      "source": {
+        "name": "Geotab",
+        "collection_timestamp": "2022-07-28 21:03:43.847000+00:00"
+      }
+    },
+    "rtdh_message_id": "110e5ecc-cd7f-48dc-8e59-ac6ef49fc1d0",
+    "rtdh_timestamp": "2022-07-28T21:04:53Z"
+  }
+]

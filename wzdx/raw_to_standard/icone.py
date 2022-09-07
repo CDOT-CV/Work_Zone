@@ -7,7 +7,7 @@ import datetime
 import xml.etree.ElementTree as ET
 from collections import OrderedDict
 
-from wzdx.tools import date_tools, polygon_tools, wzdx_translator, cdot_geospatial_api
+from wzdx.tools import date_tools, geospatial_tools, wzdx_translator, cdot_geospatial_api
 from wzdx.util.collections import PathDict
 from wzdx.standard_to_enhanced import icone_translator
 
@@ -181,7 +181,8 @@ def get_direction(street, coords, route_details=None):
     if not direction and route_details:
         direction = get_direction_from_route_details(route_details)
     if not direction:
-        direction = polygon_tools.get_road_direction_from_coordinates(coords)
+        direction = geospatial_tools.get_road_direction_from_coordinates(
+            coords)
     return direction
 
 

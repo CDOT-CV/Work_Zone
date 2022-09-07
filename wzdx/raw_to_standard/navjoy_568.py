@@ -7,7 +7,7 @@ import uuid
 from collections import OrderedDict
 from datetime import datetime
 
-from wzdx.tools import array_tools, date_tools, polygon_tools
+from wzdx.tools import array_tools, date_tools, polygon_tools, geospatial_tools
 from wzdx.util.collections import PathDict
 
 PROGRAM_NAME = 'Navjoy568RawToStandard'
@@ -214,7 +214,7 @@ def create_rtdh_standard_msg(pd):
     direction = pd.get("data/direction", default='unknown')
 
     # Reverse polygon if it is in the opposite direction as the message
-    polyline_direction = polygon_tools.get_road_direction_from_coordinates(
+    polyline_direction = geospatial_tools.get_road_direction_from_coordinates(
         coordinates)
     if direction == REVERSED_DIRECTION_MAP.get(polyline_direction):
         coordinates.reverse()

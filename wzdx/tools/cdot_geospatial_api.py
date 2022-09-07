@@ -1,6 +1,6 @@
 import requests
 import json
-from wzdx.tools import polygon_tools, path_history_compression
+from wzdx.tools import geospatial_tools, path_history_compression
 import logging
 
 BASE_URL = "https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded"
@@ -92,7 +92,7 @@ def get_route_and_measure(latLng, heading=None, tolerance=10000):
             startMeasure = measure
             endMeasure = measure + step
         coords = get_route_between_measures(route, startMeasure, endMeasure)
-        bearing = polygon_tools.get_heading_from_coordinates(coords)
+        bearing = geospatial_tools.get_heading_from_coordinates(coords)
 
         if bearing > 180:
             bearing -= 360

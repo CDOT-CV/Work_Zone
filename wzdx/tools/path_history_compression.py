@@ -1,6 +1,6 @@
 import math
 import logging
-from wzdx.tools import polygon_tools
+from wzdx.tools import geospatial_tools
 
 
 def getChordLength(pt1, pt2):
@@ -72,9 +72,9 @@ def generage_compressed_path(path):
             # Go to step 7
 
     # Step 3
-        heading_start = polygon_tools.get_heading_from_coordinates(
+        heading_start = geospatial_tools.get_heading_from_coordinates(
             [path[i-3], Pstarting])
-        heading_next = polygon_tools.get_heading_from_coordinates(
+        heading_next = geospatial_tools.get_heading_from_coordinates(
             [Pprevious, Pnext])
         deltaHeadings = abs(heading_next - heading_start)
         if deltaHeadings > 180:

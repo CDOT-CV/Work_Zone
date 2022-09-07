@@ -247,7 +247,7 @@ def parse_incident(incident):
         if direction:
             break
     if not direction:
-        direction = polygon_tools.get_road_direction_from_coordinates(
+        direction = geospatial_tools.get_road_direction_from_coordinates(
             geometry.get('coordinates'))
     if not direction:
         return None

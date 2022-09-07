@@ -18,38 +18,9 @@ ROAD_ORIENTATIONS_MAP = {
 }
 
 ROAD_OREINTATIONS_DIRECTIONS_MAP = {
-    0: ["northbound", "southbound"],
-    180: ["eastbound", "westbound"]
+    0: ["northbound", "southbound", "southbound", "northbound"],
+    180: ["eastbound", "westbound", "westbound", "eastbound"]
 }
-
-
-# function to get road direction by using geometry coordinates
-def get_road_directions_from_coordinates(coordinates):
-    if not coordinates or type(coordinates) != list or len(coordinates) < 2:
-        return None
-
-    directions = []
-
-    try:
-        long_dif = coordinates[-1][0] - coordinates[0][0]
-        lat_dif = coordinates[-1][1] - coordinates[0][1]
-    except ValueError as e:
-        return None
-
-    if abs(long_dif) > abs(lat_dif):
-        if long_dif > 0:
-            directions.append('eastbound')
-        else:
-            directions.append('westbound')
-    elif lat_dif > 0:
-        directions.append('northbound')
-    else:
-        directions.append('southbound')
-
-    if lat_dif == 0 and long_dif == 0:
-        directions = None
-
-    return directions
 
 
 # function to get road direction by using geometry coordinates
@@ -92,13 +63,6 @@ def get_heading_from_coordinates(coordinates):
     return fwd_heading
 
 
-def angle_between_vectors_degrees(u, v):
-    """Return the angle between two vectors in any dimension space,
-    in degrees."""
-    return np.degrees(
-        math.acos(np.dot(u, v) / (np.linalg.norm(u) * np.linalg.norm(v))))
-
-
 # unecessarily condensed just because
 def get_direction_from_bearing(bearing):
     return ROAD_DIRECTIONS_MAP[math.floor((bearing + 45)/90) % 4]
@@ -107,7 +71,7 @@ def get_direction_from_bearing(bearing):
 # unecessarily condensed just because
 def get_closest_direction_from_bearing(bearing, road_orientation):
     orientation = ROAD_ORIENTATIONS_MAP[road_orientation]
-    return ROAD_OREINTATIONS_DIRECTIONS_MAP[orientation][math.floor((orientation - (bearing % 360))/180)]
+    return ROAD_OREINTATIONS_DIRECTIONS_MAP[orientation][math.floor(abs(orientation - (bearing % 360))/90)]
 
 
 ###

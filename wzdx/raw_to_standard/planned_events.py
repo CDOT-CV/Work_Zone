@@ -340,7 +340,7 @@ def get_improved_geometry(coordinates, event_status, id):
             f"Routes did not match, not generating improved geometry: {id}")
         return coordinates
 
-    initialDirection = polygon_tools.get_road_direction_from_coordinates(
+    initialDirection = geospatial_tools.get_road_direction_from_coordinates(
         coordinates)
     newCoordinates = cdot_geospatial_api.get_route_between_measures(
         startRouteParams['Route'],
@@ -348,7 +348,7 @@ def get_improved_geometry(coordinates, event_status, id):
         endRouteParams['Measure'],
         compressed=True)
 
-    finalDirection = polygon_tools.get_road_direction_from_coordinates(
+    finalDirection = geospatial_tools.get_road_direction_from_coordinates(
         newCoordinates)
 
     # TODO: Implement Bi-directional carriageway
