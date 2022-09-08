@@ -1,0 +1,532 @@
+[
+  {
+    "rtdh_timestamp": 1662062549.0929315,
+    "rtdh_message_id": "b65b04ba-7d60-46e9-952b-0531546e4c8f",
+    "event": {
+      "type": "CONSTRUCTION",
+      "source": {
+        "id": "U13632281_202209011439",
+        "creation_timestamp": 1662043140000,
+        "last_updated_timestamp": 1662061980000
+      },
+      "geometry": [
+        [
+          -104.8265329,
+          39.7721581
+        ],
+        [
+          -104.8265329,
+          39.7721581
+        ]
+      ],
+      "header": {
+        "description": "Roadwork - Caution [iCone]",
+        "start_timestamp": 1662043140000,
+        "end_timestamp": 1662667349093
+      },
+      "detail": {
+        "road_name": null,
+        "road_number": null,
+        "direction": "northbound"
+      },
+      "additional_info": {
+        "devices": [
+          {
+            "sensor_type": "display",
+            "details": {
+              "@type": "AB",
+              "@id": "13632281",
+              "@latitude": "39.7721581",
+              "@longitude": "-104.8265329",
+              "message": {
+                "@verified": "2022-09-01T19:53:00Z",
+                "@indicator": "Caution",
+                "@latitude": "39.7722368",
+                "@longitude": "-104.8266816"
+              },
+              "status": {
+                "@type": "Arrow Panel",
+                "@starttime": "2022-09-01T13:36:20Z",
+                "@verified": "2022-09-01T19:53:00Z",
+                "@state": "Caution - Corners"
+              }
+            }
+          }
+        ],
+        "directionality": "ONE_DIRECTION"
+      }
+    }
+  },
+  {
+    "rtdh_timestamp": 1662062549.0939324,
+    "rtdh_message_id": "0f54af86-0a01-45f9-8b71-ab2c8dd73ed4",
+    "event": {
+      "type": "CONSTRUCTION",
+      "source": {
+        "id": "U13632530_202209011227",
+        "creation_timestamp": 1662035275000,
+        "last_updated_timestamp": 1662061987000
+      },
+      "geometry": [
+        [
+          -104.986356,
+          40.3103256
+        ],
+        [
+          -104.986356,
+          40.3103256
+        ]
+      ],
+      "header": {
+        "description": "Roadwork - Lane Closed, MERGE RIGHT [iCone]",
+        "start_timestamp": 1662035275000,
+        "end_timestamp": 1662667349094
+      },
+      "detail": {
+        "road_name": null,
+        "road_number": null,
+        "direction": "northbound"
+      },
+      "additional_info": {
+        "devices": [
+          {
+            "sensor_type": "display",
+            "details": {
+              "@type": "AB",
+              "@id": "13632530",
+              "@latitude": "40.3103256",
+              "@longitude": "-104.9863560",
+              "message": {
+                "@verified": "2022-09-01T19:53:07Z",
+                "@indicator": "Merge Right",
+                "@latitude": "40.3103190",
+                "@longitude": "-104.9863631"
+              },
+              "status": {
+                "@type": "Arrow Panel",
+                "@starttime": "2022-09-01T12:27:55Z",
+                "@verified": "2022-09-01T19:53:07Z",
+                "@state": "Right Arrow"
+              }
+            }
+          }
+        ],
+        "directionality": "ONE_DIRECTION"
+      }
+    }
+  },
+  {
+    "rtdh_timestamp": 1662062549.0939324,
+    "rtdh_message_id": "0d8b283c-cad0-438d-8bd1-233d4613ab8c",
+    "event": {
+      "type": "CONSTRUCTION",
+      "source": {
+        "id": "U13632312_202209011954",
+        "creation_timestamp": 1662062065000,
+        "last_updated_timestamp": 1662062066000
+      },
+      "geometry": [
+        [
+          -107.2869756,
+          39.4813435
+        ],
+        [
+          -107.2869756,
+          39.4813435
+        ]
+      ],
+      "header": {
+        "description": "Roadwork - Lane Closed, MERGE LEFT [iCone]",
+        "start_timestamp": 1662062065000,
+        "end_timestamp": 1662667349094
+      },
+      "detail": {
+        "road_name": null,
+        "road_number": null,
+        "direction": "northbound"
+      },
+      "additional_info": {
+        "devices": [
+          {
+            "sensor_type": "display",
+            "details": {
+              "@type": "AB",
+              "@id": "13632312",
+              "@latitude": "39.4813435",
+              "@longitude": "-107.2869756",
+              "message": {
+                "@verified": "2022-09-01T19:54:26Z",
+                "@indicator": "Merge Left",
+                "@latitude": "39.4813435",
+                "@longitude": "-107.2869756"
+              },
+              "status": {
+                "@type": "Arrow Panel",
+                "@starttime": "2022-09-01T19:54:25Z",
+                "@verified": "2022-09-01T19:54:26Z",
+                "@state": "Left Chevron"
+              }
+            }
+          }
+        ],
+        "directionality": "ONE_DIRECTION"
+      }
+    }
+  },
+  {
+    "rtdh_timestamp": 1662062549.0939324,
+    "rtdh_message_id": "5f0c6ecf-20ae-48b4-8e91-bfdb72778e2f",
+    "event": {
+      "type": "CONSTRUCTION",
+      "source": {
+        "id": "U13632309_202209011803",
+        "creation_timestamp": 1662055380000,
+        "last_updated_timestamp": 1662062062000
+      },
+      "geometry": [
+        [
+          -104.7048446,
+          40.3505316
+        ],
+        [
+          -104.7048446,
+          40.3505316
+        ]
+      ],
+      "header": {
+        "description": "Roadwork - Caution [iCone]",
+        "start_timestamp": 1662055380000,
+        "end_timestamp": 1662667349094
+      },
+      "detail": {
+        "road_name": null,
+        "road_number": null,
+        "direction": "northbound"
+      },
+      "additional_info": {
+        "devices": [
+          {
+            "sensor_type": "display",
+            "details": {
+              "@type": "AB",
+              "@id": "13632309",
+              "@latitude": "40.3505316",
+              "@longitude": "-104.7048446",
+              "message": {
+                "@verified": "2022-09-01T19:54:22Z",
+                "@indicator": "Caution",
+                "@latitude": "40.3505388",
+                "@longitude": "-104.7048279"
+              },
+              "status": {
+                "@type": "Arrow Panel",
+                "@starttime": "2022-09-01T17:43:32Z",
+                "@verified": "2022-09-01T19:54:22Z",
+                "@state": "Caution - Corners"
+              }
+            }
+          }
+        ],
+        "directionality": "ONE_DIRECTION"
+      }
+    }
+  },
+  {
+    "rtdh_timestamp": 1662062549.0949306,
+    "rtdh_message_id": "47a67edc-4cbd-4486-8aac-f55b9ff99def",
+    "event": {
+      "type": "CONSTRUCTION",
+      "source": {
+        "id": "U13631771_202209011421",
+        "creation_timestamp": 1662042060000,
+        "last_updated_timestamp": 1662062220000
+      },
+      "geometry": [
+        [
+          -104.8243051,
+          39.571862
+        ],
+        [
+          -104.8243051,
+          39.571862
+        ]
+      ],
+      "header": {
+        "description": "Roadwork - Lane Closed, MERGE LEFT [iCone]",
+        "start_timestamp": 1662042060000,
+        "end_timestamp": 1662667349095
+      },
+      "detail": {
+        "road_name": null,
+        "road_number": null,
+        "direction": "northbound"
+      },
+      "additional_info": {
+        "devices": [
+          {
+            "sensor_type": "display",
+            "details": {
+              "@type": "AB",
+              "@id": "13631771",
+              "@latitude": "39.5718620",
+              "@longitude": "-104.8243051",
+              "message": {
+                "@verified": "2022-09-01T19:57:00Z",
+                "@indicator": "Merge Left",
+                "@latitude": "39.5719072",
+                "@longitude": "-104.8242880"
+              },
+              "status": {
+                "@type": "Arrow Panel",
+                "@starttime": "2022-09-01T14:21:00Z",
+                "@verified": "2022-09-01T19:57:00Z",
+                "@state": "Left Arrow"
+              }
+            }
+          }
+        ],
+        "directionality": "ONE_DIRECTION"
+      }
+    }
+  },
+  {
+    "rtdh_timestamp": 1662062549.0949306,
+    "rtdh_message_id": "b1bd38b9-c80a-4f94-bb34-2ec5ae8261ff",
+    "event": {
+      "type": "CONSTRUCTION",
+      "source": {
+        "id": "U13632272_202209011801",
+        "creation_timestamp": 1662055260000,
+        "last_updated_timestamp": 1662062160000
+      },
+      "geometry": [
+        [
+          -104.9854336,
+          39.7798352
+        ],
+        [
+          -104.9854336,
+          39.7798352
+        ]
+      ],
+      "header": {
+        "description": "Roadwork - Caution [iCone]",
+        "start_timestamp": 1662055260000,
+        "end_timestamp": 1662667349095
+      },
+      "detail": {
+        "road_name": null,
+        "road_number": null,
+        "direction": "northbound"
+      },
+      "additional_info": {
+        "devices": [
+          {
+            "sensor_type": "display",
+            "details": {
+              "@type": "AB",
+              "@id": "13632272",
+              "@latitude": "39.7798352",
+              "@longitude": "-104.9854336",
+              "message": {
+                "@verified": "2022-09-01T19:56:00Z",
+                "@indicator": "Caution",
+                "@latitude": "39.7798624",
+                "@longitude": "-104.9854656"
+              },
+              "status": {
+                "@type": "Arrow Panel",
+                "@starttime": "2022-09-01T04:25:25Z",
+                "@verified": "2022-09-01T19:56:00Z",
+                "@state": "Caution - Corners"
+              }
+            }
+          }
+        ],
+        "directionality": "ONE_DIRECTION"
+      }
+    }
+  },
+  {
+    "rtdh_timestamp": 1662062549.0949306,
+    "rtdh_message_id": "7402f0e9-f3c3-44bb-9a6b-0ee507eb70c6",
+    "event": {
+      "type": "CONSTRUCTION",
+      "source": {
+        "id": "U13632551_202209011957",
+        "creation_timestamp": 1662062220000,
+        "last_updated_timestamp": 1662062224000
+      },
+      "geometry": [
+        [
+          -107.2702623,
+          39.4734131
+        ],
+        [
+          -107.2702623,
+          39.4734131
+        ]
+      ],
+      "header": {
+        "description": "Roadwork - Lane Closed, MERGE LEFT [iCone]",
+        "start_timestamp": 1662062220000,
+        "end_timestamp": 1662667349095
+      },
+      "detail": {
+        "road_name": null,
+        "road_number": null,
+        "direction": "northbound"
+      },
+      "additional_info": {
+        "devices": [
+          {
+            "sensor_type": "display",
+            "details": {
+              "@type": "AB",
+              "@id": "13632551",
+              "@latitude": "39.4734131",
+              "@longitude": "-107.2702623",
+              "message": {
+                "@verified": "2022-09-01T19:57:04Z",
+                "@indicator": "Merge Left",
+                "@latitude": "39.4734131",
+                "@longitude": "-107.2702623"
+              },
+              "status": {
+                "@type": "Arrow Panel",
+                "@starttime": "2022-09-01T17:10:21Z",
+                "@verified": "2022-09-01T19:57:04Z",
+                "@state": "Left Chevron"
+              }
+            }
+          }
+        ],
+        "directionality": "ONE_DIRECTION"
+      }
+    }
+  },
+  {
+    "rtdh_timestamp": 1662062549.0959306,
+    "rtdh_message_id": "68429f1d-4466-43cd-8f25-acf5a7b6c000",
+    "event": {
+      "type": "CONSTRUCTION",
+      "source": {
+        "id": "U13632786_202209011956",
+        "creation_timestamp": 1662062194000,
+        "last_updated_timestamp": 1662062251000
+      },
+      "geometry": [
+        [
+          -105.0138055,
+          39.7342492
+        ],
+        [
+          -105.0138055,
+          39.7342492
+        ]
+      ],
+      "header": {
+        "description": "Roadwork - Lane Closed, MERGE LEFT [iCone]",
+        "start_timestamp": 1662062194000,
+        "end_timestamp": 1662667349096
+      },
+      "detail": {
+        "road_name": null,
+        "road_number": null,
+        "direction": "northbound"
+      },
+      "additional_info": {
+        "devices": [
+          {
+            "sensor_type": "display",
+            "details": {
+              "@type": "AB",
+              "@id": "13632786",
+              "@latitude": "39.7342492",
+              "@longitude": "-105.0138055",
+              "message": {
+                "@verified": "2022-09-01T19:57:31Z",
+                "@indicator": "Merge Left",
+                "@latitude": "39.7342526",
+                "@longitude": "-105.0137933"
+              },
+              "status": [
+                {
+                  "@type": "Arrow Panel",
+                  "@starttime": "2022-09-01T19:56:34Z",
+                  "@verified": "2022-09-01T19:57:31Z",
+                  "@state": "Left Arrow"
+                },
+                {
+                  "@type": "Display Down",
+                  "@starttime": "2022-05-03T15:24:36Z",
+                  "@verified": "2022-09-01T19:57:31Z",
+                  "@state": "Up"
+                }
+              ]
+            }
+          }
+        ],
+        "directionality": "ONE_DIRECTION"
+      }
+    }
+  },
+  {
+    "rtdh_timestamp": 1662062549.0959306,
+    "rtdh_message_id": "b480ea3f-6e8a-4e4c-8c9a-b1b048e3055f",
+    "event": {
+      "type": "CONSTRUCTION",
+      "source": {
+        "id": "U13632410_202209011326",
+        "creation_timestamp": 1662038760000,
+        "last_updated_timestamp": 1662061983000
+      },
+      "geometry": [
+        [
+          -106.8480585,
+          37.4814578
+        ],
+        [
+          -106.8480585,
+          37.4814578
+        ]
+      ],
+      "header": {
+        "description": "Roadwork - Lane Closed, MERGE RIGHT [iCone]",
+        "start_timestamp": 1662038760000,
+        "end_timestamp": 1662667349096
+      },
+      "detail": {
+        "road_name": null,
+        "road_number": null,
+        "direction": "northbound"
+      },
+      "additional_info": {
+        "devices": [
+          {
+            "sensor_type": "display",
+            "details": {
+              "@type": "AB",
+              "@id": "13632410",
+              "@latitude": "37.4814578",
+              "@longitude": "-106.8480585",
+              "message": {
+                "@verified": "2022-09-01T19:53:03Z",
+                "@indicator": "Merge Right",
+                "@latitude": "37.4815824",
+                "@longitude": "-106.8483263"
+              },
+              "status": {
+                "@type": "Arrow Panel",
+                "@starttime": "2022-09-01T13:05:00Z",
+                "@verified": "2022-09-01T19:53:03Z",
+                "@state": "Right Chevron"
+              }
+            }
+          }
+        ],
+        "directionality": "ONE_DIRECTION"
+      }
+    }
+  }
+]

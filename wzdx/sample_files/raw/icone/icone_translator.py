@@ -61,7 +61,6 @@ def wzdx_creator(message, info=None):
 
     # Parse Incident to WZDx Feature
     feature = parse_incident(message)
-    print(feature)
     if feature:
         wzd.get('features').append(feature)
 
@@ -224,8 +223,8 @@ def parse_incident(incident):
     detail = event.get('detail')
 
     geometry = {}
-    geometry['type'] = "LineString"
-    geometry['coordinates'] = event.get('geometry')
+    geometry['type'] = "Point"
+    geometry['coordinates'] = event.get('geometry')[0]
     properties = {}
 
     # I included a skeleton of the message, fill out all required fields and as many optional fields as you can. Below is a link to the spec page for a road event
