@@ -7,8 +7,8 @@ import uuid
 from collections import OrderedDict
 from datetime import datetime
 
-from wzdx.tools import array_tools, date_tools, polygon_tools, geospatial_tools
-from wzdx.util.collections import PathDict
+from ..tools import array_tools, date_tools, polygon_tools, geospatial_tools
+from ..util.collections import PathDict
 
 PROGRAM_NAME = 'Navjoy568RawToStandard'
 PROGRAM_VERSION = '1.0'

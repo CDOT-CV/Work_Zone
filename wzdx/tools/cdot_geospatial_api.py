@@ -1,6 +1,6 @@
 import requests
 import json
-from wzdx.tools import geospatial_tools, path_history_compression
+from ..tools import geospatial_tools, path_history_compression
 import logging
 
 BASE_URL = "https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded"

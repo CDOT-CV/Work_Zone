@@ -4,7 +4,7 @@ import json
 import logging
 from datetime import datetime
 import uuid  # This is necessary for unit test mocking
-from wzdx.tools import date_tools, wzdx_translator
+from ..tools import date_tools, wzdx_translator
 
 PROGRAM_NAME = 'NavJoy568Translator'
 PROGRAM_VERSION = '1.0'

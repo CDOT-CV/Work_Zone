@@ -7,9 +7,9 @@ import datetime
 import xml.etree.ElementTree as ET
 from collections import OrderedDict
 
-from wzdx.tools import date_tools, geospatial_tools, wzdx_translator, cdot_geospatial_api
-from wzdx.util.collections import PathDict
-from wzdx.standard_to_enhanced import icone_translator
+from ..tools import date_tools, geospatial_tools, wzdx_translator, cdot_geospatial_api
+from ..util.collections import PathDict
+from ..standard_to_enhanced import icone_translator
 
 PROGRAM_NAME = 'iConeRawToStandard'
 PROGRAM_VERSION = '1.0'

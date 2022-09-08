@@ -3,10 +3,10 @@ import argparse
 import json
 import logging
 import copy
-from wzdx.sample_files.validation_schema import wzdx_v40_feed
+from ..sample_files.validation_schema import wzdx_v40_feed
 import uuid
 
-from wzdx.tools import date_tools, geospatial_tools, wzdx_translator
+from ..tools import date_tools, geospatial_tools, wzdx_translator
 
 PROGRAM_NAME = 'IconeTranslator'
 PROGRAM_VERSION = '1.0'

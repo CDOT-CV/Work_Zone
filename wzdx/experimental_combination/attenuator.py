@@ -1,6 +1,6 @@
 import json
 from datetime import datetime
-from wzdx.tools import cdot_geospatial_api, geospatial_tools
+from ..tools import cdot_geospatial_api, geospatial_tools
 import logging
 
 ATTENUATOR_TIME_AHEAD_SECONDS = 30 * 60

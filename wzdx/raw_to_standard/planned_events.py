@@ -10,8 +10,8 @@ import pytz
 from collections import OrderedDict
 import regex
 
-from wzdx.tools import date_tools, polygon_tools, wzdx_translator, cdot_geospatial_api
-from wzdx.util.collections import PathDict
+from ..tools import date_tools, polygon_tools, wzdx_translator, cdot_geospatial_api
+from ..util.collections import PathDict
 
 PROGRAM_NAME = 'PlannedEventsRawToStandard'
 PROGRAM_VERSION = '1.0'

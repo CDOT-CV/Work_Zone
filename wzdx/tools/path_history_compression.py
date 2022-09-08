@@ -1,6 +1,6 @@
 import math
 import logging
-from wzdx.tools import geospatial_tools
+from ..tools import geospatial_tools
 
 
 def getChordLength(pt1, pt2):
