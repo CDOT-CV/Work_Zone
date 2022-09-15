@@ -91,7 +91,7 @@ def parse_reduction_zone(incident):
     core_details['event_type'] = 'work-zone'
 
     # data_source_id
-    # Leave this empty, it will be populated by add_ids_v3
+    # Leave this empty, it will be populated by add_ids
     core_details['data_source_id'] = ''
 
     # road_name

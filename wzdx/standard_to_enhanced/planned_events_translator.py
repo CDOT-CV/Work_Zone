@@ -121,7 +121,7 @@ def parse_road_restriction(incident):
 
     core_details = {}
 
-    # data_source_id - Leave this empty, it will be populated by add_ids_v3
+    # data_source_id - Leave this empty, it will be populated by add_ids
     core_details['data_source_id'] = ''
 
     # Event Type ['work-zone', 'detour']
@@ -195,7 +195,7 @@ def parse_work_zone(incident):
     # Event Type ['work-zone', 'detour']
     core_details['event_type'] = event.get('type')
 
-    # data_source_id - Leave this empty, it will be populated by add_ids_v3
+    # data_source_id - Leave this empty, it will be populated by add_ids
     core_details['data_source_id'] = ''
 
     # road_name
