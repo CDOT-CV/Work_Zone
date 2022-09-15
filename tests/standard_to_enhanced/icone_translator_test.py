@@ -195,6 +195,7 @@ def test_wzdx_creator(mockuuid):
                             ],
                             "direction": "northbound",
                             "description": "19-1245: Roadwork between MP 40 and MP 48",
+                            "creation_date": "2019-11-05T01:22:20Z",
                             "update_date": "2021-11-05T19:56:03Z",
                         },
                         'start_date': '2021-06-08T20:15:01Z',

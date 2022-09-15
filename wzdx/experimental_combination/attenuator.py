@@ -67,7 +67,6 @@ def identify_overlapping_features(geotab_msgs, wzdx_msgs):
     for wzdx in wzdx_msgs:
         # assume 1 feature per wzdx wzdx
         coordinates = wzdx['features'][0]['geometry']['coordinates']
-        print(wzdx['features'][0].get('id'), 'start')
         wzdx = add_route(
             wzdx, coordinates[0][1], coordinates[0][0], 'route_details_start')
 
@@ -85,7 +84,6 @@ def identify_overlapping_features(geotab_msgs, wzdx_msgs):
             wzdx = add_route(
                 wzdx, coordinates[-1][1], coordinates[-1][0], 'route_details_end')
 
-            print(wzdx['features'][0].get('id'), 'end')
             if not wzdx.get('route_details_end'):
                 logging.warn(
                     f"Unable to retrieve start point route details for event {wzdx['features'][0].get('id')}")
@@ -108,7 +106,6 @@ def identify_overlapping_features(geotab_msgs, wzdx_msgs):
 
 def add_route(obj, lat, lng, name='route_details'):
     route_details = cdot_geospatial_api.get_route_and_measure((lat, lng))
-    print(lat, lng, route_details)
     obj[name] = route_details
     return obj
 
@@ -147,7 +144,8 @@ def combine_with_wzdx(wzdx_wzdx_feature, route_details, distance_ahead, bearing,
 
 
 def get_geometry_for_distance_ahead(distance_ahead, route_details, bearing, mmin, mmax):
-    print(route_details['Measure'], mmin, mmax)
+    logging.debug("Found matching events, generating geometry ahead:",
+                  route_details['Measure'], mmin, mmax)
     route_ahead = cdot_geospatial_api.get_route_geometry_ahead(
         route_details['Route'], route_details['Measure'], bearing, distance_ahead, routeDetails=route_details, mmin=mmin, mmax=mmax)
     return route_ahead['coordinates'], route_ahead['start_measure'], route_ahead['end_measure']
