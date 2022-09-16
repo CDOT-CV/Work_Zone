@@ -1,7 +1,10 @@
 import json
 from datetime import datetime
-from ..tools import cdot_geospatial_api, geospatial_tools, wzdx_translator
 import logging
+import xml.etree.ElementTree as ET
+
+from ..util.collections import PathDict
+from ..tools import combination, wzdx_translator, geospatial_tools, cdot_geospatial_api
 
 ISO_8601_FORMAT_STRING = "%Y-%m-%dT%H:%M:%SZ"
 
@@ -18,16 +21,24 @@ def main():
         f.write(json.dumps(combined_events, indent=2))
 
 
-def validate_directionality(wzdx_icone, wzdx):
-    icone_direction = wzdx_icone['features'][0]['properties']['core_details']['direction']
-    wzdx_direction = wzdx['features'][0]['properties']['core_details']['direction']
-
-    return icone_direction == wzdx_direction
+def process_icone_msg(icone_string):
+    obj = ET.fromstring(icone_string)
+    pd = PathDict(obj)
 
 
-def get_combined_events(icone_msgs, wzdx_msgs):
+def get_direction(street, coords, route_details=None):
+    direction = wzdx_translator.parse_direction_from_street_name(street)
+    if not direction and route_details:
+        direction = get_direction_from_route_details(route_details)
+    if not direction:
+        direction = geospatial_tools.get_road_direction_from_coordinates(
+            coords)
+    return direction
+
+
+def get_combined_events(icone_standard_msgs, wzdx_msgs):
     combined_events = []
-    for i in identify_overlapping_features(icone_msgs, wzdx_msgs):
+    for i in combination.identify_overlapping_features_wzdx(icone_standard_msgs, wzdx_msgs):
         feature = combine_icone_with_wzdx(*i)
         wzdx = i[1]
         wzdx['features'] = [feature]
@@ -35,47 +46,85 @@ def get_combined_events(icone_msgs, wzdx_msgs):
     return combined_events
 
 
-def get_route_details_for_wzdx(wzdx_feature):
-    coordinates = wzdx_feature['geometry']['coordinates']
-    route_details_start = get_route_details(
+def combine_icone_with_wzdx(icone_wzdx, wzdx_wzdx):
+    combined_event = wzdx_wzdx
+
+    combined_event['features'][0]['properties']['start_date'] = icone_wzdx['features'][0]['properties']['start_date']
+    combined_event['features'][0]['properties']['core_details']['description'] += ' ' + \
+        icone_wzdx['features'][0]['properties']['core_details']['description']
+
+    for i in ['route_details_start', 'route_details_end']:
+        if i in combined_event:
+            del combined_event[i]
+    return combined_event
+
+
+def get_route_details_for_icone(coordinates):
+    route_details_start = combination.get_route_details(
         coordinates[0][1], coordinates[0][0])
 
-    route_details_end = get_route_details(
-        coordinates[-1][1], coordinates[-1][0])
+    if len(coordinates) == 1 or (len(coordinates) == 2 and coordinates[0] == coordinates[1]):
+        route_details_end = None
+    else:
+        route_details_end = combination.get_route_details(
+            coordinates[-1][1], coordinates[-1][0])
 
     return route_details_start, route_details_end
 
 
-def identify_overlapping_features(icone_wzdx_msgs, wzdx_msgs):
-    icone_wzdx_routes = {}
+def validate_directionality_wzdx_icone(icone, wzdx):
+    direction_1 = icone['event']['detail']['direction']
+    direction_2 = wzdx['features'][0]['properties']['core_details']['direction']
+
+    return direction_1 == None or direction_1 == direction_2
+
+
+def does_route_overlap(obj1, obj2):
+    if obj1['route_details_end'] == None:
+        start_1_m = obj1['route_details_start']['Measure']
+        start_2_m = min(obj2['route_details_start']['Measure'],
+                        obj2['route_details_end']['Measure'])
+        end_2_m = max(obj2['route_details_start']['Measure'],
+                      obj2['route_details_end']['Measure'])
+        if start_1_m > start_2_m and start_1_m < end_2_m:
+            # Route 1 point in route 2
+            return True
+        else:
+            return False
+    else:
+        return combination.does_route_overlap(obj1, obj2)
+
+
+def identify_overlapping_features_icone(icone_standard_msgs, wzdx_msgs):
+    icone_routes = {}
     wzdx_routes = {}
     matching_routes = []
 
     # Step 1: Add route info to iCone messages
-    for icone_wzdx in icone_wzdx_msgs:
-        route_details_start, route_details_end = get_route_details_for_wzdx(
-            icone_wzdx['features'][0])
+    for icone in icone_standard_msgs:
+        route_details_start, route_details_end = get_route_details_for_icone(
+            icone['event']['geometry'])
 
         if not route_details_start or not route_details_end:
             logging.info(
-                f"No geotab route info for feature {icone_wzdx['features'][0]['id']}")
+                f"No geotab route info for feature {icone['event']['source']['id']}")
             continue
-        icone_wzdx['route_details_start'] = route_details_start
-        icone_wzdx['route_details_end'] = route_details_end
+        icone['route_details_start'] = route_details_start
+        icone['route_details_end'] = route_details_end
 
-        if route_details_start['Route'] != route_details_end['Route']:
+        if icone['route_details_end'] and route_details_start['Route'] != route_details_end['Route']:
             logging.info(
-                f"Mismatched routes for feature {icone_wzdx['features'][0]['id']}")
+                f"Mismatched routes for feature {icone['event']['source']['id']}")
             continue
 
-        if route_details_start['Route'] in icone_wzdx_routes:
-            icone_wzdx_routes[route_details_start['Route']].append(icone_wzdx)
+        if route_details_start['Route'] in icone_routes:
+            icone_routes[route_details_start['Route']].append(icone)
         else:
-            icone_wzdx_routes[route_details_start['Route']] = [icone_wzdx]
+            icone_routes[route_details_start['Route']] = [icone]
 
     # Step 2: Add route info to WZDx messages
     for wzdx in wzdx_msgs:
-        route_details_start, route_details_end = get_route_details_for_wzdx(
+        route_details_start, route_details_end = combination.get_route_details_for_wzdx(
             wzdx['features'][0])
 
         if not route_details_start or not route_details_end:
@@ -91,73 +140,27 @@ def identify_overlapping_features(icone_wzdx_msgs, wzdx_msgs):
             continue
 
         if route_details_start['Route'] in wzdx_routes:
-            wzdx_routes[route_details_start['Route']].append(icone_wzdx)
+            wzdx_routes[route_details_start['Route']].append(wzdx)
         else:
-            wzdx_routes[route_details_start['Route']] = [icone_wzdx]
+            wzdx_routes[route_details_start['Route']] = [wzdx]
 
-    if not wzdx_routes:
-        logging.warn('No WZDx route data found!!!')
+    if not icone_routes:
+        logging.debug('No routes found for dataset 1')
         return []
-    if not icone_wzdx_routes:
-        logging.info('No iCone routes found')
+    if not wzdx_routes:
+        logging.debug('No routes found for dataset 2')
         return []
 
     # Step 3: Identify overlapping events
     for wzdx_route_id, wzdx_matched_msgs in wzdx_routes:
-        icone_matching_routes = icone_wzdx_routes.get(wzdx_route_id, [])
+        matching_icone_routes = icone_routes.get(wzdx_route_id, [])
 
-        for icone_match in icone_matching_routes:
-            for wzdx_match in wzdx_matched_msgs:
-                if does_route_overlap(icone_match, wzdx_match) and validate_directionality(icone_match, wzdx_match):
-                    matching_routes.append((icone_match, wzdx_match))
+        for match_icone in matching_icone_routes:
+            for match_wzdx in wzdx_matched_msgs:
+                if does_route_overlap(match_icone, match_wzdx) and validate_directionality_wzdx_icone(match_icone, match_wzdx):
+                    matching_routes.append((match_icone, match_wzdx))
 
     return matching_routes
-
-
-def does_route_overlap(obj1, obj2):
-    start_1_m = min(obj1['route_details_start']['Measure'],
-                    obj1['route_details_end']['Measure'])
-    end_1_m = max(obj1['route_details_start']['Measure'],
-                  obj1['route_details_end']['Measure'])
-    start_2_m = min(obj2['route_details_start']['Measure'],
-                    obj2['route_details_end']['Measure'])
-    end_2_m = max(obj2['route_details_start']['Measure'],
-                  obj2['route_details_end']['Measure'])
-    if start_2_m > start_1_m and start_2_m < end_1_m:
-        # Start of route 2 in route 1
-        return True
-    elif end_2_m > start_1_m and end_2_m < end_1_m:
-        # End of route 2 in route 1
-        return True
-    elif start_2_m < start_1_m and end_2_m > end_1_m:
-        # Route 2 goes over route 1
-        return True
-    else:
-        return False
-
-
-def get_route_details(lat, lng):
-    return cdot_geospatial_api.get_route_and_measure((lat, lng))
-
-
-def add_route(obj, lat, lng, name='route_details'):
-    route_details = cdot_geospatial_api.get_route_and_measure((lat, lng))
-    print(lat, lng, route_details)
-    obj[name] = route_details
-    return obj
-
-
-def combine_icone_with_wzdx(icone_wzdx, wzdx_wzdx):
-    combined_event = wzdx_wzdx
-
-    combined_event['features'][0]['properties']['start_date'] = icone_wzdx['features'][0]['properties']['start_date']
-    combined_event['features'][0]['properties']['core_details']['description'] += ' ' + \
-        icone_wzdx['features'][0]['properties']['core_details']['description']
-
-    for i in ['route_details_start', 'route_details_end']:
-        if i in combined_event:
-            del combined_event[i]
-    return combined_event
 
 
 if __name__ == "__main__":
