@@ -10,7 +10,7 @@ import pytz
 from collections import OrderedDict
 import regex
 
-from ..tools import date_tools, polygon_tools, wzdx_translator, cdot_geospatial_api
+from ..tools import date_tools, polygon_tools, wzdx_translator, cdot_geospatial_api, geospatial_tools
 from ..util.collections import PathDict
 
 PROGRAM_NAME = 'PlannedEventsRawToStandard'
