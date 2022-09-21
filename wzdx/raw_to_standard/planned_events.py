@@ -388,6 +388,8 @@ def create_rtdh_standard_msg(pd, isIncident):
 
         coordinates = get_linestring(pd.get('geometry'))
         if not coordinates:
+            logging.warn(
+                f'Unable to retrive geometry coordinates for event: {pd.get("properties/id", default="")}')
             return {}
 
         direction = pd.get("properties/direction", default='unknown')
@@ -441,6 +443,8 @@ def create_rtdh_standard_msg(pd, isIncident):
         lane_impacts = get_lane_impacts(
             pd.get("properties/laneImpacts"), pd.get("properties/direction"))
         if direction != recorded_direction and all_lanes_open(lane_impacts):
+            logging.info(
+                f'Unable to retrive geometry coordinates for event: {pd.get("properties/id", default="")}')
             return {}
 
         return {
