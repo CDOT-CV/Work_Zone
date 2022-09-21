@@ -1,0 +1,41 @@
+{
+  "type": "Feature",
+  "geometry": {
+    "srid": 4326,
+    "type": "MultiPoint",
+    "coordinates": [
+      [-104.720703, 38.839288],
+      [-104.720716, 38.846261]
+    ]
+  },
+  "properties": {
+    "startMarker": 141.74,
+    "type": "Traffic Sign Installation",
+    "laneImpacts": [
+      {
+        "direction": "north",
+        "laneCount": 4,
+        "laneClosures": "800",
+        "closedLaneTypes": ["right lane"]
+      },
+      {
+        "direction": "south",
+        "laneCount": 4,
+        "laneClosures": "800",
+        "closedLaneTypes": ["right lane"]
+      }
+    ],
+    "routeName": "CO-21N",
+    "isOversizedLoadsProhibited": false,
+    "lastUpdated": "2022-09-08T18:47:24.116+00:00",
+    "endMarker": 142.2,
+    "hasRampRestriction": false,
+    "name": "El Paso CO Sign Replacement Projetct-22766",
+    "startTime": null,
+    "id": "OpenTMS-Event5396850150",
+    "travelerInformationMessage": "Between US 24 and Galley Road (Colorado Springs) from Mile Point 141.74 to Mile Point 142.2. Right lane closed due to traffic sign installation. Starting September 15, 2022 at 7:00PM MDT until September 16, 2022 at about 7:00AM MDT.<br/>Between Galley Road and US 24 (Colorado Springs) from Mile Point 142.2 to Mile Point 141.74. Right lane closed due to traffic sign installation. Starting September 15, 2022 at 7:00PM MDT until September 16, 2022 at about 7:00AM MDT.",
+    "jurisdictions": ["EL PASO (COUNTY)"],
+    "direction": "north"
+  },
+  "attributes": {}
+}
