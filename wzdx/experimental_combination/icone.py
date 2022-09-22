@@ -4,7 +4,7 @@ import logging
 import xml.etree.ElementTree as ET
 
 from ..util.collections import PathDict
-from ..tools import combination, wzdx_translator, geospatial_tools, cdot_geospatial_api
+from ..tools import combination, wzdx_translator, geospatial_tools, cdot_geospatial_api, date_tools
 
 ISO_8601_FORMAT_STRING = "%Y-%m-%dT%H:%M:%SZ"
 
@@ -21,9 +21,8 @@ def main():
         f.write(json.dumps(combined_events, indent=2))
 
 
-def process_icone_msg(icone_string):
-    obj = ET.fromstring(icone_string)
-    pd = PathDict(obj)
+def get_direction_from_route_details(route_details):
+    return route_details.get('Direction')
 
 
 def get_direction(street, coords, route_details=None):
@@ -38,20 +37,19 @@ def get_direction(street, coords, route_details=None):
 
 def get_combined_events(icone_standard_msgs, wzdx_msgs):
     combined_events = []
-    for i in combination.identify_overlapping_features_wzdx(icone_standard_msgs, wzdx_msgs):
-        feature = combine_icone_with_wzdx(*i)
-        wzdx = i[1]
-        wzdx['features'] = [feature]
+    for i in identify_overlapping_features_icone(icone_standard_msgs, wzdx_msgs):
+        wzdx = combine_icone_with_wzdx(*i)
         combined_events.append(wzdx)
     return combined_events
 
 
-def combine_icone_with_wzdx(icone_wzdx, wzdx_wzdx):
+def combine_icone_with_wzdx(icone_standard, wzdx_wzdx):
     combined_event = wzdx_wzdx
 
-    combined_event['features'][0]['properties']['start_date'] = icone_wzdx['features'][0]['properties']['start_date']
+    combined_event['features'][0]['properties']['start_date'] = date_tools.get_iso_string_from_unix(
+        icone_standard['event']['header']['start_timestamp'])
     combined_event['features'][0]['properties']['core_details']['description'] += ' ' + \
-        icone_wzdx['features'][0]['properties']['core_details']['description']
+        icone_standard['event']['header']['description']
 
     for i in ['route_details_start', 'route_details_end']:
         if i in combined_event:
@@ -124,15 +122,19 @@ def identify_overlapping_features_icone(icone_standard_msgs, wzdx_msgs):
 
     # Step 2: Add route info to WZDx messages
     for wzdx in wzdx_msgs:
-        route_details_start, route_details_end = combination.get_route_details_for_wzdx(
-            wzdx['features'][0])
+        if not wzdx.get('route_details_start') or not wzdx.get('route_details_end'):
+            route_details_start, route_details_end = combination.get_route_details_for_wzdx(
+                wzdx['features'][0])
 
-        if not route_details_start or not route_details_end:
-            logging.info(
-                f"No geotab route info for feature {wzdx['features'][0]['id']}")
-            continue
-        wzdx['route_details_start'] = route_details_start
-        wzdx['route_details_end'] = route_details_end
+            if not route_details_start or not route_details_end:
+                logging.info(
+                    f"No geotab route info for feature {wzdx['features'][0]['id']}")
+                continue
+            wzdx['route_details_start'] = route_details_start
+            wzdx['route_details_end'] = route_details_end
+        else:
+            route_details_start = wzdx['route_details_start']
+            route_details_end = wzdx['route_details_end']
 
         if route_details_start['Route'] != route_details_end['Route']:
             logging.info(
@@ -152,13 +154,15 @@ def identify_overlapping_features_icone(icone_standard_msgs, wzdx_msgs):
         return []
 
     # Step 3: Identify overlapping events
-    for wzdx_route_id, wzdx_matched_msgs in wzdx_routes:
+    for wzdx_route_id, wzdx_matched_msgs in wzdx_routes.items():
         matching_icone_routes = icone_routes.get(wzdx_route_id, [])
 
         for match_icone in matching_icone_routes:
             for match_wzdx in wzdx_matched_msgs:
                 if does_route_overlap(match_icone, match_wzdx) and validate_directionality_wzdx_icone(match_icone, match_wzdx):
                     matching_routes.append((match_icone, match_wzdx))
+
+    print(matching_routes)
 
     return matching_routes
 

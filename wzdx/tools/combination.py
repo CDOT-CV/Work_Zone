@@ -1,5 +1,5 @@
 import logging
-import cdot_geospatial_api
+from . import cdot_geospatial_api
 
 
 def validate_directionality_wzdx(wzdx_1, wzdx_2):
@@ -53,15 +53,19 @@ def identify_overlapping_features_wzdx(wzdx_msgs_1, wzdx_msgs_2):
 
     # Step 1: Add route info to iCone messages
     for wzdx_1 in wzdx_msgs_1:
-        route_details_start, route_details_end = get_route_details_for_wzdx(
-            wzdx_1['features'][0])
+        if not wzdx_1.get('route_details_start') or not wzdx_1.get('route_details_end'):
+            route_details_start, route_details_end = get_route_details_for_wzdx(
+                wzdx_1['features'][0])
 
-        if not route_details_start or not route_details_end:
-            logging.info(
-                f"No geotab route info for feature {wzdx_1['features'][0]['id']}")
-            continue
-        wzdx_1['route_details_start'] = route_details_start
-        wzdx_1['route_details_end'] = route_details_end
+            if not route_details_start or not route_details_end:
+                logging.info(
+                    f"No geotab route info for feature {wzdx_1['features'][0]['id']}")
+                continue
+            wzdx_1['route_details_start'] = route_details_start
+            wzdx_1['route_details_end'] = route_details_end
+        else:
+            route_details_start = wzdx_1['route_details_start']
+            route_details_end = wzdx_1['route_details_end']
 
         if route_details_start['Route'] != route_details_end['Route']:
             logging.info(
@@ -75,15 +79,19 @@ def identify_overlapping_features_wzdx(wzdx_msgs_1, wzdx_msgs_2):
 
     # Step 2: Add route info to WZDx messages
     for wzdx_2 in wzdx_msgs_2:
-        route_details_start, route_details_end = get_route_details_for_wzdx(
-            wzdx_2['features'][0])
+        if not wzdx_2.get('route_details_start') or not wzdx_2.get('route_details_end'):
+            route_details_start, route_details_end = get_route_details_for_wzdx(
+                wzdx_2['features'][0])
 
-        if not route_details_start or not route_details_end:
-            logging.info(
-                f"No geotab route info for feature {wzdx_2['features'][0]['id']}")
-            continue
-        wzdx_2['route_details_start'] = route_details_start
-        wzdx_2['route_details_end'] = route_details_end
+            if not route_details_start or not route_details_end:
+                logging.info(
+                    f"No geotab route info for feature {wzdx_2['features'][0]['id']}")
+                continue
+            wzdx_2['route_details_start'] = route_details_start
+            wzdx_2['route_details_end'] = route_details_end
+        else:
+            route_details_start = wzdx_2['route_details_start']
+            route_details_end = wzdx_2['route_details_end']
 
         if route_details_start['Route'] != route_details_end['Route']:
             logging.info(

@@ -71,7 +71,7 @@ def get_route_and_measure(latLng, heading=None, tolerance=10000):
     # raise NotImplementedError("No geospatial endpoint")
 
     if not resp.get('features'):
-        return None
+        return {}
     route_details = {
         'Route': resp['features'][0]['attributes']['Route'],
         'Measure': float(resp['features'][0]['attributes']['Measure']),
