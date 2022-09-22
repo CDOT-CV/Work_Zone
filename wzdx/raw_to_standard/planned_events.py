@@ -10,7 +10,7 @@ import pytz
 from collections import OrderedDict
 import regex
 
-from ..tools import date_tools, polygon_tools, wzdx_translator, cdot_geospatial_api
+from ..tools import date_tools, polygon_tools, wzdx_translator, cdot_geospatial_api, geospatial_tools
 from ..util.collections import PathDict
 
 PROGRAM_NAME = 'PlannedEventsRawToStandard'
@@ -388,6 +388,8 @@ def create_rtdh_standard_msg(pd, isIncident):
 
         coordinates = get_linestring(pd.get('geometry'))
         if not coordinates:
+            logging.warn(
+                f'Unable to retrive geometry coordinates for event: {pd.get("properties/id", default="")}')
             return {}
 
         direction = pd.get("properties/direction", default='unknown')
@@ -415,6 +417,7 @@ def create_rtdh_standard_msg(pd, isIncident):
         if not start_date:
             logging.warn(
                 f'Unable to process event, no start date for event: {pd.get("properties/id", default="")}')
+            return {}
         if not end_date:
             end_date = pd.get("properties/estimatedClearTime",
                               date_tools.parse_datetime_from_iso_string)
@@ -440,6 +443,8 @@ def create_rtdh_standard_msg(pd, isIncident):
         lane_impacts = get_lane_impacts(
             pd.get("properties/laneImpacts"), pd.get("properties/direction"))
         if direction != recorded_direction and all_lanes_open(lane_impacts):
+            logging.info(
+                f'Unable to retrive geometry coordinates for event: {pd.get("properties/id", default="")}')
             return {}
 
         return {

@@ -4,9 +4,9 @@ import json
 import logging
 import copy
 import uuid
-from wzdx.sample_files.validation_schema import wzdx_v40_feed
+from ..sample_files.validation_schema import wzdx_v40_feed
 
-from wzdx.tools import date_tools, polygon_tools, wzdx_translator, geospatial_tools
+from ..tools import date_tools, polygon_tools, wzdx_translator, geospatial_tools
 
 PROGRAM_NAME = 'IconeTranslator'
 PROGRAM_VERSION = '1.0'
