@@ -1,4 +1,25 @@
 {
+  "road_event_feed_info": {
+    "feed_info_id": "49253be7-0c6a-4a65-8113-450f9041f989",
+    "update_date": "2022-02-14T21:41:33Z",
+    "publisher": "CDOT",
+    "contact_name": "Ashley Nylen",
+    "contact_email": "ashley.nylen@state.co.us",
+    "version": "4.0",
+    "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "data_sources": [
+      {
+        "data_source_id": "1f8191b0-27c5-4af7-bc4d-26f45a81b98a",
+        "feed_info_id": "49253be7-0c6a-4a65-8113-450f9041f989",
+        "organization_name": "CDOT",
+        "contact_name": "Ashley Nylen",
+        "contact_email": "ashley.nylen@state.co.us",
+        "update_date": "2022-02-14T21:41:33Z",
+        "location_method": "channel-device-method",
+        "lrs_type": "lrs_type"
+      }
+    ]
+  },
   "type": "FeatureCollection",
   "features": [
     {
