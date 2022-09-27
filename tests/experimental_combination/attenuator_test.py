@@ -1,7 +1,7 @@
 from unittest.mock import MagicMock, patch
 
 from wzdx.experimental_combination import attenuator
-from wzdx.tools import polygon_tools
+from wzdx.tools import cdot_geospatial_api
 import json
 
 
@@ -35,7 +35,7 @@ def test_get_combined_events_valid():
 
 
 def test_get_combined_events_valid_multiple():
-    geotab_msgs = json.loads(open('./tests/data/geotab_msgs_1.json').read())
+    geotab_msgs = json.loads(open('./tests/data/geotab_msgs_2.json').read())
     wzdx_msgs = [json.loads(open('./tests/data/wzdx_1.json').read())]
 
     combined_events = attenuator.get_combined_events(
@@ -88,11 +88,21 @@ def test_combine_with_wzdx_ordered(atten_patch):
     bearing = 0
     event_start_marker = 5
     event_end_marker = 10
-    attenuator.combine_with_wzdx(
+    actual = attenuator.combine_with_wzdx(
         wzdx_feature, route_details, distance_ahead, bearing, event_start_marker, event_end_marker)
+
+    expected = {'properties': {
+        'beginning_milepost': 0,
+        'ending_milepost': 1,
+    },
+        'geometry': {
+        'coordinates': [],
+    }}
 
     attenuator.get_geometry_for_distance_ahead.assert_called_with(
         distance_ahead, route_details, bearing, event_start_marker, event_end_marker)
+
+    assert actual == expected
 
 
 @patch.object(attenuator, 'get_geometry_for_distance_ahead')
@@ -105,11 +115,30 @@ def test_combine_with_wzdx_reversed(atten_patch):
     bearing = 0
     event_start_marker = 10
     event_end_marker = 5
-    attenuator.combine_with_wzdx(
+    actual = attenuator.combine_with_wzdx(
         wzdx_feature, route_details, distance_ahead, bearing, event_start_marker, event_end_marker)
+
+    expected = {'properties': {
+        'beginning_milepost': 0,
+        'ending_milepost': 1,
+    }, 'geometry': {
+        'coordinates': [],
+    }}
 
     attenuator.get_geometry_for_distance_ahead.assert_called_with(
         distance_ahead, route_details, bearing, event_end_marker, event_start_marker)
+
+    assert actual == expected
+
+
+@patch.object(cdot_geospatial_api, 'get_route_geometry_ahead', side_effect=[{'coordinates': 'a', 'start_measure': 'b', 'end_measure': 'c'}])
+def test_get_geometry_for_distance_ahead(cdot_patch):
+    # cdot_geospatial_api.get_route_geometry_ahead = MagicMock(
+    #     return_value={'coordinates': 'a', 'start_measure': 'b', 'end_measure': 'c'})
+    actual = attenuator.get_geometry_for_distance_ahead(
+        0, {'Route': 0, 'Measure': 0}, 0, 0, 0)
+    expected = ('a', 'b', 'c')
+    assert actual == expected
 
 
 def test_get_distance_ahead_normal():
