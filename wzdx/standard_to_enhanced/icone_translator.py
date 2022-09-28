@@ -6,7 +6,7 @@ import copy
 import uuid
 from ..sample_files.validation_schema import wzdx_v40_feed
 
-from ..tools import date_tools, polygon_tools, wzdx_translator, geospatial_tools
+from ..tools import date_tools, wzdx_translator, geospatial_tools
 
 PROGRAM_NAME = 'IconeTranslator'
 PROGRAM_VERSION = '1.0'
@@ -48,26 +48,22 @@ def parse_icone_arguments():
 
 def wzdx_creator(message, info=None):
     if not message:
-        print('returning None 50')
         return None
    # verify info obj
     if not info:
         info = wzdx_translator.initialize_info(
             DEFAULT_ICONE_FEED_INFO_ID)
     if not wzdx_translator.validate_info(info):
-        print('returning None 57')
         return None
 
     wzd = wzdx_translator.initialize_wzdx_object(info)
 
     # Parse Incident to WZDx Feature
     feature = parse_incident(message)
-    print(feature)
     if feature:
         wzd.get('features').append(feature)
 
     if not wzd.get('features'):
-        print('returning None 69')
         return None
     wzd = wzdx_translator.add_ids(wzd)
     return wzd
@@ -253,7 +249,6 @@ def parse_incident(incident):
         direction = geospatial_tools.get_road_direction_from_coordinates(
             geometry.get('coordinates'))
     if not direction:
-        print('returning None')
         return None
     core_details['direction'] = direction
 
