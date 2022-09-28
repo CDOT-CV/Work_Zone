@@ -113,8 +113,6 @@ def test_generate_standard_messages_from_string(mockuuid):
         actual_standard = json.loads(json.dumps(icone.generate_standard_messages_from_string(
             expected_results.test_generate_standard_messages_from_string_input)))
 
-    print(actual_standard)
-
     # Removing rtdh_timestamp because mocking it was not working. Kept having incorrect decimal values, weird floating point errors?
     for i in actual_standard:
         del i['rtdh_timestamp']

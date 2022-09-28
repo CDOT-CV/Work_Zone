@@ -94,7 +94,6 @@ def test_expand_event_directions_1():
     }
 
     actual = planned_events.expand_event_directions(event)
-    print(actual)
 
     assert expected_results.test_expand_speed_zone_1_expected == actual
 
@@ -166,7 +165,6 @@ def test_generate_standard_messages_from_string(_):
         del i['rtdh_timestamp']
         del i['event']['source']['last_updated_timestamp']
     # actual_standard = [dict(x) for x in actual_standard]
-    print(actual_standard)
     assert actual_standard == expected
 
 
@@ -203,8 +201,6 @@ def test_get_lanes_list_2():
         {'order': 3, 'type': 'general', 'status': 'closed'},
         {'order': 4, 'type': 'general', 'status': 'closed'},
         {'order': 5, 'type': 'shoulder', 'status': 'closed'}]
-    print(planned_events.get_lanes_list(
-        lane_closures_hex, num_lanes, closedLaneTypes))
     assert planned_events.get_lanes_list(
         lane_closures_hex, num_lanes, closedLaneTypes) == expected
 

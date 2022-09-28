@@ -83,7 +83,6 @@ def test_wzdx_creator(mock_dt, mock_dt_3, mockuuid):
     with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
         test_wzdx = navjoy_translator.wzdx_creator(
             navjoy_translator_data.test_wzdx_creator_standard)
-    print(test_wzdx)
     assert navjoy_translator_data.test_wzdx_creator_expected_wzdx == test_wzdx
 
 

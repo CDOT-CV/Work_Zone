@@ -168,26 +168,21 @@ def test_get_direction_from_bearing_all():
 
 def test_get_closest_direction_from_bearing_all_northbound():
     for i in range(-90, 90):  # skips 90
-        print(i)
         assert geospatial_tools.get_closest_direction_from_bearing(
             i, 'northbound') == 'northbound'
     for i in range(270, 361):  # skips 361
-        print(i)
         assert geospatial_tools.get_closest_direction_from_bearing(
             i, 'northbound') == 'northbound'
     for i in range(-360, -270):  # skips -270
-        print(i)
         assert geospatial_tools.get_closest_direction_from_bearing(
             i, 'northbound') == 'northbound'
 
 
 def test_get_closest_direction_from_bearing_all_southbound():
     for i in range(90, 269):  # skips 270
-        print(i)
         assert geospatial_tools.get_closest_direction_from_bearing(
             i, 'northbound') == 'southbound'
     for i in range(-269, -90):  # skips -90
-        print(i)
         assert geospatial_tools.get_closest_direction_from_bearing(
             i, 'northbound') == 'southbound'
 
