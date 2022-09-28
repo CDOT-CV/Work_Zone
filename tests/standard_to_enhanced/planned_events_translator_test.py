@@ -7,7 +7,7 @@ from unittest.mock import MagicMock, patch
 import time_machine
 from wzdx.standard_to_enhanced import planned_events_translator
 
-import planned_events_translator_data
+from tests.data.standard_to_enhanced import planned_events_translator_data
 
 
 def init_datetime_mocks(mock_dts):

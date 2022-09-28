@@ -3,7 +3,7 @@ import unittest
 import uuid
 from datetime import datetime, timezone
 from unittest.mock import MagicMock, Mock, patch
-import navjoy_translator_data
+from tests.data.standard_to_enhanced import navjoy_translator_data
 
 import time_machine
 from wzdx.standard_to_enhanced import navjoy_translator
@@ -22,11 +22,10 @@ def init_datetime_mocks(mock_dts):
 @unittest.mock.patch('wzdx.tools.wzdx_translator.datetime')
 def test_parse_reduction_zone_linestring(mock_dt, mock_dt_3):
     init_datetime_mocks([mock_dt, mock_dt_3])
-    
 
-    test_feature = navjoy_translator.parse_reduction_zone(navjoy_translator_data.test_parse_reduction_zone_linestring_standard)
+    test_feature = navjoy_translator.parse_reduction_zone(
+        navjoy_translator_data.test_parse_reduction_zone_linestring_standard)
 
-    
     assert test_feature == navjoy_translator_data.test_parse_reduction_zone_linestring_expected_feature
 
 
@@ -81,10 +80,9 @@ def test_wzdx_creator(mock_dt, mock_dt_3, mockuuid):
     uuid.uuid4 = Mock()
     uuid.uuid4.side_effect = 'we234de'
 
-    
-
     with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
-        test_wzdx = navjoy_translator.wzdx_creator(navjoy_translator_data.test_wzdx_creator_standard)
+        test_wzdx = navjoy_translator.wzdx_creator(
+            navjoy_translator_data.test_wzdx_creator_standard)
     print(test_wzdx)
     assert navjoy_translator_data.test_wzdx_creator_expected_wzdx == test_wzdx
 

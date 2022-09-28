@@ -1,5 +1,5 @@
 from wzdx.raw_to_standard import planned_events
-from tests.raw_to_standard import planned_events_test_expected_results as expected_results
+from tests.data.raw_to_standard import planned_events_test_expected_results as expected_results
 import uuid
 import json
 from unittest.mock import MagicMock, patch

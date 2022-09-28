@@ -7,7 +7,7 @@ import time_machine
 import xmltodict
 from wzdx.standard_to_enhanced import icone_translator
 
-import icone_translator_data
+from tests.data.standard_to_enhanced import icone_translator_data
 
 
 # --------------------------------------------------------------------------------Unit test for get_vehicle_impact function--------------------------------------------------------------------------------
