@@ -93,7 +93,6 @@ def get_closest_direction_from_bearing(bearing, road_orientation):
 def getEndPoint(lat1, lon1, bearing, d):
     R = 6371.0*1000  # Radius of the Earth in meters
     brng = math.radians(bearing)  # convert degrees to radians
-    dist = d  # convert distance in meters
     lat1 = math.radians(lat1)  # Current lat point converted to radians
     lon1 = math.radians(lon1)  # Current long point converted to radians
     lat2 = math.asin(math.sin(lat1)*math.cos(d/R) +
