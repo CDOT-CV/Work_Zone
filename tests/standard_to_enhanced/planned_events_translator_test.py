@@ -2,7 +2,7 @@ import os
 import unittest
 import uuid
 from datetime import datetime, timezone
-from unittest.mock import MagicMock, Mock, patch
+from unittest.mock import MagicMock, patch
 
 import time_machine
 from wzdx.standard_to_enhanced import planned_events_translator

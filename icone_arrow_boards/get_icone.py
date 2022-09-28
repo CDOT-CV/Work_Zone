@@ -7,8 +7,6 @@ ICONE_USERNAME = os.getenv('ICONE_USERNAME')
 ICONE_FILE_PATH = os.getenv('ICONE_FILE_PATH')
 ICONE_PASSWORD = os.getenv('ICONE_PASSWORD')
 
-print(ICONE_USERNAME, ICONE_FILE_PATH, ICONE_PASSWORD)
-
 url = "ftp://{usr}:{pwd}@iconetraffic.com:42663/{path}"
 
 
