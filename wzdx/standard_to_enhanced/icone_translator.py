@@ -348,7 +348,6 @@ def parse_incident(incident):
     feature['type'] = "Feature"
     feature['properties'] = filtered_properties
     feature['geometry'] = geometry
-    # feature['bbox'] = geometry
 
     return feature
 
