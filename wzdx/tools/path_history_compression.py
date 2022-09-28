@@ -32,7 +32,7 @@ def getChordLength(pt1, pt2):
 #
 #
 ###
-def generage_compressed_path(path):
+def generate_compressed_path(path):
     if len(path) <= 3:
         logging.error("Work zone is too short")
         return path
@@ -47,18 +47,18 @@ def generage_compressed_path(path):
     ###
     # Step 1
     ###
-    i = 3
-    Pstarting = path[i-2]
-    Pprevious = path[i-1]
-    Pnext = path[i]
+    startingIndex = 3
+    Pstarting = path[startingIndex-2]
+    Pprevious = path[startingIndex-1]
+    Pnext = path[startingIndex]
     elementPos = 0
     totalDist = 0
     incrementDist = 0
 
     stopIndex = len(path) - 1
 
-    PH_ConciseDataBuffer.append(path[i-3])
-    PH_ConciseDataBuffer.append(path[i-2])
+    PH_ConciseDataBuffer.append(path[startingIndex-3])
+    PH_ConciseDataBuffer.append(path[startingIndex-2])
     elementPos += 1
 
     for i in range(i, len(path)):

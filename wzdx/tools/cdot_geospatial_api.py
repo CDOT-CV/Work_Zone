@@ -180,7 +180,7 @@ def get_route_between_measures(routeId, startMeasure, endMeasure, compressed=Fal
             linestring.extend(path)
 
     if compressed:
-        linestring = path_history_compression.generage_compressed_path(
+        linestring = path_history_compression.generate_compressed_path(
             linestring)
 
     return linestring
