@@ -47,21 +47,21 @@ def generate_compressed_path(path):
     ###
     # Step 1
     ###
-    startingIndex = 3
-    Pstarting = path[startingIndex-2]
-    Pprevious = path[startingIndex-1]
-    Pnext = path[startingIndex]
+    startIndex = 3
+    Pstarting = path[startIndex-2]
+    Pprevious = path[startIndex-1]
+    Pnext = path[startIndex]
     elementPos = 0
     totalDist = 0
     incrementDist = 0
 
     stopIndex = len(path) - 1
 
-    PH_ConciseDataBuffer.append(path[startingIndex-3])
-    PH_ConciseDataBuffer.append(path[startingIndex-2])
+    PH_ConciseDataBuffer.append(path[startIndex-3])
+    PH_ConciseDataBuffer.append(path[startIndex-2])
     elementPos += 1
 
-    for i in range(i, len(path)):
+    for i in range(startIndex, len(path)):
 
         # Step 2
         eval = True

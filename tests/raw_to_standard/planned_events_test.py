@@ -1,11 +1,20 @@
 from wzdx.raw_to_standard import planned_events
 from tests.data.raw_to_standard import planned_events_test_expected_results as expected_results
+from wzdx.tools import cdot_geospatial_api, geospatial_tools
 import uuid
+import argparse
 import json
 from unittest.mock import MagicMock, patch
 
 
+@patch.object(argparse, 'ArgumentParser')
+def test_parse_navjoy_arguments(argparse_mock):
+    navjoyFile, outputFile = planned_events.parse_rtdh_arguments()
+    assert navjoyFile != None and outputFile != None
+
 # --------------------------------------------------------------------------------Unit test for validate_closure function--------------------------------------------------------------------------------
+
+
 def test_validate_closure_valid_data():
     assert planned_events.validate_closure(
         expected_results.test_validate_closure_valid_data_input) == True
@@ -301,3 +310,31 @@ def test_is_incident_wz_false_2():
     actual = planned_events.is_incident_wz(msg)
 
     assert actual == (False, False)
+
+
+@patch.object(cdot_geospatial_api, 'get_route_and_measure', side_effect=[{
+    'Route': 'route',
+    'Measure': 0,
+    'MMin': 0,
+    'MMax': 1,
+    'Distance': 1,
+}, {
+    'Route': 'route',
+    'Measure': 1,
+    'MMin': 0,
+    'MMax': 1,
+    'Distance': 1,
+}])
+@patch.object(geospatial_tools, 'get_road_direction_from_coordinates', side_effect=['southbound', 'northbound'])
+@patch.object(cdot_geospatial_api, 'get_route_between_measures', side_effect=[[[0, 1], [2, 3]]])
+def test_get_improved_geometry(mock1, mock2, mock3):
+    coordinates = [[4, 5], [6, 7]]
+    event_status = 'active'
+    id = 'id'
+
+    expected = [[2, 3], [0, 1]]
+
+    actual = planned_events.get_improved_geometry(
+        coordinates, event_status, id)
+
+    assert actual == expected

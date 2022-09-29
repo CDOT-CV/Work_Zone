@@ -352,6 +352,7 @@ def get_improved_geometry(coordinates, event_status, id):
         newCoordinates)
 
     # TODO: Implement Bi-directional carriageway
+    print(REVERSED_DIRECTION_MAP.get(finalDirection))
     if initialDirection == REVERSED_DIRECTION_MAP.get(finalDirection):
         newCoordinates.reverse()
 

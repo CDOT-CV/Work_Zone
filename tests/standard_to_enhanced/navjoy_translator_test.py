@@ -3,10 +3,17 @@ import unittest
 import uuid
 from datetime import datetime, timezone
 from unittest.mock import MagicMock, Mock, patch
+import argparse
 from tests.data.standard_to_enhanced import navjoy_translator_data
 
 import time_machine
 from wzdx.standard_to_enhanced import navjoy_translator
+
+
+@patch.object(argparse, 'ArgumentParser')
+def test_parse_navjoy_arguments(argparse_mock):
+    navjoyFile, outputFile = navjoy_translator.parse_navjoy_arguments()
+    assert navjoyFile != None and outputFile != None
 
 
 def init_datetime_mocks(mock_dts):

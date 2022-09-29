@@ -2,13 +2,19 @@ from wzdx.raw_to_standard import icone
 from tests.data.raw_to_standard import icone_test_expected_results as expected_results
 import uuid
 import json
+import argparse
 from unittest.mock import Mock, patch
 import time_machine
 from datetime import datetime
 
+
+@patch.object(argparse, 'ArgumentParser')
+def test_parse_navjoy_arguments(argparse_mock):
+    navjoyFile, outputFile = icone.parse_rtdh_arguments()
+    assert navjoyFile != None and outputFile != None
+
+
 # --------------------------------------------------------------------------------Unit test for parse_polyline_from_linestring function--------------------------------------------------------------------------------
-
-
 def test_parse_icone_polyline_valid_data():
     test_polyline = "34.8380671,-114.1450650,34.8380671,-114.1450650"
     test_coordinates = icone.parse_icone_polyline(
