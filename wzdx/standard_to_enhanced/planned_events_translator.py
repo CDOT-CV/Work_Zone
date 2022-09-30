@@ -4,7 +4,6 @@ import json
 import logging
 import copy
 import uuid
-import datetime
 
 from ..sample_files.validation_schema import wzdx_v40_feed, road_restriction_v40_feed
 
@@ -298,7 +297,6 @@ def parse_work_zone(incident):
     feature['type'] = "Feature"
     feature['properties'] = filtered_properties
     feature['geometry'] = geometry
-    # feature['bbox'] = geometry
 
     return feature
 

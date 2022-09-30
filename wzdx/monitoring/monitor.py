@@ -1,8 +1,8 @@
 import os
 import json
 import requests
-import uuid
 import time
+import logging
 from google.cloud import monitoring_v3
 
 WZDX_REST_ENDPOINT_PROD = os.getenv(
@@ -23,7 +23,6 @@ def get_api_response(url, api_key):
     formatted_url = url.format(api_key=api_key)
 
     content = requests.get(formatted_url).content.decode("utf-8")
-    # l.info(f"API Response content length: {len(content)}")
 
     return json.loads(content)
 
@@ -35,7 +34,7 @@ def write_metric(metric_name, value):
     series = monitoring_v3.TimeSeries()
     series.metric.type = metric_name
     series.resource.type = "global"
-    series.metric.labels["project"] = "cdot-rtdh-dev"
+    series.metric.labels["project"] = PROJECT_ID
     series.metric.labels["host"] = "cloud-function"
     now = time.time()
     seconds = int(now)
@@ -53,13 +52,13 @@ def main():
     prod_resp = get_api_response(
         WZDX_REST_ENDPOINT_PROD, WZDX_REST_API_KEY_PROD)
     prod_count = len(prod_resp['features'])
-    print(prod_count)
+    logging.debug(f"Production message count: {prod_count}")
     write_metric(PROD_METRIC_NAME, prod_count)
 
     test_resp = get_api_response(
         WZDX_REST_ENDPOINT_TEST, WZDX_REST_API_KEY_TEST)
     test_count = len(test_resp['features'])
-    print(test_count)
+    logging.debug(f"Test message count: {test_count}")
 
 
 if __name__ == '__main__':

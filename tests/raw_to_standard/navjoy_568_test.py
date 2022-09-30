@@ -1,8 +1,15 @@
 from wzdx.raw_to_standard import navjoy_568
-import navjoy_568_test_expected_results as expected_results
+from tests.data.raw_to_standard import navjoy_568_test_expected_results as expected_results
 import uuid
+import argparse
 import json
 from unittest.mock import Mock, patch
+
+
+@patch.object(argparse, 'ArgumentParser')
+def test_parse_navjoy_arguments(argparse_mock):
+    navjoyFile, outputFile = navjoy_568.parse_rtdh_arguments()
+    assert navjoyFile != None and outputFile != None
 
 
 # --------------------------------------------------------------------------------Unit test for validate_closure function--------------------------------------------------------------------------------

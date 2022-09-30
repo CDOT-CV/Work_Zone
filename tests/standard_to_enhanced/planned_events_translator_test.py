@@ -1,14 +1,21 @@
 import os
 import unittest
 import uuid
+import argparse
 from datetime import datetime, timezone
 from unittest.mock import MagicMock, patch
 
 import time_machine
 from wzdx.standard_to_enhanced import planned_events_translator
 
-import planned_events_translator_data
+from tests.data.standard_to_enhanced import planned_events_translator_data
 
+
+
+@patch.object(argparse, 'ArgumentParser')
+def test_parse_planned_events_arguments(argparse_mock):
+    plannedEventsFile, outputFile = planned_events_translator.parse_planned_events_arguments()
+    assert plannedEventsFile != None and outputFile != None
 
 def init_datetime_mocks(mock_dts):
     for i in mock_dts:
@@ -144,6 +151,28 @@ def test_wzdx_creator(mock_dt, mock_dt_3, _):
 
     with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
         test_wzdx = planned_events_translator.wzdx_creator(standard)
+    assert expected_wzdx == test_wzdx
+
+
+@patch.dict(os.environ, {
+    'contact_name': 'Ashley Nylen',
+    'contact_email': 'ashley.nylen@state.co.us',
+    'issuing_organization': 'CDOT'
+})
+# first is for data source id, second is for a default id that is not used in this example, and the third is the road_event_id
+@patch.object(uuid, 'uuid4', side_effect=['w', '', '3', '4', '5'])
+@unittest.mock.patch('wzdx.standard_to_enhanced.navjoy_translator.datetime')
+@unittest.mock.patch('wzdx.tools.wzdx_translator.datetime')
+def test_wzdx_creator_road_restriction(mock_dt, mock_dt_3, _):
+    init_datetime_mocks([mock_dt, mock_dt_3])
+
+    standard = planned_events_translator_data.test_wzdx_creator_standard_road_restriction
+
+    expected_wzdx = planned_events_translator_data.test_wzdx_creator_expected_road_restriction
+
+    with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
+        test_wzdx = planned_events_translator.wzdx_creator(standard)
+
     print(test_wzdx)
     assert expected_wzdx == test_wzdx
 

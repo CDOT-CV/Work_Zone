@@ -119,7 +119,6 @@ def get_point_at_measure(routeId, measure):
 
     # call api
     response = json.loads(requests.get(url).content)
-    print(response)
 
     lat = response['features'][0]['geometry']['y']
     long = response['features'][0]['geometry']['x']
@@ -181,7 +180,7 @@ def get_route_between_measures(routeId, startMeasure, endMeasure, compressed=Fal
             linestring.extend(path)
 
     if compressed:
-        linestring = path_history_compression.generage_compressed_path(
+        linestring = path_history_compression.generate_compressed_path(
             linestring)
 
     return linestring

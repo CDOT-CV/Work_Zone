@@ -29,21 +29,8 @@ def main():
         else:
             wzdx_msg['features'].extend(wzdx['features'])
 
-    # TODO: Sort these comments out
-    # generated_files_list = []
-    # for message in generated_messages:
-    #     output_path = f"{output_dir}/standard_icone_{message['event']['source']['id']}_{round(message['rtdh_timestamp'])}.json"
-    #     open(output_path, 'w+').write(json.dumps(message, indent=2))
-    #     generated_files_list.append(output_path)
     output_path = input_file.replace('.xml', '.json')
     open(output_path, 'w+').write(json.dumps(wzdx_msg, indent=2))
-
-    # if generated_files_list:
-    #     print(
-    #         f"Successfully generated standard message files: {generated_files_list}")
-    # else:
-    #     logging.warning(
-    #         "Standard message generation failed. See messages printed above")
 
 
 def generate_standard_messages_from_string(input_file_contents):

@@ -1,5 +1,6 @@
 import os
 import uuid
+import argparse
 from datetime import datetime
 from unittest.mock import Mock, patch
 
@@ -7,10 +8,17 @@ import time_machine
 import xmltodict
 from wzdx.standard_to_enhanced import icone_translator
 
-import icone_translator_data
+from tests.data.standard_to_enhanced import icone_translator_data
 
+
+@patch.object(argparse, 'ArgumentParser')
+def test_parse_planned_events_arguments(argparse_mock):
+    iconeFile, outputFile = icone_translator.parse_icone_arguments()
+    assert iconeFile != None and outputFile != None
 
 # --------------------------------------------------------------------------------Unit test for get_vehicle_impact function--------------------------------------------------------------------------------
+
+
 def test_get_vehicle_impact_some_lanes_closed():
     test_description = "Roadwork - Lane Closed, MERGE LEFT [Trafficade, iCone]"
     test_vehicle_impact = icone_translator.get_vehicle_impact(test_description)
