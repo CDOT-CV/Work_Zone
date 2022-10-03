@@ -1,7 +1,7 @@
 import json
-from datetime import datetime
-from ..tools import cdot_geospatial_api, geospatial_tools
 import logging
+
+from ..tools import cdot_geospatial_api, geospatial_tools
 
 ATTENUATOR_TIME_AHEAD_SECONDS = 30 * 60
 ISO_8601_FORMAT_STRING = "%Y-%m-%dT%H:%M:%SZ"

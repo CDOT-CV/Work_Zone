@@ -1,7 +1,9 @@
-import requests
 import json
-from ..tools import geospatial_tools, path_history_compression
 import logging
+
+import requests
+
+from ..tools import geospatial_tools, path_history_compression
 
 BASE_URL = "https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded"
 ROUTE_BETWEEN_MEASURES_API = "RouteBetweenMeasures"

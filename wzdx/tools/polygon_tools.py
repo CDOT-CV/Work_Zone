@@ -1,16 +1,8 @@
-import math
-
-import numpy as np
-import pyproj
-import logging
-import math
-
 import geopy
 import pyproj
 from geopy.distance import geodesic
 from shapely.geometry import Point
 from shapely.geometry.polygon import Polygon
-
 
 CORNER_PRECISION_DEGREES = 10
 

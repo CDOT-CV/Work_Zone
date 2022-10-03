@@ -37,7 +37,7 @@ def test_generate_buffer_polygon_from_linestring():
         geospatial_tools.getDist(polyline[0], (polygon_points[0][1], polygon_points[0][0])), width/2, places=0)
 
 
-def test_list_to_polygon():
+def test_polygon_to_list():
     expected = [[0, 0], [0, 1], [10, 1], [10, 0], [0, 0]]
     polygon = Polygon(expected)
     actual = polygon_tools.polygon_to_list(polygon)

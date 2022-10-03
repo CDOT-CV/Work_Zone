@@ -1,6 +1,5 @@
 import math
 
-import numpy as np
 import pyproj
 
 ROAD_DIRECTIONS_MAP = {

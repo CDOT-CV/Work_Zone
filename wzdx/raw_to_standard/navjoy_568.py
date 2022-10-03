@@ -7,7 +7,7 @@ import uuid
 from collections import OrderedDict
 from datetime import datetime
 
-from ..tools import array_tools, date_tools, polygon_tools, geospatial_tools
+from ..tools import array_tools, date_tools, geospatial_tools, polygon_tools
 from ..util.collections import PathDict
 
 PROGRAM_NAME = 'Navjoy568RawToStandard'

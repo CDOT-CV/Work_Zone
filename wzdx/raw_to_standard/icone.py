@@ -1,15 +1,16 @@
 import argparse
+import datetime
 import json
 import logging
 import time
 import uuid
-import datetime
 import xml.etree.ElementTree as ET
 from collections import OrderedDict
 
-from ..tools import date_tools, geospatial_tools, wzdx_translator, cdot_geospatial_api
-from ..util.collections import PathDict
 from ..standard_to_enhanced import icone_translator
+from ..tools import (cdot_geospatial_api, date_tools, geospatial_tools,
+                     wzdx_translator)
+from ..util.collections import PathDict
 
 PROGRAM_NAME = 'iConeRawToStandard'
 PROGRAM_VERSION = '1.0'

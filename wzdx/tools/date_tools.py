@@ -1,8 +1,8 @@
-from datetime import datetime, timedelta, timezone
 import datetime as dt
 import logging
-from dateutil import parser
+from datetime import datetime, timedelta, timezone
 
+from dateutil import parser
 
 ISO_8601_FORMAT_STRING = "%Y-%m-%dT%H:%M:%SZ"
 
