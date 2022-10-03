@@ -433,6 +433,8 @@ def create_rtdh_standard_msg(pd, isIncident):
             if delta_days > 0:
                 end_date = end_date + datetime.timedelta(days=delta_days)
 
+            end_date = end_date.replace(second=0, microsecond=0)
+
         event_type, types_of_work = map_event_type(
             pd.get("properties/type", default=""))
 

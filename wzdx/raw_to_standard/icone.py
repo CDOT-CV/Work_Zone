@@ -122,7 +122,7 @@ def create_rtdh_standard_msg(pd):
             end_time = datetime.datetime.utcnow().replace(
                 tzinfo=datetime.timezone.utc) + datetime.timedelta(days=7)
         # Added for unit test
-        end_time = end_time.replace(microsecond=0)
+        end_time = end_time.replace(second=0, microsecond=0)
 
     coordinates = pd.get("incident/location/polyline", parse_icone_polyline)
     route_details_start = get_route_details(coordinates[0])
