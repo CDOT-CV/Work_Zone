@@ -22,9 +22,9 @@ def main():
 def get_combined_events(navjoy_wzdx_msgs, wzdx_msgs):
     combined_events = []
     for i in combination.identify_overlapping_features_wzdx(navjoy_wzdx_msgs, wzdx_msgs):
-        feature = combine_navjoy_with_wzdx(*i)
+        combined = combine_navjoy_with_wzdx(*i)
         wzdx = i[1]
-        wzdx['features'] = [feature]
+        wzdx['features'] = combined['features']
         combined_events.append(wzdx)
     return combined_events
 

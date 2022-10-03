@@ -77,22 +77,6 @@ def validate_directionality_wzdx_icone(icone, wzdx):
     return direction_1 == None or direction_1 == direction_2
 
 
-def does_route_overlap(obj1, obj2):
-    if obj1['route_details_end'] == None:
-        start_1_m = obj1['route_details_start']['Measure']
-        start_2_m = min(obj2['route_details_start']['Measure'],
-                        obj2['route_details_end']['Measure'])
-        end_2_m = max(obj2['route_details_start']['Measure'],
-                      obj2['route_details_end']['Measure'])
-        if start_1_m > start_2_m and start_1_m < end_2_m:
-            # Route 1 point in route 2
-            return True
-        else:
-            return False
-    else:
-        return combination.does_route_overlap(obj1, obj2)
-
-
 def identify_overlapping_features_icone(icone_standard_msgs, wzdx_msgs):
     icone_routes = {}
     wzdx_routes = {}
@@ -159,7 +143,7 @@ def identify_overlapping_features_icone(icone_standard_msgs, wzdx_msgs):
 
         for match_icone in matching_icone_routes:
             for match_wzdx in wzdx_matched_msgs:
-                if does_route_overlap(match_icone, match_wzdx) and validate_directionality_wzdx_icone(match_icone, match_wzdx):
+                if combination.does_route_overlap(match_icone, match_wzdx) and validate_directionality_wzdx_icone(match_icone, match_wzdx):
                     matching_routes.append((match_icone, match_wzdx))
 
     print(matching_routes)

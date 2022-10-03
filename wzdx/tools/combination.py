@@ -111,7 +111,7 @@ def identify_overlapping_features_wzdx(wzdx_msgs_1, wzdx_msgs_2):
         return []
 
     # Step 3: Identify overlapping events
-    for wzdx_route_id, wzdx_matched_msgs in wzdx_routes_2:
+    for wzdx_route_id, wzdx_matched_msgs in wzdx_routes_2.items():
         matching_routes_1 = wzdx_routes_1.get(wzdx_route_id, [])
 
         for match_1 in matching_routes_1:
