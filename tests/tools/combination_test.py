@@ -75,6 +75,42 @@ def test_get_route_details(mock_get_route_and_measure):
 
 
 @patch.object(combination, 'get_route_details', side_effect=['route_details_start', 'route_details_end'])
+def test_add_route_details_overwrite_false(mock_get_route_details):
+    wzdx = {'features': [{'geometry': {'coordinates': [
+        [0, 1], [2, 3]]}, 'route_details_start': 'start', 'route_details_end': 'end'}]}
+    expected = ('start', 'end')
+    actual = combination.add_route_details([wzdx])
+    assert (actual[0]['route_details_start'], actual[0]
+            ['route_details_end']) == expected
+
+
+@patch.object(combination, 'get_route_details', side_effect=['route_details_start', 'route_details_end'])
+def test_add_route_details_overwrite_true(mock_get_route_details):
+    wzdx = {'features': [{'geometry': {'coordinates': [
+        [0, 1], [2, 3]]}, 'route_details_start': 'start', 'route_details_end': 'end'}]}
+    expected = ('route_details_start', 'route_details_end')
+    actual = combination.add_route_details([wzdx], overwrite=True)
+    assert (actual[0]['route_details_start'], actual[0]
+            ['route_details_end']) == expected
+
+
+@patch.object(combination, 'get_route_details', side_effect=[{}, {}])
+def test_add_route_details_keepInvalid_true(mock_get_route_details):
+    wzdx = {'features': [{'geometry': {'coordinates': [
+        [0, 1], [2, 3]]}, 'route_details_start': 'start', 'route_details_end': 'end'}]}
+    actual = combination.add_route_details([wzdx])
+    assert len(actual) == 1
+
+
+@patch.object(combination, 'get_route_details', side_effect=[{}, {}])
+def test_add_route_details_keepInvalid_false(mock_get_route_details):
+    wzdx = {'features': [{'geometry': {'coordinates': [
+        [0, 1], [2, 3]]}, 'route_details_start': 'start', 'route_details_end': 'end'}]}
+    actual = combination.add_route_details([wzdx], keepInvalid=False)
+    assert len(actual) == 0
+
+
+@patch.object(combination, 'get_route_details', side_effect=['route_details_start', 'route_details_end'])
 def test_get_route_details_for_wzdx(mock_get_route_details):
     wzdx = {'geometry': {'coordinates': [[0, 1], [2, 3]]}}
     expected = ('route_details_start', 'route_details_end')

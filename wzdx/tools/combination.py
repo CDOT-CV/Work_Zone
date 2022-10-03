@@ -35,6 +35,23 @@ def get_route_details(lat, lng):
     return cdot_geospatial_api.get_route_and_measure((lat, lng))
 
 
+def add_route_details(wzdx_msgs, overwrite=False, keepInvalid=True):
+    output = []
+    for wzdx in wzdx_msgs:
+        if (wzdx.get('route_details_start', 'missing') == 'missing' or wzdx.get('route_details_end') == 'missing') or overwrite:
+            route_details_start, route_details_end = get_route_details_for_wzdx(
+                wzdx['features'][0])
+
+            wzdx['route_details_start'] = route_details_start if route_details_start else None
+            wzdx['route_details_end'] = route_details_end if route_details_end else None
+
+            if route_details_start and route_details_end or keepInvalid:
+                output.append(wzdx)
+        else:
+            output.append(wzdx)
+    return wzdx_msgs
+
+
 def get_route_details_for_wzdx(wzdx_feature):
     coordinates = wzdx_feature['geometry']['coordinates']
     route_details_start = get_route_details(
