@@ -1,8 +1,8 @@
-from datetime import datetime, timedelta, timezone
 import datetime as dt
 import logging
-from dateutil import parser
+from datetime import datetime, timedelta, timezone
 
+from dateutil import parser
 
 ISO_8601_FORMAT_STRING = "%Y-%m-%dT%H:%M:%SZ"
 
@@ -23,7 +23,7 @@ def get_iso_string_from_datetime(date):
 
 
 def parse_datetime_from_iso_string(time_string):
-    """Parse ISO string to datetime. Handles many differnet datetime formats"""
+    """Parse ISO string to datetime. Handles many different datetime formats"""
     if not time_string or type(time_string) != str:
         return None
 

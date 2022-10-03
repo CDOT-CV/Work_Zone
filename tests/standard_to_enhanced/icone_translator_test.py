@@ -1,5 +1,6 @@
 import os
 import uuid
+import argparse
 from datetime import datetime
 from unittest.mock import Mock, patch
 
@@ -7,8 +8,17 @@ import time_machine
 import xmltodict
 from wzdx.standard_to_enhanced import icone_translator
 
+from tests.data.standard_to_enhanced import icone_translator_data
+
+
+@patch.object(argparse, 'ArgumentParser')
+def test_parse_planned_events_arguments(argparse_mock):
+    iconeFile, outputFile = icone_translator.parse_icone_arguments()
+    assert iconeFile != None and outputFile != None
 
 # --------------------------------------------------------------------------------Unit test for get_vehicle_impact function--------------------------------------------------------------------------------
+
+
 def test_get_vehicle_impact_some_lanes_closed():
     test_description = "Roadwork - Lane Closed, MERGE LEFT [Trafficade, iCone]"
     test_vehicle_impact = icone_translator.get_vehicle_impact(test_description)
@@ -163,84 +173,7 @@ def test_wzdx_creator(mockuuid):
         }
     }
 
-    expected_wzdx = {
-        'road_event_feed_info': {
-            'feed_info_id': '104d7746-688c-44ed-b195-2ee948bf9dfa',
-            'update_date': '2021-04-13T00:00:00Z',
-            'publisher': 'CDOT',
-            'contact_name': 'Ashley Nylen',
-            'contact_email': 'ashley.nylen@state.co.us',
-            'version': '3.1',
-            'license': 'https://creativecommons.org/publicdomain/zero/1.0/',
-            'data_sources': [
-                {'data_source_id': 'w',
-                 'feed_info_id': '104d7746-688c-44ed-b195-2ee948bf9dfa',
-                 'organization_name': 'CDOT',
-                 'contact_name': 'Ashley Nylen',
-                 'contact_email': 'ashley.nylen@state.co.us',
-                 'update_date': '2021-04-13T00:00:00Z',
-                 'location_method': 'channel-device-method',
-                 'lrs_type': 'lrs_type'}
-            ]
-        },
-        'type': 'FeatureCollection',
-        'features': [
-                {
-                    'type': 'Feature',
-                    'properties': {
-                        'road_event_id': '2',
-                        'event_type': 'work-zone',
-                        'data_source_id': 'w',
-                        'start_date': '2021-06-08T20:15:01Z',
-                        'end_date': None,
-                        'start_date_accuracy': 'estimated',
-                        'end_date_accuracy': 'estimated',
-                        'beginning_accuracy': 'estimated',
-                        'ending_accuracy': 'estimated',
-                        'road_names': ['I-75 N'],
-                        'direction': 'northbound',
-                        'vehicle_impact': 'all-lanes-open',
-                        'event_status': 'planned',
-                        'description': '19-1245: Roadwork between MP 40 and MP 48',
-                        'creation_date': '2019-11-05T01:22:20Z',
-                        'update_date': '2021-11-05T19:56:03Z'
-                    },
-                    'geometry': {
-                        'type': 'LineString',
-                        'coordinates': [
-                            [
-                                -84.1238971,
-                                37.1686478
-                            ],
-                            [
-                                -84.1238971,
-                                37.1686478
-                            ],
-                            [
-                                -84.145861,
-                                37.1913
-                            ],
-                            [
-                                -84.145861,
-                                37.1913
-                            ],
-                            [
-                                -84.157105,
-                                37.201197
-                            ],
-                            [
-                                -84.167033,
-                                37.206079
-                            ],
-                            [
-                                -84.204074,
-                                37.21931
-                            ]
-                        ]
-                    }
-                }
-        ]
-    }
+    expected_wzdx = icone_translator_data.test_wzdx_creator_expected
 
     with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
         test_wzdx = icone_translator.wzdx_creator(icone_obj)
@@ -251,16 +184,13 @@ def test_wzdx_creator(mockuuid):
 def test_parse_icone_sensor():
     valid_description = {'type': 'iCone', 'id': '#4', 'location': [41.3883260, -81.9707500], 'radar': {
         'average_speed': 63.52, 'std_dev_speed': 7.32, 'timestamp': '2020-08-21T15:55:00Z'}}
-    test_sensor = {"@type": "iCone", "@id": "#4", "@latitude": "41.3883260", "@longitude": "-81.9707500", "radar": [{"@devID": "1645", "@intervalEnd": "2020-08-21T15:40:00Z", "@latitude": "41.3883258", "@longitude": "-81.9707325", "@numReads": "22", "@avgSpeed": "64.32", "@stDevSpeed": "6.1080"}, {"@devID": "1645", "@intervalEnd": "2020-08-21T15:45:00Z", "@latitude": "41.3883258", "@longitude": "-81.9707325", "@numReads": "43", "@avgSpeed": "63.66", "@stDevSpeed": "5.1282"}, {
-        "@devID": "1645", "@intervalEnd": "2020-08-21T15:50:00Z", "@latitude": "41.3883258", "@longitude": "-81.9707325", "@numReads": "59", "@avgSpeed": "63.52", "@stDevSpeed": "7.9526"}, {"@devID": "1645", "@intervalEnd": "2020-08-21T15:55:00Z", "@latitude": "41.3883258", "@longitude": "-81.9707325", "@numReads": "18", "@avgSpeed": "62.22", "@stDevSpeed": "11.9760"}]}
+    test_sensor = icone_translator_data.test_parse_icone_sensor_test_sensor_1
     output_description = icone_translator.parse_icone_sensor(test_sensor)
     assert output_description == valid_description
 
     valid_description = {'type': 'iCone', 'id': '#4', 'location': [41.3883260, -81.9707500],
                          'radar': {'average_speed': 64.32, 'std_dev_speed': 6.11, 'timestamp': '2020-08-21T15:40:00Z'}}
-    test_sensor = {"@type": "iCone", "@id": "#4", "@latitude": "41.3883260", "@longitude": "-81.9707500", "radar": [
-        {"@devID": "1645", "@intervalEnd": "2020-08-21T15:40:00Z", "@latitude": "41.3883258",
-         "@longitude": "-81.9707325", "@numReads": "22", "@avgSpeed": "64.32", "@stDevSpeed": "6.1080"}]}
+    test_sensor = icone_translator_data.test_parse_icone_sensor_test_sensor_2
     output_description = icone_translator.parse_icone_sensor(test_sensor)
     assert output_description == valid_description
 
@@ -277,7 +207,7 @@ def test_parse_pcms_sensor():
 
 # --------------------------------------------------------------------------------unit test for create_description function--------------------------------------------------------------------------------
 def test_create_description():
-    test_description = "19-1245: Roadwork between MP 48 and MP 40\n sensors: \n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 1 - MP 40.8\",\n  \"location\": [\n    37.147808,\n    -84.111588\n  ]\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 2 - MP 42.1\",\n  \"location\": [\n    37.166345,\n    -84.121425\n  ],\n  \"radar\": {\n    \"average_speed\": 67.63,\n    \"std_dev_speed\": 6.44,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 3 - MP 44.0\",\n  \"location\": [\n    37.185815,\n    -84.140482\n  ],\n  \"radar\": {\n    \"average_speed\": 65.5,\n    \"std_dev_speed\": 6.59,\n    \"timestamp\": \"2020-08-21T15:50:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 4 - MP 45.7\",\n  \"location\": [\n    37.201223,\n    -84.157346\n  ],\n  \"radar\": {\n    \"average_speed\": 65.94,\n    \"std_dev_speed\": 7.49,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 5 - MP 47.5\",\n  \"location\": [\n    37.20667,\n    -84.169129\n  ],\n  \"radar\": {\n    \"average_speed\": 67.0,\n    \"std_dev_speed\": 6.21,\n    \"timestamp\": \"2020-08-21T15:45:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 6 - MP 48.5\",\n  \"location\": [\n    37.219313,\n    -84.20466\n  ]\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 7 - MP 49.5\",\n  \"location\": [\n    37.2299854,\n    -84.2221508\n  ],\n  \"radar\": {\n    \"average_speed\": 63.03,\n    \"std_dev_speed\": 9.19,\n    \"timestamp\": \"2020-08-21T15:55:00Z\"\n  }\n}\n{\n  \"type\": \"iCone\",\n  \"id\": \"SB 8 - MP 50.5\",\n  \"location\": [\n    37.237888,\n    -84.235918\n  ]\n}\n displays: \n{\n  \"type\": \"PCMS\",\n  \"id\": \"I-75 SB - MP 50\",\n  \"timestamp\": \"2020-08-21T15:52:27Z\",\n  \"location\": [\n    37.23397,\n    -84.2290798\n  ],\n  \"messages\": [\n    \" ROADWORK / 4 MILES / AHEAD // 19 MILES / OF WORK / MP 48-29\"\n  ]\n}\n{\n  \"type\": \"PCMS\",\n  \"id\": \"I-75 SB - MP 46\",\n  \"timestamp\": \"2020-08-21T15:48:32Z\",\n  \"location\": [\n    37.205992,\n    -84.167269\n  ],\n  \"messages\": [\n    \" ROADWORK / NEXT / 5 MILES // 19 MILES / OF WORK / MP 48-29\"\n  ]\n}"
+    test_description = icone_translator_data.test_create_description_description
     test_incident = """ <incident id="1246">
     <creationtime>2019-11-05T01:32:44Z</creationtime>
     <updatetime>2020-08-21T15:52:02Z</updatetime>

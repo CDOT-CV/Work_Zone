@@ -1,12 +1,20 @@
 from wzdx.raw_to_standard import icone
-import icone_test_expected_results as expected_results
+from tests.data.raw_to_standard import icone_test_expected_results as expected_results
 import uuid
 import json
+import argparse
 from unittest.mock import Mock, patch
+import time_machine
+from datetime import datetime
+
+
+@patch.object(argparse, 'ArgumentParser')
+def test_parse_navjoy_arguments(argparse_mock):
+    navjoyFile, outputFile = icone.parse_rtdh_arguments()
+    assert navjoyFile != None and outputFile != None
+
 
 # --------------------------------------------------------------------------------Unit test for parse_polyline_from_linestring function--------------------------------------------------------------------------------
-
-
 def test_parse_icone_polyline_valid_data():
     test_polyline = "34.8380671,-114.1450650,34.8380671,-114.1450650"
     test_coordinates = icone.parse_icone_polyline(
@@ -106,10 +114,10 @@ def test_validate_incident_no_data():
 def test_generate_standard_messages_from_string(mockuuid):
     uuid.uuid4 = Mock()
     uuid.uuid4.side_effect = ['we234de', '23wsg54h']
-    actual_standard = json.loads(json.dumps(icone.generate_standard_messages_from_string(
-        expected_results.test_generate_standard_messages_from_string_input)))
 
-    print(actual_standard)
+    with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0, 0)):
+        actual_standard = json.loads(json.dumps(icone.generate_standard_messages_from_string(
+            expected_results.test_generate_standard_messages_from_string_input)))
 
     # Removing rtdh_timestamp because mocking it was not working. Kept having incorrect decimal values, weird floating point errors?
     for i in actual_standard:

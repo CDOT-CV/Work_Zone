@@ -1,0 +1,56 @@
+{
+    "type": "Feature",
+    "geometry": {
+        "srid": 4326,
+        "type": "MultiPoint",
+        "coordinates": [
+            [
+                -108.316523,
+                37.343815
+            ],
+            [
+                -108.280004,
+                37.345199
+            ]
+        ]
+    },
+    "properties": {
+        "clearTime": "2022-07-02T19:29:41.000+00:00",
+        "startMarker": 0.0,
+        "type": "Guardrail",
+        "laneImpacts": [
+            {
+                "direction": "east",
+                "laneCount": 1,
+                "laneClosures": "0",
+                "closedLaneTypes": []
+            },
+            {
+                "direction": "west",
+                "laneCount": 1,
+                "laneClosures": "0",
+                "closedLaneTypes": []
+            }
+        ],
+        "routeName": "US-160E",
+        "isOversizedLoadsProhibited": false,
+        "lastUpdated": "2022-06-30T18:09:45.473+00:00",
+        "schedule": [
+            {
+                "startTime": "2022-06-24T19:45:00.000Z",
+                "endTime": "2022-07-02T19:29:41.000Z"
+            }
+        ],
+        "endMarker": 2.0,
+        "hasRampRestriction": false,
+        "name": "Andrea LA test 6/24/22-580",
+        "startTime": "2022-06-24T19:45:00.000+00:00",
+        "id": "OpenTMS-Event4161758014",
+        "travelerInformationMessage": "Between US 160B Mancos and US 160B Mancos; US 160 Bus (near Mancos) from Mile Point 0 to Mile Point 2. Guardrail repair work. Until tomorrow at about 1:29PM MDT.",
+        "jurisdictions": [
+            "MONTEZUMA (COUNTY)"
+        ],
+        "direction": "east"
+    },
+    "attributes": {}
+}

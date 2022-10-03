@@ -15,5 +15,8 @@ test-output.xml
 build/**
 dist/**
 wzdx_translator_jacob6838.egg-info/*
+cdot_wzdx_translator.egg-info/*
 translate_icone.py
 translate_navjoy.py
+icone_arrow_boards/set_env.sh
+icone_arrow_boards/*/**

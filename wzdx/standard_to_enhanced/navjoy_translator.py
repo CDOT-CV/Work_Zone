@@ -2,8 +2,9 @@ import argparse
 import copy
 import json
 import logging
-from datetime import datetime  # This is necessary for unit test mocking
-from wzdx.tools import date_tools, wzdx_translator
+from datetime import datetime
+import uuid  # This is necessary for unit test mocking
+from ..tools import date_tools, wzdx_translator
 
 PROGRAM_NAME = 'NavJoy568Translator'
 PROGRAM_VERSION = '1.0'
@@ -56,7 +57,7 @@ def wzdx_creator(message, info=None):
     if not wzdx_translator.validate_info(info):
         return None
 
-    wzd = wzdx_translator.initialize_wzdx_object_v3(info)
+    wzd = wzdx_translator.initialize_wzdx_object(info)
 
     feature = parse_reduction_zone(message)
     if feature:
@@ -64,7 +65,7 @@ def wzdx_creator(message, info=None):
 
     if not wzd.get('features'):
         return None
-    wzd = wzdx_translator.add_ids_v3(wzd)
+    wzd = wzdx_translator.add_ids(wzd)
     return wzd
 
 
@@ -82,18 +83,36 @@ def parse_reduction_zone(incident):
     geometry = {}
     geometry['type'] = "LineString"
     geometry['coordinates'] = event.get('geometry')
-    properties = {}
+    properties = wzdx_translator.initialize_feature_properties()
 
-    # id
-    # Leave this empty, it will be populated by add_ids_v3
-    properties['road_event_id'] = None
+    core_details = properties['core_details']
 
     # Event Type ['work-zone', 'detour']
-    properties['event_type'] = 'work-zone'
+    core_details['event_type'] = 'work-zone'
 
     # data_source_id
-    # Leave this empty, it will be populated by add_ids_v3
-    properties['data_source_id'] = None
+    # Leave this empty, it will be populated by add_ids
+    core_details['data_source_id'] = ''
+
+    # road_name
+    road_names = [detail.get('road_name')]
+    core_details['road_names'] = road_names
+
+    # direction
+    core_details['direction'] = detail.get('direction')
+
+    # Relationship
+    core_details['relationship'] = {}
+
+    # description
+    core_details['description'] = header.get(
+        'description', '') + '. ' + header.get('justification', '')
+
+    # update_date
+    core_details['update_date'] = date_tools.get_iso_string_from_datetime(date_tools.parse_datetime_from_unix(
+        source.get('last_updated_timestamp')))
+
+    properties['core_details'] = core_details
 
     start_time = date_tools.parse_datetime_from_unix(
         header.get('start_timestamp'))
@@ -108,7 +127,7 @@ def parse_reduction_zone(incident):
         properties['end_date'] = date_tools.get_iso_string_from_datetime(
             end_time)
     else:
-        properties['end_date'] = ''
+        properties['end_date'] = None
 
     # start_date_accuracy
     properties['start_date_accuracy'] = "estimated"
@@ -122,19 +141,9 @@ def parse_reduction_zone(incident):
     # ending_accuracy
     properties['ending_accuracy'] = "estimated"
 
-    # road_name
-    road_names = [detail.get('road_name')]
-    properties['road_names'] = road_names
-
-    # direction
-    properties['direction'] = detail.get('direction')
-
     # vehicle impact
     properties['vehicle_impact'] = get_vehicle_impact(
         header.get('justification'))
-
-    # Relationship
-    properties['relationship'] = {}
 
     # lanes
     properties['lanes'] = []
@@ -145,13 +154,15 @@ def parse_reduction_zone(incident):
     # beginning_cross_street
     properties['ending_cross_street'] = ""
 
+    # mileposts
+    properties['beginning_milepost'] = ""
+
+    # start_date_accuracy
+    properties['ending_milepost'] = ""
+
     # event status
     properties['event_status'] = date_tools.get_event_status(
         start_time, end_time)
-
-    # reduced_speed_limit
-    if header.get('reduced_speed_limit'):
-        properties['reduced_speed_limit'] = header.get('reduced_speed_limit')
 
     # type_of_work
     # maintenance, minor-road-defect-repair, roadside-work, overhead-work, below-road-work, barrier-work, surface-work, painting, roadway-relocation, roadway-creation
@@ -160,28 +171,25 @@ def parse_reduction_zone(incident):
     if types_of_work:
         properties['types_of_work'] = types_of_work
 
+    # reduced_speed_limit
+    if header.get('reduced_speed_limit'):
+        properties['reduced_speed_limit'] = header.get('reduced_speed_limit')
+
     # restrictions
     properties['restrictions'] = []
-
-    # description
-    properties['description'] = header.get(
-        'description', '') + '. ' + header.get('justification', '')
-
-    # creation_date
-    properties['creation_date'] = date_tools.get_iso_string_from_datetime(date_tools.parse_datetime_from_unix(
-        incident.get('rtdh_timestamp')))
-
-    # update_date
-    properties['update_date'] = date_tools.get_iso_string_from_datetime(date_tools.parse_datetime_from_unix(
-        source.get('last_updated_timestamp')))
 
     filtered_properties = copy.deepcopy(properties)
 
     for key, value in properties.items():
-        if not value and key not in ['road_event_id', 'data_source_id', 'end_time']:
+        if not value:
             del filtered_properties[key]
 
+    for key, value in properties['core_details'].items():
+        if not value and key not in ['data_source_id']:
+            del filtered_properties['core_details'][key]
+
     feature = {}
+    feature['id'] = event.get('source', {}).get('id', uuid.uuid4())
     feature['type'] = "Feature"
     feature['properties'] = filtered_properties
     feature['geometry'] = geometry

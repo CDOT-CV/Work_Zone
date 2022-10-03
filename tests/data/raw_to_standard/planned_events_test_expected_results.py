@@ -344,6 +344,8 @@ test_generate_standard_messages_from_string_expected = [
                 "restrictions": [{'type': 'permitted-oversize-loads-prohibited'}],
                 "beginning_milepost": 50.0,
                 "ending_milepost": 60.0,
+                "beginning_cross_street": 'Exit 49: CO 65; Grand Mesa (5 miles east of the Palisade area)',
+                "ending_cross_street": 'US 6 (Debeque)',
                 "valid": False
             }
         }

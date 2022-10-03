@@ -1,7 +1,9 @@
 # Work_Zone
-Work zone code and documentation for WZDx, iCone, etc. 
+
+Work zone code and documentation for WZDx, iCone, etc.
 
 ## Project Description
+
 This is an open source, proof of concept solution for translating work zone data in the form of CDOT Planned Events to the standardized WZDx 4.0 format, as well as having additional translators to translate COtrip/Salesforce, iCone, and NavJOY messages to the WZDx 4.0 format. This project was developed for CDOT. A unique translator has been developed for each of these message types. These translators read in the source message, parse out specific fields, and generate a WZDx message. For more information on these message formats and the data mappings between these messages and the WZDx format, see the [documentation](wzdx/docs). sample_files are located [here](wzdx/sample_files). All these translators are built to run from the command line and from GCP Dataflows, hosted within the CDOT OIM WZDX environment, connected to the RTDH (real time data hub).
 
 The Google CloudPlatform deployment is outlined below.
@@ -10,19 +12,23 @@ The Google CloudPlatform deployment is outlined below.
 This project is also a full python package hosted on [pypi](https://pypi.org/project/wzdx-translator-jacob6838/)
 
 ## Installation
+
 ```
 pip install wzdx-translator-jacob6838
 ```
 
 ### Prerequisites
+
 Requires:
 
 - Python 3.6 (or higher)
 
 ## Translators
+
 This set of WZDx message translators is set up to be implemented in GCP with App Engines and Dataflows. It is also set up with raw, standard, and enhanced (WZDx) data feeds. This means that to take a raw icone document and generate a WZDx message, the raw icone xml document must first be converted to 1 or multiple standard json messages (based on CDOT RTDH specification), and then each standard message may be converted into a single WZDx message. The next step in the data flow is to combine all of the WZDx messages together using the combination script. The GCP layout for this is described in the Google Cloud Hosting section below
 
 ### Environment Setup
+
 This code requires Python 3.6 or a higher version. If you haven’t already, download Python and pip. You can install the required packages by running the following command:
 
 ```
@@ -30,6 +36,7 @@ pip install -r requirements.txt
 ```
 
 #### Environment variable
+
 Please set up the following environment variable for your local computer before running the script.
 
 Runtime Environment Variables:
@@ -46,7 +53,9 @@ for mac computer run the following script to initialize the environment variable
 ```
 env_var.sh
 ```
+
 ### Execution for Translators
+
 ```
 python -m wzdx.raw_to_standard.{raw translator} inputfile.json --outputDir outputDirectory
 ```
@@ -56,7 +65,9 @@ Example usage:
 ```
 python -m wzdx.raw_to_standard.planned_events 'wzdx/sample_files/raw/planned_events/hwy_50.json'
 ```
+
 #### Standard to WZDx Conversion
+
 ```
 python -m wzdx.standard_to_enhanced.{standard translator} inputfile.json --outputFile outputfile.geojson
 ```
@@ -64,12 +75,13 @@ python -m wzdx.standard_to_enhanced.{standard translator} inputfile.json --outpu
 Example usage:
 
 ```
-python -m wzdx.standard_to_enhanced.planned_events_translator 'wzdx/sample_files/standard/planned_events/standard_planned_event_OpenTMS-Event2702170538_eastbound.json' 
+python -m wzdx.standard_to_enhanced.planned_events_translator 'wzdx/sample_files/standard/planned_events/standard_planned_event_OpenTMS-Event2702170538_eastbound.json'
 ```
 
 ### Execution for iCone translator
 
 #### Raw to Standard Conversion
+
 ```
 python -m wzdx.raw_to_standard.icone inputfile.json --outputDir outputDirectory
 ```
@@ -79,7 +91,9 @@ Example usage:
 ```
 python -m wzdx.raw_to_standard.icone 'wzdx/sample_files/raw/icone/incident_short.xml'
 ```
+
 #### Standard to WZDx Conversion
+
 ```
 python -m wzdx.standard_to_enhanced.icone_translator inputfile.json --outputFile outputfile.geojson
 ```
@@ -87,11 +101,13 @@ python -m wzdx.standard_to_enhanced.icone_translator inputfile.json --outputFile
 Example usage:
 
 ```
-python -m wzdx.standard_to_enhanced.icone_translator 'wzdx/sample_files/standard/icone/standard_icone_1245_1633444335.json' 
+python -m wzdx.standard_to_enhanced.icone_translator 'wzdx/sample_files/standard/icone/standard_icone_1245_1633444335.json'
 ```
 
 ### Execution for COtrip translator
+
 #### Run the translator script (from Work_Zone)
+
 ```
 python -m wzdx.standard_to_enhanced.cotrip_translator inputfile.json --outputFile outputfile.geojson
 ```
@@ -103,7 +119,8 @@ python -m wzdx.standard_to_enhanced.cotrip_translator 'wzdx/sample_files/raw/cot
 ```
 
 ### Execution for NavJoy 568 translator
-This translator reads in a NavJoy 568 speed reduction form and translates it into a WZDx message. Many of the 568 messages cover 2 directions of traffic, and are thus expanded into 2 WZDx messages, one for each direction. 
+
+This translator reads in a NavJoy 568 speed reduction form and translates it into a WZDx message. Many of the 568 messages cover 2 directions of traffic, and are thus expanded into 2 WZDx messages, one for each direction.
 
 The NavJoy Work Zone feed is being translated into WZDx by NavJoy themselves, the source and WZDx example messages are located here: [Navjoy Sample Data](wzdx/sample%20files/navjoy_data)
 
@@ -118,6 +135,7 @@ Example usage:
 ```
 python -m wzdx.raw_to_standard.navjoy_568 'wzdx/sample_files/raw/navjoy/direction_test_2.json'
 ```
+
 #### Standard to WZDx Conversion
 
 ```
@@ -127,7 +145,7 @@ python -m wzdx.standard_to_enhanced.navjoy_translator inputfile.json --outputFil
 Example usage:
 
 ```
-python -m wzdx.standard_to_enhanced.navjoy_translator 'wzdx/sample_files/standard/navjoy/standard_568_Form568-cb0fdaf0-c27a-4bef-aabd-442615dfb2d6_1638373455_westbound.json' 
+python -m wzdx.standard_to_enhanced.navjoy_translator 'wzdx/sample_files/standard/navjoy/standard_568_Form568-cb0fdaf0-c27a-4bef-aabd-442615dfb2d6_1638373455_westbound.json'
 ```
 
 ### Execution for Combine_wzdx
@@ -154,36 +172,45 @@ python -m pytest 'tests/' -v
 
 Ensure you have your environment configured correctly (as described above).
 
+#### Unit Test Coverage
+
+```
+coverage run --source=wzdx -m pytest -v tests; coverage report -m
+```
+
 ### Message Combination Logic:
 
 The `combine_wzdx` script file combines the output from the iCone and COtrip translators, based on overlapping geography, into a single improved WZDx message. The COtrip message set contains significantly more data, and is used as the base for this new combined message. The script then finds any geographically co-located messages from the iCone data set, pulls in the additional information (comprised of vehicle impact data and data sources) and publishes a new, combined WZDx message. Future state of this script will include additional data fields from the iCone data set as they become available.
 
-
 ## Google Cloud Hosting
-All of the translators featured in this repo are hosted in the CDOT GCP Cloud as Dataflows. The workflow begins with App Engines which retrieve raw data and drop it onto raw pub/sub topics. These are picked up by the raw_to_standard translator running as a Dataflow pipeline, which drops the generated standard message(s) onto a standard topic. These are processed into valid WZDx messages by the enhanced Dataflow pipeline. The final step is to store all of the WZDx files in BigQuery, and combine them into one single WZDx data feed. 
+
+All of the translators featured in this repo are hosted in the CDOT GCP Cloud as Dataflows. The workflow begins with App Engines which retrieve raw data and drop it onto raw pub/sub topics. These are picked up by the raw_to_standard translator running as a Dataflow pipeline, which drops the generated standard message(s) onto a standard topic. These are processed into valid WZDx messages by the enhanced Dataflow pipeline. The final step is to store all of the WZDx files in BigQuery, and combine them into one single WZDx data feed.
 
 ![GCP Processing](wzdx/docs/CDOT%20WZDx%20translators%20-%20Processing.png)
-
 
 ## Build Python Package
 
 Build
+
 ```
 pip install build
 python -m build
 ```
 
 Upload (Requires PyPi account)
+
 ```
 python -m twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
 ```
 
 Import
+
 ```
 pip install wzdx-translator-jacob6838
 ```
 
 ### Notes
+
 This project utilized a python package to make the code more accessible. The setup.py file describes the core properties of the package (name, description, included files, ...), the pyproject.toml file describes the required pre-requisite packages for running this package. The MANIFEST.in file is used to exclude unit testing files from the package. More information on building a python package can be found at [python-packaging-tutorial](https://python-packaging-tutorial.readthedocs.io/en/latest/setup_py.html)
 
 ## Documentation

@@ -3,9 +3,17 @@ import unittest
 import uuid
 from datetime import datetime, timezone
 from unittest.mock import MagicMock, Mock, patch
+import argparse
+from tests.data.standard_to_enhanced import navjoy_translator_data
 
 import time_machine
 from wzdx.standard_to_enhanced import navjoy_translator
+
+
+@patch.object(argparse, 'ArgumentParser')
+def test_parse_navjoy_arguments(argparse_mock):
+    navjoyFile, outputFile = navjoy_translator.parse_navjoy_arguments()
+    assert navjoyFile != None and outputFile != None
 
 
 def init_datetime_mocks(mock_dts):
@@ -21,74 +29,11 @@ def init_datetime_mocks(mock_dts):
 @unittest.mock.patch('wzdx.tools.wzdx_translator.datetime')
 def test_parse_reduction_zone_linestring(mock_dt, mock_dt_3):
     init_datetime_mocks([mock_dt, mock_dt_3])
-    standard = {
-        'rtdh_timestamp': 1638846301.4691865,
-        'rtdh_message_id': 'e5bba2f6-bbd0-4a61-8d64-b7c33657d35a',
-        'event': {
-            'type': '',
-            'source': {
-                'id': 'Form568-44819108-703c-4d6d-ae0d-7dca7319e5b0',
-                'last_updated_timestamp': 1638871501469
-            },
-            'geometry': [
-                [-104.82230842595187, 39.73946349406594],
-                [-104.79432762150851, 39.73959547447038]
-            ],
-            'header': {
-                'description': 'Maintenance for lane expansion',
-                'justification': 'Lane expansion - maintenance work',
-                'reduced_speed_limit': 45,
-                'start_timestamp': 1630290600000,
-                'end_timestamp': 1630290600000
-            },
-            'detail': {
-                'road_name': '287',
-                'road_number': '287',
-                'direction': 'eastbound'
-            }
-        }
-    }
 
-    test_feature = navjoy_translator.parse_reduction_zone(standard)
+    test_feature = navjoy_translator.parse_reduction_zone(
+        navjoy_translator_data.test_parse_reduction_zone_linestring_standard)
 
-    expected_feature = {
-        "type": "Feature",
-        "properties": {
-            "road_event_id": None,
-            "event_type": "work-zone",
-            "data_source_id": None,
-            "start_date": "2021-08-30T02:30:00Z",
-            "end_date": "2021-08-30T02:30:00Z",
-            "start_date_accuracy": "estimated",
-            "end_date_accuracy": "estimated",
-            "beginning_accuracy": "estimated",
-            "ending_accuracy": "estimated",
-            "road_names": ["287"],
-            "direction": "eastbound",
-            "vehicle_impact": "all-lanes-open",
-            "event_status": "completed",
-            "reduced_speed_limit": 45,
-            'types_of_work': [{'type_name': 'surface-work',
-                               'is_architectural_change': True}],
-            "description": "Maintenance for lane expansion. Lane expansion - maintenance work",
-            "creation_date": "2021-12-07T03:05:01Z",
-            "update_date": "2021-12-07T10:05:01Z"
-        },
-        "geometry": {
-            "type": "LineString",
-            "coordinates": [
-                [
-                    -104.82230842595187,
-                    39.73946349406594
-                ],
-                [
-                    -104.79432762150851,
-                    39.73959547447038
-                ],
-            ]
-        }
-    }
-    assert test_feature == expected_feature
+    assert test_feature == navjoy_translator_data.test_parse_reduction_zone_linestring_expected_feature
 
 
 def test_parse_reduction_zone_no_data():
@@ -142,100 +87,10 @@ def test_wzdx_creator(mock_dt, mock_dt_3, mockuuid):
     uuid.uuid4 = Mock()
     uuid.uuid4.side_effect = 'we234de'
 
-    standard = {
-        'rtdh_timestamp': 1638846301.4691865,
-        'rtdh_message_id': 'e5bba2f6-bbd0-4a61-8d64-b7c33657d35a',
-        'event': {
-            'type': '',
-            'source': {
-                'id': 'Form568-44819108-703c-4d6d-ae0d-7dca7319e5b0',
-                'last_updated_timestamp': 1638871501469
-            },
-            'geometry': [
-                [-104.82230842595187, 39.73946349406594],
-                [-104.79432762150851, 39.73959547447038]
-            ],
-            'header': {
-                'description': 'Maintenance for lane expansion',
-                'justification': 'Lane expansion - maintenance work',
-                'reduced_speed_limit': 45,
-                'start_timestamp': 1630290600000,
-                'end_timestamp': 1630290600000
-            },
-            'detail': {
-                'road_name': '287',
-                'road_number': '287',
-                'direction': 'eastbound'
-            }
-        }
-    }
-
-    expected_wzdx = {
-        'road_event_feed_info': {
-            'feed_info_id': '2ed141dc-b998-4f7a-8395-9ae9dc7df2f8',
-            'update_date': '2021-04-13T00:00:00Z',
-            'publisher': 'CDOT',
-            'contact_name': 'Ashley Nylen',
-            'contact_email': 'ashley.nylen@state.co.us',
-            'version': '3.1',
-            'license': 'https://creativecommons.org/publicdomain/zero/1.0/',
-            'data_sources': [
-                {
-                    'data_source_id': 'w',
-                    'feed_info_id': '2ed141dc-b998-4f7a-8395-9ae9dc7df2f8',
-                    'organization_name': 'CDOT',
-                    'contact_name': 'Ashley Nylen',
-                    'contact_email': 'ashley.nylen@state.co.us',
-                    'update_date': '2021-04-13T00:00:00Z',
-                    'location_method': 'channel-device-method',
-                    'lrs_type': 'lrs_type'
-                }
-            ]
-        },
-        'type': 'FeatureCollection',
-        'features': [
-            {
-                'type': 'Feature',
-                'properties': {
-                    'road_event_id': '2',
-                    'event_type': 'work-zone',
-                    'reduced_speed_limit': 45,
-                    'data_source_id': 'w',
-                    'start_date': "2021-08-30T02:30:00Z",
-                    'end_date': "2021-08-30T02:30:00Z",
-                    'start_date_accuracy': 'estimated',
-                    'end_date_accuracy': 'estimated',
-                    'beginning_accuracy': 'estimated',
-                    'ending_accuracy': 'estimated',
-                    'road_names': ['287'],
-                    'direction': 'eastbound',
-                    'vehicle_impact': 'all-lanes-open',
-                    'event_status': 'planned',
-                    'types_of_work': [
-                        {
-                            'type_name': 'surface-work',
-                            'is_architectural_change': True
-                        }
-                    ],
-                    'description': 'Maintenance for lane expansion. Lane expansion - maintenance work',
-                    'creation_date': "2021-12-07T03:05:01Z",
-                    'update_date': "2021-12-07T10:05:01Z"
-                },
-                'geometry': {
-                    'type': 'LineString',
-                    'coordinates': [
-                        [-104.82230842595187, 39.73946349406594],
-                        [-104.79432762150851, 39.73959547447038]
-                    ]
-                }
-            }
-        ]
-    }
-
     with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
-        test_wzdx = navjoy_translator.wzdx_creator(standard)
-    print(test_wzdx)
-    assert expected_wzdx == test_wzdx
+        test_wzdx = navjoy_translator.wzdx_creator(
+            navjoy_translator_data.test_wzdx_creator_standard)
+    assert navjoy_translator_data.test_wzdx_creator_expected_wzdx == test_wzdx
 
 
 def test_wzdx_creator_empty_object():

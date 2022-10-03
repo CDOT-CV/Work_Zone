@@ -1,4 +1,5 @@
 import argparse
+import datetime
 import json
 import logging
 import time
@@ -6,8 +7,10 @@ import uuid
 import xml.etree.ElementTree as ET
 from collections import OrderedDict
 
-from wzdx.tools import date_tools, polygon_tools, wzdx_translator
-from wzdx.util.collections import PathDict
+from ..standard_to_enhanced import icone_translator
+from ..tools import (cdot_geospatial_api, date_tools, geospatial_tools,
+                     wzdx_translator)
+from ..util.collections import PathDict
 
 PROGRAM_NAME = 'iConeRawToStandard'
 PROGRAM_VERSION = '1.0'
@@ -19,18 +22,16 @@ def main():
     generated_messages = generate_standard_messages_from_string(
         input_file_contents)
 
-    generated_files_list = []
+    wzdx_msg = {}
     for message in generated_messages:
-        output_path = f"{output_dir}/standard_icone_{message['event']['source']['id']}_{round(message['rtdh_timestamp'])}.json"
-        open(output_path, 'w+').write(json.dumps(message, indent=2))
-        generated_files_list.append(output_path)
+        wzdx = icone_translator.wzdx_creator(message)
+        if not wzdx_msg:
+            wzdx_msg = wzdx
+        else:
+            wzdx_msg['features'].extend(wzdx['features'])
 
-    if generated_files_list:
-        print(
-            f"Successfully generated standard message files: {generated_files_list}")
-    else:
-        logging.warning(
-            "Standard message generation failed. See messages printed above")
+    output_path = input_file.replace('.xml', '.json')
+    open(output_path, 'w+').write(json.dumps(wzdx_msg, indent=2))
 
 
 def generate_standard_messages_from_string(input_file_contents):
@@ -110,6 +111,30 @@ def get_sensor_list(incident):
 
 def create_rtdh_standard_msg(pd):
     devices = get_sensor_list(pd.get(f"incident"))
+    start_time = pd.get("incident/starttime",
+                        date_tools.parse_datetime_from_iso_string, default=None)
+    end_time = pd.get(
+        "incident/endtime", date_tools.parse_datetime_from_iso_string, default=None)
+    if not end_time:
+        if start_time > datetime.datetime.utcnow().replace(tzinfo=datetime.timezone.utc):
+            end_time = start_time + datetime.timedelta(days=7)
+        else:
+            end_time = datetime.datetime.utcnow().replace(
+                tzinfo=datetime.timezone.utc) + datetime.timedelta(days=7)
+        # Added for unit test
+        end_time = end_time.replace(second=0, microsecond=0)
+
+    coordinates = pd.get("incident/location/polyline", parse_icone_polyline)
+    route_details_start = get_route_details(coordinates[0])
+    route_details_end = get_route_details(coordinates[-1])
+
+    direction = get_direction(
+        pd.get("incident/location/street"), coordinates, route_details_start)
+
+    road_name = pd.get("incident/location/street")
+    if not road_name:
+        road_name = get_road_name(route_details_start)
+
     return {
         "rtdh_timestamp": time.time(),
         "rtdh_message_id": str(uuid.uuid4()),
@@ -123,13 +148,13 @@ def create_rtdh_standard_msg(pd):
             "geometry": pd.get("incident/location/polyline", parse_icone_polyline),
             "header": {
                 "description": pd.get("incident/description", default=""),
-                "start_timestamp": pd.get("incident/starttime", date_tools.get_unix_from_iso_string, default=None),
-                "end_timestamp": pd.get("incident/endtime", date_tools.get_unix_from_iso_string, default=None)
+                "start_timestamp": date_tools.date_to_unix(start_time),
+                "end_timestamp": date_tools.date_to_unix(end_time)
             },
             "detail": {
-                "road_name": pd.get("incident/location/street"),
-                "road_number": pd.get("incident/location/street"),
-                "direction": get_direction(pd.get("incident/location/street"), pd.get("incident/location/polyline"))
+                "road_name": road_name,
+                "road_number": road_name,
+                "direction": direction
             },
             "additional_info": {
                 "devices": devices,
@@ -139,11 +164,26 @@ def create_rtdh_standard_msg(pd):
     }
 
 
-def get_direction(street, coords):
+def get_direction(street, coords, route_details=None):
     direction = wzdx_translator.parse_direction_from_street_name(street)
+    if not direction and route_details:
+        direction = get_direction_from_route_details(route_details)
     if not direction:
-        direction = polygon_tools.get_road_direction_from_coordinates(coords)
+        direction = geospatial_tools.get_road_direction_from_coordinates(
+            coords)
     return direction
+
+
+def get_route_details(latLng):
+    return cdot_geospatial_api.get_route_and_measure(latLng)
+
+
+def get_road_name(route_details):
+    return route_details.get('Route')
+
+
+def get_direction_from_route_details(route_details):
+    return route_details.get('Direction')
 
 
 # function to validate the incident

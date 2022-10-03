@@ -1,122 +1,88 @@
-from wzdx.tools import polygon_tools
+from wzdx.tools import polygon_tools, geospatial_tools
+import unittest
+from shapely.geometry.polygon import Polygon
 
 
-# --------------------------------------------------------------------------------Unit test for get_road_direction function--------------------------------------------------------------------------------
-def test_get_road_direction_no_direction():
-    test_coordinates = [
-        [
-            -114.145065,
-            34.8380671
-        ],
-        [
-            -114.145065,
-            34.8380671
-        ]
-    ]
-    test_direction = polygon_tools.get_road_direction_from_coordinates(
-        test_coordinates)
-    valid_direction = None
-    assert test_direction == valid_direction
-
-
-def test_get_road_direction_empty_string():
-    test_coordinates = ''
-    test_direction = polygon_tools.get_road_direction_from_coordinates(
-        test_coordinates)
-    valid_direction = None
-    assert test_direction == valid_direction
-
-
-def test_get_road_direction_empty_coordinates():
-    test_coordinates = []
-    test_direction = polygon_tools.get_road_direction_from_coordinates(
-        test_coordinates)
-    valid_direction = None
-    assert test_direction == valid_direction
-
-
-def test_get_road_direction_null_coordinates():
-    test_coordinates = None
-    test_direction = polygon_tools.get_road_direction_from_coordinates(
-        test_coordinates)
-    valid_direction = None
-    assert test_direction == valid_direction
-
-
-def test_get_road_direction_northbound_direction():
-    test_coordinates = [
-        [
-            -114.145065,
-            34.8380671
-        ],
-        [
-            -114.145065,
-            38.8380671
-        ]
-    ]
-    test_direction = polygon_tools.get_road_direction_from_coordinates(
-        test_coordinates)
-    valid_direction = 'northbound'
-    assert test_direction == valid_direction
-
-
-def test_get_road_direction_eastbound_direction():
-    test_coordinates = [
-        [
-            -114.145065,
-            34.8380671
-        ],
-        [
-            -104.145065,
-            34.8380671
-        ]
-    ]
-    test_direction = polygon_tools.get_road_direction_from_coordinates(
-        test_coordinates)
-    valid_direction = 'eastbound'
-    assert test_direction == valid_direction
-
-
-def test_get_road_direction_westbound_direction():
-    test_coordinates = [
-        [
-            -114.145065,
-            34.8380671
-        ],
-        [
-            -124.145065,
-            34.8380671
-        ]
-    ]
-    test_direction = polygon_tools.get_road_direction_from_coordinates(
-        test_coordinates)
-    valid_direction = 'westbound'
-    assert test_direction == valid_direction
-
-
-def test_polygon_to_polyline():
-    coordinates = [[
-        -105.02536913607729,
-        39.7766424440161
+def test_generate_buffer_polygon_from_linestring():
+    polyline = [[
+        -105.02518638968468,
+        39.776638166930375
     ],
         [
-        -105.02503117774141,
-        39.77663419842862
-    ],
-        [
-        -105.0250819152026,
-        39.771948514459645
-    ],
-        [
-        -105.02539573365735,
-        39.77195057599695
-    ],
-        [
-        -105.02536913607729,
-        39.7766424440161
+            -105.02523601055145,
+            39.771953483109826
     ]]
-    polyline = polygon_tools.polygon_to_polyline_corners(coordinates)
-    assert polyline != None
+    expected = [[39.77663632624975,  -105.02489458690503], [39.77195164242777,  -105.0249442275526], [39.77195532305836,  -
+                                                                                                      105.02552779356584], [39.77664000687735,  -105.02547819247987], [39.77663632624975,  -105.02489458690503]]
+    width = 50
+    polygon = polygon_tools.generate_buffer_polygon_from_linestring(
+        polyline, width)
+    print(polygon)
+    polygon_points = polygon_tools.polygon_to_list(polygon)
+    print(polygon_points)
+
+    testCase = unittest.TestCase()
+
+    print(polygon_points, expected)
+
+    # Validate against previous result
+    for i, point in enumerate(expected):
+        testCase.assertAlmostEqual(
+            point[0], polygon_points[i][0], places=10)
+        testCase.assertAlmostEqual(
+            point[1], polygon_points[i][1], places=10)
+
+    # Validate width
+    testCase.assertAlmostEqual(
+        geospatial_tools.getDist(polyline[0], (polygon_points[0][1], polygon_points[0][0])), width/2, places=0)
+
+
+def test_polygon_to_list():
+    expected = [[0, 0], [0, 1], [10, 1], [10, 0], [0, 0]]
+    polygon = Polygon(expected)
+    actual = polygon_tools.polygon_to_list(polygon)
+    assert actual == expected
+
+
+def test_list_to_polygon():
+    coordinates = [[0, 0], [0, 1], [10, 1], [10, 0], [0, 0]]
+    expected = Polygon(coordinates)
+    actual = polygon_tools.list_to_polygon(coordinates)
+    assert actual == expected
+
+
+def test_is_point_in_polygon_true():
+    polygon = [[0, 0], [0, 1], [10, 1], [10, 0], [0, 0]]
+    point = [5, 0.5]
+    actual = polygon_tools.is_point_in_polygon(point, polygon)
+    assert actual == True
+
+
+def test_is_point_in_polygon_false():
+    polygon = [[0, 0], [0, 1], [10, 1], [10, 0], [0, 0]]
+    point = [10.5, 0.5]
+    actual = polygon_tools.is_point_in_polygon(point, polygon)
+    assert actual == False
+
+
+def test_average_coordinates():
+    expected = [0.5, 1.5]
+    actual = polygon_tools.average_coordinates([0, 0], [1, 3])
+    assert actual == expected
+
+
+def test_average_symmetric_polygon_to_centerline():
+    coordinates = [[0, 0], [0, 1], [10, 1], [10, 0], [0, 0]]
+    expected = [[0, 0.5], [10, 0.5]]
+    actual = polygon_tools.average_symmetric_polygon_to_centerline(coordinates)
+    assert actual == expected
+
+
+def test_rotate_polygon():
+    polygon = [[0, 1], [2, 3], [3, 4], [4, 5]]
+    expected = [[4, 5], [0, 1], [2, 3], [3, 4]]
+    actual = polygon_tools.rotate(polygon, 1)
+    assert actual == expected
 
 
 # --------------------------------------------- polygon_to_polyline_center ---------------------------------------------
