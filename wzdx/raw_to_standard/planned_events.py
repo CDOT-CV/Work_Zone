@@ -121,8 +121,6 @@ def expand_event_directions(message):
 def generate_rtdh_standard_message_from_raw_single(obj):
     is_incident_msg, is_wz = is_incident_wz(obj)
     if is_incident_msg and not is_wz:
-        id = obj.get('properties', {}).get('id')
-        dir = obj.get('properties', {}).get('direction')
         return {}
     pd = PathDict(obj)
     standard_message = create_rtdh_standard_msg(pd, is_incident_msg)
@@ -266,7 +264,7 @@ def map_lane_status(lane_status_bit):
 
 
 def map_direction_string(direction_string):
-    return STRING_DIRECTION_MAP.get(direction_string)
+    return STRING_DIRECTION_MAP.get(direction_string, 'undefined')
 
 
 # This method parses a hex string and list of closed lane names into a WZDx lanes list. The hex string, lane_closures_hex,
@@ -400,7 +398,7 @@ def create_rtdh_standard_msg(pd, isIncident):
         beginning_milepost = pd.get("properties/startMarker", default="")
         ending_milepost = pd.get("properties/endMarker", default="")
         recorded_direction = pd.get("properties/recorded_direction")
-        if direction == REVERSED_DIRECTION_MAP.get(recorded_direction):
+        if direction == REVERSED_DIRECTION_MAP.get(recorded_direction) and direction != "unknown":
             coordinates.reverse()
             beginning_milepost = pd.get("properties/endMarker", default="")
             ending_milepost = pd.get("properties/startMarker", default="")
@@ -508,7 +506,7 @@ def validate_closure(obj):
         starttime_string = properties.get('startTime')
         endtime_string = properties.get('clearTime')
         description = properties.get('travelerInformationMessage')
-        direction = properties.get('direction')
+        direction = properties.get('direction', 'undefined')
 
         required_fields = [starttime_string, description, direction]
         for field in required_fields:

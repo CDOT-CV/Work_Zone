@@ -19,7 +19,8 @@ def initialize_feature_properties():
         'data_source_id': None,
         'road_names': None,
         'direction': None,
-        'relationship': {},
+        'related_road_events': [],
+        'name': None,
         'description': None,
         'creation_date': None,
         'update_date': None,
@@ -127,22 +128,32 @@ def add_ids(message, event_type="work-zone"):
         feature = message.get('features')[i]
         id = road_event_ids[i]
         feature['properties']['core_details']['data_source_id'] = data_source_id
-        if feature['properties']['core_details'].get('relationship'):
-            feature['properties']['core_details']['relationship']['relationship_id'] = str(
-                uuid.uuid4())
-            feature['properties']['core_details']['relationship']['road_event_id'] = feature.get(
-                'id', id)
-    return message
 
+        # TODO: Implement related_road_events
+        # if feature['properties']['core_details'].get('related_road_events'):
+        #     related_road_events = feature['properties']['core_details']['related_road_events']
+        #     road_event = {}
+        #     feature['properties']['core_details']['related_road_events']['relationship_id'] = str(
+        #         uuid.uuid4())
+        #     feature['properties']['core_details']['related_road_events']['road_event_id'] = feature.get(
+        #         'id', id)
+    return message
 
 # Add ids to message
 # This function may fail if some optional fields are not present (lanes, types_of_work, relationship, ...)
-def add_ids_v3(message):
+
+
+def add_ids(message, event_type="work-zone"):
     if not message or type(message) != dict:
         return None
 
-    data_source_id = message.get('road_event_feed_info').get(
-        'data_sources')[0].get('data_source_id')
+    if event_type == 'work-zone':
+        data_source_id = message.get('road_event_feed_info').get(
+            'data_sources')[0].get('data_source_id')
+    elif event_type == 'restriction':
+        data_source_id = message.get('feed_info').get(
+            'data_sources')[0].get('data_source_id')
+
     road_event_length = len(message.get('features'))
     road_event_ids = []
     for i in range(road_event_length):
@@ -151,12 +162,12 @@ def add_ids_v3(message):
     for i in range(road_event_length):
         feature = message.get('features')[i]
         id = road_event_ids[i]
-        feature['properties']['road_event_id'] = id
-        feature['properties']['data_source_id'] = data_source_id
-        if feature['properties'].get('relationship'):
-            feature['properties']['relationship']['relationship_id'] = str(
+        feature['properties']['core_details']['data_source_id'] = data_source_id
+        if feature['properties']['core_details'].get('relationship'):
+            feature['properties']['core_details']['relationship']['relationship_id'] = str(
                 uuid.uuid4())
-            feature['properties']['relationship']['road_event_id'] = id
+            feature['properties']['core_details']['relationship']['road_event_id'] = feature.get(
+                'id', id)
     return message
 
 
@@ -269,7 +280,7 @@ def parse_direction_from_street_name(street):
     elif street_char == 'E' or street_chars == 'EB':
         direction = 'eastbound'
     else:
-        direction = None
+        direction = 'unknown'
 
     return direction
 

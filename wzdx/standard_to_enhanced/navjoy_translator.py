@@ -99,10 +99,10 @@ def parse_reduction_zone(incident):
     core_details['road_names'] = road_names
 
     # direction
-    core_details['direction'] = detail.get('direction')
+    core_details['direction'] = detail.get('direction', 'unknown')
 
     # Relationship
-    core_details['relationship'] = {}
+    core_details['related_road_events'] = []
 
     # description
     core_details['description'] = header.get(

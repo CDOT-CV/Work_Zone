@@ -46,7 +46,7 @@ def get_road_direction_from_coordinates(coordinates):
         direction = 'southbound'
 
     if lat_dif == 0 and long_dif == 0:
-        direction = None
+        direction = 'unknown'
 
     return direction
 

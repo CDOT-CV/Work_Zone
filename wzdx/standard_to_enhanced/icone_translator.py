@@ -249,11 +249,11 @@ def parse_incident(incident):
         direction = geospatial_tools.get_road_direction_from_coordinates(
             geometry.get('coordinates'))
     if not direction:
-        return None
+        direction = 'unknown'
     core_details['direction'] = direction
 
     # relationship
-    core_details['relationship'] = {}
+    core_details['related_road_events'] = []
 
     # description
     core_details['description'] = header.get('description')

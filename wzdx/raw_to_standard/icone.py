@@ -166,9 +166,9 @@ def create_rtdh_standard_msg(pd):
 
 def get_direction(street, coords, route_details=None):
     direction = wzdx_translator.parse_direction_from_street_name(street)
-    if not direction and route_details:
+    if direction == 'unknown' and route_details:
         direction = get_direction_from_route_details(route_details)
-    if not direction:
+    if direction == 'unknown':
         direction = geospatial_tools.get_road_direction_from_coordinates(
             coords)
     return direction
@@ -183,7 +183,7 @@ def get_road_name(route_details):
 
 
 def get_direction_from_route_details(route_details):
-    return route_details.get('Direction')
+    return route_details.get('Direction', 'unknown')
 
 
 # function to validate the incident

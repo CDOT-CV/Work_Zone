@@ -17,7 +17,7 @@ STRING_DIRECTION_MAP = {'north': 'northbound', 'south': 'southbound',
                         'west': 'westbound', 'east': 'eastbound'}
 
 REVERSED_DIRECTION_MAP = {'northbound': 'southbound', 'southbound': 'northbound',
-                          'eastbound': 'westbound', 'westbound': 'eastbound'}
+                          'eastbound': 'westbound', 'westbound': 'eastbound', 'undefined': 'undefined'}
 
 CORRECT_KEY_NAMES = {
     'street_name': 'streetNameFrom',
@@ -149,7 +149,7 @@ def get_directions_from_string(directions_string) -> list:
     # iterate over directions and convert short direction names to WZDx enum directions
     directions_string = directions_string.strip()
     for dir in directions_string.split('/'):
-        direction = STRING_DIRECTION_MAP.get(dir.lower())
+        direction = STRING_DIRECTION_MAP.get(dir.lower(), 'undefined')
         if direction:
             directions.append(direction)
 
@@ -216,7 +216,7 @@ def create_rtdh_standard_msg(pd):
     # Reverse polygon if it is in the opposite direction as the message
     polyline_direction = geospatial_tools.get_road_direction_from_coordinates(
         coordinates)
-    if direction == REVERSED_DIRECTION_MAP.get(polyline_direction):
+    if direction == REVERSED_DIRECTION_MAP.get(polyline_direction) and direction != "undefined":
         coordinates.reverse()
 
     start_date = pd.get("data/workStartDate",
@@ -294,7 +294,7 @@ def validate_closure(obj):
     starttime_string = data.get('workStartDate')
     endtime_string = data.get('workEndDate')
     description = data.get('descriptionForProject')
-    direction = data.get('direction')
+    direction = data.get('direction', 'undefined')
 
     required_fields = [street, starttime_string, description, direction]
     for field in required_fields:
