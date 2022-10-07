@@ -27,10 +27,10 @@ def initialize_feature_properties():
     }
     properties['start_date'] = None
     properties['end_date'] = None
-    properties['start_date_accuracy'] = None
-    properties['end_date_accuracy'] = None
-    properties['beginning_accuracy'] = None
-    properties['ending_accuracy'] = None
+    properties['is_start_date_verified'] = None
+    properties['is_end_date_verified'] = None
+    properties['is_start_position_verified'] = None
+    properties['is_end_position_verified'] = None
     properties['location_method'] = None
     properties['vehicle_impact'] = None
     properties['lanes'] = None
@@ -38,7 +38,6 @@ def initialize_feature_properties():
     properties['ending_cross_street'] = None
     properties['beginning_mile_post'] = None
     properties['ending_mile_post'] = None
-    properties['event_status'] = None
     properties['types_of_work'] = None
     properties['worker_presence'] = None
     properties['reduced_speed_limit_kph'] = None
@@ -113,7 +112,7 @@ def add_ids(message, event_type="work-zone"):
         return None
 
     if event_type == 'work-zone':
-        data_source_id = message.get('road_event_feed_info').get(
+        data_source_id = message.get('feed_info').get(
             'data_sources')[0].get('data_source_id')
     elif event_type == 'restriction':
         data_source_id = message.get('feed_info').get(
@@ -173,10 +172,10 @@ def add_ids(message, event_type="work-zone"):
 
 def initialize_wzdx_object(info):
     wzd = {}
-    wzd['road_event_feed_info'] = {}
-    wzd['road_event_feed_info']['publisher'] = 'CDOT'
-    wzd['road_event_feed_info']['version'] = '4.0'
-    wzd['road_event_feed_info']['license'] = "https://creativecommons.org/publicdomain/zero/1.0/"
+    wzd['feed_info'] = {}
+    wzd['feed_info']['publisher'] = 'CDOT'
+    wzd['feed_info']['version'] = '4.0'
+    wzd['feed_info']['license'] = "https://creativecommons.org/publicdomain/zero/1.0/"
 
     data_source = {}
     data_source['data_source_id'] = str(uuid.uuid4())
@@ -188,15 +187,15 @@ def initialize_wzdx_object(info):
         'metadata').get('datafeed_frequency_update', 300)
     data_source['contact_name'] = info.get('metadata').get('contact_name')
     data_source['contact_email'] = info.get('metadata').get('contact_email')
-    wzd['road_event_feed_info']['data_sources'] = [data_source]
+    wzd['feed_info']['data_sources'] = [data_source]
 
-    wzd['road_event_feed_info']['update_date'] = datetime.utcnow().strftime(
+    wzd['feed_info']['update_date'] = datetime.utcnow().strftime(
         "%Y-%m-%dT%H:%M:%SZ")
-    wzd['road_event_feed_info']['update_frequency'] = info.get(
+    wzd['feed_info']['update_frequency'] = info.get(
         'metadata').get('datafeed_frequency_update', 300)
-    wzd['road_event_feed_info']['contact_name'] = info.get(
+    wzd['feed_info']['contact_name'] = info.get(
         'metadata').get('contact_name')
-    wzd['road_event_feed_info']['contact_email'] = info.get(
+    wzd['feed_info']['contact_email'] = info.get(
         'metadata').get('contact_email')
 
     wzd['type'] = 'FeatureCollection'

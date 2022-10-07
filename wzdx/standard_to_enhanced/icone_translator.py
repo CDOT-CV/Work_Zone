@@ -284,17 +284,17 @@ def parse_incident(incident):
     else:
         properties['end_date'] = None
 
-    # start_date_accuracy
-    properties['start_date_accuracy'] = "estimated"
+    # is_start_date_verified
+    properties['is_start_date_verified'] = False
 
-    # end_date_accuracy
-    properties['end_date_accuracy'] = "estimated"
+    # is_end_date_verified
+    properties['is_end_date_verified'] = False
 
-    # beginning_accuracy
-    properties['beginning_accuracy'] = "estimated"
+    # is_start_position_verified
+    properties['is_start_position_verified'] = False
 
-    # ending_accuracy
-    properties['ending_accuracy'] = "estimated"
+    # is_end_position_verified
+    properties['is_end_position_verified'] = False
 
     # location_method
     properties["location_method"] = "channel-device-method"
@@ -317,10 +317,6 @@ def parse_incident(incident):
 
     # beginning_cross_street
     properties['ending_milepost'] = ""
-
-    # event status
-    properties['event_status'] = date_tools.get_event_status(
-        start_time, end_time)
 
     # type_of_work
     # maintenance, minor-road-defect-repair, roadside-work, overhead-work, below-road-work, barrier-work, surface-work, painting, roadway-relocation, roadway-creation

@@ -230,17 +230,17 @@ def parse_work_zone(incident):
     # end_date
     properties['end_date'] = date_tools.get_iso_string_from_datetime(end_time)
 
-    # start_date_accuracy
-    properties['start_date_accuracy'] = "estimated"
+    # is_start_date_verified
+    properties['is_start_date_verified'] = False
 
-    # end_date_accuracy
-    properties['end_date_accuracy'] = "estimated"
+    # is_end_date_verified
+    properties['is_end_date_verified'] = False
 
-    # beginning_accuracy
-    properties['beginning_accuracy'] = "estimated"
+    # is_start_position_verified
+    properties['is_start_position_verified'] = False
 
-    # ending_accuracy
-    properties['ending_accuracy'] = "estimated"
+    # is_end_position_verified
+    properties['is_end_position_verified'] = False
 
     # location_method
     properties["location_method"] = "channel-device-method"
@@ -264,12 +264,8 @@ def parse_work_zone(incident):
     properties['beginning_milepost'] = additional_info.get(
         'beginning_milepost')
 
-    # start_date_accuracy
+    # ending_milepost
     properties['ending_milepost'] = additional_info.get('ending_milepost')
-
-    # event status
-    properties['event_status'] = date_tools.get_event_status(
-        start_time, end_time)
 
     # type_of_work
     # maintenance, minor-road-defect-repair, roadside-work, overhead-work, below-road-work, barrier-work, surface-work, painting, roadway-relocation, roadway-creation
