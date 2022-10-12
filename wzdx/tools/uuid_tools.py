@@ -9,10 +9,16 @@ def random_uuid():
 
 
 def get_seeded_uuid(seed_string):
-    random.seed(seed_string)
+    if seed_string != None:
+        random.seed(seed_string)
     return random_uuid()
 
 
+def get_seeded_uuid_string(seed_string):
+    return str(get_seeded_uuid(seed_string))
+
+
+# Only for testing
 def is_valid_uuid(uuid_to_test, version=4):
     """
     Check if uuid_to_test is a valid UUID.

@@ -63,7 +63,7 @@ test_parse_work_zone_linestring_standard = {
 }
 
 test_parse_work_zone_linestring_expected = {
-    "id": "OpenTMS-Event1689408506",
+    "id": "4c75682c-b846-47dc-8610-38bfd2724662",
     "type": "Feature",
     "properties": {
             "core_details": {
@@ -79,10 +79,10 @@ test_parse_work_zone_linestring_expected = {
         "start_date": "2021-10-29T18:26:04Z",
         "end_date": "2022-05-01T18:26:04Z",
         "location_method": "channel-device-method",
-        "start_date_accuracy": "estimated",
-        "end_date_accuracy": "estimated",
-        "beginning_accuracy": "estimated",
-        "ending_accuracy": "estimated",
+        "is_start_date_verified": False,
+        "is_end_date_verified": False,
+        "is_start_position_verified": False,
+        "is_end_position_verified": False,
         "vehicle_impact": "some-lanes-closed",
         "beginning_milepost": 50.0,
         "ending_milepost": 60.0,
@@ -108,7 +108,6 @@ test_parse_work_zone_linestring_expected = {
                     "status": "open"
                 }
             ],
-        "event_status": "completed"
     },
     "geometry": {
         "type": "LineString",
@@ -190,7 +189,7 @@ test_wzdx_creator_standard = {
 }
 
 test_wzdx_creator_expected = {
-    "road_event_feed_info": {
+    "feed_info": {
         "update_date": "2021-04-13T00:00:00Z",
         "publisher": "CDOT",
         "contact_name": "Ashley Nylen",
@@ -212,7 +211,7 @@ test_wzdx_creator_expected = {
     "type": "FeatureCollection",
     "features": [
             {
-                "id": "OpenTMS-Event1689408506",
+                "id": "4c75682c-b846-47dc-8610-38bfd2724662",
                 "type": "Feature",
                 "properties": {
                     "core_details": {
@@ -230,10 +229,10 @@ test_wzdx_creator_expected = {
                     "location_method": "channel-device-method",
                     "beginning_milepost": 50.0,
                     "ending_milepost": 60.0,
-                    "start_date_accuracy": "estimated",
-                    "end_date_accuracy": "estimated",
-                    "beginning_accuracy": "estimated",
-                    "ending_accuracy": "estimated",
+                    "is_start_date_verified": False,
+                    "is_end_date_verified": False,
+                    "is_start_position_verified": False,
+                    "is_end_position_verified": False,
                     "vehicle_impact": "some-lanes-closed",
                     "lanes": [
                         {
@@ -256,8 +255,7 @@ test_wzdx_creator_expected = {
                             "type": "shoulder",
                             "status": "open"
                         }
-                    ],
-                    "event_status": "planned"
+                    ]
                 },
                 "geometry": {
                     "type": "LineString",
@@ -342,4 +340,4 @@ test_wzdx_creator_standard_road_restriction = {
 }
 
 test_wzdx_creator_expected_road_restriction = {'feed_info': {'feed_info_id': '49253be7-0c6a-4a65-8113-450f9041f989', 'update_date': '2021-04-13T00:00:00Z', 'publisher': 'CDOT', 'contact_name': 'Ashley Nylen', 'contact_email': 'ashley.nylen@state.co.us', 'version': '4.0', 'license': 'https://creativecommons.org/publicdomain/zero/1.0/', 'data_sources': [{'data_source_id': 'w', 'feed_info_id': '49253be7-0c6a-4a65-8113-450f9041f989', 'organization_name': 'CDOT', 'contact_name': 'Ashley Nylen', 'contact_email': 'ashley.nylen@state.co.us', 'update_date': '2021-04-13T00:00:00Z', 'location_method': 'channel-device-method', 'lrs_type': 'lrs_type'}]}, 'type': 'FeatureCollection', 'features': [{'type': 'Feature', 'properties': {'core_details': {
-    'data_source_id': 'w', 'event_type': 'restriction', 'road_names': ['I-70E'], 'direction': 'westbound', 'relationship': {}, 'description': 'Between Exit 49: CO 65; Grand Mesa (5 miles east of the Palisade area) and US 6 (Debeque) from Mile Point 50 to Mile Point 60. Road closed expect delays due to bridge construction. Until May 1, 2022 at about 12:26PM MDT.', 'update_date': '2021-10-29T18:35:01Z'}, 'lanes': [{'order': 1, 'type': 'shoulder', 'status': 'open'}, {'order': 2, 'type': 'general', 'status': 'closed'}, {'order': 3, 'type': 'general', 'status': 'closed'}, {'order': 4, 'type': 'shoulder', 'status': 'open'}]}, 'geometry': {'type': 'LineString', 'coordinates': [[-108.279106, 39.195663], [-108.218549, 39.302392]]}, 'id': 'OpenTMS-Event1689408506'}]}
+    'data_source_id': 'w', 'event_type': 'restriction', 'road_names': ['I-70E'], 'direction': 'westbound', 'relationship': {}, 'description': 'Between Exit 49: CO 65; Grand Mesa (5 miles east of the Palisade area) and US 6 (Debeque) from Mile Point 50 to Mile Point 60. Road closed expect delays due to bridge construction. Until May 1, 2022 at about 12:26PM MDT.', 'update_date': '2021-10-29T18:35:01Z'}, 'lanes': [{'order': 1, 'type': 'shoulder', 'status': 'open'}, {'order': 2, 'type': 'general', 'status': 'closed'}, {'order': 3, 'type': 'general', 'status': 'closed'}, {'order': 4, 'type': 'shoulder', 'status': 'open'}]}, 'geometry': {'type': 'LineString', 'coordinates': [[-108.279106, 39.195663], [-108.218549, 39.302392]]}, 'id': '4c75682c-b846-47dc-8610-38bfd2724662'}]}

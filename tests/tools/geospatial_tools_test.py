@@ -15,40 +15,35 @@ def test_get_road_direction_no_direction():
     ]
     test_direction = geospatial_tools.get_road_direction_from_coordinates(
         test_coordinates)
-    valid_direction = None
-    assert test_direction == valid_direction
+    assert test_direction == 'unknown'
 
 
 def test_get_road_direction_empty_string():
     test_coordinates = ''
     test_direction = geospatial_tools.get_road_direction_from_coordinates(
         test_coordinates)
-    valid_direction = None
-    assert test_direction == valid_direction
+    assert test_direction == 'unknown'
 
 
 def test_get_road_direction_empty_coordinates():
     test_coordinates = []
     test_direction = geospatial_tools.get_road_direction_from_coordinates(
         test_coordinates)
-    valid_direction = None
-    assert test_direction == valid_direction
+    assert test_direction == 'unknown'
 
 
 def test_get_road_direction_short_coordinates():
     test_coordinates = [[], []]
     test_direction = geospatial_tools.get_road_direction_from_coordinates(
         test_coordinates)
-    valid_direction = None
-    assert test_direction == valid_direction
+    assert test_direction == 'unknown'
 
 
 def test_get_road_direction_null_coordinates():
     test_coordinates = None
     test_direction = geospatial_tools.get_road_direction_from_coordinates(
         test_coordinates)
-    valid_direction = None
-    assert test_direction == valid_direction
+    assert test_direction == 'unknown'
 
 
 def test_get_road_direction_northbound_direction():

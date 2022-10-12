@@ -5,9 +5,9 @@ import logging
 import copy
 import uuid
 
-from ..sample_files.validation_schema import wzdx_v40_feed, road_restriction_v40_feed
+from ..sample_files.validation_schema import work_zone_feed_v41, road_restriction_v40_feed
 
-from ..tools import date_tools, wzdx_translator
+from ..tools import date_tools, wzdx_translator, uuid_tools
 
 PROGRAM_NAME = 'PlannedEventsTranslator'
 PROGRAM_VERSION = '1.0'
@@ -26,7 +26,7 @@ def main():
     except:
         event_type = 'work-zone'
     schemas = {
-        'work-zone': wzdx_v40_feed.wzdx_v40_schema_string,
+        'work-zone': work_zone_feed_v41.wzdx_v41_schema_string,
         'restriction': road_restriction_v40_feed.road_restriction_v40_schema_string
     }
 
@@ -164,7 +164,8 @@ def parse_road_restriction(incident):
     feature['type'] = "Feature"
     feature['properties'] = filtered_properties
     feature['geometry'] = geometry
-    feature['id'] = event.get('source', {}).get('id', uuid.uuid4())
+    feature['id'] = uuid_tools.get_seeded_uuid_string(
+        event.get('source', {}).get('id', None))
 
     return feature
 
@@ -279,17 +280,20 @@ def parse_work_zone(incident):
     properties['restrictions'] = additional_info.get('restrictions', [])
 
     filtered_properties = copy.deepcopy(properties)
+    
+    INVALID_PROPERTIES = [None, '', []]
 
     for key, value in properties.items():
-        if not value:
+        if value in INVALID_PROPERTIES:
             del filtered_properties[key]
 
     for key, value in properties['core_details'].items():
-        if not value and key not in ['data_source_id']:
+        if value in INVALID_PROPERTIES and key not in ['data_source_id']:
             del filtered_properties['core_details'][key]
 
     feature = {}
-    feature['id'] = event.get('source', {}).get('id', uuid.uuid4())
+    feature['id'] = uuid_tools.get_seeded_uuid_string(
+        event.get('source', {}).get('id', None))
     feature['type'] = "Feature"
     feature['properties'] = filtered_properties
     feature['geometry'] = geometry

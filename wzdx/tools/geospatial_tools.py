@@ -25,15 +25,15 @@ ROAD_OREINTATIONS_DIRECTIONS_MAP = {
 # function to get road direction by using geometry coordinates
 def get_road_direction_from_coordinates(coordinates):
     if not coordinates or type(coordinates) != list or len(coordinates) < 2:
-        return None
+        return 'unknown'
 
     try:
         long_dif = coordinates[-1][0] - coordinates[0][0]
         lat_dif = coordinates[-1][1] - coordinates[0][1]
     except ValueError as e:
-        return None
+        return 'unknown'
     except IndexError as e:
-        return None
+        return 'unknown'
 
     if abs(long_dif) > abs(lat_dif):
         if long_dif > 0:

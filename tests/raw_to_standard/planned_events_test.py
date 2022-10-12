@@ -48,34 +48,30 @@ def test_validate_closure_no_coordinates():
 # ----------------------------------------- get_directions_from_string -----------------------------------------
 def test_map_direction_string_valid():
     directions_string = 'east'
-    expected = 'eastbound'
     actual = planned_events.map_direction_string(directions_string)
 
-    assert actual == expected
+    assert actual == 'eastbound'
 
 
 def test_map_directions_from_string_invalid():
     directions_string = 'Easasdt'
-    expected = None
     actual = planned_events.map_direction_string(directions_string)
 
-    assert actual == expected
+    assert actual == 'undefined'
 
 
 def test_map_directions_from_string_none():
     directions_string = None
-    expected = None
     actual = planned_events.map_direction_string(directions_string)
 
-    assert actual == expected
+    assert actual == 'undefined'
 
 
 def test_map_directions_from_string_empty_string():
     directions_string = ''
-    expected = None
     actual = planned_events.map_direction_string(directions_string)
 
-    assert actual == expected
+    assert actual == 'undefined'
 
 
 def test_expand_event_directions_1():

@@ -158,7 +158,7 @@ def test_get_directions_from_string_valid():
 
 def test_get_directions_from_string_invalid():
     directions_string = ' Easasdt/dWest '
-    expected = []
+    expected = ['undefined']
     actual = navjoy_568.get_directions_from_string(directions_string)
 
     assert actual == expected

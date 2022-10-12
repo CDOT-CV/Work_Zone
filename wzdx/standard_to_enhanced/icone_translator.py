@@ -4,7 +4,7 @@ import json
 import logging
 import copy
 import uuid
-from ..sample_files.validation_schema import wzdx_v40_feed
+from ..sample_files.validation_schema import work_zone_feed_v41
 
 from ..tools import date_tools, wzdx_translator, geospatial_tools
 
@@ -21,7 +21,7 @@ def main():
 
     icone_obj = json.loads(open(input_file, 'r').read())
     wzdx = wzdx_creator(icone_obj)
-    wzdx_schema = wzdx_v40_feed.wzdx_v40_schema_string
+    wzdx_schema = work_zone_feed_v41.wzdx_v41_schema_string
 
     if not wzdx_translator.validate_wzdx(wzdx, wzdx_schema):
         logging.error(

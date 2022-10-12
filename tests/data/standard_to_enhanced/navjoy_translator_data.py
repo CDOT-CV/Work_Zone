@@ -94,7 +94,7 @@ test_wzdx_creator_standard = {
 }
 
 test_wzdx_creator_expected_wzdx = {
-    'road_event_feed_info': {
+    'feed_info': {
         'update_date': '2021-04-13T00:00:00Z',
         'publisher': 'CDOT',
         'contact_name': 'Ashley Nylen',

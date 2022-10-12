@@ -5,8 +5,6 @@
       "type": "Feature",
       "properties": {
         "name": "Original WZDx (from planned event)",
-        "road_event_id": null,
-        "data_source_id": null,
         "core_details": {
           "event_type": "work-zone",
           "data_source_id": "15c4cc92-658c-4a58-ba08-dc6d36a0631b",
@@ -14,15 +12,14 @@
           "direction": "southbound",
           "relationship": {},
           "description": "Between West Jasper Drive (near San Luis) and County Road P7 (1 mile south of the San Luis area) from Mile Point 20 to Mile Point 14. Striping operations. Until today at about 3:11PM MDT.",
-          "update_date": "2022-07-27T14:22:31Z",
-          "road_event_id": "8d2c0b62-8d02-4bf4-9510-0614d93ce963"
+          "update_date": "2022-07-27T14:22:31Z"
         },
         "start_date": "2022-07-27T14:20:00Z",
         "end_date": "2022-07-27T21:11:00Z",
-        "start_date_accuracy": "estimated",
-        "end_date_accuracy": "estimated",
-        "beginning_accuracy": "estimated",
-        "ending_accuracy": "estimated",
+        "is_start_date_verified": false,
+        "is_end_date_verified": false,
+        "is_start_position_verified": false,
+        "is_end_position_verified": false,
         "location_method": "channel-device-method",
         "vehicle_impact": "all-lanes-open",
         "lanes": [
@@ -32,7 +29,6 @@
             "status": "open"
           }
         ],
-        "event_status": "completed",
         "types_of_work": [
           {
             "type_name": "painting",
@@ -104,7 +100,7 @@
           [-105.43320319899999, 37.30655150100006]
         ]
       },
-      "id": "OpenTMS-Event4707772849_southbound"
+      "id": "1b5e4294-11e9-4e47-ba20-b52f5a8eec15"
     }
   ]
 }

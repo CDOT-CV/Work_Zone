@@ -147,7 +147,7 @@ def add_ids(message, event_type="work-zone"):
         return None
 
     if event_type == 'work-zone':
-        data_source_id = message.get('road_event_feed_info').get(
+        data_source_id = message.get('feed_info').get(
             'data_sources')[0].get('data_source_id')
     elif event_type == 'restriction':
         data_source_id = message.get('feed_info').get(
