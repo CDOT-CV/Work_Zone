@@ -32,6 +32,7 @@ def test_get_combined_events_valid():
         geotab_msgs, wzdx_msgs)
 
     assert len(combined_events) == 1
+    assert len(combined_events[0]['features'][0]['geometry']['coordinates']) > 2
 
 
 def test_get_combined_events_valid_multiple():
@@ -42,6 +43,7 @@ def test_get_combined_events_valid_multiple():
         geotab_msgs, wzdx_msgs)
 
     assert len(combined_events) == 1
+    assert len(combined_events[0]['features'][0]['geometry']['coordinates']) > 2
 
 
 def test_identify_overlapping_features_valid():

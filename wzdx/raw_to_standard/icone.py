@@ -214,6 +214,7 @@ def validate_incident(incident):
         logging.warning(
             f'Invalid incident with id = {id}. unable to parse direction from street name or polyline')
         return False
+
     required_fields = [location, polyline, coords, street,
                        starttime_string, description, creationtime, updatetime]
     for field in required_fields:

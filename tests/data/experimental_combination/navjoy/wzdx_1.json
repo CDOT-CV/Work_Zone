@@ -26,6 +26,8 @@
       "type": "Feature",
       "properties": {
         "name": "Original WZDx (from planned event)",
+        "road_event_id": null,
+        "data_source_id": null,
         "core_details": {
           "event_type": "work-zone",
           "data_source_id": "15c4cc92-658c-4a58-ba08-dc6d36a0631b",
@@ -33,14 +35,15 @@
           "direction": "southbound",
           "relationship": {},
           "description": "Between West Jasper Drive (near San Luis) and County Road P7 (1 mile south of the San Luis area) from Mile Point 20 to Mile Point 14. Striping operations. Until today at about 3:11PM MDT.",
-          "update_date": "2022-07-27T14:22:31Z"
+          "update_date": "2022-07-27T14:22:31Z",
+          "road_event_id": "8d2c0b62-8d02-4bf4-9510-0614d93ce963"
         },
         "start_date": "2022-07-27T14:20:00Z",
         "end_date": "2022-07-27T21:11:00Z",
-        "is_start_date_verified": false,
-        "is_end_date_verified": false,
-        "is_start_position_verified": false,
-        "is_end_position_verified": false,
+        "start_date_accuracy": "estimated",
+        "end_date_accuracy": "estimated",
+        "beginning_accuracy": "estimated",
+        "ending_accuracy": "estimated",
         "location_method": "channel-device-method",
         "vehicle_impact": "all-lanes-open",
         "lanes": [
@@ -50,6 +53,7 @@
             "status": "open"
           }
         ],
+        "event_status": "completed",
         "types_of_work": [
           {
             "type_name": "painting",
@@ -62,11 +66,6 @@
       "geometry": {
         "type": "LineString",
         "coordinates": [
-          [-105.49113132299999, 37.19060215300004],
-          [-105.49088698699995, 37.19067838600006],
-          [-105.48901075799995, 37.19114973400008],
-          [-105.48710543699997, 37.19146180900003],
-          [-105.48518397999999, 37.19162007500006],
           [-105.48421725799994, 37.19164389600007],
           [-105.47899798799995, 37.191639459000044],
           [-105.46551048099997, 37.19161554900006],
@@ -113,15 +112,10 @@
           [-105.43242750999997, 37.259451840000054],
           [-105.43277384799995, 37.26935221700006],
           [-105.43319731499997, 37.28145336000006],
-          [-105.43326032199997, 37.28325347500004],
-          [-105.43335779299997, 37.28647540700007],
-          [-105.43337415299999, 37.28828864400003],
-          [-105.43331788099994, 37.29532162300006],
-          [-105.43325569199999, 37.30141161900008],
-          [-105.43320319899999, 37.30655150100006]
+          [-105.43326032199997, 37.28325347500004]
         ]
       },
-      "id": "1b5e4294-11e9-4e47-ba20-b52f5a8eec15"
+      "id": "OpenTMS-Event4707772849_southbound"
     }
   ]
 }
