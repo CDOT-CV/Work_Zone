@@ -168,7 +168,7 @@ def test_get_directions_from_string_valid():
     expected = ['eastbound', 'westbound']
     actual = navjoy_568.get_directions_from_string(directions_string)
 
-    assert actual == expected
+    assert compare_lists(actual, expected)
 
 
 def test_get_directions_from_string_invalid():
