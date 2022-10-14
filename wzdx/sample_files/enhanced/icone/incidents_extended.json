@@ -1,0 +1,476 @@
+{
+  "feed_info": {
+    "publisher": "CDOT",
+    "version": "4.0",
+    "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "data_sources": [
+      {
+        "data_source_id": "0b509510-1043-47b8-b6b5-81e599f51273",
+        "organization_name": "CDOT",
+        "update_date": "2022-10-12T19:55:00Z",
+        "update_frequency": 300,
+        "contact_name": "Ashley Nylen",
+        "contact_email": "ashley.nylen@state.co.us"
+      }
+    ],
+    "update_date": "2022-10-12T19:55:00Z",
+    "update_frequency": 300,
+    "contact_name": "Ashley Nylen",
+    "contact_email": "ashley.nylen@state.co.us"
+  },
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "id": "1245",
+      "type": "Feature",
+      "properties": {
+        "core_details": {
+          "event_type": "work-zone",
+          "data_source_id": "0b509510-1043-47b8-b6b5-81e599f51273",
+          "road_names": [
+            "I-75 N"
+          ],
+          "direction": "northbound",
+          "description": "19-1245: Roadwork between MP 40 and MP 48",
+          "creation_date": "2019-11-05T01:22:20Z",
+          "update_date": "2020-08-21T15:52:02Z"
+        },
+        "start_date": "2020-02-14T17:08:16Z",
+        "end_date": "2022-10-19T19:54:00Z",
+        "is_start_date_verified": false,
+        "is_end_date_verified": false,
+        "is_start_position_verified": false,
+        "is_end_position_verified": false,
+        "location_method": "channel-device-method",
+        "vehicle_impact": "all-lanes-open"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -84.112854,
+            37.157199
+          ],
+          [
+            -84.1238971,
+            37.1686478
+          ],
+          [
+            -84.145861,
+            37.1913
+          ],
+          [
+            -84.175297,
+            37.209348
+          ],
+          [
+            -84.201303,
+            37.216837
+          ]
+        ]
+      }
+    },
+    {
+      "id": "1246",
+      "type": "Feature",
+      "properties": {
+        "core_details": {
+          "event_type": "work-zone",
+          "data_source_id": "de174e4b-4891-49ab-aff5-84a44907e15f",
+          "road_names": [
+            "I-75 S"
+          ],
+          "direction": "southbound",
+          "description": "19-1245: Roadwork between MP 48 and MP 40",
+          "creation_date": "2019-11-05T01:32:44Z",
+          "update_date": "2020-08-21T15:52:02Z"
+        },
+        "start_date": "2019-11-22T23:02:21Z",
+        "end_date": "2022-10-19T19:54:00Z",
+        "is_start_date_verified": false,
+        "is_end_date_verified": false,
+        "is_start_position_verified": false,
+        "is_end_position_verified": false,
+        "location_method": "channel-device-method",
+        "vehicle_impact": "all-lanes-open"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -84.169129,
+            37.20667
+          ],
+          [
+            -84.157346,
+            37.201223
+          ],
+          [
+            -84.140482,
+            37.185815
+          ],
+          [
+            -84.121425,
+            37.166345
+          ],
+          [
+            -84.111588,
+            37.147808
+          ]
+        ]
+      }
+    },
+    {
+      "id": "1247",
+      "type": "Feature",
+      "properties": {
+        "core_details": {
+          "event_type": "work-zone",
+          "data_source_id": "d6a5c4e1-60fd-44fd-9a65-ea890aca865b",
+          "road_names": [
+            "I-75 N"
+          ],
+          "direction": "northbound",
+          "description": "19-1210: Roadwork between MP 28.9 and MP 33.3",
+          "creation_date": "2019-11-19T22:43:10Z",
+          "update_date": "2020-08-21T15:52:02Z"
+        },
+        "start_date": "2019-11-20T21:56:19Z",
+        "end_date": "2022-10-19T19:54:00Z",
+        "is_start_date_verified": false,
+        "is_end_date_verified": false,
+        "is_start_position_verified": false,
+        "is_end_position_verified": false,
+        "location_method": "channel-device-method",
+        "vehicle_impact": "all-lanes-open"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -84.113184,
+            36.965312
+          ],
+          [
+            -84.110439,
+            36.979238
+          ],
+          [
+            -84.103757,
+            37.007131
+          ]
+        ]
+      }
+    },
+    {
+      "id": "1248",
+      "type": "Feature",
+      "properties": {
+        "core_details": {
+          "event_type": "work-zone",
+          "data_source_id": "0cddb076-aa09-4224-8170-42a3f24ceb28",
+          "road_names": [
+            "I-75 S"
+          ],
+          "direction": "southbound",
+          "description": "19-1210: Roadwork between MP 28.9 and MP 33.3",
+          "creation_date": "2019-11-19T22:50:54Z",
+          "update_date": "2020-08-21T15:52:03Z"
+        },
+        "start_date": "2019-11-20T21:56:22Z",
+        "end_date": "2022-10-19T19:54:00Z",
+        "is_start_date_verified": false,
+        "is_end_date_verified": false,
+        "is_start_position_verified": false,
+        "is_end_position_verified": false,
+        "location_method": "channel-device-method",
+        "vehicle_impact": "all-lanes-open"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -84.098933,
+            37.049889
+          ],
+          [
+            -84.098554,
+            37.035515
+          ],
+          [
+            -84.10517,
+            37.004092
+          ]
+        ]
+      }
+    },
+    {
+      "id": "1249",
+      "type": "Feature",
+      "properties": {
+        "core_details": {
+          "event_type": "work-zone",
+          "data_source_id": "595315b8-eee6-4895-aa45-fa31280cd654",
+          "road_names": [
+            "I-75 S"
+          ],
+          "direction": "southbound",
+          "description": "18-1001: Roadwork between MP 54 and MP 59",
+          "creation_date": "2019-11-19T23:12:39Z",
+          "update_date": "2020-08-21T15:52:02Z"
+        },
+        "start_date": "2019-11-26T16:30:16Z",
+        "end_date": "2022-10-19T19:54:00Z",
+        "is_start_date_verified": false,
+        "is_end_date_verified": false,
+        "is_start_position_verified": false,
+        "is_end_position_verified": false,
+        "location_method": "channel-device-method",
+        "vehicle_impact": "all-lanes-open"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -84.306549,
+            37.338256
+          ],
+          [
+            -84.306481,
+            37.338416
+          ],
+          [
+            -84.303585,
+            37.328765
+          ]
+        ]
+      }
+    },
+    {
+      "id": "1250",
+      "type": "Feature",
+      "properties": {
+        "core_details": {
+          "event_type": "work-zone",
+          "data_source_id": "dd725255-5f6f-45dc-9d75-8e7d94e0699e",
+          "road_names": [
+            "I-75 N"
+          ],
+          "direction": "northbound",
+          "description": "18-1001: Roadwork between MP 54 and MP 59",
+          "creation_date": "2019-11-20T04:20:30Z",
+          "update_date": "2020-08-21T15:52:03Z"
+        },
+        "start_date": "2020-02-14T17:50:18Z",
+        "end_date": "2022-10-19T19:54:00Z",
+        "is_start_date_verified": false,
+        "is_end_date_verified": false,
+        "is_start_position_verified": false,
+        "is_end_position_verified": false,
+        "location_method": "channel-device-method",
+        "vehicle_impact": "all-lanes-open"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -84.250244,
+            37.264908
+          ],
+          [
+            -84.255334,
+            37.278209
+          ],
+          [
+            -84.263218,
+            37.285597
+          ],
+          [
+            -84.285754,
+            37.305551
+          ],
+          [
+            -84.307316,
+            37.357947
+          ]
+        ]
+      }
+    },
+    {
+      "id": "1254",
+      "type": "Feature",
+      "properties": {
+        "core_details": {
+          "event_type": "work-zone",
+          "data_source_id": "698ab7c2-9ea6-4b11-92e1-0bffc755517e",
+          "road_names": [
+            "I-69 N"
+          ],
+          "direction": "northbound",
+          "description": "Roadwork I-69 N",
+          "creation_date": "2020-03-09T16:18:10Z",
+          "update_date": "2020-08-21T15:52:03Z"
+        },
+        "start_date": "2020-03-09T17:10:18Z",
+        "end_date": "2022-10-19T19:54:00Z",
+        "is_start_date_verified": false,
+        "is_end_date_verified": false,
+        "is_start_position_verified": false,
+        "is_end_position_verified": false,
+        "location_method": "channel-device-method",
+        "vehicle_impact": "all-lanes-open"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -86.466029,
+            39.387328
+          ],
+          [
+            -86.466029,
+            39.387328
+          ]
+        ]
+      }
+    },
+    {
+      "id": "1255",
+      "type": "Feature",
+      "properties": {
+        "core_details": {
+          "event_type": "work-zone",
+          "data_source_id": "72b76541-5a32-42ea-bcf3-299fcde74882",
+          "road_names": [
+            "SR-37 SB"
+          ],
+          "direction": "southbound",
+          "description": "Roadwork I-69 N",
+          "creation_date": "2020-04-13T17:12:18Z",
+          "update_date": "2020-08-21T15:52:04Z"
+        },
+        "start_date": "2020-04-13T17:16:23Z",
+        "end_date": "2022-10-19T19:54:00Z",
+        "is_start_date_verified": false,
+        "is_end_date_verified": false,
+        "is_start_position_verified": false,
+        "is_end_position_verified": false,
+        "location_method": "channel-device-method",
+        "vehicle_impact": "all-lanes-open"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -86.442772,
+            39.404317
+          ],
+          [
+            -86.442772,
+            39.404317
+          ]
+        ]
+      }
+    },
+    {
+      "id": "1257",
+      "type": "Feature",
+      "properties": {
+        "core_details": {
+          "event_type": "work-zone",
+          "data_source_id": "e20b671c-162b-4859-8376-868c221c70e8",
+          "road_names": [
+            "I-480 E"
+          ],
+          "direction": "eastbound",
+          "description": "20-0006: Roadwork I-480 E",
+          "creation_date": "2020-06-12T19:03:27Z",
+          "update_date": "2020-08-21T15:52:04Z"
+        },
+        "start_date": "2020-06-12T19:36:31Z",
+        "end_date": "2022-10-19T19:54:00Z",
+        "is_start_date_verified": false,
+        "is_end_date_verified": false,
+        "is_start_position_verified": false,
+        "is_end_position_verified": false,
+        "location_method": "channel-device-method",
+        "vehicle_impact": "all-lanes-open"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -81.97075,
+            41.388326
+          ],
+          [
+            -81.94554,
+            41.395692
+          ],
+          [
+            -81.921577,
+            41.404223
+          ],
+          [
+            -81.892403,
+            41.415454
+          ]
+        ]
+      }
+    },
+    {
+      "id": "1258",
+      "type": "Feature",
+      "properties": {
+        "core_details": {
+          "event_type": "work-zone",
+          "data_source_id": "c635866a-80ee-4347-a338-47c45c24e2ea",
+          "road_names": [
+            "I-480 W"
+          ],
+          "direction": "westbound",
+          "description": "20-0006: Roadwork I-480 W",
+          "creation_date": "2020-06-12T19:05:34Z",
+          "update_date": "2020-08-21T15:52:04Z"
+        },
+        "start_date": "2020-06-12T19:36:33Z",
+        "end_date": "2022-10-19T19:54:00Z",
+        "is_start_date_verified": false,
+        "is_end_date_verified": false,
+        "is_start_position_verified": false,
+        "is_end_position_verified": false,
+        "location_method": "channel-device-method",
+        "vehicle_impact": "all-lanes-open"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -81.862112,
+            41.424992
+          ],
+          [
+            -81.862112,
+            41.424992
+          ],
+          [
+            -81.898686,
+            41.414105
+          ],
+          [
+            -81.92174,
+            41.40456
+          ],
+          [
+            -81.92174,
+            41.40456
+          ],
+          [
+            -81.947409,
+            41.395362
+          ]
+        ]
+      }
+    }
+  ]
+}

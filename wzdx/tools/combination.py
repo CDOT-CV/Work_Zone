@@ -42,14 +42,18 @@ def add_route_details(wzdx_msgs, overwrite=False, keepInvalid=True):
             route_details_start, route_details_end = get_route_details_for_wzdx(
                 wzdx['features'][0])
 
+            print(route_details_start, route_details_end)
+
             wzdx['route_details_start'] = route_details_start if route_details_start else None
             wzdx['route_details_end'] = route_details_end if route_details_end else None
 
-            if route_details_start and route_details_end or keepInvalid:
+            if (route_details_start and route_details_end) or keepInvalid:
+                print('appending, 51')
                 output.append(wzdx)
         else:
+            print('appending, 54')
             output.append(wzdx)
-    return wzdx_msgs
+    return output
 
 
 def get_route_details_for_wzdx(wzdx_feature):

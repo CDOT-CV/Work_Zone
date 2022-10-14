@@ -7,6 +7,7 @@ import string
 import uuid
 from collections import OrderedDict
 from datetime import datetime
+from ..sample_files.validation_schema import work_zone_feed_v41
 
 import jsonschema
 import xmltodict
@@ -78,7 +79,7 @@ def parse_xml_to_dict(xml_string):
     return d
 
 
-def validate_wzdx(wzdx_obj, wzdx_schema):
+def validate_wzdx(wzdx_obj, wzdx_schema=work_zone_feed_v41.wzdx_v41_schema_string):
     if not wzdx_schema or not wzdx_obj:
         return False
     try:
@@ -174,7 +175,7 @@ def initialize_wzdx_object(info):
     wzd = {}
     wzd['feed_info'] = {}
     wzd['feed_info']['publisher'] = 'CDOT'
-    wzd['feed_info']['version'] = '4.0'
+    wzd['feed_info']['version'] = '4.1'
     wzd['feed_info']['license'] = "https://creativecommons.org/publicdomain/zero/1.0/"
 
     data_source = {}

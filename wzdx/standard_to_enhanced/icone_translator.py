@@ -21,11 +21,10 @@ def main():
 
     icone_obj = json.loads(open(input_file, 'r').read())
     wzdx = wzdx_creator(icone_obj)
-    wzdx_schema = work_zone_feed_v41.wzdx_v41_schema_string
 
-    if not wzdx_translator.validate_wzdx(wzdx, wzdx_schema):
+    if not wzdx:
         logging.error(
-            'validation error more message are printed above. output file is not created because the message failed validation.')
+            'Generation error more message are printed above. output file is not created because the message failed validation.')
         return
     with open(output_file, 'w') as fwzdx:
         fwzdx.write(json.dumps(wzdx, indent=2))
@@ -47,26 +46,31 @@ def parse_icone_arguments():
 
 
 def wzdx_creator(message, info=None):
-    if not message:
+    if not message or not validate_standard_msg(message):
         return None
-   # verify info obj
+
     if not info:
         info = wzdx_translator.initialize_info(
             DEFAULT_ICONE_FEED_INFO_ID)
     if not wzdx_translator.validate_info(info):
         return None
 
-    wzd = wzdx_translator.initialize_wzdx_object(info)
+    wzdx = wzdx_translator.initialize_wzdx_object(info)
 
     # Parse Incident to WZDx Feature
     feature = parse_incident(message)
     if feature:
-        wzd.get('features').append(feature)
+        wzdx.get('features').append(feature)
 
-    if not wzd.get('features'):
+    if not wzdx.get('features'):
         return None
-    wzd = wzdx_translator.add_ids(wzd)
-    return wzd
+    wzdx = wzdx_translator.add_ids(wzdx)
+
+    if not wzdx_translator.validate_wzdx(wzdx):
+        logging.warn("WZDx message failed validation")
+        return None
+
+    return wzdx
 
 
 #################### Sample Incident ####################
@@ -331,8 +335,10 @@ def parse_incident(incident):
 
     filtered_properties = copy.deepcopy(properties)
 
+    INVALID_PROPERTIES = [None, '', []]
+
     for key, value in properties.items():
-        if not value:
+        if value in INVALID_PROPERTIES:
             del filtered_properties[key]
 
     for key, value in properties['core_details'].items():
@@ -346,6 +352,74 @@ def parse_incident(incident):
     feature['geometry'] = geometry
 
     return feature
+
+
+# function to validate the event
+def validate_standard_msg(msg):
+    if not msg or type(msg) != dict:
+        logging.warning('event is empty or has invalid type')
+        return False
+
+    event = msg.get('event')
+
+    source = event.get('source')
+    header = event.get('header')
+    detail = event.get('detail')
+
+    id = source.get('id')
+    try:
+
+        event = msg.get('event')
+
+        source = event.get('source')
+        header = event.get('header')
+        detail = event.get('detail')
+
+        id = source.get('id')
+
+        geometry = event.get('geometry')
+        road_name = detail.get('road_name')
+
+        start_time = header.get('start_timestamp')
+        end_time = header.get('end_timestamp')
+        description = header.get('description')
+        update_time = source.get('last_updated_timestamp')
+        direction = detail.get('direction')
+
+        if not (type(geometry) == list and len(geometry) >= 0):
+            logging.warning(
+                f'''Invalid event with id = {id}. Invalid geometry: {geometry}''')
+            return False
+        if not (type(road_name) == str and len(road_name) >= 0):
+            logging.warning(
+                f'''Invalid event with id = {id}. Invalid road_name: {road_name}''')
+            return False
+        if not (type(start_time) == float or type(start_time) == int):
+            logging.warning(
+                f'''Invalid event with id = {id}. Invalid start_time: {start_time}''')
+            return False
+        if not (type(end_time) == float or type(end_time) == int or end_time == None):
+            logging.warning(
+                f'''Invalid event with id = {id}. Invalid end_time: {end_time}''')
+            return False
+        if not (type(update_time) == float or type(update_time) == int):
+            logging.warning(
+                f'''Invalid event with id = {id}. Invalid update_time: {update_time}''')
+            return False
+        if not (type(direction) == str and direction in ['unknown', 'undefined', 'northbound', 'southbound', 'eastbound', 'westbound']):
+            logging.warning(
+                f'''Invalid event with id = {id}. Invalid direction: {direction}''')
+            return False
+        if not (type(description) == str and len(description) >= 0):
+            logging.warning(
+                f'''Invalid event with id = {id}. Invalid description: {description}''')
+            return False
+
+        return True
+    except Exception as e:
+        logging.warning(
+            f'''Invalid event with id = {id}. Error in validation: {e}''')
+        return False
 
 
 if __name__ == "__main__":

@@ -78,7 +78,7 @@ def test_get_route_details(mock_get_route_and_measure):
 def test_add_route_details_overwrite_false(mock_get_route_details):
     wzdx = {'features': [{'geometry': {'coordinates': [
         [0, 1], [2, 3]]}, 'route_details_start': 'start', 'route_details_end': 'end'}]}
-    expected = ('start', 'end')
+    expected = ('route_details_start', 'route_details_end')
     actual = combination.add_route_details([wzdx])
     assert (actual[0]['route_details_start'], actual[0]
             ['route_details_end']) == expected
@@ -97,7 +97,7 @@ def test_add_route_details_overwrite_true(mock_get_route_details):
 @patch.object(combination, 'get_route_details', side_effect=[{}, {}])
 def test_add_route_details_keepInvalid_true(mock_get_route_details):
     wzdx = {'features': [{'geometry': {'coordinates': [
-        [0, 1], [2, 3]]}, 'route_details_start': 'start', 'route_details_end': 'end'}]}
+        [0, 1], [2, 3]]}}]}
     actual = combination.add_route_details([wzdx])
     assert len(actual) == 1
 
@@ -105,7 +105,7 @@ def test_add_route_details_keepInvalid_true(mock_get_route_details):
 @patch.object(combination, 'get_route_details', side_effect=[{}, {}])
 def test_add_route_details_keepInvalid_false(mock_get_route_details):
     wzdx = {'features': [{'geometry': {'coordinates': [
-        [0, 1], [2, 3]]}, 'route_details_start': 'start', 'route_details_end': 'end'}]}
+        [0, 1], [2, 3]]}}]}
     actual = combination.add_route_details([wzdx], keepInvalid=False)
     assert len(actual) == 0
 

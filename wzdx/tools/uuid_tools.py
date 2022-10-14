@@ -4,22 +4,23 @@ import random
 import uuid
 
 
+CDOT_NAMESPACE_UUID = uuid.UUID('ef39d1dd-53ce-4651-9491-4bba7251a3c0')
+
+
 def random_uuid():
-    return uuid.UUID(bytes=bytes(random.getrandbits(8) for _ in range(16)), version=4)
+    return uuid.UUID(bytes=bytes(random.getrandbits(8) for _ in range(16)), version=5)
 
 
-def get_seeded_uuid(seed_string):
-    if seed_string != None:
-        random.seed(seed_string)
-    return random_uuid()
+def named_uuid(name: str):
+    return uuid.uuid5(CDOT_NAMESPACE_UUID, name)
 
 
-def get_seeded_uuid_string(seed_string):
-    return str(get_seeded_uuid(seed_string))
+def named_uuid_string(name):
+    return str(named_uuid(name))
 
 
 # Only for testing
-def is_valid_uuid(uuid_to_test, version=4):
+def is_valid_uuid(uuid_to_test, version=5):
     """
     Check if uuid_to_test is a valid UUID.
 

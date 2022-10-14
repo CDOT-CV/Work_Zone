@@ -25,6 +25,9 @@ def main():
     wzdx_msg = {}
     for message in generated_messages:
         wzdx = icone_translator.wzdx_creator(message)
+        if not wzdx:
+            continue
+
         if not wzdx_msg:
             wzdx_msg = wzdx
         else:
@@ -166,9 +169,9 @@ def create_rtdh_standard_msg(pd):
 
 def get_direction(street, coords, route_details=None):
     direction = wzdx_translator.parse_direction_from_street_name(street)
-    if direction == 'unknown' and route_details:
+    if (not direction or direction == 'unknown') and route_details:
         direction = get_direction_from_route_details(route_details)
-    if direction == 'unknown':
+    if not direction or direction == 'unknown':
         direction = geospatial_tools.get_road_direction_from_coordinates(
             coords)
     return direction
@@ -215,13 +218,13 @@ def validate_incident(incident):
             f'Invalid incident with id = {id}. unable to parse direction from street name or polyline')
         return False
 
-    required_fields = [location, polyline, coords, street,
+    required_fields = [location, polyline, coords,
                        starttime_string, description, creationtime, updatetime]
     for field in required_fields:
         if not field:
             logging.warning(
                 f'''Invalid incident with id = {id}. Not all required fields are present. Required fields are:
-                location, polyline, street, starttime, description, creationtime, and updatetime''')
+                location, polyline, starttime, description, creationtime, and updatetime''')
             return False
 
     start_time = date_tools.parse_datetime_from_iso_string(starttime_string)

@@ -176,8 +176,10 @@ def parse_reduction_zone(incident):
 
     filtered_properties = copy.deepcopy(properties)
 
+    INVALID_PROPERTIES = [None, '', []]
+
     for key, value in properties.items():
-        if not value:
+        if value in INVALID_PROPERTIES:
             del filtered_properties[key]
 
     for key, value in properties['core_details'].items():

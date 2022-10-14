@@ -164,7 +164,7 @@ def parse_road_restriction(incident):
     feature['type'] = "Feature"
     feature['properties'] = filtered_properties
     feature['geometry'] = geometry
-    feature['id'] = uuid_tools.get_seeded_uuid_string(
+    feature['id'] = uuid_tools.named_uuid_string(
         event.get('source', {}).get('id', None))
 
     return feature
@@ -280,7 +280,7 @@ def parse_work_zone(incident):
     properties['restrictions'] = additional_info.get('restrictions', [])
 
     filtered_properties = copy.deepcopy(properties)
-    
+
     INVALID_PROPERTIES = [None, '', []]
 
     for key, value in properties.items():
@@ -292,7 +292,7 @@ def parse_work_zone(incident):
             del filtered_properties['core_details'][key]
 
     feature = {}
-    feature['id'] = uuid_tools.get_seeded_uuid_string(
+    feature['id'] = uuid_tools.named_uuid_string(
         event.get('source', {}).get('id', None))
     feature['type'] = "Feature"
     feature['properties'] = filtered_properties

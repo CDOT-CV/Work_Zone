@@ -162,7 +162,7 @@ def test_wzdx_creator(mockuuid):
             "header": {
                 "description": "19-1245: Roadwork between MP 40 and MP 48",
                 "start_timestamp": 1623183301000,
-                "end_timestamp": "None"
+                "end_timestamp": 1623186301000
             },
             "detail": {
                 "road_name": "I-75 N",

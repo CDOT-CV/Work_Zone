@@ -153,7 +153,7 @@ def get_directions_from_string(directions_string) -> list:
         if direction:
             directions.append(direction)
 
-    return list(set(directions))
+    return list(dict.fromkeys(directions))
 
 
 def generate_standard_messages_from_string(input_file_contents):
