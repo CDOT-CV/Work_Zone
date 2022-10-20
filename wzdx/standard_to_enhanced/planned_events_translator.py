@@ -205,8 +205,11 @@ def parse_work_zone(incident):
     # direction
     core_details['direction'] = detail.get('direction', 'unknown')
 
-    # relationship
+    # related_road_events
     core_details['related_road_events'] = []
+    
+    # name
+    core_details['name'] = event.get('source', {}).get('id', None)
 
     # description
     core_details['description'] = header.get('description')
