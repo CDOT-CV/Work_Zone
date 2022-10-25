@@ -326,6 +326,9 @@ def get_improved_geometry(coordinates, event_status, id):
     startPoint = [coordinates[0][-1], coordinates[0][0]]
     endPoint = [coordinates[-1][-1], coordinates[-1][0]]
 
+    if startPoint == endPoint:
+        return coordinates
+
     startRouteParams = cdot_geospatial_api.get_route_and_measure(
         startPoint)
     endRouteParams = cdot_geospatial_api.get_route_and_measure(
@@ -355,6 +358,9 @@ def get_improved_geometry(coordinates, event_status, id):
     print(REVERSED_DIRECTION_MAP.get(finalDirection))
     if initialDirection == REVERSED_DIRECTION_MAP.get(finalDirection):
         newCoordinates.reverse()
+
+    if not newCoordinates:
+        return coordinates
 
     return newCoordinates
 
