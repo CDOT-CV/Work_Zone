@@ -42,9 +42,9 @@ def test_get_direction():
 
 def test_get_combined_events_valid():
     icone_msgs = [json.loads(
-        open('./tests/data/experimental_combination/icone/icone_standard_1.json').read())]
+        open('./tests/data/experimental_combination/icone/icone_standard_hwy-159.json').read())]
     wzdx = [json.loads(
-        open('./tests/data/experimental_combination/icone/wzdx_1.json').read())]
+        open('./tests/data/experimental_combination/icone/wzdx_combination_hwy-159.json').read())]
 
     expected = icone.get_combined_events(icone_msgs, wzdx)
     assert len(expected) == 1
@@ -52,9 +52,9 @@ def test_get_combined_events_valid():
 
 def test_get_combined_events_invalid():
     icone_msgs = [json.loads(
-        open('./tests/data/experimental_combination/icone/icone_standard_1.json').read())]
+        open('./tests/data/experimental_combination/icone/icone_standard_hwy-159.json').read())]
     wzdx = [json.loads(
-        open('./tests/data/experimental_combination/icone/wzdx_2.json').read())]
+        open('./tests/data/experimental_combination/icone/wzdx_combination_nowhere.json').read())]
 
     expected = icone.get_combined_events(icone_msgs, wzdx)
     assert len(expected) == 0
@@ -62,9 +62,9 @@ def test_get_combined_events_invalid():
 
 def test_get_combined_events_invalid_different_routes():
     icone_msgs = [json.loads(
-        open('./tests/data/experimental_combination/icone/icone_standard_1.json').read())]
+        open('./tests/data/experimental_combination/icone/icone_standard_hwy-159.json').read())]
     wzdx = [json.loads(
-        open('./tests/data/experimental_combination/icone/wzdx_3.json').read())]
+        open('./tests/data/experimental_combination/icone/wzdx_combination_co-9.json').read())]
 
     expected = icone.get_combined_events(icone_msgs, wzdx)
     assert len(expected) == 0
@@ -72,9 +72,9 @@ def test_get_combined_events_invalid_different_routes():
 
 def test_get_combined_events_invalid_no_routes():
     icone_msgs = [json.loads(
-        open('./tests/data/experimental_combination/icone/icone_standard_2.json').read())]
+        open('./tests/data/experimental_combination/icone/icone_standard_nowhere.json').read())]
     wzdx = [json.loads(
-        open('./tests/data/experimental_combination/icone/wzdx_4.json').read())]
+        open('./tests/data/experimental_combination/icone/wzdx_combination_nowhere_2.json').read())]
 
     expected = icone.get_combined_events(icone_msgs, wzdx)
     assert len(expected) == 0

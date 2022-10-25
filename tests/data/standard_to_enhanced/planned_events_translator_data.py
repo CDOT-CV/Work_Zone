@@ -69,6 +69,7 @@ test_parse_work_zone_linestring_expected = {
             "core_details": {
                 "data_source_id": "",
                 "event_type": "work-zone",
+                "name": "OpenTMS-Event1689408506",
                 "road_names": [
                     "I-70E"
                 ],
@@ -217,6 +218,7 @@ test_wzdx_creator_expected = {
                     "core_details": {
                         "data_source_id": "w",
                         "event_type": "work-zone",
+                        "name": "OpenTMS-Event1689408506",
                         "road_names": [
                             "I-70E"
                         ],
