@@ -21,7 +21,7 @@ def main():
             'Invalid file type. Please specify a valid Json file!') from None
     wzdx_obj = wzdx_creator(navjoy_obj)
 
-    location_schema = 'wzdx/sample_files/validation_schema/wzdx_v3.1_feed.json'
+    location_schema = 'wzdx/sample_files/validation_schema/work_zone_feed_v41.json'
     wzdx_schema = json.loads(open(location_schema).read())
 
     if not wzdx_translator.validate_wzdx(wzdx_obj, wzdx_schema):
@@ -140,6 +140,9 @@ def parse_reduction_zone(incident):
 
     # is_end_position_verified
     properties['is_end_position_verified'] = False
+
+    # location_method
+    properties["location_method"] = "channel-device-method"
 
     # vehicle impact
     properties['vehicle_impact'] = get_vehicle_impact(
