@@ -22,16 +22,29 @@ def main():
     generated_messages = generate_standard_messages_from_string(
         input_file_contents)
 
+    generated_files_list = []
+
     wzdx_msg = {}
     for message in generated_messages:
-        wzdx = icone_translator.wzdx_creator(message)
-        if not wzdx:
-            continue
+        output_path = f"{output_dir}/icone_{message['event']['source']['id']}_{round(message['rtdh_timestamp'])}_{message['event']['detail']['direction']}.json"
+        open(output_path, 'w+').write(json.dumps(message, indent=2))
+        generated_files_list.append(output_path)
 
-        if not wzdx_msg:
-            wzdx_msg = wzdx
-        else:
-            wzdx_msg['features'].extend(wzdx['features'])
+    if generated_files_list:
+        print(
+            f"Successfully generated standard message files: {generated_files_list}")
+    else:
+        logging.warning(
+            "Standard message generation failed. See messages printed above")
+    # for message in generated_messages:
+    #     wzdx = icone_translator.wzdx_creator(message)
+    #     if not wzdx:
+    #         continue
+
+    #     if not wzdx_msg:
+    #         wzdx_msg = wzdx
+    #     else:
+    #         wzdx_msg['features'].extend(wzdx['features'])
 
     output_path = input_file.replace('.xml', '.json')
     open(output_path, 'w+').write(json.dumps(wzdx_msg, indent=2))
@@ -129,6 +142,7 @@ def create_rtdh_standard_msg(pd):
 
     coordinates = pd.get("incident/location/polyline", parse_icone_polyline)
     route_details_start = get_route_details(coordinates[0])
+    print(coordinates[0], route_details_start)
     route_details_end = get_route_details(coordinates[-1])
 
     direction = get_direction(
@@ -177,7 +191,8 @@ def get_direction(street, coords, route_details=None):
     return direction
 
 
-def get_route_details(latLng):
+def get_route_details(lngLat):
+    latLng = (lngLat[1], lngLat[0])
     return cdot_geospatial_api.get_route_and_measure(latLng)
 
 

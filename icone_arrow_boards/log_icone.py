@@ -18,8 +18,8 @@ import re
 
 IDS = ['13632784', '13632786', '13632785']
 #      U13632281_202210250517
-ICONE_USERNAME = os.getenv('ICONE_USERNAME')
-ICONE_FILE_PATH = os.getenv('ICONE_FILE_PATH')
+ICONE_USERNAME = os.getenv('ICONE_USERNAME', 'cdot')
+ICONE_FILE_PATH = os.getenv('ICONE_FILE_PATH', 'incidents-extended.xml')
 ICONE_PASSWORD = os.getenv('ICONE_PASSWORD')
 
 ICONE_URL = "ftp://{usr}:{pwd}@iconetraffic.com:42663/{path}"
@@ -62,9 +62,8 @@ def main():
                 update_time = incident['updatetime']
                 msg = f"ID: {id}, update_time: {update_time}, state: {state}, polyline: {incident.get('location', {}).get('polyline')}"
                 icone_matches.append(msg)
-            if icone_matches != [nameTimestamp]:
-                f.write('; '.join(icone_matches))
-                print(icone_matches)
+            f.write('; '.join(icone_matches))
+            print(icone_matches)
             time.sleep((QUERY_INTERVAL_SECONDS -
                         ((time.time() - startTime) % QUERY_INTERVAL_SECONDS)))
 
