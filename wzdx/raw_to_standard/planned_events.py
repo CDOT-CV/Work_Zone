@@ -12,7 +12,7 @@ import pytz
 import regex
 
 from ..tools import (cdot_geospatial_api, date_tools, geospatial_tools,
-                     polygon_tools, wzdx_translator)
+                     polygon_tools, wzdx_translator, combination)
 from ..util.collections import PathDict
 
 PROGRAM_NAME = 'PlannedEventsRawToStandard'
@@ -319,7 +319,7 @@ def create_description(name, roadName, startMarker, endMarker, typeOfWork, start
     return f"Event {name}, on {roadName}, between mile markers {startMarker} and {endMarker}. {typeOfWork}. Running between {startTime} and {endTime}"
 
 
-def get_improved_geometry(coordinates, event_status, id):
+def get_improved_geometry(coordinates, event_status, route_details_start, route_details_end, id):
     if event_status == "completed":
         return coordinates
 
@@ -329,16 +329,11 @@ def get_improved_geometry(coordinates, event_status, id):
     if startPoint == endPoint:
         return coordinates
 
-    startRouteParams = cdot_geospatial_api.get_route_and_measure(
-        startPoint)
-    endRouteParams = cdot_geospatial_api.get_route_and_measure(
-        endPoint)
-
-    if not startRouteParams or not endRouteParams:
+    if not route_details_start or not route_details_end:
         logging.warn(
             f"1 or more routes not found, not generating improved geometry: {id}")
         return coordinates
-    if startRouteParams['Route'] != endRouteParams['Route']:
+    if route_details_start['Route'] != route_details_end['Route']:
         logging.warn(
             f"Routes did not match, not generating improved geometry: {id}")
         return coordinates
@@ -346,9 +341,9 @@ def get_improved_geometry(coordinates, event_status, id):
     initialDirection = geospatial_tools.get_road_direction_from_coordinates(
         coordinates)
     newCoordinates = cdot_geospatial_api.get_route_between_measures(
-        startRouteParams['Route'],
-        startRouteParams['Measure'],
-        endRouteParams['Measure'],
+        route_details_start['Route'],
+        route_details_start['Measure'],
+        route_details_end['Measure'],
         compressed=True)
 
     finalDirection = geospatial_tools.get_road_direction_from_coordinates(
@@ -373,9 +368,8 @@ def get_cross_streets_from_description(description):
     except:
         return ('', '')
 
+
 # isIncident is unused, could be useful later though
-
-
 def create_rtdh_standard_msg(pd, isIncident):
     try:
         description = pd.get('properties/travelerInformationMessage', '')
@@ -456,6 +450,9 @@ def create_rtdh_standard_msg(pd, isIncident):
                 f'Unable to retrive geometry coordinates for event: {pd.get("properties/id", default="")}')
             return {}
 
+        route_details_start, route_details_end = combination.get_route_details_for_coordinates_lnglat(
+            coordinates)
+
         return {
             "rtdh_timestamp": time.time(),
             "rtdh_message_id": str(uuid.uuid4()),
@@ -466,7 +463,7 @@ def create_rtdh_standard_msg(pd, isIncident):
                     "id": pd.get("properties/id", default="") + '_' + direction,
                     "last_updated_timestamp": pd.get('properties/lastUpdated', date_tools.get_unix_from_iso_string, default=0),
                 },
-                "geometry": get_improved_geometry(coordinates, event_status, pd.get("properties/id", default="") + '_' + direction),
+                "geometry": get_improved_geometry(coordinates, event_status, route_details_start, route_details_end, pd.get("properties/id", default="") + '_' + direction),
                 "header": {
                     "description": description,
                     "start_timestamp": date_tools.date_to_unix(start_date),
@@ -485,6 +482,8 @@ def create_rtdh_standard_msg(pd, isIncident):
                     "beginning_cross_street": begin_cross_street,
                     "ending_cross_street": end_cross_street,
                     "valid": False,
+                    "route_details_start": route_details_start,
+                    "route_details_end": route_details_end,
                 }
             }
         }

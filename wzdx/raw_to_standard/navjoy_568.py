@@ -7,7 +7,7 @@ import uuid
 from collections import OrderedDict
 from datetime import datetime
 
-from ..tools import array_tools, date_tools, geospatial_tools, polygon_tools
+from ..tools import array_tools, date_tools, geospatial_tools, polygon_tools, combination
 from ..util.collections import PathDict
 
 PROGRAM_NAME = 'Navjoy568RawToStandard'
@@ -219,6 +219,9 @@ def create_rtdh_standard_msg(pd):
     if direction == REVERSED_DIRECTION_MAP.get(polyline_direction) and direction != "undefined":
         coordinates.reverse()
 
+    route_details_start, route_details_end = combination.get_route_details_for_coordinates_lnglat(
+        coordinates)
+
     start_date = pd.get("data/workStartDate",
                         date_tools.parse_datetime_from_iso_string)
     end_date = pd.get("data/workStartDate",
@@ -252,6 +255,8 @@ def create_rtdh_standard_msg(pd):
                 "mileMarkerStart": pd.get("data/mileMarkerStart"),
                 "mileMarkerEnd": pd.get("data/mileMarkerEnd"),
                 "mileMarkerEnd": pd.get("data/mileMarkerEnd"),
+                "route_details_start": route_details_start,
+                "route_details_end": route_details_end,
             }
         }
     }

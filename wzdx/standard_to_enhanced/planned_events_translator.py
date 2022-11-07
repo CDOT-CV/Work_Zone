@@ -154,6 +154,10 @@ def parse_road_restriction(incident):
     # restrictions
     properties['restrictions'] = additional_info.get('restrictions', [])
 
+    properties['route_details_start'] = additional_info.get(
+        'route_details_start')
+    properties['route_details_end'] = additional_info.get('route_details_end')
+
     filtered_properties = copy.deepcopy(properties)
 
     for key, value in properties.items():
@@ -207,7 +211,7 @@ def parse_work_zone(incident):
 
     # related_road_events
     core_details['related_road_events'] = []
-    
+
     # name
     core_details['name'] = event.get('source', {}).get('id', None)
 

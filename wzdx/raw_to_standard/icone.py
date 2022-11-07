@@ -7,9 +7,8 @@ import uuid
 import xml.etree.ElementTree as ET
 from collections import OrderedDict
 
-from ..standard_to_enhanced import icone_translator
 from ..tools import (cdot_geospatial_api, date_tools, geospatial_tools,
-                     wzdx_translator)
+                     wzdx_translator, combination)
 from ..util.collections import PathDict
 
 PROGRAM_NAME = 'iConeRawToStandard'
@@ -141,9 +140,9 @@ def create_rtdh_standard_msg(pd):
         end_time = end_time.replace(second=0, microsecond=0)
 
     coordinates = pd.get("incident/location/polyline", parse_icone_polyline)
-    route_details_start = get_route_details(coordinates[0])
-    print(coordinates[0], route_details_start)
-    route_details_end = get_route_details(coordinates[-1])
+
+    route_details_start, route_details_end = combination.get_route_details_for_coordinates_lnglat(
+        coordinates)
 
     direction = get_direction(
         pd.get("incident/location/street"), coordinates, route_details_start)
@@ -175,7 +174,9 @@ def create_rtdh_standard_msg(pd):
             },
             "additional_info": {
                 "devices": devices,
-                "directionality": pd.get("incident/location/direction")
+                "directionality": pd.get("incident/location/direction"),
+                "route_details_start": route_details_start,
+                "route_details_end": route_details_end,
             }
         }
     }

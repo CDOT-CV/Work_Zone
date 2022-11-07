@@ -31,6 +31,19 @@ def does_route_overlap(obj1, obj2):
         return False
 
 
+def get_route_details_for_coordinates_lnglat(coordinates):
+    route_details_start = get_route_details(
+        coordinates[0][1], coordinates[0][0])
+
+    if len(coordinates) == 1 or (len(coordinates) == 2 and coordinates[0] == coordinates[1]):
+        route_details_end = None
+    else:
+        route_details_end = get_route_details(
+            coordinates[-1][1], coordinates[-1][0])
+
+    return route_details_start, route_details_end
+
+
 def get_route_details(lat, lng):
     return cdot_geospatial_api.get_route_and_measure((lat, lng))
 

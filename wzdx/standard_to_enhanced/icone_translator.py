@@ -223,6 +223,7 @@ def parse_incident(incident):
     source = event.get('source')
     header = event.get('header')
     detail = event.get('detail')
+    additional_info = event.get('additional_info')
 
     geometry = {}
     geometry['type'] = "LineString"
@@ -332,6 +333,10 @@ def parse_incident(incident):
 
     # restrictions
     properties['restrictions'] = []
+
+    properties['route_details_start'] = additional_info.get(
+        'route_details_start')
+    properties['route_details_end'] = additional_info.get('route_details_end')
 
     filtered_properties = copy.deepcopy(properties)
 
