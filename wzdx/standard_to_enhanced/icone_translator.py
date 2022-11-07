@@ -338,6 +338,8 @@ def parse_incident(incident):
         'route_details_start')
     properties['route_details_end'] = additional_info.get('route_details_end')
 
+    properties['condition_1'] = additional_info.get('condition_1', True)
+
     filtered_properties = copy.deepcopy(properties)
 
     INVALID_PROPERTIES = [None, '', []]

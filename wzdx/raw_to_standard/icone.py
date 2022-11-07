@@ -177,6 +177,7 @@ def create_rtdh_standard_msg(pd):
                 "directionality": pd.get("incident/location/direction"),
                 "route_details_start": route_details_start,
                 "route_details_end": route_details_end,
+                "condition_1": True,
             }
         }
     }

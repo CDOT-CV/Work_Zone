@@ -158,6 +158,8 @@ def parse_road_restriction(incident):
         'route_details_start')
     properties['route_details_end'] = additional_info.get('route_details_end')
 
+    properties['condition_1'] = additional_info.get('condition_1', True)
+
     filtered_properties = copy.deepcopy(properties)
 
     for key, value in properties.items():
@@ -285,6 +287,12 @@ def parse_work_zone(incident):
 
     # restrictions
     properties['restrictions'] = additional_info.get('restrictions', [])
+
+    properties['route_details_start'] = additional_info.get(
+        'route_details_start')
+    properties['route_details_end'] = additional_info.get('route_details_end')
+
+    properties['condition_1'] = additional_info.get('condition_1', True)
 
     filtered_properties = copy.deepcopy(properties)
 

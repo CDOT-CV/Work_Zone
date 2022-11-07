@@ -227,6 +227,10 @@ def create_rtdh_standard_msg(pd):
     end_date = pd.get("data/workStartDate",
                       date_tools.parse_datetime_from_iso_string)
 
+    event_status = date_tools.get_event_status(start_date, end_date)
+
+    condition_1 = event_status in ['active', 'pending', 'planned']
+
     return {
         "rtdh_timestamp": time.time(),
         "rtdh_message_id": str(uuid.uuid4()),
@@ -257,6 +261,7 @@ def create_rtdh_standard_msg(pd):
                 "mileMarkerEnd": pd.get("data/mileMarkerEnd"),
                 "route_details_start": route_details_start,
                 "route_details_end": route_details_end,
+                "condition_1": condition_1,
             }
         }
     }

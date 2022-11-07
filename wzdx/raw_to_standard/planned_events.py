@@ -436,6 +436,8 @@ def create_rtdh_standard_msg(pd, isIncident):
         event_type, types_of_work = map_event_type(
             pd.get("properties/type", default=""))
 
+        condition_1 = event_type in ['active', 'pending', 'planned']
+
         restrictions = []
         if pd.get('properties/isOversizedLoadsProhibited'):
             restrictions.append(
@@ -484,6 +486,7 @@ def create_rtdh_standard_msg(pd, isIncident):
                     "valid": False,
                     "route_details_start": route_details_start,
                     "route_details_end": route_details_end,
+                    "condition_1": condition_1,
                 }
             }
         }
