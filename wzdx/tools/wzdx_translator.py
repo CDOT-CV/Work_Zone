@@ -97,9 +97,9 @@ def initialize_info(feed_info_id):
     info['metadata']['wz_location_method'] = "channel-device-method"
     info['metadata']['lrs_type'] = "lrs_type"
     info['metadata']['contact_name'] = os.getenv(
-        'contact_name', 'Ashley Nylen')
+        'contact_name', 'Heather Pickering-Hilgers')
     info['metadata']['contact_email'] = os.getenv(
-        'contact_email', 'ashley.nylen@state.co.us')
+        'contact_email', 'heather.pickeringhilgers@state.co.us')
     info['metadata']['issuing_organization'] = os.getenv(
         'issuing_organization', 'CDOT')
 

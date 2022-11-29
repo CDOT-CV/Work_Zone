@@ -96,8 +96,8 @@ test_wzdx_creator_expected_wzdx = {
     'feed_info': {
         'update_date': '2021-04-13T00:00:00Z',
         'publisher': 'CDOT',
-        'contact_name': 'Ashley Nylen',
-        'contact_email': 'ashley.nylen@state.co.us',
+        'contact_name': 'Heather Pickering-Hilgers',
+        'contact_email': 'heather.pickeringhilgers@state.co.us',
         'version': '4.1',
         "update_frequency": 300,
         'license': 'https://creativecommons.org/publicdomain/zero/1.0/',
@@ -105,8 +105,8 @@ test_wzdx_creator_expected_wzdx = {
             {
                 'data_source_id': 'w',
                 'organization_name': 'CDOT',
-                'contact_name': 'Ashley Nylen',
-                'contact_email': 'ashley.nylen@state.co.us',
+                'contact_name': 'Heather Pickering-Hilgers',
+                'contact_email': 'heather.pickeringhilgers@state.co.us',
                 'update_date': '2021-04-13T00:00:00Z',
                 "update_frequency": 300,
             }

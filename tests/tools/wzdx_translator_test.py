@@ -14,8 +14,8 @@ def test_valid_info_valid_info():
         'metadata': {
             'wz_location_method': "channel-device-method",
             'lrs_type': "lrs_type",
-            'contact_name': "Ashley Nylen",
-            'contact_email': "ashley.nylen@state.co.us",
+            'contact_name': "Heather Pickering-Hilgers",
+            'contact_email': "heather.pickeringhilgers@state.co.us",
             'issuing_organization': "iCone",
         }
     }
@@ -34,8 +34,8 @@ def test_valid_info_invalid_info_missing_required_fields_lrs_type():
         'feed_info_id': "104d7746-688c-44ed-b195-2ee948bf9dfa",
         'metadata': {
             'wz_location_method': "channel-device-method",
-            'contact_name': "Ashley Nylen",
-            'contact_email': "ashley.nylen@state.co.us",
+            'contact_name': "Heather Pickering-Hilgers",
+            'contact_email': "heather.pickeringhilgers@state.co.us",
             'issuing_organization': "iCone",
         }
     }
@@ -49,8 +49,8 @@ def test_valid_info_invalid_info_invalid_feed_info_id():
         'metadata': {
             'wz_location_method': "channel-device-method",
             'lrs_type': "lrs_type",
-            'contact_name': "Ashley Nylen",
-            'contact_email': "ashley.nylen@state.co.us",
+            'contact_name': "Heather Pickering-Hilgers",
+            'contact_email': "heather.pickeringhilgers@state.co.us",
             'issuing_organization': "iCone",
         }
     }
@@ -102,15 +102,15 @@ def test_validate_wzdx_no_wzdx_data():
 
 # --------------------------------------------------------------------------------unit test for initialize_info function--------------------------------------------------------------------------------
 @patch.dict(os.environ, {
-    'contact_name': 'Ashley Nylen',
-    'contact_email': 'ashley.nylen@state.co.us',
+    'contact_name': 'Heather Pickering-Hilgers',
+    'contact_email': 'heather.pickeringhilgers@state.co.us',
     'issuing_organization': 'CDOT'
 })
 def test_initialize_info():
     actual = wzdx_translator.initialize_info(
         "104d7746-688c-44ed-b195-2ee948bf9dfa")
     expected = {'feed_info_id': "104d7746-688c-44ed-b195-2ee948bf9dfa", 'metadata': {'wz_location_method': "channel-device-method",
-                                                                                     'lrs_type': "lrs_type", 'contact_name': "Ashley Nylen", 'contact_email': "ashley.nylen@state.co.us", 'issuing_organization': "CDOT"}}
+                                                                                     'lrs_type': "lrs_type", 'contact_name': "Heather Pickering-Hilgers", 'contact_email': "heather.pickeringhilgers@state.co.us", 'issuing_organization': "CDOT"}}
     assert actual == expected
 
 

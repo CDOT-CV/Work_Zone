@@ -75,8 +75,8 @@ def test_get_vehicle_impact_all_lanes_open():
 
 # --------------------------------------------------------------------------------Unit test for wzdx_creator function--------------------------------------------------------------------------------
 @patch.dict(os.environ, {
-    'contact_name': 'Ashley Nylen',
-    'contact_email': 'ashley.nylen@state.co.us',
+    'contact_name': 'Heather Pickering-Hilgers',
+    'contact_email': 'heather.pickeringhilgers@state.co.us',
     'issuing_organization': 'CDOT'
 })
 @patch('uuid.uuid4')
@@ -114,8 +114,8 @@ def test_wzdx_creator_invalid_info_object():
         'metadata': {
             'wz_location_method': "channel-device-method",
             'lrs_type': "lrs_type",
-            'contact_name': "Ashley Nylen",
-            'contact_email': "ashley.nylen@state.co.us",
+            'contact_name': "Heather Pickering-Hilgers",
+            'contact_email': "heather.pickeringhilgers@state.co.us",
             'issuing_organization': "iCone",
         }
     }

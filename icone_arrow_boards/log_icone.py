@@ -49,20 +49,35 @@ def main():
 
             obj = parse_xml_to_dict(icone)
             icone_matches = [nameTimestamp]
-            for incident in obj.get('incidents', {}).get('incident', []):
+            incidents = obj.get('incidents', {}).get('incident', [])
+            if type(incidents) == list:
+                for incident in incidents:
+                    id = incident['@id']
+                    if not match_id(id):
+                        continue
+                    update_time = incident['updatetime']
+                    try:
+                        state = incident['display']['status']['@state']
+                    except:
+                        state = [i['@state']
+                                 for i in incident['display']['status']]
+                    update_time = incident['updatetime']
+                    msg = f"ID: {id}, update_time: {update_time}, state: {state}, polyline: {incident.get('location', {}).get('polyline')}"
+                    icone_matches.append(msg)
+            else:
+                incident = incidents
                 id = incident['@id']
-                if not match_id(id):
-                    continue
-                update_time = incident['updatetime']
-                try:
-                    state = incident['display']['status']['@state']
-                except:
-                    state = [i['@state']
-                             for i in incident['display']['status']]
-                update_time = incident['updatetime']
-                msg = f"ID: {id}, update_time: {update_time}, state: {state}, polyline: {incident.get('location', {}).get('polyline')}"
-                icone_matches.append(msg)
-            f.write('; '.join(icone_matches))
+                if match_id(id):
+                    update_time = incident['updatetime']
+                    try:
+                        state = incident['display']['status']['@state']
+                    except:
+                        state = [i['@state']
+                                 for i in incident['display']['status']]
+                    update_time = incident['updatetime']
+                    msg = f"ID: {id}, update_time: {update_time}, state: {state}, polyline: {incident.get('location', {}).get('polyline')}"
+                    icone_matches.append(msg)
+            f.write('; '.join(icone_matches) + '\n')
             print(icone_matches)
             time.sleep((QUERY_INTERVAL_SECONDS -
                         ((time.time() - startTime) % QUERY_INTERVAL_SECONDS)))

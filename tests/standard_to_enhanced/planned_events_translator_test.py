@@ -11,11 +11,11 @@ from wzdx.standard_to_enhanced import planned_events_translator
 from tests.data.standard_to_enhanced import planned_events_translator_data
 
 
-
 @patch.object(argparse, 'ArgumentParser')
 def test_parse_planned_events_arguments(argparse_mock):
     plannedEventsFile, outputFile = planned_events_translator.parse_planned_events_arguments()
     assert plannedEventsFile != None and outputFile != None
+
 
 def init_datetime_mocks(mock_dts):
     for i in mock_dts:
@@ -134,8 +134,8 @@ def test_get_vehicle_impact_all_lanes_open():
 
 # --------------------------------------------------------------------------------Unit test for wzdx_creator function--------------------------------------------------------------------------------
 @patch.dict(os.environ, {
-    'contact_name': 'Ashley Nylen',
-    'contact_email': 'ashley.nylen@state.co.us',
+    'contact_name': 'Heather Pickering-Hilgers',
+    'contact_email': 'heather.pickeringhilgers@state.co.us',
     'issuing_organization': 'CDOT'
 })
 # first is for data source id, second is for a default id that is not used in this example, and the third is the road_event_id
@@ -155,8 +155,8 @@ def test_wzdx_creator(mock_dt, mock_dt_3, _):
 
 
 @patch.dict(os.environ, {
-    'contact_name': 'Ashley Nylen',
-    'contact_email': 'ashley.nylen@state.co.us',
+    'contact_name': 'Heather Pickering-Hilgers',
+    'contact_email': 'heather.pickeringhilgers@state.co.us',
     'issuing_organization': 'CDOT'
 })
 # first is for data source id, second is for a default id that is not used in this example, and the third is the road_event_id
@@ -198,8 +198,8 @@ def test_wzdx_creator_invalid_info_object():
         'metadata': {
             'wz_location_method': "channel-device-method",
             'lrs_type': "lrs_type",
-            'contact_name': "Ashley Nylen",
-            'contact_email': "ashley.nylen@state.co.us",
+            'contact_name': "Heather Pickering-Hilgers",
+            'contact_email': "heather.pickeringhilgers@state.co.us",
             'issuing_organization': "iCone",
         }
     }

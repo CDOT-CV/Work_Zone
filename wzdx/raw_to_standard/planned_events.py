@@ -436,14 +436,14 @@ def create_rtdh_standard_msg(pd, isIncident):
         event_type, types_of_work = map_event_type(
             pd.get("properties/type", default=""))
 
-        condition_1 = event_type in ['active', 'pending', 'planned']
-
         restrictions = []
         if pd.get('properties/isOversizedLoadsProhibited'):
             restrictions.append(
                 {'type': 'permitted-oversize-loads-prohibited'})
 
         event_status = date_tools.get_event_status(start_date, end_date)
+
+        condition_1 = event_status in ['active', 'pending', 'planned']
 
         lane_impacts = get_lane_impacts(
             pd.get("properties/laneImpacts"), pd.get("properties/direction"))
