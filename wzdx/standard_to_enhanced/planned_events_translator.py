@@ -13,9 +13,6 @@ PROGRAM_NAME = 'PlannedEventsTranslator'
 PROGRAM_VERSION = '1.0'
 
 
-DEFAULT_PLANNED_EVENTS_FEED_INFO_ID = '49253be7-0c6a-4a65-8113-450f9041f989'
-
-
 def main():
     input_file, output_file = parse_planned_events_arguments()
 
@@ -60,8 +57,7 @@ def wzdx_creator(message, info=None):
 
     # verify info obj
     if not info:
-        info = wzdx_translator.initialize_info(
-            DEFAULT_PLANNED_EVENTS_FEED_INFO_ID)
+        info = wzdx_translator.initialize_info()
     if not wzdx_translator.validate_info(info):
         return None
 

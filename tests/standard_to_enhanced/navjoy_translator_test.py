@@ -77,7 +77,7 @@ def test_get_vehicle_impact_all_lanes_open():
 @patch.dict(os.environ, {
     'contact_name': 'Heather Pickering-Hilgers',
     'contact_email': 'heather.pickeringhilgers@state.co.us',
-    'issuing_organization': 'CDOT'
+    'publisher': 'CDOT'
 })
 @patch('uuid.uuid4')
 @unittest.mock.patch('wzdx.standard_to_enhanced.navjoy_translator.datetime')
@@ -110,14 +110,9 @@ def test_wzdx_creator_invalid_info_object():
                                                                                                                                                                                                                                                                [-104.79432762150851, 39.73959547447038]], 'header': {'description': 'Maintenance for lane expansion', 'justification': 'Lane expansion - maintenance work', 'start_timestamp': 1630290600000, 'end_timestamp': 1630290600000}, 'detail': {'road_name': '287', 'road_number': '287', 'direction': 'eastbound'}}}
 
     test_invalid_info_object = {
-        'feed_info_id': "104d7746-e948bf9dfa",
-        'metadata': {
-            'wz_location_method': "channel-device-method",
-            'lrs_type': "lrs_type",
-            'contact_name': "Heather Pickering-Hilgers",
-            'contact_email': "heather.pickeringhilgers@state.co.us",
-            'issuing_organization': "iCone",
-        }
+        'contact_name': "Heather Pickering-Hilgers",
+        'contact_email': "heather.pickeringhilgers@state.co.us",
+        'publisher': "iCone",
     }
 
     test_wzdx = navjoy_translator.wzdx_creator(

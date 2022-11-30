@@ -136,7 +136,7 @@ def test_get_vehicle_impact_all_lanes_open():
 @patch.dict(os.environ, {
     'contact_name': 'Heather Pickering-Hilgers',
     'contact_email': 'heather.pickeringhilgers@state.co.us',
-    'issuing_organization': 'CDOT'
+    'publisher': 'CDOT'
 })
 # first is for data source id, second is for a default id that is not used in this example, and the third is the road_event_id
 @patch.object(uuid, 'uuid4', side_effect=['w', '', '3'])
@@ -157,7 +157,7 @@ def test_wzdx_creator(mock_dt, mock_dt_3, _):
 @patch.dict(os.environ, {
     'contact_name': 'Heather Pickering-Hilgers',
     'contact_email': 'heather.pickeringhilgers@state.co.us',
-    'issuing_organization': 'CDOT'
+    'publisher': 'CDOT'
 })
 # first is for data source id, second is for a default id that is not used in this example, and the third is the road_event_id
 @patch.object(uuid, 'uuid4', side_effect=['w', '', '3', '4', '5'])
@@ -194,14 +194,9 @@ def test_wzdx_creator_invalid_info_object():
                                                                                                                                                                                                                                                                [-104.79432762150851, 39.73959547447038]], 'header': {'description': 'Maintenance for lane expansion', 'justification': 'Lane expansion - maintenance work', 'start_timestamp': 1630290600000, 'end_timestamp': 1630290600000}, 'detail': {'road_name': '287', 'road_number': '287', 'direction': 'eastbound'}}}
 
     test_invalid_info_object = {
-        'feed_info_id': "104d7746-e948bf9dfa",
-        'metadata': {
-            'wz_location_method': "channel-device-method",
-            'lrs_type': "lrs_type",
-            'contact_name': "Heather Pickering-Hilgers",
-            'contact_email': "heather.pickeringhilgers@state.co.us",
-            'issuing_organization': "iCone",
-        }
+        'contact_name': "Heather Pickering-Hilgers",
+        'contact_email': "heather.pickeringhilgers@state.co.us",
+        'publisher': "iCone",
     }
 
     test_wzdx = planned_events_translator.wzdx_creator(

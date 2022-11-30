@@ -41,11 +41,11 @@ Please set up the following environment variable for your local computer before 
 
 Runtime Environment Variables:
 
-| Name                 |                Value                 |                                    Description |
-| :------------------- | :----------------------------------: | ---------------------------------------------: |
-| contact_name         |      Heather Pickering-Hilgers       |                      name of WZDx feed contact |
-| contact_email        | heather.pickeringhilgers@state.co.us |                     email of WZDx feed contact |
-| issuing_organization |                 CDOT                 | name of the organization issuing the WZDx feed |
+| Name          |                Value                 |                                    Description |
+| :------------ | :----------------------------------: | ---------------------------------------------: |
+| contact_name  |      Heather Pickering-Hilgers       |                      name of WZDx feed contact |
+| contact_email | heather.pickeringhilgers@state.co.us |                     email of WZDx feed contact |
+| publisher     |                 CDOT                 | name of the organization issuing the WZDx feed |
 
 Example usage:
 for mac computer run the following script to initialize the environment variable:

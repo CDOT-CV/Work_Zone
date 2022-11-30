@@ -10,14 +10,9 @@ from tests.data.tools import wzdx_translator_data
 # --------------------------------------------------------------------------------unit test for valid_info function--------------------------------------------------------------------------------
 def test_valid_info_valid_info():
     test_info = {
-        'feed_info_id': "104d7746-688c-44ed-b195-2ee948bf9dfa",
-        'metadata': {
-            'wz_location_method': "channel-device-method",
-            'lrs_type': "lrs_type",
-            'contact_name': "Heather Pickering-Hilgers",
-            'contact_email': "heather.pickeringhilgers@state.co.us",
-            'issuing_organization': "iCone",
-        }
+        'contact_name': "Heather Pickering-Hilgers",
+        'contact_email': "heather.pickeringhilgers@state.co.us",
+        'publisher': "iCone",
     }
     test_validate_info = wzdx_translator.validate_info(test_info)
     assert test_validate_info == True
@@ -31,13 +26,9 @@ def test_valid_info_no_info():
 
 def test_valid_info_invalid_info_missing_required_fields_lrs_type():
     test_info = {
-        'feed_info_id': "104d7746-688c-44ed-b195-2ee948bf9dfa",
-        'metadata': {
-            'wz_location_method': "channel-device-method",
-            'contact_name': "Heather Pickering-Hilgers",
-            'contact_email': "heather.pickeringhilgers@state.co.us",
-            'issuing_organization': "iCone",
-        }
+        'contact_name': "Heather Pickering-Hilgers",
+        'contact_email': "heather.pickeringhilgers@state.co.us",
+        'publisher': "iCone",
     }
     test_validate_info = wzdx_translator.validate_info(test_info)
     assert test_validate_info == False
@@ -45,14 +36,9 @@ def test_valid_info_invalid_info_missing_required_fields_lrs_type():
 
 def test_valid_info_invalid_info_invalid_feed_info_id():
     test_info = {
-        'feed_info_id': "104d7746-e948bf9dfa",
-        'metadata': {
-            'wz_location_method': "channel-device-method",
-            'lrs_type': "lrs_type",
-            'contact_name': "Heather Pickering-Hilgers",
-            'contact_email': "heather.pickeringhilgers@state.co.us",
-            'issuing_organization': "iCone",
-        }
+        'contact_name': "Heather Pickering-Hilgers",
+        'contact_email': "heather.pickeringhilgers@state.co.us",
+        'publisher': "iCone",
     }
     test_validate_info = wzdx_translator.validate_info(test_info)
     assert test_validate_info == False
@@ -104,13 +90,12 @@ def test_validate_wzdx_no_wzdx_data():
 @patch.dict(os.environ, {
     'contact_name': 'Heather Pickering-Hilgers',
     'contact_email': 'heather.pickeringhilgers@state.co.us',
-    'issuing_organization': 'CDOT'
+    'publisher': 'CDOT'
 })
 def test_initialize_info():
-    actual = wzdx_translator.initialize_info(
-        "104d7746-688c-44ed-b195-2ee948bf9dfa")
-    expected = {'feed_info_id': "104d7746-688c-44ed-b195-2ee948bf9dfa", 'metadata': {'wz_location_method': "channel-device-method",
-                                                                                     'lrs_type': "lrs_type", 'contact_name': "Heather Pickering-Hilgers", 'contact_email': "heather.pickeringhilgers@state.co.us", 'issuing_organization': "CDOT"}}
+    actual = wzdx_translator.initialize_info()
+    expected = {'contact_name': "Heather Pickering-Hilgers",
+                'contact_email': "heather.pickeringhilgers@state.co.us", 'publisher': "CDOT"}
     assert actual == expected
 
 

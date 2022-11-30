@@ -12,9 +12,6 @@ PROGRAM_NAME = 'IconeTranslator'
 PROGRAM_VERSION = '1.0'
 
 
-DEFAULT_ICONE_FEED_INFO_ID = '104d7746-688c-44ed-b195-2ee948bf9dfa'
-
-
 def main():
     input_file, output_file = parse_icone_arguments()
     # Added encoding argument because of weird character at start of incidents.xml file
@@ -50,8 +47,7 @@ def wzdx_creator(message, info=None):
         return None
 
     if not info:
-        info = wzdx_translator.initialize_info(
-            DEFAULT_ICONE_FEED_INFO_ID)
+        info = wzdx_translator.initialize_info()
     if not wzdx_translator.validate_info(info):
         return None
 

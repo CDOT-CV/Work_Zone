@@ -9,8 +9,6 @@ from ..tools import date_tools, wzdx_translator
 PROGRAM_NAME = 'NavJoy568Translator'
 PROGRAM_VERSION = '1.0'
 
-DEFAULT_NAVJOY_FEED_INFO_ID = '2ed141dc-b998-4f7a-8395-9ae9dc7df2f8'
-
 
 def main():
     inputfile, outputfile = parse_navjoy_arguments()
@@ -53,7 +51,7 @@ def wzdx_creator(message, info=None):
         return None
    # verify info obj
     if not info:
-        info = wzdx_translator.initialize_info(DEFAULT_NAVJOY_FEED_INFO_ID)
+        info = wzdx_translator.initialize_info()
     if not wzdx_translator.validate_info(info):
         return None
 

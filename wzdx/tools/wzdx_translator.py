@@ -53,18 +53,10 @@ def validate_info(info):
         logging.warning('invalid type')
         return False
 
-    feed_info_id = str(info.get('feed_info_id', ''))
-    check_feed_info_id = re.match(
-        '[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}', feed_info_id)
-
-    metadata = info.get('metadata', {})
-    wz_location_method = metadata.get('wz_location_method')
-    lrs_type = metadata.get('lrs_type')
-    contact_name = metadata.get('contact_name')
-    contact_email = metadata.get('contact_email')
-    issuing_organization = metadata.get('issuing_organization')
-    required_fields = [check_feed_info_id, metadata, wz_location_method,
-                       lrs_type, contact_name, contact_email, issuing_organization]
+    contact_name = info.get('contact_name')
+    contact_email = info.get('contact_email')
+    publisher = info.get('publisher')
+    required_fields = [contact_name, contact_email, publisher]
     for field in required_fields:
         if not field:
             logging.warning(
@@ -90,18 +82,14 @@ def validate_wzdx(wzdx_obj, wzdx_schema=work_zone_feed_v41.wzdx_v41_schema_strin
     return True
 
 
-def initialize_info(feed_info_id):
+def initialize_info():
     info = {}
-    info['feed_info_id'] = feed_info_id
-    info['metadata'] = {}
-    info['metadata']['wz_location_method'] = "channel-device-method"
-    info['metadata']['lrs_type'] = "lrs_type"
-    info['metadata']['contact_name'] = os.getenv(
+    info['contact_name'] = os.getenv(
         'contact_name', 'Heather Pickering-Hilgers')
-    info['metadata']['contact_email'] = os.getenv(
+    info['contact_email'] = os.getenv(
         'contact_email', 'heather.pickeringhilgers@state.co.us')
-    info['metadata']['issuing_organization'] = os.getenv(
-        'issuing_organization', 'CDOT')
+    info['publisher'] = os.getenv(
+        'publisher', 'CDOT')
 
     return info
 
@@ -174,30 +162,27 @@ def add_ids(message, event_type="work-zone"):
 def initialize_wzdx_object(info):
     wzd = {}
     wzd['feed_info'] = {}
-    wzd['feed_info']['publisher'] = 'CDOT'
+    wzd['feed_info']['publisher'] = info.get('publisher')
     wzd['feed_info']['version'] = '4.1'
     wzd['feed_info']['license'] = "https://creativecommons.org/publicdomain/zero/1.0/"
 
     data_source = {}
     data_source['data_source_id'] = str(uuid.uuid4())
-    data_source['organization_name'] = info.get(
-        'metadata').get('issuing_organization')
+    data_source['organization_name'] = info.get('publisher')
     data_source['update_date'] = datetime.utcnow().strftime(
         "%Y-%m-%dT%H:%M:%SZ")
     data_source['update_frequency'] = info.get(
-        'metadata').get('datafeed_frequency_update', 300)
-    data_source['contact_name'] = info.get('metadata').get('contact_name')
-    data_source['contact_email'] = info.get('metadata').get('contact_email')
+        'datafeed_frequency_update', 300)
+    data_source['contact_name'] = info.get('contact_name')
+    data_source['contact_email'] = info.get('contact_email')
     wzd['feed_info']['data_sources'] = [data_source]
 
     wzd['feed_info']['update_date'] = datetime.utcnow().strftime(
         "%Y-%m-%dT%H:%M:%SZ")
     wzd['feed_info']['update_frequency'] = info.get(
-        'metadata').get('datafeed_frequency_update', 300)
-    wzd['feed_info']['contact_name'] = info.get(
-        'metadata').get('contact_name')
-    wzd['feed_info']['contact_email'] = info.get(
-        'metadata').get('contact_email')
+        'datafeed_frequency_update', 300)
+    wzd['feed_info']['contact_name'] = info.get('contact_name')
+    wzd['feed_info']['contact_email'] = info.get('contact_email')
 
     wzd['type'] = 'FeatureCollection'
 
@@ -210,36 +195,27 @@ def initialize_wzdx_object_restriction(info):
     wzd = {}
     wzd['feed_info'] = {}
     # hardcode
-    wzd['feed_info']['feed_info_id'] = info.get('feed_info_id')
     wzd['feed_info']['update_date'] = datetime.utcnow().strftime(
         "%Y-%m-%dT%H:%M:%SZ")
-    wzd['feed_info']['publisher'] = info.get(
-        'metadata').get('issuing_organization')
-    wzd['feed_info']['contact_name'] = info.get(
-        'metadata').get('contact_name')
-    wzd['feed_info']['contact_email'] = info.get(
-        'metadata').get('contact_email')
-    if info['metadata'].get('datafeed_frequency_update', False):
-        wzd['feed_info']['update_frequency'] = info.get('metadata')[
+    wzd['feed_info']['publisher'] = info.get('publisher')
+    wzd['feed_info']['contact_name'] = info.get('contact_name')
+    wzd['feed_info']['contact_email'] = info.get('contact_email')
+    if info.get('datafeed_frequency_update', False):
+        wzd['feed_info']['update_frequency'] = info[
             'datafeed_frequency_update']  # Verify data type
     wzd['feed_info']['version'] = '4.0'
     wzd['feed_info']['license'] = "https://creativecommons.org/publicdomain/zero/1.0/"
 
     data_source = {}
     data_source['data_source_id'] = str(uuid.uuid4())
-    data_source['feed_info_id'] = info.get('feed_info_id')
-    data_source['organization_name'] = info.get(
-        'metadata').get('issuing_organization')
-    data_source['contact_name'] = info.get('metadata').get('contact_name')
-    data_source['contact_email'] = info.get('metadata').get('contact_email')
-    if info['metadata'].get('datafeed_frequency_update', False):
-        data_source['update_frequency'] = info.get(
-            'metadata').get('datafeed_frequency_update')
+    data_source['organization_name'] = info.get('publisher')
+    data_source['contact_name'] = info.get('contact_name')
+    data_source['contact_email'] = info.get('contact_email')
+    if info.get('datafeed_frequency_update', False):
+        data_source['update_frequency'] = info.get('datafeed_frequency_update')
     data_source['update_date'] = datetime.utcnow().strftime(
         "%Y-%m-%dT%H:%M:%SZ")
-    data_source['location_method'] = info.get(
-        'metadata').get('wz_location_method')
-    data_source['lrs_type'] = info.get('metadata').get('lrs_type')
+    data_source['location_method'] = info.get('wz_location_method')
     wzd['feed_info']['data_sources'] = [data_source]
 
     wzd['type'] = 'FeatureCollection'

@@ -94,14 +94,9 @@ def test_wzdx_creator_invalid_info_object():
     }
 
     test_invalid_info_object = {
-        'feed_info_id': "104d7746-e948bf9dfa",
-        'metadata': {
-            'wz_location_method': "channel-device-method",
-            'lrs_type': "lrs_type",
-            'contact_name': "Heather Pickering-Hilgers",
-            'contact_email': "heather.pickeringhilgers@state.co.us",
-            'issuing_organization': "iCone",
-        }
+        'contact_name': "Heather Pickering-Hilgers",
+        'contact_email': "heather.pickeringhilgers@state.co.us",
+        'publisher': "iCone",
     }
 
     test_wzdx = icone_translator.wzdx_creator(
@@ -112,7 +107,7 @@ def test_wzdx_creator_invalid_info_object():
 @patch.dict(os.environ, {
     'contact_name': 'Heather Pickering-Hilgers',
     'contact_email': 'heather.pickeringhilgers@state.co.us',
-    'issuing_organization': 'CDOT'
+    'publisher': 'CDOT'
 })
 @patch('uuid.uuid4')
 def test_wzdx_creator(mockuuid):
