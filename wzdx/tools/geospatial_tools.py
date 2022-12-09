@@ -11,14 +11,14 @@ ROAD_DIRECTIONS_MAP = {
 
 ROAD_ORIENTATIONS_MAP = {
     "northbound": 0,
-    "eastbound": 180,
+    "eastbound": 90,
     "southbound": 0,
-    "westbound": 180
+    "westbound": 90
 }
 
-ROAD_OREINTATIONS_DIRECTIONS_MAP = {
+ROAD_ORIENTATIONS_DIRECTIONS_MAP = {
     0: ["northbound", "southbound", "southbound", "northbound"],
-    180: ["eastbound", "westbound", "westbound", "eastbound"]
+    90: ["eastbound", "westbound", "westbound", "eastbound"]
 }
 
 
@@ -72,7 +72,7 @@ def get_direction_from_bearing(bearing):
 # unecessarily condensed just because
 def get_closest_direction_from_bearing(bearing, road_orientation):
     orientation = ROAD_ORIENTATIONS_MAP[road_orientation]
-    return ROAD_OREINTATIONS_DIRECTIONS_MAP[orientation][math.floor(abs(orientation - (bearing % 360))/90)]
+    return ROAD_ORIENTATIONS_DIRECTIONS_MAP[orientation][math.floor(abs(orientation - (bearing % 360))/90)]
 
 
 ###

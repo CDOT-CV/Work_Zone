@@ -182,6 +182,24 @@ def test_get_closest_direction_from_bearing_all_southbound():
             i, 'northbound') == 'southbound'
 
 
+def test_get_closest_direction_from_bearing_all_eastbound():
+    for i in range(1, 180):  # skips 270
+        assert geospatial_tools.get_closest_direction_from_bearing(
+            i, 'eastbound') == 'eastbound'
+    for i in range(-359, -180):  # skips -90
+        assert geospatial_tools.get_closest_direction_from_bearing(
+            i, 'eastbound') == 'eastbound'
+
+
+def test_get_closest_direction_from_bearing_all_westbound():
+    for i in range(181, 360):  # skips -90
+        assert geospatial_tools.get_closest_direction_from_bearing(
+            i, 'eastbound') == 'westbound'
+    for i in range(-179, 0):  # skips -90
+        assert geospatial_tools.get_closest_direction_from_bearing(
+            i, 'eastbound') == 'westbound'
+
+
 def test_getEndPoint():
     start = (37.19060215300004, -105.49113132299999)
     bearing = 21.6697
