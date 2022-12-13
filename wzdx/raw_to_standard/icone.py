@@ -66,9 +66,12 @@ def generate_raw_messages(message):
     # Loop through all elements and print each element to PubSub
     for msg in msg_lst:
         incident = ET.tostring(msg, encoding='utf8')
+        print(incident)
         obj = wzdx_translator.parse_xml_to_dict(incident)
         if validate_incident(obj.get('incident', {})):
             messages.append(incident)
+        else:
+            logging.warn("Invalid message")
 
     return messages
 

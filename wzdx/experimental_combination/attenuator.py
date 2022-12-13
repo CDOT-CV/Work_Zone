@@ -8,7 +8,7 @@ ATTENUATOR_TIME_AHEAD_SECONDS = 30 * 60
 ISO_8601_FORMAT_STRING = "%Y-%m-%dT%H:%M:%SZ"
 
 
-def main():
+def main(outputPath='./tests/data/output/wzdx_navjoy_combined.json'):
     with open('./wzdx/sample_files/raw/geotab_avl/geotab_test.json') as f:
         geotab_avl = [json.loads(f.read())]
     with open('./wzdx/sample_files/enhanced/version_4_1.json') as f:
@@ -16,14 +16,13 @@ def main():
 
     combined_events = get_combined_events(geotab_avl, wzdx)
 
-    with open('./wzdx/sample_files/enhanced/wzdx_combined.json', 'w+') as f:
+    with open(outputPath, 'w+') as f:
         f.write(json.dumps(combined_events, indent=2))
 
 
 def validate_directionality(geotab, wzdx):
     geotab_bearing = geotab['avl_location']['position']['bearing']
     wzdx_direction = wzdx['features'][0]['properties']['core_details']['direction']
-    print(geotab_bearing, wzdx_direction)
 
     geotab_direction = geospatial_tools.get_closest_direction_from_bearing(
         geotab_bearing, wzdx_direction)
@@ -37,8 +36,6 @@ def get_combined_events(geotab_msgs, wzdx_msgs):
         logging.info("identify_overlapping_features")
         if not validate_directionality(*i):
             logging.info(
-                "Ignoring matching Geotab message because the direction does not match the planned event")
-            print(
                 "Ignoring matching Geotab message because the direction does not match the planned event")
             continue
         logging.info("validate_directionality")
@@ -61,7 +58,6 @@ def identify_overlapping_features(geotab_msgs, wzdx_msgs):
             geotab_msg, geometry['latitude'], geometry['longitude'])
         geotab_route_details = cdot_geospatial_api.get_route_and_measure(
             (geometry['latitude'], geometry['longitude']))
-        print("geotab_route_details", geotab_route_details)
         if not geotab_route_details:
             logging.info(
                 f"No geotab route info for {geotab_msg['rtdh_message_id']}")
@@ -77,8 +73,6 @@ def identify_overlapping_features(geotab_msgs, wzdx_msgs):
         if not wzdx.get('route_details_start') or not wzdx.get('route_details_end'):
             route_details_start, route_details_end = combination.get_route_details_for_wzdx(
                 wzdx['features'][0])
-            print("route_details_start", route_details_start)
-            print("route_details_end", route_details_end)
 
             if not route_details_start or not route_details_end:
                 logging.info(
@@ -94,21 +88,15 @@ def identify_overlapping_features(geotab_msgs, wzdx_msgs):
             logging.warn(
                 f"Unable to retrieve start point route details for event {wzdx['features'][0].get('id')}")
             continue
-        print('geotab_routes', geotab_routes)
 
         matching_geotab_routes = geotab_routes.get(
             wzdx['route_details_start']['Route'], [])
-        print('matching_geotab_routes', matching_geotab_routes)
         if matching_geotab_routes:
             logging.info(
-                f"FOUND MATCHING GEOTAB ROUTE FOR {wzdx['features'][0]['id']}")
-            print(
                 f"FOUND MATCHING GEOTAB ROUTE FOR {wzdx['features'][0]['id']}")
 
             if not wzdx.get('route_details_end'):
                 logging.warn(
-                    f"Unable to retrieve start point route details for event {wzdx['features'][0].get('id')}")
-                print(
                     f"Unable to retrieve start point route details for event {wzdx['features'][0].get('id')}")
                 continue
             if (wzdx['route_details_start']['Route'] != wzdx['route_details_end']['Route']):
@@ -117,15 +105,11 @@ def identify_overlapping_features(geotab_msgs, wzdx_msgs):
             for geotab in matching_geotab_routes:
                 logging.debug("Mile markers. geotab: {}, wzdx start: {}, wzdx_end: {}".format(
                     geotab['route_details']['Measure'], wzdx['route_details_start']['Measure'], wzdx['route_details_end']['Measure']))
-                print("Mile markers. geotab: {}, wzdx start: {}, wzdx_end: {}".format(
-                    geotab['route_details']['Measure'], wzdx['route_details_start']['Measure'], wzdx['route_details_end']['Measure']))
                 if wzdx['route_details_start']['Measure'] >= geotab['route_details']['Measure'] and wzdx['route_details_end']['Measure'] <= geotab['route_details']['Measure']:
                     matching_routes.append((geotab, wzdx))
-                    print('matching_routes', matching_routes)
                     return matching_routes
                 elif wzdx['route_details_start']['Measure'] <= geotab['route_details']['Measure'] and wzdx['route_details_end']['Measure'] >= geotab['route_details']['Measure']:
                     matching_routes.append((geotab, wzdx))
-                    print('matching_routes', matching_routes)
                     return matching_routes
 
     return matching_routes

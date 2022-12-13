@@ -12,12 +12,24 @@ ISO_8601_FORMAT_STRING = "%Y-%m-%dT%H:%M:%SZ"
 def main():
     with open('./wzdx/sample_files/raw/geotab_avl/geotab_all.json') as f:
         geotab_avl = json.loads(f.read())
-    with open('./wzdx/sample_files/enhanced/wzdxs/wzdx_all.json') as f:
+    with open('./wzdx/sample_files/enhanced/wzdx/wzdx_all.json') as f:
         wzdx = json.loads(f.read())
 
     combined_events = get_combined_events(geotab_avl, wzdx)
 
-    with open('./wzdx/sample_files/enhanced/wzdxs/wzdx_combined.json', 'w+') as f:
+    with open('./wzdx/sample_files/enhanced/wzdx/wzdx_combined.json', 'w+') as f:
+        f.write(json.dumps(combined_events, indent=2))
+
+
+def main(outputPath='./tests/data/output/wzdx_icone_combined.json'):
+    with open('./wzdx/sample_files/standard/icone/geotab_all.json') as f:
+        icone = json.loads(f.read())
+    with open('./wzdx/sample_files/enhanced/wzdx/version_4_1.json') as f:
+        wzdx = json.loads(f.read())
+
+    combined_events = get_combined_events([icone], [wzdx])
+
+    with open(outputPath, 'w+') as f:
         f.write(json.dumps(combined_events, indent=2))
 
 
@@ -84,9 +96,9 @@ def identify_overlapping_features_icone(icone_standard_msgs, wzdx_msgs):
 
     # Step 1: Add route info to iCone messages
     for icone in icone_standard_msgs:
-        icone['route_details_start'] = icone['event']['additional_info'].get(
+        icone['route_details_start'] = icone['event'].get('additional_info', {}).get(
             'route_details_start')
-        icone['route_details_end'] = icone['event']['additional_info'].get(
+        icone['route_details_end'] = icone['event'].get('additional_info', {}).get(
             'route_details_end')
         route_details_start, route_details_end = get_route_details_for_icone(
             icone['event']['geometry'])

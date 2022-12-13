@@ -18,8 +18,6 @@ def does_route_overlap(obj1, obj2):
                     obj2['route_details_end']['Measure'])
     end_2_m = max(obj2['route_details_start']['Measure'],
                   obj2['route_details_end']['Measure'])
-    print(start_1_m, end_1_m, start_2_m, end_2_m)
-    print(start_2_m > start_1_m, start_2_m < end_1_m)
     if start_2_m > start_1_m and start_2_m < end_1_m:
         # Start of route 2 in route 1
         return True
@@ -57,16 +55,12 @@ def add_route_details(wzdx_msgs, overwrite=False, keepInvalid=True):
             route_details_start, route_details_end = get_route_details_for_wzdx(
                 wzdx['features'][0])
 
-            print(route_details_start, route_details_end)
-
             wzdx['route_details_start'] = route_details_start if route_details_start else None
             wzdx['route_details_end'] = route_details_end if route_details_end else None
 
             if (route_details_start and route_details_end) or keepInvalid:
-                print('appending, 51')
                 output.append(wzdx)
         else:
-            print('appending, 54')
             output.append(wzdx)
     return output
 
@@ -153,8 +147,6 @@ def identify_overlapping_features_wzdx(wzdx_msgs_1, wzdx_msgs_2):
         logging.debug('No routes found for dataset 2')
         return []
 
-    print('wzdx_routes_1, wzdx_routes_2', wzdx_routes_1, wzdx_routes_2)
-
     matching_routes = []
 
     # Step 3: Identify overlapping events
@@ -163,7 +155,6 @@ def identify_overlapping_features_wzdx(wzdx_msgs_1, wzdx_msgs_2):
 
         for match_1 in matching_routes_1:
             for match_2 in wzdx_matched_msgs:
-                print(match_1, match_2)
                 if does_route_overlap(match_1, match_2) and validate_directionality_wzdx(match_1, match_2):
                     matching_routes.append((match_1, match_2))
 

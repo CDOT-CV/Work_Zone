@@ -3,6 +3,8 @@ from unittest.mock import MagicMock, patch
 from wzdx.experimental_combination import attenuator
 from wzdx.tools import cdot_geospatial_api
 import json
+import os
+import os.path
 
 
 def test_validate_directionality_valid():
@@ -32,7 +34,8 @@ def test_get_combined_events_valid():
         geotab_msgs, wzdx_msgs)
 
     assert len(combined_events) == 1
-    assert len(combined_events[0]['features'][0]['geometry']['coordinates']) > 2
+    assert len(combined_events[0]['features'][0]
+               ['geometry']['coordinates']) > 2
 
 
 def test_get_combined_events_valid_multiple():
@@ -43,7 +46,8 @@ def test_get_combined_events_valid_multiple():
         geotab_msgs, wzdx_msgs)
 
     assert len(combined_events) == 1
-    assert len(combined_events[0]['features'][0]['geometry']['coordinates']) > 2
+    assert len(combined_events[0]['features'][0]
+               ['geometry']['coordinates']) > 2
 
 
 def test_identify_overlapping_features_valid():
@@ -156,3 +160,14 @@ def test_get_distance_ahead_normal_2():
 def test_get_distance_ahead_default():
     actual = attenuator.get_distance_ahead_miles(0, 30*60)
     assert actual == 2.5
+
+
+def test_main():
+    outputPath = './tests/data/output/wzdx_attenuator_combined.json'
+    try:
+        os.remove(outputPath)
+    except Exception:
+        pass
+    attenuator.main(outputPath=outputPath)
+    assert os.path.isfile(outputPath)
+    assert len(json.loads(open(outputPath).read())) == 1

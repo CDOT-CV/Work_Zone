@@ -104,20 +104,6 @@ Example usage:
 python -m wzdx.standard_to_enhanced.icone_translator 'wzdx/sample_files/standard/icone/standard_icone_1245_1633444335.json'
 ```
 
-### Execution for COtrip translator
-
-#### Run the translator script (from Work_Zone)
-
-```
-python -m wzdx.standard_to_enhanced.cotrip_translator inputfile.json --outputFile outputfile.geojson
-```
-
-Example usage:
-
-```
-python -m wzdx.standard_to_enhanced.cotrip_translator 'wzdx/sample_files/raw/cotrip/cotrip_1.json'
-```
-
 ### Execution for NavJoy 568 translator
 
 This translator reads in a NavJoy 568 speed reduction form and translates it into a WZDx message. Many of the 568 messages cover 2 directions of traffic, and are thus expanded into 2 WZDx messages, one for each direction.

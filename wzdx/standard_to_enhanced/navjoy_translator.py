@@ -4,7 +4,7 @@ import json
 import logging
 from datetime import datetime
 import uuid  # This is necessary for unit test mocking
-from ..tools import date_tools, wzdx_translator
+from ..tools import date_tools, wzdx_translator, units
 
 PROGRAM_NAME = 'NavJoy568Translator'
 PROGRAM_VERSION = '1.0'
@@ -171,7 +171,8 @@ def parse_reduction_zone(incident):
 
     # reduced_speed_limit
     if header.get('reduced_speed_limit'):
-        properties['reduced_speed_limit'] = header.get('reduced_speed_limit')
+        properties['reduced_speed_limit_kph'] = units.miles_to_km(
+            header.get('reduced_speed_limit'), 0)
 
     # restrictions
     properties['restrictions'] = []
