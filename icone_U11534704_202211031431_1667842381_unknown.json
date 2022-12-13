@@ -1,0 +1,60 @@
+{
+  "rtdh_timestamp": 1667842380.7929027,
+  "rtdh_message_id": "036ed723-1799-4c37-90f6-7706227c300b",
+  "event": {
+    "type": "CONSTRUCTION",
+    "source": {
+      "id": "U11534704_202211031431",
+      "creation_timestamp": 1667485860000,
+      "last_updated_timestamp": 1667508354000
+    },
+    "geometry": [
+      [
+        -104.8445133,
+        39.703431
+      ],
+      [
+        -104.8445133,
+        39.703431
+      ]
+    ],
+    "header": {
+      "description": "WARNING! Utility Workers Ahead [iCone]",
+      "start_timestamp": 1667485860000,
+      "end_timestamp": 1668447180000
+    },
+    "detail": {
+      "road_name": "225A",
+      "road_number": "225A",
+      "direction": "unknown"
+    },
+    "additional_info": {
+      "devices": [
+        {
+          "sensor_type": "marker",
+          "details": {
+            "@type": "iPin",
+            "@id": "11534704",
+            "@latitude": "39.7034310",
+            "@longitude": "-104.8445133",
+            "status": {
+              "@type": "iPin",
+              "@starttime": "2022-11-01T22:01:40Z",
+              "@verified": "2022-11-03T20:45:54Z",
+              "@state": "ACTIVE"
+            }
+          }
+        }
+      ],
+      "directionality": "ONE_DIRECTION",
+      "route_details_start": {
+        "Route": "225A",
+        "Measure": 7.335,
+        "MMin": 0.0,
+        "MMax": 449.589,
+        "Distance": 1355.35
+      },
+      "route_details_end": null
+    }
+  }
+}

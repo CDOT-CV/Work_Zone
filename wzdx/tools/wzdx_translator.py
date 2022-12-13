@@ -292,3 +292,14 @@ def parse_polyline_from_linestring(poly):
         if len(coords) >= 2 and re.match('^-?([0-9]*[.])?[0-9]+$', coords[0]) and re.match('^-?([0-9]*[.])?[0-9]+$', coords[1]):
             coordinates.append([float(coords[0]), float(coords[1])])
     return coordinates
+
+
+# Remove additional fields added for internal processing, if they are present
+def remove_unnecessary_fields(feature):
+    if 'route_details_start' in feature.get('properties', {}):
+        del feature['properties']['route_details_start']
+    if 'route_details_end' in feature.get('properties', {}):
+        del feature['properties']['route_details_end']
+    if 'condition_1' in feature.get('properties', {}):
+        del feature['properties']['condition_1']
+    return feature

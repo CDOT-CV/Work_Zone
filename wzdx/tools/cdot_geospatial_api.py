@@ -188,3 +188,35 @@ def get_route_between_measures(routeId, startMeasure, endMeasure, compressed=Fal
     return linestring
 
     # RouteBetweenMeasures?routeId=070A&fromMeasure=50&toMeasure=60&outSR=4326&f=pjson
+
+
+def get_route_between_measures_dual_carriageway(routeId, forward, startMeasure, endMeasure, compressed=False):
+    # Get lat/long points between two mile markers on route
+    if forward:
+        routeId = f"{routeId}_dec"
+
+    parameters = []
+    parameters.append(f"routeId={routeId}")
+    parameters.append(f"fromMeasure={startMeasure}")
+    parameters.append(f"toMeasure={endMeasure}")
+    parameters.append(f"outSR={SR}")
+    parameters.append(f"f=pjson")
+
+    url = f"{BASE_URL}/{ROUTE_BETWEEN_MEASURES_API}?{'&'.join(parameters)}"
+    logging.debug(url)
+
+    # call api
+    response = json.loads(requests.get(url).content)
+
+    linestring = []
+    for feature in response.get('features', []):
+        for path in feature.get('geometry', {}).get('paths', []):
+            linestring.extend(path)
+
+    if compressed:
+        linestring = path_history_compression.generate_compressed_path(
+            linestring)
+
+    return linestring
+
+    # RouteBetweenMeasures?routeId=070A&fromMeasure=50&toMeasure=60&outSR=4326&f=pjson

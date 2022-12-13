@@ -24,19 +24,8 @@ def test_valid_info_no_info():
     assert test_validate_info == False
 
 
-def test_valid_info_invalid_info_missing_required_fields_lrs_type():
+def test_valid_info_invalid_info_missing_required_fields_contact_name():
     test_info = {
-        'contact_name': "Heather Pickering-Hilgers",
-        'contact_email': "heather.pickeringhilgers@state.co.us",
-        'publisher': "iCone",
-    }
-    test_validate_info = wzdx_translator.validate_info(test_info)
-    assert test_validate_info == False
-
-
-def test_valid_info_invalid_info_invalid_feed_info_id():
-    test_info = {
-        'contact_name': "Heather Pickering-Hilgers",
         'contact_email': "heather.pickeringhilgers@state.co.us",
         'publisher': "iCone",
     }

@@ -156,14 +156,14 @@ def test_identify_overlapping_features_wzdx_valid_multiple(mock_get_route_detail
 @patch.object(combination, 'get_route_details_for_wzdx', side_effect=[])
 def test_identify_overlapping_features_wzdx_valid_with_routes(mock_get_route_details_for_wzdx):
     wzdx_1 = {'features': [
-        {'properties': {'core_details': {'direction': 'northbound'}}, 'id': 'a'}],
-        'route_details_start': {'Route': 'route_1', 'Measure': 1},
-        'route_details_end': {'Route': 'route_1', 'Measure': 2}}
+        {'properties': {'core_details': {'direction': 'northbound'},
+                        'route_details_start': {'Route': 'route_1', 'Measure': 1},
+                        'route_details_end': {'Route': 'route_1', 'Measure': 2}}, 'id': 'a'}]}
 
     wzdx_2 = {'features': [
-        {'properties': {'core_details': {'direction': 'northbound'}}, 'id': 'a'}],
-        'route_details_start': {'Route': 'route_1', 'Measure': 1.5},
-        'route_details_end': {'Route': 'route_1', 'Measure': 2.5}}
+        {'properties': {'core_details': {'direction': 'northbound'},
+                        'route_details_start': {'Route': 'route_1', 'Measure': 1.5},
+                        'route_details_end': {'Route': 'route_1', 'Measure': 2.5}}, 'id': 'a'}]}
     actual = combination.identify_overlapping_features_wzdx([wzdx_1], [wzdx_2])
     assert len(actual) == 1
 

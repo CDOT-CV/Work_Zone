@@ -87,7 +87,7 @@ def identify_overlapping_features_icone(icone_standard_msgs, wzdx_msgs):
         icone['route_details_start'] = icone['event']['additional_info'].get(
             'route_details_start')
         icone['route_details_end'] = icone['event']['additional_info'].get(
-            'route_details_start')
+            'route_details_end')
         route_details_start, route_details_end = get_route_details_for_icone(
             icone['event']['geometry'])
 
@@ -113,7 +113,7 @@ def identify_overlapping_features_icone(icone_standard_msgs, wzdx_msgs):
         wzdx['route_details_start'] = wzdx['features'][0]['properties'].get(
             'route_details_start')
         wzdx['route_details_end'] = wzdx['features'][0]['properties'].get(
-            'route_details_start')
+            'route_details_end')
         if not wzdx.get('route_details_start') or not wzdx.get('route_details_end'):
             route_details_start, route_details_end = combination.get_route_details_for_wzdx(
                 wzdx['features'][0])

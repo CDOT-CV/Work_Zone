@@ -7,6 +7,7 @@ from unittest.mock import MagicMock, patch
 
 import time_machine
 from wzdx.standard_to_enhanced import planned_events_translator
+from wzdx.tools import wzdx_translator
 
 from tests.data.standard_to_enhanced import planned_events_translator_data
 
@@ -173,7 +174,7 @@ def test_wzdx_creator_road_restriction(mock_dt, mock_dt_3, _):
     with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
         test_wzdx = planned_events_translator.wzdx_creator(standard)
 
-    print(test_wzdx)
+    test_wzdx = wzdx_translator.remove_unnecessary_fields(test_wzdx)
     assert expected_wzdx == test_wzdx
 
 
