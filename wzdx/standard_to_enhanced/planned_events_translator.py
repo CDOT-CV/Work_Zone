@@ -251,6 +251,9 @@ def parse_work_zone(incident):
     # location_method
     properties["location_method"] = "channel-device-method"
 
+    # work_zone_type
+    properties['work_zone_type'] = event.get('work_zone_type', 'static')
+
     # vehicle impact
     lanes = additional_info.get('lanes', [])
     properties['vehicle_impact'] = get_vehicle_impact(lanes)

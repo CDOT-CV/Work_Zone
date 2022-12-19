@@ -174,56 +174,54 @@ def hex_to_binary(hex_string):
 
 
 # TODO: Consider support road closures
-DEFAULT_EVENT_TYPE = ('work-zone', [])
+DEFAULT_EVENT_TYPE = ('work-zone', [], 'static')
 EVENT_TYPE_MAPPING = {
     # Work Zones
-    "Bridge Construction":              ('work-zone', [{'type_name': 'below-road-work',            'is_architectural_change': True}]),
-    "Road Construction":                ('work-zone', [{'type_name': 'roadway-creation',           'is_architectural_change': True}]),
-    "Bridge Maintenance Operations":    ('work-zone', [{'type_name': 'below-road-work',            'is_architectural_change': False}]),
-    "Bridge Repair":                    ('work-zone', [{'type_name': 'below-road-work',            'is_architectural_change': False}]),
-    "Chip Seal Operations":             ('work-zone', [{'type_name': 'minor-road-defect-repair',   'is_architectural_change': False}]),
-    "Concrete Slab Replacement":        ('work-zone', [{'type_name': 'surface-work',               'is_architectural_change': False}]),
-    "Crack Sealing":                    ('work-zone', [{'type_name': 'minor-road-defect-repair',   'is_architectural_change': False}]),
-    "Culvert Maintenance":              ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}]),
-    "Electrical or Lighting":           ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}]),
-    "Emergency Maintenance":            ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}]),
-    "Fiber Optics Installation":        ('work-zone', [{'type_name': 'surface-work',               'is_architectural_change': False}]),
-    "Guardrail":                        ('work-zone', [{'type_name': 'barrier-work',               'is_architectural_change': False}]),
-    "IT or Fiber Optics":               ('work-zone', [{'type_name': 'surface-work',               'is_architectural_change': False}]),
-    "Other":                            ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}]),
-    "Paving Operations":                ('work-zone', [{'type_name': 'surface-work',               'is_architectural_change': True}]),
-    "Road Maintenance Operations":      ('work-zone', [{'type_name': 'surface-work',               'is_architectural_change': False}]),
-    "Rock Work":                        ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}]),
-    "Sign Work":                        ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}]),
-    "Striping Operations":              ('work-zone', [{'type_name': 'painting',                   'is_architectural_change': True}]),
-    "Traffic Sign Installation":        ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}]),
-    "Traffic Sign Maintenance":         ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}]),
-    "Traffic Signal Installation":      ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}]),
-    "Traffic Signal Maintenance":       ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}]),
-    "Tunnel Maintenance":               ('work-zone', [{'type_name': 'surface-work',               'is_architectural_change': False}]),
-    "Utility Work":                     ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}]),
-    "Utility Installation":             ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}]),
-    "Wall Maintenance":                 ('work-zone', [{'type_name': 'barrier-work',               'is_architectural_change': False}]),
-    "Other":                            ('work-zone', []),
+    "Bridge Construction":              ('work-zone', [{'type_name': 'below-road-work',            'is_architectural_change': True}], 'static'),
+    "Road Construction":                ('work-zone', [{'type_name': 'roadway-creation',           'is_architectural_change': True}], 'static'),
+    "Bridge Maintenance Operations":    ('work-zone', [{'type_name': 'below-road-work',            'is_architectural_change': False}], 'static'),
+    "Bridge Repair":                    ('work-zone', [{'type_name': 'below-road-work',            'is_architectural_change': False}], 'static'),
+    "Chip Seal Operations":             ('work-zone', [{'type_name': 'minor-road-defect-repair',   'is_architectural_change': False}], 'static'),
+    "Concrete Slab Replacement":        ('work-zone', [{'type_name': 'surface-work',               'is_architectural_change': False}], 'static'),
+    "Crack Sealing":                    ('work-zone', [{'type_name': 'minor-road-defect-repair',   'is_architectural_change': False}], 'static'),
+    "Culvert Maintenance":              ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}], 'static'),
+    "Electrical or Lighting":           ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}], 'static'),
+    "Emergency Maintenance":            ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}], 'static'),
+    "Fiber Optics Installation":        ('work-zone', [{'type_name': 'surface-work',               'is_architectural_change': False}], 'static'),
+    "Guardrail":                        ('work-zone', [{'type_name': 'barrier-work',               'is_architectural_change': False}], 'static'),
+    "IT or Fiber Optics":               ('work-zone', [{'type_name': 'surface-work',               'is_architectural_change': False}], 'static'),
+    "Paving Operations":                ('work-zone', [{'type_name': 'surface-work',               'is_architectural_change': True}], 'static'),
+    "Road Maintenance Operations":      ('work-zone', [{'type_name': 'surface-work',               'is_architectural_change': False}], 'static'),
+    "Rock Work":                        ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}], 'static'),
+    "Sign Work":                        ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}], 'static'),
+    "Striping Operations":              ('work-zone', [{'type_name': 'painting',                   'is_architectural_change': True}], 'planned-moving-area'),
+    "Traffic Sign Installation":        ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}], 'static'),
+    "Traffic Sign Maintenance":         ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}], 'static'),
+    "Traffic Signal Installation":      ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}], 'static'),
+    "Traffic Signal Maintenance":       ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}], 'static'),
+    "Tunnel Maintenance":               ('work-zone', [{'type_name': 'surface-work',               'is_architectural_change': False}], 'static'),
+    "Utility Work":                     ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}], 'static'),
+    "Utility Installation":             ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}], 'static'),
+    "Wall Maintenance":                 ('work-zone', [{'type_name': 'barrier-work',               'is_architectural_change': False}], 'static'),
 
     # Road Closures
-    "BAN Message":                      ('restriction', []),
-    "Safety Campaign":                  ('restriction', []),
-    "Smoke/Control Burn":               ('restriction', []),
-    "Avalanche Control":                ('restriction', []),
-    "Closed for the Season":            ('restriction', []),
-    "Funeral Procession":               ('restriction', []),
-    "Presidential Visit":               ('restriction', []),
-    "Race Event":                       ('restriction', []),
-    "Local Event":                      ('restriction', []),
-    "Military Movement":                ('restriction', []),
-    "OS/OW Limit":                      ('restriction', []),
+    "BAN Message":                      ('restriction', [], 'static'),
+    "Safety Campaign":                  ('restriction', [], 'static'),
+    "Smoke/Control Burn":               ('restriction', [], 'static'),
+    "Avalanche Control":                ('restriction', [], 'static'),
+    "Closed for the Season":            ('restriction', [], 'static'),
+    "Funeral Procession":               ('restriction', [], 'static'),
+    "Presidential Visit":               ('restriction', [], 'static'),
+    "Race Event":                       ('restriction', [], 'static'),
+    "Local Event":                      ('restriction', [], 'static'),
+    "Military Movement":                ('restriction', [], 'static'),
+    "OS/OW Limit":                      ('restriction', [], 'static'),
+    "Geological Drilling":              ('restriction', [], 'static'),
 
-    # Incidents (work zones)
-    "Emergency Roadwork":               ('work-zone', []),
-    "Maintenance Operations":           ('work-zone', []),
+    # Incidents (work zones): *\(.]n
+    "Emergency Roadwork":               ('work-zone', [], 'static'),
+    "Maintenance Operations":           ('work-zone', [], 'static'),
 }
-
 
 LANE_TYPE_MAPPING = {
     "left shoulder": 'shoulder',
@@ -433,7 +431,7 @@ def create_rtdh_standard_msg(pd, isIncident):
 
             end_date = end_date.replace(second=0, microsecond=0)
 
-        event_type, types_of_work = map_event_type(
+        event_type, types_of_work, work_zone_type = map_event_type(
             pd.get("properties/type", default=""))
 
         restrictions = []
@@ -461,6 +459,7 @@ def create_rtdh_standard_msg(pd, isIncident):
             "event": {
                 "type": event_type,
                 "types_of_work": types_of_work,
+                "work_zone_type": work_zone_type,
                 "source": {
                     "id": pd.get("properties/id", default="") + '_' + direction,
                     "last_updated_timestamp": pd.get('properties/lastUpdated', date_tools.get_unix_from_iso_string, default=0),

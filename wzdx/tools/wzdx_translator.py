@@ -33,6 +33,7 @@ def initialize_feature_properties():
     properties['is_start_position_verified'] = None
     properties['is_end_position_verified'] = None
     properties['location_method'] = None
+    properties['work_zone_type'] = None
     properties['vehicle_impact'] = None
     properties['lanes'] = None
     properties['beginning_cross_street'] = None
