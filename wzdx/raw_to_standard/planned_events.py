@@ -173,7 +173,7 @@ def hex_to_binary(hex_string):
     return bin(int(hex_string, hexidecimal_scale))[2:].zfill(num_of_bits)
 
 
-# TODO: Consider support road closures
+# (event_type, types of work, work_zone_type)
 DEFAULT_EVENT_TYPE = ('work-zone', [], 'static')
 EVENT_TYPE_MAPPING = {
     # Work Zones
