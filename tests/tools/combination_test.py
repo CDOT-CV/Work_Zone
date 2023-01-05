@@ -20,15 +20,19 @@ def test_validate_directionality_wzdx():
 
 
 def test_does_route_overlap_invalid():
-    obj1 = {}
-    obj2 = {}
+    obj1 = {'route_details_start': None,
+            'route_details_end': None}
+    obj2 = {'route_details_start': None,
+            'route_details_end': None}
     actual = combination.does_route_overlap(obj1, obj2)
     assert actual == None
     actual = combination.does_route_overlap(obj2, obj1)
     assert actual == None
 
-    obj1 = {'route_details_start': {'Measure': 1}}
-    obj2 = {}
+    obj1 = {'route_details_start': {'Measure': 1},
+            'route_details_end': None}
+    obj2 = {'route_details_start': None,
+            'route_details_end': None}
     actual = combination.does_route_overlap(obj1, obj2)
     assert actual == None
     actual = combination.does_route_overlap(obj2, obj1)
@@ -36,14 +40,17 @@ def test_does_route_overlap_invalid():
 
     obj1 = {'route_details_start': {'Measure': 1},
             'route_details_end': {'Measure': 2}}
-    obj2 = {}
+    obj2 = {'route_details_start': None,
+            'route_details_end': None}
     actual = combination.does_route_overlap(obj1, obj2)
     assert actual == None
     actual = combination.does_route_overlap(obj2, obj1)
     assert actual == None
 
-    obj1 = {'route_details_end': {'Measure': 2}}
-    obj2 = {}
+    obj1 = {'route_details_start': None,
+            'route_details_end': {'Measure': 2}}
+    obj2 = {'route_details_start': None,
+            'route_details_end': None}
     actual = combination.does_route_overlap(obj1, obj2)
     assert actual == None
     actual = combination.does_route_overlap(obj2, obj1)
@@ -52,80 +59,102 @@ def test_does_route_overlap_invalid():
 
 def test_does_route_overlap_2():
     # -------------------- Valid Equal --------------------
-    obj1 = {'route_details_start': {'Measure': 1}}
-    obj2 = {'route_details_start': {'Measure': 1}}
+    obj1 = {'route_details_start': {'Measure': 1},
+            'route_details_end': None}
+    obj2 = {'route_details_start': {'Measure': 1},
+            'route_details_end': None}
     actual = combination.does_route_overlap(obj1, obj2)
     assert actual == True
     actual = combination.does_route_overlap(obj2, obj1)
     assert actual == True
 
-    obj1 = {'route_details_start': {'Measure': 1}}
-    obj2 = {'route_details_end': {'Measure': 1}}
+    obj1 = {'route_details_start': {'Measure': 1},
+            'route_details_end': None}
+    obj2 = {'route_details_start': None,
+            'route_details_end': {'Measure': 1}}
     actual = combination.does_route_overlap(obj1, obj2)
     assert actual == True
     actual = combination.does_route_overlap(obj2, obj1)
     assert actual == True
 
-    obj1 = {'route_details_end': {'Measure': 1}}
-    obj2 = {'route_details_end': {'Measure': 1}}
+    obj1 = {'route_details_start': None,
+            'route_details_end': {'Measure': 1}}
+    obj2 = {'route_details_start': None,
+            'route_details_end': {'Measure': 1}}
     actual = combination.does_route_overlap(obj1, obj2)
     assert actual == True
     actual = combination.does_route_overlap(obj2, obj1)
     assert actual == True
 
     # -------------------- Valid Edge of Range --------------------
-    obj1 = {'route_details_start': {'Measure': 1}}
-    obj2 = {'route_details_start': {'Measure': 1.24}}
+    obj1 = {'route_details_start': {'Measure': 1},
+            'route_details_end': None}
+    obj2 = {'route_details_start': {'Measure': 1.24},
+            'route_details_end': None}
     actual = combination.does_route_overlap(obj1, obj2)
     assert actual == True
     actual = combination.does_route_overlap(obj2, obj1)
     assert actual == True
 
-    obj1 = {'route_details_start': {'Measure': 1}}
-    obj2 = {'route_details_end': {'Measure': 1.24}}
+    obj1 = {'route_details_start': {'Measure': 1},
+            'route_details_end': None}
+    obj2 = {'route_details_start': None,
+            'route_details_end': {'Measure': 1.24}}
     actual = combination.does_route_overlap(obj1, obj2)
     assert actual == True
     actual = combination.does_route_overlap(obj2, obj1)
     assert actual == True
 
-    obj1 = {'route_details_start': {'Measure': 1.24}}
-    obj2 = {'route_details_end': {'Measure': 1}}
+    obj1 = {'route_details_start': {'Measure': 1.24},
+            'route_details_end': None}
+    obj2 = {'route_details_start': None,
+            'route_details_end': {'Measure': 1}}
     actual = combination.does_route_overlap(obj1, obj2)
     assert actual == True
     actual = combination.does_route_overlap(obj2, obj1)
     assert actual == True
 
-    obj1 = {'route_details_end': {'Measure': 1}}
-    obj2 = {'route_details_end': {'Measure': 1.24}}
+    obj1 = {'route_details_start': None,
+            'route_details_end': {'Measure': 1}}
+    obj2 = {'route_details_start': None,
+            'route_details_end': {'Measure': 1.24}}
     actual = combination.does_route_overlap(obj1, obj2)
     assert actual == True
     actual = combination.does_route_overlap(obj2, obj1)
     assert actual == True
 
     # -------------------- Invalid Edge of Range --------------------
-    obj1 = {'route_details_start': {'Measure': 1}}
-    obj2 = {'route_details_start': {'Measure': 1.26}}
+    obj1 = {'route_details_start': {'Measure': 1},
+            'route_details_end': None}
+    obj2 = {'route_details_start': {'Measure': 1.26},
+            'route_details_end': None}
     actual = combination.does_route_overlap(obj1, obj2)
     assert actual == False
     actual = combination.does_route_overlap(obj2, obj1)
     assert actual == False
 
-    obj1 = {'route_details_start': {'Measure': 1}}
-    obj2 = {'route_details_end': {'Measure': 1.26}}
+    obj1 = {'route_details_start': {'Measure': 1},
+            'route_details_end': None}
+    obj2 = {'route_details_start': None,
+            'route_details_end': {'Measure': 1.26}}
     actual = combination.does_route_overlap(obj1, obj2)
     assert actual == False
     actual = combination.does_route_overlap(obj2, obj1)
     assert actual == False
 
-    obj1 = {'route_details_start': {'Measure': 1.26}}
-    obj2 = {'route_details_end': {'Measure': 1}}
+    obj1 = {'route_details_start': {'Measure': 1.26},
+            'route_details_end': None}
+    obj2 = {'route_details_start': None,
+            'route_details_end': {'Measure': 1}}
     actual = combination.does_route_overlap(obj1, obj2)
     assert actual == False
     actual = combination.does_route_overlap(obj2, obj1)
     assert actual == False
 
-    obj1 = {'route_details_end': {'Measure': 1}}
-    obj2 = {'route_details_end': {'Measure': 1.26}}
+    obj1 = {'route_details_start': None,
+            'route_details_end': {'Measure': 1}}
+    obj2 = {'route_details_start': None,
+            'route_details_end': {'Measure': 1.26}}
     actual = combination.does_route_overlap(obj1, obj2)
     assert actual == False
     actual = combination.does_route_overlap(obj2, obj1)
@@ -136,7 +165,8 @@ def test_does_route_overlap_3():
     # -------------------- Valid --------------------
     obj1 = {'route_details_start': {'Measure': 1},
             'route_details_end': {'Measure': 2}}
-    obj2 = {'route_details_start': {'Measure': 1}}
+    obj2 = {'route_details_start': {'Measure': 1},
+            'route_details_end': None}
     actual = combination.does_route_overlap(obj1, obj2)
     assert actual == True
     actual = combination.does_route_overlap(obj2, obj1)
@@ -144,7 +174,8 @@ def test_does_route_overlap_3():
 
     obj1 = {'route_details_start': {'Measure': 1},
             'route_details_end': {'Measure': 2}}
-    obj2 = {'route_details_end': {'Measure': 1}}
+    obj2 = {'route_details_start': None,
+            'route_details_end': {'Measure': 1}}
     actual = combination.does_route_overlap(obj1, obj2)
     assert actual == True
     actual = combination.does_route_overlap(obj2, obj1)
@@ -152,7 +183,8 @@ def test_does_route_overlap_3():
 
     obj1 = {'route_details_start': {'Measure': 1},
             'route_details_end': {'Measure': 2}}
-    obj2 = {'route_details_start': {'Measure': 1.5}}
+    obj2 = {'route_details_start': {'Measure': 1.5},
+            'route_details_end': None}
     actual = combination.does_route_overlap(obj1, obj2)
     assert actual == True
     actual = combination.does_route_overlap(obj2, obj1)
@@ -160,7 +192,8 @@ def test_does_route_overlap_3():
 
     obj1 = {'route_details_start': {'Measure': 1},
             'route_details_end': {'Measure': 2}}
-    obj2 = {'route_details_end': {'Measure': 1.5}}
+    obj2 = {'route_details_start': None,
+            'route_details_end': {'Measure': 1.5}}
     actual = combination.does_route_overlap(obj1, obj2)
     assert actual == True
     actual = combination.does_route_overlap(obj2, obj1)
@@ -169,7 +202,8 @@ def test_does_route_overlap_3():
     # -------------------- Invalid --------------------
     obj1 = {'route_details_start': {'Measure': 1},
             'route_details_end': {'Measure': 2}}
-    obj2 = {'route_details_start': {'Measure': 2.5}}
+    obj2 = {'route_details_start': {'Measure': 2.5},
+            'route_details_end': None}
     actual = combination.does_route_overlap(obj1, obj2)
     assert actual == False
     actual = combination.does_route_overlap(obj2, obj1)
@@ -177,7 +211,8 @@ def test_does_route_overlap_3():
 
     obj1 = {'route_details_start': {'Measure': 1},
             'route_details_end': {'Measure': 2}}
-    obj2 = {'route_details_end': {'Measure': 2.5}}
+    obj2 = {'route_details_start': None,
+            'route_details_end': {'Measure': 2.5}}
     actual = combination.does_route_overlap(obj1, obj2)
     assert actual == False
     actual = combination.does_route_overlap(obj2, obj1)
@@ -185,7 +220,8 @@ def test_does_route_overlap_3():
 
     obj1 = {'route_details_start': {'Measure': 1},
             'route_details_end': {'Measure': 2}}
-    obj2 = {'route_details_start': {'Measure': 0.5}}
+    obj2 = {'route_details_start': {'Measure': 0.5},
+            'route_details_end': None}
     actual = combination.does_route_overlap(obj1, obj2)
     assert actual == False
     actual = combination.does_route_overlap(obj2, obj1)
@@ -193,7 +229,8 @@ def test_does_route_overlap_3():
 
     obj1 = {'route_details_start': {'Measure': 1},
             'route_details_end': {'Measure': 2}}
-    obj2 = {'route_details_end': {'Measure': 0.5}}
+    obj2 = {'route_details_start': None,
+            'route_details_end': {'Measure': 0.5}}
     actual = combination.does_route_overlap(obj1, obj2)
     assert actual == False
     actual = combination.does_route_overlap(obj2, obj1)

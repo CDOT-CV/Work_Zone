@@ -20,7 +20,7 @@
     "detail": {
       "road_name": null,
       "road_number": null,
-      "direction": "northbound"
+      "direction": "unknown"
     },
     "additional_info": {
       "devices": [

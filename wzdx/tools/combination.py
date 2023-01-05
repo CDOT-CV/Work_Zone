@@ -13,36 +13,49 @@ def validate_directionality_wzdx(wzdx_1, wzdx_2):
 
 
 def does_route_overlap(obj1, obj2):
-    start_1_m = min(obj1.get('route_details_start', {}).get('Measure', -1),
-                    obj1.get('route_details_end', {}).get('Measure', -1))
-    end_1_m = max(obj1.get('route_details_start', {}).get('Measure', -1),
-                  obj1.get('route_details_end', {}).get('Measure', -1))
-    start_2_m = min(obj2.get('route_details_start', {}).get('Measure', -1),
-                    obj2.get('route_details_end', {}).get('Measure', -1))
-    end_2_m = max(obj2.get('route_details_start', {}).get('Measure', -1),
-                  obj2.get('route_details_end', {}).get('Measure', -1))
-
     number_valid_1 = 0
-    number_valid_1 += 1 if start_1_m != -1 else 0
-    number_valid_1 += 1 if end_1_m != -1 else 0
+    number_valid_1 += 1 if obj1['route_details_start'] else 0
+    number_valid_1 += 1 if obj1['route_details_end'] else 0
 
     number_valid_2 = 0
-    number_valid_2 += 1 if start_2_m != -1 else 0
-    number_valid_2 += 1 if end_2_m != -1 else 0
+    number_valid_2 += 1 if obj2['route_details_start'] else 0
+    number_valid_2 += 1 if obj2['route_details_end'] else 0
+
+    print(number_valid_1, number_valid_2)
 
     if number_valid_1 == 0 or number_valid_2 == 0:
         return None
     elif number_valid_1 == 1 and number_valid_2 == 1:
-        individual_valid_1 = start_1_m if start_1_m != -1 else end_1_m
-        individual_valid_2 = start_2_m if start_2_m != -1 else end_2_m
+        individual_valid_1 = obj1['route_details_start']['Measure'] if obj1[
+            'route_details_start'] else obj1['route_details_end']['Measure']
+        individual_valid_2 = obj2['route_details_start']['Measure'] if obj2[
+            'route_details_start'] else obj2['route_details_end']['Measure']
         return does_route_overlap_2(individual_valid_1, individual_valid_2)
     elif number_valid_1 == 2 and number_valid_2 == 1:
-        individual_valid_2 = start_2_m if start_2_m != -1 else end_2_m
+        start_1_m = min(obj1['route_details_start']['Measure'],
+                        obj1['route_details_end']['Measure'])
+        end_1_m = max(obj1['route_details_start']['Measure'],
+                      obj1['route_details_end']['Measure'])
+        individual_valid_2 = obj2['route_details_start']['Measure'] if obj2[
+            'route_details_start'] else obj2['route_details_end']['Measure']
         return does_route_overlap_3(start_1_m, end_1_m, individual_valid_2)
     elif number_valid_1 == 1 and number_valid_2 == 2:
-        individual_valid_1 = start_1_m if start_1_m != -1 else end_1_m
+        start_2_m = min(obj2['route_details_start']['Measure'],
+                        obj2['route_details_end']['Measure'])
+        end_2_m = max(obj2['route_details_start']['Measure'],
+                      obj2['route_details_end']['Measure'])
+        individual_valid_1 = obj1['route_details_start']['Measure'] if obj1[
+            'route_details_start'] else obj1['route_details_end']['Measure']
         return does_route_overlap_3(start_2_m, end_2_m, individual_valid_1)
     else:
+        start_1_m = min(obj1['route_details_start']['Measure'],
+                        obj1['route_details_end']['Measure'])
+        end_1_m = max(obj1['route_details_start']['Measure'],
+                      obj1['route_details_end']['Measure'])
+        start_2_m = min(obj2['route_details_start']['Measure'],
+                        obj2['route_details_end']['Measure'])
+        end_2_m = max(obj2['route_details_start']['Measure'],
+                      obj2['route_details_end']['Measure'])
         return does_route_overlap_4(start_1_m, end_1_m, start_2_m, end_2_m)
 
 
