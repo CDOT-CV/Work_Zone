@@ -2,6 +2,9 @@ import logging
 from . import cdot_geospatial_api
 
 
+ROUTE_OVERLAP_INDIVIDUAL_DISTANCE = 0.25
+
+
 def validate_directionality_wzdx(wzdx_1, wzdx_2):
     direction_1 = wzdx_1['features'][0]['properties']['core_details']['direction']
     direction_2 = wzdx_2['features'][0]['properties']['core_details']['direction']
@@ -10,21 +13,55 @@ def validate_directionality_wzdx(wzdx_1, wzdx_2):
 
 
 def does_route_overlap(obj1, obj2):
-    start_1_m = min(obj1['route_details_start']['Measure'],
-                    obj1['route_details_end']['Measure'])
-    end_1_m = max(obj1['route_details_start']['Measure'],
-                  obj1['route_details_end']['Measure'])
-    start_2_m = min(obj2['route_details_start']['Measure'],
-                    obj2['route_details_end']['Measure'])
-    end_2_m = max(obj2['route_details_start']['Measure'],
-                  obj2['route_details_end']['Measure'])
-    if start_2_m > start_1_m and start_2_m < end_1_m:
+    start_1_m = min(obj1.get('route_details_start', {}).get('Measure', -1),
+                    obj1.get('route_details_end', {}).get('Measure', -1))
+    end_1_m = max(obj1.get('route_details_start', {}).get('Measure', -1),
+                  obj1.get('route_details_end', {}).get('Measure', -1))
+    start_2_m = min(obj2.get('route_details_start', {}).get('Measure', -1),
+                    obj2.get('route_details_end', {}).get('Measure', -1))
+    end_2_m = max(obj2.get('route_details_start', {}).get('Measure', -1),
+                  obj2.get('route_details_end', {}).get('Measure', -1))
+
+    number_valid_1 = 0
+    number_valid_1 += 1 if start_1_m != -1 else 0
+    number_valid_1 += 1 if end_1_m != -1 else 0
+
+    number_valid_2 = 0
+    number_valid_2 += 1 if start_2_m != -1 else 0
+    number_valid_2 += 1 if end_2_m != -1 else 0
+
+    if number_valid_1 == 0 or number_valid_2 == 0:
+        return None
+    elif number_valid_1 == 1 and number_valid_2 == 1:
+        individual_valid_1 = start_1_m if start_1_m != -1 else end_1_m
+        individual_valid_2 = start_2_m if start_2_m != -1 else end_2_m
+        return does_route_overlap_2(individual_valid_1, individual_valid_2)
+    elif number_valid_1 == 2 and number_valid_2 == 1:
+        individual_valid_2 = start_2_m if start_2_m != -1 else end_2_m
+        return does_route_overlap_3(start_1_m, end_1_m, individual_valid_2)
+    elif number_valid_1 == 1 and number_valid_2 == 2:
+        individual_valid_1 = start_1_m if start_1_m != -1 else end_1_m
+        return does_route_overlap_3(start_2_m, end_2_m, individual_valid_1)
+    else:
+        return does_route_overlap_4(start_1_m, end_1_m, start_2_m, end_2_m)
+
+
+def does_route_overlap_2(mm1, mm2):
+    return abs(mm1 - mm2) <= ROUTE_OVERLAP_INDIVIDUAL_DISTANCE
+
+
+def does_route_overlap_3(start_1_m, end_1_m, mm2):
+    return mm2 >= start_1_m and mm2 <= end_1_m
+
+
+def does_route_overlap_4(start_1_m, end_1_m, start_2_m, end_2_m):
+    if start_2_m >= start_1_m and start_2_m <= end_1_m:
         # Start of route 2 in route 1
         return True
-    elif end_2_m > start_1_m and end_2_m < end_1_m:
+    elif end_2_m >= start_1_m and end_2_m <= end_1_m:
         # End of route 2 in route 1
         return True
-    elif start_2_m < start_1_m and end_2_m > end_1_m:
+    elif end_2_m >= end_1_m and start_2_m <= start_1_m:
         # Route 2 goes over route 1
         return True
     else:
