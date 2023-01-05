@@ -11,6 +11,12 @@ The Google CloudPlatform deployment is outlined below.
 
 This project is also a full python package hosted on [pypi](https://pypi.org/project/wzdx-translator-jacob6838/)
 
+```
+stuff.js
+|- public
+   |- stuff.js
+```
+
 ## Installation
 
 ```

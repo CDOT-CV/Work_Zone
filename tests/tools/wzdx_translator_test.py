@@ -45,7 +45,7 @@ def test_parse_xml():
 # --------------------------------------------------------------------------------unit test for validate_wzdx function--------------------------------------------------------------------------------
 def test_validate_wzdx_valid_wzdx_data():
     test_schema = json.loads(
-        open('wzdx/sample_files/validation_schema/work_zone_feed_v41.json').read())
+        open('wzdx/sample_files/validation_schema/work_zone_feed_v42.json').read())
     validate_write = wzdx_translator.validate_wzdx(
         wzdx_translator_data.test_validate_wzdx_valid_wzdx_data, test_schema)
     assert validate_write == True
@@ -53,7 +53,7 @@ def test_validate_wzdx_valid_wzdx_data():
 
 def test_validate_wzdx_invalid_location_method_wzdx_data():
     test_schema = json.loads(
-        open('wzdx/sample_files/validation_schema/work_zone_feed_v41.json').read())
+        open('wzdx/sample_files/validation_schema/work_zone_feed_v42.json').read())
     invalid_write = wzdx_translator.validate_wzdx(
         wzdx_translator_data.test_validate_wzdx_invalid_location_method, test_schema)
     assert invalid_write == False
@@ -69,7 +69,7 @@ def test_validate_wzdx_no_schema():
 def test_validate_wzdx_no_wzdx_data():
     test_wzdx_data = {}
     test_schema = json.loads(
-        open('wzdx/sample_files/validation_schema/work_zone_feed_v41.json').read())
+        open('wzdx/sample_files/validation_schema/work_zone_feed_v42.json').read())
     validate_write = wzdx_translator.validate_wzdx(
         test_wzdx_data, test_schema)
     assert validate_write == False

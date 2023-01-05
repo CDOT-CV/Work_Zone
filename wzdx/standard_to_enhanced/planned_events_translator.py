@@ -5,7 +5,7 @@ import logging
 import copy
 import uuid
 
-from ..sample_files.validation_schema import work_zone_feed_v41, road_restriction_v40_feed
+from ..sample_files.validation_schema import work_zone_feed_v42, road_restriction_v40_feed
 
 from ..tools import date_tools, wzdx_translator, uuid_tools
 
@@ -23,7 +23,7 @@ def main():
     except:
         event_type = 'work-zone'
     schemas = {
-        'work-zone': work_zone_feed_v41.wzdx_v41_schema_string,
+        'work-zone': work_zone_feed_v42.wzdx_v42_schema_string,
         'restriction': road_restriction_v40_feed.road_restriction_v40_schema_string
     }
 
