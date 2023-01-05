@@ -6,9 +6,9 @@ import os.path
 
 def test_get_combined_events_valid():
     navjoy_msgs = [json.loads(
-        open('./tests/data/experimental_combination/navjoy/wzdx_navjoy_1.json').read())]
+        open('./tests/data/experimental_combination/navjoy/wzdx_navjoy.json').read())]
     wzdx = [json.loads(
-        open('./tests/data/experimental_combination/navjoy/wzdx_1.json').read())]
+        open('./tests/data/experimental_combination/navjoy/wzdx.json').read())]
 
     expected = navjoy.get_combined_events(navjoy_msgs, wzdx)
     assert len(expected) == 1

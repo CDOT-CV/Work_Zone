@@ -10,5 +10,4 @@ Output Message : WZDx message Generation Output
 
 validation_schema : wzdx schema(from specification)
 
-- wzdx_v4.0_feed.json
 - work_zone_feed_v41.json
