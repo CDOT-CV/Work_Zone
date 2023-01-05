@@ -15,9 +15,7 @@ def compare_lists(list1, list2):
         if i in l2:
             l2.remove(i)
         else:
-            print(i)
             remaining = True
-    print(l2)
     return not remaining and len(l2) == 0
 
 
@@ -439,7 +437,4 @@ def test_generate_standard_messages_from_string(mockuuid):
     for i in expected:
         del i['rtdh_timestamp']
         del i['event']['source']['last_updated_timestamp']
-    # actual_standard = [dict(x) for x in actual_standard]
-    print(actual_standard)
-    print(expected)
     assert compare_lists(actual_standard, expected)

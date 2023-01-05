@@ -329,8 +329,11 @@ def test_get_improved_geometry(mock1, mock2, mock3):
     id = 'id'
 
     expected = [[2, 3], [0, 1]]
+    
+
+    route_details = {'Route': 'Route', 'Measure': 'Measure'}
 
     actual = planned_events.get_improved_geometry(
-        coordinates, event_status, id)
+        coordinates, event_status, route_details, route_details, id)
 
     assert actual == expected

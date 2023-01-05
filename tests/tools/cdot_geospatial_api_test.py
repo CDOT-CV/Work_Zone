@@ -11,15 +11,15 @@ def test_get_route_details():
 
 
 def test_get_route_and_measure():
-    expected = {'Route': '159A', 'MMin': 0, 'MMax': 33.84,
-                'Measure': 17.595, 'Distance': 0.89}
+    expected = {'Route': '159A', 'MMin': 0.0, 'MMax': 33.84,
+                'Measure': 17.597, 'Distance': 0.89}
     pos = (37.1957245, -105.428146)
     assert cdot_geospatial_api.get_route_and_measure(pos) == expected
 
 
 def test_get_route_and_measure_heading():
-    expected = {'Route': '159A', 'MMin': 0, 'MMax': 33.84,
-                'Measure': 17.595, 'Distance': 0.89, 'Direction': '-'}
+    expected = {'Route': '159A', 'MMin': 0.0, 'MMax': 33.84,
+                'Measure': 17.597, 'Distance': 0.89, 'Direction': '-'}
     pos = (37.1957245, -105.428146)
     assert cdot_geospatial_api.get_route_and_measure(pos, 225) == expected
 

@@ -35,6 +35,8 @@ def test_parse_work_zone_linestring(mock_dt, mock_dt_3):
     expected_feature = planned_events_translator_data.test_parse_work_zone_linestring_expected
 
     test_feature = planned_events_translator.parse_work_zone(standard)
+    test_feature = wzdx_translator.remove_unnecessary_fields_feature(
+        test_feature)
 
     assert test_feature == expected_feature
 
@@ -152,6 +154,7 @@ def test_wzdx_creator(mock_dt, mock_dt_3, _):
 
     with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
         test_wzdx = planned_events_translator.wzdx_creator(standard)
+    test_wzdx = wzdx_translator.remove_unnecessary_fields(test_wzdx)
     assert expected_wzdx == test_wzdx
 
 

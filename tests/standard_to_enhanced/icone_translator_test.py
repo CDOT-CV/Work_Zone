@@ -7,6 +7,7 @@ from unittest.mock import Mock, patch
 import time_machine
 import xmltodict
 from wzdx.standard_to_enhanced import icone_translator
+from wzdx.tools import wzdx_translator
 
 from tests.data.standard_to_enhanced import icone_translator_data
 
@@ -89,6 +90,9 @@ def test_wzdx_creator_invalid_info_object():
                 "road_name": "I-75 N",
                 "road_number": "I-75 N",
                 "direction": "northbound"
+            },
+            "additional_info": {
+
             }
         }
     }
@@ -171,6 +175,7 @@ def test_wzdx_creator(mockuuid):
 
     with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
         test_wzdx = icone_translator.wzdx_creator(icone_obj)
+    test_wzdx = wzdx_translator.remove_unnecessary_fields(test_wzdx)
     assert expected_wzdx == test_wzdx
 
 

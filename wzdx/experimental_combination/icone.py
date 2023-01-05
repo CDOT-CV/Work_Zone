@@ -166,8 +166,6 @@ def identify_overlapping_features_icone(icone_standard_msgs, wzdx_msgs):
                 if combination.does_route_overlap(match_icone, match_wzdx) and validate_directionality_wzdx_icone(match_icone, match_wzdx):
                     matching_routes.append((match_icone, match_wzdx))
 
-    print(matching_routes)
-
     return matching_routes
 
 
