@@ -26,7 +26,6 @@ REVERSED_DIRECTION_MAP = {'northbound': 'southbound', 'southbound': 'northbound'
 
 WORK_ZONE_INCIDENT_TYPES = {
     "Maintenance Operations":   {"Traffic": True},
-    "Other":                    {"Environmental": True},
     "Emergency Roadwork":       {"Traffic": True},
 }
 INCIDENT_ID_REGEX = "^OpenTMS-Incident"

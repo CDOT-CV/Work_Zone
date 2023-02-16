@@ -164,7 +164,7 @@ def initialize_wzdx_object(info):
     wzd = {}
     wzd['feed_info'] = {}
     wzd['feed_info']['publisher'] = info.get('publisher')
-    wzd['feed_info']['version'] = '4.1'
+    wzd['feed_info']['version'] = '4.2'
     wzd['feed_info']['license'] = "https://creativecommons.org/publicdomain/zero/1.0/"
 
     data_source = {}
