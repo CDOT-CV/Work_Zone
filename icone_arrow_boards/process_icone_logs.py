@@ -6,8 +6,8 @@ segments = []
 start_time = None
 end_time = None
 prevID = None
-dir = '2022_11_08'
-file_name = 'icone_log_20221108-094339'
+dir = '2023_01_22'
+file_name = 'icone_log_20230122-223231'
 with open(f'./{dir}/{file_name}.txt', 'r') as f:
     for line in f.readlines():
         items = line.strip('\n').split('; ')
@@ -24,8 +24,9 @@ with open(f'./{dir}/{file_name}.txt', 'r') as f:
             continue
         info = items[1].split(', ')
         currentID = info[0].split(': ')[-1].split('_')[0][1:]
-        state = info[2].split(': ')[-1][2:-1]
-        coordinates = info[4].split(': ')[-1].split(',')
+        # print("Info", info, info[2].split(': ')[-1])
+        state = info[2].split(': ')[-1]
+        coordinates = info[3].split(': ')[-1].split(',')
 
         if prevID:
             print("APPENDING")
@@ -45,7 +46,7 @@ with open(f'./{dir}/{file_name}.txt', 'r') as f:
         prevID = currentID
 
 results = {'start_time': start_time, 'end_time': end_time, 'results': segments}
-print(json.dumps(results, indent=2))
+# print(json.dumps(results, indent=2))
 print(f'./{dir}/{file_name}.json')
 with open(f'./{dir}/{file_name}.json', 'w') as f:
     f.write(json.dumps(results, indent=2))

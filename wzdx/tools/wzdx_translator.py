@@ -7,7 +7,7 @@ import string
 import uuid
 from collections import OrderedDict
 from datetime import datetime
-from ..sample_files.validation_schema import work_zone_feed_v41
+from ..sample_files.validation_schema import work_zone_feed_v42
 
 import jsonschema
 import xmltodict
@@ -33,6 +33,7 @@ def initialize_feature_properties():
     properties['is_start_position_verified'] = None
     properties['is_end_position_verified'] = None
     properties['location_method'] = None
+    properties['work_zone_type'] = None
     properties['vehicle_impact'] = None
     properties['lanes'] = None
     properties['beginning_cross_street'] = None
@@ -71,7 +72,7 @@ def parse_xml_to_dict(xml_string):
     return d
 
 
-def validate_wzdx(wzdx_obj, wzdx_schema=work_zone_feed_v41.wzdx_v41_schema_string):
+def validate_wzdx(wzdx_obj, wzdx_schema=work_zone_feed_v42.wzdx_v42_schema_string):
     if not wzdx_schema or not wzdx_obj:
         return False
     try:
@@ -163,7 +164,7 @@ def initialize_wzdx_object(info):
     wzd = {}
     wzd['feed_info'] = {}
     wzd['feed_info']['publisher'] = info.get('publisher')
-    wzd['feed_info']['version'] = '4.1'
+    wzd['feed_info']['version'] = '4.2'
     wzd['feed_info']['license'] = "https://creativecommons.org/publicdomain/zero/1.0/"
 
     data_source = {}

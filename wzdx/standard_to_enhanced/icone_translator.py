@@ -4,7 +4,7 @@ import json
 import logging
 import copy
 import uuid
-from ..sample_files.validation_schema import work_zone_feed_v41
+from ..sample_files.validation_schema import work_zone_feed_v42
 
 from ..tools import date_tools, wzdx_translator, geospatial_tools
 
@@ -242,16 +242,7 @@ def parse_incident(incident):
     core_details['road_names'] = road_names
 
     # direction
-    for road_name in road_names:
-        direction = wzdx_translator.parse_direction_from_street_name(road_name)
-        if direction:
-            break
-    if not direction:
-        direction = geospatial_tools.get_road_direction_from_coordinates(
-            geometry.get('coordinates'))
-    if not direction:
-        direction = 'unknown'
-    core_details['direction'] = direction
+    core_details['direction'] = detail.get('direction')
 
     # relationship
     core_details['related_road_events'] = []

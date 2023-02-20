@@ -16,7 +16,20 @@ import re
 # And the R1 Maintenance TMA: (operations M-F, sometimes on the weekends if needed)
 # 13632785 00512  - SH 83 from MM 74 to MM 62 and I25 MM 194 to 208
 
-IDS = ['13632784', '13632786', '13632785']
+# ['13632784', '13632786', '13632785']
+IDS = ['13632527', '13632530', '13632531', '13632528']
+# attributes:
+# OBJECTID: 1
+# Route: 025A
+# Measure: 268.233
+# Distance: 13.12
+# MMin: 0
+# MMax: 385.223
+# geometry:
+# Point:
+# X: -105.00125899599999
+# Y: 40.563891316000024
+
 #      U13632281_202210250517
 ICONE_USERNAME = os.getenv('ICONE_USERNAME', 'cdot')
 ICONE_FILE_PATH = os.getenv('ICONE_FILE_PATH', 'incidents-extended.xml')

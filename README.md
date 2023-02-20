@@ -4,12 +4,18 @@ Work zone code and documentation for WZDx, iCone, etc.
 
 ## Project Description
 
-This is an open source, proof of concept solution for translating work zone data in the form of CDOT Planned Events to the standardized WZDx 4.0 format, as well as having additional translators to translate COtrip/Salesforce, iCone, and NavJOY messages to the WZDx 4.0 format. This project was developed for CDOT. A unique translator has been developed for each of these message types. These translators read in the source message, parse out specific fields, and generate a WZDx message. For more information on these message formats and the data mappings between these messages and the WZDx format, see the [documentation](wzdx/docs). sample_files are located [here](wzdx/sample_files). All these translators are built to run from the command line and from GCP Dataflows, hosted within the CDOT OIM WZDX environment, connected to the RTDH (real time data hub).
+This is an open source, proof of concept solution for translating work zone data in the form of CDOT Planned Events to the standardized WZDx 4.2 format, as well as having additional translators to translate COtrip/Salesforce, iCone, and NavJOY messages to the WZDx 4.2 format. This project was developed for CDOT. A unique translator has been developed for each of these message types. These translators read in the source message, parse out specific fields, and generate a WZDx message. For more information on these message formats and the data mappings between these messages and the WZDx format, see the [documentation](wzdx/docs). sample_files are located [here](wzdx/sample_files). All these translators are built to run from the command line and from GCP Dataflows, hosted within the CDOT OIM WZDX environment, connected to the RTDH (real time data hub).
 
 The Google CloudPlatform deployment is outlined below.
 ![GCP Processing](wzdx/docs/CDOT%20WZDx%20translators%20-%20Planned%20Events.png)
 
 This project is also a full python package hosted on [pypi](https://pypi.org/project/wzdx-translator-jacob6838/)
+
+```
+stuff.js
+|- public
+   |- stuff.js
+```
 
 ## Installation
 
