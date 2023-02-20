@@ -9,9 +9,9 @@ ISO_8601_FORMAT_STRING = "%Y-%m-%dT%H:%M:%SZ"
 
 
 def main(outputPath='./tests/data/output/wzdx_navjoy_combined.json'):
-    with open('./wzdx/sample_files/raw/geotab_avl/geotab_test.json') as f:
+    with open('./wzdx/sample_files/raw/geotab_avl/attenuator_combination_geotab.json') as f:
         geotab_avl = [json.loads(f.read())]
-    with open('./wzdx/sample_files/enhanced/version_4_1.json') as f:
+    with open('./wzdx/sample_files/enhanced/attenuator/attenuator_combination_wzdx.json') as f:
         wzdx = [json.loads(f.read())]
 
     combined_events = get_combined_events(geotab_avl, wzdx)

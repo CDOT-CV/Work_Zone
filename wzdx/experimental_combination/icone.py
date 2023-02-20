@@ -9,22 +9,10 @@ from ..tools import combination, wzdx_translator, geospatial_tools, cdot_geospat
 ISO_8601_FORMAT_STRING = "%Y-%m-%dT%H:%M:%SZ"
 
 
-def main():
-    with open('./wzdx/sample_files/raw/geotab_avl/geotab_all.json') as f:
-        geotab_avl = json.loads(f.read())
-    with open('./wzdx/sample_files/enhanced/wzdx/wzdx_all.json') as f:
-        wzdx = json.loads(f.read())
-
-    combined_events = get_combined_events(geotab_avl, wzdx)
-
-    with open('./wzdx/sample_files/enhanced/wzdx/wzdx_combined.json', 'w+') as f:
-        f.write(json.dumps(combined_events, indent=2))
-
-
 def main(outputPath='./tests/data/output/wzdx_icone_combined.json'):
-    with open('./wzdx/sample_files/standard/icone/geotab_all.json') as f:
+    with open('./wzdx/sample_files/standard/icone/standard_icone_combination.json') as f:
         icone = json.loads(f.read())
-    with open('./wzdx/sample_files/enhanced/wzdx/version_4_1.json') as f:
+    with open('./wzdx/sample_files/enhanced/attenuator/attenuator_combination_wzdx.json') as f:
         wzdx = json.loads(f.read())
 
     combined_events = get_combined_events([icone], [wzdx])
@@ -63,6 +51,9 @@ def combine_icone_with_wzdx(icone_standard, wzdx_wzdx):
     combined_event['features'][0]['properties']['core_details']['description'] += ' ' + \
         icone_standard['event']['header']['description']
 
+    combined_event['features'][0]['properties']['core_details']['update_date'] = date_tools.get_iso_string_from_datetime(
+        datetime.now())
+
     for i in ['route_details_start', 'route_details_end']:
         if i in combined_event:
             del combined_event[i]
@@ -85,8 +76,9 @@ def get_route_details_for_icone(coordinates):
 def validate_directionality_wzdx_icone(icone, wzdx):
     direction_1 = icone['event']['detail']['direction']
     direction_2 = wzdx['features'][0]['properties']['core_details']['direction']
+    print(direction_1, direction_2)
 
-    return direction_1 == None or direction_1 == direction_2
+    return direction_1 in [None, 'unknown', 'undefined'] or direction_1 == direction_2
 
 
 def identify_overlapping_features_icone(icone_standard_msgs, wzdx_msgs):
@@ -102,13 +94,16 @@ def identify_overlapping_features_icone(icone_standard_msgs, wzdx_msgs):
             'route_details_end')
         route_details_start, route_details_end = get_route_details_for_icone(
             icone['event']['geometry'])
+        print('icone', route_details_start, route_details_end)
 
-        if not route_details_start or not route_details_end:
+        if not route_details_start:
             logging.info(
                 f"No geotab route info for feature {icone['event']['source']['id']}")
             continue
         icone['route_details_start'] = route_details_start
         icone['route_details_end'] = route_details_end
+
+        print('icone', route_details_start, route_details_end)
 
         if icone['route_details_end'] and route_details_start['Route'] != route_details_end['Route']:
             logging.info(
@@ -136,6 +131,7 @@ def identify_overlapping_features_icone(icone_standard_msgs, wzdx_msgs):
                 continue
             wzdx['route_details_start'] = route_details_start
             wzdx['route_details_end'] = route_details_end
+            print('wzdx', route_details_start, route_details_end)
         else:
             route_details_start = wzdx['route_details_start']
             route_details_end = wzdx['route_details_end']
@@ -163,10 +159,11 @@ def identify_overlapping_features_icone(icone_standard_msgs, wzdx_msgs):
 
         for match_icone in matching_icone_routes:
             for match_wzdx in wzdx_matched_msgs:
+                print(combination.does_route_overlap(match_icone, match_wzdx),
+                      validate_directionality_wzdx_icone(match_icone, match_wzdx))
                 if combination.does_route_overlap(match_icone, match_wzdx) and validate_directionality_wzdx_icone(match_icone, match_wzdx):
-                    matching_routes.append((match_icone, match_wzdx))
 
-    print(matching_routes)
+                    matching_routes.append((match_icone, match_wzdx))
 
     return matching_routes
 

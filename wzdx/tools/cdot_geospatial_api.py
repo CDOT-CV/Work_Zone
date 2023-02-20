@@ -5,7 +5,7 @@ import requests
 
 from ..tools import geospatial_tools, path_history_compression
 
-BASE_URL = "https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded"
+BASE_URL = "https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes_withDEC/MapServer/exts/CdotLrsAccessRounded"
 ROUTE_BETWEEN_MEASURES_API = "RouteBetweenMeasures"
 GET_ROUTE_AND_MEASURE_API = "MeasureAtPoint"
 GET_POINT_AT_MEASURE_API = "PointAtMeasure"

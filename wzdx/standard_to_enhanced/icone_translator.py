@@ -219,7 +219,7 @@ def parse_incident(incident):
     source = event.get('source')
     header = event.get('header')
     detail = event.get('detail')
-    additional_info = event.get('additional_info')
+    additional_info = event.get('additional_info', {})
 
     geometry = {}
     geometry['type'] = "LineString"

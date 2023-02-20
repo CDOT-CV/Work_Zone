@@ -1,0 +1,52 @@
+{
+  "rtdh_timestamp": 1657663329.0570855,
+  "rtdh_message_id": "9a9f11a8-a18a-4eca-8dbd-abaa0389b151",
+  "event": {
+    "type": "CONSTRUCTION",
+    "source": {
+      "id": "U13631863_202207122128",
+      "creation_timestamp": 1657661280000,
+      "last_updated_timestamp": 1657662180000
+    },
+    "geometry": [
+      [-107.4024748, 38.4230042],
+      [-107.4024748, 38.4230042]
+    ],
+    "header": {
+      "description": "Roadwork - Caution [iCone]",
+      "start_timestamp": 1657661280000,
+      "end_timestamp": 1658268129057
+    },
+    "detail": {
+      "road_name": null,
+      "road_number": null,
+      "direction": "unknown"
+    },
+    "additional_info": {
+      "devices": [
+        {
+          "sensor_type": "display",
+          "details": {
+            "@type": "AB",
+            "@id": "13631863",
+            "@latitude": "39.7793359",
+            "@longitude": "-104.9217209",
+            "message": {
+              "@verified": "2022-07-12T21:43:00Z",
+              "@indicator": "Caution",
+              "@latitude": "39.7793632",
+              "@longitude": "-104.9216512"
+            },
+            "status": {
+              "@type": "Arrow Panel",
+              "@starttime": "2022-07-12T21:28:00Z",
+              "@verified": "2022-07-12T21:43:00Z",
+              "@state": "Caution - Bar"
+            }
+          }
+        }
+      ],
+      "directionality": "ONE_DIRECTION"
+    }
+  }
+}

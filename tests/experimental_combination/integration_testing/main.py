@@ -45,7 +45,7 @@ except:
 
 
 def get_wzdx():
-    return [json.loads(open('./tests/data/wzdx_1.json').read())]
+    return [json.loads(open('./tests/data/wzdx.json').read())]
 
     query = _datastore_client.query(
         namespace='rtdh_cache_latest', kind='RTDHCache')
@@ -117,7 +117,7 @@ def combine_experimental_feed(wzdx, wzdx_exp):
 
 def get_experimental_icone(wzdx):
     icone_msgs = [json.loads(
-        open('./tests/data/icone_standard_1.json').read())]
+        open('./tests/data/icone_standard.json').read())]
     # icone_msgs = get_icone()
     open('wzdx_icone.json', 'w').write(json.dumps(icone_msgs, default=str))
     return icone.get_combined_events(icone_msgs, wzdx)
@@ -131,7 +131,7 @@ def get_experimental_navjoy(wzdx):
 
 
 def get_experimental_atma(wzdx):
-    geotab_msgs = json.loads(open('./tests/data/geotab_msgs_1.json').read())
+    geotab_msgs = json.loads(open('./tests/data/geotab_msgs_single.json').read())
     # geotab_msgs = get_geotab.get_recent_geotab(
     #     GEOTAB_AUTOMATED_ATTENUATOR_IDS, QUERY_INTERVAL_MINUTES, _bigquery_client)
     # l.info(f"Grabbed attenuator messages: {len(geotab_msgs)}")

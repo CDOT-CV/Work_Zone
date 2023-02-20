@@ -14,7 +14,7 @@ test_parse_reduction_zone_linestring_standard = {
         'header': {
             'description': 'Maintenance for lane expansion',
             'justification': 'Lane expansion - maintenance work',
-            'reduced_speed_limit_kph': 72,
+            'reduced_speed_limit': 45,
             'start_timestamp': 1630290600000,
             'end_timestamp': 1630290600000
         },
@@ -45,7 +45,8 @@ test_parse_reduction_zone_linestring_expected_feature = {
         'is_start_position_verified': False,
         'is_end_position_verified': False,
         "vehicle_impact": "all-lanes-open",
-        "reduced_speed_limit_kph": 72,
+        "location_method": "channel-device-method",
+        "reduced_speed_limit_kph": 72.0,
         'types_of_work': [{'type_name': 'surface-work',
                            'is_architectural_change': True}],
     },
@@ -80,7 +81,7 @@ test_wzdx_creator_standard = {
         'header': {
             'description': 'Maintenance for lane expansion',
             'justification': 'Lane expansion - maintenance work',
-            'reduced_speed_limit_kph': 72,
+            'reduced_speed_limit': 45,
             'start_timestamp': 1630290600000,
             'end_timestamp': 1630290600000
         },
@@ -126,7 +127,8 @@ test_wzdx_creator_expected_wzdx = {
                     'description': 'Maintenance for lane expansion. Lane expansion - maintenance work',
                     'update_date': "2021-12-07T10:05:01Z"
                 },
-                'reduced_speed_limit_kph': 72,
+                'location_method': 'channel-device-method',
+                'reduced_speed_limit_kph': 72.0,
                 'start_date': "2021-08-30T02:30:00Z",
                 'end_date': "2021-08-30T02:30:00Z",
                 'is_start_date_verified': False,

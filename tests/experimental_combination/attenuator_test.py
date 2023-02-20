@@ -28,8 +28,9 @@ def test_validate_directionality_invalid():
 
 
 def test_get_combined_events_valid():
-    geotab_msgs = json.loads(open('./tests/data/geotab_msgs_1.json').read())
-    wzdx_msgs = [json.loads(open('./tests/data/wzdx_1.json').read())]
+    geotab_msgs = json.loads(
+        open('./tests/data/geotab_msgs_single.json').read())
+    wzdx_msgs = [json.loads(open('./tests/data/wzdx.json').read())]
     combined_events = attenuator.get_combined_events(
         geotab_msgs, wzdx_msgs)
 
@@ -39,8 +40,9 @@ def test_get_combined_events_valid():
 
 
 def test_get_combined_events_valid_multiple():
-    geotab_msgs = json.loads(open('./tests/data/geotab_msgs_2.json').read())
-    wzdx_msgs = [json.loads(open('./tests/data/wzdx_1.json').read())]
+    geotab_msgs = json.loads(
+        open('./tests/data/geotab_msgs_double.json').read())
+    wzdx_msgs = [json.loads(open('./tests/data/wzdx.json').read())]
 
     combined_events = attenuator.get_combined_events(
         geotab_msgs, wzdx_msgs)

@@ -216,7 +216,6 @@ def initialize_wzdx_object_restriction(info):
         data_source['update_frequency'] = info.get('datafeed_frequency_update')
     data_source['update_date'] = datetime.utcnow().strftime(
         "%Y-%m-%dT%H:%M:%SZ")
-    data_source['location_method'] = info.get('wz_location_method')
     wzd['feed_info']['data_sources'] = [data_source]
 
     wzd['type'] = 'FeatureCollection'
@@ -296,7 +295,19 @@ def parse_polyline_from_linestring(poly):
 
 
 # Remove additional fields added for internal processing, if they are present
-def remove_unnecessary_fields(feature):
+def remove_unnecessary_fields(wzdx):
+    for feature in wzdx['features']:
+        if 'route_details_start' in feature.get('properties', {}):
+            del feature['properties']['route_details_start']
+        if 'route_details_end' in feature.get('properties', {}):
+            del feature['properties']['route_details_end']
+        if 'condition_1' in feature.get('properties', {}):
+            del feature['properties']['condition_1']
+    return wzdx
+
+
+# Remove additional fields added for internal processing, if they are present
+def remove_unnecessary_fields_feature(feature):
     if 'route_details_start' in feature.get('properties', {}):
         del feature['properties']['route_details_start']
     if 'route_details_end' in feature.get('properties', {}):

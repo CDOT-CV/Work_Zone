@@ -77,7 +77,7 @@ def parse_reduction_zone(incident):
     source = event.get('source')
     header = event.get('header')
     detail = event.get('detail')
-    additional_info = event.get('additional_info')
+    additional_info = event.get('additional_info', {})
 
     geometry = {}
     geometry['type'] = "LineString"
@@ -173,6 +173,9 @@ def parse_reduction_zone(incident):
     if header.get('reduced_speed_limit'):
         properties['reduced_speed_limit_kph'] = units.miles_to_km(
             header.get('reduced_speed_limit'), 0)
+
+    # location_method
+    properties['location_method'] = "channel-device-method"
 
     # restrictions
     properties['restrictions'] = []
