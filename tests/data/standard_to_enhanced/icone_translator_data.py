@@ -1,20 +1,20 @@
 test_wzdx_creator_expected = {
-    'road_event_feed_info': {
+    'feed_info': {
         'update_date': '2021-04-13T00:00:00Z',
         'publisher': 'CDOT',
-        'contact_name': 'Ashley Nylen',
-        'contact_email': 'ashley.nylen@state.co.us',
+        'contact_name': 'Heather Pickering-Hilgers',
+        'contact_email': 'heather.pickeringhilgers@state.co.us',
         'update_frequency': 300,
-        'version': '4.0',
+        'version': '4.1',
         'license': 'https://creativecommons.org/publicdomain/zero/1.0/',
-        'data_sources': [
-            {'data_source_id': 'w',
-             'organization_name': 'CDOT',
-             'contact_name': 'Ashley Nylen',
-             'contact_email': 'ashley.nylen@state.co.us',
-             'update_date': '2021-04-13T00:00:00Z',
-             'update_frequency': 300}
-        ]
+        'data_sources': [{
+            'data_source_id': 'w',
+            'organization_name': 'CDOT',
+            'contact_name': 'Heather Pickering-Hilgers',
+            'contact_email': 'heather.pickeringhilgers@state.co.us',
+            'update_date': '2021-04-13T00:00:00Z',
+            'update_frequency': 300
+        }]
     },
     'type': 'FeatureCollection',
     'features': [
@@ -34,13 +34,13 @@ test_wzdx_creator_expected = {
                             "update_date": "2021-11-05T19:56:03Z",
                         },
                         'start_date': '2021-06-08T20:15:01Z',
-                        'start_date_accuracy': 'estimated',
-                        'end_date_accuracy': 'estimated',
-                        'beginning_accuracy': 'estimated',
-                        'ending_accuracy': 'estimated',
+                        'end_date': '2021-06-08T21:05:01Z',
+                        'is_start_date_verified': False,
+                        'is_end_date_verified': False,
+                        'is_start_position_verified': False,
+                        'is_end_position_verified': False,
                         'location_method': 'channel-device-method',
                         'vehicle_impact': 'all-lanes-open',
-                        'event_status': 'planned',
                     },
             'geometry': {
                         'type': 'LineString',

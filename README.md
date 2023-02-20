@@ -4,12 +4,18 @@ Work zone code and documentation for WZDx, iCone, etc.
 
 ## Project Description
 
-This is an open source, proof of concept solution for translating work zone data in the form of CDOT Planned Events to the standardized WZDx 4.0 format, as well as having additional translators to translate COtrip/Salesforce, iCone, and NavJOY messages to the WZDx 4.0 format. This project was developed for CDOT. A unique translator has been developed for each of these message types. These translators read in the source message, parse out specific fields, and generate a WZDx message. For more information on these message formats and the data mappings between these messages and the WZDx format, see the [documentation](wzdx/docs). sample_files are located [here](wzdx/sample_files). All these translators are built to run from the command line and from GCP Dataflows, hosted within the CDOT OIM WZDX environment, connected to the RTDH (real time data hub).
+This is an open source, proof of concept solution for translating work zone data in the form of CDOT Planned Events to the standardized WZDx 4.2 format, as well as having additional translators to translate COtrip/Salesforce, iCone, and NavJOY messages to the WZDx 4.2 format. This project was developed for CDOT. A unique translator has been developed for each of these message types. These translators read in the source message, parse out specific fields, and generate a WZDx message. For more information on these message formats and the data mappings between these messages and the WZDx format, see the [documentation](wzdx/docs). sample_files are located [here](wzdx/sample_files). All these translators are built to run from the command line and from GCP Dataflows, hosted within the CDOT OIM WZDX environment, connected to the RTDH (real time data hub).
 
 The Google CloudPlatform deployment is outlined below.
 ![GCP Processing](wzdx/docs/CDOT%20WZDx%20translators%20-%20Planned%20Events.png)
 
 This project is also a full python package hosted on [pypi](https://pypi.org/project/wzdx-translator-jacob6838/)
+
+```
+stuff.js
+|- public
+   |- stuff.js
+```
 
 ## Installation
 
@@ -41,11 +47,11 @@ Please set up the following environment variable for your local computer before 
 
 Runtime Environment Variables:
 
-| Name                 |          Value           |                                    Description |
-| :------------------- | :----------------------: | ---------------------------------------------: |
-| contact_name         |       Ashley Nylen       |                      name of WZDx feed contact |
-| contact_email        | ashley.nylen@state.co.us |                     email of WZDx feed contact |
-| issuing_organization |           CDOT           | name of the organization issuing the WZDx feed |
+| Name          |                Value                 |                                    Description |
+| :------------ | :----------------------------------: | ---------------------------------------------: |
+| contact_name  |      Heather Pickering-Hilgers       |                      name of WZDx feed contact |
+| contact_email | heather.pickeringhilgers@state.co.us |                     email of WZDx feed contact |
+| publisher     |                 CDOT                 | name of the organization issuing the WZDx feed |
 
 Example usage:
 for mac computer run the following script to initialize the environment variable:
@@ -102,20 +108,6 @@ Example usage:
 
 ```
 python -m wzdx.standard_to_enhanced.icone_translator 'wzdx/sample_files/standard/icone/standard_icone_1245_1633444335.json'
-```
-
-### Execution for COtrip translator
-
-#### Run the translator script (from Work_Zone)
-
-```
-python -m wzdx.standard_to_enhanced.cotrip_translator inputfile.json --outputFile outputfile.geojson
-```
-
-Example usage:
-
-```
-python -m wzdx.standard_to_enhanced.cotrip_translator 'wzdx/sample_files/raw/cotrip/cotrip_1.json'
 ```
 
 ### Execution for NavJoy 568 translator
@@ -228,8 +220,8 @@ documentation for the included WZDx translator is located here: [docs](wzdx/docs
 
 ## Contact Information
 
-Contact Name: Ashley Nylen
-Contact Information: ashley.nylen@state.co.us
+Contact Name: Heather Pickering-Hilgers
+Contact Information: heather.pickeringhilgers@state.co.us
 
 ## Abbreviations
 

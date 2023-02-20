@@ -521,7 +521,22 @@ test_generate_standard_messages_from_string_expected = [
             "additional_info": {
                 "normal_speed_limit": "45",
                 "mileMarkerStart": "47.25",
-                "mileMarkerEnd": "47.30"
+                "mileMarkerEnd": "47.30",
+                'route_details_start': {
+                    'Route': '085L',
+                    'Measure': 268.058,
+                    'MMin': 0.0,
+                    'MMax': 309.542,
+                    'Distance': 7.03
+                },
+                'route_details_end': {
+                    'Route': '085L',
+                    'Measure': 268.129,
+                    'MMin': 0.0,
+                    'MMax': 309.542,
+                    'Distance': 6.48
+                },
+                'condition_1': False
             }
         }
     },
@@ -560,7 +575,22 @@ test_generate_standard_messages_from_string_expected = [
             "additional_info": {
                 "normal_speed_limit": "45",
                 "mileMarkerStart": "47.25",
-                "mileMarkerEnd": "47.30"
+                "mileMarkerEnd": "47.30",
+                'route_details_start': {
+                    'Route': '085L',
+                    'Measure': 268.129,
+                    'MMin': 0.0,
+                    'MMax': 309.542,
+                    'Distance': 6.48
+                },
+                'route_details_end': {
+                    'Route': '085L',
+                    'Measure': 268.058,
+                    'MMin': 0.0,
+                    'MMax': 309.542,
+                    'Distance': 7.03
+                },
+                'condition_1': False
             }
         }
     },
@@ -599,7 +629,22 @@ test_generate_standard_messages_from_string_expected = [
             "additional_info": {
                 "normal_speed_limit": "45",
                 "mileMarkerStart": "48",
-                "mileMarkerEnd": "50"
+                "mileMarkerEnd": "50",
+                'route_details_start': {
+                    'Route': '085L_DEC',
+                    'Measure': 267.159,
+                    'MMin': 0.0,
+                    'MMax': 309.542,
+                    'Distance': 0.19
+                },
+                'route_details_end': {
+                    'Route': '085L_DEC',
+                    'Measure': 267.771,
+                    'MMin': 0.0,
+                    'MMax': 309.542,
+                    'Distance': 1.54
+                },
+                'condition_1': False
             }
         }
     },
@@ -638,7 +683,22 @@ test_generate_standard_messages_from_string_expected = [
             "additional_info": {
                 "normal_speed_limit": "45",
                 "mileMarkerStart": "48",
-                "mileMarkerEnd": "50"
+                "mileMarkerEnd": "50",
+        'route_details_start': {
+          'Route': '085L_DEC',
+          'Measure': 267.771,
+          'MMin': 0.0,
+          'MMax': 309.542,
+          'Distance': 1.54
+        },
+        'route_details_end': {
+          'Route': '085L_DEC',
+          'Measure': 267.159,
+          'MMin': 0.0,
+          'MMax': 309.542,
+          'Distance': 0.19
+        },
+        'condition_1': False
             }
         }
     }

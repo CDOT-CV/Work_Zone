@@ -7,9 +7,8 @@ import uuid
 import xml.etree.ElementTree as ET
 from collections import OrderedDict
 
-from ..standard_to_enhanced import icone_translator
 from ..tools import (cdot_geospatial_api, date_tools, geospatial_tools,
-                     wzdx_translator)
+                     wzdx_translator, combination)
 from ..util.collections import PathDict
 
 PROGRAM_NAME = 'iConeRawToStandard'
@@ -22,13 +21,29 @@ def main():
     generated_messages = generate_standard_messages_from_string(
         input_file_contents)
 
+    generated_files_list = []
+
     wzdx_msg = {}
     for message in generated_messages:
-        wzdx = icone_translator.wzdx_creator(message)
-        if not wzdx_msg:
-            wzdx_msg = wzdx
-        else:
-            wzdx_msg['features'].extend(wzdx['features'])
+        output_path = f"{output_dir}/icone_{message['event']['source']['id']}_{round(message['rtdh_timestamp'])}_{message['event']['detail']['direction']}.json"
+        open(output_path, 'w+').write(json.dumps(message, indent=2))
+        generated_files_list.append(output_path)
+
+    if generated_files_list:
+        print(
+            f"Successfully generated standard message files: {generated_files_list}")
+    else:
+        logging.warning(
+            "Standard message generation failed. See messages printed above")
+    # for message in generated_messages:
+    #     wzdx = icone_translator.wzdx_creator(message)
+    #     if not wzdx:
+    #         continue
+
+    #     if not wzdx_msg:
+    #         wzdx_msg = wzdx
+    #     else:
+    #         wzdx_msg['features'].extend(wzdx['features'])
 
     output_path = input_file.replace('.xml', '.json')
     open(output_path, 'w+').write(json.dumps(wzdx_msg, indent=2))
@@ -51,9 +66,12 @@ def generate_raw_messages(message):
     # Loop through all elements and print each element to PubSub
     for msg in msg_lst:
         incident = ET.tostring(msg, encoding='utf8')
+        print(incident)
         obj = wzdx_translator.parse_xml_to_dict(incident)
         if validate_incident(obj.get('incident', {})):
             messages.append(incident)
+        else:
+            logging.warn("Invalid message")
 
     return messages
 
@@ -125,8 +143,9 @@ def create_rtdh_standard_msg(pd):
         end_time = end_time.replace(second=0, microsecond=0)
 
     coordinates = pd.get("incident/location/polyline", parse_icone_polyline)
-    route_details_start = get_route_details(coordinates[0])
-    route_details_end = get_route_details(coordinates[-1])
+
+    route_details_start, route_details_end = combination.get_route_details_for_coordinates_lnglat(
+        coordinates)
 
     direction = get_direction(
         pd.get("incident/location/street"), coordinates, route_details_start)
@@ -158,7 +177,10 @@ def create_rtdh_standard_msg(pd):
             },
             "additional_info": {
                 "devices": devices,
-                "directionality": pd.get("incident/location/direction")
+                "directionality": pd.get("incident/location/direction"),
+                "route_details_start": route_details_start,
+                "route_details_end": route_details_end,
+                "condition_1": True,
             }
         }
     }
@@ -166,15 +188,16 @@ def create_rtdh_standard_msg(pd):
 
 def get_direction(street, coords, route_details=None):
     direction = wzdx_translator.parse_direction_from_street_name(street)
-    if not direction and route_details:
+    if (not direction or direction == 'unknown') and route_details:
         direction = get_direction_from_route_details(route_details)
-    if not direction:
+    if not direction or direction == 'unknown':
         direction = geospatial_tools.get_road_direction_from_coordinates(
             coords)
     return direction
 
 
-def get_route_details(latLng):
+def get_route_details(lngLat):
+    latLng = (lngLat[1], lngLat[0])
     return cdot_geospatial_api.get_route_and_measure(latLng)
 
 
@@ -183,7 +206,7 @@ def get_road_name(route_details):
 
 
 def get_direction_from_route_details(route_details):
-    return route_details.get('Direction')
+    return route_details.get('Direction', 'unknown')
 
 
 # function to validate the incident
@@ -214,13 +237,14 @@ def validate_incident(incident):
         logging.warning(
             f'Invalid incident with id = {id}. unable to parse direction from street name or polyline')
         return False
-    required_fields = [location, polyline, coords, street,
+
+    required_fields = [location, polyline, coords,
                        starttime_string, description, creationtime, updatetime]
     for field in required_fields:
         if not field:
             logging.warning(
                 f'''Invalid incident with id = {id}. Not all required fields are present. Required fields are:
-                location, polyline, street, starttime, description, creationtime, and updatetime''')
+                location, polyline, starttime, description, creationtime, and updatetime''')
             return False
 
     start_time = date_tools.parse_datetime_from_iso_string(starttime_string)

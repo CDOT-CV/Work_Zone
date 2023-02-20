@@ -15,40 +15,35 @@ def test_get_road_direction_no_direction():
     ]
     test_direction = geospatial_tools.get_road_direction_from_coordinates(
         test_coordinates)
-    valid_direction = None
-    assert test_direction == valid_direction
+    assert test_direction == 'unknown'
 
 
 def test_get_road_direction_empty_string():
     test_coordinates = ''
     test_direction = geospatial_tools.get_road_direction_from_coordinates(
         test_coordinates)
-    valid_direction = None
-    assert test_direction == valid_direction
+    assert test_direction == 'unknown'
 
 
 def test_get_road_direction_empty_coordinates():
     test_coordinates = []
     test_direction = geospatial_tools.get_road_direction_from_coordinates(
         test_coordinates)
-    valid_direction = None
-    assert test_direction == valid_direction
+    assert test_direction == 'unknown'
 
 
 def test_get_road_direction_short_coordinates():
     test_coordinates = [[], []]
     test_direction = geospatial_tools.get_road_direction_from_coordinates(
         test_coordinates)
-    valid_direction = None
-    assert test_direction == valid_direction
+    assert test_direction == 'unknown'
 
 
 def test_get_road_direction_null_coordinates():
     test_coordinates = None
     test_direction = geospatial_tools.get_road_direction_from_coordinates(
         test_coordinates)
-    valid_direction = None
-    assert test_direction == valid_direction
+    assert test_direction == 'unknown'
 
 
 def test_get_road_direction_northbound_direction():
@@ -185,6 +180,24 @@ def test_get_closest_direction_from_bearing_all_southbound():
     for i in range(-269, -90):  # skips -90
         assert geospatial_tools.get_closest_direction_from_bearing(
             i, 'northbound') == 'southbound'
+
+
+def test_get_closest_direction_from_bearing_all_eastbound():
+    for i in range(1, 180):  # skips 270
+        assert geospatial_tools.get_closest_direction_from_bearing(
+            i, 'eastbound') == 'eastbound'
+    for i in range(-359, -180):  # skips -90
+        assert geospatial_tools.get_closest_direction_from_bearing(
+            i, 'eastbound') == 'eastbound'
+
+
+def test_get_closest_direction_from_bearing_all_westbound():
+    for i in range(181, 360):  # skips -90
+        assert geospatial_tools.get_closest_direction_from_bearing(
+            i, 'eastbound') == 'westbound'
+    for i in range(-179, 0):  # skips -90
+        assert geospatial_tools.get_closest_direction_from_bearing(
+            i, 'eastbound') == 'westbound'
 
 
 def test_getEndPoint():

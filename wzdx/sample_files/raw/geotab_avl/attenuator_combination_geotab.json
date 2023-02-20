@@ -1,0 +1,30 @@
+{
+  "avl_location": {
+    "vehicle": {
+      "id": "bB81",
+      "id2": "G9VP798WCUVX",
+      "fleet": "Heavy",
+      "type": "Attenuator",
+      "sub_type": "Attenuator"
+    },
+    "position": {
+      "latitude": 38.41922898713261,
+      "longitude": -107.397401740424,
+      "bearing": 135,
+      "speed": 0.0,
+      "odometer": null
+    },
+    "confidence": null,
+    "current_status": {
+      "state": "Active",
+      "info": "Parked"
+    },
+    "additional_info": null,
+    "source": {
+      "name": "Geotab",
+      "collection_timestamp": 1649856637.88
+    }
+  },
+  "rtdh_message_id": "226ba23b-bfe0-4f5f-aec3-bf81633a1720",
+  "rtdh_timestamp": 1649856643.0791879
+}

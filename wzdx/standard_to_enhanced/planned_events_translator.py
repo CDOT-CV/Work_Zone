@@ -5,15 +5,12 @@ import logging
 import copy
 import uuid
 
-from ..sample_files.validation_schema import wzdx_v40_feed, road_restriction_v40_feed
+from ..sample_files.validation_schema import work_zone_feed_v42, road_restriction_v40_feed
 
-from ..tools import date_tools, wzdx_translator
+from ..tools import date_tools, wzdx_translator, uuid_tools
 
 PROGRAM_NAME = 'PlannedEventsTranslator'
 PROGRAM_VERSION = '1.0'
-
-
-DEFAULT_PLANNED_EVENTS_FEED_INFO_ID = '49253be7-0c6a-4a65-8113-450f9041f989'
 
 
 def main():
@@ -26,7 +23,7 @@ def main():
     except:
         event_type = 'work-zone'
     schemas = {
-        'work-zone': wzdx_v40_feed.wzdx_v40_schema_string,
+        'work-zone': work_zone_feed_v42.wzdx_v42_schema_string,
         'restriction': road_restriction_v40_feed.road_restriction_v40_schema_string
     }
 
@@ -60,8 +57,7 @@ def wzdx_creator(message, info=None):
 
     # verify info obj
     if not info:
-        info = wzdx_translator.initialize_info(
-            DEFAULT_PLANNED_EVENTS_FEED_INFO_ID)
+        info = wzdx_translator.initialize_info()
     if not wzdx_translator.validate_info(info):
         return None
 
@@ -131,7 +127,7 @@ def parse_road_restriction(incident):
     core_details['road_names'] = road_names
 
     # direction
-    core_details['direction'] = detail.get('direction')
+    core_details['direction'] = detail.get('direction', 'unknown')
 
     # Relationship
     core_details['relationship'] = {}
@@ -154,6 +150,12 @@ def parse_road_restriction(incident):
     # restrictions
     properties['restrictions'] = additional_info.get('restrictions', [])
 
+    properties['route_details_start'] = additional_info.get(
+        'route_details_start')
+    properties['route_details_end'] = additional_info.get('route_details_end')
+
+    properties['condition_1'] = additional_info.get('condition_1', True)
+
     filtered_properties = copy.deepcopy(properties)
 
     for key, value in properties.items():
@@ -164,7 +166,8 @@ def parse_road_restriction(incident):
     feature['type'] = "Feature"
     feature['properties'] = filtered_properties
     feature['geometry'] = geometry
-    feature['id'] = event.get('source', {}).get('id', uuid.uuid4())
+    feature['id'] = uuid_tools.named_uuid_string(
+        event.get('source', {}).get('id', None))
 
     return feature
 
@@ -202,10 +205,13 @@ def parse_work_zone(incident):
     core_details['road_names'] = road_names
 
     # direction
-    core_details['direction'] = detail.get('direction')
+    core_details['direction'] = detail.get('direction', 'unknown')
 
-    # relationship
-    core_details['relationship'] = {}
+    # related_road_events
+    core_details['related_road_events'] = []
+
+    # name
+    core_details['name'] = event.get('source', {}).get('id', None)
 
     # description
     core_details['description'] = header.get('description')
@@ -230,20 +236,23 @@ def parse_work_zone(incident):
     # end_date
     properties['end_date'] = date_tools.get_iso_string_from_datetime(end_time)
 
-    # start_date_accuracy
-    properties['start_date_accuracy'] = "estimated"
+    # is_start_date_verified
+    properties['is_start_date_verified'] = False
 
-    # end_date_accuracy
-    properties['end_date_accuracy'] = "estimated"
+    # is_end_date_verified
+    properties['is_end_date_verified'] = False
 
-    # beginning_accuracy
-    properties['beginning_accuracy'] = "estimated"
+    # is_start_position_verified
+    properties['is_start_position_verified'] = False
 
-    # ending_accuracy
-    properties['ending_accuracy'] = "estimated"
+    # is_end_position_verified
+    properties['is_end_position_verified'] = False
 
     # location_method
     properties["location_method"] = "channel-device-method"
+
+    # work_zone_type
+    properties['work_zone_type'] = event.get('work_zone_type', 'static')
 
     # vehicle impact
     lanes = additional_info.get('lanes', [])
@@ -264,12 +273,8 @@ def parse_work_zone(incident):
     properties['beginning_milepost'] = additional_info.get(
         'beginning_milepost')
 
-    # start_date_accuracy
+    # ending_milepost
     properties['ending_milepost'] = additional_info.get('ending_milepost')
-
-    # event status
-    properties['event_status'] = date_tools.get_event_status(
-        start_time, end_time)
 
     # type_of_work
     # maintenance, minor-road-defect-repair, roadside-work, overhead-work, below-road-work, barrier-work, surface-work, painting, roadway-relocation, roadway-creation
@@ -282,18 +287,27 @@ def parse_work_zone(incident):
     # restrictions
     properties['restrictions'] = additional_info.get('restrictions', [])
 
+    properties['route_details_start'] = additional_info.get(
+        'route_details_start')
+    properties['route_details_end'] = additional_info.get('route_details_end')
+
+    properties['condition_1'] = additional_info.get('condition_1', True)
+
     filtered_properties = copy.deepcopy(properties)
 
+    INVALID_PROPERTIES = [None, '', []]
+
     for key, value in properties.items():
-        if not value:
+        if value in INVALID_PROPERTIES:
             del filtered_properties[key]
 
     for key, value in properties['core_details'].items():
-        if not value and key not in ['data_source_id']:
+        if value in INVALID_PROPERTIES and key not in ['data_source_id']:
             del filtered_properties['core_details'][key]
 
     feature = {}
-    feature['id'] = event.get('source', {}).get('id', uuid.uuid4())
+    feature['id'] = uuid_tools.named_uuid_string(
+        event.get('source', {}).get('id', None))
     feature['type'] = "Feature"
     feature['properties'] = filtered_properties
     feature['geometry'] = geometry

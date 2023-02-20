@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "properties": {
+    "event": {
+      "properties": {
+        "detail": {
+          "properties": {
+            "direction": {
+              "type": ["string", "null"]
+            },
+            "road_name": {
+              "type": "string"
+            },
+            "road_number": {
+              "type": ["string", "null"]
+            }
+          },
+          "required": ["road_name", "road_number", "direction"],
+          "type": "object"
+        },
+        "geometry": {
+          "items": [
+            {
+              "items": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                }
+              ],
+              "type": "array"
+            }
+          ],
+          "type": "array"
+        },
+        "header": {
+          "properties": {
+            "description": {
+              "type": "string"
+            },
+            "end_timestamp": {
+              "type": ["null", "integer"]
+            },
+            "start_timestamp": {
+              "type": "integer"
+            }
+          },
+          "required": ["description", "start_timestamp", "end_timestamp"],
+          "type": "object"
+        },
+        "source": {
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "last_updated_timestamp": {
+              "type": "integer"
+            }
+          },
+          "required": ["id", "last_updated_timestamp"],
+          "type": "object"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": ["type", "source", "geometry", "header", "detail"],
+      "type": "object"
+    },
+    "rtdh_message_id": {
+      "type": "string"
+    },
+    "rtdh_timestamp": {
+      "type": "number"
+    }
+  },
+  "required": ["rtdh_timestamp", "rtdh_message_id", "event"],
+  "type": "object"
+}

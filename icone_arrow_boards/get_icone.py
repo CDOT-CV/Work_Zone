@@ -3,8 +3,8 @@ import datetime
 import os
 import xmltodict
 
-ICONE_USERNAME = os.getenv('ICONE_USERNAME')
-ICONE_FILE_PATH = os.getenv('ICONE_FILE_PATH')
+ICONE_USERNAME = os.getenv('ICONE_USERNAME', 'cdot')
+ICONE_FILE_PATH = os.getenv('ICONE_FILE_PATH', 'incidents-extended.xml')
 ICONE_PASSWORD = os.getenv('ICONE_PASSWORD')
 
 url = "ftp://{usr}:{pwd}@iconetraffic.com:42663/{path}"

@@ -4,12 +4,10 @@ import json
 import logging
 from datetime import datetime
 import uuid  # This is necessary for unit test mocking
-from ..tools import date_tools, wzdx_translator
+from ..tools import date_tools, wzdx_translator, units
 
 PROGRAM_NAME = 'NavJoy568Translator'
 PROGRAM_VERSION = '1.0'
-
-DEFAULT_NAVJOY_FEED_INFO_ID = '2ed141dc-b998-4f7a-8395-9ae9dc7df2f8'
 
 
 def main():
@@ -21,7 +19,7 @@ def main():
             'Invalid file type. Please specify a valid Json file!') from None
     wzdx_obj = wzdx_creator(navjoy_obj)
 
-    location_schema = 'wzdx/sample_files/validation_schema/wzdx_v3.1_feed.json'
+    location_schema = 'wzdx/sample_files/validation_schema/work_zone_feed_v42.json'
     wzdx_schema = json.loads(open(location_schema).read())
 
     if not wzdx_translator.validate_wzdx(wzdx_obj, wzdx_schema):
@@ -53,7 +51,7 @@ def wzdx_creator(message, info=None):
         return None
    # verify info obj
     if not info:
-        info = wzdx_translator.initialize_info(DEFAULT_NAVJOY_FEED_INFO_ID)
+        info = wzdx_translator.initialize_info()
     if not wzdx_translator.validate_info(info):
         return None
 
@@ -79,6 +77,7 @@ def parse_reduction_zone(incident):
     source = event.get('source')
     header = event.get('header')
     detail = event.get('detail')
+    additional_info = event.get('additional_info', {})
 
     geometry = {}
     geometry['type'] = "LineString"
@@ -99,10 +98,10 @@ def parse_reduction_zone(incident):
     core_details['road_names'] = road_names
 
     # direction
-    core_details['direction'] = detail.get('direction')
+    core_details['direction'] = detail.get('direction', 'unknown')
 
     # Relationship
-    core_details['relationship'] = {}
+    core_details['related_road_events'] = []
 
     # description
     core_details['description'] = header.get(
@@ -129,17 +128,20 @@ def parse_reduction_zone(incident):
     else:
         properties['end_date'] = None
 
-    # start_date_accuracy
-    properties['start_date_accuracy'] = "estimated"
+    # is_start_date_verified
+    properties['is_start_date_verified'] = False
 
-    # end_date_accuracy
-    properties['end_date_accuracy'] = "estimated"
+    # is_end_date_verified
+    properties['is_end_date_verified'] = False
 
-    # beginning_accuracy
-    properties['beginning_accuracy'] = "estimated"
+    # is_start_position_verified
+    properties['is_start_position_verified'] = False
 
-    # ending_accuracy
-    properties['ending_accuracy'] = "estimated"
+    # is_end_position_verified
+    properties['is_end_position_verified'] = False
+
+    # location_method
+    properties["location_method"] = "channel-device-method"
 
     # vehicle impact
     properties['vehicle_impact'] = get_vehicle_impact(
@@ -157,12 +159,8 @@ def parse_reduction_zone(incident):
     # mileposts
     properties['beginning_milepost'] = ""
 
-    # start_date_accuracy
+    # ending_milepost
     properties['ending_milepost'] = ""
-
-    # event status
-    properties['event_status'] = date_tools.get_event_status(
-        start_time, end_time)
 
     # type_of_work
     # maintenance, minor-road-defect-repair, roadside-work, overhead-work, below-road-work, barrier-work, surface-work, painting, roadway-relocation, roadway-creation
@@ -173,15 +171,27 @@ def parse_reduction_zone(incident):
 
     # reduced_speed_limit
     if header.get('reduced_speed_limit'):
-        properties['reduced_speed_limit'] = header.get('reduced_speed_limit')
+        properties['reduced_speed_limit_kph'] = units.miles_to_km(
+            header.get('reduced_speed_limit'), 0)
+
+    # location_method
+    properties['location_method'] = "channel-device-method"
 
     # restrictions
     properties['restrictions'] = []
 
+    properties['route_details_start'] = additional_info.get(
+        'route_details_start')
+    properties['route_details_end'] = additional_info.get('route_details_end')
+
+    properties['condition_1'] = additional_info.get('condition_1', True)
+
     filtered_properties = copy.deepcopy(properties)
 
+    INVALID_PROPERTIES = [None, '', []]
+
     for key, value in properties.items():
-        if not value:
+        if value in INVALID_PROPERTIES:
             del filtered_properties[key]
 
     for key, value in properties['core_details'].items():

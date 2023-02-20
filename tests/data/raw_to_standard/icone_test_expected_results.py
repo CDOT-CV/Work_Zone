@@ -42,6 +42,9 @@ test_generate_standard_messages_from_string_expected = [
                 "direction": "northbound"
             },
             "additional_info": {
+                'condition_1': True,
+                'route_details_end': {},
+                'route_details_start': {},
                 "devices": [
                     {
                         "sensor_type": "sensor",
@@ -325,6 +328,9 @@ test_generate_standard_messages_from_string_expected = [
                 "direction": "southbound"
             },
             "additional_info": {
+                'condition_1': True,
+                'route_details_end': {},
+                'route_details_start': {},
                 "devices": [
                     {
                         "sensor_type": "sensor",

@@ -33,7 +33,7 @@ test_validate_closure_valid_data_input = {
                     "laneCount": 2,
                     "laneClosures": "0",
                     "closedLaneTypes": []
-            }
+                }
         ],
         "routeName": "I-70E",
         "isOversizedLoadsProhibited": True,
@@ -88,7 +88,7 @@ test_validate_closure_missing_required_field_description_input = {
                     "laneCount": 2,
                     "laneClosures": "0",
                     "closedLaneTypes": []
-                }
+                    }
         ],
         "routeName": "I-70E",
         "isOversizedLoadsProhibited": True,
@@ -142,7 +142,7 @@ test_validate_closure_invalid_start_time_input = {
                     "laneCount": 2,
                     "laneClosures": "0",
                     "closedLaneTypes": []
-                }
+                    }
         ],
         "routeName": "I-70E",
         "isOversizedLoadsProhibited": True,
@@ -272,7 +272,7 @@ test_validate_closure_no_coordinates_input = {
                     "laneCount": 2,
                     "laneClosures": "0",
                     "closedLaneTypes": []
-                }
+                    }
         ],
         "routeName": "I-70E",
         "isOversizedLoadsProhibited": True,
@@ -342,6 +342,17 @@ test_generate_standard_messages_from_string_expected = [
                     }
                 ],
                 "restrictions": [{'type': 'permitted-oversize-loads-prohibited'}],
+                'route_details_end': {'Distance': 1.06,
+                                      'MMax': 449.589,
+                                      'MMin': 0.0,
+                                      'Measure': 60.0,
+                                      'Route': '070A'},
+                'route_details_start': {'Distance': 0.91,
+                                        'MMax': 449.589,
+                                        'MMin': 0.0,
+                                        'Measure': 50.0,
+                                        'Route': '070A'},
+                'condition_1': False,
                 "beginning_milepost": 50.0,
                 "ending_milepost": 60.0,
                 "beginning_cross_street": 'Exit 49: CO 65; Grand Mesa (5 miles east of the Palisade area)',

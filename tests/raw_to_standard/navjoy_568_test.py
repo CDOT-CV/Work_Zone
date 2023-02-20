@@ -4,6 +4,19 @@ import uuid
 import argparse
 import json
 from unittest.mock import Mock, patch
+import copy
+
+
+def compare_lists(list1, list2):
+    l1 = copy.deepcopy(list1)
+    l2 = copy.deepcopy(list2)
+    remaining = False
+    for i in l1:
+        if i in l2:
+            l2.remove(i)
+        else:
+            remaining = True
+    return not remaining and len(l2) == 0
 
 
 @patch.object(argparse, 'ArgumentParser')
@@ -153,12 +166,12 @@ def test_get_directions_from_string_valid():
     expected = ['eastbound', 'westbound']
     actual = navjoy_568.get_directions_from_string(directions_string)
 
-    assert actual == expected
+    assert compare_lists(actual, expected)
 
 
 def test_get_directions_from_string_invalid():
     directions_string = ' Easasdt/dWest '
-    expected = []
+    expected = ['undefined']
     actual = navjoy_568.get_directions_from_string(directions_string)
 
     assert actual == expected
@@ -313,7 +326,8 @@ def test_expand_speed_zone_1():
 
     actual = navjoy_568.expand_speed_zone(event)
 
-    assert expected_results.test_expand_speed_zone_1_expected == actual
+    assert compare_lists(
+        expected_results.test_expand_speed_zone_1_expected, actual)
 
 
 def test_expand_speed_zone_2():
@@ -352,7 +366,8 @@ def test_expand_speed_zone_2():
 
     actual = navjoy_568.expand_speed_zone(event)
 
-    assert expected_results.test_expand_speed_zone_2_expected == actual
+    assert compare_lists(
+        expected_results.test_expand_speed_zone_2_expected, actual)
 
 
 # I hate how long this test is, but this is what is has to be to test all 4 at the same time
@@ -403,7 +418,8 @@ def test_expand_speed_zone_2_3_4():
 
     actual = navjoy_568.expand_speed_zone(event)
 
-    assert expected_results.test_expand_speed_zone_2_3_4_expected == actual
+    assert compare_lists(
+        expected_results.test_expand_speed_zone_2_3_4_expected, actual)
 
 
 @patch('uuid.uuid4')
@@ -421,5 +437,4 @@ def test_generate_standard_messages_from_string(mockuuid):
     for i in expected:
         del i['rtdh_timestamp']
         del i['event']['source']['last_updated_timestamp']
-    # actual_standard = [dict(x) for x in actual_standard]
-    assert actual_standard == expected
+    assert compare_lists(actual_standard, expected)
