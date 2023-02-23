@@ -1,5 +1,5 @@
 import logging
-from . import cdot_geospatial_api
+from . import cdot_geospatial_api, date_tools
 
 
 ROUTE_OVERLAP_INDIVIDUAL_DISTANCE = 0.25
@@ -10,6 +10,21 @@ def validate_directionality_wzdx(wzdx_1, wzdx_2):
     direction_2 = wzdx_2['features'][0]['properties']['core_details']['direction']
 
     return direction_1 == direction_2
+
+
+def validate_date_overlap_wzdx(wzdx_1, wzdx_2):
+    start_date_1 = date_tools.get_unix_from_iso_string(
+        wzdx_1['features'][0]['properties']['start_date'])
+    end_date_1 = date_tools.get_unix_from_iso_string(
+        wzdx_1['features'][0]['properties']['end_date'])
+
+    start_date_2 = date_tools.get_unix_from_iso_string(
+        wzdx_2['features'][0]['properties']['start_date'])
+    end_date_2 = date_tools.get_unix_from_iso_string(
+        wzdx_2['features'][0]['properties']['end_date'])
+
+    # return whether the dates overlap
+    return (start_date_1 <= start_date_2 <= end_date_1) or (start_date_2 <= start_date_1 <= end_date_2)
 
 
 def does_route_overlap(obj1, obj2):
@@ -205,7 +220,19 @@ def identify_overlapping_features_wzdx(wzdx_msgs_1, wzdx_msgs_2):
 
         for match_1 in matching_routes_1:
             for match_2 in wzdx_matched_msgs:
-                if does_route_overlap(match_1, match_2) and validate_directionality_wzdx(match_1, match_2):
+                if (does_route_overlap(match_1, match_2) 
+                    and validate_directionality_wzdx(match_1, match_2)
+                    and validate_date_overlap_wzdx(match_1, match_2)):
                     matching_routes.append((match_1, match_2))
 
     return matching_routes
+
+
+def filter_active_wzdx(wzdx):
+    start_date=date_tools.parse_datetime_from_iso_string(
+        wzdx['features'][0]['properties']['start_date'])
+    end_date=date_tools.parse_datetime_from_iso_string(
+        wzdx['features'][0]['properties']['end_date'])
+    event_status=date_tools.get_event_status(
+        start_date, end_date)
+    return event_status == 'active'

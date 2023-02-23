@@ -7,6 +7,8 @@ from ..util.collections import PathDict
 from ..tools import combination, wzdx_translator, geospatial_tools, cdot_geospatial_api, date_tools
 
 ISO_8601_FORMAT_STRING = "%Y-%m-%dT%H:%M:%SZ"
+START_TIME_THRESHOLD_MILLISECONDS = 1000 * 60 * 60 * 24 * 31  # 31 days
+END_TIME_THRESHOLD_MILLISECONDS = 1000 * 60 * 60 * 24 * 31  # 31 days
 
 
 def main(outputPath='./tests/data/output/wzdx_icone_combined.json'):
@@ -79,6 +81,18 @@ def validate_directionality_wzdx_icone(icone, wzdx):
     print(direction_1, direction_2)
 
     return direction_1 in [None, 'unknown', 'undefined'] or direction_1 == direction_2
+
+
+# Filter out iCone and WZDx messages which are not within the time interval
+def validate_dates(icone, wzdx):
+    wzdx_start_date = date_tools.get_unix_from_iso_string(
+        wzdx['features'][0]['properties']['start_date'])
+    wzdx_end_date = date_tools.get_unix_from_iso_string(
+        wzdx['features'][0]['properties']['end_date'])
+    icone_start_date = icone['event']['header']['start_timestamp']
+    icone_end_date = icone['event']['header']['end_timestamp']
+    return (wzdx_start_date - icone_start_date < START_TIME_THRESHOLD_MILLISECONDS
+            and icone_end_date - wzdx_end_date < END_TIME_THRESHOLD_MILLISECONDS)
 
 
 def identify_overlapping_features_icone(icone_standard_msgs, wzdx_msgs):
@@ -160,8 +174,13 @@ def identify_overlapping_features_icone(icone_standard_msgs, wzdx_msgs):
         for match_icone in matching_icone_routes:
             for match_wzdx in wzdx_matched_msgs:
                 print(combination.does_route_overlap(match_icone, match_wzdx),
-                      validate_directionality_wzdx_icone(match_icone, match_wzdx))
-                if combination.does_route_overlap(match_icone, match_wzdx) and validate_directionality_wzdx_icone(match_icone, match_wzdx):
+                      validate_directionality_wzdx_icone(
+                          match_icone, match_wzdx),
+                      validate_dates(match_icone, match_wzdx))
+                # require routes to overlap, directionality to match, and dates to match
+                if (combination.does_route_overlap(match_icone, match_wzdx)
+                        and validate_directionality_wzdx_icone(match_icone, match_wzdx)
+                        and validate_dates(match_icone, match_wzdx)):
 
                     matching_routes.append((match_icone, match_wzdx))
 
