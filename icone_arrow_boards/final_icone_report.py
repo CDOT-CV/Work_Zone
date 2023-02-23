@@ -6,8 +6,8 @@ import json
 
 
 ###################################################################
-############ THIS SCRIPT IS INTENDED TO RUN FROM THE ROOT DIRECTORY 
-############ IT WAS MOVED FOR ORGANIZATION PURPOSES
+# THIS SCRIPT IS INTENDED TO RUN FROM THE ROOT DIRECTORY
+# IT WAS MOVED FOR ORGANIZATION PURPOSES
 ###################################################################
 
 def parse_xml_to_dict(xml_string):
@@ -46,11 +46,11 @@ def check_id(id):
     return id in IDS
 
 
-INITIAL_PATH = "./icone_arrow_boards"
+INITIAL_PATH = "./icone_arrow_boards/gcp_data/month=02/"
 files = [os.path.join(dp, f) for dp, dn, filenames in os.walk(INITIAL_PATH)
          for f in filenames if os.path.splitext(f)[1] == '.xml']
 
-
+print(files)
 # matches = []
 segments = []
 start_time = None
