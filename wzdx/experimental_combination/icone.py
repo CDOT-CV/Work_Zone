@@ -1,10 +1,9 @@
 import json
 from datetime import datetime
 import logging
-import xml.etree.ElementTree as ET
+from datetime import datetime, timedelta
 
-from ..util.collections import PathDict
-from ..tools import combination, wzdx_translator, geospatial_tools, cdot_geospatial_api, date_tools
+from ..tools import combination, wzdx_translator, geospatial_tools, date_tools
 
 ISO_8601_FORMAT_STRING = "%Y-%m-%dT%H:%M:%SZ"
 START_TIME_THRESHOLD_MILLISECONDS = 1000 * 60 * 60 * 24 * 31  # 31 days
@@ -14,8 +13,14 @@ END_TIME_THRESHOLD_MILLISECONDS = 1000 * 60 * 60 * 24 * 31  # 31 days
 def main(outputPath='./tests/data/output/wzdx_icone_combined.json'):
     with open('./wzdx/sample_files/standard/icone/standard_icone_combination.json') as f:
         icone = json.loads(f.read())
+        icone[0]['event']['header']['start_timestamp'] = date_tools.date_to_unix(
+            datetime.now())
     with open('./wzdx/sample_files/enhanced/attenuator/attenuator_combination_wzdx.json') as f:
         wzdx = json.loads(f.read())
+        wzdx[0]['features'][0]['properties']['start_date'] = date_tools.get_iso_string_from_datetime(
+            datetime.now() - timedelta(days=1))
+        wzdx[0]['features'][0]['properties']['end_date'] = date_tools.get_iso_string_from_datetime(
+            datetime.now() + timedelta(days=1))
 
     combined_events = get_combined_events([icone], [wzdx])
 

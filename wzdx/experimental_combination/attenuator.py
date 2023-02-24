@@ -1,6 +1,7 @@
 import json
 from ..tools import cdot_geospatial_api, geospatial_tools, combination, date_tools
 import logging
+from datetime import datetime, timedelta
 
 ATTENUATOR_TIME_AHEAD_SECONDS = 30 * 60
 ISO_8601_FORMAT_STRING = "%Y-%m-%dT%H:%M:%SZ"
@@ -9,8 +10,14 @@ ISO_8601_FORMAT_STRING = "%Y-%m-%dT%H:%M:%SZ"
 def main(outputPath='./tests/data/output/wzdx_attenuator_combined.json'):
     with open('./wzdx/sample_files/raw/geotab_avl/attenuator_combination_geotab.json') as f:
         geotab_avl = [json.loads(f.read())]
+        geotab_avl[0]['avl_location']['source']['collection_timestamp'] = date_tools.date_to_unix(
+            datetime.now())/1000
     with open('./wzdx/sample_files/enhanced/attenuator/attenuator_combination_wzdx.json') as f:
         wzdx = [json.loads(f.read())]
+        wzdx[0]['features'][0]['properties']['start_date'] = date_tools.get_iso_string_from_datetime(
+            datetime.now() - timedelta(days=1))
+        wzdx[0]['features'][0]['properties']['end_date'] = date_tools.get_iso_string_from_datetime(
+            datetime.now() + timedelta(days=1))
 
     combined_events = get_combined_events(geotab_avl, wzdx)
 

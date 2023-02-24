@@ -1,19 +1,26 @@
 import json
-from datetime import datetime
-import logging
 
-from ..tools import combination
+from ..tools import combination, date_tools
+from datetime import datetime, timedelta
 
 ISO_8601_FORMAT_STRING = "%Y-%m-%dT%H:%M:%SZ"
 
 
 def main(outputPath='./tests/data/output/wzdx_navjoy_combined.json'):
     with open('./wzdx/sample_files/enhanced/navjoy/wzdx_2022_11_3.json') as f:
-        navjoy = json.loads(f.read())
+        navjoy = [json.loads(f.read())]
+        navjoy[0]['features'][0]['properties']['start_date'] = date_tools.get_iso_string_from_datetime(
+            datetime.now() - timedelta(days=1))
+        navjoy[0]['features'][0]['properties']['end_date'] = date_tools.get_iso_string_from_datetime(
+            datetime.now() + timedelta(days=1))
     with open('./wzdx/sample_files/enhanced/planned_events/wzdx_2022_11_3.json') as f:
-        wzdx = json.loads(f.read())
+        wzdx = [json.loads(f.read())]
+        wzdx[0]['features'][0]['properties']['start_date'] = date_tools.get_iso_string_from_datetime(
+            datetime.now() - timedelta(days=2))
+        wzdx[0]['features'][0]['properties']['end_date'] = date_tools.get_iso_string_from_datetime(
+            datetime.now() + timedelta(days=2))
 
-    combined_events = get_combined_events([navjoy], [wzdx])
+    combined_events = get_combined_events(navjoy, wzdx)
 
     with open(outputPath, 'w+') as f:
         f.write(json.dumps(combined_events, indent=2))

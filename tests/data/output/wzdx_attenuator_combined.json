@@ -36,8 +36,8 @@
             "description": "Between County Road 66 and County Road 25 (2 to 6 miles east of Blue Mesa Summit) from Mile Point 123 to Mile Point 127. Road construction. Alternating traffic. Width limit in effect. Width limit 10'0\". Starting tomorrow at 8:30AM MDT until tomorrow at about 5:30PM MDT.",
             "update_date": "2022-03-21T21:57:31Z"
           },
-          "start_date": "2022-07-22T14:30:00Z",
-          "end_date": "2022-08-22T23:30:00Z",
+          "start_date": "2023-02-23T00:51:38Z",
+          "end_date": "2023-02-25T00:51:38Z",
           "is_start_date_verified": false,
           "is_end_date_verified": false,
           "is_start_position_verified": false,
@@ -60,7 +60,22 @@
             }
           ],
           "beginning_milepost": 124.9,
-          "ending_milepost": 127.01
+          "ending_milepost": 127.01,
+          "route_details_start": {
+            "Route": "050A_DEC",
+            "Measure": 124.9,
+            "MMin": 0.0,
+            "MMax": 314.598,
+            "Distance": 1.93
+          },
+          "route_details_end": {
+            "Route": "050A_DEC",
+            "Measure": 127.01,
+            "MMin": 0.0,
+            "MMax": 314.598,
+            "Distance": 0.74
+          },
+          "condition_1": true
         },
         "geometry": {
           "type": "LineString",
