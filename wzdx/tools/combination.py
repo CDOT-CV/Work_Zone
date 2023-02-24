@@ -36,8 +36,6 @@ def does_route_overlap(obj1, obj2):
     number_valid_2 += 1 if obj2['route_details_start'] else 0
     number_valid_2 += 1 if obj2['route_details_end'] else 0
 
-    print(number_valid_1, number_valid_2)
-
     if number_valid_1 == 0 or number_valid_2 == 0:
         return None
     elif number_valid_1 == 1 and number_valid_2 == 1:

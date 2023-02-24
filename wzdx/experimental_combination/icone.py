@@ -83,7 +83,6 @@ def get_route_details_for_icone(coordinates):
 def validate_directionality_wzdx_icone(icone, wzdx):
     direction_1 = icone['event']['detail']['direction']
     direction_2 = wzdx['features'][0]['properties']['core_details']['direction']
-    print(direction_1, direction_2)
 
     return direction_1 in [None, 'unknown', 'undefined'] or direction_1 == direction_2
 
@@ -113,7 +112,6 @@ def identify_overlapping_features_icone(icone_standard_msgs, wzdx_msgs):
             'route_details_end')
         route_details_start, route_details_end = get_route_details_for_icone(
             icone['event']['geometry'])
-        print('icone', route_details_start, route_details_end)
 
         if not route_details_start:
             logging.debug(
@@ -121,8 +119,6 @@ def identify_overlapping_features_icone(icone_standard_msgs, wzdx_msgs):
             continue
         icone['route_details_start'] = route_details_start
         icone['route_details_end'] = route_details_end
-
-        print('icone', route_details_start, route_details_end)
 
         if icone['route_details_end'] and route_details_start['Route'] != route_details_end['Route']:
             logging.debug(
@@ -150,7 +146,6 @@ def identify_overlapping_features_icone(icone_standard_msgs, wzdx_msgs):
                 continue
             wzdx['route_details_start'] = route_details_start
             wzdx['route_details_end'] = route_details_end
-            print('wzdx', route_details_start, route_details_end)
         else:
             route_details_start = wzdx['route_details_start']
             route_details_end = wzdx['route_details_end']
@@ -178,10 +173,6 @@ def identify_overlapping_features_icone(icone_standard_msgs, wzdx_msgs):
 
         for match_icone in matching_icone_routes:
             for match_wzdx in wzdx_matched_msgs:
-                print(combination.does_route_overlap(match_icone, match_wzdx),
-                      validate_directionality_wzdx_icone(
-                          match_icone, match_wzdx),
-                      validate_dates(match_icone, match_wzdx))
                 # require routes to overlap, directionality to match, and dates to match
                 if (combination.does_route_overlap(match_icone, match_wzdx)
                         and validate_directionality_wzdx_icone(match_icone, match_wzdx)
