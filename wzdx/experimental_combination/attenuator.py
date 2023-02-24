@@ -47,7 +47,6 @@ def get_combined_events(geotab_msgs, wzdx_msgs):
     for i in identify_overlapping_features(geotab_msgs, active_wzdx_msgs):
         wzdx = combine_geotab_with_wzdx(*i)
         combined_events.append(wzdx)
-    logging.info("combined_events")
     return combined_events
 
 
@@ -64,8 +63,8 @@ def identify_overlapping_features(geotab_msgs, wzdx_msgs):
         geotab_msg['route_details_end'] = None
 
         if not route_details:
-            logging.info(
-                f"No geotab route info for {geotab_msg['rtdh_message_id']}")
+            logging.debug(
+                f"No route details for Geotab object: {geotab_msg['rtdh_message_id']}")
             continue
         if route_details['Route'] in geotab_routes:
             geotab_routes[route_details['Route']].append(geotab_msg)
@@ -80,8 +79,8 @@ def identify_overlapping_features(geotab_msgs, wzdx_msgs):
                 wzdx['features'][0])
 
             if not route_details_start or not route_details_end:
-                logging.info(
-                    f"No geotab route info for feature {wzdx['features'][0]['id']}")
+                logging.debug(
+                    f"Missing route_details for WZDx object: {wzdx['features'][0]['id']}")
                 continue
             wzdx['route_details_start'] = route_details_start
             wzdx['route_details_end'] = route_details_end
@@ -90,26 +89,24 @@ def identify_overlapping_features(geotab_msgs, wzdx_msgs):
         #     route_details_end = wzdx['route_details_end']
 
         if not wzdx.get('route_details_start'):
-            logging.warn(
-                f"Unable to retrieve start point route details for event {wzdx['features'][0].get('id')}")
+            logging.debug(
+                f"Unable to retrieve start point route details for WZDx event {wzdx['features'][0].get('id')}")
             continue
 
         matching_geotab_routes = geotab_routes.get(
             wzdx['route_details_start']['Route'], [])
         if matching_geotab_routes:
-            logging.info(
+            logging.debug(
                 f"FOUND MATCHING GEOTAB ROUTE FOR {wzdx['features'][0]['id']}")
 
             if not wzdx.get('route_details_end'):
-                logging.warn(
-                    f"Unable to retrieve start point route details for event {wzdx['features'][0].get('id')}")
+                logging.debug(
+                    f"Unable to retrieve start point route details for WZDx event {wzdx['features'][0].get('id')}")
                 continue
             if (wzdx['route_details_start']['Route'] != wzdx['route_details_end']['Route']):
                 continue
 
             for geotab in matching_geotab_routes:
-                logging.debug("Mile markers. geotab: {}, wzdx start: {}, wzdx_end: {}".format(
-                    geotab['route_details_start']['Measure'], wzdx['route_details_start']['Measure'], wzdx['route_details_end']['Measure']))
                 if (combination.does_route_overlap(geotab, wzdx)
                         and validate_directionality(geotab, wzdx)
                         and validate_dates(geotab, wzdx)):

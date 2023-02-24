@@ -156,8 +156,8 @@ def identify_overlapping_features_wzdx(wzdx_msgs_1, wzdx_msgs_2):
                 wzdx_1['features'][0])
 
             if not route_details_start or not route_details_end:
-                logging.info(
-                    f"No geotab route info for feature {wzdx_1['features'][0]['id']}")
+                logging.debug(
+                    f"No route details for WZDx 1 feature {wzdx_1['features'][0]['id']}")
                 continue
             wzdx_1['route_details_start'] = route_details_start
             wzdx_1['route_details_end'] = route_details_end
@@ -166,8 +166,8 @@ def identify_overlapping_features_wzdx(wzdx_msgs_1, wzdx_msgs_2):
             route_details_end = wzdx_1['route_details_end']
 
         if route_details_start['Route'] != route_details_end['Route']:
-            logging.info(
-                f"Mismatched routes for feature {wzdx_1['features'][0]['id']}")
+            logging.debug(
+                f"Mismatched routes for WZDx 1 feature {wzdx_1['features'][0]['id']}")
             continue
 
         if route_details_start['Route'] in wzdx_routes_1:
@@ -186,8 +186,8 @@ def identify_overlapping_features_wzdx(wzdx_msgs_1, wzdx_msgs_2):
                 wzdx_2['features'][0])
 
             if not route_details_start or not route_details_end:
-                logging.info(
-                    f"No geotab route info for feature {wzdx_2['features'][0]['id']}")
+                logging.debug(
+                    f"Missing route details for WZDx 2 feature {wzdx_2['features'][0]['id']}")
                 continue
             wzdx_2['route_details_start'] = route_details_start
             wzdx_2['route_details_end'] = route_details_end
@@ -196,8 +196,8 @@ def identify_overlapping_features_wzdx(wzdx_msgs_1, wzdx_msgs_2):
             route_details_end = wzdx_2['route_details_end']
 
         if route_details_start['Route'] != route_details_end['Route']:
-            logging.info(
-                f"Mismatched routes for feature {wzdx_2['features'][0]['id']}")
+            logging.debug(
+                f"Mismatched routes for WZDx 2 feature {wzdx_2['features'][0]['id']}")
             continue
 
         if route_details_start['Route'] in wzdx_routes_2:
@@ -220,19 +220,19 @@ def identify_overlapping_features_wzdx(wzdx_msgs_1, wzdx_msgs_2):
 
         for match_1 in matching_routes_1:
             for match_2 in wzdx_matched_msgs:
-                if (does_route_overlap(match_1, match_2) 
+                if (does_route_overlap(match_1, match_2)
                     and validate_directionality_wzdx(match_1, match_2)
-                    and validate_date_overlap_wzdx(match_1, match_2)):
+                        and validate_date_overlap_wzdx(match_1, match_2)):
                     matching_routes.append((match_1, match_2))
 
     return matching_routes
 
 
 def filter_active_wzdx(wzdx):
-    start_date=date_tools.parse_datetime_from_iso_string(
+    start_date = date_tools.parse_datetime_from_iso_string(
         wzdx['features'][0]['properties']['start_date'])
-    end_date=date_tools.parse_datetime_from_iso_string(
+    end_date = date_tools.parse_datetime_from_iso_string(
         wzdx['features'][0]['properties']['end_date'])
-    event_status=date_tools.get_event_status(
+    event_status = date_tools.get_event_status(
         start_date, end_date)
     return event_status == 'active'

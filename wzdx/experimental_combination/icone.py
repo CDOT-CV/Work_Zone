@@ -111,8 +111,8 @@ def identify_overlapping_features_icone(icone_standard_msgs, wzdx_msgs):
         print('icone', route_details_start, route_details_end)
 
         if not route_details_start:
-            logging.info(
-                f"No geotab route info for feature {icone['event']['source']['id']}")
+            logging.debug(
+                f"Invalid route details for iCone: {icone['event']['source']['id']}")
             continue
         icone['route_details_start'] = route_details_start
         icone['route_details_end'] = route_details_end
@@ -120,8 +120,8 @@ def identify_overlapping_features_icone(icone_standard_msgs, wzdx_msgs):
         print('icone', route_details_start, route_details_end)
 
         if icone['route_details_end'] and route_details_start['Route'] != route_details_end['Route']:
-            logging.info(
-                f"Mismatched routes for feature {icone['event']['source']['id']}")
+            logging.debug(
+                f"Mismatched routes for iCone feature {icone['event']['source']['id']}")
             continue
 
         if route_details_start['Route'] in icone_routes:
@@ -140,8 +140,8 @@ def identify_overlapping_features_icone(icone_standard_msgs, wzdx_msgs):
                 wzdx['features'][0])
 
             if not route_details_start or not route_details_end:
-                logging.info(
-                    f"No geotab route info for feature {wzdx['features'][0]['id']}")
+                logging.debug(
+                    f"Missing WZDx route details {wzdx['features'][0]['id']}")
                 continue
             wzdx['route_details_start'] = route_details_start
             wzdx['route_details_end'] = route_details_end
@@ -151,7 +151,7 @@ def identify_overlapping_features_icone(icone_standard_msgs, wzdx_msgs):
             route_details_end = wzdx['route_details_end']
 
         if route_details_start['Route'] != route_details_end['Route']:
-            logging.info(
+            logging.debug(
                 f"Mismatched routes for feature {wzdx['features'][0]['id']}")
             continue
 
@@ -161,10 +161,10 @@ def identify_overlapping_features_icone(icone_standard_msgs, wzdx_msgs):
             wzdx_routes[route_details_start['Route']] = [wzdx]
 
     if not icone_routes:
-        logging.debug('No routes found for dataset 1')
+        logging.debug('No routes found for icone')
         return []
     if not wzdx_routes:
-        logging.debug('No routes found for dataset 2')
+        logging.debug('No routes found for wzdx')
         return []
 
     # Step 3: Identify overlapping events
