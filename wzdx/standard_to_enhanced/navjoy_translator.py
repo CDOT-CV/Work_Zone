@@ -172,7 +172,7 @@ def parse_reduction_zone(incident):
     # reduced_speed_limit
     if header.get('reduced_speed_limit'):
         properties['reduced_speed_limit_kph'] = units.miles_to_km(
-            header.get('reduced_speed_limit'), 0)
+            float(header.get('reduced_speed_limit')), 0)
 
     # location_method
     properties['location_method'] = "channel-device-method"
