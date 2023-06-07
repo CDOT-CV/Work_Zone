@@ -22,12 +22,27 @@ def main():
         input_file_contents)
 
     generated_files_list = []
+    features = json.loads(open(f'{output_dir}/icone_feature_collection.geojson').read())
 
     wzdx_msg = {}
     for message in generated_messages:
         output_path = f"{output_dir}/icone_{message['event']['source']['id']}_{round(message['rtdh_timestamp'])}_{message['event']['detail']['direction']}.json"
         open(output_path, 'w+').write(json.dumps(message, indent=2))
         generated_files_list.append(output_path)
+        
+        features.append({
+            'type': 'Feature',
+            'properties': {
+                'id': message['event']['source']['id'],
+                'route_details': message['event']['additional_info']['route_details_start'],
+            },
+            'geometry': {
+                'type': 'Point',
+                'coordinates': message['event']['geometry'][0]
+            }
+        })
+    
+    open(f'{output_dir}/icone_feature_collection.geojson', 'w+').write(json.dumps(features, indent=2))
 
     if generated_files_list:
         print(

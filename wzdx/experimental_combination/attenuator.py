@@ -1,5 +1,5 @@
 import json
-from ..tools import cdot_geospatial_api, geospatial_tools, combination, date_tools
+from ..tools import cdot_geospatial_api, geospatial_tools, combination, date_tools, wzdx_translator
 import logging
 from datetime import datetime, timedelta
 
@@ -48,12 +48,16 @@ def validate_dates(geotab, wzdx):
 
 
 def get_combined_events(geotab_msgs, wzdx_msgs):
-    active_wzdx_msgs = filter(combination.filter_active_wzdx, wzdx_msgs)
+    active_wzdx_msgs = wzdx_translator.filter_active_wzdx(wzdx_msgs)
 
     combined_events = []
     for i in identify_overlapping_features(geotab_msgs, active_wzdx_msgs):
-        wzdx = combine_geotab_with_wzdx(*i)
-        combined_events.append(wzdx)
+        geotab_msg, wzdx_msg = i
+        event_status = wzdx_translator.get_event_status(
+            wzdx_msg['features'][0])
+        if event_status in ['active']:
+            wzdx = combine_geotab_with_wzdx(geotab_msg, wzdx_msg, event_status)
+            combined_events.append(wzdx)
     return combined_events
 
 
@@ -91,9 +95,6 @@ def identify_overlapping_features(geotab_msgs, wzdx_msgs):
                 continue
             wzdx['route_details_start'] = route_details_start
             wzdx['route_details_end'] = route_details_end
-        # else:
-        #     route_details_start = wzdx['route_details_start']
-        #     route_details_end = wzdx['route_details_end']
 
         if not wzdx.get('route_details_start'):
             logging.debug(
@@ -127,41 +128,50 @@ def add_route(obj, lat, lng, name='route_details_start'):
     return obj
 
 
-def combine_geotab_with_wzdx(geotab_avl, wzdx_wzdx):
-    wzdx_wzdx_feature = wzdx_wzdx['features'][0]
+def combine_geotab_with_wzdx(geotab_avl, wzdx_wzdx, event_status):
+    combined_feature = wzdx_wzdx['features'][0]
+
+    # determine distance ahead to use in moving area
     speed = geotab_avl['avl_location']['position']['speed']
     bearing = geotab_avl['avl_location']['position']['bearing']
     route_details = geotab_avl['route_details_start']
     distance_ahead = get_distance_ahead_miles(
         speed, ATTENUATOR_TIME_AHEAD_SECONDS)
-    combined_event = combine_with_wzdx(
-        wzdx_wzdx_feature,
-        route_details,
-        distance_ahead,
-        bearing,
-        wzdx_wzdx['route_details_start']['Measure'],
-        wzdx_wzdx['route_details_end']['Measure'])
 
-    # update route details for whichever side was overwritten by geotab
-    if (combined_event['properties']['beginning_milepost'] == geotab_avl['route_details_start']['Measure']):
-        combined_event['properties']['route_details_start'] = geotab_avl['route_details_start']
-    elif (combined_event['properties']['ending_milepost'] == geotab_avl['route_details_start']['Measure']):
-        combined_event['properties']['route_details_end'] = geotab_avl['route_details_start']
-
-    wzdx_wzdx['features'][0] = combined_event
-    return wzdx_wzdx
-
-
-def combine_with_wzdx(wzdx_wzdx_feature, route_details, distance_ahead, bearing, event_start_marker, event_end_marker):
+    # determine new geometry and mile markers
+    event_start_marker = wzdx_wzdx['route_details_start']['Measure']
+    event_end_marker = wzdx_wzdx['route_details_end']['Measure']
     mmin = min(event_start_marker, event_end_marker)
     mmax = max(event_start_marker, event_end_marker)
     geometry, startMarker, endMarker = get_geometry_for_distance_ahead(
         distance_ahead, route_details, bearing, mmin, mmax)
-    wzdx_wzdx_feature['properties']['beginning_milepost'] = startMarker
-    wzdx_wzdx_feature['properties']['ending_milepost'] = endMarker
-    wzdx_wzdx_feature['geometry']['coordinates'] = geometry
+    combined_feature['properties']['beginning_milepost'] = startMarker
+    combined_feature['properties']['ending_milepost'] = endMarker
+    combined_feature['geometry']['coordinates'] = geometry
 
-    return wzdx_wzdx_feature
+    # update route details for whichever side was overwritten by geotab
+    if (combined_feature['properties']['beginning_milepost'] == geotab_avl['route_details_start']['Measure']):
+        combined_feature['properties']['route_details_start'] = geotab_avl['route_details_start']
+    elif (combined_feature['properties']['ending_milepost'] == geotab_avl['route_details_start']['Measure']):
+        combined_feature['properties']['route_details_end'] = geotab_avl['route_details_start']
+
+    # update description and data sources
+    combined_feature['properties']['core_details'][
+        'description'] += f" Moving area updated by Geotab ATMA {geotab_avl['avl_location']['vehicle']['id']}"
+
+    # add fields for traceability
+    combined_feature['properties']['experimental_source_type'] = 'geotab'
+    combined_feature['properties']['experimental_source_id'] = geotab_avl['rtdh_message_id']
+    combined_feature['properties']['geotab_id'] = geotab_avl['avl_location']['vehicle']['id']
+    combined_feature['properties']['geotab_message'] = geotab_avl
+
+    # update update_dates
+    update_date = date_tools.get_iso_string_from_datetime(datetime.now())
+    combined_feature['properties']['core_details']['update_date'] = update_date
+    wzdx_wzdx['feed_info']['data_sources'][0]['update_date'] = update_date
+
+    wzdx_wzdx['features'][0] = combined_feature
+    return wzdx_wzdx
 
 
 def get_geometry_for_distance_ahead(distance_ahead, route_details, bearing, mmin, mmax):

@@ -2,6 +2,7 @@ import json
 from datetime import datetime
 import logging
 from datetime import datetime, timedelta
+import glob
 
 from ..tools import combination, wzdx_translator, geospatial_tools, date_tools
 
@@ -11,18 +12,28 @@ END_TIME_THRESHOLD_MILLISECONDS = 1000 * 60 * 60 * 24 * 31  # 31 days
 
 
 def main(outputPath='./tests/data/output/wzdx_icone_combined.json'):
-    with open('./wzdx/sample_files/standard/icone/standard_icone_combination.json') as f:
-        icone = json.loads(f.read())
-        icone[0]['event']['header']['start_timestamp'] = date_tools.date_to_unix(
-            datetime.now())
-    with open('./wzdx/sample_files/enhanced/attenuator/attenuator_combination_wzdx.json') as f:
-        wzdx = json.loads(f.read())
-        wzdx[0]['features'][0]['properties']['start_date'] = date_tools.get_iso_string_from_datetime(
-            datetime.now() - timedelta(days=1))
-        wzdx[0]['features'][0]['properties']['end_date'] = date_tools.get_iso_string_from_datetime(
-            datetime.now() + timedelta(days=1))
+    icone = [json.loads(open(f_name).read()) for f_name in glob.glob(
+        './icone_arrow_boards/2023_05_16_standard/*.json')]
+    wzdx_full = json.loads(
+        open('./icone_arrow_boards/2023_05_16_standard/wzdx.geojson').read())
+    wzdx = [{
+        'feed_info': wzdx_full['feed_info'],
+        'type': "FeatureCollection",
+        'features': [i]
+    } for i in wzdx_full['features']]
+    outputPath = './icone_arrow_boards/2023_05_16_standard/wzdx_experimental.geojson'
+    # with open('./wzdx/sample_files/standard/icone/standard_icone_combination.json') as f:
+    #     icone = json.loads(f.read())
+    #     icone[0]['event']['header']['start_timestamp'] = date_tools.date_to_unix(
+    #         datetime.now())
+    # with open('./wzdx/sample_files/enhanced/attenuator/attenuator_combination_wzdx.json') as f:
+    #     wzdx = json.loads(f.read())
+    #     wzdx[0]['features'][0]['properties']['start_date'] = date_tools.get_iso_string_from_datetime(
+    #         datetime.now() - timedelta(days=1))
+    #     wzdx[0]['features'][0]['properties']['end_date'] = date_tools.get_iso_string_from_datetime(
+    #         datetime.now() + timedelta(days=1))
 
-    combined_events = get_combined_events([icone], [wzdx])
+    combined_events = get_combined_events(icone, wzdx)
 
     with open(outputPath, 'w+') as f:
         f.write(json.dumps(combined_events, indent=2))
@@ -44,27 +55,49 @@ def get_direction(street, coords, route_details=None):
 
 def get_combined_events(icone_standard_msgs, wzdx_msgs):
     combined_events = []
-    for i in identify_overlapping_features_icone(icone_standard_msgs, wzdx_msgs):
-        wzdx = combine_icone_with_wzdx(*i)
-        combined_events.append(wzdx)
+    
+    filtered_wzdx_msgs = wzdx_translator.filter_wzdx_by_event_status(wzdx_msgs, ['pending', 'completed_recently'])
+    
+    for i in identify_overlapping_features_icone(icone_standard_msgs, filtered_wzdx_msgs):
+        icone_msg, wzdx_msg = i
+        event_status = wzdx_translator.get_event_status(
+            wzdx_msg['features'][0])
+        if event_status in ['pending', 'completed_recently']:
+            wzdx = combine_icone_with_wzdx(icone_msg, wzdx_msg, event_status)
+            if wzdx:
+                combined_events.append(wzdx)
     return combined_events
 
 
-def combine_icone_with_wzdx(icone_standard, wzdx_wzdx):
+def combine_icone_with_wzdx(icone_standard, wzdx_wzdx, event_status):
     combined_event = wzdx_wzdx
+    updated = False
 
-    combined_event['features'][0]['properties']['start_date'] = date_tools.get_iso_string_from_unix(
-        icone_standard['event']['header']['start_timestamp'])
-    combined_event['features'][0]['properties']['core_details']['description'] += ' ' + \
-        icone_standard['event']['header']['description']
+    if event_status == "pending":
+        combined_event['features'][0]['properties']['start_date'] = date_tools.get_iso_string_from_unix(
+            icone_standard['event']['header']['start_timestamp'])
+    elif event_status == "completed_recently":
+        combined_event['features'][0]['properties']['end_date'] = date_tools.get_iso_string_from_unix(
+            icone_standard['event']['header']['start_timestamp'] + 60*60)
+        combined_event['features'][0]['properties']['core_details']['description'] += ' ' + \
+            icone_standard['event']['header']['description']
 
-    combined_event['features'][0]['properties']['core_details']['update_date'] = date_tools.get_iso_string_from_datetime(
-        datetime.now())
+    if updated:
+        update_date = date_tools.get_iso_string_from_datetime(datetime.now())
+        combined_event['features'][0]['properties']['core_details']['update_date'] = update_date
+        combined_event['feed_info']['data_sources'][0]['update_date'] = update_date
 
-    for i in ['route_details_start', 'route_details_end']:
-        if i in combined_event:
-            del combined_event[i]
-    return combined_event
+        combined_event['features'][0]['properties']['experimental_source_type'] = 'icone'
+        combined_event['features'][0]['properties']['experimental_source_id'] = icone_standard['rtdh_message_id']
+        combined_event['features'][0]['properties']['icone_id'] = icone_standard['event']['source']['id']
+        combined_event['features'][0]['properties']['icone_message'] = icone_standard
+
+        for i in ['route_details_start', 'route_details_end']:
+            if i in combined_event:
+                del combined_event[i]
+        return combined_event
+    else:
+        return None
 
 
 def get_route_details_for_icone(coordinates):

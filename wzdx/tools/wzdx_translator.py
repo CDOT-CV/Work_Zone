@@ -8,6 +8,7 @@ import uuid
 from collections import OrderedDict
 from datetime import datetime
 from ..sample_files.validation_schema import work_zone_feed_v42
+import date_tools
 
 import jsonschema
 import xmltodict
@@ -315,3 +316,20 @@ def remove_unnecessary_fields_feature(feature):
     if 'condition_1' in feature.get('properties', {}):
         del feature['properties']['condition_1']
     return feature
+
+
+def get_event_status(feature):
+    start_date = date_tools.parse_datetime_from_iso_string(
+        feature['properties']['start_date'])
+    end_date = date_tools.parse_datetime_from_iso_string(
+        feature['properties']['end_date'])
+    return date_tools.get_event_status(
+        start_date, end_date)
+
+
+def filter_active_wzdx(wzdx_msgs):
+    return filter(lambda x: get_event_status(x['features'][0]) == 'active', wzdx_msgs)
+
+
+def filter_wzdx_by_event_status(wzdx_msgs, event_status_list):
+    return filter(lambda x: get_event_status(x['features'][0]) in event_status_list, wzdx_msgs)

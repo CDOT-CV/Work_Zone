@@ -224,13 +224,3 @@ def identify_overlapping_features_wzdx(wzdx_msgs_1, wzdx_msgs_2):
                     matching_routes.append((match_1, match_2))
 
     return matching_routes
-
-
-def filter_active_wzdx(wzdx):
-    start_date = date_tools.parse_datetime_from_iso_string(
-        wzdx['features'][0]['properties']['start_date'])
-    end_date = date_tools.parse_datetime_from_iso_string(
-        wzdx['features'][0]['properties']['end_date'])
-    event_status = date_tools.get_event_status(
-        start_date, end_date)
-    return event_status == 'active'

@@ -77,6 +77,8 @@ def get_event_status(start_time, end_time):
 
     future_date_after_2weeks = current_time + \
         timedelta(days=14)
+    past_date_2weeks_ago = current_time - \
+        timedelta(days=14)
 
     if current_time < start_time:
         if start_time < future_date_after_2weeks:
@@ -84,5 +86,8 @@ def get_event_status(start_time, end_time):
         else:
             event_status = "planned"
     elif end_time and type(end_time) == dt.datetime and end_time < current_time:
-        event_status = "completed"
+        if (end_time > past_date_2weeks_ago):
+            event_status = "completed_recently"
+        else:
+            event_status = "completed"
     return event_status
