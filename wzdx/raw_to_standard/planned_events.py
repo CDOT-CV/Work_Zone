@@ -36,6 +36,10 @@ def main():
     input_file_contents = open(source_file, 'r').read()
     generated_messages = generate_standard_messages_from_string(
         input_file_contents)
+    generated_messages = generate_standard_messages_from_string(
+        input_file_contents)
+    generated_messages = generate_standard_messages_from_string(
+        input_file_contents)
 
     generated_files_list = []
     for message in generated_messages:
@@ -327,11 +331,11 @@ def get_improved_geometry(coordinates, event_status, route_details_start, route_
         return coordinates
 
     if not route_details_start or not route_details_end:
-        logging.warn(
+        logging.warning(
             f"1 or more routes not found, not generating improved geometry: {id}")
         return coordinates
     if route_details_start['Route'] != route_details_end['Route']:
-        logging.warn(
+        logging.warning(
             f"Routes did not match, not generating improved geometry: {id}")
         return coordinates
 
@@ -385,7 +389,7 @@ def create_rtdh_standard_msg(pd, isIncident):
 
         coordinates = get_linestring(pd.get('geometry'))
         if not coordinates:
-            logging.warn(
+            logging.warning(
                 f'Unable to retrive geometry coordinates for event: {pd.get("properties/id", default="")}')
             return {}
 
@@ -412,7 +416,7 @@ def create_rtdh_standard_msg(pd, isIncident):
             start_date = now
 
         if not start_date:
-            logging.warn(
+            logging.warning(
                 f'Unable to process event, no start date for event: {pd.get("properties/id", default="")}')
             return {}
         if not end_date:
@@ -488,7 +492,7 @@ def create_rtdh_standard_msg(pd, isIncident):
             }
         }
     except Exception as e:
-        logging.warn(
+        logging.warning(
             f'Error occured generating standard message for message {pd.get("properties/id", default="")}: {e}')
         return {}
 

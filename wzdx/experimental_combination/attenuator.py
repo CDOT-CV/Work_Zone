@@ -70,6 +70,8 @@ def identify_overlapping_features(geotab_msgs, wzdx_msgs):
 
         route_details = cdot_geospatial_api.get_route_and_measure(
             (geometry['latitude'], geometry['longitude']))
+        if not route_details:
+            continue
         geotab_msg['route_details_start'] = route_details
         geotab_msg['route_details_end'] = None
 
@@ -179,6 +181,8 @@ def get_geometry_for_distance_ahead(distance_ahead, route_details, bearing, mmin
                   route_details['Measure'], mmin, mmax)
     route_ahead = cdot_geospatial_api.get_route_geometry_ahead(
         route_details['Route'], route_details['Measure'], bearing, distance_ahead, routeDetails=route_details, mmin=mmin, mmax=mmax)
+    if not route_details:
+        return [], mmin, mmax
     return route_ahead['coordinates'], route_ahead['start_measure'], route_ahead['end_measure']
 
 

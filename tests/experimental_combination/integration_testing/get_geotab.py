@@ -13,7 +13,9 @@ def get_route_info_geotab(geotab):
         geotab['geometry']['coordinates'][0])
     end = cdot_geospatial_api.get_route_and_measure(
         geotab['geometry']['coordinates'][1])
-    if start['Route'] != end['Route'] or start['Measure'] == end['Measure']:
+    if not start or not end:
+        return None
+    elif start['Route'] != end['Route'] or start['Measure'] == end['Measure']:
         return None
     else:
         return {

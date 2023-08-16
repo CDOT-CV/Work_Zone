@@ -1,5 +1,7 @@
 import json
 import logging
+from cachetools import cached, LRUCache, keys
+import os
 
 import requests
 
@@ -24,7 +26,9 @@ def get_routes_list():
     # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded/Routes?f=pjson
     # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded/Route?routeId=070A&outSR=4326&f=pjson
 
-    resp = json.loads(requests.get(url).content)
+    resp = _make_cached_web_request(url)
+    if not resp:
+        return None
     # response = [{'routeID': '070A', 'MMin': 0, 'MMax': 499}]
     return resp
 
@@ -41,7 +45,9 @@ def get_route_details(routeId):
     # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded/Routes?f=pjson
     # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded/Route?routeId=070A&outSR=4326&f=pjson
 
-    resp = json.loads(requests.get(url).content)
+    resp = _make_cached_web_request(url)
+    if not resp:
+        return None
     # response = {'routeID': '070A', 'MMin': 0, 'MMax': 499}
 
     route_details = {
@@ -69,8 +75,9 @@ def get_route_and_measure(latLng, heading=None, tolerance=10000):
     logging.debug(url)
 
     # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded/MeasureAtPoint?x=-105&y=39.5&inSR=4326&tolerance=10000&outSR=&f=html
-    resp = json.loads(requests.get(url).content)
-    # raise NotImplementedError("No geospatial endpoint")
+    resp = _make_cached_web_request(url)
+    if not resp:
+        return None
 
     if not resp.get('features'):
         return {}
@@ -120,7 +127,9 @@ def get_point_at_measure(routeId, measure):
     logging.debug(url)
 
     # call api
-    response = json.loads(requests.get(url).content)
+    response = _make_cached_web_request(url)
+    if not response:
+        return None
 
     lat = response['features'][0]['geometry']['y']
     long = response['features'][0]['geometry']['x']
@@ -135,6 +144,8 @@ def get_route_geometry_ahead(routeId, startMeasure, heading, distanceAhead, poin
     if not routeDetails:
         latLng = get_point_at_measure(routeId, startMeasure)
         routeDetails = get_route_and_measure(latLng, heading)
+        if not latLng or not routeDetails:
+            return None
 
     # process direction here
     if (routeDetails.get('Direction', '+') == '+'):
@@ -176,7 +187,9 @@ def get_route_between_measures(routeId, startMeasure, endMeasure, dualCarriagewa
     logging.debug(url)
 
     # call api
-    response = json.loads(requests.get(url).content)
+    response = _make_cached_web_request(url)
+    if not response:
+        return None
 
     linestring = []
     for feature in response.get('features', []):
@@ -194,3 +207,34 @@ def get_route_between_measures(routeId, startMeasure, endMeasure, dualCarriagewa
 
 def is_route_dec(routeId, startMeasure, endMeasure):
     return endMeasure > startMeasure
+
+
+def _get_cache_info():
+    return _make_web_request.cache_info()
+
+
+def _make_cached_web_request(url: str, timeout: int = 30, retryOnTimeout: bool = False):
+    print(_get_cache_info())
+    print(f"Making cached web request: {url}, {timeout}")
+    try:
+        return json.loads(_make_web_request(url, timeout=timeout))
+    except requests.exceptions.Timeout:
+        if (retryOnTimeout):
+            logging.debug(
+                f"Geospatial Request Timed Out for URL: {url}. Timeout: {timeout}. Retrying with double timeout")
+            return _make_cached_web_request(url, timeout=timeout*2, retryOnTimeout=False)
+        else:
+            logging.error(
+                f"Geospatial Request Timed Out for URL: {url}. Timeout: {timeout}. Error: {e}")
+            return None
+    except requests.exceptions.RequestException as e:
+        logging.error(
+            f"Geospatial Request Failed for URL: {url}. Timeout: {timeout}. Error: {e}")
+        return None
+
+
+@cached(cache=LRUCache(maxsize=int(os.getenv('GEOSPATIAL_CACHE_SIZE', 1024*1024)), getsizeof=len), info=True, key=lambda url, timeout: keys.hashkey(url))  # 640*
+def _make_web_request(url: str, timeout):
+    resp = requests.get(url).content.decode('utf-8')
+    print(len(resp))
+    return resp  # , timeout=timeout

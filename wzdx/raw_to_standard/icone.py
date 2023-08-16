@@ -7,8 +7,7 @@ import uuid
 import xml.etree.ElementTree as ET
 from collections import OrderedDict
 
-from ..tools import (cdot_geospatial_api, date_tools, geospatial_tools,
-                     wzdx_translator, combination)
+from ..tools import date_tools, geospatial_tools, wzdx_translator, combination
 from ..util.collections import PathDict
 
 PROGRAM_NAME = 'iConeRawToStandard'
@@ -22,14 +21,15 @@ def main():
         input_file_contents)
 
     generated_files_list = []
-    features = json.loads(open(f'{output_dir}/icone_feature_collection.geojson').read())
+    features = json.loads(
+        open(f'{output_dir}/icone_feature_collection.geojson').read())
 
     wzdx_msg = {}
     for message in generated_messages:
         output_path = f"{output_dir}/icone_{message['event']['source']['id']}_{round(message['rtdh_timestamp'])}_{message['event']['detail']['direction']}.json"
         open(output_path, 'w+').write(json.dumps(message, indent=2))
         generated_files_list.append(output_path)
-        
+
         features.append({
             'type': 'Feature',
             'properties': {
@@ -41,8 +41,9 @@ def main():
                 'coordinates': message['event']['geometry'][0]
             }
         })
-    
-    open(f'{output_dir}/icone_feature_collection.geojson', 'w+').write(json.dumps(features, indent=2))
+
+    open(f'{output_dir}/icone_feature_collection.geojson',
+         'w+').write(json.dumps(features, indent=2))
 
     if generated_files_list:
         print(
@@ -85,7 +86,7 @@ def generate_raw_messages(message):
         if validate_incident(obj.get('incident', {})):
             messages.append(incident)
         else:
-            logging.warn("Invalid message")
+            logging.warning("Invalid message")
 
     return messages
 
@@ -208,11 +209,6 @@ def get_direction(street, coords, route_details=None):
         direction = geospatial_tools.get_road_direction_from_coordinates(
             coords)
     return direction
-
-
-def get_route_details(lngLat):
-    latLng = (lngLat[1], lngLat[0])
-    return cdot_geospatial_api.get_route_and_measure(latLng)
 
 
 def get_road_name(route_details):
