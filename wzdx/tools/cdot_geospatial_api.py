@@ -213,7 +213,7 @@ def get_cache_info():
     return _make_web_request.cache_info()
 
 
-def _make_cached_web_request(url: str, timeout: int = 30, retryOnTimeout: bool = False):
+def _make_cached_web_request(url: str, timeout: int = 10, retryOnTimeout: bool = False):
     try:
         return json.loads(_make_web_request(url, timeout=timeout))
     except requests.exceptions.Timeout:
@@ -231,8 +231,8 @@ def _make_cached_web_request(url: str, timeout: int = 30, retryOnTimeout: bool =
         return None
 
 
-# average request size is 1000b, so 1MB cache is roughly 1000 requests
-@cached(cache=LRUCache(maxsize=int(os.getenv('GEOSPATIAL_CACHE_SIZE', 1024*1024)), getsizeof=len), key=lambda url, timeout: keys.hashkey(url), info=True)
+# average request size is 1000b, so 10MB cache is roughly 10k requests
+@cached(cache=LRUCache(maxsize=int(os.getenv('GEOSPATIAL_CACHE_SIZE', 1024*1024*10)), getsizeof=len), key=lambda url, timeout: keys.hashkey(url), info=True)
 def _make_web_request(url: str, timeout):
-    resp = requests.get(url).content.decode('utf-8')
+    resp = requests.get(url, timeout).content.decode('utf-8')
     return resp
