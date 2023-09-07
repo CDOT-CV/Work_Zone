@@ -222,11 +222,11 @@ def _make_cached_web_request(url: str, timeout: int = 10, retryOnTimeout: bool =
                 f"Geospatial Request Timed Out for URL: {url}. Timeout: {timeout}. Retrying with double timeout")
             return _make_cached_web_request(url, timeout=timeout*2, retryOnTimeout=False)
         else:
-            logging.error(
+            logging.warn(
                 f"Geospatial Request Timed Out for URL: {url}. Timeout: {timeout}. Error: {e}")
             return None
     except requests.exceptions.RequestException as e:
-        logging.error(
+        logging.warn(
             f"Geospatial Request Failed for URL: {url}. Timeout: {timeout}. Error: {e}")
         return None
 
@@ -234,5 +234,5 @@ def _make_cached_web_request(url: str, timeout: int = 10, retryOnTimeout: bool =
 # average request size is 1000b, so 10MB cache is roughly 10k requests
 @cached(cache=LRUCache(maxsize=int(os.getenv('GEOSPATIAL_CACHE_SIZE', 1024*1024*10)), getsizeof=len), key=lambda url, timeout: keys.hashkey(url), info=True)
 def _make_web_request(url: str, timeout):
-    resp = requests.get(url, timeout).content.decode('utf-8')
+    resp = requests.get(url, timeout=timeout).content.decode('utf-8')
     return resp
