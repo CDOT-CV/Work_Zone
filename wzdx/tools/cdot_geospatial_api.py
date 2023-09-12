@@ -2,6 +2,8 @@ import json
 import logging
 from cachetools import cached, LRUCache, keys
 import os
+# Python code to demonstrate namedtuple()
+from collections import namedtuple
 
 import requests
 
@@ -210,10 +212,13 @@ def is_route_dec(routeId, startMeasure, endMeasure):
 
 
 def get_cache_info():
-    return _make_web_request.cache_info()
+    CacheData = namedtuple('CacheData', ['currsize', 'hits', 'misses'])
+
+    return CacheData(0, 0, 0)
+    # return _make_web_request.cache_info()
 
 
-def _make_cached_web_request(url: str, timeout: int = 10, retryOnTimeout: bool = False):
+def _make_cached_web_request(url: str, timeout: int = 5, retryOnTimeout: bool = False):
     try:
         return json.loads(_make_web_request(url, timeout=timeout))
     except requests.exceptions.Timeout:
@@ -232,7 +237,7 @@ def _make_cached_web_request(url: str, timeout: int = 10, retryOnTimeout: bool =
 
 
 # average request size is 1000b, so 10MB cache is roughly 10k requests
-@cached(cache=LRUCache(maxsize=int(os.getenv('GEOSPATIAL_CACHE_SIZE', 1024*1024*10)), getsizeof=len), key=lambda url, timeout: keys.hashkey(url), info=True)
+# @cached(cache=LRUCache(maxsize=int(os.getenv('GEOSPATIAL_CACHE_SIZE', 1024*1024*10)), getsizeof=len), key=lambda url, timeout: keys.hashkey(url), info=True)
 def _make_web_request(url: str, timeout):
     resp = requests.get(url, timeout=timeout).content.decode('utf-8')
     return resp
