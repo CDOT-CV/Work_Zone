@@ -1,6 +1,6 @@
 import json
 import logging
-from cachetools import cached, LFUCache, keys
+from cachetools import cached, Cache, keys
 import os
 # Python code to demonstrate namedtuple()
 from collections import namedtuple
@@ -237,7 +237,7 @@ def _make_cached_web_request(url: str, timeout: int = 5, retryOnTimeout: bool = 
 
 
 # average request size is 1000b, so 10MB cache is roughly 10k requests
-@cached(cache=LFUCache(maxsize=1024*10), key=lambda url, timeout: keys.hashkey(url))
+@cached(cache=Cache(maxsize=1024*10))
 def _make_web_request(url: str, timeout):
     resp = requests.get(url, timeout=timeout).content.decode('utf-8')
     return resp
