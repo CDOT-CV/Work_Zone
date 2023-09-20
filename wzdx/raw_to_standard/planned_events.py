@@ -32,13 +32,14 @@ INCIDENT_ID_REGEX = "^OpenTMS-Incident"
 
 
 def main():
+    cdotGeospatialApi: cdot_geospatial_api.GeospatialApi = cdot_geospatial_api.GeospatialApi()
     source_file, output_dir = parse_rtdh_arguments()
     input_file_contents = open(source_file, 'r').read()
-    generated_messages = generate_standard_messages_from_string(
+    generated_messages = generate_standard_messages_from_string(cdotGeospatialApi, 
         input_file_contents)
-    generated_messages = generate_standard_messages_from_string(
+    generated_messages = generate_standard_messages_from_string(cdotGeospatialApi, 
         input_file_contents)
-    generated_messages = generate_standard_messages_from_string(
+    generated_messages = generate_standard_messages_from_string(cdotGeospatialApi, 
         input_file_contents)
 
     generated_files_list = []
@@ -69,12 +70,11 @@ def parse_rtdh_arguments():
     return args.plannedEventsFile, args.outputDir
 
 
-def generate_standard_messages_from_string(input_file_contents):
+def generate_standard_messages_from_string(cdotGeospatialApi: cdot_geospatial_api.GeospatialApi, input_file_contents):
     raw_messages = generate_raw_messages(input_file_contents)
     standard_messages = []
     for message in raw_messages:
-        standard_message = generate_rtdh_standard_message_from_raw_single(
-            message)
+        standard_message = generate_rtdh_standard_message_from_raw_single(cdotGeospatialApi, message)
         if standard_message:
             standard_messages.append(standard_message)
     return standard_messages
@@ -121,12 +121,12 @@ def expand_event_directions(message):
         return [message]
 
 
-def generate_rtdh_standard_message_from_raw_single(obj):
+def generate_rtdh_standard_message_from_raw_single(cdotGeospatialApi: cdot_geospatial_api.GeospatialApi, obj):
     is_incident_msg, is_wz = is_incident_wz(obj)
     if is_incident_msg and not is_wz:
         return {}
     pd = PathDict(obj)
-    standard_message = create_rtdh_standard_msg(pd, is_incident_msg)
+    standard_message = create_rtdh_standard_msg(cdotGeospatialApi, pd, is_incident_msg)
     return standard_message
 
 
@@ -320,7 +320,7 @@ def create_description(name, roadName, startMarker, endMarker, typeOfWork, start
     return f"Event {name}, on {roadName}, between mile markers {startMarker} and {endMarker}. {typeOfWork}. Running between {startTime} and {endTime}"
 
 
-def get_improved_geometry(coordinates, event_status, route_details_start, route_details_end, id):
+def get_improved_geometry(cdotGeospatialApi: cdot_geospatial_api.GeospatialApi, coordinates, event_status, route_details_start, route_details_end, id):
     if event_status == "completed":
         return coordinates
 
@@ -341,7 +341,7 @@ def get_improved_geometry(coordinates, event_status, route_details_start, route_
 
     initialDirection = geospatial_tools.get_road_direction_from_coordinates(
         coordinates)
-    newCoordinates = cdot_geospatial_api.get_route_between_measures(
+    newCoordinates = cdotGeospatialApi.get_route_between_measures(
         route_details_start['Route'],
         route_details_start['Measure'],
         route_details_end['Measure'],
@@ -369,8 +369,25 @@ def get_cross_streets_from_description(description):
         return ('', '')
 
 
+def get_route_details_for_coordinates_lnglat(cdotGeospatialApi: cdot_geospatial_api.GeospatialApi, coordinates):
+    route_details_start = get_route_details(
+        cdotGeospatialApi, coordinates[0][1], coordinates[0][0])
+
+    if len(coordinates) == 1 or (len(coordinates) == 2 and coordinates[0] == coordinates[1]):
+        route_details_end = None
+    else:
+        route_details_end = get_route_details(
+            cdotGeospatialApi, coordinates[-1][1], coordinates[-1][0])
+
+    return route_details_start, route_details_end
+
+
+def get_route_details(cdotGeospatialApi: cdot_geospatial_api.GeospatialApi, lat, lng):
+    return cdotGeospatialApi.get_route_and_measure((lat, lng))
+
+
 # isIncident is unused, could be useful later though
-def create_rtdh_standard_msg(pd, isIncident):
+def create_rtdh_standard_msg(cdotGeospatialApi: cdot_geospatial_api.GeospatialApi, pd, isIncident):
     try:
         description = pd.get('properties/travelerInformationMessage', '')
         if description == INVALID_EVENT_DESCRIPTION:
@@ -452,8 +469,7 @@ def create_rtdh_standard_msg(pd, isIncident):
                 f'Unable to retrive geometry coordinates for event: {pd.get("properties/id", default="")}')
             return {}
 
-        route_details_start, route_details_end = combination.get_route_details_for_coordinates_lnglat(
-            coordinates)
+        route_details_start, route_details_end = get_route_details_for_coordinates_lnglat(cdotGeospatialApi, coordinates)
 
         return {
             "rtdh_timestamp": time.time(),
@@ -466,7 +482,7 @@ def create_rtdh_standard_msg(pd, isIncident):
                     "id": pd.get("properties/id", default="") + '_' + direction,
                     "last_updated_timestamp": pd.get('properties/lastUpdated', date_tools.get_unix_from_iso_string, default=0),
                 },
-                "geometry": get_improved_geometry(coordinates, event_status, route_details_start, route_details_end, pd.get("properties/id", default="") + '_' + direction),
+                "geometry": get_improved_geometry(cdotGeospatialApi, coordinates, event_status, route_details_start, route_details_end, pd.get("properties/id", default="") + '_' + direction),
                 "header": {
                     "description": description,
                     "start_timestamp": date_tools.date_to_unix(start_date),
