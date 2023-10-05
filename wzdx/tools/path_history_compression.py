@@ -35,7 +35,7 @@ def getChordLength(pt1, pt2):
 ###
 def generate_compressed_path(path):
     if len(path) <= 3:
-        logging.error("Work zone is too short")
+        logging.debug("Not compressing path, Work zone is too short")
         return path
 
     ALLOWABLEERROR = 30

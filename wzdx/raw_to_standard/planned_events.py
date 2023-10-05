@@ -113,7 +113,7 @@ def expand_event_directions(message):
             messages.append(new_message)
         return messages
     except Exception as e:
-        logging.error(e)
+        logging.error(f"Error expanding event directions: {e}")
         return [message]
 
 
@@ -252,7 +252,7 @@ def map_event_type(event_type):
     try:
         return EVENT_TYPE_MAPPING[event_type]
     except KeyError as e:
-        logging.error(f"Unrecognized event type: {e}")
+        logging.warn(f"Unrecognized event type: {e}")
         return DEFAULT_EVENT_TYPE
 
 
@@ -327,11 +327,11 @@ def get_improved_geometry(coordinates, event_status, route_details_start, route_
         return coordinates
 
     if not route_details_start or not route_details_end:
-        logging.warn(
+        logging.info(
             f"1 or more routes not found, not generating improved geometry: {id}")
         return coordinates
     if route_details_start['Route'] != route_details_end['Route']:
-        logging.warn(
+        logging.info(
             f"Routes did not match, not generating improved geometry: {id}")
         return coordinates
 
@@ -385,7 +385,7 @@ def create_rtdh_standard_msg(pd, isIncident):
 
         coordinates = get_linestring(pd.get('geometry'))
         if not coordinates:
-            logging.warn(
+            logging.info(
                 f'Unable to retrive geometry coordinates for event: {pd.get("properties/id", default="")}')
             return {}
 
@@ -488,8 +488,8 @@ def create_rtdh_standard_msg(pd, isIncident):
             }
         }
     except Exception as e:
-        logging.warn(
-            f'Error occured generating standard message for message {pd.get("properties/id", default="")}: {e}')
+        logging.error(
+            f'Error occurred generating standard message for message {pd.get("properties/id", default="")}: {e}')
         return {}
 
 

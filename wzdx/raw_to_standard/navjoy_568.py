@@ -136,7 +136,7 @@ def expand_speed_zone(message):
                 messages.append(new_message_dir)
         return messages
     except Exception as e:
-        logging.error(e)
+        logging.error(f"Error expanding speed zone: {e}")
         return [message]
 
 

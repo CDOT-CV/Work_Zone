@@ -85,7 +85,7 @@ def generate_raw_messages(message):
         if validate_incident(obj.get('incident', {})):
             messages.append(incident)
         else:
-            logging.warn("Invalid message")
+            logging.error("Invalid iCone XML message")
 
     return messages
 
