@@ -317,6 +317,7 @@ def create_description(name, roadName, startMarker, endMarker, typeOfWork, start
 
 
 def get_improved_geometry(coordinates, event_status, route_details_start, route_details_end, id):
+    # Temporarily removing geometry generation because it is too time intensive
     if True or event_status == "completed":
         return coordinates
 
