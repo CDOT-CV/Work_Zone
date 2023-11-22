@@ -1,7 +1,5 @@
 import json
 import logging
-from cachetools import cached, LRUCache, cachedmethod, keys
-import os
 
 import requests
 
@@ -17,10 +15,10 @@ SR = "4326"
 
 
 class GeospatialApi():
-    def __init__(self, maxsize=1024*10):
-        self.cache = LRUCache(maxsize=maxsize)
+    def __init__(self, getCachedRequest=lambda x: None, setCachedRequest=lambda x, y: None):
+        self.getCachedRequest = getCachedRequest
+        self.setCachedRequest = setCachedRequest
 
-    @cachedmethod(lambda self: self.cache)
     def _make_web_request(self, url: str, timeout):
         resp = requests.get(url, timeout=timeout).content.decode('utf-8')
         return resp
@@ -220,7 +218,11 @@ class GeospatialApi():
 
     def _make_cached_web_request(self, url: str, timeout: int = 5, retryOnTimeout: bool = False):
         try:
-            return json.loads(self._make_web_request(url, timeout=timeout))
+            response = self.getCachedRequest(url)
+            if not response:
+                response = self._make_web_request(url, timeout=timeout)
+                self.setCachedRequest(url, response)
+            return json.loads(response)
         except requests.exceptions.Timeout:
             if (retryOnTimeout):
                 logging.debug(
