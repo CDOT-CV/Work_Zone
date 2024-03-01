@@ -15,15 +15,17 @@ setup(
     long_description=README,
     packages=find_packages(exclude=["tests", "icone_arrow_boards"]),
     install_requires=[
-        'xmltodict',
+        'xmltodict==0.12.0',
+        'orjson==3.6.8',
         'jsonschema',
         'python-dateutil',
-        'shapely',
+        'shapely==1.8.0',
         'geopy',
         'pyproj',
         'numpy',
         'requests',
-        'pytz'],
+        'pytz',
+        'regex'],
 
     keywords=['python', 'wzdx'],
     classifiers=[
