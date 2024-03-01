@@ -1,14 +1,12 @@
 import pathlib
 from setuptools import setup, find_packages
 
-VERSION = "1.2.0"
+VERSION = "1.3.0"
 DESCRIPTION = 'CDOT Work Zone WZDx Translators'
 HERE = pathlib.Path(__file__).parent
 README = (HERE / "README.md").read_text()
 
-# Setting up
 setup(
-    # the name must match the folder name 'verysimplemodule'
     name="cdot-wzdx-translator",
     version=VERSION,
     author="CDOT",
@@ -25,8 +23,7 @@ setup(
         'pyproj',
         'numpy',
         'requests',
-        'pytz'],  # add any additional packages that
-    # needs to be installed along with your package. Eg: 'caer'
+        'pytz'],
 
     keywords=['python', 'wzdx'],
     classifiers=[

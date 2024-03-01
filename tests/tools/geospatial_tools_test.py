@@ -1,4 +1,6 @@
 from wzdx.tools import geospatial_tools
+import json
+import statistics
 
 
 # --------------------------------------------------------------------------------Unit test for get_road_direction function--------------------------------------------------------------------------------
@@ -219,3 +221,56 @@ def test_getDist():
 
     actual = geospatial_tools.getDist(start, end)
     assert abs(actual - expected) < 5
+
+
+################################# Random Testing #################################
+def get_color(val):
+    if val < 5:
+        return '#00b521'
+    elif val < 10:
+        return '#00ff40'
+    elif val < 20:
+        return '#ffe100'
+    elif val < 50:
+        return '#ff8400'
+    elif val < 100:
+        return '#ff0000'
+    elif val < 500:
+        return '#940000'
+    else:
+        return '#000000'
+
+
+def test_get_point_spacing_geospatial_endpoint():
+    geospatial_response = json.load(
+        open('./tests/data/tools/geospatial_spacing.json'))
+    coordinates = geospatial_response['features'][0]['geometry']['paths'][0]
+    spacings = []
+
+    out = {
+        'type': 'FeatureCollection'
+    }
+    features = []
+
+    for i in range(len(coordinates) - 1):
+        spacing = geospatial_tools.getDist(coordinates[i], coordinates[i + 1])
+        features.append({
+            'type': 'Feature',
+            'geometry': {
+                'type': 'Point',
+                'coordinates': coordinates[i],
+            },
+            'properties': {
+                'index': i,
+                'marker-color': get_color(spacing)
+            }
+        }
+        )
+
+    out['features'] = features
+
+    print("GEOSPATIAL ENDPOINT SPACING")
+    print("Mean", statistics.mean(spacings))
+    print("Std", statistics.stdev(spacings))
+    print("Min", min(spacings))
+    print("Max", max(spacings))
