@@ -15,7 +15,7 @@ setup(
     long_description=README,
     packages=find_packages(exclude=["tests", "icone_arrow_boards"]),
     install_requires=[
-        'xmltodict==0.1.3',
+        'xmltodict==0.13.0',
         'orjson==3.9.15',
         'jsonschema',
         'python-dateutil',
