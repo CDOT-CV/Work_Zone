@@ -423,7 +423,7 @@ def create_rtdh_standard_msg(cdotGeospatialApi: cdot_geospatial_api.GeospatialAp
         roadName = wzdx_translator.remove_direction_from_street_name(
             pd.get("properties/routeName"))
 
-        now = datetime.datetime.utcnow().replace(tzinfo=pytz.utc)
+        now = datetime.datetime.now(datetime.timezone.utc)
         start_date = pd.get("properties/startTime",
                             date_tools.parse_datetime_from_iso_string)
         end_date = pd.get("properties/clearTime",

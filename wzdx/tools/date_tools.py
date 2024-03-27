@@ -73,7 +73,7 @@ def get_event_status(start_time, end_time):
 
     # check if datetime is time zone aware. If it is, get utc time
     if start_time.tzinfo is not None and start_time.tzinfo.utcoffset(start_time) is not None:
-        current_time = datetime.utcnow().astimezone(timezone.utc)
+        current_time = datetime.now(timezone.utc)
 
     future_date_after_2weeks = current_time + \
         timedelta(days=14)
@@ -91,3 +91,6 @@ def get_event_status(start_time, end_time):
         else:
             event_status = "completed"
     return event_status
+
+def get_current_ts_millis():
+    return date_to_unix(datetime.now(timezone.utc).timestamp())

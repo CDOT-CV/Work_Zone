@@ -6,7 +6,7 @@ import re
 import string
 import uuid
 from collections import OrderedDict
-from datetime import datetime
+from datetime import datetime, timezone
 from ..sample_files.validation_schema import work_zone_feed_v42
 from . import date_tools
 
@@ -171,7 +171,7 @@ def initialize_wzdx_object(info):
     data_source = {}
     data_source['data_source_id'] = str(uuid.uuid4())
     data_source['organization_name'] = info.get('publisher')
-    data_source['update_date'] = datetime.utcnow().strftime(
+    data_source['update_date'] = datetime.now(timezone.utc).strftime(
         "%Y-%m-%dT%H:%M:%SZ")
     data_source['update_frequency'] = info.get(
         'datafeed_frequency_update', 300)
@@ -179,7 +179,7 @@ def initialize_wzdx_object(info):
     data_source['contact_email'] = info.get('contact_email')
     wzd['feed_info']['data_sources'] = [data_source]
 
-    wzd['feed_info']['update_date'] = datetime.utcnow().strftime(
+    wzd['feed_info']['update_date'] = datetime.now(timezone.utc).strftime(
         "%Y-%m-%dT%H:%M:%SZ")
     wzd['feed_info']['update_frequency'] = info.get(
         'datafeed_frequency_update', 300)
@@ -197,7 +197,7 @@ def initialize_wzdx_object_restriction(info):
     wzd = {}
     wzd['feed_info'] = {}
     # hardcode
-    wzd['feed_info']['update_date'] = datetime.utcnow().strftime(
+    wzd['feed_info']['update_date'] = datetime.now(timezone.utc).strftime(
         "%Y-%m-%dT%H:%M:%SZ")
     wzd['feed_info']['publisher'] = info.get('publisher')
     wzd['feed_info']['contact_name'] = info.get('contact_name')
@@ -215,7 +215,7 @@ def initialize_wzdx_object_restriction(info):
     data_source['contact_email'] = info.get('contact_email')
     if info.get('datafeed_frequency_update', False):
         data_source['update_frequency'] = info.get('datafeed_frequency_update')
-    data_source['update_date'] = datetime.utcnow().strftime(
+    data_source['update_date'] = datetime.now(timezone.utc).strftime(
         "%Y-%m-%dT%H:%M:%SZ")
     wzd['feed_info']['data_sources'] = [data_source]
 

@@ -149,11 +149,10 @@ def create_rtdh_standard_msg(pd):
     end_time = pd.get(
         "incident/endtime", date_tools.parse_datetime_from_iso_string, default=None)
     if not end_time:
-        if start_time > datetime.datetime.utcnow().replace(tzinfo=datetime.timezone.utc):
+        if start_time > datetime.datetime.now(datetime.timezone.utc):
             end_time = start_time + datetime.timedelta(days=7)
         else:
-            end_time = datetime.datetime.utcnow().replace(
-                tzinfo=datetime.timezone.utc) + datetime.timedelta(days=7)
+            end_time = datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(days=7)
         # Added for unit test
         end_time = end_time.replace(second=0, microsecond=0)
 

@@ -27,7 +27,7 @@ def get_route_info_geotab(geotab):
 
 def create_geotab_query(attenuator_ids, query_interval_minutes):
     queries = []
-    now = datetime.datetime.utcnow()
+    now = datetime.datetime.now(datetime.timezone.utc)
     start = now
     if now.hour == 0 and now.minute < query_interval_minutes:
         start1 = now - \

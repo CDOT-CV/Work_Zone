@@ -5,7 +5,8 @@ import requests
 
 from ..tools import geospatial_tools, path_history_compression
 
-BASE_URL = "https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes_withDEC/MapServer/exts/CdotLrsAccessRounded"
+# BASE_URL = "https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes_withDEC/MapServer/exts/CdotLrsAccessRounded"
+BASE_URL = "https://dtdapps.colorado.gov/server/rest/services/LRS/Routes_withDEC/MapServer/exts/CdotLrsAccessRounded"
 ROUTE_BETWEEN_MEASURES_API = "RouteBetweenMeasures"
 GET_ROUTE_AND_MEASURE_API = "MeasureAtPoint"
 GET_POINT_AT_MEASURE_API = "PointAtMeasure"
@@ -141,7 +142,7 @@ class GeospatialApi():
 
         return (lat, long)
 
-    def get_route_geometry_ahead(self, routeId, startMeasure, heading, distanceAhead, pointsToSkip=0, routeDetails=None, mmin=None, mmax=None):
+    def get_route_geometry_ahead(self, routeId, startMeasure, heading, distanceAhead, compressed=False, routeDetails=None, mmin=None, mmax=None):
         # Get list of routes and mile markers for a distance ahead and distance
 
         # TODO: Integrate direction to determine whether to add/subtract distance
@@ -172,7 +173,7 @@ class GeospatialApi():
 
         return {'start_measure': startMeasure, 'end_measure': endMeasure,
                 'coordinates': self.get_route_between_measures(
-                    routeId, startMeasure, endMeasure, pointsToSkip)}
+                    routeId, startMeasure, endMeasure, compressed=compressed)}
 
     def get_route_between_measures(self, routeId, startMeasure, endMeasure, dualCarriageway=True, compressed=False):
         # Get lat/long points between two mile markers on route
