@@ -11,29 +11,29 @@ ROAD_DIRECTIONS_MAP = {
 
 ROAD_ORIENTATIONS_MAP = {
     "northbound": 0,
-    "eastbound": 180,
+    "eastbound": 90,
     "southbound": 0,
-    "westbound": 180
+    "westbound": 90
 }
 
-ROAD_OREINTATIONS_DIRECTIONS_MAP = {
+ROAD_ORIENTATIONS_DIRECTIONS_MAP = {
     0: ["northbound", "southbound", "southbound", "northbound"],
-    180: ["eastbound", "westbound", "westbound", "eastbound"]
+    90: ["eastbound", "westbound", "westbound", "eastbound"]
 }
 
 
 # function to get road direction by using geometry coordinates
 def get_road_direction_from_coordinates(coordinates):
     if not coordinates or type(coordinates) != list or len(coordinates) < 2:
-        return None
+        return 'unknown'
 
     try:
         long_dif = coordinates[-1][0] - coordinates[0][0]
         lat_dif = coordinates[-1][1] - coordinates[0][1]
     except ValueError as e:
-        return None
+        return 'unknown'
     except IndexError as e:
-        return None
+        return 'unknown'
 
     if abs(long_dif) > abs(lat_dif):
         if long_dif > 0:
@@ -46,7 +46,7 @@ def get_road_direction_from_coordinates(coordinates):
         direction = 'southbound'
 
     if lat_dif == 0 and long_dif == 0:
-        direction = None
+        direction = 'unknown'
 
     return direction
 
@@ -72,7 +72,7 @@ def get_direction_from_bearing(bearing):
 # unecessarily condensed just because
 def get_closest_direction_from_bearing(bearing, road_orientation):
     orientation = ROAD_ORIENTATIONS_MAP[road_orientation]
-    return ROAD_OREINTATIONS_DIRECTIONS_MAP[orientation][math.floor(abs(orientation - (bearing % 360))/90)]
+    return ROAD_ORIENTATIONS_DIRECTIONS_MAP[orientation][math.floor(abs(orientation - (bearing % 360))/90)]
 
 
 ###

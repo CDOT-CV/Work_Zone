@@ -12,7 +12,7 @@ import pytz
 import regex
 
 from ..tools import (cdot_geospatial_api, date_tools, geospatial_tools,
-                     polygon_tools, wzdx_translator)
+                     polygon_tools, wzdx_translator, combination)
 from ..util.collections import PathDict
 
 PROGRAM_NAME = 'PlannedEventsRawToStandard'
@@ -26,7 +26,6 @@ REVERSED_DIRECTION_MAP = {'northbound': 'southbound', 'southbound': 'northbound'
 
 WORK_ZONE_INCIDENT_TYPES = {
     "Maintenance Operations":   {"Traffic": True},
-    "Other":                    {"Environmental": True},
     "Emergency Roadwork":       {"Traffic": True},
 }
 INCIDENT_ID_REGEX = "^OpenTMS-Incident"
@@ -121,8 +120,6 @@ def expand_event_directions(message):
 def generate_rtdh_standard_message_from_raw_single(obj):
     is_incident_msg, is_wz = is_incident_wz(obj)
     if is_incident_msg and not is_wz:
-        id = obj.get('properties', {}).get('id')
-        dir = obj.get('properties', {}).get('direction')
         return {}
     pd = PathDict(obj)
     standard_message = create_rtdh_standard_msg(pd, is_incident_msg)
@@ -175,57 +172,55 @@ def hex_to_binary(hex_string):
     return bin(int(hex_string, hexidecimal_scale))[2:].zfill(num_of_bits)
 
 
-# TODO: Consider support road closures
-DEFAULT_EVENT_TYPE = ('work-zone', [])
+# (event_type, types of work, work_zone_type)
+DEFAULT_EVENT_TYPE = ('work-zone', [], 'static')
 EVENT_TYPE_MAPPING = {
     # Work Zones
-    "Bridge Construction":              ('work-zone', [{'type_name': 'below-road-work',            'is_architectural_change': True}]),
-    "Road Construction":                ('work-zone', [{'type_name': 'roadway-creation',           'is_architectural_change': True}]),
-    "Bridge Maintenance Operations":    ('work-zone', [{'type_name': 'below-road-work',            'is_architectural_change': False}]),
-    "Bridge Repair":                    ('work-zone', [{'type_name': 'below-road-work',            'is_architectural_change': False}]),
-    "Chip Seal Operations":             ('work-zone', [{'type_name': 'minor-road-defect-repair',   'is_architectural_change': False}]),
-    "Concrete Slab Replacement":        ('work-zone', [{'type_name': 'surface-work',               'is_architectural_change': False}]),
-    "Crack Sealing":                    ('work-zone', [{'type_name': 'minor-road-defect-repair',   'is_architectural_change': False}]),
-    "Culvert Maintenance":              ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}]),
-    "Electrical or Lighting":           ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}]),
-    "Emergency Maintenance":            ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}]),
-    "Fiber Optics Installation":        ('work-zone', [{'type_name': 'surface-work',               'is_architectural_change': False}]),
-    "Guardrail":                        ('work-zone', [{'type_name': 'barrier-work',               'is_architectural_change': False}]),
-    "IT or Fiber Optics":               ('work-zone', [{'type_name': 'surface-work',               'is_architectural_change': False}]),
-    "Other":                            ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}]),
-    "Paving Operations":                ('work-zone', [{'type_name': 'surface-work',               'is_architectural_change': True}]),
-    "Road Maintenance Operations":      ('work-zone', [{'type_name': 'surface-work',               'is_architectural_change': False}]),
-    "Rock Work":                        ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}]),
-    "Sign Work":                        ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}]),
-    "Striping Operations":              ('work-zone', [{'type_name': 'painting',                   'is_architectural_change': True}]),
-    "Traffic Sign Installation":        ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}]),
-    "Traffic Sign Maintenance":         ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}]),
-    "Traffic Signal Installation":      ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}]),
-    "Traffic Signal Maintenance":       ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}]),
-    "Tunnel Maintenance":               ('work-zone', [{'type_name': 'surface-work',               'is_architectural_change': False}]),
-    "Utility Work":                     ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}]),
-    "Utility Installation":             ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}]),
-    "Wall Maintenance":                 ('work-zone', [{'type_name': 'barrier-work',               'is_architectural_change': False}]),
-    "Other":                            ('work-zone', []),
+    "Bridge Construction":              ('work-zone', [{'type_name': 'below-road-work',            'is_architectural_change': True}], 'static'),
+    "Road Construction":                ('work-zone', [{'type_name': 'roadway-creation',           'is_architectural_change': True}], 'static'),
+    "Bridge Maintenance Operations":    ('work-zone', [{'type_name': 'below-road-work',            'is_architectural_change': False}], 'static'),
+    "Bridge Repair":                    ('work-zone', [{'type_name': 'below-road-work',            'is_architectural_change': False}], 'static'),
+    "Chip Seal Operations":             ('work-zone', [{'type_name': 'minor-road-defect-repair',   'is_architectural_change': False}], 'static'),
+    "Concrete Slab Replacement":        ('work-zone', [{'type_name': 'surface-work',               'is_architectural_change': False}], 'static'),
+    "Crack Sealing":                    ('work-zone', [{'type_name': 'minor-road-defect-repair',   'is_architectural_change': False}], 'static'),
+    "Culvert Maintenance":              ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}], 'static'),
+    "Electrical or Lighting":           ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}], 'static'),
+    "Emergency Maintenance":            ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}], 'static'),
+    "Fiber Optics Installation":        ('work-zone', [{'type_name': 'surface-work',               'is_architectural_change': False}], 'static'),
+    "Guardrail":                        ('work-zone', [{'type_name': 'barrier-work',               'is_architectural_change': False}], 'static'),
+    "IT or Fiber Optics":               ('work-zone', [{'type_name': 'surface-work',               'is_architectural_change': False}], 'static'),
+    "Paving Operations":                ('work-zone', [{'type_name': 'surface-work',               'is_architectural_change': True}], 'static'),
+    "Road Maintenance Operations":      ('work-zone', [{'type_name': 'surface-work',               'is_architectural_change': False}], 'static'),
+    "Rock Work":                        ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}], 'static'),
+    "Sign Work":                        ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}], 'static'),
+    "Striping Operations":              ('work-zone', [{'type_name': 'painting',                   'is_architectural_change': True}], 'planned-moving-area'),
+    "Traffic Sign Installation":        ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}], 'static'),
+    "Traffic Sign Maintenance":         ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}], 'static'),
+    "Traffic Signal Installation":      ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}], 'static'),
+    "Traffic Signal Maintenance":       ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}], 'static'),
+    "Tunnel Maintenance":               ('work-zone', [{'type_name': 'surface-work',               'is_architectural_change': False}], 'static'),
+    "Utility Work":                     ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}], 'static'),
+    "Utility Installation":             ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}], 'static'),
+    "Wall Maintenance":                 ('work-zone', [{'type_name': 'barrier-work',               'is_architectural_change': False}], 'static'),
 
     # Road Closures
-    "BAN Message":                      ('restriction', []),
-    "Safety Campaign":                  ('restriction', []),
-    "Smoke/Control Burn":               ('restriction', []),
-    "Avalanche Control":                ('restriction', []),
-    "Closed for the Season":            ('restriction', []),
-    "Funeral Procession":               ('restriction', []),
-    "Presidential Visit":               ('restriction', []),
-    "Race Event":                       ('restriction', []),
-    "Local Event":                      ('restriction', []),
-    "Military Movement":                ('restriction', []),
-    "OS/OW Limit":                      ('restriction', []),
+    "BAN Message":                      ('restriction', [], 'static'),
+    "Safety Campaign":                  ('restriction', [], 'static'),
+    "Smoke/Control Burn":               ('restriction', [], 'static'),
+    "Avalanche Control":                ('restriction', [], 'static'),
+    "Closed for the Season":            ('restriction', [], 'static'),
+    "Funeral Procession":               ('restriction', [], 'static'),
+    "Presidential Visit":               ('restriction', [], 'static'),
+    "Race Event":                       ('restriction', [], 'static'),
+    "Local Event":                      ('restriction', [], 'static'),
+    "Military Movement":                ('restriction', [], 'static'),
+    "OS/OW Limit":                      ('restriction', [], 'static'),
+    "Geological Drilling":              ('restriction', [], 'static'),
 
-    # Incidents (work zones)
-    "Emergency Roadwork":               ('work-zone', []),
-    "Maintenance Operations":           ('work-zone', []),
+    # Incidents (work zones): *\(.]n
+    "Emergency Roadwork":               ('work-zone', [], 'static'),
+    "Maintenance Operations":           ('work-zone', [], 'static'),
 }
-
 
 LANE_TYPE_MAPPING = {
     "left shoulder": 'shoulder',
@@ -266,7 +261,7 @@ def map_lane_status(lane_status_bit):
 
 
 def map_direction_string(direction_string):
-    return STRING_DIRECTION_MAP.get(direction_string)
+    return STRING_DIRECTION_MAP.get(direction_string, 'undefined')
 
 
 # This method parses a hex string and list of closed lane names into a WZDx lanes list. The hex string, lane_closures_hex,
@@ -321,23 +316,21 @@ def create_description(name, roadName, startMarker, endMarker, typeOfWork, start
     return f"Event {name}, on {roadName}, between mile markers {startMarker} and {endMarker}. {typeOfWork}. Running between {startTime} and {endTime}"
 
 
-def get_improved_geometry(coordinates, event_status, id):
+def get_improved_geometry(coordinates, event_status, route_details_start, route_details_end, id):
     if event_status == "completed":
         return coordinates
 
     startPoint = [coordinates[0][-1], coordinates[0][0]]
     endPoint = [coordinates[-1][-1], coordinates[-1][0]]
 
-    startRouteParams = cdot_geospatial_api.get_route_and_measure(
-        startPoint)
-    endRouteParams = cdot_geospatial_api.get_route_and_measure(
-        endPoint)
+    if startPoint == endPoint:
+        return coordinates
 
-    if not startRouteParams or not endRouteParams:
+    if not route_details_start or not route_details_end:
         logging.warn(
             f"1 or more routes not found, not generating improved geometry: {id}")
         return coordinates
-    if startRouteParams['Route'] != endRouteParams['Route']:
+    if route_details_start['Route'] != route_details_end['Route']:
         logging.warn(
             f"Routes did not match, not generating improved geometry: {id}")
         return coordinates
@@ -345,18 +338,20 @@ def get_improved_geometry(coordinates, event_status, id):
     initialDirection = geospatial_tools.get_road_direction_from_coordinates(
         coordinates)
     newCoordinates = cdot_geospatial_api.get_route_between_measures(
-        startRouteParams['Route'],
-        startRouteParams['Measure'],
-        endRouteParams['Measure'],
+        route_details_start['Route'],
+        route_details_start['Measure'],
+        route_details_end['Measure'],
         compressed=True)
 
     finalDirection = geospatial_tools.get_road_direction_from_coordinates(
         newCoordinates)
 
     # TODO: Implement Bi-directional carriageway
-    print(REVERSED_DIRECTION_MAP.get(finalDirection))
     if initialDirection == REVERSED_DIRECTION_MAP.get(finalDirection):
         newCoordinates.reverse()
+
+    if not newCoordinates:
+        return coordinates
 
     return newCoordinates
 
@@ -369,9 +364,8 @@ def get_cross_streets_from_description(description):
     except:
         return ('', '')
 
+
 # isIncident is unused, could be useful later though
-
-
 def create_rtdh_standard_msg(pd, isIncident):
     try:
         description = pd.get('properties/travelerInformationMessage', '')
@@ -400,7 +394,7 @@ def create_rtdh_standard_msg(pd, isIncident):
         beginning_milepost = pd.get("properties/startMarker", default="")
         ending_milepost = pd.get("properties/endMarker", default="")
         recorded_direction = pd.get("properties/recorded_direction")
-        if direction == REVERSED_DIRECTION_MAP.get(recorded_direction):
+        if direction == REVERSED_DIRECTION_MAP.get(recorded_direction) and direction != "unknown":
             coordinates.reverse()
             beginning_milepost = pd.get("properties/endMarker", default="")
             ending_milepost = pd.get("properties/startMarker", default="")
@@ -435,7 +429,7 @@ def create_rtdh_standard_msg(pd, isIncident):
 
             end_date = end_date.replace(second=0, microsecond=0)
 
-        event_type, types_of_work = map_event_type(
+        event_type, types_of_work, work_zone_type = map_event_type(
             pd.get("properties/type", default=""))
 
         restrictions = []
@@ -445,6 +439,8 @@ def create_rtdh_standard_msg(pd, isIncident):
 
         event_status = date_tools.get_event_status(start_date, end_date)
 
+        condition_1 = event_status in ['active', 'pending', 'planned']
+
         lane_impacts = get_lane_impacts(
             pd.get("properties/laneImpacts"), pd.get("properties/direction"))
         if direction != recorded_direction and all_lanes_open(lane_impacts):
@@ -452,17 +448,21 @@ def create_rtdh_standard_msg(pd, isIncident):
                 f'Unable to retrive geometry coordinates for event: {pd.get("properties/id", default="")}')
             return {}
 
+        route_details_start, route_details_end = combination.get_route_details_for_coordinates_lnglat(
+            coordinates)
+
         return {
             "rtdh_timestamp": time.time(),
             "rtdh_message_id": str(uuid.uuid4()),
             "event": {
                 "type": event_type,
                 "types_of_work": types_of_work,
+                "work_zone_type": work_zone_type,
                 "source": {
                     "id": pd.get("properties/id", default="") + '_' + direction,
                     "last_updated_timestamp": pd.get('properties/lastUpdated', date_tools.get_unix_from_iso_string, default=0),
                 },
-                "geometry": get_improved_geometry(coordinates, event_status, pd.get("properties/id", default="") + '_' + direction),
+                "geometry": get_improved_geometry(coordinates, event_status, route_details_start, route_details_end, pd.get("properties/id", default="") + '_' + direction),
                 "header": {
                     "description": description,
                     "start_timestamp": date_tools.date_to_unix(start_date),
@@ -481,6 +481,9 @@ def create_rtdh_standard_msg(pd, isIncident):
                     "beginning_cross_street": begin_cross_street,
                     "ending_cross_street": end_cross_street,
                     "valid": False,
+                    "route_details_start": route_details_start,
+                    "route_details_end": route_details_end,
+                    "condition_1": condition_1,
                 }
             }
         }
@@ -508,7 +511,7 @@ def validate_closure(obj):
         starttime_string = properties.get('startTime')
         endtime_string = properties.get('clearTime')
         description = properties.get('travelerInformationMessage')
-        direction = properties.get('direction')
+        direction = properties.get('direction', 'undefined')
 
         required_fields = [starttime_string, description, direction]
         for field in required_fields:

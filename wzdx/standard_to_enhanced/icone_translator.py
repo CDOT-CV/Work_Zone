@@ -4,15 +4,12 @@ import json
 import logging
 import copy
 import uuid
-from ..sample_files.validation_schema import wzdx_v40_feed
+from ..sample_files.validation_schema import work_zone_feed_v42
 
 from ..tools import date_tools, wzdx_translator, geospatial_tools
 
 PROGRAM_NAME = 'IconeTranslator'
 PROGRAM_VERSION = '1.0'
-
-
-DEFAULT_ICONE_FEED_INFO_ID = '104d7746-688c-44ed-b195-2ee948bf9dfa'
 
 
 def main():
@@ -21,11 +18,10 @@ def main():
 
     icone_obj = json.loads(open(input_file, 'r').read())
     wzdx = wzdx_creator(icone_obj)
-    wzdx_schema = wzdx_v40_feed.wzdx_v40_schema_string
 
-    if not wzdx_translator.validate_wzdx(wzdx, wzdx_schema):
+    if not wzdx:
         logging.error(
-            'validation error more message are printed above. output file is not created because the message failed validation.')
+            'Generation error more message are printed above. output file is not created because the message failed validation.')
         return
     with open(output_file, 'w') as fwzdx:
         fwzdx.write(json.dumps(wzdx, indent=2))
@@ -47,26 +43,30 @@ def parse_icone_arguments():
 
 
 def wzdx_creator(message, info=None):
-    if not message:
+    if not message or not validate_standard_msg(message):
         return None
-   # verify info obj
+
     if not info:
-        info = wzdx_translator.initialize_info(
-            DEFAULT_ICONE_FEED_INFO_ID)
+        info = wzdx_translator.initialize_info()
     if not wzdx_translator.validate_info(info):
         return None
 
-    wzd = wzdx_translator.initialize_wzdx_object(info)
+    wzdx = wzdx_translator.initialize_wzdx_object(info)
 
     # Parse Incident to WZDx Feature
     feature = parse_incident(message)
     if feature:
-        wzd.get('features').append(feature)
+        wzdx.get('features').append(feature)
 
-    if not wzd.get('features'):
+    if not wzdx.get('features'):
         return None
-    wzd = wzdx_translator.add_ids(wzd)
-    return wzd
+    wzdx = wzdx_translator.add_ids(wzdx)
+
+    if not wzdx_translator.validate_wzdx(wzdx):
+        logging.warn("WZDx message failed validation")
+        return None
+
+    return wzdx
 
 
 #################### Sample Incident ####################
@@ -219,6 +219,7 @@ def parse_incident(incident):
     source = event.get('source')
     header = event.get('header')
     detail = event.get('detail')
+    additional_info = event.get('additional_info', {})
 
     geometry = {}
     geometry['type'] = "LineString"
@@ -241,19 +242,10 @@ def parse_incident(incident):
     core_details['road_names'] = road_names
 
     # direction
-    for road_name in road_names:
-        direction = wzdx_translator.parse_direction_from_street_name(road_name)
-        if direction:
-            break
-    if not direction:
-        direction = geospatial_tools.get_road_direction_from_coordinates(
-            geometry.get('coordinates'))
-    if not direction:
-        return None
-    core_details['direction'] = direction
+    core_details['direction'] = detail.get('direction')
 
     # relationship
-    core_details['relationship'] = {}
+    core_details['related_road_events'] = []
 
     # description
     core_details['description'] = header.get('description')
@@ -284,17 +276,17 @@ def parse_incident(incident):
     else:
         properties['end_date'] = None
 
-    # start_date_accuracy
-    properties['start_date_accuracy'] = "estimated"
+    # is_start_date_verified
+    properties['is_start_date_verified'] = False
 
-    # end_date_accuracy
-    properties['end_date_accuracy'] = "estimated"
+    # is_end_date_verified
+    properties['is_end_date_verified'] = False
 
-    # beginning_accuracy
-    properties['beginning_accuracy'] = "estimated"
+    # is_start_position_verified
+    properties['is_start_position_verified'] = False
 
-    # ending_accuracy
-    properties['ending_accuracy'] = "estimated"
+    # is_end_position_verified
+    properties['is_end_position_verified'] = False
 
     # location_method
     properties["location_method"] = "channel-device-method"
@@ -318,10 +310,6 @@ def parse_incident(incident):
     # beginning_cross_street
     properties['ending_milepost'] = ""
 
-    # event status
-    properties['event_status'] = date_tools.get_event_status(
-        start_time, end_time)
-
     # type_of_work
     # maintenance, minor-road-defect-repair, roadside-work, overhead-work, below-road-work, barrier-work, surface-work, painting, roadway-relocation, roadway-creation
     properties['types_of_work'] = []
@@ -333,10 +321,18 @@ def parse_incident(incident):
     # restrictions
     properties['restrictions'] = []
 
+    properties['route_details_start'] = additional_info.get(
+        'route_details_start')
+    properties['route_details_end'] = additional_info.get('route_details_end')
+
+    properties['condition_1'] = additional_info.get('condition_1', True)
+
     filtered_properties = copy.deepcopy(properties)
 
+    INVALID_PROPERTIES = [None, '', []]
+
     for key, value in properties.items():
-        if not value:
+        if value in INVALID_PROPERTIES:
             del filtered_properties[key]
 
     for key, value in properties['core_details'].items():
@@ -350,6 +346,74 @@ def parse_incident(incident):
     feature['geometry'] = geometry
 
     return feature
+
+
+# function to validate the event
+def validate_standard_msg(msg):
+    if not msg or type(msg) != dict:
+        logging.warning('event is empty or has invalid type')
+        return False
+
+    event = msg.get('event')
+
+    source = event.get('source')
+    header = event.get('header')
+    detail = event.get('detail')
+
+    id = source.get('id')
+    try:
+
+        event = msg.get('event')
+
+        source = event.get('source')
+        header = event.get('header')
+        detail = event.get('detail')
+
+        id = source.get('id')
+
+        geometry = event.get('geometry')
+        road_name = detail.get('road_name')
+
+        start_time = header.get('start_timestamp')
+        end_time = header.get('end_timestamp')
+        description = header.get('description')
+        update_time = source.get('last_updated_timestamp')
+        direction = detail.get('direction')
+
+        if not (type(geometry) == list and len(geometry) >= 0):
+            logging.warning(
+                f'''Invalid event with id = {id}. Invalid geometry: {geometry}''')
+            return False
+        if not (type(road_name) == str and len(road_name) >= 0):
+            logging.warning(
+                f'''Invalid event with id = {id}. Invalid road_name: {road_name}''')
+            return False
+        if not (type(start_time) == float or type(start_time) == int):
+            logging.warning(
+                f'''Invalid event with id = {id}. Invalid start_time: {start_time}''')
+            return False
+        if not (type(end_time) == float or type(end_time) == int or end_time == None):
+            logging.warning(
+                f'''Invalid event with id = {id}. Invalid end_time: {end_time}''')
+            return False
+        if not (type(update_time) == float or type(update_time) == int):
+            logging.warning(
+                f'''Invalid event with id = {id}. Invalid update_time: {update_time}''')
+            return False
+        if not (type(direction) == str and direction in ['unknown', 'undefined', 'northbound', 'southbound', 'eastbound', 'westbound']):
+            logging.warning(
+                f'''Invalid event with id = {id}. Invalid direction: {direction}''')
+            return False
+        if not (type(description) == str and len(description) >= 0):
+            logging.warning(
+                f'''Invalid event with id = {id}. Invalid description: {description}''')
+            return False
+
+        return True
+    except Exception as e:
+        logging.warning(
+            f'''Invalid event with id = {id}. Error in validation: {e}''')
+        return False
 
 
 if __name__ == "__main__":

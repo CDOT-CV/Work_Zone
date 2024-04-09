@@ -1,4 +1,5 @@
 import json
+from ..tools import cdot_geospatial_api, geospatial_tools, combination
 import logging
 
 from ..tools import cdot_geospatial_api, geospatial_tools
@@ -7,15 +8,15 @@ ATTENUATOR_TIME_AHEAD_SECONDS = 30 * 60
 ISO_8601_FORMAT_STRING = "%Y-%m-%dT%H:%M:%SZ"
 
 
-def main():
-    with open('./wzdx/sample_files/raw/geotab_avl/geotab_all.json') as f:
-        geotab_avl = json.loads(f.read())
-    with open('./wzdx/sample_files/enhanced/wzdxs/wzdx_all.json') as f:
-        wzdx = json.loads(f.read())
+def main(outputPath='./tests/data/output/wzdx_navjoy_combined.json'):
+    with open('./wzdx/sample_files/raw/geotab_avl/attenuator_combination_geotab.json') as f:
+        geotab_avl = [json.loads(f.read())]
+    with open('./wzdx/sample_files/enhanced/attenuator/attenuator_combination_wzdx.json') as f:
+        wzdx = [json.loads(f.read())]
 
     combined_events = get_combined_events(geotab_avl, wzdx)
 
-    with open('./wzdx/sample_files/enhanced/wzdxs/wzdx_combined.json', 'w+') as f:
+    with open(outputPath, 'w+') as f:
         f.write(json.dumps(combined_events, indent=2))
 
 
@@ -32,14 +33,18 @@ def validate_directionality(geotab, wzdx):
 def get_combined_events(geotab_msgs, wzdx_msgs):
     combined_events = []
     for i in identify_overlapping_features(geotab_msgs, wzdx_msgs):
+        logging.info("identify_overlapping_features")
         if not validate_directionality(*i):
             logging.info(
                 "Ignoring matching Geotab message because the direction does not match the planned event")
             continue
+        logging.info("validate_directionality")
         feature = combine_geotab_with_wzdx(*i)
+        logging.info("combine_geotab_with_wzdx")
         wzdx = i[1]
         wzdx['features'] = [feature]
         combined_events.append(wzdx)
+    logging.info("combined_events")
     return combined_events
 
 
@@ -65,10 +70,19 @@ def identify_overlapping_features(geotab_msgs, wzdx_msgs):
     if not geotab_routes:
         return []
     for wzdx in wzdx_msgs:
-        # assume 1 feature per wzdx wzdx
-        coordinates = wzdx['features'][0]['geometry']['coordinates']
-        wzdx = add_route(
-            wzdx, coordinates[0][1], coordinates[0][0], 'route_details_start')
+        if not wzdx.get('route_details_start') or not wzdx.get('route_details_end'):
+            route_details_start, route_details_end = combination.get_route_details_for_wzdx(
+                wzdx['features'][0])
+
+            if not route_details_start or not route_details_end:
+                logging.info(
+                    f"No geotab route info for feature {wzdx['features'][0]['id']}")
+                continue
+            wzdx['route_details_start'] = route_details_start
+            wzdx['route_details_end'] = route_details_end
+        # else:
+        #     route_details_start = wzdx['route_details_start']
+        #     route_details_end = wzdx['route_details_end']
 
         if not wzdx.get('route_details_start'):
             logging.warn(
@@ -80,9 +94,6 @@ def identify_overlapping_features(geotab_msgs, wzdx_msgs):
         if matching_geotab_routes:
             logging.info(
                 f"FOUND MATCHING GEOTAB ROUTE FOR {wzdx['features'][0]['id']}")
-
-            wzdx = add_route(
-                wzdx, coordinates[-1][1], coordinates[-1][0], 'route_details_end')
 
             if not wzdx.get('route_details_end'):
                 logging.warn(

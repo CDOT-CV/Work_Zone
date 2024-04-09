@@ -5,7 +5,7 @@ import requests
 
 from ..tools import geospatial_tools, path_history_compression
 
-BASE_URL = "https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded"
+BASE_URL = "https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes_withDEC/MapServer/exts/CdotLrsAccessRounded"
 ROUTE_BETWEEN_MEASURES_API = "RouteBetweenMeasures"
 GET_ROUTE_AND_MEASURE_API = "MeasureAtPoint"
 GET_POINT_AT_MEASURE_API = "PointAtMeasure"
@@ -73,7 +73,7 @@ def get_route_and_measure(latLng, heading=None, tolerance=10000):
     # raise NotImplementedError("No geospatial endpoint")
 
     if not resp.get('features'):
-        return None
+        return {}
     route_details = {
         'Route': resp['features'][0]['attributes']['Route'],
         'Measure': float(resp['features'][0]['attributes']['Measure']),
@@ -160,8 +160,10 @@ def get_route_geometry_ahead(routeId, startMeasure, heading, distanceAhead, poin
                 routeId, startMeasure, endMeasure, pointsToSkip)}
 
 
-def get_route_between_measures(routeId, startMeasure, endMeasure, compressed=False):
+def get_route_between_measures(routeId, startMeasure, endMeasure, dualCarriageway=True, compressed=False):
     # Get lat/long points between two mile markers on route
+    if dualCarriageway and is_route_dec(routeId, startMeasure, endMeasure):
+        routeId = f"{routeId}_dec"
 
     parameters = []
     parameters.append(f"routeId={routeId}")
@@ -188,3 +190,7 @@ def get_route_between_measures(routeId, startMeasure, endMeasure, compressed=Fal
     return linestring
 
     # RouteBetweenMeasures?routeId=070A&fromMeasure=50&toMeasure=60&outSR=4326&f=pjson
+
+
+def is_route_dec(routeId, startMeasure, endMeasure):
+    return endMeasure > startMeasure

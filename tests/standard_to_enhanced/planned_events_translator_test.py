@@ -7,15 +7,16 @@ from unittest.mock import MagicMock, patch
 
 import time_machine
 from wzdx.standard_to_enhanced import planned_events_translator
+from wzdx.tools import wzdx_translator
 
 from tests.data.standard_to_enhanced import planned_events_translator_data
-
 
 
 @patch.object(argparse, 'ArgumentParser')
 def test_parse_planned_events_arguments(argparse_mock):
     plannedEventsFile, outputFile = planned_events_translator.parse_planned_events_arguments()
     assert plannedEventsFile != None and outputFile != None
+
 
 def init_datetime_mocks(mock_dts):
     for i in mock_dts:
@@ -34,6 +35,8 @@ def test_parse_work_zone_linestring(mock_dt, mock_dt_3):
     expected_feature = planned_events_translator_data.test_parse_work_zone_linestring_expected
 
     test_feature = planned_events_translator.parse_work_zone(standard)
+    test_feature = wzdx_translator.remove_unnecessary_fields_feature(
+        test_feature)
 
     assert test_feature == expected_feature
 
@@ -134,9 +137,9 @@ def test_get_vehicle_impact_all_lanes_open():
 
 # --------------------------------------------------------------------------------Unit test for wzdx_creator function--------------------------------------------------------------------------------
 @patch.dict(os.environ, {
-    'contact_name': 'Ashley Nylen',
-    'contact_email': 'ashley.nylen@state.co.us',
-    'issuing_organization': 'CDOT'
+    'contact_name': 'Heather Pickering-Hilgers',
+    'contact_email': 'heather.pickeringhilgers@state.co.us',
+    'publisher': 'CDOT'
 })
 # first is for data source id, second is for a default id that is not used in this example, and the third is the road_event_id
 @patch.object(uuid, 'uuid4', side_effect=['w', '', '3'])
@@ -151,13 +154,14 @@ def test_wzdx_creator(mock_dt, mock_dt_3, _):
 
     with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
         test_wzdx = planned_events_translator.wzdx_creator(standard)
+    test_wzdx = wzdx_translator.remove_unnecessary_fields(test_wzdx)
     assert expected_wzdx == test_wzdx
 
 
 @patch.dict(os.environ, {
-    'contact_name': 'Ashley Nylen',
-    'contact_email': 'ashley.nylen@state.co.us',
-    'issuing_organization': 'CDOT'
+    'contact_name': 'Heather Pickering-Hilgers',
+    'contact_email': 'heather.pickeringhilgers@state.co.us',
+    'publisher': 'CDOT'
 })
 # first is for data source id, second is for a default id that is not used in this example, and the third is the road_event_id
 @patch.object(uuid, 'uuid4', side_effect=['w', '', '3', '4', '5'])
@@ -173,7 +177,7 @@ def test_wzdx_creator_road_restriction(mock_dt, mock_dt_3, _):
     with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
         test_wzdx = planned_events_translator.wzdx_creator(standard)
 
-    print(test_wzdx)
+    test_wzdx = wzdx_translator.remove_unnecessary_fields(test_wzdx)
     assert expected_wzdx == test_wzdx
 
 
@@ -194,14 +198,9 @@ def test_wzdx_creator_invalid_info_object():
                                                                                                                                                                                                                                                                [-104.79432762150851, 39.73959547447038]], 'header': {'description': 'Maintenance for lane expansion', 'justification': 'Lane expansion - maintenance work', 'start_timestamp': 1630290600000, 'end_timestamp': 1630290600000}, 'detail': {'road_name': '287', 'road_number': '287', 'direction': 'eastbound'}}}
 
     test_invalid_info_object = {
-        'feed_info_id': "104d7746-e948bf9dfa",
-        'metadata': {
-            'wz_location_method': "channel-device-method",
-            'lrs_type': "lrs_type",
-            'contact_name': "Ashley Nylen",
-            'contact_email': "ashley.nylen@state.co.us",
-            'issuing_organization': "iCone",
-        }
+        'contact_name': "Heather Pickering-Hilgers",
+        'contact_email': "heather.pickeringhilgers@state.co.us",
+        'publisher': "iCone",
     }
 
     test_wzdx = planned_events_translator.wzdx_creator(

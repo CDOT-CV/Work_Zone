@@ -40,13 +40,13 @@ test_parse_reduction_zone_linestring_expected_feature = {
         },
         "start_date": "2021-08-30T02:30:00Z",
         "end_date": "2021-08-30T02:30:00Z",
-        "start_date_accuracy": "estimated",
-        "end_date_accuracy": "estimated",
-        "beginning_accuracy": "estimated",
-        "ending_accuracy": "estimated",
+        'is_start_date_verified': False,
+        'is_end_date_verified': False,
+        'is_start_position_verified': False,
+        'is_end_position_verified': False,
         "vehicle_impact": "all-lanes-open",
-        "event_status": "completed",
-        "reduced_speed_limit": 45,
+        "location_method": "channel-device-method",
+        "reduced_speed_limit_kph": 72.0,
         'types_of_work': [{'type_name': 'surface-work',
                            'is_architectural_change': True}],
     },
@@ -94,20 +94,20 @@ test_wzdx_creator_standard = {
 }
 
 test_wzdx_creator_expected_wzdx = {
-    'road_event_feed_info': {
+    'feed_info': {
         'update_date': '2021-04-13T00:00:00Z',
         'publisher': 'CDOT',
-        'contact_name': 'Ashley Nylen',
-        'contact_email': 'ashley.nylen@state.co.us',
-        'version': '4.0',
+        'contact_name': 'Heather Pickering-Hilgers',
+        'contact_email': 'heather.pickeringhilgers@state.co.us',
+        'version': '4.1',
         "update_frequency": 300,
         'license': 'https://creativecommons.org/publicdomain/zero/1.0/',
         'data_sources': [
             {
                 'data_source_id': 'w',
                 'organization_name': 'CDOT',
-                'contact_name': 'Ashley Nylen',
-                'contact_email': 'ashley.nylen@state.co.us',
+                'contact_name': 'Heather Pickering-Hilgers',
+                'contact_email': 'heather.pickeringhilgers@state.co.us',
                 'update_date': '2021-04-13T00:00:00Z',
                 "update_frequency": 300,
             }
@@ -127,15 +127,15 @@ test_wzdx_creator_expected_wzdx = {
                     'description': 'Maintenance for lane expansion. Lane expansion - maintenance work',
                     'update_date': "2021-12-07T10:05:01Z"
                 },
-                'reduced_speed_limit': 45,
+                'location_method': 'channel-device-method',
+                'reduced_speed_limit_kph': 72.0,
                 'start_date': "2021-08-30T02:30:00Z",
                 'end_date': "2021-08-30T02:30:00Z",
-                'start_date_accuracy': 'estimated',
-                'end_date_accuracy': 'estimated',
-                'beginning_accuracy': 'estimated',
-                'ending_accuracy': 'estimated',
+                'is_start_date_verified': False,
+                'is_end_date_verified': False,
+                'is_start_position_verified': False,
+                'is_end_position_verified': False,
                 'vehicle_impact': 'all-lanes-open',
-                'event_status': 'planned',
                 'types_of_work': [
                     {
                         'type_name': 'surface-work',

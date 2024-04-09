@@ -7,6 +7,7 @@ from unittest.mock import Mock, patch
 import time_machine
 import xmltodict
 from wzdx.standard_to_enhanced import icone_translator
+from wzdx.tools import wzdx_translator
 
 from tests.data.standard_to_enhanced import icone_translator_data
 
@@ -16,9 +17,8 @@ def test_parse_planned_events_arguments(argparse_mock):
     iconeFile, outputFile = icone_translator.parse_icone_arguments()
     assert iconeFile != None and outputFile != None
 
+
 # --------------------------------------------------------------------------------Unit test for get_vehicle_impact function--------------------------------------------------------------------------------
-
-
 def test_get_vehicle_impact_some_lanes_closed():
     test_description = "Roadwork - Lane Closed, MERGE LEFT [Trafficade, iCone]"
     test_vehicle_impact = icone_translator.get_vehicle_impact(test_description)
@@ -90,19 +90,17 @@ def test_wzdx_creator_invalid_info_object():
                 "road_name": "I-75 N",
                 "road_number": "I-75 N",
                 "direction": "northbound"
+            },
+            "additional_info": {
+
             }
         }
     }
 
     test_invalid_info_object = {
-        'feed_info_id': "104d7746-e948bf9dfa",
-        'metadata': {
-            'wz_location_method': "channel-device-method",
-            'lrs_type': "lrs_type",
-            'contact_name': "Ashley Nylen",
-            'contact_email': "ashley.nylen@state.co.us",
-            'issuing_organization': "iCone",
-        }
+        'contact_name': "Heather Pickering-Hilgers",
+        'contact_email': "heather.pickeringhilgers@state.co.us",
+        'publisher': "iCone",
     }
 
     test_wzdx = icone_translator.wzdx_creator(
@@ -111,9 +109,9 @@ def test_wzdx_creator_invalid_info_object():
 
 
 @patch.dict(os.environ, {
-    'contact_name': 'Ashley Nylen',
-    'contact_email': 'ashley.nylen@state.co.us',
-    'issuing_organization': 'CDOT'
+    'contact_name': 'Heather Pickering-Hilgers',
+    'contact_email': 'heather.pickeringhilgers@state.co.us',
+    'publisher': 'CDOT'
 })
 @patch('uuid.uuid4')
 def test_wzdx_creator(mockuuid):
@@ -163,7 +161,7 @@ def test_wzdx_creator(mockuuid):
             "header": {
                 "description": "19-1245: Roadwork between MP 40 and MP 48",
                 "start_timestamp": 1623183301000,
-                "end_timestamp": "None"
+                "end_timestamp": 1623186301000
             },
             "detail": {
                 "road_name": "I-75 N",
@@ -177,6 +175,7 @@ def test_wzdx_creator(mockuuid):
 
     with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
         test_wzdx = icone_translator.wzdx_creator(icone_obj)
+    test_wzdx = wzdx_translator.remove_unnecessary_fields(test_wzdx)
     assert expected_wzdx == test_wzdx
 
 
