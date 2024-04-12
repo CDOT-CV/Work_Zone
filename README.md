@@ -1,6 +1,6 @@
 # Work_Zone
 
-This is an open source, proof of concept solution for translating work zone data in the form of CDOT Planned Events, iCone device, and NavJOY 568 form data to the standardized [WZDx 4.2 format](https://github.com/usdot-jpo-ode/wzdx/tree/release/v4.2). This project was developed for CDOT. A unique translator has been developed for each of these message types. These translators read in the source message, parse out specific fields, and generate a WZDx message. For more information on these message formats and the data mappings between these messages and the WZDx format, see the [documentation](wzdx/docs). sample_files are located [here](wzdx/sample_files). All these translators are built to run from the command line and from GCP Dataflows, hosted within the CDOT RTDH WZDX environment.
+This is an open source, proof of concept solution for translating work zone data in the form of CDOT Planned Events, iCone device, and NavJOY 568 form data to the standardized [WZDx 4.2 format](https://github.com/usdot-jpo-ode/wzdx/tree/release/v4.2). This project was developed for CDOT. A unique translator has been developed for each of these message types. These translators read in the source message, parse out specific fields, and generate a WZDx message. For more information on these message formats and the data mappings between these messages and the WZDx format, see the [documentation](wzdx/docs). sample_files are located [here](wzdx/sample_files). All these translators are built to run from the command line and from GCP Dataflows, hosted within the CDOT RTDH WZDX environment. These translators are used to generate the CDOT Production WZDx data feed, which is published on the USDOT [WZDx Data Exchange Feed Registry](https://datahub.transportation.gov/Roadways-and-Bridges/Work-Zone-Data-Exchange-WZDx-Feed-Registry/69qe-yiui/data_preview)
 
 The Google CloudPlatform deployment for the CDOT Planned Event WZDx translator is outlined below:
 ![GCP Planned Events](wzdx/docs/CDOT%20WZDx%20translators%20-%20Planned%20Events.png)
@@ -10,7 +10,19 @@ On top of these translators, combination scripts have been written to integrate 
 The Google CloudPlatform deployment for the CDOT WZDx combination workflow is outlined below:
 ![GCP Combination](wzdx/docs/CDOT%20WZDx%20translators%20-%20Processing.png)
 
-## Running the Translators
+## Building as a Package
+
+This project is set up to be build into a python package, using python 3.8 and above. Use the following script to build the package:
+
+```
+pip install wheel
+pip install -r requirements.txt
+python setup.py sdist bdist_wheel
+```
+
+The build package tar.gz file will be located in the dist folder.
+
+## Running the Translators Locally
 
 This set of WZDx message translators is set up to be implemented in GCP with App Engines and Dataflows. It is also set up with raw, standard, and enhanced (WZDx) data feeds. This means that to take a raw icone document and generate a WZDx message, the raw icone xml document must first be converted to 1 or multiple standard json messages (based on CDOT RTDH specification), and then each standard message may be converted into a single WZDx message. At this point, this data can be combined with other WZDx messages, through the [combination scripts](wzdx/experimental_combination/)
 
@@ -127,23 +139,37 @@ Example usage:
 python -m wzdx.standard_to_enhanced.navjoy_translator 'wzdx/sample_files/standard/navjoy/standard_568_Form568-cb0fdaf0-c27a-4bef-aabd-442615dfb2d6_1638373455_westbound.json'
 ```
 
-### Execution for Combine_wzdx
+### Combine WZDx Messages
 
-#### Run the translator script (from Work_Zone/wzdx)
+These combination scripts take in a base WZDx message and an additional icone/navjoy WZDx or Geotab JSON message, and generate an enhanced WZDx message as output.
 
-```
-python combine_wzdx.py icone_wzdx_output_message_file cotrip_wzdx_output_message_file --outputFile outputfile.geojson
-```
+### iCone
 
-Example usage:
+Edit the files read in for iCone and WZDx messages in the main method, then run the combination script:
 
 ```
-python combine_wzdx.py '../sample_files/enhanced/icone_wzdx_translated_output_message.geojson' '../sample_files/enhanced/cotrip_wzdx_translated_output_message.geojson'
+python icone.py
 ```
 
-### Unit Testing
+### Navjoy 568 form
 
-#### Run the unit test for translator script (from root directory)
+Edit the files read in for navjoy and WZDx messages in the main method, then run the combination script:
+
+```
+python navjoy.py
+```
+
+### Geotab Vehicle (ATMA)
+
+Edit the files read in for geotab_avl and WZDx messages in the main method, then run the combination script:
+
+```
+python attenuator.py
+```
+
+## Unit Testing
+
+### Run the unit test for translator script (from root directory)
 
 ```
 python -m pytest 'tests/' -v
@@ -151,23 +177,19 @@ python -m pytest 'tests/' -v
 
 Ensure you have your environment configured correctly (as described above).
 
-#### Unit Test Coverage
+### Unit Test Coverage
 
 ```
 coverage run --source=wzdx -m pytest -v tests; coverage report -m
 ```
 
-### Message Combination Logic:
+## Message Combination Logic:
 
-The `combine_wzdx` script file combines the output from the iCone and COtrip translators, based on overlapping geography, into a single improved WZDx message. The COtrip message set contains significantly more data, and is used as the base for this new combined message. The script then finds any geographically co-located messages from the iCone data set, pulls in the additional information (comprised of vehicle impact data and data sources) and publishes a new, combined WZDx message. Future state of this script will include additional data fields from the iCone data set as they become available.
-
-### Notes
-
-This project utilized a python package to make the code more accessible. The setup.py file describes the core properties of the package (name, description, included files, ...), the pyproject.toml file describes the required pre-requisite packages for running this package. The MANIFEST.in file is used to exclude unit testing files from the package. More information on building a python package can be found at [python-packaging-tutorial](https://python-packaging-tutorial.readthedocs.io/en/latest/setup_py.html)
+The `combine_wzdx` script file combines the output from the iCone and Navjoy 568 translators, based on overlapping geography, into a single improved WZDx message. The CDOT planned events WZDx messages contain more accurate data, and are used as the base for the new combined message. The script then finds any geographically co-located messages from the iCone, Navjoy 568, and Geotab/AVL data sets, pulls in the additional information from each additional message, and generates a new, combined WZDx message.
 
 ## Documentation
 
-documentation for the included WZDx translator is located here: [docs](wzdx/docs)
+documentation for the included WZDx translators are located here: [docs](wzdx/docs)
 
 ## Guidelines
 
