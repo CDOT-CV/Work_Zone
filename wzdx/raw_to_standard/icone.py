@@ -7,8 +7,7 @@ import uuid
 import xml.etree.ElementTree as ET
 from collections import OrderedDict
 
-from ..tools import (cdot_geospatial_api, date_tools, geospatial_tools,
-                     wzdx_translator, combination)
+from ..tools import date_tools, geospatial_tools, wzdx_translator, combination
 from ..util.collections import PathDict
 
 PROGRAM_NAME = 'iConeRawToStandard'
@@ -22,12 +21,29 @@ def main():
         input_file_contents)
 
     generated_files_list = []
+    features = json.loads(
+        open(f'{output_dir}/icone_feature_collection.geojson').read())
 
     wzdx_msg = {}
     for message in generated_messages:
         output_path = f"{output_dir}/icone_{message['event']['source']['id']}_{round(message['rtdh_timestamp'])}_{message['event']['detail']['direction']}.json"
         open(output_path, 'w+').write(json.dumps(message, indent=2))
         generated_files_list.append(output_path)
+
+        features.append({
+            'type': 'Feature',
+            'properties': {
+                'id': message['event']['source']['id'],
+                'route_details': message['event']['additional_info']['route_details_start'],
+            },
+            'geometry': {
+                'type': 'Point',
+                'coordinates': message['event']['geometry'][0]
+            }
+        })
+
+    open(f'{output_dir}/icone_feature_collection.geojson',
+         'w+').write(json.dumps(features, indent=2))
 
     if generated_files_list:
         print(
@@ -66,12 +82,11 @@ def generate_raw_messages(message):
     # Loop through all elements and print each element to PubSub
     for msg in msg_lst:
         incident = ET.tostring(msg, encoding='utf8')
-        print(incident)
         obj = wzdx_translator.parse_xml_to_dict(incident)
         if validate_incident(obj.get('incident', {})):
             messages.append(incident)
         else:
-            logging.warn("Invalid message")
+            logging.warning("Invalid message")
 
     return messages
 
@@ -134,11 +149,10 @@ def create_rtdh_standard_msg(pd):
     end_time = pd.get(
         "incident/endtime", date_tools.parse_datetime_from_iso_string, default=None)
     if not end_time:
-        if start_time > datetime.datetime.utcnow().replace(tzinfo=datetime.timezone.utc):
+        if start_time > datetime.datetime.now(datetime.timezone.utc):
             end_time = start_time + datetime.timedelta(days=7)
         else:
-            end_time = datetime.datetime.utcnow().replace(
-                tzinfo=datetime.timezone.utc) + datetime.timedelta(days=7)
+            end_time = datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(days=7)
         # Added for unit test
         end_time = end_time.replace(second=0, microsecond=0)
 
@@ -194,11 +208,6 @@ def get_direction(street, coords, route_details=None):
         direction = geospatial_tools.get_road_direction_from_coordinates(
             coords)
     return direction
-
-
-def get_route_details(lngLat):
-    latLng = (lngLat[1], lngLat[0])
-    return cdot_geospatial_api.get_route_and_measure(latLng)
 
 
 def get_road_name(route_details):

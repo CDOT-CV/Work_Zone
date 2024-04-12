@@ -4,22 +4,27 @@ import os
 from datetime import datetime, timedelta
 import json
 
+###################################################################
+# THIS SCRIPT IS INTENDED TO RUN FROM THE ROOT DIRECTORY
+# IT WAS MOVED FOR ORGANIZATION PURPOSES
+###################################################################
 
-###################################################################
-############ THIS SCRIPT IS INTENDED TO RUN FROM THE ROOT DIRECTORY 
-############ IT WAS MOVED FOR ORGANIZATION PURPOSES
-###################################################################
 
 def parse_xml_to_dict(xml_string):
     d = xmltodict.parse(xml_string)
     return d
 
 
-IDS = ['13632527', '13632530', '13632531', '13632528']
-ROUTE_ID = "025A"
-MILE_MARKER_RANGE = (253.6, 270.24)
+# IDS = ['13632527', '13632530', '13632531', '13632528']
+IDS = ['13632529']
+# >>> cdot_geospatial_api.get_route_and_measure((39.643551167000055,-106.30534674999996))
+# {'Route': '070A_DEC', 'Measure': 179.999, 'MMin': 0.0, 'MMax': 449.589, 'Distance': 0.0}
+# >>> cdot_geospatial_api.get_route_and_measure((39.70960419000005,-106.69303564999996))
+# {'Route': '070A_DEC', 'Measure': 155.0, 'MMin': 0.0, 'MMax': 449.589, 'Distance': 0.0}
+ROUTE_IDS = ["070A_DEC", "070A"]
+MILE_MARKER_RANGE = (0, 100000)
 CACHED_LOCATIONS = {}
-CACHE_THRESHOLD = 3
+CACHE_THRESHOLD = 4
 
 
 def check_within_range(min, max, val):
@@ -27,7 +32,7 @@ def check_within_range(min, max, val):
 
 
 def check_geofence(lat, lng):
-    lng = lng + 0.006
+    # lng = lng + 0.006
     rounded_lat = round(lat, CACHE_THRESHOLD)
     rounded_lng = round(lng, CACHE_THRESHOLD)
     cache_key = f"{rounded_lat}_{rounded_lng}"
@@ -38,19 +43,20 @@ def check_geofence(lat, lng):
         CACHED_LOCATIONS[cache_key] = route_details
     route = route_details.get('Route')
     mile = route_details.get('Measure')
-    return route == ROUTE_ID and check_within_range(*MILE_MARKER_RANGE, mile), mile, route
+    return route in ROUTE_IDS and check_within_range(*MILE_MARKER_RANGE, mile), mile, route
 
 
 def check_id(id):
     # print(id)
-    return id in IDS
+    return True
+    # return id in IDS
 
 
-INITIAL_PATH = "./icone_arrow_boards"
+INITIAL_PATH = "./icone_arrow_boards/2023_05_16/"
 files = [os.path.join(dp, f) for dp, dn, filenames in os.walk(INITIAL_PATH)
          for f in filenames if os.path.splitext(f)[1] == '.xml']
-
-
+print("FILES")
+print(files)
 # matches = []
 segments = []
 start_time = None
@@ -75,8 +81,8 @@ for file_path in files:
                     'location', {}).get('polyline').split(',')]
                 valid, mile_marker, route = check_geofence(
                     coordinates[0], coordinates[1])
-                # if not valid:
-                #     continue
+                if not valid:
+                    continue
                 update_time = incident['updatetime']
                 try:
                     state = incident['display']['status']['@state']
@@ -95,8 +101,8 @@ for file_path in files:
                 'location', {}).get('polyline').split(',')]
             valid, mile_marker, route = check_geofence(
                 coordinates[0], coordinates[1])
-            # if not valid:
-            #     continue
+            if not valid:
+                continue
 
             update_time = incident['updatetime']
             try:
@@ -123,8 +129,8 @@ for file_path in files:
         if prevID and prevTs and ts - prevTs < timedelta(hours=3):
             # print("APPENDING")
             segments[-1]['end_time'] = ts.strftime("%Y-%m-%dT%H:%M:%SZ")
-            # segments[-1]['coordinates'].append(
-            #     [icone['lng'], icone['lat']])
+            segments[-1]['coordinates'].append(
+                [icone['lng'], icone['lat']])
             if state not in segments[-1]['states']:
                 segments[-1]['states'].append(state)
             if icone['mile_marker'] < segments[-1]['mm_min']:
@@ -156,7 +162,7 @@ for file_path in files:
         prevTs = None
 
 
-open('final_icone_report.json', 'w').write(
+open('final_icone_report_2023_04_20.json', 'w').write(
     json.dumps(segments, indent=2, default=str))
 # open('final_icone_report_matches.json', 'w').write(
 #     json.dumps(matches, indent=2, default=str))

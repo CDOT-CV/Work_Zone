@@ -1,5 +1,5 @@
 import logging
-from . import cdot_geospatial_api
+from . import cdot_geospatial_api, date_tools
 
 
 ROUTE_OVERLAP_INDIVIDUAL_DISTANCE = 0.25
@@ -12,6 +12,21 @@ def validate_directionality_wzdx(wzdx_1, wzdx_2):
     return direction_1 == direction_2
 
 
+def validate_date_overlap_wzdx(wzdx_1, wzdx_2):
+    start_date_1 = date_tools.get_unix_from_iso_string(
+        wzdx_1['features'][0]['properties']['start_date'])
+    end_date_1 = date_tools.get_unix_from_iso_string(
+        wzdx_1['features'][0]['properties']['end_date'])
+
+    start_date_2 = date_tools.get_unix_from_iso_string(
+        wzdx_2['features'][0]['properties']['start_date'])
+    end_date_2 = date_tools.get_unix_from_iso_string(
+        wzdx_2['features'][0]['properties']['end_date'])
+
+    # return whether the dates overlap
+    return (start_date_1 <= start_date_2 <= end_date_1) or (start_date_2 <= start_date_1 <= end_date_2)
+
+
 def does_route_overlap(obj1, obj2):
     number_valid_1 = 0
     number_valid_1 += 1 if obj1['route_details_start'] else 0
@@ -20,8 +35,6 @@ def does_route_overlap(obj1, obj2):
     number_valid_2 = 0
     number_valid_2 += 1 if obj2['route_details_start'] else 0
     number_valid_2 += 1 if obj2['route_details_end'] else 0
-
-    print(number_valid_1, number_valid_2)
 
     if number_valid_1 == 0 or number_valid_2 == 0:
         return None
@@ -141,8 +154,8 @@ def identify_overlapping_features_wzdx(wzdx_msgs_1, wzdx_msgs_2):
                 wzdx_1['features'][0])
 
             if not route_details_start or not route_details_end:
-                logging.info(
-                    f"No geotab route info for feature {wzdx_1['features'][0]['id']}")
+                logging.debug(
+                    f"No route details for WZDx 1 feature {wzdx_1['features'][0]['id']}")
                 continue
             wzdx_1['route_details_start'] = route_details_start
             wzdx_1['route_details_end'] = route_details_end
@@ -151,8 +164,8 @@ def identify_overlapping_features_wzdx(wzdx_msgs_1, wzdx_msgs_2):
             route_details_end = wzdx_1['route_details_end']
 
         if route_details_start['Route'] != route_details_end['Route']:
-            logging.info(
-                f"Mismatched routes for feature {wzdx_1['features'][0]['id']}")
+            logging.debug(
+                f"Mismatched routes for WZDx 1 feature {wzdx_1['features'][0]['id']}")
             continue
 
         if route_details_start['Route'] in wzdx_routes_1:
@@ -171,8 +184,8 @@ def identify_overlapping_features_wzdx(wzdx_msgs_1, wzdx_msgs_2):
                 wzdx_2['features'][0])
 
             if not route_details_start or not route_details_end:
-                logging.info(
-                    f"No geotab route info for feature {wzdx_2['features'][0]['id']}")
+                logging.debug(
+                    f"Missing route details for WZDx 2 feature {wzdx_2['features'][0]['id']}")
                 continue
             wzdx_2['route_details_start'] = route_details_start
             wzdx_2['route_details_end'] = route_details_end
@@ -181,8 +194,8 @@ def identify_overlapping_features_wzdx(wzdx_msgs_1, wzdx_msgs_2):
             route_details_end = wzdx_2['route_details_end']
 
         if route_details_start['Route'] != route_details_end['Route']:
-            logging.info(
-                f"Mismatched routes for feature {wzdx_2['features'][0]['id']}")
+            logging.debug(
+                f"Mismatched routes for WZDx 2 feature {wzdx_2['features'][0]['id']}")
             continue
 
         if route_details_start['Route'] in wzdx_routes_2:
@@ -205,7 +218,9 @@ def identify_overlapping_features_wzdx(wzdx_msgs_1, wzdx_msgs_2):
 
         for match_1 in matching_routes_1:
             for match_2 in wzdx_matched_msgs:
-                if does_route_overlap(match_1, match_2) and validate_directionality_wzdx(match_1, match_2):
+                if (does_route_overlap(match_1, match_2)
+                    and validate_directionality_wzdx(match_1, match_2)
+                        and validate_date_overlap_wzdx(match_1, match_2)):
                     matching_routes.append((match_1, match_2))
 
     return matching_routes

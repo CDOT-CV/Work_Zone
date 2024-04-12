@@ -239,7 +239,7 @@ def create_rtdh_standard_msg(pd):
             "source": {
                 "id": pd.get("sys_gUid", default=""),
                 "creation_timestamp": pd.get("data/signature/date", date_tools.get_unix_from_iso_string, default=0),
-                "last_updated_timestamp": date_tools.date_to_unix(datetime.utcnow()),
+                "last_updated_timestamp": date_tools.getCurrentTsMillis(),
             },
             "geometry": coordinates,
             "header": {

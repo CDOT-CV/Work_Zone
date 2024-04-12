@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents timestamp="2023-05-22T22:38:03Z">
+  <incident id="U13632309_202305222048">
+    <creationtime>2023-05-22T20:48:00Z</creationtime>
+    <updatetime>2023-05-22T21:47:02Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Caution [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>37.3471771,-106.9218292,37.3471771,-106.9218292</polyline>
+    </location>
+    <starttime>2023-05-22T20:48:00Z</starttime>
+    <display type="AB" id="13632309" latitude="37.3471771" longitude="-106.9218292">
+      <message verified="2023-05-22T21:47:02Z" indicator="Caution" latitude="37.3471729" longitude="-106.9218341" />
+      <status type="Arrow Panel" starttime="2023-05-19T12:57:21Z" verified="2023-05-22T21:47:02Z" state="Caution - Corners" />
+    </display>
+  </incident>
+  <incident id="U13632530_202305221143">
+    <creationtime>2023-05-22T11:43:09Z</creationtime>
+    <updatetime>2023-05-22T22:37:23Z</updatetime>
+    <type>CONSTRUCTION</type>
+    <description>Roadwork - Lane Closed, MERGE LEFT [iCone]</description>
+    <location>
+      <direction>ONE_DIRECTION</direction>
+      <polyline>40.3103279,-104.9863958,40.3103279,-104.9863958</polyline>
+    </location>
+    <starttime>2023-05-22T11:43:09Z</starttime>
+    <display type="AB" id="13632530" latitude="40.3103279" longitude="-104.9863958">
+      <message verified="2023-05-22T22:37:23Z" indicator="Merge Left" latitude="40.3103997" longitude="-104.9863327" />
+      <status type="Arrow Panel" starttime="2023-05-22T11:43:09Z" verified="2023-05-22T22:37:23Z" state="Left Arrow" />
+    </display>
+  </incident>
+</incidents>

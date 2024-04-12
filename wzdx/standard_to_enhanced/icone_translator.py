@@ -63,7 +63,7 @@ def wzdx_creator(message, info=None):
     wzdx = wzdx_translator.add_ids(wzdx)
 
     if not wzdx_translator.validate_wzdx(wzdx):
-        logging.warn("WZDx message failed validation")
+        logging.warning("WZDx message failed validation")
         return None
 
     return wzdx

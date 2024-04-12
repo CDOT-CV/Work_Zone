@@ -128,6 +128,16 @@ def test_get_event_status_completed():
     assert test_event_status == valid_event_status
 
 
+def test_get_event_status_completed():
+    test_starttime_string = datetime(2020, 1, 1)
+    test_endtime_string = datetime(2021, 1, 1)
+    with time_machine.travel(datetime(2021, 1, 11)):
+        test_event_status = date_tools.get_event_status(
+            test_starttime_string, test_endtime_string)
+    valid_event_status = "completed_recently"
+    assert test_event_status == valid_event_status
+
+
 def test_get_event_status_none():
     test_starttime_string = None
     test_endtime_string = None

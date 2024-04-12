@@ -57,7 +57,16 @@
           }
         ],
         "beginning_milepost": 123.0,
-        "ending_milepost": 127.0
+        "ending_milepost": 127.0,
+        "route_details_start": {
+          "Route": "050A_DEC",
+          "Measure": 123.0,
+          "MMin": 0.0,
+          "MMax": 314.598,
+          "Distance": 1.07
+        },
+        "route_details_end": { "Route": "050A_DEC", "Measure": 127.01, "MMin": 0.0, "MMax": 314.598, "Distance": 0.74 },
+        "condition_1": true
       },
       "geometry": {
         "type": "LineString",
