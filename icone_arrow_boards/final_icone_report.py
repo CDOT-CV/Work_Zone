@@ -16,7 +16,7 @@ def parse_xml_to_dict(xml_string):
 
 
 # IDS = ['13632527', '13632530', '13632531', '13632528']
-IDS = ['13632529']
+IDS = ["13632529"]
 # >>> cdot_geospatial_api.get_route_and_measure((39.643551167000055,-106.30534674999996))
 # {'Route': '070A_DEC', 'Measure': 179.999, 'MMin': 0.0, 'MMax': 449.589, 'Distance': 0.0}
 # >>> cdot_geospatial_api.get_route_and_measure((39.70960419000005,-106.69303564999996))
@@ -39,11 +39,17 @@ def check_geofence(lat, lng):
     if cache_key in CACHED_LOCATIONS:
         route_details = CACHED_LOCATIONS[cache_key]
     else:
-        route_details = cdot_geospatial_api.get_route_and_measure((lat, lng))
+        route_details = cdot_geospatial_api.GeospatialApi().get_route_and_measure(
+            (lat, lng)
+        )
         CACHED_LOCATIONS[cache_key] = route_details
-    route = route_details.get('Route')
-    mile = route_details.get('Measure')
-    return route in ROUTE_IDS and check_within_range(*MILE_MARKER_RANGE, mile), mile, route
+    route = route_details.get("Route")
+    mile = route_details.get("Measure")
+    return (
+        route in ROUTE_IDS and check_within_range(*MILE_MARKER_RANGE, mile),
+        mile,
+        route,
+    )
 
 
 def check_id(id):
@@ -53,8 +59,12 @@ def check_id(id):
 
 
 INITIAL_PATH = "./icone_arrow_boards/2023_05_16/"
-files = [os.path.join(dp, f) for dp, dn, filenames in os.walk(INITIAL_PATH)
-         for f in filenames if os.path.splitext(f)[1] == '.xml']
+files = [
+    os.path.join(dp, f)
+    for dp, dn, filenames in os.walk(INITIAL_PATH)
+    for f in filenames
+    if os.path.splitext(f)[1] == ".xml"
+]
 print("FILES")
 print(files)
 # matches = []
@@ -66,53 +76,68 @@ prevTs = None
 
 for file_path in files:
     # print(file_path)
-    fileName = file_path.split('/')[-1]
-    ts = datetime.strptime(fileName.split(
-        '.')[0].split('_')[-1], "%Y%m%d-%H%M%S")
+    fileName = file_path.split("/")[-1]
+    ts = datetime.strptime(fileName.split(".")[0].split("_")[-1], "%Y%m%d-%H%M%S")
     icone = xmltodict.parse(open(file_path).read())
-    incidents = icone.get('incidents', {}).get('incident', [])
+    incidents = icone.get("incidents", {}).get("incident", [])
 
     icone_matches = []
     if type(incidents) == list:
         for incident in incidents:
-            id = incident['@id'][1:9]
+            id = incident["@id"][1:9]
             if check_id(id):
-                coordinates = [float(i) for i in incident.get(
-                    'location', {}).get('polyline').split(',')]
+                coordinates = [
+                    float(i)
+                    for i in incident.get("location", {}).get("polyline").split(",")
+                ]
                 valid, mile_marker, route = check_geofence(
-                    coordinates[0], coordinates[1])
+                    coordinates[0], coordinates[1]
+                )
                 if not valid:
                     continue
-                update_time = incident['updatetime']
+                update_time = incident["updatetime"]
                 try:
-                    state = incident['display']['status']['@state']
+                    state = incident["display"]["status"]["@state"]
                 except:
-                    state = [i['@state']
-                             for i in incident['display']['status']]
-                update_time = incident['updatetime']
-                msg = {'id': id, 'update_time': update_time, 'state': state,
-                       'lat': coordinates[0], 'lng': coordinates[1], 'mile_marker': mile_marker, "route": route}
+                    state = [i["@state"] for i in incident["display"]["status"]]
+                update_time = incident["updatetime"]
+                msg = {
+                    "id": id,
+                    "update_time": update_time,
+                    "state": state,
+                    "lat": coordinates[0],
+                    "lng": coordinates[1],
+                    "mile_marker": mile_marker,
+                    "route": route,
+                }
                 icone_matches.append(msg)
     else:
         incident = incidents
-        id = incident['@id'][1:9]
+        id = incident["@id"][1:9]
         if check_id(id):
-            coordinates = [float(i) for i in incident.get(
-                'location', {}).get('polyline').split(',')]
-            valid, mile_marker, route = check_geofence(
-                coordinates[0], coordinates[1])
+            coordinates = [
+                float(i)
+                for i in incident.get("location", {}).get("polyline").split(",")
+            ]
+            valid, mile_marker, route = check_geofence(coordinates[0], coordinates[1])
             if not valid:
                 continue
 
-            update_time = incident['updatetime']
+            update_time = incident["updatetime"]
             try:
-                state = incident['display']['status']['@state']
+                state = incident["display"]["status"]["@state"]
             except:
-                state = [i['@state']
-                         for i in incident['display']['status']]
-            update_time = incident['updatetime']
-            msg = {'id': id, 'update_time': update_time, 'state': state,
-                   'lat': coordinates[0], 'lng': coordinates[1], 'mile_marker': mile_marker, "route": route}
+                state = [i["@state"] for i in incident["display"]["status"]]
+            update_time = incident["updatetime"]
+            msg = {
+                "id": id,
+                "update_time": update_time,
+                "state": state,
+                "lat": coordinates[0],
+                "lng": coordinates[1],
+                "mile_marker": mile_marker,
+                "route": route,
+            }
             icone_matches.append(msg)
     # print(icone_matches)
     # matches.append(icone_matches)
@@ -128,24 +153,30 @@ for file_path in files:
 
         if prevID and prevTs and ts - prevTs < timedelta(hours=3):
             # print("APPENDING")
-            segments[-1]['end_time'] = ts.strftime("%Y-%m-%dT%H:%M:%SZ")
-            segments[-1]['coordinates'].append(
-                [icone['lng'], icone['lat']])
-            if state not in segments[-1]['states']:
-                segments[-1]['states'].append(state)
-            if icone['mile_marker'] < segments[-1]['mm_min']:
-                segments[-1]['mm_min'] = icone['mile_marker']
-            elif icone['mile_marker'] > segments[-1]['mm_max']:
-                segments[-1]['mm_max'] = icone['mile_marker']
+            segments[-1]["end_time"] = ts.strftime("%Y-%m-%dT%H:%M:%SZ")
+            segments[-1]["coordinates"].append([icone["lng"], icone["lat"]])
+            if state not in segments[-1]["states"]:
+                segments[-1]["states"].append(state)
+            if icone["mile_marker"] < segments[-1]["mm_min"]:
+                segments[-1]["mm_min"] = icone["mile_marker"]
+            elif icone["mile_marker"] > segments[-1]["mm_max"]:
+                segments[-1]["mm_max"] = icone["mile_marker"]
 
         else:
             # print(icone['id'], prevID)
             # print("CREATING")
-            segments.append({'start_time': ts.strftime("%Y-%m-%dT%H:%M:%SZ"), 'end_time': ts.strftime("%Y-%m-%dT%H:%M:%SZ"),
-                            'id': icone['id'], 'states': [state],
-                             'mm_min': icone['mile_marker'], 'mm_max': icone['mile_marker'], 'route': icone['route'],
-                             'coordinates': [[float(coordinates[1]), float(coordinates[0])]]
-                             })
+            segments.append(
+                {
+                    "start_time": ts.strftime("%Y-%m-%dT%H:%M:%SZ"),
+                    "end_time": ts.strftime("%Y-%m-%dT%H:%M:%SZ"),
+                    "id": icone["id"],
+                    "states": [state],
+                    "mm_min": icone["mile_marker"],
+                    "mm_max": icone["mile_marker"],
+                    "route": icone["route"],
+                    "coordinates": [[float(coordinates[1]), float(coordinates[0])]],
+                }
+            )
 
         # else:
         #     if prevID and ts - prevTs < timedelta(hours=1):
@@ -153,17 +184,18 @@ for file_path in files:
         #     prevID = None
         #     prevTs = None
         #     continue
-        prevID = icone['id']
+        prevID = icone["id"]
         prevTs = ts
     else:
         if prevID and ts - prevTs < timedelta(hours=1):
-            segments[-1]['end_time'] = ts.strftime("%Y-%m-%dT%H:%M:%SZ")
+            segments[-1]["end_time"] = ts.strftime("%Y-%m-%dT%H:%M:%SZ")
         prevID = None
         prevTs = None
 
 
-open('final_icone_report_2023_04_20.json', 'w').write(
-    json.dumps(segments, indent=2, default=str))
+open("final_icone_report_2023_04_20.json", "w").write(
+    json.dumps(segments, indent=2, default=str)
+)
 # open('final_icone_report_matches.json', 'w').write(
 #     json.dumps(matches, indent=2, default=str))
 

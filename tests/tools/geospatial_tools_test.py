@@ -5,97 +5,69 @@ import statistics
 
 # --------------------------------------------------------------------------------Unit test for get_road_direction function--------------------------------------------------------------------------------
 def test_get_road_direction_no_direction():
-    test_coordinates = [
-        [
-            -114.145065,
-            34.8380671
-        ],
-        [
-            -114.145065,
-            34.8380671
-        ]
-    ]
+    test_coordinates = [[-114.145065, 34.8380671], [-114.145065, 34.8380671]]
     test_direction = geospatial_tools.get_road_direction_from_coordinates(
-        test_coordinates)
-    assert test_direction == 'unknown'
+        test_coordinates
+    )
+    assert test_direction == "unknown"
 
 
 def test_get_road_direction_empty_string():
-    test_coordinates = ''
+    test_coordinates = ""
     test_direction = geospatial_tools.get_road_direction_from_coordinates(
-        test_coordinates)
-    assert test_direction == 'unknown'
+        test_coordinates
+    )
+    assert test_direction == "unknown"
 
 
 def test_get_road_direction_empty_coordinates():
     test_coordinates = []
     test_direction = geospatial_tools.get_road_direction_from_coordinates(
-        test_coordinates)
-    assert test_direction == 'unknown'
+        test_coordinates
+    )
+    assert test_direction == "unknown"
 
 
 def test_get_road_direction_short_coordinates():
     test_coordinates = [[], []]
     test_direction = geospatial_tools.get_road_direction_from_coordinates(
-        test_coordinates)
-    assert test_direction == 'unknown'
+        test_coordinates
+    )
+    assert test_direction == "unknown"
 
 
 def test_get_road_direction_null_coordinates():
     test_coordinates = None
     test_direction = geospatial_tools.get_road_direction_from_coordinates(
-        test_coordinates)
-    assert test_direction == 'unknown'
+        test_coordinates
+    )
+    assert test_direction == "unknown"
 
 
 def test_get_road_direction_northbound_direction():
-    test_coordinates = [
-        [
-            -114.145065,
-            34.8380671
-        ],
-        [
-            -114.145065,
-            38.8380671
-        ]
-    ]
+    test_coordinates = [[-114.145065, 34.8380671], [-114.145065, 38.8380671]]
     test_direction = geospatial_tools.get_road_direction_from_coordinates(
-        test_coordinates)
-    valid_direction = 'northbound'
+        test_coordinates
+    )
+    valid_direction = "northbound"
     assert test_direction == valid_direction
 
 
 def test_get_road_direction_eastbound_direction():
-    test_coordinates = [
-        [
-            -114.145065,
-            34.8380671
-        ],
-        [
-            -104.145065,
-            34.8380671
-        ]
-    ]
+    test_coordinates = [[-114.145065, 34.8380671], [-104.145065, 34.8380671]]
     test_direction = geospatial_tools.get_road_direction_from_coordinates(
-        test_coordinates)
-    valid_direction = 'eastbound'
+        test_coordinates
+    )
+    valid_direction = "eastbound"
     assert test_direction == valid_direction
 
 
 def test_get_road_direction_westbound_direction():
-    test_coordinates = [
-        [
-            -114.145065,
-            34.8380671
-        ],
-        [
-            -124.145065,
-            34.8380671
-        ]
-    ]
+    test_coordinates = [[-114.145065, 34.8380671], [-124.145065, 34.8380671]]
     test_direction = geospatial_tools.get_road_direction_from_coordinates(
-        test_coordinates)
-    valid_direction = 'westbound'
+        test_coordinates
+    )
+    valid_direction = "westbound"
     assert test_direction == valid_direction
 
 
@@ -146,60 +118,78 @@ def test_get_heading_from_coordinates_west():
 
 def test_get_direction_from_bearing_all():
     for i in range(-45, 45):
-        assert geospatial_tools.get_direction_from_bearing(i) == 'northbound'
+        assert geospatial_tools.get_direction_from_bearing(i) == "northbound"
     for i in range(-360, -315):
-        assert geospatial_tools.get_direction_from_bearing(i) == 'northbound'
+        assert geospatial_tools.get_direction_from_bearing(i) == "northbound"
     for i in range(45, 135):
-        assert geospatial_tools.get_direction_from_bearing(i) == 'eastbound'
+        assert geospatial_tools.get_direction_from_bearing(i) == "eastbound"
     for i in range(-315, -225):
-        assert geospatial_tools.get_direction_from_bearing(i) == 'eastbound'
+        assert geospatial_tools.get_direction_from_bearing(i) == "eastbound"
     for i in range(135, 225):
-        assert geospatial_tools.get_direction_from_bearing(i) == 'southbound'
+        assert geospatial_tools.get_direction_from_bearing(i) == "southbound"
     for i in range(-225, -135):
-        assert geospatial_tools.get_direction_from_bearing(i) == 'southbound'
+        assert geospatial_tools.get_direction_from_bearing(i) == "southbound"
     for i in range(225, 315):
-        assert geospatial_tools.get_direction_from_bearing(i) == 'westbound'
+        assert geospatial_tools.get_direction_from_bearing(i) == "westbound"
     for i in range(-135, -45):
-        assert geospatial_tools.get_direction_from_bearing(i) == 'westbound'
+        assert geospatial_tools.get_direction_from_bearing(i) == "westbound"
 
 
 def test_get_closest_direction_from_bearing_all_northbound():
     for i in range(-90, 90):  # skips 90
-        assert geospatial_tools.get_closest_direction_from_bearing(
-            i, 'northbound') == 'northbound'
+        assert (
+            geospatial_tools.get_closest_direction_from_bearing(i, "northbound")
+            == "northbound"
+        )
     for i in range(270, 361):  # skips 361
-        assert geospatial_tools.get_closest_direction_from_bearing(
-            i, 'northbound') == 'northbound'
+        assert (
+            geospatial_tools.get_closest_direction_from_bearing(i, "northbound")
+            == "northbound"
+        )
     for i in range(-360, -270):  # skips -270
-        assert geospatial_tools.get_closest_direction_from_bearing(
-            i, 'northbound') == 'northbound'
+        assert (
+            geospatial_tools.get_closest_direction_from_bearing(i, "northbound")
+            == "northbound"
+        )
 
 
 def test_get_closest_direction_from_bearing_all_southbound():
     for i in range(90, 269):  # skips 270
-        assert geospatial_tools.get_closest_direction_from_bearing(
-            i, 'northbound') == 'southbound'
+        assert (
+            geospatial_tools.get_closest_direction_from_bearing(i, "northbound")
+            == "southbound"
+        )
     for i in range(-269, -90):  # skips -90
-        assert geospatial_tools.get_closest_direction_from_bearing(
-            i, 'northbound') == 'southbound'
+        assert (
+            geospatial_tools.get_closest_direction_from_bearing(i, "northbound")
+            == "southbound"
+        )
 
 
 def test_get_closest_direction_from_bearing_all_eastbound():
     for i in range(1, 180):  # skips 270
-        assert geospatial_tools.get_closest_direction_from_bearing(
-            i, 'eastbound') == 'eastbound'
+        assert (
+            geospatial_tools.get_closest_direction_from_bearing(i, "eastbound")
+            == "eastbound"
+        )
     for i in range(-359, -180):  # skips -90
-        assert geospatial_tools.get_closest_direction_from_bearing(
-            i, 'eastbound') == 'eastbound'
+        assert (
+            geospatial_tools.get_closest_direction_from_bearing(i, "eastbound")
+            == "eastbound"
+        )
 
 
 def test_get_closest_direction_from_bearing_all_westbound():
     for i in range(181, 360):  # skips -90
-        assert geospatial_tools.get_closest_direction_from_bearing(
-            i, 'eastbound') == 'westbound'
+        assert (
+            geospatial_tools.get_closest_direction_from_bearing(i, "eastbound")
+            == "westbound"
+        )
     for i in range(-179, 0):  # skips -90
-        assert geospatial_tools.get_closest_direction_from_bearing(
-            i, 'eastbound') == 'westbound'
+        assert (
+            geospatial_tools.get_closest_direction_from_bearing(i, "eastbound")
+            == "westbound"
+        )
 
 
 def test_getEndPoint():
@@ -209,8 +199,9 @@ def test_getEndPoint():
     expected = (37.30655150100006, -105.43320319899999)
 
     actual = geospatial_tools.getEndPoint(*start, bearing, distance)
-    assert abs(actual[0] - expected[0]
-               ) < 0.0001 and abs(actual[1] - expected[1]) < 0.0001
+    assert (
+        abs(actual[0] - expected[0]) < 0.0001 and abs(actual[1] - expected[1]) < 0.0001
+    )
 
 
 def test_getDist():
@@ -226,48 +217,44 @@ def test_getDist():
 ################################# Random Testing #################################
 def get_color(val):
     if val < 5:
-        return '#00b521'
+        return "#00b521"
     elif val < 10:
-        return '#00ff40'
+        return "#00ff40"
     elif val < 20:
-        return '#ffe100'
+        return "#ffe100"
     elif val < 50:
-        return '#ff8400'
+        return "#ff8400"
     elif val < 100:
-        return '#ff0000'
+        return "#ff0000"
     elif val < 500:
-        return '#940000'
+        return "#940000"
     else:
-        return '#000000'
+        return "#000000"
 
 
 def test_get_point_spacing_geospatial_endpoint():
-    geospatial_response = json.load(
-        open('./tests/data/tools/geospatial_spacing.json'))
-    coordinates = geospatial_response['features'][0]['geometry']['paths'][0]
+    geospatial_response = json.load(open("./tests/data/tools/geospatial_spacing.json"))
+    coordinates = geospatial_response["features"][0]["geometry"]["paths"][0]
     spacings = []
 
-    out = {
-        'type': 'FeatureCollection'
-    }
+    out = {"type": "FeatureCollection"}
     features = []
 
     for i in range(len(coordinates) - 1):
         spacing = geospatial_tools.getDist(coordinates[i], coordinates[i + 1])
-        features.append({
-            'type': 'Feature',
-            'geometry': {
-                'type': 'Point',
-                'coordinates': coordinates[i],
-            },
-            'properties': {
-                'index': i,
-                'marker-color': get_color(spacing)
+        spacings.append(spacing)
+        features.append(
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": coordinates[i],
+                },
+                "properties": {"index": i, "marker-color": get_color(spacing)},
             }
-        }
         )
 
-    out['features'] = features
+    out["features"] = features
 
     print("GEOSPATIAL ENDPOINT SPACING")
     print("Mean", statistics.mean(spacings))

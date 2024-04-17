@@ -1,11 +1,11 @@
 {
-  "rtdh_timestamp": 1633444335.4258583,
+  "rtdh_timestamp": 1658952000.4258583,
   "rtdh_message_id": "4c94f97e-e0ea-4336-86ab-49c5bc1317d1",
   "event": {
     "type": "CONSTRUCTION",
     "source": {
       "id": 1246,
-      "last_updated_timestamp": 1598046722
+      "last_updated_timestamp": 1658952000
     },
     "geometry": [
       [-106.94366455078125, 39.455546939606066],
@@ -13,7 +13,7 @@
     ],
     "header": {
       "description": "19-1245: Roadwork between MP 48 and MP 40",
-      "start_timestamp": 1574488941,
+      "start_timestamp": 1658952000,
       "end_timestamp": null
     },
     "detail": {
