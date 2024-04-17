@@ -12,7 +12,7 @@ The Google CloudPlatform deployment for the CDOT WZDx combination workflow is ou
 
 ## Building as a Package
 
-This project is set up to be build into a python package, using python 3.8 and above. Use the following script to build the package:
+This project is set up to be built into a python package, using python 3.8 and above. Use the following script to build the package:
 
 ```
 pip install wheel
