@@ -1,26 +1,35 @@
 import json
 import logging
+import time
 
 import requests
+import os
+import sys
 
 from ..tools import geospatial_tools, path_history_compression
-
-BASE_URL = "https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes_withDEC/MapServer/exts/CdotLrsAccessRounded"
-# BASE_URL = "https://dtdapps.colorado.gov/server/rest/services/LRS/Routes_withDEC/MapServer/exts/CdotLrsAccessRounded"
-ROUTE_BETWEEN_MEASURES_API = "RouteBetweenMeasures"
-GET_ROUTE_AND_MEASURE_API = "MeasureAtPoint"
-GET_POINT_AT_MEASURE_API = "PointAtMeasure"
-GET_ROUTES_API = "ROUTES"
-GET_ROUTE_API = "ROUTE"
-SR = "4326"
 
 
 class GeospatialApi:
     def __init__(
-        self, getCachedRequest=lambda x: None, setCachedRequest=lambda x, y: None
+        self,
+        getCachedRequest=lambda x: None,
+        setCachedRequest=lambda x, y: None,
+        BASE_URL=os.getenv(
+            "CDOT_GEOSPATIAL_API_BASE_URL",
+            "https://dtdapps.colorado.gov/server/rest/services/LRS/Routes_withDEC/MapServer/exts/CdotLrsAccessRounded",
+            # TODO: Remove old api url: "https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes_withDEC/MapServer/exts/CdotLrsAccessRounded"
+        ),
     ):
         self.getCachedRequest = getCachedRequest
         self.setCachedRequest = setCachedRequest
+        self.BASE_URL = BASE_URL
+        self.ROUTE_BETWEEN_MEASURES_API = "RouteBetweenMeasures"
+        self.GET_ROUTE_AND_MEASURE_API = "MeasureAtPoint"
+        self.GET_POINT_AT_MEASURE_API = "PointAtMeasure"
+        self.GET_ROUTES_API = "ROUTES"
+        self.GET_ROUTE_API = "ROUTE"
+        self.SR = "4326"
+        self.responseTimes = []
 
     def _make_web_request(self, url: str, timeout):
         resp = requests.get(url, timeout=timeout).content.decode("utf-8")
@@ -30,7 +39,7 @@ class GeospatialApi:
         parameters = []
         parameters.append(f"f=pjson")
 
-        url = f"{BASE_URL}/{GET_ROUTES_API}?{'&'.join(parameters)}"
+        url = f"{self.BASE_URL}/{self.GET_ROUTES_API}?{'&'.join(parameters)}"
         logging.debug(url)
 
         # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded/Routes?f=pjson
@@ -45,10 +54,10 @@ class GeospatialApi:
     def get_route_details(self, routeId):
         parameters = []
         parameters.append(f"routeId={routeId}")
-        parameters.append(f"outSR={SR}")
+        parameters.append(f"outSR={self.SR}")
         parameters.append(f"f=pjson")
 
-        url = f"{BASE_URL}/{GET_ROUTE_API}?{'&'.join(parameters)}"
+        url = f"{self.BASE_URL}/{self.GET_ROUTE_API}?{'&'.join(parameters)}"
         logging.debug(url)
 
         # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded/Routes?f=pjson
@@ -75,11 +84,11 @@ class GeospatialApi:
         parameters.append(f"x={lng}")
         parameters.append(f"y={lat}")
         parameters.append(f"tolerance={tolerance}")
-        parameters.append(f"inSR={SR}")
-        parameters.append(f"outSR={SR}")
+        parameters.append(f"inSR={self.SR}")
+        parameters.append(f"outSR={self.SR}")
         parameters.append(f"f=pjson")
 
-        url = f"{BASE_URL}/{GET_ROUTE_AND_MEASURE_API}?{'&'.join(parameters)}"
+        url = f"{self.BASE_URL}/{self.GET_ROUTE_AND_MEASURE_API}?{'&'.join(parameters)}"
         logging.debug(url)
 
         # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded/MeasureAtPoint?x=-105&y=39.5&inSR=4326&tolerance=10000&outSR=&f=html
@@ -127,10 +136,10 @@ class GeospatialApi:
         parameters = []
         parameters.append(f"routeId={routeId}")
         parameters.append(f"measure={measure}")
-        parameters.append(f"outSR={SR}")
+        parameters.append(f"outSR={self.SR}")
         parameters.append(f"f=pjson")
 
-        url = f"{BASE_URL}/{GET_POINT_AT_MEASURE_API}?{'&'.join(parameters)}"
+        url = f"{self.BASE_URL}/{self.GET_POINT_AT_MEASURE_API}?{'&'.join(parameters)}"
         logging.debug(url)
 
         # call api
@@ -195,16 +204,18 @@ class GeospatialApi:
     ):
         # Get lat/long points between two mile markers on route
         if dualCarriageway and self.is_route_dec(routeId, startMeasure, endMeasure):
-            routeId = f"{routeId}_dec"
+            routeId = f"{routeId}_DEC"
 
         parameters = []
         parameters.append(f"routeId={routeId}")
         parameters.append(f"fromMeasure={startMeasure}")
         parameters.append(f"toMeasure={endMeasure}")
-        parameters.append(f"outSR={SR}")
+        parameters.append(f"outSR={self.SR}")
         parameters.append(f"f=pjson")
 
-        url = f"{BASE_URL}/{ROUTE_BETWEEN_MEASURES_API}?{'&'.join(parameters)}"
+        url = (
+            f"{self.BASE_URL}/{self.ROUTE_BETWEEN_MEASURES_API}?{'&'.join(parameters)}"
+        )
         logging.debug(url)
 
         # call api
@@ -227,20 +238,20 @@ class GeospatialApi:
     def is_route_dec(self, routeId, startMeasure, endMeasure):
         return endMeasure > startMeasure
 
-    # def get_cache_info():
-    #     CacheData = namedtuple('CacheData', ['currsize', 'hits', 'misses'])
-
-    #     return CacheData(0, 0, 0)
-    #     # return _make_web_request.cache_info()
-
     def _make_cached_web_request(
-        self, url: str, timeout: int = 5, retryOnTimeout: bool = False
+        self, url: str, timeout: int = 15, retryOnTimeout: bool = False
     ):
+        startTime = time.time()
         try:
             response = self.getCachedRequest(url)
             if not response:
                 response = self._make_web_request(url, timeout=timeout)
                 self.setCachedRequest(url, response)
+            self.responseTimes.append(time.time() - startTime)
+            logging.debug(
+                f"Average Response Time: {sum(self.responseTimes)/len(self.responseTimes)}"
+            )
+            logging.debug("Max Response Time: " + str(max(self.responseTimes)))
             return json.loads(response)
         except requests.exceptions.Timeout as e:
             if retryOnTimeout:
@@ -260,10 +271,3 @@ class GeospatialApi:
                 f"Geospatial Request Failed for URL: {url}. Timeout: {timeout}. Error: {e}"
             )
             return None
-
-
-# # average request size is 1000b, so 10MB cache is roughly 10k requests
-# @cached(cache=Cache(maxsize=1024*10))
-# def _make_web_request(url: str, timeout):
-#     resp = requests.get(url, timeout=timeout).content.decode('utf-8')
-#     return resp

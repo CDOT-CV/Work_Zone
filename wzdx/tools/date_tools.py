@@ -17,7 +17,7 @@ def get_iso_string_from_unix(time_string):
 
 def get_iso_string_from_datetime(date):
     # This is added for unit test mocking (dt.datetime instead of just datetime)
-    if (not date or type(date) != dt.datetime):
+    if not date or type(date) != dt.datetime:
         return None
     return date.astimezone(timezone.utc).strftime(ISO_8601_FORMAT_STRING)
 
@@ -50,7 +50,7 @@ def parse_datetime_from_unix(time):
 def datetime_from_unix(time):
     # I tested this method, and this value makes it fail (3001, 1, 19, 21, 59, 59)
     if time > 32536850399:
-        return datetime.fromtimestamp(time/1000, tz=timezone.utc)
+        return datetime.fromtimestamp(time / 1000, tz=timezone.utc)
     else:
         return datetime.fromtimestamp(time, tz=timezone.utc)
 
@@ -72,13 +72,14 @@ def get_event_status(start_time, end_time):
     current_time = datetime.now()
 
     # check if datetime is time zone aware. If it is, get utc time
-    if start_time.tzinfo is not None and start_time.tzinfo.utcoffset(start_time) is not None:
+    if (
+        start_time.tzinfo is not None
+        and start_time.tzinfo.utcoffset(start_time) is not None
+    ):
         current_time = datetime.now(timezone.utc)
 
-    future_date_after_2weeks = current_time + \
-        timedelta(days=14)
-    past_date_2weeks_ago = current_time - \
-        timedelta(days=14)
+    future_date_after_2weeks = current_time + timedelta(days=14)
+    past_date_2weeks_ago = current_time - timedelta(days=14)
 
     if current_time < start_time:
         if start_time < future_date_after_2weeks:
@@ -86,11 +87,12 @@ def get_event_status(start_time, end_time):
         else:
             event_status = "planned"
     elif end_time and type(end_time) == dt.datetime and end_time < current_time:
-        if (end_time > past_date_2weeks_ago):
+        if end_time > past_date_2weeks_ago:
             event_status = "completed_recently"
         else:
             event_status = "completed"
     return event_status
 
+
 def get_current_ts_millis():
-    return date_to_unix(datetime.now(timezone.utc).timestamp())
+    return datetime.now(timezone.utc).timestamp()

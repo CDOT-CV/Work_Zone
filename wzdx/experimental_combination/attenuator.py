@@ -18,9 +18,6 @@ def main(outputPath="./tests/data/output/wzdx_attenuator_combined.json"):
         "./wzdx/sample_files/raw/geotab_avl/attenuator_combination_geotab.json"
     ) as f:
         geotab_avl = [json.loads(f.read())]
-        geotab_avl[0]["avl_location"]["source"]["collection_timestamp"] = (
-            date_tools.get_iso_string_from_unix(date_tools.get_current_ts_millis())
-        )
     with open(
         "./wzdx/sample_files/enhanced/attenuator/attenuator_combination_wzdx.json"
     ) as f:
@@ -36,6 +33,7 @@ def main(outputPath="./tests/data/output/wzdx_attenuator_combined.json"):
 
     with open(outputPath, "w+") as f:
         f.write(json.dumps(combined_events, indent=2))
+        logging.debug(f"Output written to {outputPath}")
 
 
 def validate_directionality(geotab, wzdx):
@@ -53,6 +51,7 @@ def validate_dates(geotab, wzdx):
     geotab_date = date_tools.get_unix_from_iso_string(
         geotab["avl_location"]["source"]["collection_timestamp"]
     )
+    logging.debug(f"Geotab: {json.dumps(geotab)}")
     if not geotab_date:
         geotab_date = (
             geotab["avl_location"]["source"]["collection_timestamp"] * 1000
@@ -60,6 +59,7 @@ def validate_dates(geotab, wzdx):
             else None
         )
     if not geotab_date:
+        logging.debug(f"No geotab date found")
         return False
 
     wzdx_start_date = date_tools.get_unix_from_iso_string(
@@ -68,6 +68,8 @@ def validate_dates(geotab, wzdx):
     wzdx_end_date = date_tools.get_unix_from_iso_string(
         wzdx["features"][0]["properties"]["end_date"]
     )
+
+    logging.debug(f"Dates: {wzdx_start_date}, {geotab_date}, {wzdx_end_date}")
 
     return wzdx_start_date <= geotab_date <= wzdx_end_date
 
@@ -99,6 +101,7 @@ def identify_overlapping_features(geotab_msgs, wzdx_msgs):
             continue
         geotab_msg["route_details_start"] = route_details
         geotab_msg["route_details_end"] = None
+        logging.debug(route_details)
 
         if not route_details:
             logging.debug(
@@ -113,6 +116,12 @@ def identify_overlapping_features(geotab_msgs, wzdx_msgs):
     if not geotab_routes:
         return []
     for wzdx in wzdx_msgs:
+        wzdx["route_details_start"] = wzdx["features"][0]["properties"].get(
+            "route_details_start"
+        )
+        wzdx["route_details_end"] = wzdx["features"][0]["properties"].get(
+            "route_details_end"
+        )
         if not wzdx.get("route_details_start") or not wzdx.get("route_details_end"):
             route_details_start, route_details_end = (
                 combination.get_route_details_for_wzdx(wzdx["features"][0])
@@ -125,6 +134,9 @@ def identify_overlapping_features(geotab_msgs, wzdx_msgs):
                 continue
             wzdx["route_details_start"] = route_details_start
             wzdx["route_details_end"] = route_details_end
+            logging.debug(
+                json.dumps(route_details) + ", " + json.dumps(route_details_end)
+            )
 
         if not wzdx.get("route_details_start"):
             logging.debug(
@@ -149,8 +161,15 @@ def identify_overlapping_features(geotab_msgs, wzdx_msgs):
                 wzdx["route_details_start"]["Route"]
                 != wzdx["route_details_end"]["Route"]
             ):
+                
+                logging.debug(
+                    f"Start/End don't match: {wzdx["route_details_start"]["Route"]}, {wzdx["route_details_end"]["Route"]}"
+                )
                 continue
             for geotab in matching_geotab_routes:
+                logging.debug(
+                    f"VALIDATING MATCH: {combination.does_route_overlap(geotab, wzdx)}, {validate_directionality(geotab, wzdx)}, {validate_dates(geotab, wzdx)}"
+                )
                 if (
                     combination.does_route_overlap(geotab, wzdx)
                     and validate_directionality(geotab, wzdx)
@@ -228,12 +247,6 @@ def combine_geotab_with_wzdx(geotab_avl, wzdx_wzdx):
 
 
 def get_geometry_for_distance_ahead(distance_ahead, route_details, bearing, mmin, mmax):
-    logging.debug(
-        "Found matching events, generating geometry ahead:"
-        + str(route_details["Measure"])
-        + str(mmin)
-        + str(mmax)
-    )
     route_ahead = cdot_geospatial_api.GeospatialApi().get_route_geometry_ahead(
         route_details["Route"],
         route_details["Measure"],
