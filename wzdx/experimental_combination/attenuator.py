@@ -21,7 +21,7 @@ def main(outputPath="./tests/data/output/wzdx_attenuator_combined.json"):
     with open(
         "./wzdx/sample_files/enhanced/attenuator/attenuator_combination_wzdx.json"
     ) as f:
-        wzdx = [json.loads(f.read())]
+        wzdx = json.loads(f.read())
         wzdx[0]["features"][0]["properties"]["start_date"] = (
             date_tools.get_iso_string_from_datetime(datetime.now() - timedelta(days=1))
         )
