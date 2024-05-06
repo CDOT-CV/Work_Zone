@@ -340,32 +340,34 @@ class MockGeospatialApi:
         return [[2, 3], [0, 1]]
 
 
-# @patch.object(
-#     cdot_geospatial_api,
-#     "GeospatialApi",
-#     side_effect=lambda: MockGeospatialApi(),
-# )
-# @patch.object(
-#     geospatial_tools,
-#     "get_road_direction_from_coordinates",
-#     side_effect=["southbound", "northbound"],
-# )
-# def test_get_improved_geometry(mock1, mock2):
-#     coordinates = [[4, 5], [6, 7]]
-#     event_status = "active"
-#     id = "id"
+@patch.object(
+    cdot_geospatial_api,
+    "GeospatialApi",
+    side_effect=lambda: MockGeospatialApi(),
+)
+@patch.object(
+    geospatial_tools,
+    "get_road_direction_from_coordinates",
+    side_effect=["southbound", "northbound"],
+)
+def test_get_improved_geometry(mock1, mock2):
+    coordinates = [[4, 5], [6, 7]]
+    event_status = "active"
+    id = "id"
 
-#     expected = [[2, 3], [0, 1]]
+    expected = [[0, 1], [2, 3]]
 
-#     route_details = {"Route": "Route", "Measure": "Measure"}
+    route_details = {"Route": "Route", "Measure": "Measure"}
 
-#     actual = planned_events.get_improved_geometry(
-#         cdot_geospatial_api.GeospatialApi(),
-#         coordinates,
-#         event_status,
-#         route_details,
-#         route_details,
-#         id,
-#     )
+    actual = planned_events.get_improved_geometry(
+        cdot_geospatial_api.GeospatialApi(),
+        coordinates,
+        event_status,
+        route_details,
+        route_details,
+        id,
+    )
 
-#     assert set(actual) == set(expected)
+    assert actual == expected
+
+    assert set(tuple(x) for x in actual) == set(tuple(x) for x in expected)
