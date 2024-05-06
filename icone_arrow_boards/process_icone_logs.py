@@ -1,3 +1,7 @@
+########################################################################################################################
+# This script processes the log files created by the log_icone.py script and creates a JSON file with the start and end times of the log as well as the segments of the log with the ID, start and end times, states, and coordinates of each segment.
+########################################################################################################################
+
 import json
 
 # (2022[0-9]{4}-[0-9]{6})

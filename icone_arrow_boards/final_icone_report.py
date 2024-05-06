@@ -1,3 +1,14 @@
+########################################################################################################################
+# THIS SCRIPT IS INTENDED TO RUN FROM THE ROOT DIRECTORY. IT WAS MOVED FOR ORGANIZATION PURPOSES
+# 
+# This script generates a report on the locations and on-times of iCone enabled arrow boards. This script reads all the 
+# XML files from a directory, and collects them by ID, state, and position. The script then generates a JSON file with the 
+# following columns: `ID`, `states`, `coordinates`, `route`, `start_time`, `end_time`, `mm_min`, and `mm_max`. For each 
+# device, this report contains entries for each on/off change, state change, and position change. This script also utilizes 
+# the WZDx library to get start/end mile marker values for each device.
+########################################################################################################################
+
+
 import xmltodict
 from wzdx.tools import cdot_geospatial_api
 import os
@@ -5,8 +16,7 @@ from datetime import datetime, timedelta
 import json
 
 ###################################################################
-# THIS SCRIPT IS INTENDED TO RUN FROM THE ROOT DIRECTORY
-# IT WAS MOVED FOR ORGANIZATION PURPOSES
+# THIS SCRIPT IS INTENDED TO RUN FROM THE ROOT DIRECTORY. IT WAS MOVED FOR ORGANIZATION PURPOSES
 ###################################################################
 
 
