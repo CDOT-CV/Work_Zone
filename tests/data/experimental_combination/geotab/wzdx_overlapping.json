@@ -123,5 +123,19 @@
       },
       "id": "1b5e4294-11e9-4e47-ba20-b52f5a8eec15"
     }
-  ]
+  ],
+  "route_details_start": {
+    "Route": "159A",
+    "Measure": 17.597,
+    "MMin": 0.0,
+    "MMax": 33.84,
+    "Distance": 0.89
+  },
+  "route_details_end": {
+    "Route": "159A",
+    "Measure": 25.358,
+    "MMin": 0.0,
+    "MMax": 33.661,
+    "Distance": 0.0
+  }
 }

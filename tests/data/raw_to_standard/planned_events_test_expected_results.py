@@ -298,6 +298,7 @@ test_generate_standard_messages_from_string_expected = [
         "rtdh_message_id": "we234de",
         "event": {
             "type": 'work-zone',
+            'work_zone_type': 'static',
             "types_of_work": [
                 {
                     "type_name": "below-road-work",

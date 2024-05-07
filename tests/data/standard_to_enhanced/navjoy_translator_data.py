@@ -1,155 +1,139 @@
 test_parse_reduction_zone_linestring_standard = {
-    'rtdh_timestamp': 1638846301.4691865,
-    'rtdh_message_id': 'e5bba2f6-bbd0-4a61-8d64-b7c33657d35a',
-    'event': {
-        'type': '',
-        'source': {
-            'id': 'Form568-44819108-703c-4d6d-ae0d-7dca7319e5b0',
-            'last_updated_timestamp': 1638871501469
+    "rtdh_timestamp": 1638846301.4691865,
+    "rtdh_message_id": "e5bba2f6-bbd0-4a61-8d64-b7c33657d35a",
+    "event": {
+        "type": "",
+        "source": {
+            "id": "Form568-44819108-703c-4d6d-ae0d-7dca7319e5b0",
+            "last_updated_timestamp": 1638871501469,
         },
-        'geometry': [
+        "geometry": [
             [-104.82230842595187, 39.73946349406594],
-            [-104.79432762150851, 39.73959547447038]
+            [-104.79432762150851, 39.73959547447038],
         ],
-        'header': {
-            'description': 'Maintenance for lane expansion',
-            'justification': 'Lane expansion - maintenance work',
-            'reduced_speed_limit': 45,
-            'start_timestamp': 1630290600000,
-            'end_timestamp': 1630290600000
+        "header": {
+            "description": "Maintenance for lane expansion",
+            "justification": "Lane expansion - maintenance work",
+            "reduced_speed_limit": 45,
+            "start_timestamp": 1630290600000,
+            "end_timestamp": 1630290600000,
         },
-        'detail': {
-            'road_name': '287',
-            'road_number': '287',
-            'direction': 'eastbound'
-        }
-    }
+        "detail": {"road_name": "287", "road_number": "287", "direction": "eastbound"},
+    },
 }
 
 test_parse_reduction_zone_linestring_expected_feature = {
-    'id': 'Form568-44819108-703c-4d6d-ae0d-7dca7319e5b0',
+    "id": "Form568-44819108-703c-4d6d-ae0d-7dca7319e5b0",
     "type": "Feature",
     "properties": {
         "core_details": {
-            "data_source_id": '',
+            "data_source_id": "",
             "event_type": "work-zone",
             "road_names": ["287"],
             "direction": "eastbound",
             "description": "Maintenance for lane expansion. Lane expansion - maintenance work",
-            "update_date": "2021-12-07T10:05:01Z"
+            "update_date": "2021-12-07T10:05:01Z",
         },
         "start_date": "2021-08-30T02:30:00Z",
         "end_date": "2021-08-30T02:30:00Z",
-        'is_start_date_verified': False,
-        'is_end_date_verified': False,
-        'is_start_position_verified': False,
-        'is_end_position_verified': False,
+        "is_start_date_verified": False,
+        "is_end_date_verified": False,
+        "is_start_position_verified": False,
+        "is_end_position_verified": False,
         "vehicle_impact": "all-lanes-open",
         "location_method": "channel-device-method",
         "reduced_speed_limit_kph": 72.0,
-        'types_of_work': [{'type_name': 'surface-work',
-                           'is_architectural_change': True}],
+        "types_of_work": [
+            {"type_name": "surface-work", "is_architectural_change": True}
+        ],
     },
     "geometry": {
         "type": "LineString",
         "coordinates": [
-            [
-                -104.82230842595187,
-                39.73946349406594
-            ],
-            [
-                -104.79432762150851,
-                39.73959547447038
-            ],
-        ]
-    }
+            [-104.82230842595187, 39.73946349406594],
+            [-104.79432762150851, 39.73959547447038],
+        ],
+    },
 }
 
 test_wzdx_creator_standard = {
-    'rtdh_timestamp': 1638846301.4691865,
-    'rtdh_message_id': 'e5bba2f6-bbd0-4a61-8d64-b7c33657d35a',
-    'event': {
-        'type': '',
-        'source': {
-            'id': 'Form568-44819108-703c-4d6d-ae0d-7dca7319e5b0',
-            'last_updated_timestamp': 1638871501469
+    "rtdh_timestamp": 1638846301.4691865,
+    "rtdh_message_id": "e5bba2f6-bbd0-4a61-8d64-b7c33657d35a",
+    "event": {
+        "type": "",
+        "source": {
+            "id": "Form568-44819108-703c-4d6d-ae0d-7dca7319e5b0",
+            "last_updated_timestamp": 1638871501469,
         },
-        'geometry': [
+        "geometry": [
             [-104.82230842595187, 39.73946349406594],
-            [-104.79432762150851, 39.73959547447038]
+            [-104.79432762150851, 39.73959547447038],
         ],
-        'header': {
-            'description': 'Maintenance for lane expansion',
-            'justification': 'Lane expansion - maintenance work',
-            'reduced_speed_limit': 45,
-            'start_timestamp': 1630290600000,
-            'end_timestamp': 1630290600000
+        "header": {
+            "description": "Maintenance for lane expansion",
+            "justification": "Lane expansion - maintenance work",
+            "reduced_speed_limit": 45,
+            "start_timestamp": 1630290600000,
+            "end_timestamp": 1630290600000,
         },
-        'detail': {
-            'road_name': '287',
-            'road_number': '287',
-            'direction': 'eastbound'
-        }
-    }
+        "detail": {"road_name": "287", "road_number": "287", "direction": "eastbound"},
+    },
 }
 
 test_wzdx_creator_expected_wzdx = {
-    'feed_info': {
-        'update_date': '2021-04-13T00:00:00Z',
-        'publisher': 'CDOT',
-        'contact_name': 'Heather Pickering-Hilgers',
-        'contact_email': 'heather.pickeringhilgers@state.co.us',
-        'version': '4.1',
+    "feed_info": {
+        "update_date": "2021-04-13T00:00:00Z",
+        "publisher": "CDOT",
+        "contact_name": "Heather Pickering-Hilgers",
+        "contact_email": "heather.pickeringhilgers@state.co.us",
+        "version": "4.2",
         "update_frequency": 300,
-        'license': 'https://creativecommons.org/publicdomain/zero/1.0/',
-        'data_sources': [
+        "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "data_sources": [
             {
-                'data_source_id': 'w',
-                'organization_name': 'CDOT',
-                'contact_name': 'Heather Pickering-Hilgers',
-                'contact_email': 'heather.pickeringhilgers@state.co.us',
-                'update_date': '2021-04-13T00:00:00Z',
+                "data_source_id": "w",
+                "organization_name": "CDOT",
+                "contact_name": "Heather Pickering-Hilgers",
+                "contact_email": "heather.pickeringhilgers@state.co.us",
+                "update_date": "2021-04-13T00:00:00Z",
                 "update_frequency": 300,
             }
-        ]
+        ],
     },
-    'type': 'FeatureCollection',
-    'features': [
+    "type": "FeatureCollection",
+    "features": [
         {
-            'id': 'Form568-44819108-703c-4d6d-ae0d-7dca7319e5b0',
-            'type': 'Feature',
-            'properties': {
-                'core_details': {
-                    'data_source_id': 'w',
-                    'event_type': 'work-zone',
-                    'road_names': ['287'],
-                    'direction': 'eastbound',
-                    'description': 'Maintenance for lane expansion. Lane expansion - maintenance work',
-                    'update_date': "2021-12-07T10:05:01Z"
+            "id": "Form568-44819108-703c-4d6d-ae0d-7dca7319e5b0",
+            "type": "Feature",
+            "properties": {
+                "core_details": {
+                    "data_source_id": "w",
+                    "event_type": "work-zone",
+                    "road_names": ["287"],
+                    "direction": "eastbound",
+                    "description": "Maintenance for lane expansion. Lane expansion - maintenance work",
+                    "update_date": "2021-12-07T10:05:01Z",
                 },
-                'location_method': 'channel-device-method',
-                'reduced_speed_limit_kph': 72.0,
-                'start_date': "2021-08-30T02:30:00Z",
-                'end_date': "2021-08-30T02:30:00Z",
-                'is_start_date_verified': False,
-                'is_end_date_verified': False,
-                'is_start_position_verified': False,
-                'is_end_position_verified': False,
-                'vehicle_impact': 'all-lanes-open',
-                'types_of_work': [
-                    {
-                        'type_name': 'surface-work',
-                        'is_architectural_change': True
-                    }
-                ]
+                "location_method": "channel-device-method",
+                "reduced_speed_limit_kph": 72.0,
+                "start_date": "2021-08-30T02:30:00Z",
+                "end_date": "2021-08-30T02:30:00Z",
+                "is_start_date_verified": False,
+                "is_end_date_verified": False,
+                "is_start_position_verified": False,
+                "is_end_position_verified": False,
+                "vehicle_impact": "all-lanes-open",
+                "types_of_work": [
+                    {"type_name": "surface-work", "is_architectural_change": True}
+                ],
             },
-            'geometry': {
-                'type': 'LineString',
-                'coordinates': [
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
                     [-104.82230842595187, 39.73946349406594],
-                    [-104.79432762150851, 39.73959547447038]
-                ]
+                    [-104.79432762150851, 39.73959547447038],
+                ],
             },
         }
-    ]
+    ],
 }

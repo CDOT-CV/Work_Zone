@@ -1,0 +1,120 @@
+{
+  "feed_info": {
+    "feed_info_id": "49253be7-0c6a-4a65-8113-450f9041f989",
+    "update_date": "2022-02-14T21:41:33Z",
+    "publisher": "CDOT",
+    "contact_name": "Ashley Nylen",
+    "contact_email": "ashley.nylen@state.co.us",
+    "version": "4.2",
+    "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "data_sources": [
+      {
+        "data_source_id": "1f8191b0-27c5-4af7-bc4d-26f45a81b98a",
+        "feed_info_id": "49253be7-0c6a-4a65-8113-450f9041f989",
+        "organization_name": "CDOT",
+        "contact_name": "Ashley Nylen",
+        "contact_email": "ashley.nylen@state.co.us",
+        "update_date": "2022-07-27T14:22:31Z",
+        "location_method": "channel-device-method",
+        "lrs_type": "lrs_type"
+      }
+    ]
+  },
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Original WZDx (from planned event)",
+        "core_details": {
+          "event_type": "work-zone",
+          "data_source_id": "15c4cc92-658c-4a58-ba08-dc6d36a0631b",
+          "road_names": ["CO-159"],
+          "direction": "southbound",
+          "relationship": {},
+          "description": "Between West Jasper Drive (near San Luis) and County Road P7 (1 mile south of the San Luis area) from Mile Point 20 to Mile Point 14. Striping operations. Until today at about 3:11PM MDT. Moving area updated by Geotab ATMA bFB",
+          "update_date": "2022-07-27T14:22:31Z"
+        },
+        "start_date": "2022-07-27T14:20:00Z",
+        "end_date": "2022-07-27T21:11:00Z",
+        "is_start_date_verified": false,
+        "is_end_date_verified": false,
+        "is_start_position_verified": false,
+        "is_end_position_verified": false,
+        "location_method": "channel-device-method",
+        "vehicle_impact": "all-lanes-open",
+        "lanes": [
+          {
+            "order": 1,
+            "type": "general",
+            "status": "open"
+          }
+        ],
+        "types_of_work": [
+          {
+            "type_name": "painting",
+            "is_architectural_change": true
+          }
+        ],
+        "beginning_milepost": 0,
+        "ending_milepost": 1,
+        "experimental_source_id": "110e5ecc-cd7f-48dc-8e59-ac6ef49fc1d0",
+        "experimental_source_type": "geotab",
+        "geotab_id": "bFB",
+        "geotab_message": {
+          "avl_location": {
+            "additional_info": [],
+            "confidence": null,
+            "current_status": { "info": "Driving", "state": "Active" },
+            "position": {
+              "bearing": 215,
+              "latitude": 37.1957245,
+              "longitude": -105.428146,
+              "odometer": null,
+              "speed": 5
+            },
+            "source": {
+              "collection_timestamp": "2022-07-27 21:04:43.847000+00:00",
+              "name": "Geotab"
+            },
+            "vehicle": {
+              "fleet": "Heavy",
+              "id": "bFB",
+              "id2": "G90N60BYJT18",
+              "sub_type": "Attenuator (ATMA)",
+              "type": "Attenuator"
+            }
+          },
+          "route_details_start": {
+            "Distance": 0.89,
+            "MMax": 33.84,
+            "MMin": 0.0,
+            "Measure": 17.597,
+            "Route": "159A"
+          },
+          "rtdh_message_id": "110e5ecc-cd7f-48dc-8e59-ac6ef49fc1d0",
+          "rtdh_timestamp": "2022-07-27T21:05:53Z"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": []
+      },
+      "id": "1b5e4294-11e9-4e47-ba20-b52f5a8eec15"
+    }
+  ],
+  "route_details_start": {
+    "Route": "159A",
+    "Measure": 17.597,
+    "MMin": 0.0,
+    "MMax": 33.84,
+    "Distance": 0.89
+  },
+  "route_details_end": {
+    "Route": "159A",
+    "Measure": 25.358,
+    "MMin": 0.0,
+    "MMax": 33.661,
+    "Distance": 0.0
+  }
+}

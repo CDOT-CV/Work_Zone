@@ -11,3 +11,5 @@ numpy
 requests
 pytz
 regex
+google-cloud-monitoring
+google-cloud-storage

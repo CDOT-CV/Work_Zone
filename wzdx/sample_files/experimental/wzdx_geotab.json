@@ -16,10 +16,7 @@
         "odometer": null
       },
       "confidence": null,
-      "current_status": {
-        "state": "Active",
-        "info": "Driving"
-      },
+      "current_status": { "state": "Active", "info": "Driving" },
       "additional_info": [],
       "source": {
         "name": "Geotab",

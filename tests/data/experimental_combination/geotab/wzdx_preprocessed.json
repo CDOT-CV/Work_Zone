@@ -57,7 +57,21 @@
           }
         ],
         "beginning_milepost": 14,
-        "ending_milepost": 25
+        "ending_milepost": 25,
+        "route_details_start": {
+          "Route": "159A",
+          "Measure": 17.597,
+          "MMin": 0.0,
+          "MMax": 33.84,
+          "Distance": 0.89
+        },
+        "route_details_end": {
+          "Route": "159A",
+          "Measure": 25.358,
+          "MMin": 0.0,
+          "MMax": 33.661,
+          "Distance": 0.0
+        }
       },
       "geometry": {
         "type": "LineString",

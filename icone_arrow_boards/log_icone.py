@@ -1,3 +1,7 @@
+########################################################################################################################
+# This script constantly logs results from the iCone FTP server to a single log file. This log file contains ID, update_time, state, and position of each sensor
+########################################################################################################################
+
 import urllib.request
 import datetime
 import os

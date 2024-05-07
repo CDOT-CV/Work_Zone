@@ -1,3 +1,7 @@
+########################################################################################################################
+# This script pulls the latest iCone data from the iCone FTP server, saves it to an xml file, and prints the incident ID, update time, and state of each incident.
+########################################################################################################################
+
 import urllib.request
 import datetime
 import os
