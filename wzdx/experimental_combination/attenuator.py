@@ -163,7 +163,7 @@ def identify_overlapping_features(geotab_msgs, wzdx_msgs):
             ):
                 
                 logging.debug(
-                    f"Start/End don't match: {wzdx["route_details_start"]["Route"]}, {wzdx["route_details_end"]["Route"]}"
+                    f"Start/End don't match: {wzdx['route_details_start']['Route']}, {wzdx['route_details_end']['Route']}"
                 )
                 continue
             for geotab in matching_geotab_routes:
