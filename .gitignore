@@ -19,3 +19,4 @@ cdot_wzdx_translator.egg-info/*
 translate_icone.py
 translate_navjoy.py
 icone_arrow_boards/**
+wzdx/monitoring/env.sh
