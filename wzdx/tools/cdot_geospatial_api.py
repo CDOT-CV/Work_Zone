@@ -17,7 +17,6 @@ class GeospatialApi:
         BASE_URL=os.getenv(
             "CDOT_GEOSPATIAL_API_BASE_URL",
             "https://dtdapps.colorado.gov/server/rest/services/LRS/Routes_withDEC/MapServer/exts/CdotLrsAccessRounded",
-            # TODO: Remove old api url: "https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes_withDEC/MapServer/exts/CdotLrsAccessRounded"
         ),
     ):
         self.getCachedRequest = getCachedRequest
