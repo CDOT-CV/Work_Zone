@@ -122,6 +122,16 @@ def identify_overlapping_features(geotab_msgs, wzdx_msgs):
         wzdx["route_details_end"] = wzdx["features"][0]["properties"].get(
             "route_details_end"
         )
+        if (
+            wzdx.get("route_details_start")
+            and not wzdx.get("route_details_end")
+            or not wzdx.get("route_details_start")
+            and wzdx.get("route_details_end")
+        ):
+            logging.debug(
+                f"Missing route_details for WZDx object: {wzdx['features'][0]['id']}"
+            )
+            continue
         if not wzdx.get("route_details_start") or not wzdx.get("route_details_end"):
             route_details_start, route_details_end = (
                 combination.get_route_details_for_wzdx(wzdx["features"][0])
@@ -161,9 +171,9 @@ def identify_overlapping_features(geotab_msgs, wzdx_msgs):
                 wzdx["route_details_start"]["Route"]
                 != wzdx["route_details_end"]["Route"]
             ):
-                
+
                 logging.debug(
-                    f"Start/End don't match: {wzdx["route_details_start"]["Route"]}, {wzdx["route_details_end"]["Route"]}"
+                    f"Start/End don't match: {wzdx['route_details_start']['Route']}, {wzdx['route_details_end']['Route']}"
                 )
                 continue
             for geotab in matching_geotab_routes:

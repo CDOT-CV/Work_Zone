@@ -5,17 +5,12 @@ import time
 import logging
 from google.cloud import monitoring_v3
 
-WZDX_REST_ENDPOINT_PROD = os.getenv(
-    'WZDX_REST_ENDPOINT_PROD', 'https://data.cotrip.org/api/v1/wzdx?apiKey={api_key}')
-WZDX_REST_API_KEY_PROD = os.getenv(
-    'WZDX_REST_API_KEY_PROD', 'CT0E0KD-1S1MKYA-QSJ8WV7-045RH37')
-WZDX_REST_ENDPOINT_TEST = os.getenv(
-    'WZDX_REST_ENDPOINT_TEST', 'https://test.data.cotrip.org/api/v1/wzdx?apiKey={api_key}')
-WZDX_REST_API_KEY_TEST = os.getenv(
-    'WZDX_REST_API_KEY_TEST', 'CT0E0KD-1S1MKYA-QSJ8WV7-045RH37')
-PROJECT_ID = os.getenv('PROJECT_ID', 'cdot-rtdh-dev')
-PROD_METRIC_NAME = os.getenv(
-    'PROD_METRIC_NAME', 'custom.googleapis.com/wzdx_rest_count')
+WZDX_REST_ENDPOINT_PROD = os.getenv("WZDX_REST_ENDPOINT_PROD")
+WZDX_REST_API_KEY_PROD = os.getenv("WZDX_REST_API_KEY_PROD")
+WZDX_REST_ENDPOINT_TEST = os.getenv("WZDX_REST_ENDPOINT_TEST")
+WZDX_REST_API_KEY_TEST = os.getenv("WZDX_REST_API_KEY_TEST")
+PROJECT_ID = os.getenv("PROJECT_ID")
+PROD_METRIC_NAME = os.getenv("PROD_METRIC_NAME")
 
 
 def get_api_response(url, api_key):
@@ -38,28 +33,25 @@ def write_metric(metric_name, value):
     series.metric.labels["host"] = "cloud-function"
     now = time.time()
     seconds = int(now)
-    nanos = int((now - seconds) * 10 ** 9)
+    nanos = int((now - seconds) * 10**9)
     interval = monitoring_v3.TimeInterval(
         {"end_time": {"seconds": seconds, "nanos": nanos}}
     )
-    point = monitoring_v3.Point(
-        {"interval": interval, "value": {"int64_value": value}})
+    point = monitoring_v3.Point({"interval": interval, "value": {"int64_value": value}})
     series.points = [point]
     client.create_time_series(name=project_name, time_series=[series])
 
 
 def main():
-    prod_resp = get_api_response(
-        WZDX_REST_ENDPOINT_PROD, WZDX_REST_API_KEY_PROD)
-    prod_count = len(prod_resp['features'])
+    prod_resp = get_api_response(WZDX_REST_ENDPOINT_PROD, WZDX_REST_API_KEY_PROD)
+    prod_count = len(prod_resp["features"])
     logging.debug(f"Production message count: {prod_count}")
     write_metric(PROD_METRIC_NAME, prod_count)
 
-    test_resp = get_api_response(
-        WZDX_REST_ENDPOINT_TEST, WZDX_REST_API_KEY_TEST)
-    test_count = len(test_resp['features'])
+    test_resp = get_api_response(WZDX_REST_ENDPOINT_TEST, WZDX_REST_API_KEY_TEST)
+    test_count = len(test_resp["features"])
     logging.debug(f"Test message count: {test_count}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

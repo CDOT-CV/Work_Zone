@@ -35,6 +35,9 @@ def test_main():
         os.remove(outputPath)
     except Exception:
         pass
-    navjoy.main(outputPath=outputPath)
+    with time_machine.travel(
+        datetime.datetime(2024, 5, 10, 0, 0, 0, 0, tzinfo=datetime.timezone.utc)
+    ):
+        navjoy.main(outputPath=outputPath)
     assert os.path.isfile(outputPath)
     assert len(json.loads(open(outputPath).read())) == 1

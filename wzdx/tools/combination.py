@@ -181,6 +181,17 @@ def identify_overlapping_features_wzdx(wzdx_msgs_1, wzdx_msgs_2):
         wzdx_1["route_details_end"] = wzdx_1["features"][0]["properties"].get(
             "route_details_end"
         )
+        
+        if (
+            wzdx_1.get("route_details_start")
+            and not wzdx_1.get("route_details_end")
+            or not wzdx_1.get("route_details_start")
+            and wzdx_1.get("route_details_end")
+        ):
+            logging.debug(
+                f"Missing route_details for WZDx object: {wzdx_1['features'][0]['id']}"
+            )
+            continue
         if not wzdx_1.get("route_details_start") or not wzdx_1.get("route_details_end"):
             route_details_start, route_details_end = get_route_details_for_wzdx(
                 wzdx_1["features"][0]
@@ -216,6 +227,17 @@ def identify_overlapping_features_wzdx(wzdx_msgs_1, wzdx_msgs_2):
         wzdx_2["route_details_end"] = wzdx_2["features"][0]["properties"].get(
             "route_details_end"
         )
+        
+        if (
+            wzdx_2.get("route_details_start")
+            and not wzdx_2.get("route_details_end")
+            or not wzdx_2.get("route_details_start")
+            and wzdx_2.get("route_details_end")
+        ):
+            logging.debug(
+                f"Missing route_details for WZDx object: {wzdx_2['features'][0]['id']}"
+            )
+            continue
         if not wzdx_2.get("route_details_start") or not wzdx_2.get("route_details_end"):
             route_details_start, route_details_end = get_route_details_for_wzdx(
                 wzdx_2["features"][0]

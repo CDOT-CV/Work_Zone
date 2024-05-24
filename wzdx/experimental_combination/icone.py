@@ -28,16 +28,6 @@ def main(outputPath="./tests/data/output/wzdx_icone_combined.json"):
         for i in wzdx_full["features"]
     ]
     outputPath = "./icone_arrow_boards/2023_05_16_standard/wzdx_experimental.geojson"
-    # with open('./wzdx/sample_files/standard/icone/standard_icone_combination.json') as f:
-    #     icone = json.loads(f.read())
-    #     icone[0]['event']['header']['start_timestamp'] = date_tools.date_to_unix(
-    #         datetime.now())
-    # with open('./wzdx/sample_files/enhanced/attenuator/attenuator_combination_wzdx.json') as f:
-    #     wzdx = json.loads(f.read())
-    #     wzdx[0]['features'][0]['properties']['start_date'] = date_tools.get_iso_string_from_datetime(
-    #         datetime.now() - timedelta(days=1))
-    #     wzdx[0]['features'][0]['properties']['end_date'] = date_tools.get_iso_string_from_datetime(
-    #         datetime.now() + timedelta(days=1))
 
     combined_events = get_combined_events(icone, wzdx)
 
@@ -216,7 +206,17 @@ def identify_overlapping_features_icone(icone_standard_msgs, wzdx_msgs):
         wzdx["route_details_end"] = wzdx["features"][0]["properties"].get(
             "route_details_end"
         )
-        if not wzdx.get("route_details_start") or not wzdx.get("route_details_end"):
+        if (
+            wzdx.get("route_details_start")
+            and not wzdx.get("route_details_end")
+            or not wzdx.get("route_details_start")
+            and wzdx.get("route_details_end")
+        ):
+            logging.debug(
+                f"Missing route_details for WZDx object: {wzdx['features'][0]['id']}"
+            )
+            continue
+        if not wzdx.get("route_details_start") and not wzdx.get("route_details_end"):
             route_details_start, route_details_end = (
                 combination.get_route_details_for_wzdx(wzdx["features"][0])
             )
