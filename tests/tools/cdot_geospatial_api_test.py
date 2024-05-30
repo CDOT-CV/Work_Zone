@@ -52,16 +52,16 @@ def test_get_route_geometry_ahead():
     assert len(actual["coordinates"]) == 20
 
 
-def test_get_route_geometry_ahead_mmax():
+def test_get_route_geometry_ahead_mMax():
     actual = cdot_geospatial_api.GeospatialApi().get_route_geometry_ahead(
-        "159A", 5, 45, 5, mmin=5, mmax=7
+        "159A", 5, 45, 5, mMin=5, mMax=7
     )
     assert len(actual["coordinates"]) == 7
 
 
-def test_get_route_geometry_ahead_mmin():
+def test_get_route_geometry_ahead_mMin():
     actual = cdot_geospatial_api.GeospatialApi().get_route_geometry_ahead(
-        "159A", 5, 45, 5, mmin=8, mmax=10
+        "159A", 5, 45, 5, mMin=8, mMax=10
     )
     assert len(actual["coordinates"]) == 6
 
