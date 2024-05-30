@@ -11,70 +11,90 @@ from collections import OrderedDict
 import pytz
 import regex
 
-from ..tools import (cdot_geospatial_api, date_tools, geospatial_tools,
-                     polygon_tools, wzdx_translator, combination)
+from ..tools import (
+    cdot_geospatial_api,
+    date_tools,
+    geospatial_tools,
+    polygon_tools,
+    wzdx_translator,
+    combination,
+)
 from ..util.collections import PathDict
 
-PROGRAM_NAME = 'PlannedEventsRawToStandard'
-PROGRAM_VERSION = '1.0'
+PROGRAM_NAME = "PlannedEventsRawToStandard"
+PROGRAM_VERSION = "1.0"
 
-STRING_DIRECTION_MAP = {'north': 'northbound', 'south': 'southbound',
-                        'west': 'westbound', 'east': 'eastbound'}
+STRING_DIRECTION_MAP = {
+    "north": "northbound",
+    "south": "southbound",
+    "west": "westbound",
+    "east": "eastbound",
+}
 
-REVERSED_DIRECTION_MAP = {'northbound': 'southbound', 'southbound': 'northbound',
-                          'eastbound': 'westbound', 'westbound': 'eastbound'}
+REVERSED_DIRECTION_MAP = {
+    "northbound": "southbound",
+    "southbound": "northbound",
+    "eastbound": "westbound",
+    "westbound": "eastbound",
+}
 
 WORK_ZONE_INCIDENT_TYPES = {
-    "Maintenance Operations":   {"Traffic": True},
-    "Emergency Roadwork":       {"Traffic": True},
+    "Maintenance Operations": {"Traffic": True},
+    "Emergency Roadwork": {"Traffic": True},
 }
 INCIDENT_ID_REGEX = "^OpenTMS-Incident"
 
 
 def main():
-    cdotGeospatialApi: cdot_geospatial_api.GeospatialApi = cdot_geospatial_api.GeospatialApi()
+    cdotGeospatialApi: cdot_geospatial_api.GeospatialApi = (
+        cdot_geospatial_api.GeospatialApi()
+    )
     source_file, output_dir = parse_rtdh_arguments()
-    input_file_contents = open(source_file, 'r').read()
-    generated_messages = generate_standard_messages_from_string(cdotGeospatialApi, 
-        input_file_contents)
-    generated_messages = generate_standard_messages_from_string(cdotGeospatialApi, 
-        input_file_contents)
-    generated_messages = generate_standard_messages_from_string(cdotGeospatialApi, 
-        input_file_contents)
+    input_file_contents = open(source_file, "r").read()
+    generated_messages = generate_standard_messages_from_string(
+        cdotGeospatialApi, input_file_contents
+    )
 
     generated_files_list = []
     for message in generated_messages:
         output_path = f"{output_dir}/standard_planned_event_{message['event']['source']['id']}.json"
-        open(output_path, 'w+').write(json.dumps(message, indent=2))
+        open(output_path, "w+").write(json.dumps(message, indent=2))
         generated_files_list.append(output_path)
 
     if generated_files_list:
-        print(
-            f"Successfully generated standard message files: {generated_files_list}")
+        print(f"Successfully generated standard message files: {generated_files_list}")
     else:
         logging.warning(
-            "Standard message generation failed. See messages printed above")
+            "Standard message generation failed. See messages printed above"
+        )
 
 
 # parse script command line arguments
 def parse_rtdh_arguments():
     parser = argparse.ArgumentParser(
-        description='Translate Planned Event data to RTDH Standard')
-    parser.add_argument('--version', action='version',
-                        version=f'{PROGRAM_NAME} {PROGRAM_VERSION}')
-    parser.add_argument('plannedEventsFile', help='planned event file path')
-    parser.add_argument('--outputDir', required=False,
-                        default='./', help='output directory')
+        description="Translate Planned Event data to RTDH Standard"
+    )
+    parser.add_argument(
+        "--version", action="version", version=f"{PROGRAM_NAME} {PROGRAM_VERSION}"
+    )
+    parser.add_argument("plannedEventsFile", help="planned event file path")
+    parser.add_argument(
+        "--outputDir", required=False, default="./", help="output directory"
+    )
 
     args = parser.parse_args()
     return args.plannedEventsFile, args.outputDir
 
 
-def generate_standard_messages_from_string(cdotGeospatialApi: cdot_geospatial_api.GeospatialApi, input_file_contents):
+def generate_standard_messages_from_string(
+    cdotGeospatialApi: cdot_geospatial_api.GeospatialApi, input_file_contents
+):
     raw_messages = generate_raw_messages(input_file_contents)
     standard_messages = []
     for message in raw_messages:
-        standard_message = generate_rtdh_standard_message_from_raw_single(cdotGeospatialApi, message)
+        standard_message = generate_rtdh_standard_message_from_raw_single(
+            cdotGeospatialApi, message
+        )
         if standard_message:
             standard_messages.append(standard_message)
     return standard_messages
@@ -82,8 +102,8 @@ def generate_standard_messages_from_string(cdotGeospatialApi: cdot_geospatial_ap
 
 # TODO: Integrate Category
 def is_incident_wz(msg):
-    id = msg.get('properties', {}).get('id', '')
-    type = msg.get('properties', {}).get('type', '')
+    id = msg.get("properties", {}).get("id", "")
+    type = msg.get("properties", {}).get("type", "")
     # category = msg.get('properties', {}).get('Category')
     is_incident = re.match(INCIDENT_ID_REGEX, id) != None
     # is_wz = WORK_ZONE_INCIDENT_TYPES.get(type, {}).get(category)
@@ -100,20 +120,20 @@ def generate_raw_messages(message_string):
 def expand_event_directions(message):
     try:
         messages = []
-        laneImpacts = message.get('properties', {}).get('laneImpacts')
+        laneImpacts = message.get("properties", {}).get("laneImpacts")
         for laneImpact in laneImpacts:
             new_message = copy.deepcopy(message)
-            direction_string = laneImpact['direction']
+            direction_string = laneImpact["direction"]
             direction = map_direction_string(direction_string)
-            for laneImpact2 in new_message['properties']['laneImpacts']:
-                if direction_string == laneImpact2['direction']:
-                    new_message['properties']['laneImpacts'] = [laneImpact2]
-                    new_message['properties']['recorded_direction'] = map_direction_string(
-                        message['properties']['direction'])
-                    new_message['properties']['laneImpacts'][0]['direction'] = direction
+            for laneImpact2 in new_message["properties"]["laneImpacts"]:
+                if direction_string == laneImpact2["direction"]:
+                    new_message["properties"]["laneImpacts"] = [laneImpact2]
+                    new_message["properties"]["recorded_direction"] = (
+                        map_direction_string(message["properties"]["direction"])
+                    )
+                    new_message["properties"]["laneImpacts"][0]["direction"] = direction
                     break
-            new_message['properties'][
-                'direction'] = direction
+            new_message["properties"]["direction"] = direction
             messages.append(new_message)
         return messages
     except Exception as e:
@@ -121,7 +141,9 @@ def expand_event_directions(message):
         return [message]
 
 
-def generate_rtdh_standard_message_from_raw_single(cdotGeospatialApi: cdot_geospatial_api.GeospatialApi, obj):
+def generate_rtdh_standard_message_from_raw_single(
+    cdotGeospatialApi: cdot_geospatial_api.GeospatialApi, obj
+):
     is_incident_msg, is_wz = is_incident_wz(obj)
     if is_incident_msg and not is_wz:
         return {}
@@ -131,12 +153,13 @@ def generate_rtdh_standard_message_from_raw_single(cdotGeospatialApi: cdot_geosp
 
 
 def get_linestring(geometry):
-    if geometry.get('type') == "MultiPoint":
-        return geometry['coordinates']
-    elif geometry.get('type') == "Polygon":
-        return polygon_tools.polygon_to_polyline_center(geometry['coordinates'])
+    if geometry.get("type") == "MultiPoint":
+        return geometry["coordinates"]
+    elif geometry.get("type") == "Polygon":
+        return polygon_tools.polygon_to_polyline_center(geometry["coordinates"])
     else:
         return []
+
 
 # input:
 # "laneImpacts": [
@@ -177,79 +200,182 @@ def hex_to_binary(hex_string):
 
 
 # (event_type, types of work, work_zone_type)
-DEFAULT_EVENT_TYPE = ('work-zone', [], 'static')
+DEFAULT_EVENT_TYPE = ("work-zone", [], "static")
 EVENT_TYPE_MAPPING = {
     # Work Zones
-    "Bridge Construction":              ('work-zone', [{'type_name': 'below-road-work',            'is_architectural_change': True}], 'static'),
-    "Road Construction":                ('work-zone', [{'type_name': 'roadway-creation',           'is_architectural_change': True}], 'static'),
-    "Bridge Maintenance Operations":    ('work-zone', [{'type_name': 'below-road-work',            'is_architectural_change': False}], 'static'),
-    "Bridge Repair":                    ('work-zone', [{'type_name': 'below-road-work',            'is_architectural_change': False}], 'static'),
-    "Chip Seal Operations":             ('work-zone', [{'type_name': 'minor-road-defect-repair',   'is_architectural_change': False}], 'static'),
-    "Concrete Slab Replacement":        ('work-zone', [{'type_name': 'surface-work',               'is_architectural_change': False}], 'static'),
-    "Crack Sealing":                    ('work-zone', [{'type_name': 'minor-road-defect-repair',   'is_architectural_change': False}], 'static'),
-    "Culvert Maintenance":              ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}], 'static'),
-    "Electrical or Lighting":           ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}], 'static'),
-    "Emergency Maintenance":            ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}], 'static'),
-    "Fiber Optics Installation":        ('work-zone', [{'type_name': 'surface-work',               'is_architectural_change': False}], 'static'),
-    "Guardrail":                        ('work-zone', [{'type_name': 'barrier-work',               'is_architectural_change': False}], 'static'),
-    "IT or Fiber Optics":               ('work-zone', [{'type_name': 'surface-work',               'is_architectural_change': False}], 'static'),
-    "Paving Operations":                ('work-zone', [{'type_name': 'surface-work',               'is_architectural_change': True}], 'static'),
-    "Road Maintenance Operations":      ('work-zone', [{'type_name': 'surface-work',               'is_architectural_change': False}], 'static'),
-    "Rock Work":                        ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}], 'static'),
-    "Sign Work":                        ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}], 'static'),
-    "Striping Operations":              ('work-zone', [{'type_name': 'painting',                   'is_architectural_change': True}], 'planned-moving-area'),
-    "Traffic Sign Installation":        ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}], 'static'),
-    "Traffic Sign Maintenance":         ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}], 'static'),
-    "Traffic Signal Installation":      ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}], 'static'),
-    "Traffic Signal Maintenance":       ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}], 'static'),
-    "Tunnel Maintenance":               ('work-zone', [{'type_name': 'surface-work',               'is_architectural_change': False}], 'static'),
-    "Utility Work":                     ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}], 'static'),
-    "Utility Installation":             ('work-zone', [{'type_name': 'roadside-work',              'is_architectural_change': False}], 'static'),
-    "Wall Maintenance":                 ('work-zone', [{'type_name': 'barrier-work',               'is_architectural_change': False}], 'static'),
-
+    "Bridge Construction": (
+        "work-zone",
+        [{"type_name": "below-road-work", "is_architectural_change": True}],
+        "static",
+    ),
+    "Road Construction": (
+        "work-zone",
+        [{"type_name": "roadway-creation", "is_architectural_change": True}],
+        "static",
+    ),
+    "Bridge Maintenance Operations": (
+        "work-zone",
+        [{"type_name": "below-road-work", "is_architectural_change": False}],
+        "static",
+    ),
+    "Bridge Repair": (
+        "work-zone",
+        [{"type_name": "below-road-work", "is_architectural_change": False}],
+        "static",
+    ),
+    "Chip Seal Operations": (
+        "work-zone",
+        [{"type_name": "minor-road-defect-repair", "is_architectural_change": False}],
+        "static",
+    ),
+    "Concrete Slab Replacement": (
+        "work-zone",
+        [{"type_name": "surface-work", "is_architectural_change": False}],
+        "static",
+    ),
+    "Crack Sealing": (
+        "work-zone",
+        [{"type_name": "minor-road-defect-repair", "is_architectural_change": False}],
+        "static",
+    ),
+    "Culvert Maintenance": (
+        "work-zone",
+        [{"type_name": "roadside-work", "is_architectural_change": False}],
+        "static",
+    ),
+    "Electrical or Lighting": (
+        "work-zone",
+        [{"type_name": "roadside-work", "is_architectural_change": False}],
+        "static",
+    ),
+    "Emergency Maintenance": (
+        "work-zone",
+        [{"type_name": "roadside-work", "is_architectural_change": False}],
+        "static",
+    ),
+    "Fiber Optics Installation": (
+        "work-zone",
+        [{"type_name": "surface-work", "is_architectural_change": False}],
+        "static",
+    ),
+    "Guardrail": (
+        "work-zone",
+        [{"type_name": "barrier-work", "is_architectural_change": False}],
+        "static",
+    ),
+    "IT or Fiber Optics": (
+        "work-zone",
+        [{"type_name": "surface-work", "is_architectural_change": False}],
+        "static",
+    ),
+    "Paving Operations": (
+        "work-zone",
+        [{"type_name": "surface-work", "is_architectural_change": True}],
+        "static",
+    ),
+    "Road Maintenance Operations": (
+        "work-zone",
+        [{"type_name": "surface-work", "is_architectural_change": False}],
+        "static",
+    ),
+    "Rock Work": (
+        "work-zone",
+        [{"type_name": "roadside-work", "is_architectural_change": False}],
+        "static",
+    ),
+    "Sign Work": (
+        "work-zone",
+        [{"type_name": "roadside-work", "is_architectural_change": False}],
+        "static",
+    ),
+    "Striping Operations": (
+        "work-zone",
+        [{"type_name": "painting", "is_architectural_change": True}],
+        "planned-moving-area",
+    ),
+    "Traffic Sign Installation": (
+        "work-zone",
+        [{"type_name": "roadside-work", "is_architectural_change": False}],
+        "static",
+    ),
+    "Traffic Sign Maintenance": (
+        "work-zone",
+        [{"type_name": "roadside-work", "is_architectural_change": False}],
+        "static",
+    ),
+    "Traffic Signal Installation": (
+        "work-zone",
+        [{"type_name": "roadside-work", "is_architectural_change": False}],
+        "static",
+    ),
+    "Traffic Signal Maintenance": (
+        "work-zone",
+        [{"type_name": "roadside-work", "is_architectural_change": False}],
+        "static",
+    ),
+    "Tunnel Maintenance": (
+        "work-zone",
+        [{"type_name": "surface-work", "is_architectural_change": False}],
+        "static",
+    ),
+    "Utility Work": (
+        "work-zone",
+        [{"type_name": "roadside-work", "is_architectural_change": False}],
+        "static",
+    ),
+    "Utility Installation": (
+        "work-zone",
+        [{"type_name": "roadside-work", "is_architectural_change": False}],
+        "static",
+    ),
+    "Wall Maintenance": (
+        "work-zone",
+        [{"type_name": "barrier-work", "is_architectural_change": False}],
+        "static",
+    ),
     # Road Closures
-    "BAN Message":                      ('restriction', [], 'static'),
-    "Safety Campaign":                  ('restriction', [], 'static'),
-    "Smoke/Control Burn":               ('restriction', [], 'static'),
-    "Avalanche Control":                ('restriction', [], 'static'),
-    "Closed for the Season":            ('restriction', [], 'static'),
-    "Funeral Procession":               ('restriction', [], 'static'),
-    "Presidential Visit":               ('restriction', [], 'static'),
-    "Race Event":                       ('restriction', [], 'static'),
-    "Local Event":                      ('restriction', [], 'static'),
-    "Military Movement":                ('restriction', [], 'static'),
-    "OS/OW Limit":                      ('restriction', [], 'static'),
-    "Geological Drilling":              ('restriction', [], 'static'),
-
+    "BAN Message": ("restriction", [], "static"),
+    "Safety Campaign": ("restriction", [], "static"),
+    "Smoke/Control Burn": ("restriction", [], "static"),
+    "Avalanche Control": ("restriction", [], "static"),
+    "Closed for the Season": ("restriction", [], "static"),
+    "Funeral Procession": ("restriction", [], "static"),
+    "Presidential Visit": ("restriction", [], "static"),
+    "Race Event": ("restriction", [], "static"),
+    "Local Event": ("restriction", [], "static"),
+    "Military Movement": ("restriction", [], "static"),
+    "OS/OW Limit": ("restriction", [], "static"),
+    "Geological Drilling": ("restriction", [], "static"),
     # Incidents (work zones): *\(.]n
-    "Emergency Roadwork":               ('work-zone', [], 'static'),
-    "Maintenance Operations":           ('work-zone', [], 'static'),
+    "Emergency Roadwork": ("work-zone", [], "static"),
+    "Maintenance Operations": ("work-zone", [], "static"),
 }
 
 LANE_TYPE_MAPPING = {
-    "left shoulder": 'shoulder',
-    "left lane": 'general',
-    "center lane": 'general',
-    "middle two lanes": 'general',
-    "general": 'general',
-    "middle lanes": 'general',     # this is a weird one
-    "right lane": 'general',
-    "right shoulder": 'shoulder',
-    "through lanes": 'general',
-    "right entrance ramp": 'exit-ramp',
-    "right exit ramp": 'exit-ramp'
+    "left shoulder": "shoulder",
+    "left lane": "general",
+    "center lane": "general",
+    "middle two lanes": "general",
+    "general": "general",
+    "middle lanes": "general",  # this is a weird one
+    "right lane": "general",
+    "right shoulder": "shoulder",
+    "through lanes": "general",
+    "right entrance ramp": "exit-ramp",
+    "right exit ramp": "exit-ramp",
 }
 
-INVALID_EVENT_DESCRIPTION = "511 event cannot be created in CARS because route does not exist."
+INVALID_EVENT_DESCRIPTION = (
+    "511 event cannot be created in CARS because route does not exist."
+)
 
 
 def map_lane_type(lane_type):
     try:
         return LANE_TYPE_MAPPING[lane_type]
     except KeyError as e:
-        logging.warning(
-            f"Unrecognized lane type: {e}")
-        return 'general'
+        logging.warning(f"Unrecognized lane type: {e}")
+        return "general"
 
 
 def map_event_type(event_type):
@@ -261,11 +387,11 @@ def map_event_type(event_type):
 
 
 def map_lane_status(lane_status_bit):
-    return 'open' if lane_status_bit == '0' else 'closed'
+    return "open" if lane_status_bit == "0" else "closed"
 
 
 def map_direction_string(direction_string):
-    return STRING_DIRECTION_MAP.get(direction_string, 'undefined')
+    return STRING_DIRECTION_MAP.get(direction_string, "undefined")
 
 
 # This method parses a hex string and list of closed lane names into a WZDx lanes list. The hex string, lane_closures_hex,
@@ -274,53 +400,72 @@ def map_direction_string(direction_string):
 # lanes start from the left, or 1st index.
 def get_lanes_list(lane_closures_hex, num_lanes, closedLaneTypes):
     lanes_affected = hex_to_binary(lane_closures_hex)
-    lane_bits = lanes_affected[1:(num_lanes+1)]
+    lane_bits = lanes_affected[1 : (num_lanes + 1)]
     lanes = []
     order = 1
-    if map_lane_status(lanes_affected[0]) == 'closed':
-        lanes.append({
-            'order': order,
-            'type': 'shoulder',
-            'status': map_lane_status(lanes_affected[0]),
-        })
+    if map_lane_status(lanes_affected[0]) == "closed":
+        lanes.append(
+            {
+                "order": order,
+                "type": "shoulder",
+                "status": map_lane_status(lanes_affected[0]),
+            }
+        )
         order += 1
-    closedLaneTypes = [i for i in closedLaneTypes if 'shoulder' not in i]
+    closedLaneTypes = [i for i in closedLaneTypes if "shoulder" not in i]
     for i, bit in enumerate([char for char in lane_bits]):
-        lanes.append({
-            'order': order,
-            'type': map_lane_type(closedLaneTypes[i] if (len(closedLaneTypes) > i) else 'general'),
-            'status': map_lane_status(bit),
-        })
+        lanes.append(
+            {
+                "order": order,
+                "type": map_lane_type(
+                    closedLaneTypes[i] if (len(closedLaneTypes) > i) else "general"
+                ),
+                "status": map_lane_status(bit),
+            }
+        )
         order += 1
-    if map_lane_status(lanes_affected[15]) == 'closed':
-        lanes.append({
-            'order': order,
-            'type': 'shoulder',
-            'status': map_lane_status(lanes_affected[15]),
-        })
+    if map_lane_status(lanes_affected[15]) == "closed":
+        lanes.append(
+            {
+                "order": order,
+                "type": "shoulder",
+                "status": map_lane_status(lanes_affected[15]),
+            }
+        )
         order += 1
     return lanes
 
 
 def get_lane_impacts(lane_impacts, direction):
     for impact in lane_impacts:
-        if impact['direction'] == direction:
-            return get_lanes_list(impact['laneClosures'], impact['laneCount'], impact['closedLaneTypes'])
+        if impact["direction"] == direction:
+            return get_lanes_list(
+                impact["laneClosures"], impact["laneCount"], impact["closedLaneTypes"]
+            )
 
 
 def all_lanes_open(lanes):
     for i in lanes:
-        if i['status'] != 'open':
+        if i["status"] != "open":
             return False
     return True
 
 
 # On {roadName}, between mile markers {startMarker} and {endMarker}. {typeOfWork}. Running between {startTime} and {endTime}
-def create_description(name, roadName, startMarker, endMarker, typeOfWork, startTime, endTime):
+def create_description(
+    name, roadName, startMarker, endMarker, typeOfWork, startTime, endTime
+):
     return f"Event {name}, on {roadName}, between mile markers {startMarker} and {endMarker}. {typeOfWork}. Running between {startTime} and {endTime}"
 
 
-def get_improved_geometry(cdotGeospatialApi: cdot_geospatial_api.GeospatialApi, coordinates, event_status, route_details_start, route_details_end, id):
+def get_improved_geometry(
+    cdotGeospatialApi: cdot_geospatial_api.GeospatialApi,
+    coordinates,
+    event_status,
+    route_details_start,
+    route_details_end,
+    id,
+):
     if event_status == "completed":
         return coordinates
 
@@ -332,23 +477,24 @@ def get_improved_geometry(cdotGeospatialApi: cdot_geospatial_api.GeospatialApi, 
 
     if not route_details_start or not route_details_end:
         logging.warning(
-            f"1 or more routes not found, not generating improved geometry: {id}")
+            f"1 or more routes not found, not generating improved geometry: {id}"
+        )
         return coordinates
-    if route_details_start['Route'] != route_details_end['Route']:
-        logging.warning(
-            f"Routes did not match, not generating improved geometry: {id}")
+    if route_details_start["Route"] != route_details_end["Route"]:
+        logging.warning(f"Routes did not match, not generating improved geometry: {id}")
         return coordinates
 
-    initialDirection = geospatial_tools.get_road_direction_from_coordinates(
-        coordinates)
+    initialDirection = geospatial_tools.get_road_direction_from_coordinates(coordinates)
     newCoordinates = cdotGeospatialApi.get_route_between_measures(
-        route_details_start['Route'],
-        route_details_start['Measure'],
-        route_details_end['Measure'],
-        compressed=True)
+        route_details_start["Route"],
+        route_details_start["Measure"],
+        route_details_end["Measure"],
+        compressed=True,
+    )
 
     finalDirection = geospatial_tools.get_road_direction_from_coordinates(
-        newCoordinates)
+        newCoordinates
+    )
 
     # TODO: Implement Bi-directional carriageway
     if initialDirection == REVERSED_DIRECTION_MAP.get(finalDirection):
@@ -361,23 +507,29 @@ def get_improved_geometry(cdotGeospatialApi: cdot_geospatial_api.GeospatialApi, 
 
 
 def get_cross_streets_from_description(description):
-    desc_regex = '^Between (.*?) and (.*?)(?= from)'
+    desc_regex = "^Between (.*?) and (.*?)(?= from)"
     m = regex.search(desc_regex, description)
     try:
         return m.group(1, 2)
     except:
-        return ('', '')
+        return ("", "")
 
 
-def get_route_details_for_coordinates_lnglat(cdotGeospatialApi: cdot_geospatial_api.GeospatialApi, coordinates):
+def get_route_details_for_coordinates_lngLat(
+    cdotGeospatialApi: cdot_geospatial_api.GeospatialApi, coordinates
+):
     route_details_start = get_route_details(
-        cdotGeospatialApi, coordinates[0][1], coordinates[0][0])
+        cdotGeospatialApi, coordinates[0][1], coordinates[0][0]
+    )
 
-    if len(coordinates) == 1 or (len(coordinates) == 2 and coordinates[0] == coordinates[1]):
+    if len(coordinates) == 1 or (
+        len(coordinates) == 2 and coordinates[0] == coordinates[1]
+    ):
         route_details_end = None
     else:
         route_details_end = get_route_details(
-            cdotGeospatialApi, coordinates[-1][1], coordinates[-1][0])
+            cdotGeospatialApi, coordinates[-1][1], coordinates[-1][0]
+        )
 
     return route_details_start, route_details_end
 
@@ -387,58 +539,71 @@ def get_route_details(cdotGeospatialApi: cdot_geospatial_api.GeospatialApi, lat,
 
 
 # isIncident is unused, could be useful later though
-def create_rtdh_standard_msg(cdotGeospatialApi: cdot_geospatial_api.GeospatialApi, pd, isIncident):
+def create_rtdh_standard_msg(
+    cdotGeospatialApi: cdot_geospatial_api.GeospatialApi, pd, isIncident
+):
     try:
-        description = pd.get('properties/travelerInformationMessage', '')
+        description = pd.get("properties/travelerInformationMessage", "")
         if description == INVALID_EVENT_DESCRIPTION:
             description = create_description(
-                pd.get('properties/name'),
-                pd.get('properties/routeName'),
-                pd.get('properties/startMarker'),
-                pd.get('properties/endMarker'),
-                pd.get('properties/type'),
-                pd.get('properties/startTime'),
-                pd.get('properties/clearTime'),
+                pd.get("properties/name"),
+                pd.get("properties/routeName"),
+                pd.get("properties/startMarker"),
+                pd.get("properties/endMarker"),
+                pd.get("properties/type"),
+                pd.get("properties/startTime"),
+                pd.get("properties/clearTime"),
             )
 
         begin_cross_street, end_cross_street = get_cross_streets_from_description(
-            description)
+            description
+        )
 
-        coordinates = get_linestring(pd.get('geometry'))
+        coordinates = get_linestring(pd.get("geometry"))
         if not coordinates:
             logging.warning(
-                f'Unable to retrive geometry coordinates for event: {pd.get("properties/id", default="")}')
+                f'Unable to retrieve geometry coordinates for event: {pd.get("properties/id", default="")}'
+            )
             return {}
 
-        direction = pd.get("properties/direction", default='unknown')
+        direction = pd.get("properties/direction", default="unknown")
 
         beginning_milepost = pd.get("properties/startMarker", default="")
         ending_milepost = pd.get("properties/endMarker", default="")
         recorded_direction = pd.get("properties/recorded_direction")
-        if direction == REVERSED_DIRECTION_MAP.get(recorded_direction) and direction != "unknown":
+        if (
+            direction == REVERSED_DIRECTION_MAP.get(recorded_direction)
+            and direction != "unknown"
+        ):
             coordinates.reverse()
             beginning_milepost = pd.get("properties/endMarker", default="")
             ending_milepost = pd.get("properties/startMarker", default="")
 
         roadName = wzdx_translator.remove_direction_from_street_name(
-            pd.get("properties/routeName"))
+            pd.get("properties/routeName")
+        )
 
         now = datetime.datetime.now(datetime.timezone.utc)
-        start_date = pd.get("properties/startTime",
-                            date_tools.parse_datetime_from_iso_string)
-        end_date = pd.get("properties/clearTime",
-                          date_tools.parse_datetime_from_iso_string)
+        start_date = pd.get(
+            "properties/startTime", date_tools.parse_datetime_from_iso_string
+        )
+        end_date = pd.get(
+            "properties/clearTime", date_tools.parse_datetime_from_iso_string
+        )
 
         if not start_date and isIncident:
             start_date = now
 
         if not start_date:
             logging.warning(
-                f'Unable to process event, no start date for event: {pd.get("properties/id", default="")}')
+                f'Unable to process event, no start date for event: {pd.get("properties/id", default="")}'
+            )
             return {}
         if not end_date:
-            end_date = pd.get("properties/estimatedClearTime",
-                              date_tools.parse_datetime_from_iso_string)
+            end_date = pd.get(
+                "properties/estimatedClearTime",
+                date_tools.parse_datetime_from_iso_string,
+            )
 
         if not end_date:
             # Since there is no end date, assume still active, set end date in future (12 hours + n days until after current time)
@@ -451,25 +616,29 @@ def create_rtdh_standard_msg(cdotGeospatialApi: cdot_geospatial_api.GeospatialAp
             end_date = end_date.replace(second=0, microsecond=0)
 
         event_type, types_of_work, work_zone_type = map_event_type(
-            pd.get("properties/type", default=""))
+            pd.get("properties/type", default="")
+        )
 
         restrictions = []
-        if pd.get('properties/isOversizedLoadsProhibited'):
-            restrictions.append(
-                {'type': 'permitted-oversize-loads-prohibited'})
+        if pd.get("properties/isOversizedLoadsProhibited"):
+            restrictions.append({"type": "permitted-oversize-loads-prohibited"})
 
         event_status = date_tools.get_event_status(start_date, end_date)
 
-        condition_1 = event_status in ['active', 'pending', 'planned']
+        condition_1 = event_status in ["active", "pending", "planned"]
 
         lane_impacts = get_lane_impacts(
-            pd.get("properties/laneImpacts"), pd.get("properties/direction"))
+            pd.get("properties/laneImpacts"), pd.get("properties/direction")
+        )
         if direction != recorded_direction and all_lanes_open(lane_impacts):
             logging.info(
-                f'Unable to retrive geometry coordinates for event: {pd.get("properties/id", default="")}')
+                f'Unable to retrieve geometry coordinates for event: {pd.get("properties/id", default="")}'
+            )
             return {}
 
-        route_details_start, route_details_end = get_route_details_for_coordinates_lnglat(cdotGeospatialApi, coordinates)
+        route_details_start, route_details_end = (
+            get_route_details_for_coordinates_lngLat(cdotGeospatialApi, coordinates)
+        )
 
         return {
             "rtdh_timestamp": time.time(),
@@ -479,10 +648,21 @@ def create_rtdh_standard_msg(cdotGeospatialApi: cdot_geospatial_api.GeospatialAp
                 "types_of_work": types_of_work,
                 "work_zone_type": work_zone_type,
                 "source": {
-                    "id": pd.get("properties/id", default="") + '_' + direction,
-                    "last_updated_timestamp": pd.get('properties/lastUpdated', date_tools.get_unix_from_iso_string, default=0),
+                    "id": pd.get("properties/id", default="") + "_" + direction,
+                    "last_updated_timestamp": pd.get(
+                        "properties/lastUpdated",
+                        date_tools.get_unix_from_iso_string,
+                        default=0,
+                    ),
                 },
-                "geometry": get_improved_geometry(cdotGeospatialApi, coordinates, event_status, route_details_start, route_details_end, pd.get("properties/id", default="") + '_' + direction),
+                "geometry": get_improved_geometry(
+                    cdotGeospatialApi,
+                    coordinates,
+                    event_status,
+                    route_details_start,
+                    route_details_end,
+                    pd.get("properties/id", default="") + "_" + direction,
+                ),
                 "header": {
                     "description": description,
                     "start_timestamp": date_tools.date_to_unix(start_date),
@@ -504,57 +684,62 @@ def create_rtdh_standard_msg(cdotGeospatialApi: cdot_geospatial_api.GeospatialAp
                     "route_details_start": route_details_start,
                     "route_details_end": route_details_end,
                     "condition_1": condition_1,
-                }
-            }
+                },
+            },
         }
     except Exception as e:
         logging.warning(
-            f'Error occured generating standard message for message {pd.get("properties/id", default="")}: {e}')
+            f'Error ocurred generating standard message for message {pd.get("properties/id", default="")}: {e}'
+        )
         return {}
 
 
 def validate_closure(obj):
     if not obj or (type(obj) != dict and type(obj) != OrderedDict):
-        logging.warning('alert is empty or has invalid type')
+        logging.warning("alert is empty or has invalid type")
         return False
     id = obj.get("sys_gUid")
     try:
 
-        properties = obj.get('properties', {})
+        properties = obj.get("properties", {})
 
-        coordinates = get_linestring(obj.get('geometry'))
+        coordinates = get_linestring(obj.get("geometry"))
         if not coordinates:
             logging.warning(
-                f"Invalid event with id = {obj.get('sys_gUid')}. No valid coordinates found")
+                f"Invalid event with id = {obj.get('sys_gUid')}. No valid coordinates found"
+            )
             return False
 
-        starttime_string = properties.get('startTime')
-        endtime_string = properties.get('clearTime')
-        description = properties.get('travelerInformationMessage')
-        direction = properties.get('direction', 'undefined')
+        starttime_string = properties.get("startTime")
+        endtime_string = properties.get("clearTime")
+        description = properties.get("travelerInformationMessage")
+        direction = properties.get("direction", "undefined")
 
         required_fields = [starttime_string, description, direction]
         for field in required_fields:
             if not field:
                 logging.warning(
-                    f'''Invalid event with id = {id}. not all required fields are present. Required fields are: 
-                    streetNameFrom, workStartDate, and descriptionForProject''')
+                    f"""Invalid event with id = {id}. not all required fields are present. Required fields are: 
+                    streetNameFrom, workStartDate, and descriptionForProject"""
+                )
                 return False
 
-        start_time = date_tools.parse_datetime_from_iso_string(
-            starttime_string)
+        start_time = date_tools.parse_datetime_from_iso_string(starttime_string)
         end_time = date_tools.parse_datetime_from_iso_string(endtime_string)
         if not start_time:
             logging.error(
-                f'Invalid incident with id = {id}. Unsupported start time format: {start_time}')
+                f"Invalid incident with id = {id}. Unsupported start time format: {start_time}"
+            )
             return False
         elif endtime_string and not end_time:
             logging.error(
-                f'Invalid incident with id = {id}. Unsupported end time format: {end_time}')
+                f"Invalid incident with id = {id}. Unsupported end time format: {end_time}"
+            )
             return False
     except Exception as e:
         logging.error(
-            f"Invalid event with id = {id}. Error occured while validating: {e}")
+            f"Invalid event with id = {id}. Error ocurred while validating: {e}"
+        )
         return False
 
     return True

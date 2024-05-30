@@ -41,9 +41,9 @@ def upload_logs(contents, path, bucket_name):
         return False
 
 
-def get_wzdx_data(endpoint, apikey):
+def get_wzdx_data(endpoint, apiKey):
     # format URL with username, password, and file path
-    url = f"{endpoint}?apiKey={apikey}"
+    url = f"{endpoint}?apiKey={apiKey}"
 
     # Download and decode file to string
     file_contents = urllib.request.urlopen(url).read().decode("utf-8-sig")
@@ -153,7 +153,7 @@ def get_log(entry):
             json.loads(experimental), json.loads(prod)
         )
     except Exception as e:
-        logging.error(f"Error diffing prod and experimetal data: {e}")
+        logging.error(f"Error diffing prod and experimental data: {e}")
         raise e
 
     upload_logs(json.dumps(diff, default=str), f"diff/{path}", BUCKET_NAME)

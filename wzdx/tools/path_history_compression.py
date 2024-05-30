@@ -15,11 +15,11 @@ def getChordLength(pt1, pt2):
         d = radius*math.acos(math.cos(lat1)*math.cos(lat2) *
                              math.cos(lon1-lon2) + math.sin(lat1)*math.sin(lat2))
     except:
-        dlat = lat2-lat1  # in radians
-        dlon = lon2-lon1
+        dLat = lat2-lat1  # in radians
+        dLon = lon2-lon1
 
-        a = math.sin(dlat/2) * math.sin(dlat/2) + math.cos(math.radians(lat1)) \
-            * math.cos(math.radians(lat2)) * math.sin(dlon/2) * math.sin(dlon/2)
+        a = math.sin(dLat/2) * math.sin(dLat/2) + math.cos(math.radians(lat1)) \
+            * math.cos(math.radians(lat2)) * math.sin(dLon/2) * math.sin(dLon/2)
         c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
         d = radius * c
     return d
@@ -38,10 +38,10 @@ def generate_compressed_path(path):
         logging.error("Work zone is too short")
         return path
 
-    ALLOWABLEERROR = 30
-    SMALLDELTAPHI = 0.01
-    CHORDLENGTHTHRESHOLD = 10000
-    MAXESTIMATEDRADIUS = 8388607  # 7FFFFF
+    ALLOWABLE_ERROR = 30
+    SMALL_DELTA_PHI = 0.01
+    CHORD_LENGTH_THRESHOLD = 10000
+    MAX_ESTIMATED_RADIUS = 8388607  # 7FFFFF
 
     PH_ConciseDataBuffer = []
 
@@ -49,9 +49,9 @@ def generate_compressed_path(path):
     # Step 1
     ###
     startIndex = 3
-    Pstarting = path[startIndex-2]
-    Pprevious = path[startIndex-1]
-    Pnext = path[startIndex]
+    pStarting = path[startIndex-2]
+    pPrevious = path[startIndex-1]
+    pNext = path[startIndex]
     elementPos = 0
     totalDist = 0
     incrementDist = 0
@@ -66,26 +66,26 @@ def generate_compressed_path(path):
 
         # Step 2
         eval = True
-        actualChordLength = getChordLength(Pstarting, Pnext)
-        if actualChordLength > CHORDLENGTHTHRESHOLD:
-            actualError = ALLOWABLEERROR + 1
+        actualChordLength = getChordLength(pStarting, pNext)
+        if actualChordLength > CHORD_LENGTH_THRESHOLD:
+            actualError = ALLOWABLE_ERROR + 1
             eval = False
             # Go to step 7
 
     # Step 3
         heading_start = geospatial_tools.get_heading_from_coordinates(
-            [path[i-3], Pstarting])
+            [path[i-3], pStarting])
         heading_next = geospatial_tools.get_heading_from_coordinates(
-            [Pprevious, Pnext])
+            [pPrevious, pNext])
         deltaHeadings = abs(heading_next - heading_start)
         if deltaHeadings > 180:
             deltaHeadings = 360 - deltaHeadings
         deltaHeadings = abs(math.radians(deltaHeadings))
 
     # Step 4
-        if deltaHeadings < SMALLDELTAPHI and eval:
+        if deltaHeadings < SMALL_DELTA_PHI and eval:
             actualError = 0
-            estimatedRadius = MAXESTIMATEDRADIUS
+            estimatedRadius = MAX_ESTIMATED_RADIUS
             eval = False
             # Go to step 8
         elif eval:
@@ -100,20 +100,20 @@ def generate_compressed_path(path):
             actualError = estimatedRadius - d
 
     # Step 7
-        if actualError > ALLOWABLEERROR:
+        if actualError > ALLOWABLE_ERROR:
             incrementDist = actualChordLength
             totalDist += incrementDist
             PH_ConciseDataBuffer.append(path[i-1])
 
-            Pstarting = path[i-1]
-            Pprevious = path[i]
+            pStarting = path[i-1]
+            pPrevious = path[i]
             if i < stopIndex:
-                Pnext = path[i+1]
+                pNext = path[i+1]
     # Step 8
         else:
             if i < stopIndex:
-                Pnext = path[i+1]
-            Pprevious = path[i]
+                pNext = path[i+1]
+            pPrevious = path[i]
 
         if i == stopIndex:
             incrementDist = actualChordLength

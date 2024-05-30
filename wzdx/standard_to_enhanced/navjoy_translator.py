@@ -26,8 +26,8 @@ def main():
         logging.error(
             'validation error more message are printed above. output file is not created because the message failed validation.')
         return
-    with open(outputfile, 'w') as fwzdx:
-        fwzdx.write(json.dumps(wzdx_obj, indent=2))
+    with open(outputfile, 'w') as fWzdx:
+        fWzdx.write(json.dumps(wzdx_obj, indent=2))
         print(
             'Your wzdx message was successfully generated and is located here: ' + str(outputfile))
 

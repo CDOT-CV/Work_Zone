@@ -120,7 +120,7 @@ def does_route_overlap_4(start_1_m, end_1_m, start_2_m, end_2_m):
         return False
 
 
-def get_route_details_for_coordinates_lnglat(coordinates):
+def get_route_details_for_coordinates_lngLat(coordinates):
     route_details_start = get_route_details(coordinates[0][1], coordinates[0][0])
 
     if len(coordinates) == 1 or (
@@ -181,7 +181,7 @@ def identify_overlapping_features_wzdx(wzdx_msgs_1, wzdx_msgs_2):
         wzdx_1["route_details_end"] = wzdx_1["features"][0]["properties"].get(
             "route_details_end"
         )
-        
+
         if (
             wzdx_1.get("route_details_start")
             and not wzdx_1.get("route_details_end")
@@ -227,7 +227,7 @@ def identify_overlapping_features_wzdx(wzdx_msgs_1, wzdx_msgs_2):
         wzdx_2["route_details_end"] = wzdx_2["features"][0]["properties"].get(
             "route_details_end"
         )
-        
+
         if (
             wzdx_2.get("route_details_start")
             and not wzdx_2.get("route_details_end")

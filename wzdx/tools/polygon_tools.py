@@ -7,7 +7,9 @@ from shapely.geometry.polygon import Polygon
 CORNER_PRECISION_DEGREES = 10
 
 
-def generate_buffer_polygon_from_linestring(geometry: list, polygon_width_in_meters: float):
+def generate_buffer_polygon_from_linestring(
+    geometry: list, polygon_width_in_meters: float
+):
     """Generate a polygon from a Linestring using polygon_width_in_meters as a buffer.
 
     Args:
@@ -17,7 +19,7 @@ def generate_buffer_polygon_from_linestring(geometry: list, polygon_width_in_met
 
     if not geometry or type(geometry) != list or len(geometry) <= 1:
         return None
-    geodesic_pyproj = pyproj.Geod(ellps='WGS84')
+    geodesic_pyproj = pyproj.Geod(ellps="WGS84")
 
     # Initializing lists to create polygon
     polygon_left_points = []
@@ -28,15 +30,14 @@ def generate_buffer_polygon_from_linestring(geometry: list, polygon_width_in_met
         if i == 0:
             # first point, heading from first to second point
             p1 = geometry[i]
-            p2 = geometry[i+1]
+            p2 = geometry[i + 1]
         else:
             # Not first point, heading from previous point to current point
-            p1 = geometry[i-1]
+            p1 = geometry[i - 1]
             p2 = geometry[i]
 
         # Get forward heading between 2 points
-        fwd_heading, _, __ = geodesic_pyproj.inv(
-            p1[0], p1[1], p2[0], p2[1])
+        fwd_heading, _, __ = geodesic_pyproj.inv(p1[0], p1[1], p2[0], p2[1])
 
         # Get left and right vectors
         left = fwd_heading - 90
@@ -47,18 +48,19 @@ def generate_buffer_polygon_from_linestring(geometry: list, polygon_width_in_met
 
         # get left and right points from direction and distance
         origin = geopy.Point(p1[1], p1[0])
-        left_point = geodesic(
-            meters=polygon_width_in_meters/2).destination(origin, left)
-        right_point = geodesic(meters=polygon_width_in_meters /
-                               2).destination(origin, right)
+        left_point = geodesic(meters=polygon_width_in_meters / 2).destination(
+            origin, left
+        )
+        right_point = geodesic(meters=polygon_width_in_meters / 2).destination(
+            origin, right
+        )
 
         # Append points to left and right lists
         polygon_left_points.append([left_point.latitude, left_point.longitude])
-        polygon_right_points.append(
-            [right_point.latitude, right_point.longitude])
+        polygon_right_points.append([right_point.latitude, right_point.longitude])
 
     # Create list of points in correct order (all left points, then all right points in reverse order)
-    # This order is critical to prevent criss-crossing in the polygon
+    # This order is critical to prevent crisscrossing in the polygon
     polygon_points = []
 
     for i in polygon_left_points:
@@ -129,7 +131,7 @@ def average_coordinates(coord1: list, coord2: list) -> list:
     """Average two sets of coordinates to one center coordinate"""
     if len(coord1) != 2 or len(coord2) != 2:
         return None
-    return [(coord1[0]+coord2[0])/2, (coord1[1]+coord2[1])/2]
+    return [(coord1[0] + coord2[0]) / 2, (coord1[1] + coord2[1]) / 2]
 
 
 def average_symmetric_polygon_to_centerline(polygon):
@@ -137,7 +139,7 @@ def average_symmetric_polygon_to_centerline(polygon):
     centerline"""
     centerline = []
     for i in range(0, len(polygon) - 1, 2):
-        centerline.append(average_coordinates(polygon[i], polygon[i+1]))
+        centerline.append(average_coordinates(polygon[i], polygon[i + 1]))
     return centerline
 
 
@@ -151,7 +153,7 @@ def polygon_to_polyline_center(coordinates):
     if not coordinates or type(coordinates) != list or len(coordinates) < 5:
         return None
 
-    geodesic = pyproj.Geod(ellps='WGS84')
+    geodesic = pyproj.Geod(ellps="WGS84")
 
     center_lon = 0
     center_lat = 0
@@ -166,10 +168,9 @@ def polygon_to_polyline_center(coordinates):
     distances = []
 
     for i in range(len(coordinates) - 1):
-        avg_lon = (coordinates[i][0] + coordinates[i+1][0]) / 2
-        avg_lat = (coordinates[i][1] + coordinates[i+1][1]) / 2
-        _, __, distance = geodesic.inv(
-            avg_lon, avg_lat, center_lon, center_lat)
+        avg_lon = (coordinates[i][0] + coordinates[i + 1][0]) / 2
+        avg_lat = (coordinates[i][1] + coordinates[i + 1][1]) / 2
+        _, __, distance = geodesic.inv(avg_lon, avg_lat, center_lon, center_lat)
         distances.append([distance, [avg_lon, avg_lat]])
 
     distances = sorted(distances, key=lambda ls: -ls[0])
