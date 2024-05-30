@@ -1,3 +1,4 @@
+import argparse
 import json
 from ..tools import (
     cdot_geospatial_api,
@@ -9,24 +10,27 @@ from ..tools import (
 import logging
 from datetime import datetime, timedelta
 
+PROGRAM_NAME = "ExperimentalCombinationGeotabAttenuator"
+PROGRAM_VERSION = "1.0"
+
 ATTENUATOR_TIME_AHEAD_SECONDS = 30 * 60
 ISO_8601_FORMAT_STRING = "%Y-%m-%dT%H:%M:%SZ"
 
 
-def main(outputPath="./tests/data/output/wzdx_attenuator_combined.json"):
-    with open(
-        "./wzdx/sample_files/raw/geotab_avl/attenuator_combination_geotab.json"
-    ) as f:
-        geotab_avl = [json.loads(f.read())]
-    with open(
-        "./wzdx/sample_files/enhanced/attenuator/attenuator_combination_wzdx.json"
-    ) as f:
-        wzdx = json.loads(f.read())
+def main():
+    wzdxFile, geotabFile, output_dir, updateDates = parse_rtdh_arguments()
+    wzdx = json.loads(open(wzdxFile, "r").read())
+    geotab_avl = [json.loads(open(geotabFile, "r").read())]
+    outputPath = output_dir + "/wzdx_attenuator_combined.geojson"
+    if updateDates == "true":
+        geotab_avl[0]["avl_location"]["source"]["collection_timestamp"] = (
+            date_tools.get_current_ts_millis() / 1000
+        )
         wzdx[0]["features"][0]["properties"]["start_date"] = (
-            date_tools.get_iso_string_from_datetime(datetime.now() - timedelta(days=1))
+            date_tools.get_iso_string_from_datetime(datetime.now() - timedelta(days=2))
         )
         wzdx[0]["features"][0]["properties"]["end_date"] = (
-            date_tools.get_iso_string_from_datetime(datetime.now() + timedelta(days=1))
+            date_tools.get_iso_string_from_datetime(datetime.now() + timedelta(days=2))
         )
 
     combined_events = get_combined_events(geotab_avl, wzdx)
@@ -34,6 +38,30 @@ def main(outputPath="./tests/data/output/wzdx_attenuator_combined.json"):
     with open(outputPath, "w+") as f:
         f.write(json.dumps(combined_events, indent=2))
         logging.debug(f"Output written to {outputPath}")
+
+
+# parse script command line arguments
+def parse_rtdh_arguments():
+    parser = argparse.ArgumentParser(
+        description="Combine WZDx and Geotab AVL (ATMA) data"
+    )
+    parser.add_argument(
+        "--version", action="version", version=f"{PROGRAM_NAME} {PROGRAM_VERSION}"
+    )
+    parser.add_argument("wzdxFile", help="planned event file path")
+    parser.add_argument("geotabFile", help="planned event file path")
+    parser.add_argument(
+        "--outputDir", required=False, default="./", help="output directory"
+    )
+    parser.add_argument(
+        "--updateDates",
+        required=False,
+        default="false",
+        help="Boolean (true/false), Update dates to the current date to pass time filter",
+    )
+
+    args = parser.parse_args()
+    return args.wzdxFile, args.geotabFile, args.outputDir, args.updateDates
 
 
 def validate_directionality(geotab, wzdx):
@@ -98,16 +126,13 @@ def identify_overlapping_features(geotab_msgs, wzdx_msgs):
             (geometry["latitude"], geometry["longitude"])
         )
         if not route_details:
-            continue
-        geotab_msg["route_details_start"] = route_details
-        geotab_msg["route_details_end"] = None
-        logging.debug(route_details)
-
-        if not route_details:
             logging.debug(
                 f"No route details for Geotab object: {geotab_msg['rtdh_message_id']}"
             )
             continue
+        geotab_msg["route_details_start"] = route_details
+        geotab_msg["route_details_end"] = None
+
         if route_details["Route"] in geotab_routes:
             geotab_routes[route_details["Route"]].append(geotab_msg)
         else:
@@ -207,10 +232,10 @@ def combine_geotab_with_wzdx(geotab_avl, wzdx_wzdx):
     # determine new geometry and mile markers
     event_start_marker = wzdx_wzdx["route_details_start"]["Measure"]
     event_end_marker = wzdx_wzdx["route_details_end"]["Measure"]
-    mmin = min(event_start_marker, event_end_marker)
-    mmax = max(event_start_marker, event_end_marker)
+    mMin = min(event_start_marker, event_end_marker)
+    mMax = max(event_start_marker, event_end_marker)
     geometry, startMarker, endMarker = get_geometry_for_distance_ahead(
-        distance_ahead, route_details, bearing, mmin, mmax
+        distance_ahead, route_details, bearing, mMin, mMax
     )
     combined_feature["properties"]["beginning_milepost"] = startMarker
     combined_feature["properties"]["ending_milepost"] = endMarker
@@ -256,18 +281,18 @@ def combine_geotab_with_wzdx(geotab_avl, wzdx_wzdx):
     return wzdx_wzdx
 
 
-def get_geometry_for_distance_ahead(distance_ahead, route_details, bearing, mmin, mmax):
+def get_geometry_for_distance_ahead(distance_ahead, route_details, bearing, mMin, mMax):
     route_ahead = cdot_geospatial_api.GeospatialApi().get_route_geometry_ahead(
         route_details["Route"],
         route_details["Measure"],
         bearing,
         distance_ahead,
         routeDetails=route_details,
-        mmin=mmin,
-        mmax=mmax,
+        mMin=mMin,
+        mMax=mMax,
     )
     if not route_details:
-        return [], mmin, mmax
+        return [], mMin, mMax
     return (
         route_ahead["coordinates"],
         route_ahead["start_measure"],

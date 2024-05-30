@@ -27,17 +27,3 @@ def test_get_combined_events_valid():
         expected[0]["features"][0]["properties"]["reduced_speed_limit_kph"]
         == navjoy_msgs[0]["features"][0]["properties"]["reduced_speed_limit_kph"]
     )
-
-
-def test_main():
-    outputPath = "./tests/data/output/wzdx_navjoy_combined.json"
-    try:
-        os.remove(outputPath)
-    except Exception:
-        pass
-    with time_machine.travel(
-        datetime.datetime(2024, 5, 10, 0, 0, 0, 0, tzinfo=datetime.timezone.utc)
-    ):
-        navjoy.main(outputPath=outputPath)
-    assert os.path.isfile(outputPath)
-    assert len(json.loads(open(outputPath).read())) == 1

@@ -1,22 +1,27 @@
+import argparse
 import json
 
 from ..tools import combination, date_tools, wzdx_translator
 from datetime import datetime, timedelta
 
+PROGRAM_NAME = "ExperimentalCombinationNavjoy568"
+PROGRAM_VERSION = "1.0"
+
 ISO_8601_FORMAT_STRING = "%Y-%m-%dT%H:%M:%SZ"
 
 
-def main(outputPath="./tests/data/output/wzdx_navjoy_combined.json"):
-    with open("./wzdx/sample_files/enhanced/navjoy/wzdx_2022_11_3.json") as f:
-        navjoy = [json.loads(f.read())]
+def main():
+    wzdxFile, navjoyFile, output_dir, updateDates = parse_rtdh_arguments()
+    wzdx = json.loads(open(wzdxFile, "r").read())
+    navjoy = [json.loads(open(navjoyFile, "r").read())]
+    outputPath = output_dir + "/wzdx_attenuator_combined.geojson"
+    if updateDates == "true":
         navjoy[0]["features"][0]["properties"]["start_date"] = (
             date_tools.get_iso_string_from_datetime(datetime.now() - timedelta(days=1))
         )
         navjoy[0]["features"][0]["properties"]["end_date"] = (
             date_tools.get_iso_string_from_datetime(datetime.now() + timedelta(days=1))
         )
-    with open("./wzdx/sample_files/enhanced/planned_events/wzdx_2022_11_3.json") as f:
-        wzdx = [json.loads(f.read())]
         wzdx[0]["features"][0]["properties"]["start_date"] = (
             date_tools.get_iso_string_from_datetime(datetime.now() - timedelta(days=2))
         )
@@ -28,6 +33,30 @@ def main(outputPath="./tests/data/output/wzdx_navjoy_combined.json"):
 
     with open(outputPath, "w+") as f:
         f.write(json.dumps(combined_events, indent=2))
+
+
+# parse script command line arguments
+def parse_rtdh_arguments():
+    parser = argparse.ArgumentParser(
+        description="Combine WZDx and Geotab AVL (ATMA) data"
+    )
+    parser.add_argument(
+        "--version", action="version", version=f"{PROGRAM_NAME} {PROGRAM_VERSION}"
+    )
+    parser.add_argument("wzdxFile", help="planned event file path")
+    parser.add_argument("navjoyWzdxFile", help="planned event file path")
+    parser.add_argument(
+        "--outputDir", required=False, default="./", help="output directory"
+    )
+    parser.add_argument(
+        "--updateDates",
+        required=False,
+        default="false",
+        help="Boolean (true/false), Update dates to the current date to pass time filter",
+    )
+
+    args = parser.parse_args()
+    return args.wzdxFile, args.navjoyWzdxFile, args.outputDir, args.updateDates
 
 
 def get_combined_events(navjoy_wzdx_msgs, wzdx_msgs):

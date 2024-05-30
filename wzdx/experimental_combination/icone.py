@@ -1,3 +1,4 @@
+import argparse
 import json
 from datetime import datetime
 import logging
@@ -6,33 +7,70 @@ import glob
 
 from ..tools import combination, wzdx_translator, geospatial_tools, date_tools
 
+PROGRAM_NAME = "ExperimentalCombinationIcone"
+PROGRAM_VERSION = "1.0"
+
 ISO_8601_FORMAT_STRING = "%Y-%m-%dT%H:%M:%SZ"
 START_TIME_THRESHOLD_MILLISECONDS = 1000 * 60 * 60 * 24 * 31  # 31 days
 END_TIME_THRESHOLD_MILLISECONDS = 1000 * 60 * 60 * 24 * 31  # 31 days
 
 
 def main(outputPath="./tests/data/output/wzdx_icone_combined.json"):
+    wzdxFile, iconeDirectory, output_dir, updateDates = parse_rtdh_arguments()
+    wzdx = json.loads(open(wzdxFile, "r").read())
     icone = [
         json.loads(open(f_name).read())
-        for f_name in glob.glob("./icone_arrow_boards/2023_05_16_standard/*.json")
+        for f_name in glob.glob(f"${iconeDirectory}/*.json")
     ]
-    wzdx_full = json.loads(
-        open("./icone_arrow_boards/2023_05_16_standard/wzdx.geojson").read()
-    )
-    wzdx = [
-        {
-            "feed_info": wzdx_full["feed_info"],
-            "type": "FeatureCollection",
-            "features": [i],
-        }
-        for i in wzdx_full["features"]
-    ]
-    outputPath = "./icone_arrow_boards/2023_05_16_standard/wzdx_experimental.geojson"
+    outputPath = output_dir + "/wzdx_experimental.geojson"
+    if updateDates == "true":
+        for i in icone:
+            i["rtdh_timestamp"] = date_tools.get_current_ts_millis() / 1000
+            i["event"]["header"]["start_timestamp"] = (
+                date_tools.get_iso_string_from_datetime(
+                    datetime.now() - timedelta(days=1)
+                )
+            )
+            i["features"][0]["properties"]["end_date"] = (
+                date_tools.get_iso_string_from_datetime(
+                    datetime.now() + timedelta(hours=4)
+                )
+            )
+        wzdx[0]["features"][0]["properties"]["start_date"] = (
+            date_tools.get_iso_string_from_datetime(datetime.now() - timedelta(days=2))
+        )
+        wzdx[0]["features"][0]["properties"]["end_date"] = (
+            date_tools.get_iso_string_from_datetime(datetime.now() - timedelta(hours=2))
+        )
 
     combined_events = get_combined_events(icone, wzdx)
 
     with open(outputPath, "w+") as f:
         f.write(json.dumps(combined_events, indent=2))
+
+
+# parse script command line arguments
+def parse_rtdh_arguments():
+    parser = argparse.ArgumentParser(
+        description="Combine WZDx and iCone arrow board data"
+    )
+    parser.add_argument(
+        "--version", action="version", version=f"{PROGRAM_NAME} {PROGRAM_VERSION}"
+    )
+    parser.add_argument("wzdxFile", help="planned event file path")
+    parser.add_argument("iconeJsonDirectory", help="planned event file path")
+    parser.add_argument(
+        "--outputDir", required=False, default="./", help="output directory"
+    )
+    parser.add_argument(
+        "--updateDates",
+        required=False,
+        default="false",
+        help="Boolean (true/false), Update dates to the current date to pass time filter",
+    )
+
+    args = parser.parse_args()
+    return args.wzdxFile, args.iconeDirectory, args.outputDir, args.updateDates
 
 
 def get_direction_from_route_details(route_details):
