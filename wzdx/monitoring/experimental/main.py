@@ -18,7 +18,7 @@ def get_path():
     date = datetime.datetime.now(pytz.timezone("US/Mountain"))
     print(date)
     # Defining the path for GCS bucket
-    date_name = f"year={date.strftime('%Y')}/month={date.strftime('%m')}/day={date.strftime('%d')}/raw_{date.strftime('%Y%m%d-%H%M%S')}.xml"
+    date_name = f"year={date.strftime('%Y')}/month={date.strftime('%m')}/day={date.strftime('%d')}/raw_{date.strftime('%Y%m%d-%H%M%S')}.json"
     print(date_name)
     return date_name
 
@@ -44,6 +44,7 @@ def upload_logs(contents, path, bucket_name):
 def get_wzdx_data(endpoint, apiKey):
     # format URL with username, password, and file path
     url = f"{endpoint}?apiKey={apiKey}"
+    print(url)
 
     # Download and decode file to string
     file_contents = urllib.request.urlopen(url).read().decode("utf-8-sig")
@@ -127,7 +128,6 @@ def compare_wzdx_experimental_prod(experimental: dict, prod: dict) -> dict:
     return total_diff
 
 
-# https://us-central1-cdot-oim-cv-dev.cloudfunctions.net/get_wzdx_data
 def get_log(entry):
     BUCKET_NAME = os.getenv("BUCKET_NAME")
 
