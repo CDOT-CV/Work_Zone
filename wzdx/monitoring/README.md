@@ -1,3 +1,3 @@
 # Monitoring Resources
 
-This folder contains scripts that enable monitoring of the production WZDx rest endpoint. These scripts generate GCP custom metrics from the returned WZDx data.
+This folder contains a cloud function which diffs the production and experimental wzdx feeds and outputs them to GCP buckets.
