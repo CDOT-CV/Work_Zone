@@ -4,7 +4,7 @@ import random
 import uuid
 
 
-CDOT_NAMESPACE_UUID = uuid.UUID('ef39d1dd-53ce-4651-9491-4bba7251a3c0')
+CDOT_NAMESPACE_UUID = uuid.UUID("ef39d1dd-53ce-4651-9491-4bba7251a3c0")
 
 
 def random_uuid():

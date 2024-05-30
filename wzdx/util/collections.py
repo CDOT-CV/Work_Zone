@@ -32,7 +32,7 @@ class PathDict(object):
             # if date_val:
             #     return int(datetime.datetime.fromisoformat(target).timestamp())
             if trans:
-                '''The transformer has the duty to handle exceptions'''
+                """The transformer has the duty to handle exceptions"""
                 # try:
                 #     return trans(target)
                 # except:

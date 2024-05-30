@@ -4,19 +4,19 @@ from shapely.geometry.polygon import Polygon
 
 
 def test_generate_buffer_polygon_from_linestring():
-    polyline = [[
-        -105.02518638968468,
-        39.776638166930375
-    ],
-        [
-            -105.02523601055145,
-            39.771953483109826
-    ]]
-    expected = [[39.77663632624975,  -105.02489458690503], [39.77195164242777,  -105.0249442275526], [39.77195532305836,  -
-                                                                                                      105.02552779356584], [39.77664000687735,  -105.02547819247987], [39.77663632624975,  -105.02489458690503]]
+    polyline = [
+        [-105.02518638968468, 39.776638166930375],
+        [-105.02523601055145, 39.771953483109826],
+    ]
+    expected = [
+        [39.77663632624975, -105.02489458690503],
+        [39.77195164242777, -105.0249442275526],
+        [39.77195532305836, -105.02552779356584],
+        [39.77664000687735, -105.02547819247987],
+        [39.77663632624975, -105.02489458690503],
+    ]
     width = 50
-    polygon = polygon_tools.generate_buffer_polygon_from_linestring(
-        polyline, width)
+    polygon = polygon_tools.generate_buffer_polygon_from_linestring(polyline, width)
     print(polygon)
     polygon_points = polygon_tools.polygon_to_list(polygon)
     print(polygon_points)
@@ -27,14 +27,17 @@ def test_generate_buffer_polygon_from_linestring():
 
     # Validate against previous result
     for i, point in enumerate(expected):
-        testCase.assertAlmostEqual(
-            point[0], polygon_points[i][0], places=10)
-        testCase.assertAlmostEqual(
-            point[1], polygon_points[i][1], places=10)
+        testCase.assertAlmostEqual(point[0], polygon_points[i][0], places=10)
+        testCase.assertAlmostEqual(point[1], polygon_points[i][1], places=10)
 
     # Validate width
     testCase.assertAlmostEqual(
-        geospatial_tools.getDist(polyline[0], (polygon_points[0][1], polygon_points[0][0])), width/2, places=0)
+        geospatial_tools.getDist(
+            polyline[0], (polygon_points[0][1], polygon_points[0][0])
+        ),
+        width / 2,
+        places=0,
+    )
 
 
 def test_polygon_to_list():

@@ -9,13 +9,13 @@ def test_compare_features():
         "type": "Feature",
         "properties": {
             "core_details": {
-              "event_type": "work-zone",
-              "data_source_id": "c9a1044c-6518-4449-a93f-3954ffc55975",
-              "road_names": ["US-550"],
-              "direction": "northbound",
-              "name": "OpenTMS-Event9834175545_northbound",
-              "description": "Between County Road 24 (4 miles north of Ridgway) and County Road 2 (4 miles south of Colona) from Mile Point 109 to Mile Point 113. Paving operations. Alternating traffic. Starting May 5, 2023 at 7:00AM MDT until May 5, 2023 at about 7:00PM MDT.",
-              "update_date": "2023-04-27T13:02:20Z"
+                "event_type": "work-zone",
+                "data_source_id": "c9a1044c-6518-4449-a93f-3954ffc55975",
+                "road_names": ["US-550"],
+                "direction": "northbound",
+                "name": "OpenTMS-Event9834175545_northbound",
+                "description": "Between County Road 24 (4 miles north of Ridgway) and County Road 2 (4 miles south of Colona) from Mile Point 109 to Mile Point 113. Paving operations. Alternating traffic. Starting May 5, 2023 at 7:00AM MDT until May 5, 2023 at about 7:00PM MDT.",
+                "update_date": "2023-04-27T13:02:20Z",
             },
             "start_date": "2023-05-05T13:00:00Z",
             "end_date": "2023-05-06T01:00:00Z",
@@ -29,9 +29,11 @@ def test_compare_features():
             "lanes": [{"order": 1, "type": "general", "status": "open"}],
             "beginning_cross_street": "County Road 24 (4 miles north of Ridgway)",
             "ending_cross_street": "County Road 2 (4 miles south of Colona)",
-            "types_of_work": [{"type_name": "surface-work", "is_architectural_change": True}],
+            "types_of_work": [
+                {"type_name": "surface-work", "is_architectural_change": True}
+            ],
             "beginning_milepost": 113.0,
-            "ending_milepost": 109.0
+            "ending_milepost": 109.0,
         },
         "geometry": {
             "type": "LineString",
@@ -69,9 +71,9 @@ def test_compare_features():
                 [-107.72679390199994, 38.223637127000075],
                 [-107.72776237599999, 38.221720134000066],
                 [-107.72816747399997, 38.220385185000055],
-                [-107.72795128199999, 38.218591221000054]
-            ]
-        }
+                [-107.72795128199999, 38.218591221000054],
+            ],
+        },
     }
 
     experimental_feature = {
@@ -79,13 +81,13 @@ def test_compare_features():
         "type": "Feature",
         "properties": {
             "core_details": {
-              "event_type": "work-zone",
-              "data_source_id": "c9a1044c-6518-4449-a93f-3954ffc55975",
-              "road_names": ["US-550"],
-              "direction": "northbound",
-              "name": "OpenTMS-Event9834175545_northbound",
-              "description": "Between County Road 24 (4 miles north of Ridgway) and County Road 2 (4 miles south of Colona) from Mile Point 109 to Mile Point 113. Paving operations. Alternating traffic. Starting May 5, 2023 at 7:00AM MDT until May 5, 2023 at about 7:00PM MDT.",
-              "update_date": "2023-04-27T13:02:20Z"
+                "event_type": "work-zone",
+                "data_source_id": "c9a1044c-6518-4449-a93f-3954ffc55975",
+                "road_names": ["US-550"],
+                "direction": "northbound",
+                "name": "OpenTMS-Event9834175545_northbound",
+                "description": "Between County Road 24 (4 miles north of Ridgway) and County Road 2 (4 miles south of Colona) from Mile Point 109 to Mile Point 113. Paving operations. Alternating traffic. Starting May 5, 2023 at 7:00AM MDT until May 5, 2023 at about 7:00PM MDT.",
+                "update_date": "2023-04-27T13:02:20Z",
             },
             "start_date": "2023-05-05T13:00:00Z",
             "end_date": "2023-05-06T01:00:00Z",
@@ -99,9 +101,11 @@ def test_compare_features():
             "lanes": [{"order": 1, "type": "general", "status": "open"}],
             "beginning_cross_street": "County Road 24 (4 miles north of Ridgway)",
             "ending_cross_street": "County Road 2 (4 miles south of Colona)",
-            "types_of_work": [{"type_name": "surface-work", "is_architectural_change": True}],
+            "types_of_work": [
+                {"type_name": "surface-work", "is_architectural_change": True}
+            ],
             "beginning_milepost": 113.0,
-            "ending_milepost": 109.0
+            "ending_milepost": 109.0,
         },
         "geometry": {
             "type": "LineString",
@@ -139,9 +143,9 @@ def test_compare_features():
                 [-107.72679390199994, 38.223637127000075],
                 [-107.72776237599999, 38.221720134000066],
                 [-107.72816747399997, 38.220385185000055],
-                [-107.72795128199999, 38.218591221000054]
-            ]
-        }
+                [-107.72795128199999, 38.218591221000054],
+            ],
+        },
     }
 
     actual_diff = main.compare_features(prod_feature, experimental_feature)
@@ -151,12 +155,24 @@ def test_compare_features():
 
 def test_compare_features_invalid():
     expected_diff = {
-        'properties/work_zone_type': {'prod': 'static', 'experimental': 'moving'},
-        'properties/core_details/description': {'prod': 'Between County Road 24 (4 miles north of Ridgway) and County Road 2 (4 miles south of Colona) from Mile Point 109 to Mile Point 113. Paving operations. Alternating traffic. Starting May 5, 2023 at 7:00AM MDT until May 5, 2023 at about 7:00PM MDT.', 'experimental': 'Between County Road 24 (4 miles north of Ridgway) and County Road 2 (4 miles south of Colona) from Mile Point 109 to Mile Point 113. Paving operations. Alternating traffic. Starting May 5, 2023 at 7:00AM MDT until May 5, 2023 at about 7:00PM MDT. icone Message'},
-        'properties/core_details/update_date': {'prod': '2023-04-27T13:02:20Z', 'experimental': '2023-04-27T14:02:20Z'},
-        'properties/reduced_speed_limit_kph': {'prod': None, 'experimental': 40},
-        'properties/start_date': {'prod': '2023-05-05T13:00:00Z', 'experimental': '2023-05-05T11:00:00Z'},
-        'properties/end_date': {'prod': '2023-05-06T01:00:00Z', 'experimental': '2023-05-06T02:00:00Z'},
+        "properties/work_zone_type": {"prod": "static", "experimental": "moving"},
+        "properties/core_details/description": {
+            "prod": "Between County Road 24 (4 miles north of Ridgway) and County Road 2 (4 miles south of Colona) from Mile Point 109 to Mile Point 113. Paving operations. Alternating traffic. Starting May 5, 2023 at 7:00AM MDT until May 5, 2023 at about 7:00PM MDT.",
+            "experimental": "Between County Road 24 (4 miles north of Ridgway) and County Road 2 (4 miles south of Colona) from Mile Point 109 to Mile Point 113. Paving operations. Alternating traffic. Starting May 5, 2023 at 7:00AM MDT until May 5, 2023 at about 7:00PM MDT. icone Message",
+        },
+        "properties/core_details/update_date": {
+            "prod": "2023-04-27T13:02:20Z",
+            "experimental": "2023-04-27T14:02:20Z",
+        },
+        "properties/reduced_speed_limit_kph": {"prod": None, "experimental": 40},
+        "properties/start_date": {
+            "prod": "2023-05-05T13:00:00Z",
+            "experimental": "2023-05-05T11:00:00Z",
+        },
+        "properties/end_date": {
+            "prod": "2023-05-06T01:00:00Z",
+            "experimental": "2023-05-06T02:00:00Z",
+        },
     }
 
     prod_feature = {
@@ -164,13 +180,13 @@ def test_compare_features_invalid():
         "type": "Feature",
         "properties": {
             "core_details": {
-              "event_type": "work-zone",
-              "data_source_id": "c9a1044c-6518-4449-a93f-3954ffc55975",
-              "road_names": ["US-550"],
-              "direction": "northbound",
-              "name": "OpenTMS-Event9834175545_northbound",
-              "description": "Between County Road 24 (4 miles north of Ridgway) and County Road 2 (4 miles south of Colona) from Mile Point 109 to Mile Point 113. Paving operations. Alternating traffic. Starting May 5, 2023 at 7:00AM MDT until May 5, 2023 at about 7:00PM MDT.",
-              "update_date": "2023-04-27T13:02:20Z"
+                "event_type": "work-zone",
+                "data_source_id": "c9a1044c-6518-4449-a93f-3954ffc55975",
+                "road_names": ["US-550"],
+                "direction": "northbound",
+                "name": "OpenTMS-Event9834175545_northbound",
+                "description": "Between County Road 24 (4 miles north of Ridgway) and County Road 2 (4 miles south of Colona) from Mile Point 109 to Mile Point 113. Paving operations. Alternating traffic. Starting May 5, 2023 at 7:00AM MDT until May 5, 2023 at about 7:00PM MDT.",
+                "update_date": "2023-04-27T13:02:20Z",
             },
             "start_date": "2023-05-05T13:00:00Z",
             "end_date": "2023-05-06T01:00:00Z",
@@ -184,9 +200,11 @@ def test_compare_features_invalid():
             "lanes": [{"order": 1, "type": "general", "status": "open"}],
             "beginning_cross_street": "County Road 24 (4 miles north of Ridgway)",
             "ending_cross_street": "County Road 2 (4 miles south of Colona)",
-            "types_of_work": [{"type_name": "surface-work", "is_architectural_change": True}],
+            "types_of_work": [
+                {"type_name": "surface-work", "is_architectural_change": True}
+            ],
             "beginning_milepost": 113.0,
-            "ending_milepost": 109.0
+            "ending_milepost": 109.0,
         },
         "geometry": {
             "type": "LineString",
@@ -224,9 +242,9 @@ def test_compare_features_invalid():
                 [-107.72679390199994, 38.223637127000075],
                 [-107.72776237599999, 38.221720134000066],
                 [-107.72816747399997, 38.220385185000055],
-                [-107.72795128199999, 38.218591221000054]
-            ]
-        }
+                [-107.72795128199999, 38.218591221000054],
+            ],
+        },
     }
 
     experimental_feature = {
@@ -234,13 +252,13 @@ def test_compare_features_invalid():
         "type": "Feature",
         "properties": {
             "core_details": {
-              "event_type": "work-zone",
-              "data_source_id": "c9a1044c-6518-4449-a93f-3954ffc55975",
-              "road_names": ["US-550"],
-              "direction": "northbound",
-              "name": "OpenTMS-Event9834175545_northbound",
-              "description": "Between County Road 24 (4 miles north of Ridgway) and County Road 2 (4 miles south of Colona) from Mile Point 109 to Mile Point 113. Paving operations. Alternating traffic. Starting May 5, 2023 at 7:00AM MDT until May 5, 2023 at about 7:00PM MDT. icone Message",
-              "update_date": "2023-04-27T14:02:20Z"
+                "event_type": "work-zone",
+                "data_source_id": "c9a1044c-6518-4449-a93f-3954ffc55975",
+                "road_names": ["US-550"],
+                "direction": "northbound",
+                "name": "OpenTMS-Event9834175545_northbound",
+                "description": "Between County Road 24 (4 miles north of Ridgway) and County Road 2 (4 miles south of Colona) from Mile Point 109 to Mile Point 113. Paving operations. Alternating traffic. Starting May 5, 2023 at 7:00AM MDT until May 5, 2023 at about 7:00PM MDT. icone Message",
+                "update_date": "2023-04-27T14:02:20Z",
             },
             "start_date": "2023-05-05T11:00:00Z",
             "end_date": "2023-05-06T02:00:00Z",
@@ -254,10 +272,12 @@ def test_compare_features_invalid():
             "lanes": [{"order": 1, "type": "general", "status": "open"}],
             "beginning_cross_street": "County Road 24 (4 miles north of Ridgway)",
             "ending_cross_street": "County Road 2 (4 miles south of Colona)",
-            "types_of_work": [{"type_name": "surface-work", "is_architectural_change": True}],
+            "types_of_work": [
+                {"type_name": "surface-work", "is_architectural_change": True}
+            ],
             "beginning_milepost": 113.0,
             "ending_milepost": 109.0,
-            "reduced_speed_limit_kph": 40
+            "reduced_speed_limit_kph": 40,
         },
         "geometry": {
             "type": "LineString",
@@ -295,9 +315,9 @@ def test_compare_features_invalid():
                 [-107.72679390199994, 38.223637127000075],
                 [-107.72776237599999, 38.221720134000066],
                 [-107.72816747399997, 38.220385185000055],
-                [-107.72795128199999, 38.218591221000054]
-            ]
-        }
+                [-107.72795128199999, 38.218591221000054],
+            ],
+        },
     }
 
     actual_diff = main.compare_features(prod_feature, experimental_feature)

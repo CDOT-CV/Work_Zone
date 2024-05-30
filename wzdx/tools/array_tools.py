@@ -1,5 +1,3 @@
-
-
 # return dimension of list (only analyzing 0th index)
 def dim(a):
     """Return dimensions of list and all non-empty sub-lists ([[1,2]] -> [1,2])"""
@@ -9,7 +7,7 @@ def dim(a):
 
 
 def get_2d_list(l):
-    """Convert an n dimensional list to a 2 dimensional list by taking final 
+    """Convert an n dimensional list to a 2 dimensional list by taking final
     2 dimensions at index 0"""
     dimensions = dim(l)
     index = len(dimensions) - 2

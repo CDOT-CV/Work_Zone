@@ -8,10 +8,7 @@ wzdx_v42_schema_string = {
         "feed_info": {
             "$ref": "https://raw.githubusercontent.com/usdot-jpo-ode/wzdx/release/v4.2/schemas/4.2/FeedInfo.json"
         },
-        "type": {
-            "description": "The GeoJSON type",
-            "enum": ["FeatureCollection"]
-        },
+        "type": {"description": "The GeoJSON type", "enum": ["FeatureCollection"]},
         "features": {
             "description": "An array of GeoJSON Feature objects which represent WZDx road events",
             "type": "array",
@@ -27,34 +24,27 @@ wzdx_v42_schema_string = {
                                                 "enum": ["work-zone", "detour"]
                                             }
                                         },
-                                        "required": ["event_type"]
+                                        "required": ["event_type"],
                                     }
                                 },
-                                "required": ["core_details"]
+                                "required": ["core_details"],
                             }
                         },
-                        "required": ["properties"]
+                        "required": ["properties"],
                     },
                     {
                         "$ref": "https://raw.githubusercontent.com/usdot-jpo-ode/wzdx/release/v4.2/schemas/4.2/RoadEventFeature.json"
-                    }
+                    },
                 ]
-            }
+            },
         },
         "bbox": {
             "$ref": "https://raw.githubusercontent.com/usdot-jpo-ode/wzdx/release/v4.2/schemas/4.2/BoundingBox.json"
         },
         "road_event_feed_info": {
             "$ref": "https://raw.githubusercontent.com/usdot-jpo-ode/wzdx/release/v4.2/schemas/4.2/FeedInfo.json"
-        }
+        },
     },
     "required": ["type", "features"],
-    "anyOf": [
-        {
-            "required": ["feed_info"]
-        },
-        {
-            "required": ["road_event_feed_info"]
-        }
-    ]
+    "anyOf": [{"required": ["feed_info"]}, {"required": ["road_event_feed_info"]}],
 }
