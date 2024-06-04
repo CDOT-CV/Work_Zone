@@ -83,7 +83,6 @@ def combine_navjoy_with_wzdx(navjoy_wzdx, wzdx_wzdx):
     combined_feature["properties"]["reduced_speed_limit_kph"] = navjoy_wzdx["features"][
         0
     ]["properties"]["reduced_speed_limit_kph"]
-    print(combined_event)
     combined_feature["properties"]["core_details"][
         "description"
     ] += f" Moving area updated by Geotab ATMA {combined_feature['id']}"

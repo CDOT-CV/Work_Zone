@@ -17,13 +17,8 @@ def test_generate_buffer_polygon_from_linestring():
     ]
     width = 50
     polygon = polygon_tools.generate_buffer_polygon_from_linestring(polyline, width)
-    print(polygon)
     polygon_points = polygon_tools.polygon_to_list(polygon)
-    print(polygon_points)
-
     testCase = unittest.TestCase()
-
-    print(polygon_points, expected)
 
     # Validate against previous result
     for i, point in enumerate(expected):

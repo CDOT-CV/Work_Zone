@@ -109,7 +109,6 @@ def test_combine_with_wzdx_reversed(attenuator_patch):
     expected = json.loads(
         open("./tests/data/experimental_combination/geotab/wzdx_combined.json").read()
     )
-    print(attenuator.get_geometry_for_distance_ahead.call_args)
     attenuator.get_geometry_for_distance_ahead.assert_called_with(
         2.5,
         {
@@ -123,7 +122,6 @@ def test_combine_with_wzdx_reversed(attenuator_patch):
         17.597,
         25.358,
     )
-    print(actual)
     assert actual == expected
 
 
