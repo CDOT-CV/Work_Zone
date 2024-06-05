@@ -255,9 +255,3 @@ def test_get_point_spacing_geospatial_endpoint():
         )
 
     out["features"] = features
-
-    print("GEOSPATIAL ENDPOINT SPACING")
-    print("Mean", statistics.mean(spacings))
-    print("Std", statistics.stdev(spacings))
-    print("Min", min(spacings))
-    print("Max", max(spacings))

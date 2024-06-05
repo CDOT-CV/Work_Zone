@@ -16,10 +16,8 @@ def set_clients():
 def get_path():
     # Parsing the date from the file name
     date = datetime.datetime.now(pytz.timezone("US/Mountain"))
-    print(date)
     # Defining the path for GCS bucket
-    date_name = f"year={date.strftime('%Y')}/month={date.strftime('%m')}/day={date.strftime('%d')}/raw_{date.strftime('%Y%m%d-%H%M%S')}.xml"
-    print(date_name)
+    date_name = f"year={date.strftime('%Y')}/month={date.strftime('%m')}/day={date.strftime('%d')}/raw_{date.strftime('%Y%m%d-%H%M%S')}.json"
     return date_name
 
 
@@ -31,19 +29,21 @@ def upload_logs(contents, path, bucket_name):
         # Checking if the file is already uploaded
         if blob.exists() == False and contents:
             blob.upload_from_string(contents)
-            print(f"{path} uploaded to {bucket_name}")
+            logging.info(f"{path} uploaded to {bucket_name}")
         else:
-            print(f"blob already exists for {path}))")
+            logging.warn(f"blob already exists for {path}")
         return True
     except Exception as e:
-        print(f"Error uploading log path: {str(path)} to bucket: {bucket_name}")
-        print(str(e))
+        logging.error(
+            f"Error uploading log path: {str(path)} to bucket: {bucket_name}, with message: {str(e)}"
+        )
         return False
 
 
-def get_wzdx_data(endpoint, apikey):
+def get_wzdx_data(endpoint, apiKey):
     # format URL with username, password, and file path
-    url = f"{endpoint}?apiKey={apikey}"
+    url = f"{endpoint}?apiKey={apiKey}"
+    logging.info(f"Making request to ${url}")
 
     # Download and decode file to string
     file_contents = urllib.request.urlopen(url).read().decode("utf-8-sig")
@@ -127,7 +127,6 @@ def compare_wzdx_experimental_prod(experimental: dict, prod: dict) -> dict:
     return total_diff
 
 
-# https://us-central1-cdot-oim-cv-dev.cloudfunctions.net/get_wzdx_data
 def get_log(entry):
     BUCKET_NAME = os.getenv("BUCKET_NAME")
 
@@ -153,7 +152,7 @@ def get_log(entry):
             json.loads(experimental), json.loads(prod)
         )
     except Exception as e:
-        logging.error(f"Error diffing prod and experimetal data: {e}")
+        logging.error(f"Error diffing prod and experimental data: {e}")
         raise e
 
     upload_logs(json.dumps(diff, default=str), f"diff/{path}", BUCKET_NAME)

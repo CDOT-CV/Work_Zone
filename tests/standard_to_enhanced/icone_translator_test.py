@@ -12,7 +12,7 @@ from wzdx.tools import wzdx_translator
 from tests.data.standard_to_enhanced import icone_translator_data
 
 
-@patch.object(argparse, 'ArgumentParser')
+@patch.object(argparse, "ArgumentParser")
 def test_parse_planned_events_arguments(argparse_mock):
     iconeFile, outputFile = icone_translator.parse_icone_arguments()
     assert iconeFile != None and outputFile != None
@@ -27,7 +27,9 @@ def test_get_vehicle_impact_some_lanes_closed():
 
 
 def test_get_vehicle_impact_all_lanes_open():
-    test_description = 'Road Ranger Emergency Personnel On-Scene. Move over - Caution [DBi, iCone]'
+    test_description = (
+        "Road Ranger Emergency Personnel On-Scene. Move over - Caution [DBi, iCone]"
+    )
     test_vehicle_impact = icone_translator.get_vehicle_impact(test_description)
     expected_vehicle_impact = "all-lanes-open"
     assert test_vehicle_impact == expected_vehicle_impact
@@ -49,74 +51,53 @@ def test_wzdx_creator_invalid_info_object():
             "source": {
                 "id": "1245",
                 "creation_timestamp": 1572916940000,
-                "last_updated_timestamp": 1636142163000
+                "last_updated_timestamp": 1636142163000,
             },
             "geometry": [
-                [
-                    -84.1238971,
-                    37.1686478
-                ],
-                [
-                    -84.1238971,
-                    37.1686478
-                ],
-                [
-                    -84.145861,
-                    37.1913
-                ],
-                [
-                    -84.145861,
-                    37.1913
-                ],
-                [
-                    -84.157105,
-                    37.201197
-                ],
-                [
-                    -84.167033,
-                    37.206079
-                ],
-                [
-                    -84.204074,
-                    37.21931
-                ]
+                [-84.1238971, 37.1686478],
+                [-84.1238971, 37.1686478],
+                [-84.145861, 37.1913],
+                [-84.145861, 37.1913],
+                [-84.157105, 37.201197],
+                [-84.167033, 37.206079],
+                [-84.204074, 37.21931],
             ],
             "header": {
                 "description": "19-1245: Roadwork between MP 40 and MP 48",
                 "start_timestamp": 1623183301000,
-                "end_timestamp": "None"
+                "end_timestamp": "None",
             },
             "detail": {
                 "road_name": "I-75 N",
                 "road_number": "I-75 N",
-                "direction": "northbound"
+                "direction": "northbound",
             },
-            "additional_info": {
-
-            }
-        }
+            "additional_info": {},
+        },
     }
 
     test_invalid_info_object = {
-        'contact_name': "Heather Pickering-Hilgers",
-        'contact_email': "heather.pickeringhilgers@state.co.us",
-        'publisher': "iCone",
+        "contact_name": "Heather Pickering-Hilgers",
+        "contact_email": "heather.pickeringhilgers@state.co.us",
+        "publisher": "iCone",
     }
 
-    test_wzdx = icone_translator.wzdx_creator(
-        icone_obj, test_invalid_info_object)
+    test_wzdx = icone_translator.wzdx_creator(icone_obj, test_invalid_info_object)
     assert test_wzdx == None
 
 
-@patch.dict(os.environ, {
-    'contact_name': 'Heather Pickering-Hilgers',
-    'contact_email': 'heather.pickeringhilgers@state.co.us',
-    'publisher': 'CDOT'
-})
-@patch('uuid.uuid4')
-def test_wzdx_creator(mockuuid):
+@patch.dict(
+    os.environ,
+    {
+        "contact_name": "Heather Pickering-Hilgers",
+        "contact_email": "heather.pickeringhilgers@state.co.us",
+        "publisher": "CDOT",
+    },
+)
+@patch("uuid.uuid4")
+def test_wzdx_creator(mockUuid):
     uuid.uuid4 = Mock()
-    uuid.uuid4.side_effect = 'we234de'
+    uuid.uuid4.side_effect = "we234de"
 
     icone_obj = {
         "rtdh_timestamp": 1638894543.6077065,
@@ -126,49 +107,28 @@ def test_wzdx_creator(mockuuid):
             "source": {
                 "id": "1245",
                 "creation_timestamp": 1572916940000,
-                "last_updated_timestamp": 1636142163000
+                "last_updated_timestamp": 1636142163000,
             },
             "geometry": [
-                [
-                    -84.1238971,
-                    37.1686478
-                ],
-                [
-                    -84.1238971,
-                    37.1686478
-                ],
-                [
-                    -84.145861,
-                    37.1913
-                ],
-                [
-                    -84.145861,
-                    37.1913
-                ],
-                [
-                    -84.157105,
-                    37.201197
-                ],
-                [
-                    -84.167033,
-                    37.206079
-                ],
-                [
-                    -84.204074,
-                    37.21931
-                ]
+                [-84.1238971, 37.1686478],
+                [-84.1238971, 37.1686478],
+                [-84.145861, 37.1913],
+                [-84.145861, 37.1913],
+                [-84.157105, 37.201197],
+                [-84.167033, 37.206079],
+                [-84.204074, 37.21931],
             ],
             "header": {
                 "description": "19-1245: Roadwork between MP 40 and MP 48",
                 "start_timestamp": 1623183301000,
-                "end_timestamp": 1623186301000
+                "end_timestamp": 1623186301000,
             },
             "detail": {
                 "road_name": "I-75 N",
                 "road_number": "I-75 N",
-                "direction": "northbound"
-            }
-        }
+                "direction": "northbound",
+            },
+        },
     }
 
     expected_wzdx = icone_translator_data.test_wzdx_creator_expected
@@ -181,14 +141,30 @@ def test_wzdx_creator(mockuuid):
 
 # --------------------------------------------------------------------------------unit test for parse_icone_sensor function--------------------------------------------------------------------------------
 def test_parse_icone_sensor():
-    valid_description = {'type': 'iCone', 'id': '#4', 'location': [41.3883260, -81.9707500], 'radar': {
-        'average_speed': 63.52, 'std_dev_speed': 7.32, 'timestamp': '2020-08-21T15:55:00Z'}}
+    valid_description = {
+        "type": "iCone",
+        "id": "#4",
+        "location": [41.3883260, -81.9707500],
+        "radar": {
+            "average_speed": 63.52,
+            "std_dev_speed": 7.32,
+            "timestamp": "2020-08-21T15:55:00Z",
+        },
+    }
     test_sensor = icone_translator_data.test_parse_icone_sensor_test_sensor_1
     output_description = icone_translator.parse_icone_sensor(test_sensor)
     assert output_description == valid_description
 
-    valid_description = {'type': 'iCone', 'id': '#4', 'location': [41.3883260, -81.9707500],
-                         'radar': {'average_speed': 64.32, 'std_dev_speed': 6.11, 'timestamp': '2020-08-21T15:40:00Z'}}
+    valid_description = {
+        "type": "iCone",
+        "id": "#4",
+        "location": [41.3883260, -81.9707500],
+        "radar": {
+            "average_speed": 64.32,
+            "std_dev_speed": 6.11,
+            "timestamp": "2020-08-21T15:40:00Z",
+        },
+    }
     test_sensor = icone_translator_data.test_parse_icone_sensor_test_sensor_2
     output_description = icone_translator.parse_icone_sensor(test_sensor)
     assert output_description == valid_description
@@ -196,10 +172,25 @@ def test_parse_icone_sensor():
 
 # --------------------------------------------------------------------------------unit test for parse_pcms_sensor function--------------------------------------------------------------------------------
 def test_parse_pcms_sensor():
-    valid_description = {'type': 'PCMS', 'id': 'I-75 NB - MP 48.3', 'timestamp': '2020-08-21T15:48:25Z',
-                         'location': [37.2182000, -84.2027000], 'messages': [' ROADWORK / 5 MILES / AHEAD']}
-    test_sensor = {'@type': 'PCMS', '@id': 'I-75 NB - MP 48.3', '@latitude': '37.2182000', '@longitude': '-84.2027000', 'message': {
-        '@verified': '2020-08-21T15:48:25Z', '@latitude': '37.2178100', '@longitude': '-84.2024390', '@text': ' ROADWORK / 5 MILES / AHEAD'}}
+    valid_description = {
+        "type": "PCMS",
+        "id": "I-75 NB - MP 48.3",
+        "timestamp": "2020-08-21T15:48:25Z",
+        "location": [37.2182000, -84.2027000],
+        "messages": [" ROADWORK / 5 MILES / AHEAD"],
+    }
+    test_sensor = {
+        "@type": "PCMS",
+        "@id": "I-75 NB - MP 48.3",
+        "@latitude": "37.2182000",
+        "@longitude": "-84.2027000",
+        "message": {
+            "@verified": "2020-08-21T15:48:25Z",
+            "@latitude": "37.2178100",
+            "@longitude": "-84.2024390",
+            "@text": " ROADWORK / 5 MILES / AHEAD",
+        },
+    }
     output_description = icone_translator.parse_pcms_sensor(test_sensor)
     assert output_description == valid_description
 
@@ -255,5 +246,6 @@ def test_create_description():
     </display>
   </incident>"""
     output_description = icone_translator.create_description(
-        xmltodict.parse(test_incident)['incident'])
+        xmltodict.parse(test_incident)["incident"]
+    )
     assert output_description == test_description

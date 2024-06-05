@@ -46,12 +46,13 @@ Please set up the following environment variable for your local computer before 
 
 Runtime Environment Variables:
 
-| Name                         |                                                  Value                                                   |                                    Description |
-| :--------------------------- | :------------------------------------------------------------------------------------------------------: | ---------------------------------------------: |
-| contact_name                 |                                        Heather Pickering-Hilgers                                         |                      name of WZDx feed contact |
-| contact_email                |                                   heather.pickeringhilgers@state.co.us                                   |                     email of WZDx feed contact |
-| publisher                    |                                                   CDOT                                                   | name of the organization issuing the WZDx feed |
-| CDOT_GEOSPATIAL_API_BASE_URL | https://dtdapps.colorado.gov/server/rest/services/LRS/Routes_withDEC/MapServer/exts/CdotLrsAccessRounded |    GIS server endpoint used for geospatial api |
+| Name                         |                                                  Value                                                   |                                          Description |
+| :--------------------------- | :------------------------------------------------------------------------------------------------------: | ---------------------------------------------------: |
+| contact_name                 |                                        Heather Pickering-Hilgers                                         |                            name of WZDx feed contact |
+| contact_email                |                                   heather.pickeringhilgers@state.co.us                                   |                           email of WZDx feed contact |
+| publisher                    |                                                   CDOT                                                   |       name of the organization issuing the WZDx feed |
+| CDOT_GEOSPATIAL_API_BASE_URL | https://dtdapps.colorado.gov/server/rest/services/LRS/Routes_withDEC/MapServer/exts/CdotLrsAccessRounded |          GIS server endpoint used for geospatial api |
+| NAMESPACE_UUID               |                                   00000000-0000-0000-0000-000000000000                                   | UUID used to pseudo-randomly tag all UUIDs generated |
 
 Example usage:
 for mac computer run the following script to initialize the environment variable:
@@ -149,7 +150,7 @@ These combination scripts take in a base WZDx message and an additional icone/na
 Edit the files read in for iCone and WZDx messages in the main method, then run the combination script:
 
 ```
-python icone.py
+python icone.py wzdxFile.geojson ./iconeDirectory --outputDir ./ --updateDates true
 ```
 
 ### Navjoy 568 form
@@ -157,7 +158,7 @@ python icone.py
 Edit the files read in for navjoy and WZDx messages in the main method, then run the combination script:
 
 ```
-python navjoy.py
+python navjoy.py wzdxFile.geojson navjoyWzdxFile.geojson --outputDir ./ --updateDates true
 ```
 
 ### Geotab Vehicle (ATMA)
@@ -165,7 +166,7 @@ python navjoy.py
 Edit the files read in for geotab_avl and WZDx messages in the main method, then run the combination script:
 
 ```
-python attenuator.py
+python attenuator.py wzdxFile.geojson geotabFile.json --outputDir ./ --updateDates true
 ```
 
 ## Unit Testing

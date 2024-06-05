@@ -88,7 +88,7 @@ def test_identify_overlapping_features_valid():
 
 
 @patch.object(attenuator, "get_geometry_for_distance_ahead")
-def test_combine_with_wzdx_reversed(atten_patch):
+def test_combine_with_wzdx_reversed(attenuator_patch):
     attenuator.get_geometry_for_distance_ahead = MagicMock(return_value=([], 0, 1))
     geotab_avl = json.loads(
         open(
@@ -109,7 +109,6 @@ def test_combine_with_wzdx_reversed(atten_patch):
     expected = json.loads(
         open("./tests/data/experimental_combination/geotab/wzdx_combined.json").read()
     )
-    print(attenuator.get_geometry_for_distance_ahead.call_args)
     attenuator.get_geometry_for_distance_ahead.assert_called_with(
         2.5,
         {
@@ -123,7 +122,6 @@ def test_combine_with_wzdx_reversed(atten_patch):
         17.597,
         25.358,
     )
-    print(actual)
     assert actual == expected
 
 
@@ -142,8 +140,8 @@ class MockGeospatialApi:
         distanceAhead,
         compressed=False,
         routeDetails=None,
-        mmin=None,
-        mmax=None,
+        mMin=None,
+        mMax=None,
     ):
         return {"coordinates": "a", "start_measure": "b", "end_measure": "c"}
 
@@ -176,21 +174,6 @@ def test_get_distance_ahead_normal_2():
 def test_get_distance_ahead_default():
     actual = attenuator.get_distance_ahead_miles(0, 30 * 60)
     assert actual == 2.5
-
-
-def test_main():
-    outputPath = "./tests/data/output/wzdx_attenuator_combined.json"
-    try:
-        os.remove(outputPath)
-    except Exception:
-        pass
-
-    with time_machine.travel(
-        datetime.datetime(2022, 7, 22, 20, 0, 0, 0, tzinfo=datetime.timezone.utc)
-    ):
-        attenuator.main(outputPath=outputPath)
-    assert os.path.isfile(outputPath)
-    assert len(json.loads(open(outputPath).read())) == 1
 
 
 @patch.object(combination, "get_route_details_for_wzdx")

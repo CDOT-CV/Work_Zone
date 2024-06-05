@@ -243,7 +243,7 @@ def create_rtdh_standard_msg(pd):
         coordinates.reverse()
 
     route_details_start, route_details_end = (
-        combination.get_route_details_for_coordinates_lnglat(coordinates)
+        combination.get_route_details_for_coordinates_lngLat(coordinates)
     )
 
     start_date = pd.get("data/workStartDate", date_tools.parse_datetime_from_iso_string)

@@ -109,11 +109,11 @@ class GeospatialApi:
             step = 0.1  # 500 ft
             route = route_details["Route"]
             measure = route_details["Measure"]
-            mmin = route_details["MMin"]
-            mmax = route_details["MMax"]
+            mMin = route_details["MMin"]
+            mMax = route_details["MMax"]
             startMeasure = measure - step
             endMeasure = measure
-            if startMeasure < mmin:
+            if startMeasure < mMin:
                 # reverse order
                 startMeasure = measure
                 endMeasure = measure + step
@@ -159,8 +159,8 @@ class GeospatialApi:
         distanceAhead,
         compressed=False,
         routeDetails=None,
-        mmin=None,
-        mmax=None,
+        mMin=None,
+        mMax=None,
     ):
         # Get list of routes and mile markers for a distance ahead and distance
 
@@ -179,16 +179,16 @@ class GeospatialApi:
             endMeasure = startMeasure - distanceAhead
             endMeasure = max(endMeasure, routeDetails["MMin"])
 
-        if mmin != None and mmax != None:
-            # Force mmin > mmax
-            if mmin > mmax:
-                temp = mmin
-                mmin = mmax
-                mmax = temp
+        if mMin != None and mMax != None:
+            # Force mMin > mMax
+            if mMin > mMax:
+                temp = mMin
+                mMin = mMax
+                mMax = temp
 
             # Force measures between bounds
-            startMeasure = min(max(startMeasure, mmin), mmax)
-            endMeasure = min(max(endMeasure, mmin), mmax)
+            startMeasure = min(max(startMeasure, mMin), mMax)
+            endMeasure = min(max(endMeasure, mMin), mMax)
 
         return {
             "start_measure": startMeasure,

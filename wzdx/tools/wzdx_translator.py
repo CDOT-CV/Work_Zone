@@ -62,7 +62,7 @@ def validate_info(info):
     for field in required_fields:
         if not field:
             logging.warning(
-                "invalid supplimentary information object. Not all required fields are present"
+                "invalid supplementary information object. Not all required fields are present"
             )
             return False
 
@@ -301,7 +301,7 @@ def parse_polyline_from_linestring(poly):
     for i in polyline:
         coords = i.split(" ")
 
-        # the regular rexpression '^-?([0-9]*[.])?[0-9]+$ matches an integer or decimals
+        # the regular expression '^-?([0-9]*[.])?[0-9]+$ matches an integer or decimals
         if (
             len(coords) >= 2
             and re.match("^-?([0-9]*[.])?[0-9]+$", coords[0])

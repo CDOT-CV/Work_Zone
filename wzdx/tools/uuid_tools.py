@@ -1,10 +1,11 @@
-# https://nathanielknight.ca/articles/consistent_random_uuids_in_python.html
-
 import random
 import uuid
+import os
 
 
-CDOT_NAMESPACE_UUID = uuid.UUID('ef39d1dd-53ce-4651-9491-4bba7251a3c0')
+NAMESPACE_UUID = uuid.UUID(
+    os.getenv("NAMESPACE_UUID", "00000000-0000-0000-0000-000000000000")
+)
 
 
 def random_uuid():
@@ -12,7 +13,7 @@ def random_uuid():
 
 
 def named_uuid(name: str):
-    return uuid.uuid5(CDOT_NAMESPACE_UUID, name)
+    return uuid.uuid5(NAMESPACE_UUID, name)
 
 
 def named_uuid_string(name):

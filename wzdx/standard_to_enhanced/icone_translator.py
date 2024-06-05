@@ -1,4 +1,3 @@
-
 import argparse
 import json
 import logging
@@ -8,35 +7,43 @@ from ..sample_files.validation_schema import work_zone_feed_v42
 
 from ..tools import date_tools, wzdx_translator, geospatial_tools
 
-PROGRAM_NAME = 'IconeTranslator'
-PROGRAM_VERSION = '1.0'
+PROGRAM_NAME = "IconeTranslator"
+PROGRAM_VERSION = "1.0"
 
 
 def main():
     input_file, output_file = parse_icone_arguments()
     # Added encoding argument because of weird character at start of incidents.xml file
 
-    icone_obj = json.loads(open(input_file, 'r').read())
+    icone_obj = json.loads(open(input_file, "r").read())
     wzdx = wzdx_creator(icone_obj)
 
     if not wzdx:
         logging.error(
-            'Generation error more message are printed above. output file is not created because the message failed validation.')
+            "Generation error more message are printed above. output file is not created because the message failed validation."
+        )
         return
-    with open(output_file, 'w') as fwzdx:
-        fwzdx.write(json.dumps(wzdx, indent=2))
-        print('Your wzdx message was successfully generated and is located here: ' + str(output_file))
+    with open(output_file, "w") as fWzdx:
+        fWzdx.write(json.dumps(wzdx, indent=2))
+        print(
+            "Your wzdx message was successfully generated and is located here: "
+            + str(output_file)
+        )
 
 
 # parse script command line arguments
 def parse_icone_arguments():
-    parser = argparse.ArgumentParser(
-        description='Translate iCone data to WZDx')
-    parser.add_argument('--version', action='version',
-                        version=f'{PROGRAM_NAME} {PROGRAM_VERSION}')
-    parser.add_argument('iconeFile', help='icone file path')
-    parser.add_argument('--outputFile', required=False,
-                        default='icone_wzdx_translated_output_message.geojson', help='output file path')
+    parser = argparse.ArgumentParser(description="Translate iCone data to WZDx")
+    parser.add_argument(
+        "--version", action="version", version=f"{PROGRAM_NAME} {PROGRAM_VERSION}"
+    )
+    parser.add_argument("iconeFile", help="icone file path")
+    parser.add_argument(
+        "--outputFile",
+        required=False,
+        default="icone_wzdx_translated_output_message.geojson",
+        help="output file path",
+    )
 
     args = parser.parse_args()
     return args.iconeFile, args.outputFile
@@ -56,9 +63,9 @@ def wzdx_creator(message, info=None):
     # Parse Incident to WZDx Feature
     feature = parse_incident(message)
     if feature:
-        wzdx.get('features').append(feature)
+        wzdx.get("features").append(feature)
 
-    if not wzdx.get('features'):
+    if not wzdx.get("features"):
         return None
     wzdx = wzdx_translator.add_ids(wzdx)
 
@@ -109,241 +116,245 @@ def wzdx_creator(message, info=None):
 
 # function to calculate vehicle impact
 def get_vehicle_impact(description):
-    vehicle_impact = 'all-lanes-open'
-    if 'lane closed' in description.lower():
-        vehicle_impact = 'some-lanes-closed'
+    vehicle_impact = "all-lanes-open"
+    if "lane closed" in description.lower():
+        vehicle_impact = "some-lanes-closed"
     return vehicle_impact
 
 
 # function to get description
 def create_description(incident):
-    description = incident.get('description')
+    description = incident.get("description")
 
-    if incident.get('sensor'):
-        description += '\n sensors: '
-        for sensor in incident.get('sensor'):
+    if incident.get("sensor"):
+        description += "\n sensors: "
+        for sensor in incident.get("sensor"):
             if not isinstance(sensor, str):
-                if sensor['@type'] == 'iCone':
-                    description += '\n' + \
-                        json.dumps(parse_icone_sensor(sensor), indent=2)
+                if sensor["@type"] == "iCone":
+                    description += "\n" + json.dumps(
+                        parse_icone_sensor(sensor), indent=2
+                    )
             else:
-                sensor = incident.get('sensor')
-                if sensor['@type'] == 'iCone':
-                    description += '\n' + \
-                        json.dumps(parse_icone_sensor(sensor), indent=2)
+                sensor = incident.get("sensor")
+                if sensor["@type"] == "iCone":
+                    description += "\n" + json.dumps(
+                        parse_icone_sensor(sensor), indent=2
+                    )
 
-    if incident.get('display'):
-        description += '\n displays: '
-        for display in incident.get('display'):
+    if incident.get("display"):
+        description += "\n displays: "
+        for display in incident.get("display"):
             if not isinstance(display, str):
-                if display['@type'] == 'PCMS':
-                    description += '\n' + json.dumps(parse_pcms_sensor(display),
-                                                     indent=2)  # add baton,ab,truck beacon,ipin,signal
+                if display["@type"] == "PCMS":
+                    description += "\n" + json.dumps(
+                        parse_pcms_sensor(display), indent=2
+                    )  # add baton,ab,truck beacon,ipin,signal
             else:
-                display = incident.get('display')
-                if display['@type'] == 'PCMS':
-                    description += '\n' + json.dumps(parse_pcms_sensor(display),
-                                                     indent=2)  # add baton,ab,truck beacon,ipin,signal
+                display = incident.get("display")
+                if display["@type"] == "PCMS":
+                    description += "\n" + json.dumps(
+                        parse_pcms_sensor(display), indent=2
+                    )  # add baton,ab,truck beacon,ipin,signal
 
     return description
 
 
 def parse_icone_sensor(sensor):
     icone = {}
-    icone['type'] = sensor.get('@type')
-    icone['id'] = sensor.get('@id')
-    icone['location'] = [float(sensor.get('@latitude')),
-                         float(sensor.get('@longitude'))]
+    icone["type"] = sensor.get("@type")
+    icone["id"] = sensor.get("@id")
+    icone["location"] = [
+        float(sensor.get("@latitude")),
+        float(sensor.get("@longitude")),
+    ]
 
-    if sensor.get('radar', None):
+    if sensor.get("radar", None):
         avg_speed = 0
         std_dev_speed = 0
         num_reads = 0
-        for radar in sensor.get('radar'):
-            timestamp = ''
+        for radar in sensor.get("radar"):
+            timestamp = ""
             if not isinstance(radar, str):
-                curr_reads = int(radar.get('@numReads'))
+                curr_reads = int(radar.get("@numReads"))
                 if curr_reads == 0:
                     continue
-                curr_avg_speed = float(radar.get('@avgSpeed'))
-                curr_dev_speed = float(radar.get('@stDevSpeed'))
+                curr_avg_speed = float(radar.get("@avgSpeed"))
+                curr_dev_speed = float(radar.get("@stDevSpeed"))
                 total_num_reads = num_reads + curr_reads
-                avg_speed = (avg_speed * num_reads +
-                             curr_avg_speed * curr_reads) / total_num_reads
-                std_dev_speed = (std_dev_speed * num_reads +
-                                 curr_dev_speed * curr_reads) / total_num_reads
+                avg_speed = (
+                    avg_speed * num_reads + curr_avg_speed * curr_reads
+                ) / total_num_reads
+                std_dev_speed = (
+                    std_dev_speed * num_reads + curr_dev_speed * curr_reads
+                ) / total_num_reads
                 num_reads = total_num_reads
-                timestamp = radar.get('@intervalEnd')
+                timestamp = radar.get("@intervalEnd")
             else:
-                radar = sensor.get('radar')
-                avg_speed = float(radar.get('@avgSpeed'))
-                std_dev_speed = float(radar.get('@stDevSpeed'))
-                timestamp = radar.get('@intervalEnd')
+                radar = sensor.get("radar")
+                avg_speed = float(radar.get("@avgSpeed"))
+                std_dev_speed = float(radar.get("@stDevSpeed"))
+                timestamp = radar.get("@intervalEnd")
 
         radar = {}
 
-        radar['average_speed'] = round(avg_speed, 2)
-        radar['std_dev_speed'] = round(std_dev_speed, 2)
-        radar['timestamp'] = timestamp
-        icone['radar'] = radar
+        radar["average_speed"] = round(avg_speed, 2)
+        radar["std_dev_speed"] = round(std_dev_speed, 2)
+        radar["timestamp"] = timestamp
+        icone["radar"] = radar
     return icone
 
 
 def parse_pcms_sensor(sensor):
     pcms = {}
-    pcms['type'] = sensor.get('@type')
-    pcms['id'] = sensor.get('@id')
-    pcms['timestamp'] = sensor.get('@id')
-    pcms['location'] = [float(sensor.get('@latitude')),
-                        float(sensor.get('@longitude'))]
-    if sensor.get('message', None):
-        pcms['messages'] = []
-        for message in sensor.get('message'):
+    pcms["type"] = sensor.get("@type")
+    pcms["id"] = sensor.get("@id")
+    pcms["timestamp"] = sensor.get("@id")
+    pcms["location"] = [float(sensor.get("@latitude")), float(sensor.get("@longitude"))]
+    if sensor.get("message", None):
+        pcms["messages"] = []
+        for message in sensor.get("message"):
             if not isinstance(message, str):
-                pcms['timestamp'] = message.get('@verified')
-                if message.get('@text') not in pcms.get('messages'):
-                    pcms.get('messages').append(message.get('@text'))
+                pcms["timestamp"] = message.get("@verified")
+                if message.get("@text") not in pcms.get("messages"):
+                    pcms.get("messages").append(message.get("@text"))
             else:
-                message = sensor.get('message')
-                pcms['timestamp'] = message.get('@verified')
-                if message['@text'] not in pcms.get('messages'):
-                    pcms.get('messages').append(message.get('@text'))
+                message = sensor.get("message")
+                pcms["timestamp"] = message.get("@verified")
+                if message["@text"] not in pcms.get("messages"):
+                    pcms.get("messages").append(message.get("@text"))
     return pcms
 
 
 # Parse Icone Incident to WZDx
 def parse_incident(incident):
 
-    event = incident.get('event')
+    event = incident.get("event")
 
-    source = event.get('source')
-    header = event.get('header')
-    detail = event.get('detail')
-    additional_info = event.get('additional_info', {})
+    source = event.get("source")
+    header = event.get("header")
+    detail = event.get("detail")
+    additional_info = event.get("additional_info", {})
 
     geometry = {}
-    geometry['type'] = "LineString"
-    geometry['coordinates'] = event.get('geometry')
+    geometry["type"] = "LineString"
+    geometry["coordinates"] = event.get("geometry")
     properties = wzdx_translator.initialize_feature_properties()
 
     # I included a skeleton of the message, fill out all required fields and as many optional fields as you can. Below is a link to the spec page for a road event
     # https://github.com/usdot-jpo-ode/jpo-wzdx/blob/master/spec-content/objects/RoadEvent.md
 
-    core_details = properties['core_details']
+    core_details = properties["core_details"]
 
     # Event Type ['work-zone', 'detour']
-    core_details['event_type'] = 'work-zone'
+    core_details["event_type"] = "work-zone"
 
     # data_source_id - Leave this empty, it will be populated by add_ids
-    core_details['data_source_id'] = ''
+    core_details["data_source_id"] = ""
 
     # road_name
-    road_names = [detail.get('road_name')]
-    core_details['road_names'] = road_names
+    road_names = [detail.get("road_name")]
+    core_details["road_names"] = road_names
 
     # direction
-    core_details['direction'] = detail.get('direction')
+    core_details["direction"] = detail.get("direction")
 
     # relationship
-    core_details['related_road_events'] = []
+    core_details["related_road_events"] = []
 
     # description
-    core_details['description'] = header.get('description')
+    core_details["description"] = header.get("description")
 
     # creation_date
-    core_details['creation_date'] = date_tools.get_iso_string_from_unix(
-        source.get('creation_timestamp'))
+    core_details["creation_date"] = date_tools.get_iso_string_from_unix(
+        source.get("creation_timestamp")
+    )
 
     # update_date
-    core_details['update_date'] = date_tools.get_iso_string_from_unix(
-        source.get('last_updated_timestamp'))
+    core_details["update_date"] = date_tools.get_iso_string_from_unix(
+        source.get("last_updated_timestamp")
+    )
 
     # core_details
-    properties['core_details'] = core_details
+    properties["core_details"] = core_details
 
-    start_time = date_tools.parse_datetime_from_unix(
-        header.get('start_timestamp'))
-    end_time = date_tools.parse_datetime_from_unix(header.get('end_timestamp'))
+    start_time = date_tools.parse_datetime_from_unix(header.get("start_timestamp"))
+    end_time = date_tools.parse_datetime_from_unix(header.get("end_timestamp"))
 
     # start_date
-    properties['start_date'] = date_tools.get_iso_string_from_datetime(
-        start_time)
+    properties["start_date"] = date_tools.get_iso_string_from_datetime(start_time)
 
     # end_date
     if end_time:
-        properties['end_date'] = date_tools.get_iso_string_from_datetime(
-            end_time)
+        properties["end_date"] = date_tools.get_iso_string_from_datetime(end_time)
     else:
-        properties['end_date'] = None
+        properties["end_date"] = None
 
     # is_start_date_verified
-    properties['is_start_date_verified'] = False
+    properties["is_start_date_verified"] = False
 
     # is_end_date_verified
-    properties['is_end_date_verified'] = False
+    properties["is_end_date_verified"] = False
 
     # is_start_position_verified
-    properties['is_start_position_verified'] = False
+    properties["is_start_position_verified"] = False
 
     # is_end_position_verified
-    properties['is_end_position_verified'] = False
+    properties["is_end_position_verified"] = False
 
     # location_method
     properties["location_method"] = "channel-device-method"
 
     # vehicle impact
-    properties['vehicle_impact'] = get_vehicle_impact(
-        header.get('description'))
+    properties["vehicle_impact"] = get_vehicle_impact(header.get("description"))
 
     # lanes
-    properties['lanes'] = []
+    properties["lanes"] = []
 
     # beginning_cross_street
-    properties['beginning_cross_street'] = ""
+    properties["beginning_cross_street"] = ""
 
     # beginning_cross_street
-    properties['ending_cross_street'] = ""
+    properties["ending_cross_street"] = ""
 
     # beginning_cross_street
-    properties['beginning_milepost'] = ""
+    properties["beginning_milepost"] = ""
 
     # beginning_cross_street
-    properties['ending_milepost'] = ""
+    properties["ending_milepost"] = ""
 
     # type_of_work
     # maintenance, minor-road-defect-repair, roadside-work, overhead-work, below-road-work, barrier-work, surface-work, painting, roadway-relocation, roadway-creation
-    properties['types_of_work'] = []
+    properties["types_of_work"] = []
 
     # worker_presence - not available
 
     # reduced_speed_limit_kph - not available
 
     # restrictions
-    properties['restrictions'] = []
+    properties["restrictions"] = []
 
-    properties['route_details_start'] = additional_info.get(
-        'route_details_start')
-    properties['route_details_end'] = additional_info.get('route_details_end')
+    properties["route_details_start"] = additional_info.get("route_details_start")
+    properties["route_details_end"] = additional_info.get("route_details_end")
 
-    properties['condition_1'] = additional_info.get('condition_1', True)
+    properties["condition_1"] = additional_info.get("condition_1", True)
 
     filtered_properties = copy.deepcopy(properties)
 
-    INVALID_PROPERTIES = [None, '', []]
+    INVALID_PROPERTIES = [None, "", []]
 
     for key, value in properties.items():
         if value in INVALID_PROPERTIES:
             del filtered_properties[key]
 
-    for key, value in properties['core_details'].items():
-        if not value and key not in ['data_source_id']:
-            del filtered_properties['core_details'][key]
+    for key, value in properties["core_details"].items():
+        if not value and key not in ["data_source_id"]:
+            del filtered_properties["core_details"][key]
 
     feature = {}
-    feature['id'] = event.get('source', {}).get('id', uuid.uuid4())
-    feature['type'] = "Feature"
-    feature['properties'] = filtered_properties
-    feature['geometry'] = geometry
+    feature["id"] = event.get("source", {}).get("id", uuid.uuid4())
+    feature["type"] = "Feature"
+    feature["properties"] = filtered_properties
+    feature["geometry"] = geometry
 
     return feature
 
@@ -351,68 +362,85 @@ def parse_incident(incident):
 # function to validate the event
 def validate_standard_msg(msg):
     if not msg or type(msg) != dict:
-        logging.warning('event is empty or has invalid type')
+        logging.warning("event is empty or has invalid type")
         return False
 
-    event = msg.get('event')
+    event = msg.get("event")
 
-    source = event.get('source')
-    header = event.get('header')
-    detail = event.get('detail')
+    source = event.get("source")
+    header = event.get("header")
+    detail = event.get("detail")
 
-    id = source.get('id')
+    id = source.get("id")
     try:
 
-        event = msg.get('event')
+        event = msg.get("event")
 
-        source = event.get('source')
-        header = event.get('header')
-        detail = event.get('detail')
+        source = event.get("source")
+        header = event.get("header")
+        detail = event.get("detail")
 
-        id = source.get('id')
+        id = source.get("id")
 
-        geometry = event.get('geometry')
-        road_name = detail.get('road_name')
+        geometry = event.get("geometry")
+        road_name = detail.get("road_name")
 
-        start_time = header.get('start_timestamp')
-        end_time = header.get('end_timestamp')
-        description = header.get('description')
-        update_time = source.get('last_updated_timestamp')
-        direction = detail.get('direction')
+        start_time = header.get("start_timestamp")
+        end_time = header.get("end_timestamp")
+        description = header.get("description")
+        update_time = source.get("last_updated_timestamp")
+        direction = detail.get("direction")
 
         if not (type(geometry) == list and len(geometry) >= 0):
             logging.warning(
-                f'''Invalid event with id = {id}. Invalid geometry: {geometry}''')
+                f"""Invalid event with id = {id}. Invalid geometry: {geometry}"""
+            )
             return False
         if not (type(road_name) == str and len(road_name) >= 0):
             logging.warning(
-                f'''Invalid event with id = {id}. Invalid road_name: {road_name}''')
+                f"""Invalid event with id = {id}. Invalid road_name: {road_name}"""
+            )
             return False
         if not (type(start_time) == float or type(start_time) == int):
             logging.warning(
-                f'''Invalid event with id = {id}. Invalid start_time: {start_time}''')
+                f"""Invalid event with id = {id}. Invalid start_time: {start_time}"""
+            )
             return False
         if not (type(end_time) == float or type(end_time) == int or end_time == None):
             logging.warning(
-                f'''Invalid event with id = {id}. Invalid end_time: {end_time}''')
+                f"""Invalid event with id = {id}. Invalid end_time: {end_time}"""
+            )
             return False
         if not (type(update_time) == float or type(update_time) == int):
             logging.warning(
-                f'''Invalid event with id = {id}. Invalid update_time: {update_time}''')
+                f"""Invalid event with id = {id}. Invalid update_time: {update_time}"""
+            )
             return False
-        if not (type(direction) == str and direction in ['unknown', 'undefined', 'northbound', 'southbound', 'eastbound', 'westbound']):
+        if not (
+            type(direction) == str
+            and direction
+            in [
+                "unknown",
+                "undefined",
+                "northbound",
+                "southbound",
+                "eastbound",
+                "westbound",
+            ]
+        ):
             logging.warning(
-                f'''Invalid event with id = {id}. Invalid direction: {direction}''')
+                f"""Invalid event with id = {id}. Invalid direction: {direction}"""
+            )
             return False
         if not (type(description) == str and len(description) >= 0):
             logging.warning(
-                f'''Invalid event with id = {id}. Invalid description: {description}''')
+                f"""Invalid event with id = {id}. Invalid description: {description}"""
+            )
             return False
 
         return True
     except Exception as e:
-        logging.warning(
-            f'''Invalid event with id = {id}. Error in validation: {e}''')
+        logging.warning(f"""Invalid event with id = {id}. Error in validation: {e}""")
         return False
 
 
