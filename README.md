@@ -179,6 +179,15 @@ python -m pytest 'tests/' -v
 
 Ensure you have your environment configured correctly (as described above).
 
+### Unit Test Warnings
+
+There are a few warnings shown by pypi, based on old package versions. These can be resolved by running the following commands:
+
+```sh
+pip install --upgrade google-cloud-storage
+pip install --upgrade protobuf
+```
+
 ### Unit Test Coverage
 
 ```
