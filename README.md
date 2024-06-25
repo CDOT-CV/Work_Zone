@@ -181,7 +181,13 @@ Ensure you have your environment configured correctly (as described above).
 
 ### Unit Test Warnings
 
-There are a few warnings shown by pypi, based on old package versions. These can be resolved by running the following commands:
+There are a few warnings shown by pypi, based on old package versions. These can be resolved by re-installing these packages from the requirements.txt:
+
+```sh
+pip install -r requirements.txt
+```
+
+Of, if you only wish to update the affected packages directly, run these commands:
 
 ```sh
 pip install --upgrade google-cloud-storage==2.17.0
