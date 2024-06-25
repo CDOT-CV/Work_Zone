@@ -184,8 +184,8 @@ Ensure you have your environment configured correctly (as described above).
 There are a few warnings shown by pypi, based on old package versions. These can be resolved by running the following commands:
 
 ```sh
-pip install --upgrade google-cloud-storage
-pip install --upgrade protobuf
+pip install --upgrade google-cloud-storage==2.17.0
+pip install --upgrade protobuf==5.27.1
 ```
 
 ### Unit Test Coverage
