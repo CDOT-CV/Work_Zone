@@ -37,7 +37,7 @@ test_parse_work_zone_linestring_standard = {
 }
 
 test_parse_work_zone_linestring_expected = {
-    "id": "9d5f0257-85c5-5461-ba93-f97990bb23e0",
+    "id": "ce32f52d-1150-5bc9-a9df-7b5c71217d26",
     "type": "Feature",
     "properties": {
         "core_details": {
@@ -135,7 +135,7 @@ test_wzdx_creator_expected = {
     "type": "FeatureCollection",
     "features": [
         {
-            "id": "9d5f0257-85c5-5461-ba93-f97990bb23e0",
+            "id": "ce32f52d-1150-5bc9-a9df-7b5c71217d26",
             "type": "Feature",
             "properties": {
                 "core_details": {
@@ -234,6 +234,7 @@ test_wzdx_creator_expected_road_restriction = {
     "type": "FeatureCollection",
     "features": [
         {
+            "id": "ce32f52d-1150-5bc9-a9df-7b5c71217d26",
             "type": "Feature",
             "properties": {
                 "core_details": {
@@ -256,7 +257,6 @@ test_wzdx_creator_expected_road_restriction = {
                 "type": "LineString",
                 "coordinates": [[-108.279106, 39.195663], [-108.218549, 39.302392]],
             },
-            "id": "9d5f0257-85c5-5461-ba93-f97990bb23e0",
         }
     ],
 }
