@@ -15,7 +15,7 @@ The Google CloudPlatform deployment for the CDOT WZDx combination workflow is ou
 This project is set up to be built into a python package, using python 3.8 and above. Use the following script to build the package:
 
 ```
-pip install wheel
+pip install wheel==0.43.0 setuptools==70.1.1
 pip install -r requirements.txt
 python setup.py sdist bdist_wheel
 ```
@@ -185,13 +185,6 @@ There are a few warnings shown by pypi, based on old package versions. These can
 
 ```sh
 pip install -r requirements.txt
-```
-
-Of, if you only wish to update the affected packages directly, run these commands:
-
-```sh
-pip install --upgrade google-cloud-storage==2.17.0
-pip install --upgrade protobuf==5.27.1
 ```
 
 ### Unit Test Coverage
