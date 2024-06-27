@@ -21,3 +21,4 @@ translate_navjoy.py
 icone_arrow_boards/**
 wzdx/monitoring/env.sh
 wzdx/monitoring/experimental/env.sh
+wzdx/sample_files/validation_schema/local_schema.json

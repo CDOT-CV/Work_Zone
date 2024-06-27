@@ -23,7 +23,12 @@ def init_datetime_mocks(mock_dts):
         i.now = MagicMock(return_value=datetime(2021, 4, 13))
         i.strptime = datetime.strptime
 
-
+@patch.dict(
+    os.environ,
+    {
+        "NAMESPACE_UUID": "3f0bce7b-1e59-4be0-80cd-b5f1f3801708",
+    },
+)
 @unittest.mock.patch("wzdx.standard_to_enhanced.navjoy_translator.datetime")
 @unittest.mock.patch("wzdx.tools.wzdx_translator.datetime")
 def test_parse_reduction_zone_linestring(mock_dt, mock_dt_3):

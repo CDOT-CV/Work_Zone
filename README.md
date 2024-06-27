@@ -15,7 +15,7 @@ The Google CloudPlatform deployment for the CDOT WZDx combination workflow is ou
 This project is set up to be built into a python package, using python 3.8 and above. Use the following script to build the package:
 
 ```
-pip install wheel
+pip install wheel==0.43.0 setuptools==70.1.1
 pip install -r requirements.txt
 python setup.py sdist bdist_wheel
 ```
@@ -177,7 +177,17 @@ python attenuator.py wzdxFile.geojson geotabFile.json --outputDir ./ --updateDat
 python -m pytest 'tests/' -v
 ```
 
-Ensure you have your environment configured correctly (as described above).
+#### Protobuf Warnings
+
+Warnings for the protobuf library exist, created by the currently available versions of the google-cloud-monitoring==2.21.0 and google-cloud-storage==2.17.0 packages. These warnings are currently ignored in the pytest.ini, but will be resolved at a future date.
+
+### Unit Test Warnings
+
+There are a few warnings shown by pypi, based on old package versions. These can be resolved by re-installing these packages from the requirements.txt:
+
+```sh
+pip install -r requirements.txt
+```
 
 ### Unit Test Coverage
 

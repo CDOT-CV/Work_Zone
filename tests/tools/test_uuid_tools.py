@@ -1,4 +1,6 @@
 from wzdx.tools import uuid_tools
+from unittest.mock import MagicMock, patch
+import os
 
 
 def test_random_uuid():
@@ -10,6 +12,12 @@ def test_random_uuid():
     assert uuid1 != uuid2
 
 
+@patch.dict(
+    os.environ,
+    {
+        "NAMESPACE_UUID": "3f0bce7b-1e59-4be0-80cd-b5f1f3801708",
+    },
+)
 def test_get_seeded_uuid():
     name1 = "OpenTMS-Event2843552682"
     name3 = "OpenTMS-Event2702170538"
@@ -23,5 +31,5 @@ def test_get_seeded_uuid():
     assert uuid1 == uuid2
     assert uuid1 != uuid3
 
-    assert str(uuid1) == "933bb8d1-a666-51a7-af72-4e9f0f53ddc3"
-    assert str(uuid3) == "6a19d3c4-1710-5970-a563-946320fbfb0a"
+    assert str(uuid1) == "5b74060c-1e7e-5e1e-bf43-ac00f3080bf0"
+    assert str(uuid3) == "e1898e28-02fd-5057-9cf3-c6a40cb0d0d2"

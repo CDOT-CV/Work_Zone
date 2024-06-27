@@ -27,6 +27,15 @@ def init_datetime_mocks(mock_dts):
         i.strptime = datetime.strptime
 
 
+@patch.dict(
+    os.environ,
+    {
+        "contact_name": "Heather Pickering-Hilgers",
+        "contact_email": "heather.pickeringhilgers@state.co.us",
+        "publisher": "CDOT",
+        "NAMESPACE_UUID": "3f0bce7b-1e59-4be0-80cd-b5f1f3801708",
+    },
+)
 @unittest.mock.patch("wzdx.standard_to_enhanced.navjoy_translator.datetime")
 @unittest.mock.patch("wzdx.tools.wzdx_translator.datetime")
 def test_parse_work_zone_linestring(mock_dt, mock_dt_3):
@@ -98,6 +107,7 @@ def test_get_vehicle_impact_all_lanes_open():
         "contact_name": "Heather Pickering-Hilgers",
         "contact_email": "heather.pickeringhilgers@state.co.us",
         "publisher": "CDOT",
+        "NAMESPACE_UUID": "3f0bce7b-1e59-4be0-80cd-b5f1f3801708",
     },
 )
 # first is for data source id, second is for a default id that is not used in this example, and the third is the road_event_id
@@ -123,6 +133,7 @@ def test_wzdx_creator(mock_dt, mock_dt_3, _):
         "contact_name": "Heather Pickering-Hilgers",
         "contact_email": "heather.pickeringhilgers@state.co.us",
         "publisher": "CDOT",
+        "NAMESPACE_UUID": "3f0bce7b-1e59-4be0-80cd-b5f1f3801708",
     },
 )
 # first is for data source id, second is for a default id that is not used in this example, and the third is the road_event_id
