@@ -177,7 +177,9 @@ python attenuator.py wzdxFile.geojson geotabFile.json --outputDir ./ --updateDat
 python -m pytest 'tests/' -v
 ```
 
-Ensure you have your environment configured correctly (as described above).
+#### Protobuf Warnings
+
+Warnings for the protobuf library exist, created by the currently available versions of the google-cloud-monitoring==2.21.0 and google-cloud-storage==2.17.0 packages. These warnings are currently ignored in the pytest.ini, but will be resolved at a future date.
 
 ### Unit Test Warnings
 
