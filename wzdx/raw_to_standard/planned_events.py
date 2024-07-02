@@ -9,7 +9,6 @@ from typing import Literal
 import uuid
 from collections import OrderedDict
 
-import pytz
 import regex
 
 from ..tools import (
@@ -18,7 +17,6 @@ from ..tools import (
     geospatial_tools,
     polygon_tools,
     wzdx_translator,
-    combination,
 )
 from ..util.collections import PathDict
 
@@ -65,9 +63,7 @@ def main():
     if generated_files_list:
         print(f"Successfully generated standard message files: {generated_files_list}")
     else:
-        logging.warning(
-            "Standard message generation failed. See messages printed above"
-        )
+        print("Warning: Standard message generation failed. See messages printed above")
 
 
 # parse script command line arguments

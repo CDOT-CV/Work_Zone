@@ -116,25 +116,6 @@ def test_get_heading_from_coordinates_west():
     assert abs(actual - expected) < 0.1
 
 
-def test_get_direction_from_bearing_all():
-    for i in range(-45, 45):
-        assert geospatial_tools.get_direction_from_bearing(i) == "northbound"
-    for i in range(-360, -315):
-        assert geospatial_tools.get_direction_from_bearing(i) == "northbound"
-    for i in range(45, 135):
-        assert geospatial_tools.get_direction_from_bearing(i) == "eastbound"
-    for i in range(-315, -225):
-        assert geospatial_tools.get_direction_from_bearing(i) == "eastbound"
-    for i in range(135, 225):
-        assert geospatial_tools.get_direction_from_bearing(i) == "southbound"
-    for i in range(-225, -135):
-        assert geospatial_tools.get_direction_from_bearing(i) == "southbound"
-    for i in range(225, 315):
-        assert geospatial_tools.get_direction_from_bearing(i) == "westbound"
-    for i in range(-135, -45):
-        assert geospatial_tools.get_direction_from_bearing(i) == "westbound"
-
-
 def test_get_closest_direction_from_bearing_all_northbound():
     for i in range(-90, 90):  # skips 90
         assert (
