@@ -41,7 +41,15 @@ def main():
 
 
 # parse script command line arguments
-def parse_rtdh_arguments():
+def parse_rtdh_arguments() -> tuple[str, str, str, str]:
+    """Parse command line arguments for attenuator WZDx combination script
+
+    Returns:
+        str: WZDx file path
+        str: Geotab file path
+        str: Output directory
+        str: Update dates boolean
+    """
     parser = argparse.ArgumentParser(
         description="Combine WZDx and Geotab AVL (ATMA) data"
     )
@@ -64,7 +72,16 @@ def parse_rtdh_arguments():
     return args.wzdxFile, args.geotabFile, args.outputDir, args.updateDates
 
 
-def validate_directionality(geotab, wzdx):
+def validate_directionality(geotab: dict, wzdx: dict) -> bool:
+    """Validate that the directionality of the Geotab and WZDx objects match
+
+    Args:
+        geotab (dict): Geotab AVL message
+        wzdx (dict): WZDx message
+
+    Returns:
+        bool: Whether the directionality of the Geotab and WZDx objects match
+    """
     geotab_bearing = geotab["avl_location"]["position"]["bearing"]
     wzdx_direction = wzdx["features"][0]["properties"]["core_details"]["direction"]
 
@@ -75,7 +92,16 @@ def validate_directionality(geotab, wzdx):
     return geotab_direction == wzdx_direction
 
 
-def validate_dates(geotab, wzdx):
+def validate_dates(geotab: dict, wzdx: dict) -> bool:
+    """Validate that the Geotab date falls within the WZDx date range
+
+    Args:
+        geotab (dict): Geotab AVL message
+        wzdx (dict): WZDx message
+
+    Returns:
+        bool: Whether the Geotab date falls within the WZDx date range
+    """
     geotab_date = date_tools.get_unix_from_iso_string(
         geotab["avl_location"]["source"]["collection_timestamp"]
     )
@@ -102,7 +128,16 @@ def validate_dates(geotab, wzdx):
     return wzdx_start_date <= geotab_date <= wzdx_end_date
 
 
-def get_combined_events(geotab_msgs, wzdx_msgs):
+def get_combined_events(geotab_msgs: list[dict], wzdx_msgs: list[dict]) -> list[dict]:
+    """Combine/integrate overlapping Geotab AVL ATMA messages into WZDx messages
+
+    Args:
+        icone_standard_msgs (list[dict]): iCone RTDH standard messages
+        wzdx_msgs (list[dict]): WZDx messages
+
+    Returns:
+        list[dict]: Combined WZDx messages
+    """
     active_wzdx_msgs = wzdx_translator.filter_active_wzdx(wzdx_msgs)
 
     combined_events = []
@@ -115,7 +150,18 @@ def get_combined_events(geotab_msgs, wzdx_msgs):
     return combined_events
 
 
-def identify_overlapping_features(geotab_msgs, wzdx_msgs):
+def identify_overlapping_features(
+    geotab_msgs: list[dict], wzdx_msgs: list[dict]
+) -> list[tuple[dict, dict]]:
+    """Identify overlapping Geotab AVL ATMA and WZDx messages
+
+    Args:
+        geotab_msgs (list[dict]): Geotab avl messages
+        wzdx_msgs (list[dict]): WZDx messages
+
+    Returns:
+        list[tuple[dict, dict]]: List of tuples of Geotab and WZDx messages that overlap
+    """
     geotab_routes = {}
     matching_routes = []
 
@@ -216,11 +262,16 @@ def identify_overlapping_features(geotab_msgs, wzdx_msgs):
     return matching_routes
 
 
-def add_route(obj, lat, lng, name="route_details_start"):
-    return obj
+def combine_geotab_with_wzdx(geotab_avl: dict, wzdx_wzdx: dict) -> dict:
+    """Combine Geotab AVL ATMA message with WZDx message. Converts WZDx message to planned-moving-area, with geometry and mile markers from ATMA position and speed.
 
+    Args:
+        geotab_avl (dict): Geotab AVL ATMA message
+        wzdx_wzdx (dict): WZDx message
 
-def combine_geotab_with_wzdx(geotab_avl, wzdx_wzdx):
+    Returns:
+        dict: Combined WZDx message
+    """
     combined_feature = wzdx_wzdx["features"][0]
 
     # determine distance ahead to use in moving area
@@ -281,7 +332,21 @@ def combine_geotab_with_wzdx(geotab_avl, wzdx_wzdx):
     return wzdx_wzdx
 
 
-def get_geometry_for_distance_ahead(distance_ahead, route_details, bearing, mMin, mMax):
+def get_geometry_for_distance_ahead(
+    distance_ahead: float, route_details: dict, bearing: float, mMin: float, mMax: float
+) -> tuple[list[list[float]], float, float]:
+    """Get the geometry for a distance ahead on a route, within the bounds of mile markers
+
+    Args:
+        distance_ahead (float): Distance ahead of vehicle
+        route_details (dict): GIS route details
+        bearing (float): Vehicle bearing
+        mMin (float): Minimum mile marker of event, to generate geometry within
+        mMax (float): Maximum mile marker of event, to generate geometry within
+
+    Returns:
+        tuple[list[list[float]], float, float]: Geometry, start mile marker, end mile marker
+    """
     route_ahead = cdot_geospatial_api.GeospatialApi().get_route_geometry_ahead(
         route_details["Route"],
         route_details["Measure"],
@@ -301,7 +366,16 @@ def get_geometry_for_distance_ahead(distance_ahead, route_details, bearing, mMin
 
 
 # Speed in mph, time in seconds
-def get_distance_ahead_miles(speed, time):
+def get_distance_ahead_miles(speed: float, time: float) -> float:
+    """Get the distance ahead in miles given a speed and time. Vehicle speed is "floored" at 5 mph.
+
+    Args:
+        speed (float): Speed of vehicle, in mph
+        time (float): Time ahead of vehicle, in seconds
+
+    Returns:
+        float: Distance ahead of vehicle, in miles
+    """
     speed = max(speed, 5)
     return speed * time / 3600
 

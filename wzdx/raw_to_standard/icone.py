@@ -68,7 +68,12 @@ def main():
     open(output_path, "w+").write(json.dumps(wzdx_msg, indent=2))
 
 
-def generate_standard_messages_from_string(input_file_contents):
+def generate_standard_messages_from_string(input_file_contents: str):
+    """Generate RTDH standard messages from iCone XML string
+
+    Args:
+        input_file_contents: iCone XML string data
+    """
     raw_messages = generate_raw_messages(input_file_contents)
     standard_messages = []
     for message in raw_messages:
@@ -78,7 +83,12 @@ def generate_standard_messages_from_string(input_file_contents):
     return standard_messages
 
 
-def generate_raw_messages(message):
+def generate_raw_messages(message: str):
+    """Parse iCone XML string and return list of validated xml incidents
+
+    Args:
+        message: iCone XML string data
+    """
     response_xml = ET.fromstring(message)
     msg_lst = response_xml.findall("incident")
     messages = []
@@ -95,7 +105,15 @@ def generate_raw_messages(message):
     return messages
 
 
-def generate_rtdh_standard_message_from_raw_single(raw_message_xml):
+def generate_rtdh_standard_message_from_raw_single(raw_message_xml: str) -> dict:
+    """Generate RTDH standard message from iCone XML string
+
+    Args:
+        raw_message_xml: xml string iCone incident
+
+    Returns:
+        dict: RTDH standard message
+    """
     obj = wzdx_translator.parse_xml_to_dict(raw_message_xml)
     pd = PathDict(obj)
     standard_message = create_rtdh_standard_msg(pd)
@@ -103,7 +121,12 @@ def generate_rtdh_standard_message_from_raw_single(raw_message_xml):
 
 
 # parse script command line arguments
-def parse_rtdh_arguments():
+def parse_rtdh_arguments() -> tuple[str, str]:
+    """Parse command line arguments for iCone to RTDH Standard translation
+
+    Returns:
+        tuple[str, str]: iCone file path, output directory
+    """
     parser = argparse.ArgumentParser(
         description="Translate iCone data to RTDH Standard"
     )
@@ -122,7 +145,12 @@ def parse_rtdh_arguments():
 # function to parse polyline to geometry line string
 # input: "37.1571990,-84.1128540,37.1686478,-84.1238971" (lat, long)
 # output: [[-84.1128540, 37.1571990], [-84.1238971, 37.1686478]] (long, lat)
-def parse_icone_polyline(polylineString):
+def parse_icone_polyline(polylineString: list[float]):
+    """Parse iCone polyline string to geometry line string
+
+    Args:
+        polylineString: iCone polyline string
+    """
     if not polylineString or type(polylineString) != str:
         return None
     # polyline right now is a list which has an empty string in it.
@@ -137,7 +165,12 @@ def parse_icone_polyline(polylineString):
     return coordinates
 
 
-def get_sensor_list(incident):
+def get_sensor_list(incident: dict | OrderedDict):
+    """Get list of sensors from iCone incident
+
+    Args:
+        incident: iCone incident object
+    """
     devices = []
     for key in ["sensor", "radar", "display", "message", "marker", "status"]:
         obj = incident.get(f"{key}")
@@ -149,7 +182,12 @@ def get_sensor_list(incident):
     return devices
 
 
-def create_rtdh_standard_msg(pd):
+def create_rtdh_standard_msg(pd: PathDict):
+    """Create RTDH standard message from iCone incident pathDict
+
+    Args:
+        pd: iCone incident pathDict
+    """
     devices = get_sensor_list(pd.get(f"incident"))
     start_time = pd.get(
         "incident/starttime", date_tools.parse_datetime_from_iso_string, default=None
@@ -221,7 +259,17 @@ def create_rtdh_standard_msg(pd):
     }
 
 
-def get_direction(street, coords, route_details=None):
+def get_direction(street: str, coords: list[float], route_details=None):
+    """Get road direction from street, coordinates, or route details
+
+    Args:
+        street: Roadway name to pull direction from (I-25 NB, I-25 SB, etc.)
+        coords: Coordinates to pull direction from
+        route_details: Optional GIS route details to pull direction from. Defaults to None.
+
+    Returns:
+        Literal['unknown', 'eastbound', 'westbound', 'northbound', 'southbound']: direction of roadway
+    """
     direction = wzdx_translator.parse_direction_from_street_name(street)
     if (not direction or direction == "unknown") and route_details:
         direction = get_direction_from_route_details(route_details)
@@ -230,16 +278,50 @@ def get_direction(street, coords, route_details=None):
     return direction
 
 
-def get_road_name(route_details):
+def get_road_name(route_details: dict) -> str | None:
+    """Get road name from GIS route details
+
+    Args:
+        route_details: GIS route details
+    Returns:
+        str | None: road name
+    """
     return route_details.get("Route")
 
 
-def get_direction_from_route_details(route_details):
+def get_direction_from_route_details(route_details: dict) -> str:
+    """Get direction from GIS route details
+
+    Args:
+        route_details (dict): GIS route details
+
+    Returns:
+        str: direction | "unknown"
+    """
     return route_details.get("Direction", "unknown")
 
 
 # function to validate the incident
-def validate_incident(incident):
+def validate_incident(incident: dict | OrderedDict):
+    """Validate iCone Incident against predefined set of rules (see below)
+
+    Args:
+        incident: iCone incident object
+
+    Returns:
+        bool: True if incident is valid, False otherwise
+
+    Validation Rules:
+    - Incident must have a location object
+    - Incident must have a polyline object
+    - Incident must have a starttime field
+    - Incident must have a description field
+    - Incident must have a creationtime field
+    - Incident must have an updatetime field
+    - Incident must have a valid direction (parsable from street name or polyline)
+    - Incident must have a valid start time (parsable from ISO string)
+    - Incident must have a valid end time (parsable from ISO string)
+    """
     if not incident or (type(incident) != dict and type(incident) != OrderedDict):
         logging.warning("incident is empty or has invalid type")
         return False
