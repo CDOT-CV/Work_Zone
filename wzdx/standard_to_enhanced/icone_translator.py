@@ -2,6 +2,7 @@ import argparse
 import json
 import logging
 import copy
+from typing import Literal
 import uuid
 from ..sample_files.validation_schema import work_zone_feed_v42
 
@@ -32,7 +33,12 @@ def main():
 
 
 # parse script command line arguments
-def parse_icone_arguments():
+def parse_icone_arguments() -> tuple[str, str]:
+    """Parse command line arguments for standard RTDH iCone data translation to WZDx
+
+    Returns:
+        tuple[str, str]: iCone file path, output file path
+    """
     parser = argparse.ArgumentParser(description="Translate iCone data to WZDx")
     parser.add_argument(
         "--version", action="version", version=f"{PROGRAM_NAME} {PROGRAM_VERSION}"
@@ -49,7 +55,16 @@ def parse_icone_arguments():
     return args.iconeFile, args.outputFile
 
 
-def wzdx_creator(message, info=None):
+def wzdx_creator(message: dict, info: dict = None) -> dict:
+    """Translate standard RTDH iCone data to WZDx
+
+    Args:
+        message (dict): iCone data
+        info (dict, optional): WZDx info object. Defaults to None.
+
+    Returns:
+        dict: WZDx object
+    """
     if not message or not validate_standard_msg(message):
         return None
 
@@ -115,7 +130,17 @@ def wzdx_creator(message, info=None):
 
 
 # function to calculate vehicle impact
-def get_vehicle_impact(description):
+def get_vehicle_impact(
+    description: str,
+) -> Literal["all-lanes-open", "some-lanes-closed"]:
+    """Calculate vehicle impact based on description
+
+    Args:
+        description (str): Incident description
+
+    Returns:
+        Literal["all-lanes-open", "some-lanes-closed"]: Vehicle impact
+    """
     vehicle_impact = "all-lanes-open"
     if "lane closed" in description.lower():
         vehicle_impact = "some-lanes-closed"
@@ -123,7 +148,15 @@ def get_vehicle_impact(description):
 
 
 # function to get description
-def create_description(incident):
+def create_description(incident: dict) -> str:
+    """Create description from incident
+
+    Args:
+        incident (dict): RTDH standard incident object
+
+    Returns:
+        str: Description
+    """
     description = incident.get("description")
 
     if incident.get("sensor"):
@@ -159,7 +192,15 @@ def create_description(incident):
     return description
 
 
-def parse_icone_sensor(sensor):
+def parse_icone_sensor(sensor: dict) -> dict:
+    """Parse iCone sensor data
+
+    Args:
+        sensor (dict): iCone sensor data
+
+    Returns:
+        dict: Parsed iCone sensor data
+    """
     icone = {}
     icone["type"] = sensor.get("@type")
     icone["id"] = sensor.get("@id")
@@ -204,7 +245,15 @@ def parse_icone_sensor(sensor):
     return icone
 
 
-def parse_pcms_sensor(sensor):
+def parse_pcms_sensor(sensor: dict) -> dict:
+    """Parse PCMS sensor data
+
+    Args:
+        sensor (dict): iCone PCMS sensor data
+
+    Returns:
+        dict: Parsed PCMS sensor data
+    """
     pcms = {}
     pcms["type"] = sensor.get("@type")
     pcms["id"] = sensor.get("@id")
@@ -226,8 +275,15 @@ def parse_pcms_sensor(sensor):
 
 
 # Parse Icone Incident to WZDx
-def parse_incident(incident):
+def parse_incident(incident: dict) -> dict:
+    """Parse iCone incident to WZDx feature
 
+    Args:
+        incident (dict): standard RTDH iCone incident
+
+    Returns:
+        dict: WZDx feature
+    """
     event = incident.get("event")
 
     source = event.get("source")
@@ -360,7 +416,15 @@ def parse_incident(incident):
 
 
 # function to validate the event
-def validate_standard_msg(msg):
+def validate_standard_msg(msg: dict) -> bool:
+    """Validate the event
+
+    Args:
+        msg (dict): Event message
+
+    Returns:
+        bool: True if event is valid, False otherwise
+    """
     if not msg or type(msg) != dict:
         logging.warning("event is empty or has invalid type")
         return False

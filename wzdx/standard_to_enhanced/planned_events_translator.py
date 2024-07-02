@@ -43,7 +43,12 @@ def main():
 
 
 # parse script command line arguments
-def parse_planned_events_arguments():
+def parse_planned_events_arguments() -> tuple[str, str]:
+    """Parse command line arguments for Planned Event data translation
+
+    Returns:
+        tuple[str, str]: Planned Event file path, output file path
+    """
     parser = argparse.ArgumentParser(description="Translate Planned Event data to WZDx")
     parser.add_argument(
         "--version", action="version", version=f"{PROGRAM_NAME} {PROGRAM_VERSION}"
@@ -60,7 +65,16 @@ def parse_planned_events_arguments():
     return args.plannedEventsFile, args.outputFile
 
 
-def wzdx_creator(message, info=None):
+def wzdx_creator(message: dict, info: dict = None) -> dict:
+    """Translate Planned Event data to WZDx, separating Work Zones and Road Restrictions
+
+    Args:
+        message (dict): Planned Event data
+        info (dict, optional): WZDx info object. Defaults to None.
+
+    Returns:
+        dict: WZDx object
+    """
     if not message:
         return None
     event_type = message["event"]["type"]
@@ -90,7 +104,15 @@ def wzdx_creator(message, info=None):
     return wzd
 
 
-def get_vehicle_impact(lanes):
+def get_vehicle_impact(lanes: list[dict]) -> str:
+    """Determine the impact of lane closures on vehicle traffic
+
+    Args:
+        lanes (list[dict]): List of lane objects
+
+    Returns:
+        str: Vehicle impact status
+    """
     num_lanes = len(lanes)
     num_closed_lanes = 0
     for i in lanes:
@@ -105,7 +127,15 @@ def get_vehicle_impact(lanes):
 
 
 # Parse Icone Incident to WZDx
-def parse_road_restriction(incident):
+def parse_road_restriction(incident: dict) -> dict:
+    """Translate Planned Events RTDH standard road restriction to WZDx
+
+    Args:
+        incident (dict): Planned event event data
+
+    Returns:
+        dict: WZDx object
+    """
     if not incident or type(incident) != dict:
         return None
 
@@ -184,7 +214,15 @@ def parse_road_restriction(incident):
 
 
 # Parse Icone Incident to WZDx
-def parse_work_zone(incident):
+def parse_work_zone(incident: dict) -> dict:
+    """Translate Planned Events RTDH standard work zone to WZDx
+
+    Args:
+        incident (dict): Planned event event data
+
+    Returns:
+        dict: WZDx object
+    """
     if not incident or type(incident) != dict:
         return None
 

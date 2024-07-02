@@ -37,7 +37,12 @@ def main():
 
 
 # parse script command line arguments
-def parse_navjoy_arguments():
+def parse_navjoy_arguments() -> tuple[str, str]:
+    """Parse command line arguments for NavJoy 568 data translation
+
+    Returns:
+        tuple[str, str]: NavJoy 568 file path, output file path
+    """
     parser = argparse.ArgumentParser(description="Translate iCone data to WZDx")
     parser.add_argument(
         "--version", action="version", version=f"{PROGRAM_NAME} {PROGRAM_VERSION}"
@@ -54,7 +59,16 @@ def parse_navjoy_arguments():
     return args.navjoyFile, args.outputFile
 
 
-def wzdx_creator(message, info=None):
+def wzdx_creator(message: dict, info: dict = None) -> dict:
+    """Translate NavJoy 568 data to WZDx
+
+    Args:
+        message (dict): standard RTDH NavJoy 568 data
+        info (dict, optional): WZDx info object. Defaults to None.
+
+    Returns:
+        dict: WZDx object
+    """
     if not message:
         return None
     # verify info obj
@@ -76,7 +90,15 @@ def wzdx_creator(message, info=None):
 
 
 # Parse standard Navjoy 568 form to WZDx
-def parse_reduction_zone(incident):
+def parse_reduction_zone(incident: dict) -> dict:
+    """Translate NavJoy 568 data to WZDx
+
+    Args:
+        incident (dict): standard RTDH NavJoy 568 data
+
+    Returns:
+        dict: WZDx object
+    """
     if not incident or type(incident) != dict:
         return None
 
@@ -214,7 +236,15 @@ def parse_reduction_zone(incident):
 
 
 # function to calculate vehicle impact
-def get_vehicle_impact(travelRestriction):
+def get_vehicle_impact(travelRestriction: str) -> str:
+    """Calculate vehicle impact based on travel restriction
+
+    Args:
+        travelRestriction (str): Travel restriction
+
+    Returns:
+        str: Vehicle impact
+    """
     if not travelRestriction or type(travelRestriction) != str:
         return None
     travelRestriction = travelRestriction.lower()
@@ -228,7 +258,15 @@ def get_vehicle_impact(travelRestriction):
 
 
 # TODO: Support more types of work
-def get_types_of_work(field):
+def get_types_of_work(field: str) -> list[dict]:
+    """Get types of work based on project description
+
+    Args:
+        field (str): Project description
+
+    Returns:
+        list[dict]: Types of work
+    """
     if not field or type(field) != str:
         return None
     field = field.lower()
