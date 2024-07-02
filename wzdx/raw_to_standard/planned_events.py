@@ -5,6 +5,7 @@ import json
 import logging
 import re
 import time
+from typing import Literal
 import uuid
 from collections import OrderedDict
 
@@ -71,6 +72,12 @@ def main():
 
 # parse script command line arguments
 def parse_rtdh_arguments():
+    """Parse command line arguments for Planned Events to RTDH Standard translation
+
+    Returns:
+        str: planned event file path
+        str: output directory path
+    """
     parser = argparse.ArgumentParser(
         description="Translate Planned Event data to RTDH Standard"
     )
@@ -87,8 +94,17 @@ def parse_rtdh_arguments():
 
 
 def generate_standard_messages_from_string(
-    cdotGeospatialApi: cdot_geospatial_api.GeospatialApi, input_file_contents
-):
+    cdotGeospatialApi: cdot_geospatial_api.GeospatialApi, input_file_contents: str
+) -> list[dict]:
+    """Generate standard messages from a string of input file contents
+
+    Args:
+        cdotGeospatialApi (cdot_geospatial_api.GeospatialApi): customized GeospatialApi object, used for route details
+        input_file_contents (str): string of input file contents
+
+    Returns:
+        list[dict]: list of generated RTDH standard messages
+    """
     raw_messages = generate_raw_messages(input_file_contents)
     standard_messages = []
     for message in raw_messages:
@@ -101,7 +117,16 @@ def generate_standard_messages_from_string(
 
 
 # TODO: Integrate Category
-def is_incident_wz(msg):
+def is_incident_wz(msg: dict) -> tuple[bool, bool]:
+    """Determine if a message is an incident or work zone
+
+    Args:
+        msg (dict): planned event message object
+
+    Returns:
+        is_incident (bool): whether the message is an incident
+        is_wz (bool): whether the message is a work zone
+    """
     id = msg.get("properties", {}).get("id", "")
     type = msg.get("properties", {}).get("type", "")
     # category = msg.get('properties', {}).get('Category')
@@ -111,13 +136,29 @@ def is_incident_wz(msg):
     return is_incident, is_wz
 
 
-def generate_raw_messages(message_string):
+def generate_raw_messages(message_string: str) -> list[dict]:
+    """Generate raw messages from a string of input file contents using `expand_event_directions`
+
+    Args:
+        message_string (_type_): raw planned events message string
+
+    Returns:
+        _type_: list of raw planned events message objects, 1 for each lane impact direction
+    """
     msg = json.loads(message_string)
     return expand_event_directions(msg)
 
 
 # Break event into
-def expand_event_directions(message):
+def expand_event_directions(message: dict) -> list[dict]:
+    """Expand a message into multiple messages, one for each lane impact direction
+
+    Args:
+        message (dict): planned event message object
+
+    Returns:
+        list[dict]: list of planned event message objects, 1 for each lane impact direction
+    """
     try:
         messages = []
         laneImpacts = message.get("properties", {}).get("laneImpacts")
@@ -142,8 +183,17 @@ def expand_event_directions(message):
 
 
 def generate_rtdh_standard_message_from_raw_single(
-    cdotGeospatialApi: cdot_geospatial_api.GeospatialApi, obj
-):
+    cdotGeospatialApi: cdot_geospatial_api.GeospatialApi, obj: dict
+) -> dict:
+    """Generate a single RTDH standard message from a raw planned event message
+
+    Args:
+        cdotGeospatialApi (cdot_geospatial_api.GeospatialApi): customized GeospatialApi object, used for route details
+        obj (dict): raw planned event message object
+
+    Returns:
+        dict: RTDH standard message object
+    """
     is_incident_msg, is_wz = is_incident_wz(obj)
     if is_incident_msg and not is_wz:
         return {}
@@ -152,7 +202,15 @@ def generate_rtdh_standard_message_from_raw_single(
     return standard_message
 
 
-def get_linestring(geometry):
+def get_linestring(geometry: dict) -> list[list[float]]:
+    """Get a list of coordinates from a geometry object. Supports MultiPoint and Polygon types, and Polygons are converted to polylines with `polygon_tools.polygon_to_polyline_center`.
+
+    Args:
+        geometry (dict): GeoJSON geometry object, only supports MultiPoint and Polygon
+
+    Returns:
+        list[list[float]]: list of coordinates
+    """
     if geometry.get("type") == "MultiPoint":
         return geometry["coordinates"]
     elif geometry.get("type") == "Polygon":
@@ -193,7 +251,15 @@ def get_linestring(geometry):
 # ]
 
 
-def hex_to_binary(hex_string):
+def hex_to_binary(hex_string: str) -> str:
+    """Convert a hex string to a binary string
+
+    Args:
+        hex_string (str): hex string
+
+    Returns:
+        str: binary string
+    """
     hexidecimal_scale = 16  # equals to hexadecimal
     num_of_bits = 16
     return bin(int(hex_string, hexidecimal_scale))[2:].zfill(num_of_bits)
@@ -370,7 +436,15 @@ INVALID_EVENT_DESCRIPTION = (
 )
 
 
-def map_lane_type(lane_type):
+def map_lane_type(lane_type: str) -> str:
+    """Map a planned event lane type to a standard lane type, using `LANE_TYPE_MAPPING`
+
+    Args:
+        lane_type (str): planned event lane type
+
+    Returns:
+        str: standard lane type
+    """
     try:
         return LANE_TYPE_MAPPING[lane_type]
     except KeyError as e:
@@ -378,7 +452,15 @@ def map_lane_type(lane_type):
         return "general"
 
 
-def map_event_type(event_type):
+def map_event_type(event_type: str) -> tuple[str, list[dict], str]:
+    """Map a planned event type to a standard event type, using `EVENT_TYPE_MAPPING`
+
+    Args:
+        event_type (str): planned event type
+
+    Returns:
+        tuple[str, list[dict], str]: work zone/restriction classification, types of work, planned-moving-area/static work zone type
+    """
     try:
         return EVENT_TYPE_MAPPING[event_type]
     except KeyError as e:
@@ -386,11 +468,29 @@ def map_event_type(event_type):
         return DEFAULT_EVENT_TYPE
 
 
-def map_lane_status(lane_status_bit):
+def map_lane_status(lane_status_bit: Literal["1", "0"]) -> str:
+    """Map a lane status bit to WZDx lane status
+
+    Args:
+        lane_status_bit (Literal[&quot;1&quot;, &quot;0&quot;]): lane status bit
+
+    Returns:
+        str: WZDx lane status
+    """
     return "open" if lane_status_bit == "0" else "closed"
 
 
-def map_direction_string(direction_string):
+def map_direction_string(
+    direction_string: str,
+) -> Literal["undefined", "eastbound", "westbound", "northbound", "southbound"]:
+    """Map a direction string to a standard direction string
+
+    Args:
+        direction_string (str): direction string, like 'north', 'south', 'east', 'west'
+
+    Returns:
+        Literal["undefined", "eastbound", "westbound", "northbound", "southbound"]: standard direction string
+    """
     return STRING_DIRECTION_MAP.get(direction_string, "undefined")
 
 
@@ -398,7 +498,16 @@ def map_direction_string(direction_string):
 # is a hexidecimal string which, when converted to binary and zero padded to length 16, yields the state of all lanes.
 # 0 = open, 1 = closed. The 0th index is the left shoulder, the 15th index is the right shoulder, and all of the normal
 # lanes start from the left, or 1st index.
-def get_lanes_list(lane_closures_hex, num_lanes, closedLaneTypes):
+def get_lanes_list(lane_closures_hex: str, num_lanes: int, closedLaneTypes: list[str]):
+    """This method parses a hex string and list of closed lane names into a WZDx lanes list. The hex string, lane_closures_hex, is a hexidecimal string which, when converted to binary and zero padded to length 16, yields the state of all lanes. 0 = open, 1 = closed. The 0th index is the left shoulder, the 15th index is the right shoulder, and all of the normal lanes start from the left, or 1st index.
+    Args:
+        lane_closures_hex (str): Planned event laneClosures hex string
+        num_lanes (int): number of lanes
+        closedLaneTypes (list[str]): Planned event closedLaneTypes list
+
+    Returns:
+        _type_: WZDx lanes list
+    """
     lanes_affected = hex_to_binary(lane_closures_hex)
     lane_bits = lanes_affected[1 : (num_lanes + 1)]
     lanes = []
@@ -436,7 +545,21 @@ def get_lanes_list(lane_closures_hex, num_lanes, closedLaneTypes):
     return lanes
 
 
-def get_lane_impacts(lane_impacts, direction):
+def get_lane_impacts(
+    lane_impacts: list[dict],
+    direction: Literal[
+        "undefined", "eastbound", "westbound", "northbound", "southbound"
+    ],
+) -> list[dict]:
+    """Get WZDx lane list from list of lane impacts and direction
+
+    Args:
+        lane_impacts (list[dict]): Planned event lane impacts
+        direction (Literal["undefined", "eastbound", "westbound", "northbound", "southbound"]): Planned event direction
+
+    Returns:
+        list[dict]: _description_
+    """
     for impact in lane_impacts:
         if impact["direction"] == direction:
             return get_lanes_list(
@@ -444,7 +567,15 @@ def get_lane_impacts(lane_impacts, direction):
             )
 
 
-def all_lanes_open(lanes):
+def all_lanes_open(lanes: list[dict]) -> bool:
+    """Check if all lanes are open
+
+    Args:
+        lanes (list[dict]): WZDx lanes list
+
+    Returns:
+        bool: whether all lanes are open
+    """
     for i in lanes:
         if i["status"] != "open":
             return False
@@ -453,19 +584,52 @@ def all_lanes_open(lanes):
 
 # On {roadName}, between mile markers {startMarker} and {endMarker}. {typeOfWork}. Running between {startTime} and {endTime}
 def create_description(
-    name, roadName, startMarker, endMarker, typeOfWork, startTime, endTime
-):
+    name: str,
+    roadName: str,
+    startMarker: float,
+    endMarker: float,
+    typeOfWork: str,
+    startTime: str,
+    endTime: str,
+) -> str:
+    """Create a description string from planned event details
+
+    Args:
+        name (str)
+        roadName (str)
+        startMarker (float)
+        endMarker (float)
+        typeOfWork (str)
+        startTime (str)
+        endTime (str)
+
+    Returns:
+        str: generated event description
+    """
     return f"Event {name}, on {roadName}, between mile markers {startMarker} and {endMarker}. {typeOfWork}. Running between {startTime} and {endTime}"
 
 
 def get_improved_geometry(
     cdotGeospatialApi: cdot_geospatial_api.GeospatialApi,
-    coordinates,
-    event_status,
-    route_details_start,
-    route_details_end,
-    id,
-):
+    coordinates: list[list[float]],
+    event_status: str,
+    route_details_start: dict,
+    route_details_end: dict,
+    id: str,
+) -> list[list[float]]:
+    """Get higher definition geometry from GIS endpoint for planned event. Do not improve geometry for completed events.
+
+    Args:
+        cdotGeospatialApi (cdot_geospatial_api.GeospatialApi): customized GeospatialApi object, for retrieving route geometry
+        coordinates (list[list[float]]): planned event coordinates
+        event_status (str): ["active", "pending", "planned", "completed"]
+        route_details_start (dict): GIS route details for start of event
+        route_details_end (dict): GIS route details for end of event
+        id (str): ID of planned event, used for logging
+
+    Returns:
+        list[list[float]]: _description_
+    """
     if event_status == "completed":
         return coordinates
 
@@ -506,7 +670,15 @@ def get_improved_geometry(
     return newCoordinates
 
 
-def get_cross_streets_from_description(description):
+def get_cross_streets_from_description(description: str) -> tuple[str, str]:
+    """Get cross streets from a description string using regular expression "^Between (.*?) and (.*?)(?= from)"
+
+    Args:
+        description (str): description string
+
+    Returns:
+        tuple[str, str]: beginning cross street, ending cross street
+    """
     desc_regex = "^Between (.*?) and (.*?)(?= from)"
     m = regex.search(desc_regex, description)
     try:
@@ -516,8 +688,17 @@ def get_cross_streets_from_description(description):
 
 
 def get_route_details_for_coordinates_lngLat(
-    cdotGeospatialApi: cdot_geospatial_api.GeospatialApi, coordinates
-):
+    cdotGeospatialApi: cdot_geospatial_api.GeospatialApi, coordinates: list[list[float]]
+) -> tuple[dict, dict]:
+    """Get GIS route details for start and end coordinates
+
+    Args:
+        cdotGeospatialApi (cdot_geospatial_api.GeospatialApi): customized GeospatialApi object, for retrieving route details
+        coordinates (list[list[float]]): planned event coordinates
+
+    Returns:
+        tuple[dict, dict]: GIS route details for start and end coordinates
+    """
     route_details_start = get_route_details(
         cdotGeospatialApi, coordinates[0][1], coordinates[0][0]
     )
@@ -534,14 +715,36 @@ def get_route_details_for_coordinates_lngLat(
     return route_details_start, route_details_end
 
 
-def get_route_details(cdotGeospatialApi: cdot_geospatial_api.GeospatialApi, lat, lng):
+def get_route_details(
+    cdotGeospatialApi: cdot_geospatial_api.GeospatialApi, lat: float, lng: float
+) -> dict:
+    """Get GIS route details for a given latitude and longitude
+
+    Args:
+        cdotGeospatialApi (cdot_geospatial_api.GeospatialApi): customized GeospatialApi object, for retrieving route details
+        lat (float): latitude
+        lng (float): longitude
+
+    Returns:
+        dict: GIS route details
+    """
     return cdotGeospatialApi.get_route_and_measure((lat, lng))
 
 
 # isIncident is unused, could be useful later though
 def create_rtdh_standard_msg(
-    cdotGeospatialApi: cdot_geospatial_api.GeospatialApi, pd, isIncident
-):
+    cdotGeospatialApi: cdot_geospatial_api.GeospatialApi, pd: PathDict, isIncident: bool
+) -> dict:
+    """Create a RTDH standard message from a planned event PathDict
+
+    Args:
+        cdotGeospatialApi (cdot_geospatial_api.GeospatialApi): customized GeospatialApi object, for retrieving route details and improved geometry
+        pd (PathDict): planned event PathDict
+        isIncident (bool): whether the event is an incident (modifies start_date parsing)
+
+    Returns:
+        dict: RTDH standard message
+    """
     try:
         description = pd.get("properties/travelerInformationMessage", "")
         if description == INVALID_EVENT_DESCRIPTION:
@@ -694,7 +897,29 @@ def create_rtdh_standard_msg(
         return {}
 
 
-def validate_closure(obj):
+def validate_closure(obj: dict | OrderedDict) -> bool:
+    """Validate the planned event object
+
+    Args:
+        obj (dict): planned event object
+
+    Returns:
+        bool: whether the object is valid
+
+    Validation Rules:
+    - obj must be a dictionary
+    - obj must have a sys_gUid
+    - obj must have a properties object
+    - obj must have a geometry object
+    - obj must have a properties.startTime, which is a valid date
+    - obj must have a properties.clearTime, which is a valid date
+    - obj must have a properties.travelerInformationMessage
+    - obj must have a properties.direction
+    - obj must have a properties.laneImpacts
+    - obj must have a properties.id
+    - obj must have a properties.type
+
+    """
     if not obj or (type(obj) != dict and type(obj) != OrderedDict):
         logging.warning("alert is empty or has invalid type")
         return False

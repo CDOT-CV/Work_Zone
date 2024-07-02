@@ -110,6 +110,12 @@ def main():
 
 # parse script command line arguments
 def parse_rtdh_arguments():
+    """Parse command line arguments for NavJoy 568 to RTDH Standard translation
+
+    Returns:
+        str: navjoy file path
+        str: output directory path
+    """
     parser = argparse.ArgumentParser(
         description="Translate NavJoy 568 data to RTDH Standard"
     )
@@ -134,7 +140,15 @@ def parse_rtdh_arguments():
 
 # TODO: consider deleting all numbered keys after they are copied
 # TODO: consider removing duplicate messages
-def expand_speed_zone(message):
+def expand_speed_zone(message: dict) -> list[dict]:
+    """Expand Speed Reduction Zone Into Multiple Directions
+    568 Reduction zones can have multiple directions of traffic. This function will take a message and expand it into separate messages for each direction.
+    Args:
+        message (dict): A single 568 message object
+
+    Returns:
+        list[dict]: A list of messages with each direction of traffic separated into its own message, 1-2 total.
+    """
     try:
         messages = []
         for key_set in NUMBERED_KEY_NAMES:
@@ -159,7 +173,15 @@ def expand_speed_zone(message):
         return [message]
 
 
-def get_directions_from_string(directions_string) -> list:
+def get_directions_from_string(directions_string: str) -> list[str]:
+    """Parse road directions from 568 direction string
+
+    Args:
+        directions_string (str): 568 direction string, like "north" or "east/west"
+
+    Returns:
+        list[str]: List of 1-2 directions, with values ['unknown', 'eastbound', 'westbound', 'northbound', 'southbound']
+    """
     if not directions_string or type(directions_string) != str:
         return []
 
@@ -175,7 +197,15 @@ def get_directions_from_string(directions_string) -> list:
     return list(dict.fromkeys(directions))
 
 
-def generate_standard_messages_from_string(input_file_contents):
+def generate_standard_messages_from_string(input_file_contents: str) -> list[dict]:
+    """Generate RTDH standard messages from raw 568 message
+
+    Args:
+        input_file_contents (str): 568 message string
+
+    Returns:
+        list[dict]: List of RTDH standard messages
+    """
     raw_messages = generate_raw_messages(input_file_contents)
     standard_messages = []
     for message in raw_messages:
@@ -185,7 +215,15 @@ def generate_standard_messages_from_string(input_file_contents):
     return standard_messages
 
 
-def generate_raw_messages(message_string):
+def generate_raw_messages(message_string: str) -> list[dict]:
+    """Validate and generate raw messages from 568 message string, using the `expand_speed_zone` method
+
+    Args:
+        message_string (str): 568 message string
+
+    Returns:
+        list[dict]: List of raw messages, 1 for each unique direction
+    """
     msg_lst = json.loads(message_string)
     messages = []
 
@@ -198,25 +236,57 @@ def generate_raw_messages(message_string):
     return messages
 
 
-def generate_rtdh_standard_message_from_raw_single(obj):
+def generate_rtdh_standard_message_from_raw_single(obj: dict) -> dict:
+    """Generate RTDH standard message from raw 568 message using `create_rtdh_standard_msg`
+
+    Args:
+        obj (dict): 568 message object
+
+    Returns:
+        dict: RTDH standard message
+    """
     pd = PathDict(obj)
     standard_message = create_rtdh_standard_msg(pd)
     return standard_message
 
 
-def get_linestring_index(map):
+def get_linestring_index(map: list) -> int:
+    """Get index of LineString in srzmap list from 568 message
+
+    Args:
+        map (list): srzmap list from 568 message
+
+    Returns:
+        int: index of LineString in srzmap list, or None if not found
+    """
     for i in range(len(map)):
         if map[i].get("type") == "LineString":
             return i
 
 
 def get_polygon_index(map):
+    """Get index of Polygon in srzmap list from 568 message
+
+    Args:
+        map (list): srzmap list from 568 message
+
+    Returns:
+        int: index of Polygon in srzmap list, or None if not found
+    """
     for i in range(len(map)):
         if map[i].get("type") == "Polygon":
             return i
 
 
-def create_rtdh_standard_msg(pd):
+def create_rtdh_standard_msg(pd: PathDict) -> dict:
+    """Create RTDH standard message from raw 568 message object
+
+    Args:
+        pd (PathDict): raw 568 message object
+
+    Returns:
+        dict: RTDH standard message
+    """
     map = pd.get("data/srzmap", default=[])
     index = get_linestring_index(map)
     if index != None:
@@ -293,7 +363,28 @@ def create_rtdh_standard_msg(pd):
     }
 
 
-def validate_closure(obj):
+def validate_closure(obj: dict | OrderedDict) -> bool:
+    """Validate 568 message object
+
+    Args:
+        obj (dict | OrderedDict): 568 message object
+
+    Returns:
+        bool: True if valid, False if
+
+    Validation Rules:
+    - obj must be a dictionary or OrderedDict
+    - obj must have a sys_gUid key
+    - obj must have a data key
+    - data must have a streetNameFrom key
+    - data must have a srzmap key
+    - srzmap must be a list with at least one element
+    - srzmap must have a LineString or Polygon
+    - LineString or Polygon must have coordinates
+    - data must have a workStartDate key
+    - data must have a descriptionForProject key
+    - data must have a direction key
+    """
     if not obj or (type(obj) != dict and type(obj) != OrderedDict):
         logging.warning("alert is empty or has invalid type")
         return False
