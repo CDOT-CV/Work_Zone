@@ -1,0 +1,5 @@
+# Function dependencies, for example:
+# package>=version
+google-cloud-storage==1.37.1
+elementpath==4.0.0
+pytz==2022.7.1

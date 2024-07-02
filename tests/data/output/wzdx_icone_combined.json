@@ -1,0 +1,96 @@
+[
+  {
+    "feed_info": {
+      "publisher": "CDOT",
+      "version": "4.1",
+      "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "data_sources": [
+        {
+          "data_source_id": "3b97efee-8154-47eb-9870-282cb1265ccf",
+          "organization_name": "CDOT",
+          "update_date": "2022-10-20T01:15:12Z",
+          "update_frequency": 300,
+          "contact_name": "Ashley Nylen",
+          "contact_email": "ashley.nylen@state.co.us"
+        }
+      ],
+      "update_date": "2022-10-20T01:15:12Z",
+      "update_frequency": 300,
+      "contact_name": "Ashley Nylen",
+      "contact_email": "ashley.nylen@state.co.us"
+    },
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "id": "3b5c96c8-f7b1-523d-b21d-9a6a735902e7",
+        "type": "Feature",
+        "properties": {
+          "core_details": {
+            "event_type": "work-zone",
+            "data_source_id": "3b97efee-8154-47eb-9870-282cb1265ccf",
+            "road_names": [
+              "US-50"
+            ],
+            "direction": "eastbound",
+            "name": "OpenTMS-Event2702170538_eastbound",
+            "description": "Between County Road 66 and County Road 25 (2 to 6 miles east of Blue Mesa Summit) from Mile Point 123 to Mile Point 127. Road construction. Alternating traffic. Width limit in effect. Width limit 10'0\". Starting tomorrow at 8:30AM MDT until tomorrow at about 5:30PM MDT. Roadwork - Caution [iCone]",
+            "update_date": "2023-02-23T22:31:01Z"
+          },
+          "start_date": "2022-07-12T21:28:00Z",
+          "end_date": "2022-08-22T23:30:00Z",
+          "is_start_date_verified": false,
+          "is_end_date_verified": false,
+          "is_start_position_verified": false,
+          "is_end_position_verified": false,
+          "location_method": "channel-device-method",
+          "vehicle_impact": "all-lanes-open",
+          "lanes": [
+            {
+              "order": 1,
+              "type": "general",
+              "status": "open"
+            }
+          ],
+          "beginning_cross_street": "County Road 66",
+          "ending_cross_street": "County Road 25 (2 to 6 miles east of Blue Mesa Summit)",
+          "types_of_work": [
+            {
+              "type_name": "roadway-creation",
+              "is_architectural_change": true
+            }
+          ],
+          "beginning_milepost": 123.0,
+          "ending_milepost": 127.0,
+          "route_details_start": {
+            "Route": "050A_DEC",
+            "Measure": 123.0,
+            "MMin": 0.0,
+            "MMax": 314.598,
+            "Distance": 1.07
+          },
+          "route_details_end": {
+            "Route": "050A_DEC",
+            "Measure": 127.01,
+            "MMin": 0.0,
+            "MMax": 314.598,
+            "Distance": 0.74
+          },
+          "condition_1": true
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [
+              -107.413016,
+              38.398904
+            ],
+            [
+              -107.385542,
+              38.438934
+            ]
+          ]
+        }
+      }
+    ]
+  }
+]

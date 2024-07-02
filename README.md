@@ -1,44 +1,58 @@
 # Work_Zone
-Work zone code and documentation for WZDx, iCone, etc. 
 
-## Project Description
-This is an open source, proof of concept solution for translating work zone data in the form of CDOT Planned Events to the standardized WZDx 4.0 format, as well as having additional translators to translate COtrip/Salesforce, iCone, and NavJOY messages to the WZDx 4.0 format. This project was developed for CDOT. A unique translator has been developed for each of these message types. These translators read in the source message, parse out specific fields, and generate a WZDx message. For more information on these message formats and the data mappings between these messages and the WZDx format, see the [documentation](wzdx/docs). sample_files are located [here](wzdx/sample_files). All these translators are built to run from the command line and from GCP Dataflows, hosted within the CDOT OIM WZDX environment, connected to the RTDH (real time data hub).
+This is an open source, proof of concept solution for translating work zone data in the form of CDOT Planned Events, iCone device, and NavJOY 568 form data to the standardized [WZDx 4.2 format](https://github.com/usdot-jpo-ode/wzdx/tree/release/v4.2). This project was developed for CDOT. A unique translator has been developed for each of these message types. These translators read in the source message, parse out specific fields, and generate a WZDx message. For more information on these message formats and the data mappings between these messages and the WZDx format, see the [documentation](wzdx/docs). sample_files are located [here](wzdx/sample_files). All these translators are built to run from the command line and from GCP Dataflows, hosted within the CDOT RTDH WZDX environment. These translators are used to generate the CDOT Production WZDx data feed, which is published on the USDOT [WZDx Data Exchange Feed Registry](https://datahub.transportation.gov/Roadways-and-Bridges/Work-Zone-Data-Exchange-WZDx-Feed-Registry/69qe-yiui/data_preview)
 
-The Google CloudPlatform deployment is outlined below.
-![GCP Processing](wzdx/docs/CDOT%20WZDx%20translators%20-%20Planned%20Events.png)
+The Google CloudPlatform deployment for the CDOT Planned Event WZDx translator is outlined below:
+![GCP Planned Events](wzdx/docs/CDOT%20WZDx%20translators%20-%20Planned%20Events.png)
 
-This project is also a full python package hosted on [pypi](https://pypi.org/project/wzdx-translator-jacob6838/)
+On top of these translators, combination scripts have been written to integrate WZDx messages from multiple separate sources, including CDOT Planned Events, iCone, and NavJOY. Each of these sources has unique data fields that are not present in the other sources, and the combination script is designed to merge these fields into a single WZDx message. The combination script is also built to run from the command line and from GCP Dataflows, hosted within the CDOT RTDH environment. The combination script is designed to run after the individual translators have generated their WZDx messages, and the output of the combination script is a single WZDx message that contains all of the data from the individual sources. When fields from multiple sources overlap, the combination script is designed to prioritize the data from the source with the most complete information. Geotab data is also integrated for mobile work zones, so that when a vehicle is detected in a "planned-moving-area" work zone, the work zone is changed to a "moving" work zone, using the current location of the vehicle plus a buffer distance ahead.
 
-## Installation
+The Google CloudPlatform deployment for the CDOT WZDx combination workflow is outlined below:
+![GCP Combination](wzdx/docs/CDOT%20WZDx%20translators%20-%20Processing.png)
+
+## Building as a Package
+
+This project is set up to be built into a python package, using python 3.8 and above. Use the following script to build the package:
+
 ```
-pip install wzdx-translator-jacob6838
+pip install wheel==0.43.0 setuptools==70.1.1
+pip install -r requirements.txt
+python setup.py sdist bdist_wheel
 ```
+
+The build package tar.gz file will be located in the dist folder.
+
+## Running the Translators Locally
+
+This set of WZDx message translators is set up to be implemented in GCP with App Engines and Dataflows. It is also set up with raw, standard, and enhanced (WZDx) data feeds. This means that to take a raw icone document and generate a WZDx message, the raw icone xml document must first be converted to 1 or multiple standard json messages (based on CDOT RTDH specification), and then each standard message may be converted into a single WZDx message. At this point, this data can be combined with other WZDx messages, through the [combination scripts](wzdx/experimental_combination/)
 
 ### Prerequisites
+
 Requires:
 
-- Python 3.6 (or higher)
-
-## Translators
-This set of WZDx message translators is set up to be implemented in GCP with App Engines and Dataflows. It is also set up with raw, standard, and enhanced (WZDx) data feeds. This means that to take a raw icone document and generate a WZDx message, the raw icone xml document must first be converted to 1 or multiple standard json messages (based on CDOT RTDH specification), and then each standard message may be converted into a single WZDx message. The next step in the data flow is to combine all of the WZDx messages together using the combination script. The GCP layout for this is described in the Google Cloud Hosting section below
+- Python 3.8 (or higher)
 
 ### Environment Setup
-This code requires Python 3.6 or a higher version. If you haven’t already, download Python and pip. You can install the required packages by running the following command:
+
+This code requires Python 3.8 or a higher version. If you haven’t already, download Python and pip. You can install the required packages by running the following command:
 
 ```
 pip install -r requirements.txt
 ```
 
 #### Environment variable
+
 Please set up the following environment variable for your local computer before running the script.
 
 Runtime Environment Variables:
 
-| Name                 |          Value           |                                    Description |
-| :------------------- | :----------------------: | ---------------------------------------------: |
-| contact_name         |       Ashley Nylen       |                      name of WZDx feed contact |
-| contact_email        | ashley.nylen@state.co.us |                     email of WZDx feed contact |
-| issuing_organization |           CDOT           | name of the organization issuing the WZDx feed |
+| Name                         |                                                  Value                                                   |                                          Description |
+| :--------------------------- | :------------------------------------------------------------------------------------------------------: | ---------------------------------------------------: |
+| contact_name                 |                                        Heather Pickering-Hilgers                                         |                            name of WZDx feed contact |
+| contact_email                |                                   heather.pickeringhilgers@state.co.us                                   |                           email of WZDx feed contact |
+| publisher                    |                                                   CDOT                                                   |       name of the organization issuing the WZDx feed |
+| CDOT_GEOSPATIAL_API_BASE_URL | https://dtdapps.colorado.gov/server/rest/services/LRS/Routes_withDEC/MapServer/exts/CdotLrsAccessRounded |          GIS server endpoint used for geospatial api |
+| NAMESPACE_UUID               |                                   00000000-0000-0000-0000-000000000000                                   | UUID used to pseudo-randomly tag all UUIDs generated |
 
 Example usage:
 for mac computer run the following script to initialize the environment variable:
@@ -46,7 +60,9 @@ for mac computer run the following script to initialize the environment variable
 ```
 env_var.sh
 ```
+
 ### Execution for Translators
+
 ```
 python -m wzdx.raw_to_standard.{raw translator} inputfile.json --outputDir outputDirectory
 ```
@@ -56,7 +72,9 @@ Example usage:
 ```
 python -m wzdx.raw_to_standard.planned_events 'wzdx/sample_files/raw/planned_events/hwy_50.json'
 ```
+
 #### Standard to WZDx Conversion
+
 ```
 python -m wzdx.standard_to_enhanced.{standard translator} inputfile.json --outputFile outputfile.geojson
 ```
@@ -64,12 +82,13 @@ python -m wzdx.standard_to_enhanced.{standard translator} inputfile.json --outpu
 Example usage:
 
 ```
-python -m wzdx.standard_to_enhanced.planned_events_translator 'wzdx/sample_files/standard/planned_events/standard_planned_event_OpenTMS-Event2702170538_eastbound.json' 
+python -m wzdx.standard_to_enhanced.planned_events_translator 'wzdx/sample_files/standard/planned_events/standard_planned_event_OpenTMS-Event2702170538_eastbound.json'
 ```
 
 ### Execution for iCone translator
 
 #### Raw to Standard Conversion
+
 ```
 python -m wzdx.raw_to_standard.icone inputfile.json --outputDir outputDirectory
 ```
@@ -79,7 +98,9 @@ Example usage:
 ```
 python -m wzdx.raw_to_standard.icone 'wzdx/sample_files/raw/icone/incident_short.xml'
 ```
+
 #### Standard to WZDx Conversion
+
 ```
 python -m wzdx.standard_to_enhanced.icone_translator inputfile.json --outputFile outputfile.geojson
 ```
@@ -87,23 +108,12 @@ python -m wzdx.standard_to_enhanced.icone_translator inputfile.json --outputFile
 Example usage:
 
 ```
-python -m wzdx.standard_to_enhanced.icone_translator 'wzdx/sample_files/standard/icone/standard_icone_1245_1633444335.json' 
-```
-
-### Execution for COtrip translator
-#### Run the translator script (from Work_Zone)
-```
-python -m wzdx.standard_to_enhanced.cotrip_translator inputfile.json --outputFile outputfile.geojson
-```
-
-Example usage:
-
-```
-python -m wzdx.standard_to_enhanced.cotrip_translator 'wzdx/sample_files/raw/cotrip/cotrip_1.json'
+python -m wzdx.standard_to_enhanced.icone_translator 'wzdx/sample_files/standard/icone/standard_icone_1245_1633444335.json'
 ```
 
 ### Execution for NavJoy 568 translator
-This translator reads in a NavJoy 568 speed reduction form and translates it into a WZDx message. Many of the 568 messages cover 2 directions of traffic, and are thus expanded into 2 WZDx messages, one for each direction. 
+
+This translator reads in a NavJoy 568 speed reduction form and translates it into a WZDx message. Many of the 568 messages cover 2 directions of traffic, and are thus expanded into 2 WZDx messages, one for each direction.
 
 The NavJoy Work Zone feed is being translated into WZDx by NavJoy themselves, the source and WZDx example messages are located here: [Navjoy Sample Data](wzdx/sample%20files/navjoy_data)
 
@@ -118,6 +128,7 @@ Example usage:
 ```
 python -m wzdx.raw_to_standard.navjoy_568 'wzdx/sample_files/raw/navjoy/direction_test_2.json'
 ```
+
 #### Standard to WZDx Conversion
 
 ```
@@ -127,68 +138,70 @@ python -m wzdx.standard_to_enhanced.navjoy_translator inputfile.json --outputFil
 Example usage:
 
 ```
-python -m wzdx.standard_to_enhanced.navjoy_translator 'wzdx/sample_files/standard/navjoy/standard_568_Form568-cb0fdaf0-c27a-4bef-aabd-442615dfb2d6_1638373455_westbound.json' 
+python -m wzdx.standard_to_enhanced.navjoy_translator 'wzdx/sample_files/standard/navjoy/standard_568_Form568-cb0fdaf0-c27a-4bef-aabd-442615dfb2d6_1638373455_westbound.json'
 ```
 
-### Execution for Combine_wzdx
+### Combine WZDx Messages
 
-#### Run the translator script (from Work_Zone/wzdx)
+These combination scripts take in a base WZDx message and an additional icone/navjoy WZDx or Geotab JSON message, and generate an enhanced WZDx message as output.
 
-```
-python combine_wzdx.py icone_wzdx_output_message_file cotrip_wzdx_output_message_file --outputFile outputfile.geojson
-```
+### iCone
 
-Example usage:
+Edit the files read in for iCone and WZDx messages in the main method, then run the combination script:
 
 ```
-python combine_wzdx.py '../sample_files/enhanced/icone_wzdx_translated_output_message.geojson' '../sample_files/enhanced/cotrip_wzdx_translated_output_message.geojson'
+python icone.py wzdxFile.geojson ./iconeDirectory --outputDir ./ --updateDates true
 ```
 
-### Unit Testing
+### Navjoy 568 form
 
-#### Run the unit test for translator script (from root directory)
+Edit the files read in for navjoy and WZDx messages in the main method, then run the combination script:
+
+```
+python navjoy.py wzdxFile.geojson navjoyWzdxFile.geojson --outputDir ./ --updateDates true
+```
+
+### Geotab Vehicle (ATMA)
+
+Edit the files read in for geotab_avl and WZDx messages in the main method, then run the combination script:
+
+```
+python attenuator.py wzdxFile.geojson geotabFile.json --outputDir ./ --updateDates true
+```
+
+## Unit Testing
+
+### Run the unit test for translator script (from root directory)
 
 ```
 python -m pytest 'tests/' -v
 ```
 
-Ensure you have your environment configured correctly (as described above).
+#### Protobuf Warnings
 
-### Message Combination Logic:
+Warnings for the protobuf library exist, created by the currently available versions of the google-cloud-monitoring==2.21.0 and google-cloud-storage==2.17.0 packages. These warnings are currently ignored in the pytest.ini, but will be resolved at a future date.
 
-The `combine_wzdx` script file combines the output from the iCone and COtrip translators, based on overlapping geography, into a single improved WZDx message. The COtrip message set contains significantly more data, and is used as the base for this new combined message. The script then finds any geographically co-located messages from the iCone data set, pulls in the additional information (comprised of vehicle impact data and data sources) and publishes a new, combined WZDx message. Future state of this script will include additional data fields from the iCone data set as they become available.
+### Unit Test Warnings
 
+There are a few warnings shown by pypi, based on old package versions. These can be resolved by re-installing these packages from the requirements.txt:
 
-## Google Cloud Hosting
-All of the translators featured in this repo are hosted in the CDOT GCP Cloud as Dataflows. The workflow begins with App Engines which retrieve raw data and drop it onto raw pub/sub topics. These are picked up by the raw_to_standard translator running as a Dataflow pipeline, which drops the generated standard message(s) onto a standard topic. These are processed into valid WZDx messages by the enhanced Dataflow pipeline. The final step is to store all of the WZDx files in BigQuery, and combine them into one single WZDx data feed. 
-
-![GCP Processing](wzdx/docs/CDOT%20WZDx%20translators%20-%20Processing.png)
-
-
-## Build Python Package
-
-Build
-```
-pip install build
-python -m build
+```sh
+pip install -r requirements.txt
 ```
 
-Upload (Requires PyPi account)
+### Unit Test Coverage
+
 ```
-python -m twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
+coverage run --source=wzdx -m pytest -v tests; coverage report -m
 ```
 
-Import
-```
-pip install wzdx-translator-jacob6838
-```
+## Message Combination Logic:
 
-### Notes
-This project utilized a python package to make the code more accessible. The setup.py file describes the core properties of the package (name, description, included files, ...), the pyproject.toml file describes the required pre-requisite packages for running this package. The MANIFEST.in file is used to exclude unit testing files from the package. More information on building a python package can be found at [python-packaging-tutorial](https://python-packaging-tutorial.readthedocs.io/en/latest/setup_py.html)
+The `combine_wzdx` script file combines the output from the iCone and Navjoy 568 translators, based on overlapping geography, into a single improved WZDx message. The CDOT planned events WZDx messages contain more accurate data, and are used as the base for the new combined message. The script then finds any geographically co-located messages from the iCone, Navjoy 568, and Geotab/AVL data sets, pulls in the additional information from each additional message, and generates a new, combined WZDx message.
 
 ## Documentation
 
-documentation for the included WZDx translator is located here: [docs](wzdx/docs)
+documentation for the included WZDx translators are located here: [docs](wzdx/docs)
 
 ## Guidelines
 
@@ -201,8 +214,8 @@ documentation for the included WZDx translator is located here: [docs](wzdx/docs
 
 ## Contact Information
 
-Contact Name: Ashley Nylen
-Contact Information: ashley.nylen@state.co.us
+Contact Name: Heather Pickering-Hilgers
+Contact Information: heather.pickeringhilgers@state.co.us
 
 ## Abbreviations
 

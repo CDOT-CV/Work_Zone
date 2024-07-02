@@ -1,0 +1,49 @@
+{
+  "type": "Feature",
+  "geometry": {
+    "srid": 4326,
+    "type": "MultiPoint",
+    "coordinates": [
+      [-108.915358, 37.044379],
+      [-108.915358, 37.044379]
+    ]
+  },
+  "properties": {
+    "additionalImpacts": ["Alternating traffic"],
+    "clearTime": "2022-10-31T05:59:00.000+00:00",
+    "startMarker": 7.5,
+    "type": "Paving Operations",
+    "laneImpacts": [
+      {
+        "direction": "east",
+        "laneCount": 1,
+        "laneClosures": "0",
+        "closedLaneTypes": []
+      },
+      {
+        "direction": "west",
+        "laneCount": 1,
+        "laneClosures": "0",
+        "closedLaneTypes": []
+      }
+    ],
+    "routeName": "US-160W",
+    "isOversizedLoadsProhibited": false,
+    "lastUpdated": "2022-10-20T17:04:58.878+00:00",
+    "schedule": [
+      {
+        "startTime": "2022-10-24T06:00:00.000Z",
+        "endTime": "2022-10-31T05:59:00.000Z"
+      }
+    ],
+    "endMarker": 7.5,
+    "hasRampRestriction": false,
+    "name": "US 160 Resurfacing Project from Four Corners to Aztec Creek-26796",
+    "startTime": "2022-10-24T06:00:00.000+00:00",
+    "id": "OpenTMS-Event6111911216",
+    "travelerInformationMessage": "Between US 491 and CO 41 (26 miles west of the Cortez area) from Mile Point 7.5 to Mile Point 7.5. Paving operations. Alternating traffic. Starting Monday at 12:00AM MDT until October 30, 2022 at about 11:59PM MDT.",
+    "jurisdictions": ["MONTEZUMA (COUNTY)"],
+    "direction": "west"
+  },
+  "attributes": {}
+}

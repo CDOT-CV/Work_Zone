@@ -1,0 +1,312 @@
+{
+  "OpenTMS-Event10257550686_westbound": {
+    "diff": {
+      "properties/start_date": { "prod": "2023-05-22T13:00:00Z", "experimental": "2023-05-22T20:48:00Z" },
+      "properties/core_details/description": {
+        "prod": "Between Harman Avenue and USFS 667 (6 to 9 miles east of Pagosa Springs) from Mile Point 151 to Mile Point 154. Right shoulder closed due to fiber optics installation. Starting Monday at 7:00AM MDT until Monday, at about 6:00PM MDT.<br/>Between USFS 667 and Harman Avenue (6 to 9 miles east of Pagosa Springs) from Mile Point 154 to Mile Point 151. Right shoulder closed due to fiber optics installation. Starting Monday at 7:00AM MDT until Monday, at about 6:00PM MDT.",
+        "experimental": "Between Harman Avenue and USFS 667 (6 to 9 miles east of Pagosa Springs) from Mile Point 151 to Mile Point 154. Right shoulder closed due to fiber optics installation. Starting Monday at 7:00AM MDT until Monday, at about 6:00PM MDT.<br/>Between USFS 667 and Harman Avenue (6 to 9 miles east of Pagosa Springs) from Mile Point 154 to Mile Point 151. Right shoulder closed due to fiber optics installation. Starting Monday at 7:00AM MDT until Monday, at about 6:00PM MDT. Roadwork - Caution [iCone]"
+      },
+      "properties/core_details/update_date": { "prod": "2023-05-18T18:04:45Z", "experimental": "2023-05-22T23:34:25Z" }
+    },
+    "prod": {
+      "id": "0050c21f-858b-5823-b70c-be175ad2474a",
+      "type": "Feature",
+      "properties": {
+        "core_details": {
+          "event_type": "work-zone",
+          "data_source_id": "d9823a41-891b-4f4d-8ee5-296acc016927",
+          "road_names": ["US-160"],
+          "direction": "westbound",
+          "name": "OpenTMS-Event10257550686_westbound",
+          "description": "Between Harman Avenue and USFS 667 (6 to 9 miles east of Pagosa Springs) from Mile Point 151 to Mile Point 154. Right shoulder closed due to fiber optics installation. Starting Monday at 7:00AM MDT until Monday, at about 6:00PM MDT.<br/>Between USFS 667 and Harman Avenue (6 to 9 miles east of Pagosa Springs) from Mile Point 154 to Mile Point 151. Right shoulder closed due to fiber optics installation. Starting Monday at 7:00AM MDT until Monday, at about 6:00PM MDT.",
+          "update_date": "2023-05-18T18:04:45Z"
+        },
+        "start_date": "2023-05-22T13:00:00Z",
+        "end_date": "2023-05-23T00:00:00Z",
+        "is_start_date_verified": false,
+        "is_end_date_verified": false,
+        "is_start_position_verified": false,
+        "is_end_position_verified": false,
+        "location_method": "channel-device-method",
+        "work_zone_type": "static",
+        "vehicle_impact": "some-lanes-closed",
+        "lanes": [
+          { "order": 1, "type": "general", "status": "open" },
+          { "order": 2, "type": "shoulder", "status": "closed" }
+        ],
+        "beginning_cross_street": "Harman Avenue",
+        "ending_cross_street": "USFS 667 (6 to 9 miles east of Pagosa Springs)",
+        "types_of_work": [{ "type_name": "surface-work", "is_architectural_change": false }],
+        "beginning_milepost": 154.0,
+        "ending_milepost": 151.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-106.89934692899999, 37.37832098200005],
+          [-106.89934788899996, 37.37830616000008],
+          [-106.89972144099994, 37.37434371900008],
+          [-106.90093014599995, 37.36973534400005],
+          [-106.90195321099998, 37.36749321700006],
+          [-106.90384260499997, 37.36487524800003],
+          [-106.90796051699999, 37.36028624100004],
+          [-106.90957400199994, 37.35877527900004],
+          [-106.91254234199994, 37.356314707000024],
+          [-106.91555769099995, 37.35409566100003],
+          [-106.91777772599994, 37.35218075800003],
+          [-106.91884325899997, 37.35087286000004],
+          [-106.91998026399995, 37.34921781400004],
+          [-106.92196413999994, 37.34723556800003],
+          [-106.92352182699995, 37.34610508800006],
+          [-106.92667956999998, 37.34442864300007],
+          [-106.92822808099999, 37.34375264700003]
+        ]
+      }
+    },
+    "experimental": {
+      "id": "0050c21f-858b-5823-b70c-be175ad2474a",
+      "type": "Feature",
+      "properties": {
+        "core_details": {
+          "event_type": "work-zone",
+          "data_source_id": "8f4e1022-dec5-4b84-9f1c-2ba8cfbe2f0f",
+          "road_names": ["US-160"],
+          "direction": "westbound",
+          "name": "OpenTMS-Event10257550686_westbound",
+          "description": "Between Harman Avenue and USFS 667 (6 to 9 miles east of Pagosa Springs) from Mile Point 151 to Mile Point 154. Right shoulder closed due to fiber optics installation. Starting Monday at 7:00AM MDT until Monday, at about 6:00PM MDT.<br/>Between USFS 667 and Harman Avenue (6 to 9 miles east of Pagosa Springs) from Mile Point 154 to Mile Point 151. Right shoulder closed due to fiber optics installation. Starting Monday at 7:00AM MDT until Monday, at about 6:00PM MDT. Roadwork - Caution [iCone]",
+          "update_date": "2023-05-22T23:34:25Z"
+        },
+        "start_date": "2023-05-22T20:48:00Z",
+        "end_date": "2023-05-23T00:00:00Z",
+        "is_start_date_verified": false,
+        "is_end_date_verified": false,
+        "is_start_position_verified": false,
+        "is_end_position_verified": false,
+        "location_method": "channel-device-method",
+        "work_zone_type": "static",
+        "vehicle_impact": "some-lanes-closed",
+        "lanes": [
+          { "order": 1, "type": "general", "status": "open" },
+          { "order": 2, "type": "shoulder", "status": "closed" }
+        ],
+        "beginning_cross_street": "Harman Avenue",
+        "ending_cross_street": "USFS 667 (6 to 9 miles east of Pagosa Springs)",
+        "types_of_work": [{ "type_name": "surface-work", "is_architectural_change": false }],
+        "beginning_milepost": 154.0,
+        "ending_milepost": 151.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-106.89934692899999, 37.37832098200005],
+          [-106.89934788899996, 37.37830616000008],
+          [-106.89972144099994, 37.37434371900008],
+          [-106.90093014599995, 37.36973534400005],
+          [-106.90195321099998, 37.36749321700006],
+          [-106.90384260499997, 37.36487524800003],
+          [-106.90796051699999, 37.36028624100004],
+          [-106.90957400199994, 37.35877527900004],
+          [-106.91254234199994, 37.356314707000024],
+          [-106.91555769099995, 37.35409566100003],
+          [-106.91777772599994, 37.35218075800003],
+          [-106.91884325899997, 37.35087286000004],
+          [-106.91998026399995, 37.34921781400004],
+          [-106.92196413999994, 37.34723556800003],
+          [-106.92352182699995, 37.34610508800006],
+          [-106.92667956999998, 37.34442864300007],
+          [-106.92822808099999, 37.34375264700003]
+        ]
+      }
+    }
+  },
+  "OpenTMS-Event10257550686_eastbound": {
+    "diff": {
+      "properties/start_date": { "prod": "2023-05-22T13:00:00Z", "experimental": "2023-05-22T20:48:00Z" },
+      "properties/core_details/description": {
+        "prod": "Between Harman Avenue and USFS 667 (6 to 9 miles east of Pagosa Springs) from Mile Point 151 to Mile Point 154. Right shoulder closed due to fiber optics installation. Starting Monday at 7:00AM MDT until Monday, at about 6:00PM MDT.<br/>Between USFS 667 and Harman Avenue (6 to 9 miles east of Pagosa Springs) from Mile Point 154 to Mile Point 151. Right shoulder closed due to fiber optics installation. Starting Monday at 7:00AM MDT until Monday, at about 6:00PM MDT.",
+        "experimental": "Between Harman Avenue and USFS 667 (6 to 9 miles east of Pagosa Springs) from Mile Point 151 to Mile Point 154. Right shoulder closed due to fiber optics installation. Starting Monday at 7:00AM MDT until Monday, at about 6:00PM MDT.<br/>Between USFS 667 and Harman Avenue (6 to 9 miles east of Pagosa Springs) from Mile Point 154 to Mile Point 151. Right shoulder closed due to fiber optics installation. Starting Monday at 7:00AM MDT until Monday, at about 6:00PM MDT. Roadwork - Caution [iCone]"
+      },
+      "properties/core_details/update_date": { "prod": "2023-05-18T18:04:45Z", "experimental": "2023-05-22T23:34:25Z" }
+    },
+    "prod": {
+      "id": "5c5f5484-4b12-5ded-8e5b-e34a17806e5c",
+      "type": "Feature",
+      "properties": {
+        "core_details": {
+          "event_type": "work-zone",
+          "data_source_id": "d9823a41-891b-4f4d-8ee5-296acc016927",
+          "road_names": ["US-160"],
+          "direction": "eastbound",
+          "name": "OpenTMS-Event10257550686_eastbound",
+          "description": "Between Harman Avenue and USFS 667 (6 to 9 miles east of Pagosa Springs) from Mile Point 151 to Mile Point 154. Right shoulder closed due to fiber optics installation. Starting Monday at 7:00AM MDT until Monday, at about 6:00PM MDT.<br/>Between USFS 667 and Harman Avenue (6 to 9 miles east of Pagosa Springs) from Mile Point 154 to Mile Point 151. Right shoulder closed due to fiber optics installation. Starting Monday at 7:00AM MDT until Monday, at about 6:00PM MDT.",
+          "update_date": "2023-05-18T18:04:45Z"
+        },
+        "start_date": "2023-05-22T13:00:00Z",
+        "end_date": "2023-05-23T00:00:00Z",
+        "is_start_date_verified": false,
+        "is_end_date_verified": false,
+        "is_start_position_verified": false,
+        "is_end_position_verified": false,
+        "location_method": "channel-device-method",
+        "work_zone_type": "static",
+        "vehicle_impact": "some-lanes-closed",
+        "lanes": [
+          { "order": 1, "type": "general", "status": "open" },
+          { "order": 2, "type": "shoulder", "status": "closed" }
+        ],
+        "beginning_cross_street": "Harman Avenue",
+        "ending_cross_street": "USFS 667 (6 to 9 miles east of Pagosa Springs)",
+        "types_of_work": [{ "type_name": "surface-work", "is_architectural_change": false }],
+        "beginning_milepost": 151.0,
+        "ending_milepost": 154.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-106.92822808099999, 37.34375264700003],
+          [-106.92769284599996, 37.343969290000075],
+          [-106.92667956999998, 37.34442864300007],
+          [-106.92352182699995, 37.34610508800006],
+          [-106.92277620799996, 37.34659236600004],
+          [-106.92122300199998, 37.34785238300003],
+          [-106.91952500399998, 37.34988050900006],
+          [-106.91849863299996, 37.35133586500007],
+          [-106.91777772599994, 37.35218075800003],
+          [-106.91599344099996, 37.35377525500007],
+          [-106.91261030899994, 37.35626275300007],
+          [-106.91158508099994, 37.35704641700005],
+          [-106.90919349199999, 37.35911766300006],
+          [-106.90548521699998, 37.36295056900008],
+          [-106.90339403799999, 37.365400822000026],
+          [-106.90136535199997, 37.36863641300005],
+          [-106.90093014599995, 37.36973534400005],
+          [-106.90004825399996, 37.372687091000046],
+          [-106.89955195699997, 37.37553417500004],
+          [-106.89934788899996, 37.37830616000008],
+          [-106.89934692899999, 37.37832098200005]
+        ]
+      }
+    },
+    "experimental": {
+      "id": "5c5f5484-4b12-5ded-8e5b-e34a17806e5c",
+      "type": "Feature",
+      "properties": {
+        "core_details": {
+          "event_type": "work-zone",
+          "data_source_id": "8f4e1022-dec5-4b84-9f1c-2ba8cfbe2f0f",
+          "road_names": ["US-160"],
+          "direction": "eastbound",
+          "name": "OpenTMS-Event10257550686_eastbound",
+          "description": "Between Harman Avenue and USFS 667 (6 to 9 miles east of Pagosa Springs) from Mile Point 151 to Mile Point 154. Right shoulder closed due to fiber optics installation. Starting Monday at 7:00AM MDT until Monday, at about 6:00PM MDT.<br/>Between USFS 667 and Harman Avenue (6 to 9 miles east of Pagosa Springs) from Mile Point 154 to Mile Point 151. Right shoulder closed due to fiber optics installation. Starting Monday at 7:00AM MDT until Monday, at about 6:00PM MDT. Roadwork - Caution [iCone]",
+          "update_date": "2023-05-22T23:34:25Z"
+        },
+        "start_date": "2023-05-22T20:48:00Z",
+        "end_date": "2023-05-23T00:00:00Z",
+        "is_start_date_verified": false,
+        "is_end_date_verified": false,
+        "is_start_position_verified": false,
+        "is_end_position_verified": false,
+        "location_method": "channel-device-method",
+        "work_zone_type": "static",
+        "vehicle_impact": "some-lanes-closed",
+        "lanes": [
+          { "order": 1, "type": "general", "status": "open" },
+          { "order": 2, "type": "shoulder", "status": "closed" }
+        ],
+        "beginning_cross_street": "Harman Avenue",
+        "ending_cross_street": "USFS 667 (6 to 9 miles east of Pagosa Springs)",
+        "types_of_work": [{ "type_name": "surface-work", "is_architectural_change": false }],
+        "beginning_milepost": 151.0,
+        "ending_milepost": 154.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-106.92822808099999, 37.34375264700003],
+          [-106.92769284599996, 37.343969290000075],
+          [-106.92667956999998, 37.34442864300007],
+          [-106.92352182699995, 37.34610508800006],
+          [-106.92277620799996, 37.34659236600004],
+          [-106.92122300199998, 37.34785238300003],
+          [-106.91952500399998, 37.34988050900006],
+          [-106.91849863299996, 37.35133586500007],
+          [-106.91777772599994, 37.35218075800003],
+          [-106.91599344099996, 37.35377525500007],
+          [-106.91261030899994, 37.35626275300007],
+          [-106.91158508099994, 37.35704641700005],
+          [-106.90919349199999, 37.35911766300006],
+          [-106.90548521699998, 37.36295056900008],
+          [-106.90339403799999, 37.365400822000026],
+          [-106.90136535199997, 37.36863641300005],
+          [-106.90093014599995, 37.36973534400005],
+          [-106.90004825399996, 37.372687091000046],
+          [-106.89955195699997, 37.37553417500004],
+          [-106.89934788899996, 37.37830616000008],
+          [-106.89934692899999, 37.37832098200005]
+        ]
+      }
+    }
+  },
+  "OpenTMS-Event10201912251_eastbound": {
+    "diff": "Feature not found in experimental",
+    "prod": {
+      "id": "eb550c8e-f471-5fb8-929a-557296819b87",
+      "type": "Feature",
+      "properties": {
+        "core_details": {
+          "event_type": "work-zone",
+          "data_source_id": "d9823a41-891b-4f4d-8ee5-296acc016927",
+          "road_names": ["I-70"],
+          "direction": "eastbound",
+          "name": "OpenTMS-Event10201912251_eastbound",
+          "description": "Between Exit 269A: CO 121; Wadsworth Boulevard (Arvada) and Exit 271A: CO 95; Sheridan Boulevard (Lakeside) from Mile Point 269.1 to Mile Point 270.5. Two left lanes closed due to striping operations. Starting May 22, 2023 at 9:00PM MDT until May 23, 2023 at about 5:00AM MDT.",
+          "update_date": "2023-05-15T22:21:13Z"
+        },
+        "start_date": "2023-05-23T03:00:00Z",
+        "end_date": "2023-05-23T11:00:00Z",
+        "is_start_date_verified": false,
+        "is_end_date_verified": false,
+        "is_start_position_verified": false,
+        "is_end_position_verified": false,
+        "location_method": "channel-device-method",
+        "work_zone_type": "planned-moving-area",
+        "vehicle_impact": "some-lanes-closed",
+        "lanes": [
+          { "order": 1, "type": "general", "status": "closed" },
+          { "order": 2, "type": "general", "status": "closed" },
+          { "order": 3, "type": "general", "status": "open" }
+        ],
+        "beginning_cross_street": "Exit 269A: CO 121; Wadsworth Boulevard (Arvada)",
+        "ending_cross_street": "Exit 271A: CO 95; Sheridan Boulevard (Lakeside)",
+        "types_of_work": [{ "type_name": "painting", "is_architectural_change": true }],
+        "beginning_milepost": 270.5,
+        "ending_milepost": 269.1
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-105.05406022899996, 39.78338834300007],
+          [-105.05449101699998, 39.78335692700006],
+          [-105.05525532099995, 39.78333365300006],
+          [-105.05777132999998, 39.783319101000075],
+          [-105.06165634199999, 39.78329652200006],
+          [-105.06282168399997, 39.78330900800006],
+          [-105.06606631099999, 39.78341706200007],
+          [-105.06756743699998, 39.78353459500005],
+          [-105.06900564899996, 39.783793280000054],
+          [-105.07010867899999, 39.78409689000006],
+          [-105.07099634899998, 39.78441186100008],
+          [-105.07169648799999, 39.784715654000024],
+          [-105.07282813499995, 39.78523615200004],
+          [-105.07355665699998, 39.785571223000034],
+          [-105.07439697799998, 39.785899269000026],
+          [-105.07526128699999, 39.78611672100004],
+          [-105.07641337699994, 39.786384432000034],
+          [-105.07761760899996, 39.78645034600004],
+          [-105.07849020799995, 39.78640377700003],
+          [-105.07968968199998, 39.786237208000045]
+        ]
+      }
+    }
+  }
+}

@@ -1,5 +1,6 @@
 # Sample Files
-iCone Data  : Input to WZDx Translator program
+
+iCone Data : Input to WZDx Translator program
 
 - incidents_extended.xml
 
@@ -9,9 +10,5 @@ Output Message : WZDx message Generation Output
 
 validation_schema : wzdx schema(from specification)
 
--wzdx_v3.0_feed.json
-
-
- 
-   
-  
+- work_zone_feed_v41.json
+- work_zone_feed_v42.json

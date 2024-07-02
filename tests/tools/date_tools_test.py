@@ -20,7 +20,7 @@ def test_parse_datetime_from_unix_decimal():
 
 
 def test_parse_datetime_from_unix_string():
-    time = '1609398000'
+    time = "1609398000"
     expected = datetime(2020, 12, 31, 7, tzinfo=timezone.utc)
     actual = date_tools.parse_datetime_from_unix(time)
     assert actual == expected
@@ -93,7 +93,8 @@ def test_get_event_status_active():
     test_endtime_string = None
     with time_machine.travel(datetime(2022, 1, 1)):
         test_event_status = date_tools.get_event_status(
-            test_starttime_string, test_endtime_string)
+            test_starttime_string, test_endtime_string
+        )
     valid_event_status = "active"
     assert test_event_status == valid_event_status
 
@@ -103,7 +104,8 @@ def test_get_event_status_planned():
     test_endtime_string = None
     with time_machine.travel(datetime(2020, 1, 1)):
         test_event_status = date_tools.get_event_status(
-            test_starttime_string, test_endtime_string)
+            test_starttime_string, test_endtime_string
+        )
     valid_event_status = "planned"
     assert test_event_status == valid_event_status
 
@@ -113,7 +115,8 @@ def test_get_event_status_pending():
     test_endtime_string = None
     with time_machine.travel(datetime(2021, 1, 1)):
         test_event_status = date_tools.get_event_status(
-            test_starttime_string, test_endtime_string)
+            test_starttime_string, test_endtime_string
+        )
     valid_event_status = "pending"
     assert test_event_status == valid_event_status
 
@@ -123,8 +126,20 @@ def test_get_event_status_completed():
     test_endtime_string = datetime(2021, 1, 1)
     with time_machine.travel(datetime(2022, 1, 1)):
         test_event_status = date_tools.get_event_status(
-            test_starttime_string, test_endtime_string)
+            test_starttime_string, test_endtime_string
+        )
     valid_event_status = "completed"
+    assert test_event_status == valid_event_status
+
+
+def test_get_event_status_completed():
+    test_starttime_string = datetime(2020, 1, 1)
+    test_endtime_string = datetime(2021, 1, 1)
+    with time_machine.travel(datetime(2021, 1, 11)):
+        test_event_status = date_tools.get_event_status(
+            test_starttime_string, test_endtime_string
+        )
+    valid_event_status = "completed_recently"
     assert test_event_status == valid_event_status
 
 
@@ -132,7 +147,8 @@ def test_get_event_status_none():
     test_starttime_string = None
     test_endtime_string = None
     test_event_status = date_tools.get_event_status(
-        test_starttime_string, test_endtime_string)
+        test_starttime_string, test_endtime_string
+    )
     valid_event_status = None
     assert test_event_status == valid_event_status
 
@@ -141,6 +157,7 @@ def test_get_event_status_string():
     test_starttime_string = "2020-12-31T07:00:00.123Z"
     test_endtime_string = None
     test_event_status = date_tools.get_event_status(
-        test_starttime_string, test_endtime_string)
+        test_starttime_string, test_endtime_string
+    )
     valid_event_status = None
     assert test_event_status == valid_event_status
