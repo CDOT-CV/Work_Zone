@@ -2,7 +2,6 @@ import argparse
 import json
 import logging
 import copy
-import uuid
 
 from ..sample_files.validation_schema import (
     work_zone_feed_v42,
@@ -20,26 +19,16 @@ def main():
 
     planned_events_obj = json.loads(open(input_file, "r").read())
     wzdx = wzdx_creator(planned_events_obj)
-    try:
-        event_type = wzdx["features"][0]["properties"]["core_details"]["event_type"]
-    except:
-        event_type = "work-zone"
-    schemas = {
-        "work-zone": work_zone_feed_v42.wzdx_v42_schema_string,
-        "restriction": road_restriction_v40_feed.road_restriction_v40_schema_string,
-    }
 
-    if not wzdx_translator.validate_wzdx(wzdx, schemas[event_type]):
-        logging.error(
-            "validation error more message are printed above. output file is not created because the message failed validation."
-        )
-        return
-    with open(output_file, "w") as fWzdx:
-        fWzdx.write(json.dumps(wzdx, indent=2))
-        print(
-            "Your wzdx message was successfully generated and is located here: "
-            + str(output_file)
-        )
+    if not wzdx:
+        print("Error: WZDx message generation failed, see logs for more information.")
+    else:
+        with open(output_file, "w") as fWzdx:
+            fWzdx.write(json.dumps(wzdx, indent=2))
+            print(
+                "Your wzdx message was successfully generated and is located here: "
+                + str(output_file)
+            )
 
 
 # parse script command line arguments
@@ -99,8 +88,17 @@ def wzdx_creator(message: dict, info: dict = None) -> dict:
         wzd.get("features", []).append(feature)
     if not wzd.get("features"):
         return None
-
     wzd = wzdx_translator.add_ids(wzd, event_type)
+
+    schemas = {
+        "work-zone": work_zone_feed_v42.wzdx_v42_schema_string,
+        "restriction": road_restriction_v40_feed.road_restriction_v40_schema_string,
+    }
+
+    if not wzdx_translator.validate_wzdx(wzd, schemas[event_type]):
+        logging.warning("WZDx message failed validation")
+        return None
+
     return wzd
 
 

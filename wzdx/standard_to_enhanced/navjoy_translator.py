@@ -12,28 +12,19 @@ PROGRAM_VERSION = "1.0"
 
 def main():
     inputfile, outputfile = parse_navjoy_arguments()
-    try:
-        navjoy_obj = json.loads(open(inputfile).read())
-    except ValueError as e:
-        raise ValueError(
-            "Invalid file type. Please specify a valid Json file!"
-        ) from None
-    wzdx_obj = wzdx_creator(navjoy_obj)
+    
+    navjoy_obj = json.loads(open(inputfile).read())
+    wzdx = wzdx_creator(navjoy_obj)
 
-    location_schema = "wzdx/sample_files/validation_schema/work_zone_feed_v42.json"
-    wzdx_schema = json.loads(open(location_schema).read())
-
-    if not wzdx_translator.validate_wzdx(wzdx_obj, wzdx_schema):
-        logging.error(
-            "validation error more message are printed above. output file is not created because the message failed validation."
-        )
-        return
-    with open(outputfile, "w") as fWzdx:
-        fWzdx.write(json.dumps(wzdx_obj, indent=2))
-        print(
-            "Your wzdx message was successfully generated and is located here: "
-            + str(outputfile)
-        )
+    if not wzdx:
+        print("Error: WZDx message generation failed, see logs for more information.")
+    else:
+        with open(outputfile, "w") as fWzdx:
+            fWzdx.write(json.dumps(wzdx, indent=2))
+            print(
+                "Your wzdx message was successfully generated and is located here: "
+                + str(outputfile)
+            )
 
 
 # parse script command line arguments
@@ -86,6 +77,10 @@ def wzdx_creator(message: dict, info: dict = None) -> dict:
     if not wzd.get("features"):
         return None
     wzd = wzdx_translator.add_ids(wzd)
+
+    if not wzdx_translator.validate_wzdx(wzd):
+        logging.warning("WZDx message failed validation")
+        return None
     return wzd
 
 

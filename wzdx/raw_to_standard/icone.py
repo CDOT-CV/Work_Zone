@@ -51,21 +51,9 @@ def main():
     if generated_files_list:
         print(f"Successfully generated standard message files: {generated_files_list}")
     else:
-        logging.warning(
-            "Standard message generation failed. See messages printed above"
+        print(
+            "Warning: Standard message generation failed. See logging messages printed above"
         )
-    # for message in generated_messages:
-    #     wzdx = icone_translator.wzdx_creator(message)
-    #     if not wzdx:
-    #         continue
-
-    #     if not wzdx_msg:
-    #         wzdx_msg = wzdx
-    #     else:
-    #         wzdx_msg['features'].extend(wzdx['features'])
-
-    output_path = input_file.replace(".xml", ".json")
-    open(output_path, "w+").write(json.dumps(wzdx_msg, indent=2))
 
 
 def generate_standard_messages_from_string(input_file_contents: str):

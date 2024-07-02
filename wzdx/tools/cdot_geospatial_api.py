@@ -4,7 +4,6 @@ import time
 
 import requests
 import os
-import sys
 
 from ..tools import geospatial_tools, path_history_compression
 
@@ -106,7 +105,7 @@ class GeospatialApi:
         }
 
         if heading:
-            step = 0.1  # 500 ft
+            step = 0.1  # miles, ~500 ft
             route = route_details["Route"]
             measure = route_details["Measure"]
             mMin = route_details["MMin"]
@@ -117,6 +116,11 @@ class GeospatialApi:
                 # reverse order
                 startMeasure = measure
                 endMeasure = measure + step
+            if (endMeasure > mMax) or (startMeasure < mMin):
+                logging.warn(
+                    "get_route_and_measure bearing computation failed, measure out of bounds. MMin: {mMin}, MMax: {mMax}, startMeasure: {startMeasure}, endMeasure: {endMeasure}, step: {step}"
+                )
+                return route_details
             coords = self.get_route_between_measures(route, startMeasure, endMeasure)
             bearing = geospatial_tools.get_heading_from_coordinates(coords)
 
@@ -202,7 +206,7 @@ class GeospatialApi:
         self, routeId, startMeasure, endMeasure, dualCarriageway=True, compressed=False
     ):
         # Get lat/long points between two mile markers on route
-        if dualCarriageway and self.is_route_dec(routeId, startMeasure, endMeasure):
+        if dualCarriageway and self.is_route_dec(startMeasure, endMeasure):
             routeId = f"{routeId}_DEC"
 
         parameters = []
@@ -234,7 +238,7 @@ class GeospatialApi:
 
         # RouteBetweenMeasures?routeId=070A&fromMeasure=50&toMeasure=60&outSR=4326&f=pjson
 
-    def is_route_dec(self, routeId, startMeasure, endMeasure):
+    def is_route_dec(self, startMeasure, endMeasure):
         return endMeasure > startMeasure
 
     def _make_cached_web_request(

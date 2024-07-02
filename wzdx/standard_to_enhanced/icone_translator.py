@@ -4,9 +4,8 @@ import logging
 import copy
 from typing import Literal
 import uuid
-from ..sample_files.validation_schema import work_zone_feed_v42
 
-from ..tools import date_tools, wzdx_translator, geospatial_tools
+from ..tools import date_tools, wzdx_translator
 
 PROGRAM_NAME = "IconeTranslator"
 PROGRAM_VERSION = "1.0"
@@ -14,22 +13,19 @@ PROGRAM_VERSION = "1.0"
 
 def main():
     input_file, output_file = parse_icone_arguments()
-    # Added encoding argument because of weird character at start of incidents.xml file
 
     icone_obj = json.loads(open(input_file, "r").read())
     wzdx = wzdx_creator(icone_obj)
 
     if not wzdx:
-        logging.error(
-            "Generation error more message are printed above. output file is not created because the message failed validation."
-        )
-        return
-    with open(output_file, "w") as fWzdx:
-        fWzdx.write(json.dumps(wzdx, indent=2))
-        print(
-            "Your wzdx message was successfully generated and is located here: "
-            + str(output_file)
-        )
+        print("Error: WZDx message generation failed, see logs for more information.")
+    else:
+        with open(output_file, "w") as fWzdx:
+            fWzdx.write(json.dumps(wzdx, indent=2))
+            print(
+                "Your wzdx message was successfully generated and is located here: "
+                + str(output_file)
+            )
 
 
 # parse script command line arguments

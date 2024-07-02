@@ -5,7 +5,6 @@ import logging
 import time
 import uuid
 from collections import OrderedDict
-from datetime import datetime
 
 from ..tools import (
     array_tools,
@@ -103,9 +102,7 @@ def main():
     if generated_files_list:
         print(f"Successfully generated standard message files: {generated_files_list}")
     else:
-        logging.warning(
-            "Standard message generation failed. See messages printed above"
-        )
+        print("Warning: Standard message generation failed. See messages printed above")
 
 
 # parse script command line arguments

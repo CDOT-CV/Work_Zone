@@ -46,8 +46,12 @@ def main(outputPath="./tests/data/output/wzdx_icone_combined.json"):
 
     combined_events = get_combined_events(icone, wzdx)
 
-    with open(outputPath, "w+") as f:
-        f.write(json.dumps(combined_events, indent=2))
+    if len(combined_events) == 0:
+        print("No overlapping events found between WZDx and iCone data. See logs for more information.")
+    else:
+        with open(outputPath, "w+") as f:
+            f.write(json.dumps(combined_events, indent=2))
+            print(f"Successfully wrote combined WZDx file to: {outputPath}")
 
 
 # parse script command line arguments
