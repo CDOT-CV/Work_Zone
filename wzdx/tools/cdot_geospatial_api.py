@@ -1,6 +1,7 @@
 import json
 import logging
 import time
+from typing import Any, Callable
 
 import requests
 import os
@@ -9,15 +10,24 @@ from ..tools import geospatial_tools, path_history_compression
 
 
 class GeospatialApi:
+    """Class to encompass all Geospatial API calls. Specify the getCachedRequest and setCachedRequest overrides to use custom caching."""
+
     def __init__(
         self,
-        getCachedRequest=lambda x: None,
-        setCachedRequest=lambda x, y: None,
-        BASE_URL=os.getenv(
+        getCachedRequest: Callable[[str], str] = lambda url: None,
+        setCachedRequest: Callable[[str, str], None] = lambda url, response: None,
+        BASE_URL: str = os.getenv(
             "CDOT_GEOSPATIAL_API_BASE_URL",
             "https://dtdapps.colorado.gov/server/rest/services/LRS/Routes_withDEC/MapServer/exts/CdotLrsAccessRounded",
         ),
     ):
+        """Initialize the Geospatial API
+
+        Args:
+            getCachedRequest ((url: str) => cached_response: str, optional): Optional method to enable custom caching. This method is called with a request url to retrieve the cached result.
+            setCachedRequest ((url: str, response: str) => None, optional): Optional method to enable custom caching. This method is called with a request url and response to write the cached result.
+            BASE_URL (str, optional): Optional override of GIS server base url, should end with CdotLrsAccessRounded. Defaults first to the env variable CDOT_GEOSPATIAL_API_BASE_URL, then to https://dtdapps.colorado.gov/server/rest/services/LRS/Routes_withDEC/MapServer/exts/CdotLrsAccessRounded.
+        """
         self.getCachedRequest = getCachedRequest
         self.setCachedRequest = setCachedRequest
         self.BASE_URL = BASE_URL
@@ -27,29 +37,55 @@ class GeospatialApi:
         self.GET_ROUTES_API = "ROUTES"
         self.GET_ROUTE_API = "ROUTE"
         self.SR = "4326"
-        self.responseTimes = []
+        self.responseTimes: list[float] = (
+            []
+        )  # recorded response times, for debugging purposes
 
-    def _make_web_request(self, url: str, timeout):
+    def _make_web_request(self, url: str, timeout: int) -> str:
+        """Make a GET request to a URL
+
+        Args:
+            url (str): URL to make the request to
+            timeout (_type_): Timeout, in seconds
+
+        Returns:
+            str: Decoded response from the request
+        """
         resp = requests.get(url, timeout=timeout).content.decode("utf-8")
         return resp
 
-    def get_routes_list(self):
+    def get_routes_list(self) -> list[dict | None]:
+        """Return a list of all known routes and mile markers
+
+        Returns:
+            list[dict | None]: List of routes
+        """
         parameters = []
         parameters.append(f"f=pjson")
 
         url = f"{self.BASE_URL}/{self.GET_ROUTES_API}?{'&'.join(parameters)}"
-        logging.debug(url)
+        logging.debug(
+            f"Making GET request to GIS server for get_routes_list with url {url}"
+        )
 
         # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded/Routes?f=pjson
         # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded/Route?routeId=070A&outSR=4326&f=pjson
 
-        resp = self._make_cached_web_request(url)
+        resp = self._make_cached_web_request(url, source="get_routes_list")
         if not resp:
             return None
         # response = [{'routeID': '070A', 'MMin': 0, 'MMax': 499}]
         return resp
 
-    def get_route_details(self, routeId):
+    def get_route_details(self, routeId: str) -> dict | None:
+        """Get route details from route ID
+
+        Args:
+            routeId (str): GIS server route ID
+
+        Returns:
+            dict | None: Route details (Route, MMin, MMax)
+        """
         parameters = []
         parameters.append(f"routeId={routeId}")
         parameters.append(f"outSR={self.SR}")
@@ -74,7 +110,19 @@ class GeospatialApi:
 
         return route_details
 
-    def get_route_and_measure(self, latLng, heading=None, tolerance=10000):
+    def get_route_and_measure(
+        self, latLng: tuple[float, float], heading: float = None, tolerance: int = 10000
+    ) -> dict | None:
+        """Get route ID and mile marker from lat/long and optional heading
+
+        Args:
+            latLng (tuple[float, float]): Lat/long coordinates
+            heading (float, optional): Heading of object. Defaults to None.
+            tolerance (int, optional): Tolerance in meters. Defaults to 10000.
+
+        Returns:
+            dict | None: Route details (Route, Measure, MMin, MMax, Distance)
+        """
         # Get route ID and mile marker from lat/long and heading
         lat, lng = latLng
 
@@ -133,7 +181,18 @@ class GeospatialApi:
 
         return route_details
 
-    def get_point_at_measure(self, routeId, measure):
+    def get_point_at_measure(
+        self, routeId: str, measure: float
+    ) -> tuple[float, float] | None:
+        """Get lat/long points at a mile marker on route
+
+        Args:
+            routeId (str): GIS server route ID
+            measure (float): Measure on route (miles)
+
+        Returns:
+            tuple[float, float] | None: Lat/long of mile marker
+        """
         # Get lat/long points between two mile markers on route
 
         parameters = []
@@ -157,22 +216,39 @@ class GeospatialApi:
 
     def get_route_geometry_ahead(
         self,
-        routeId,
-        startMeasure,
-        heading,
-        distanceAhead,
-        compressed=False,
-        routeDetails=None,
-        mMin=None,
-        mMax=None,
-    ):
-        # Get list of routes and mile markers for a distance ahead and distance
+        routeId: str,
+        startMeasure: float,
+        heading: float,
+        distanceAhead: float,
+        compressed: bool = False,
+        routeDetails: dict = None,
+        mMin: float = None,
+        mMax: float = None,
+    ) -> dict | None:
+        """Get route geometry ahead of a mile marker given a distance ahead and heading
+
+        Args:
+            routeId (str): GIS server route ID
+            startMeasure (float): Start measure on route (miles)
+            heading (float): Heading of the object (degrees)
+            distanceAhead (float): Distance ahead to get route geometry (miles)
+            compressed (bool, optional): Whether to compress route geometry. Defaults to False. See `tools/path_history_compression.generate_compressed_path` for more details
+            routeDetails (dict, optional): Optional pre-generated route details. Defaults to None.
+            mMin (float, optional): Optional minimum mile marker to limit route geometry generation. Defaults to None, should be specified with mMax.
+            mMax (float, optional): Optional maximum mile marker to limit route geometry generation. Defaults to None, should be specified with mMin.
+
+        Returns:
+            dict | None: Route geometry ahead (start_measure, end_measure, coordinates)
+        """
 
         # TODO: Integrate direction to determine whether to add/subtract distance
         if not routeDetails:
             latLng = self.get_point_at_measure(routeId, startMeasure)
             routeDetails = self.get_route_and_measure(latLng, heading)
             if not latLng or not routeDetails:
+                logging.warn(
+                    "get_route_geometry_ahead failed to get route details for routeId: {routeId}, startMeasure: {startMeasure}, heading: {heading}"
+                )
                 return None
 
         # process direction here
@@ -203,8 +279,25 @@ class GeospatialApi:
         }
 
     def get_route_between_measures(
-        self, routeId, startMeasure, endMeasure, dualCarriageway=True, compressed=False
-    ):
+        self,
+        routeId: str,
+        startMeasure: float,
+        endMeasure: float,
+        dualCarriageway: bool = True,
+        compressed: bool = False,
+    ) -> list[list[float]]:
+        """Get lat/long points between two mile markers on route
+
+        Args:
+            routeId (str): GIS server route ID
+            startMeasure (float): Start measure on route (miles)
+            endMeasure (float): End measure on route (miles)
+            dualCarriageway (bool, optional): Whether route is reversed dual carriageway. Defaults to True.
+            compressed (bool, optional): Whether to compress route geometry (remove unnecessary points). Defaults to False. See `tools/path_history_compression.generate_compressed_path` for more details
+
+        Returns:
+            list[list[float]]: Route, as Linestring of lat/long points
+        """
         # Get lat/long points between two mile markers on route
         if dualCarriageway and self.is_route_dec(startMeasure, endMeasure):
             routeId = f"{routeId}_DEC"
@@ -236,14 +329,37 @@ class GeospatialApi:
 
         return linestring
 
-        # RouteBetweenMeasures?routeId=070A&fromMeasure=50&toMeasure=60&outSR=4326&f=pjson
+    def is_route_dec(self, startMeasure: float, endMeasure: float) -> bool:
+        """Check if the route is a reversed dual carriageway
 
-    def is_route_dec(self, startMeasure, endMeasure):
+        Args:
+            startMeasure (float): Start mile marker
+            endMeasure (float): End mile marker
+
+        Returns:
+            bool: True if route is a reversed dual carriageway
+        """
         return endMeasure > startMeasure
 
     def _make_cached_web_request(
-        self, url: str, timeout: int = 15, retryOnTimeout: bool = False
-    ):
+        self,
+        url: str,
+        timeout: int = 15,
+        retryOnTimeout: bool = False,
+        source: str = "cdot_geospatial_api",
+    ) -> Any:
+        """Make a GET request and cache the response
+
+        Args:
+            url (str): URL to make the request to
+            timeout (int, optional): Request timeout in seconds. Defaults to 15.
+            retryOnTimeout (bool, optional): Retry request on timeout. Defaults to False.
+            source (str, optional): Source to include in logging. Defaults to "unknown".
+
+        Returns:
+            Any: Response from the request
+        """
+        logging.debug(f"Making GET request to GIS server for {source} with url {url}")
         startTime = time.time()
         try:
             response = self.getCachedRequest(url)
@@ -259,18 +375,18 @@ class GeospatialApi:
         except requests.exceptions.Timeout as e:
             if retryOnTimeout:
                 logging.debug(
-                    f"Geospatial Request Timed Out for URL: {url}. Timeout: {timeout}. Retrying with double timeout"
+                    f"Geospatial Request Timed Out for {source} with url : {url}. Timeout: {timeout}. Retrying with double timeout"
                 )
                 return self._make_cached_web_request(
                     url, timeout=timeout * 2, retryOnTimeout=False
                 )
             else:
                 logging.warn(
-                    f"Geospatial Request Timed Out for URL: {url}. Timeout: {timeout}. Error: {e}"
+                    f"Geospatial Request Timed Out for {source} with url : {url}. Timeout: {timeout}. Error: {e}"
                 )
                 return None
         except requests.exceptions.RequestException as e:
             logging.warn(
-                f"Geospatial Request Failed for URL: {url}. Timeout: {timeout}. Error: {e}"
+                f"Geospatial Request Failed for {source} with url : {url}. Timeout: {timeout}. Error: {e}"
             )
             return None
