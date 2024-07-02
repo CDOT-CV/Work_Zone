@@ -4,6 +4,7 @@ from datetime import datetime
 import logging
 from datetime import datetime, timedelta
 import glob
+from typing import Literal
 
 from ..tools import combination, wzdx_translator, geospatial_tools, date_tools
 
@@ -50,7 +51,15 @@ def main(outputPath="./tests/data/output/wzdx_icone_combined.json"):
 
 
 # parse script command line arguments
-def parse_rtdh_arguments():
+def parse_rtdh_arguments() -> tuple[str, str, str, str]:
+    """Parse command line arguments for icone WZDx combination script
+
+    Returns:
+        str: WZDx file path
+        str: iCone directory path
+        str: output directory path
+        str: updateDates flag (true/false)
+    """
     parser = argparse.ArgumentParser(
         description="Combine WZDx and iCone arrow board data"
     )
@@ -73,11 +82,31 @@ def parse_rtdh_arguments():
     return args.wzdxFile, args.iconeDirectory, args.outputDir, args.updateDates
 
 
-def get_direction_from_route_details(route_details):
+def get_direction_from_route_details(route_details: dict) -> str:
+    """Get direction from GIS route details
+
+    Args:
+        route_details (dict): GIS route details
+
+    Returns:
+        str: direction | "unknown"
+    """
     return route_details.get("Direction")
 
 
-def get_direction(street, coords, route_details=None):
+def get_direction(
+    street: str, coords: list[list[float]], route_details: dict = None
+) -> str:
+    """Get road direction from street name, coordinates, or route details
+
+    Args:
+        street (str): Street name, like "I-25 NB"
+        coords (list[list[float]]): List of coordinates, to pull direction from
+        route_details (dict, optional): GIS route details, defaults to None
+
+    Returns:
+        Literal['unknown', 'eastbound', 'westbound', 'northbound', 'southbound']: Road direction
+    """
     direction = wzdx_translator.parse_direction_from_street_name(street)
     if not direction and route_details:
         direction = get_direction_from_route_details(route_details)
@@ -86,7 +115,18 @@ def get_direction(street, coords, route_details=None):
     return direction
 
 
-def get_combined_events(icone_standard_msgs, wzdx_msgs):
+def get_combined_events(
+    icone_standard_msgs: list[dict], wzdx_msgs: list[dict]
+) -> list[dict]:
+    """Combine/integrate overlapping iCone messages into WZDx messages
+
+    Args:
+        icone_standard_msgs (list[dict]): iCone RTDH standard messages
+        wzdx_msgs (list[dict]): WZDx messages
+
+    Returns:
+        list[dict]: Combined WZDx messages
+    """
     combined_events = []
 
     filtered_wzdx_msgs = wzdx_translator.filter_wzdx_by_event_status(
@@ -105,7 +145,21 @@ def get_combined_events(icone_standard_msgs, wzdx_msgs):
     return combined_events
 
 
-def combine_icone_with_wzdx(icone_standard, wzdx_wzdx, event_status):
+def combine_icone_with_wzdx(
+    icone_standard: dict,
+    wzdx_wzdx: dict,
+    event_status: Literal["active", "pending", "planned", "completed"],
+) -> dict:
+    """Combine iCone message with WZDx message
+
+    Args:
+        icone_standard (dict): iCone RTDH standard message
+        wzdx_wzdx (dict): WZDx message
+        event_status (Literal[&quot;active&quot;, &quot;pending&quot;, &quot;planned&quot;, &quot;completed&quot;]): WZDx event status
+
+    Returns:
+        dict: Combined WZDx message
+    """
     combined_event = wzdx_wzdx
     updated = False
 
@@ -153,7 +207,15 @@ def combine_icone_with_wzdx(icone_standard, wzdx_wzdx, event_status):
         return None
 
 
-def get_route_details_for_icone(coordinates):
+def get_route_details_for_icone(coordinates: list[list[float]]) -> tuple[dict, dict]:
+    """Get route details for iCone message
+
+    Args:
+        coordinates (list[list[float]]): List of coordinates
+
+    Returns:
+        tuple[dict, dict]: Route details for start and end coordinates
+    """
     route_details_start = combination.get_route_details(
         coordinates[0][1], coordinates[0][0]
     )
@@ -170,7 +232,16 @@ def get_route_details_for_icone(coordinates):
     return route_details_start, route_details_end
 
 
-def validate_directionality_wzdx_icone(icone, wzdx):
+def validate_directionality_wzdx_icone(icone: dict, wzdx: dict) -> bool:
+    """Validate directionality between iCone and WZDx messages
+
+    Args:
+        icone (dict): iCone RTDH standard message
+        wzdx (dict): WZDx message
+
+    Returns:
+        bool: Directionality match
+    """
     direction_1 = icone["event"]["detail"]["direction"]
     direction_2 = wzdx["features"][0]["properties"]["core_details"]["direction"]
 
@@ -178,7 +249,16 @@ def validate_directionality_wzdx_icone(icone, wzdx):
 
 
 # Filter out iCone and WZDx messages which are not within the time interval
-def validate_dates(icone, wzdx):
+def validate_dates(icone: dict, wzdx: dict) -> bool:
+    """Validate date overlap between iCone and WZDx messages
+
+    Args:
+        icone (dict): iCone RTDH standard message
+        wzdx (dict): WZDx message
+
+    Returns:
+        bool: Date match
+    """
     wzdx_start_date = date_tools.get_unix_from_iso_string(
         wzdx["features"][0]["properties"]["start_date"]
     )
@@ -197,7 +277,18 @@ def validate_dates(icone, wzdx):
     )
 
 
-def identify_overlapping_features_icone(icone_standard_msgs, wzdx_msgs):
+def identify_overlapping_features_icone(
+    icone_standard_msgs: list[dict], wzdx_msgs: list[dict]
+) -> list[tuple[dict, dict]]:
+    """Identify overlapping iCone and WZDx messages
+
+    Args:
+        icone_standard_msgs (list[dict]): iCone RTDH standard messages
+        wzdx_msgs (list[dict]): WZDx messages
+
+    Returns:
+        list[tuple[dict, dict]]: Overlapping iCone and WZDx messages
+    """
     icone_routes = {}
     wzdx_routes = {}
     matching_routes = []

@@ -109,7 +109,7 @@ def main():
 
 
 # parse script command line arguments
-def parse_rtdh_arguments():
+def parse_rtdh_arguments() -> tuple[str, str]:
     """Parse command line arguments for NavJoy 568 to RTDH Standard translation
 
     Returns:

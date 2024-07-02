@@ -105,11 +105,14 @@ def generate_raw_messages(message: str):
     return messages
 
 
-def generate_rtdh_standard_message_from_raw_single(raw_message_xml: str):
+def generate_rtdh_standard_message_from_raw_single(raw_message_xml: str) -> dict:
     """Generate RTDH standard message from iCone XML string
 
     Args:
         raw_message_xml: xml string iCone incident
+
+    Returns:
+        dict: RTDH standard message
     """
     obj = wzdx_translator.parse_xml_to_dict(raw_message_xml)
     pd = PathDict(obj)
@@ -118,8 +121,12 @@ def generate_rtdh_standard_message_from_raw_single(raw_message_xml: str):
 
 
 # parse script command line arguments
-def parse_rtdh_arguments():
-    """Parse command line arguments for iCone to RTDH Standard translation"""
+def parse_rtdh_arguments() -> tuple[str, str]:
+    """Parse command line arguments for iCone to RTDH Standard translation
+
+    Returns:
+        tuple[str, str]: iCone file path, output directory
+    """
     parser = argparse.ArgumentParser(
         description="Translate iCone data to RTDH Standard"
     )
@@ -256,12 +263,12 @@ def get_direction(street: str, coords: list[float], route_details=None):
     """Get road direction from street, coordinates, or route details
 
     Args:
-        street: Roadway name to pull direction from (I-25N, I-25S, etc.)
+        street: Roadway name to pull direction from (I-25 NB, I-25 SB, etc.)
         coords: Coordinates to pull direction from
         route_details: Optional GIS route details to pull direction from. Defaults to None.
 
     Returns:
-        ['unknown', 'eastbound', 'westbound', 'northbound', 'southbound']: direction of roadway
+        Literal['unknown', 'eastbound', 'westbound', 'northbound', 'southbound']: direction of roadway
     """
     direction = wzdx_translator.parse_direction_from_street_name(street)
     if (not direction or direction == "unknown") and route_details:

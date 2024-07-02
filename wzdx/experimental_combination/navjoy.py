@@ -36,7 +36,15 @@ def main():
 
 
 # parse script command line arguments
-def parse_rtdh_arguments():
+def parse_rtdh_arguments() -> tuple[str, str, str, str]:
+    """Parse command line arguments for experimental combination of WZDx and Navjoy 568 data
+
+    Returns:
+        str: WZDx file path
+        str: navjoy 568 file path
+        str: output directory
+        str: Boolean (true/false), Update dates to the current date to pass time filter
+    """
     parser = argparse.ArgumentParser(
         description="Combine WZDx and Geotab AVL (ATMA) data"
     )
@@ -59,7 +67,18 @@ def parse_rtdh_arguments():
     return args.wzdxFile, args.navjoyWzdxFile, args.outputDir, args.updateDates
 
 
-def get_combined_events(navjoy_wzdx_msgs, wzdx_msgs):
+def get_combined_events(
+    navjoy_wzdx_msgs: list[dict], wzdx_msgs: list[dict]
+) -> list[dict]:
+    """Combine/integrate overlapping Navjoy 568 messages into WZDx messages
+
+    Args:
+        navjoy_wzdx_msgs (list[dict]): Navjoy 568 messages
+        wzdx_msgs (list[dict]): WZDx messages
+
+    Returns:
+        list[dict]: Combined WZDx messages
+    """
     combined_events = []
     active_navjoy_wzdx_msgs = wzdx_translator.filter_active_wzdx(navjoy_wzdx_msgs)
     active_wzdx_msgs = wzdx_translator.filter_active_wzdx(wzdx_msgs)
@@ -75,7 +94,16 @@ def get_combined_events(navjoy_wzdx_msgs, wzdx_msgs):
     return combined_events
 
 
-def combine_navjoy_with_wzdx(navjoy_wzdx, wzdx_wzdx):
+def combine_navjoy_with_wzdx(navjoy_wzdx: dict, wzdx_wzdx: dict) -> dict:
+    """Combine Navjoy 568 message with WZDx message. Update WZDx message speed limit and description
+
+    Args:
+        navjoy_wzdx (dict): Navjoy 568 message
+        wzdx_wzdx (dict): WZDx message
+
+    Returns:
+        dict: Combined WZDx message
+    """
     combined_event = wzdx_wzdx
 
     combined_feature = combined_event["features"][0]
