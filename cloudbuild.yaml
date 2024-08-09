@@ -1,0 +1,30 @@
+steps:
+  - name: 'python:3.12'
+    args:
+      - '-c'
+      - |
+        python -m pip install wheel==0.43.0 setuptools==70.1.1
+    entrypoint: sh
+  - name: 'python:3.12'
+    args:
+      - '-c'
+      - |
+        python -m pip install -r requirements.txt
+    entrypoint: sh
+  - name: 'python:3.12'
+    args:
+      - '-c'
+      - |
+        python setup.py sdist bdist_wheel
+    entrypoint: sh
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:latest'
+    args:
+      - '-c'
+      - >
+        _ACCESS_TOKEN=$(gcloud auth print-access-token)
+
+        pip install twine
+
+        twine upload --repository-url $_REPOSITORY_URL -u oauth2accesstoken -p $_ACCESS_TOKEN dist/*
+    entrypoint: sh
+timeout: 1200s
