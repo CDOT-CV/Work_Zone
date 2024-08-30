@@ -21,10 +21,12 @@ steps:
     args:
       - '-c'
       - >
-        _ACCESS_TOKEN=$(gcloud auth print-access-token)
-
         pip install twine
 
-        twine upload --repository-url $_REPOSITORY_URL -u oauth2accesstoken -p $_ACCESS_TOKEN dist/*
+        pip install keyrings.google-artifactregistry-auth
+
+        twine upload --repository-url https://us-central1-python.pkg.dev/cdot-shared-services/cdot-shared-cv-python-public-arpo/ dist/*
     entrypoint: sh
 timeout: 1200s
+options:
+  logging: CLOUD_LOGGING_ONLY
