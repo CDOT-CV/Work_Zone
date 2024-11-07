@@ -1,0 +1,47 @@
+{
+  "type": "Feature",
+  "geometry": {
+    "srid": 4326,
+    "type": "MultiPoint",
+    "coordinates": [
+      [-105.16587, 39.734865],
+      [-105.192714, 39.714469]
+    ]
+  },
+  "properties": {
+    "clearTime": "2024-11-13T01:00:00Z",
+    "startMarker": 262.0,
+    "project": {
+      "description": "I-70 Resurfacing: Chief Hosa to Colfax, Jefferson County",
+      "status": "project active",
+      "owningGroup": "LaneAware",
+      "startTime": "2024-08-12T06:00:00Z",
+      "endTime": "2026-03-28T05:59:59Z"
+    },
+    "type": "Road Construction",
+    "laneImpacts": [
+      { "direction": "east", "laneCount": 3, "laneClosures": "0", "closedLaneTypes": [] },
+      {
+        "direction": "west",
+        "laneCount": 3,
+        "laneClosures": "8001",
+        "closedLaneTypes": ["right shoulder", "left shoulder"]
+      }
+    ],
+    "routeName": "I-70W",
+    "isOversizedLoadsProhibited": false,
+    "lastUpdated": "2024-11-07T21:09:35.261Z",
+    "schedule": [{ "startTime": "2024-11-12T14:00:00.000Z", "endTime": "2024-11-13T01:00:00.000Z" }],
+    "endMarker": 260.0,
+    "hasRampRestriction": false,
+    "name": "I-70 Resurfacing - Chief Hosa to Colfax-86584",
+    "startTime": "2024-11-12T14:00:00Z",
+    "id": "OpenTMS-Event20643308360",
+    "travelerInformationMessage": "Between Exit 263: Colorado Mills Parkway (West Pleasant View) and C-470 (Golden) from Mile Point 262 to Mile Point 260. Both shoulders closed due to road construction. Starting November 12, 2024 at 7:00AM MST until November 12, 2024 at about 6:00PM MST. Full schedule below: • November 12, 7:00AM - November 12, 6:00PM",
+    "category": "Construction",
+    "owningGroup": "LaneAware",
+    "jurisdictions": ["JEFFERSON (COUNTY)"],
+    "direction": "west"
+  },
+  "attributes": {}
+}

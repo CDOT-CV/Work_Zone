@@ -236,7 +236,7 @@ def parse_work_zone(incident: dict) -> dict:
         "type": "LineString",
         "coordinates": event.get("geometry", []),
     }
-    if len(event.get("geometry", [])) == 2:
+    if len(event.get("geometry", [])) <= 2:
         geometry["type"] = "MultiPoint"
     properties = wzdx_translator.initialize_feature_properties()
 

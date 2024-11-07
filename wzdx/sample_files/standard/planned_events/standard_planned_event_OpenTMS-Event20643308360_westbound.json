@@ -1,0 +1,144 @@
+{
+  "rtdh_timestamp": 1731021268.5759468,
+  "rtdh_message_id": "a24d7b07-bdbc-46cd-b3ea-b6017a6c4848",
+  "event": {
+    "type": "work-zone",
+    "types_of_work": [
+      {
+        "type_name": "roadway-creation",
+        "is_architectural_change": true
+      }
+    ],
+    "work_zone_type": "static",
+    "source": {
+      "id": "OpenTMS-Event20643308360_westbound",
+      "last_updated_timestamp": 1731013775261
+    },
+    "geometry": [
+      [
+        -105.16586083999994,
+        39.734858632000055
+      ],
+      [
+        -105.16638882599995,
+        39.73443766200006
+      ],
+      [
+        -105.16854799099997,
+        39.73271605700006
+      ],
+      [
+        -105.17077491299995,
+        39.73094029200007
+      ],
+      [
+        -105.17293965199997,
+        39.72943332800003
+      ],
+      [
+        -105.17468559199995,
+        39.72842892500006
+      ],
+      [
+        -105.17580481399995,
+        39.727785029000074
+      ],
+      [
+        -105.17843878399998,
+        39.72609999900004
+      ],
+      [
+        -105.17993813899994,
+        39.72512450600004
+      ],
+      [
+        -105.18206644899999,
+        39.723739730000034
+      ],
+      [
+        -105.18563422299997,
+        39.72141816000004
+      ],
+      [
+        -105.18769294899994,
+        39.72000476800008
+      ],
+      [
+        -105.18847369599996,
+        39.71936694800007
+      ],
+      [
+        -105.18984140499998,
+        39.718052475000036
+      ],
+      [
+        -105.190781717,
+        39.71695507100003
+      ],
+      [
+        -105.19270413899994,
+        39.714462801000025
+      ]
+    ],
+    "header": {
+      "description": "Between Exit 263: Colorado Mills Parkway (West Pleasant View) and C-470 (Golden) from Mile Point 262 to Mile Point 260. Both shoulders closed due to road construction. Starting November 12, 2024 at 7:00AM MST until November 12, 2024 at about 6:00PM MST. Full schedule below: \u00e2\u20ac\u00a2 November 12, 7:00AM - November 12, 6:00PM",
+      "start_timestamp": 1731420000000,
+      "end_timestamp": 1731459600000
+    },
+    "detail": {
+      "road_name": "I-70",
+      "road_number": "I-70",
+      "direction": "westbound"
+    },
+    "additional_info": {
+      "lanes": [
+        {
+          "order": 1,
+          "type": "shoulder",
+          "status": "closed"
+        },
+        {
+          "order": 2,
+          "type": "general",
+          "status": "open"
+        },
+        {
+          "order": 3,
+          "type": "general",
+          "status": "open"
+        },
+        {
+          "order": 4,
+          "type": "general",
+          "status": "open"
+        },
+        {
+          "order": 5,
+          "type": "shoulder",
+          "status": "closed"
+        }
+      ],
+      "restrictions": [],
+      "beginning_milepost": 262.0,
+      "ending_milepost": 260.0,
+      "beginning_cross_street": "Exit 263: Colorado Mills Parkway (West Pleasant View)",
+      "ending_cross_street": "C-470 (Golden)",
+      "valid": false,
+      "route_details_start": {
+        "Route": "070A_DEC",
+        "Measure": 262.0,
+        "MMin": 0.0,
+        "MMax": 449.589,
+        "Distance": 1.06
+      },
+      "route_details_end": {
+        "Route": "070A_DEC",
+        "Measure": 260.0,
+        "MMin": 0.0,
+        "MMax": 449.589,
+        "Distance": 1.08
+      },
+      "condition_1": true
+    }
+  }
+}
