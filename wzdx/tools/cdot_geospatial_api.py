@@ -75,7 +75,7 @@ class GeospatialApi:
         if not resp:
             return None
         # response = [{'routeID': '070A', 'MMin': 0, 'MMax': 499}]
-        return resp
+        return resp["routes"]
 
     def get_route_details(self, routeId: str) -> dict | None:
         """Get route details from route ID
