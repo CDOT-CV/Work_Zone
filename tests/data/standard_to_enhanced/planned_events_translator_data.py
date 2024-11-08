@@ -1,4 +1,4 @@
-test_parse_work_zone_linestring_standard = {
+test_parse_work_zone_multipoint_standard = {
     "rtdh_timestamp": 1642036259.3099449,
     "rtdh_message_id": "42fe21b8-102b-43e8-8668-23c55334a201",
     "event": {
@@ -36,7 +36,7 @@ test_parse_work_zone_linestring_standard = {
     },
 }
 
-test_parse_work_zone_linestring_expected = {
+test_parse_work_zone_multipoint_expected = {
     "id": "ce32f52d-1150-5bc9-a9df-7b5c71217d26",
     "type": "Feature",
     "properties": {
@@ -68,7 +68,7 @@ test_parse_work_zone_linestring_expected = {
         ],
     },
     "geometry": {
-        "type": "LineString",
+        "type": "MultiPoint",
         "coordinates": [[-108.279106, 39.195663], [-108.218549, 39.302392]],
     },
 }
@@ -166,7 +166,7 @@ test_wzdx_creator_expected = {
                 ],
             },
             "geometry": {
-                "type": "LineString",
+                "type": "MultiPoint",
                 "coordinates": [[-108.279106, 39.195663], [-108.218549, 39.302392]],
             },
         }
