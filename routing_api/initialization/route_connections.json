@@ -1,0 +1,9701 @@
+[
+  {
+    "Route": "001A",
+    "MMin": 0,
+    "MMax": 10.053,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 348.511,
+        "distance": 90.87484515395859,
+        "Route": "287C"
+      }
+    ]
+  },
+  {
+    "Route": "001A_DEC",
+    "MMin": 0,
+    "MMax": 10.053,
+    "intersections": []
+  },
+  {
+    "Route": "002A",
+    "MMin": 0,
+    "MMax": 9.842,
+    "intersections": [
+      {
+        "mm": 9.842,
+        "mm_other": 292.383,
+        "distance": 20.100865432544143,
+        "Route": "006H"
+      },
+      {
+        "mm": 0,
+        "mm_other": 262.674,
+        "distance": 29.200028540737055,
+        "Route": "285D"
+      },
+      {
+        "mm": 4.144,
+        "mm_other": 77.267,
+        "distance": 90.07232175967782,
+        "Route": "083A"
+      }
+    ]
+  },
+  {
+    "Route": "002A_DEC",
+    "MMin": 0,
+    "MMax": 9.842,
+    "intersections": []
+  },
+  {
+    "Route": "002D",
+    "MMin": 19.506,
+    "MMax": 19.944,
+    "intersections": [
+      {
+        "mm": 19.944,
+        "mm_other": 16.454,
+        "distance": 35.67910198598691,
+        "Route": "076A"
+      }
+    ]
+  },
+  {
+    "Route": "002D_DEC",
+    "MMin": 19.506,
+    "MMax": 19.944,
+    "intersections": []
+  },
+  {
+    "Route": "003A",
+    "MMin": 0,
+    "MMax": 2.444,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 85.941,
+        "distance": 52.08446660147028,
+        "Route": "160A"
+      }
+    ]
+  },
+  {
+    "Route": "003A_DEC",
+    "MMin": 0,
+    "MMax": 2.444,
+    "intersections": []
+  },
+  {
+    "Route": "005A",
+    "MMin": 0,
+    "MMax": 14.894,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 13.236,
+        "distance": 67.40388212065012,
+        "Route": "103A"
+      }
+    ]
+  },
+  {
+    "Route": "005A_DEC",
+    "MMin": 0,
+    "MMax": 14.894,
+    "intersections": []
+  },
+  {
+    "Route": "006A",
+    "MMin": 11.08,
+    "MMax": 26.08,
+    "intersections": [
+      {
+        "mm": 11.08,
+        "mm_other": 10.961,
+        "distance": 85.86271910274267,
+        "Route": "070A"
+      },
+      {
+        "mm": 26.08,
+        "mm_other": 0,
+        "distance": 0,
+        "Route": "070B"
+      },
+      {
+        "mm": 26.08,
+        "mm_other": 0,
+        "distance": 0,
+        "Route": "070B"
+      },
+      {
+        "mm": 19.955,
+        "mm_other": 0,
+        "distance": 0.14800700634244154,
+        "Route": "340A"
+      }
+    ]
+  },
+  {
+    "Route": "006A_DEC",
+    "MMin": 11.08,
+    "MMax": 26.08,
+    "intersections": []
+  },
+  {
+    "Route": "006B",
+    "MMin": 30.123,
+    "MMax": 34.535,
+    "intersections": [
+      {
+        "mm": 30.123,
+        "mm_other": 4.358,
+        "distance": 87.71179522354487,
+        "Route": "070B"
+      }
+    ]
+  },
+  {
+    "Route": "006B_DEC",
+    "MMin": 30.123,
+    "MMax": 34.535,
+    "intersections": []
+  },
+  {
+    "Route": "006C",
+    "MMin": 37.161,
+    "MMax": 46.058,
+    "intersections": [
+      {
+        "mm": 46.058,
+        "mm_other": 43.909,
+        "distance": 98.38467412753793,
+        "Route": "070A"
+      },
+      {
+        "mm": 37.161,
+        "mm_other": 12.0,
+        "distance": 56.7602740547207,
+        "Route": "070B"
+      }
+    ]
+  },
+  {
+    "Route": "006C_DEC",
+    "MMin": 37.161,
+    "MMax": 46.058,
+    "intersections": []
+  },
+  {
+    "Route": "006D",
+    "MMin": 92.275,
+    "MMax": 110.806,
+    "intersections": [
+      {
+        "mm": 110.806,
+        "mm_other": 108.988,
+        "distance": 60.158026090312276,
+        "Route": "070A"
+      },
+      {
+        "mm": 99.216,
+        "mm_other": 0.222,
+        "distance": 50.751947885606114,
+        "Route": "070E"
+      }
+    ]
+  },
+  {
+    "Route": "006D_DEC",
+    "MMin": 92.275,
+    "MMax": 110.806,
+    "intersections": []
+  },
+  {
+    "Route": "006E",
+    "MMin": 149.718,
+    "MMax": 174.541,
+    "intersections": [
+      {
+        "mm": 174.541,
+        "mm_other": 143.4,
+        "distance": 0,
+        "Route": "024A"
+      },
+      {
+        "mm": 174.541,
+        "mm_other": 171.089,
+        "distance": 71.13879224397617,
+        "Route": "070A"
+      },
+      {
+        "mm": 149.718,
+        "mm_other": 0.0,
+        "distance": 63.88357973999497,
+        "Route": "070F"
+      },
+      {
+        "mm": 174.541,
+        "mm_other": 143.4,
+        "distance": 0,
+        "Route": "024A"
+      },
+      {
+        "mm": 149.718,
+        "mm_other": 0,
+        "distance": 63.88357973999497,
+        "Route": "070F"
+      },
+      {
+        "mm": 165.951,
+        "mm_other": 0.577,
+        "distance": 73.27035887963353,
+        "Route": "070G"
+      },
+      {
+        "mm": 159.573,
+        "mm_other": 0.323,
+        "distance": 0.1983786317323008,
+        "Route": "131A"
+      },
+      {
+        "mm": 159.184,
+        "mm_other": 0.053,
+        "distance": 0.0,
+        "Route": "131B"
+      }
+    ]
+  },
+  {
+    "Route": "006E_DEC",
+    "MMin": 149.718,
+    "MMax": 174.541,
+    "intersections": []
+  },
+  {
+    "Route": "006F",
+    "MMin": 208.659,
+    "MMax": 229.896,
+    "intersections": [
+      {
+        "mm": 208.659,
+        "mm_other": 101.562,
+        "distance": 33.93222064109552,
+        "Route": "009D"
+      },
+      {
+        "mm": 208.659,
+        "mm_other": 205.408,
+        "distance": 82.03920025442697,
+        "Route": "070A"
+      },
+      {
+        "mm": 208.659,
+        "mm_other": 101.562,
+        "distance": 33.93222064109552,
+        "Route": "009D"
+      }
+    ]
+  },
+  {
+    "Route": "006F_DEC",
+    "MMin": 208.659,
+    "MMax": 229.896,
+    "intersections": []
+  },
+  {
+    "Route": "006G",
+    "MMin": 257.079,
+    "MMax": 284.657,
+    "intersections": [
+      {
+        "mm": 257.079,
+        "mm_other": 244.172,
+        "distance": 93.15548444126308,
+        "Route": "070A"
+      },
+      {
+        "mm": 257.694,
+        "mm_other": 269.441,
+        "distance": 71.31834893654357,
+        "Route": "040B"
+      },
+      {
+        "mm": 271.602,
+        "mm_other": 0,
+        "distance": 0.00011119375071365752,
+        "Route": "058A"
+      },
+      {
+        "mm": 271.602,
+        "mm_other": 0,
+        "distance": 0.0,
+        "Route": "093A"
+      },
+      {
+        "mm": 260.191,
+        "mm_other": 0,
+        "distance": 79.31624551448124,
+        "Route": "119A"
+      },
+      {
+        "mm": 274.298,
+        "mm_other": 1.212,
+        "distance": 85.72910104066575,
+        "Route": "470W"
+      }
+    ]
+  },
+  {
+    "Route": "006G_DEC",
+    "MMin": 257.079,
+    "MMax": 284.657,
+    "intersections": []
+  },
+  {
+    "Route": "006H",
+    "MMin": 290.98,
+    "MMax": 296.32,
+    "intersections": [
+      {
+        "mm": 292.383,
+        "mm_other": 9.842,
+        "distance": 20.100865432544143,
+        "Route": "002A"
+      },
+      {
+        "mm": 290.98,
+        "mm_other": 276.043,
+        "distance": 92.55191329550168,
+        "Route": "070A"
+      },
+      {
+        "mm": 296.32,
+        "mm_other": 9.771,
+        "distance": 58.375288331115655,
+        "Route": "076A"
+      },
+      {
+        "mm": 294.814,
+        "mm_other": 3.634,
+        "distance": 93.3525676119985,
+        "Route": "224A"
+      },
+      {
+        "mm": 294.122,
+        "mm_other": 3.621,
+        "distance": 93.37748005688756,
+        "Route": "265A"
+      }
+    ]
+  },
+  {
+    "Route": "006H_DEC",
+    "MMin": 290.98,
+    "MMax": 296.32,
+    "intersections": []
+  },
+  {
+    "Route": "006I",
+    "MMin": 343.519,
+    "MMax": 346.697,
+    "intersections": [
+      {
+        "mm": 343.519,
+        "mm_other": 63.762,
+        "distance": 6.127589149474177,
+        "Route": "076A"
+      },
+      {
+        "mm": 346.402,
+        "mm_other": 149.633,
+        "distance": 63.12890426609374,
+        "Route": "034A"
+      },
+      {
+        "mm": 345.928,
+        "mm_other": 0,
+        "distance": 0.0,
+        "Route": "039A"
+      },
+      {
+        "mm": 345.928,
+        "mm_other": 72.581,
+        "distance": 0.0,
+        "Route": "052A"
+      }
+    ]
+  },
+  {
+    "Route": "006I_DEC",
+    "MMin": 343.519,
+    "MMax": 346.697,
+    "intersections": []
+  },
+  {
+    "Route": "006J",
+    "MMin": 371.69,
+    "MMax": 467.284,
+    "intersections": [
+      {
+        "mm": 371.69,
+        "mm_other": 0.932,
+        "distance": 0,
+        "Route": "034E"
+      },
+      {
+        "mm": 371.69,
+        "mm_other": 91.693,
+        "distance": 23.911282050835705,
+        "Route": "076A"
+      },
+      {
+        "mm": 404.251,
+        "mm_other": 236.724,
+        "distance": 88.75862420263061,
+        "Route": "014C"
+      },
+      {
+        "mm": 371.69,
+        "mm_other": 0.932,
+        "distance": 0,
+        "Route": "034E"
+      },
+      {
+        "mm": 406.794,
+        "mm_other": 40.993,
+        "distance": 0.0,
+        "Route": "061A"
+      },
+      {
+        "mm": 397.955,
+        "mm_other": 56.412,
+        "distance": 0.0,
+        "Route": "063A"
+      },
+      {
+        "mm": 404.602,
+        "mm_other": 0,
+        "distance": 96.83046406171678,
+        "Route": "138A"
+      }
+    ]
+  },
+  {
+    "Route": "006J_DEC",
+    "MMin": 371.69,
+    "MMax": 467.284,
+    "intersections": []
+  },
+  {
+    "Route": "006K",
+    "MMin": 0,
+    "MMax": 0.338,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 116.174,
+        "distance": 94.74420179139419,
+        "Route": "070A"
+      },
+      {
+        "mm": 0.338,
+        "mm_other": 0.034,
+        "distance": 98.39245853839584,
+        "Route": "082A"
+      },
+      {
+        "mm": 0.195,
+        "mm_other": 0,
+        "distance": 87.11435461456371,
+        "Route": "082A"
+      }
+    ]
+  },
+  {
+    "Route": "006K_DEC",
+    "MMin": 0,
+    "MMax": 0.338,
+    "intersections": []
+  },
+  {
+    "Route": "006L",
+    "MMin": 88.895,
+    "MMax": 91.24,
+    "intersections": [
+      {
+        "mm": 88.895,
+        "mm_other": 88.895,
+        "distance": 0,
+        "Route": "006M"
+      },
+      {
+        "mm": 91.24,
+        "mm_other": 1.059,
+        "distance": 0,
+        "Route": "013A"
+      },
+      {
+        "mm": 88.895,
+        "mm_other": 86.85,
+        "distance": 13.819314144329624,
+        "Route": "070A"
+      },
+      {
+        "mm": 88.895,
+        "mm_other": 88.895,
+        "distance": 0,
+        "Route": "006M"
+      },
+      {
+        "mm": 91.24,
+        "mm_other": 1.059,
+        "distance": 0,
+        "Route": "013A"
+      }
+    ]
+  },
+  {
+    "Route": "006L_DEC",
+    "MMin": 88.895,
+    "MMax": 91.24,
+    "intersections": []
+  },
+  {
+    "Route": "006M",
+    "MMin": 62.305,
+    "MMax": 88.895,
+    "intersections": [
+      {
+        "mm": 88.895,
+        "mm_other": 88.895,
+        "distance": 0,
+        "Route": "006L"
+      },
+      {
+        "mm": 88.895,
+        "mm_other": 88.895,
+        "distance": 0,
+        "Route": "006L"
+      },
+      {
+        "mm": 62.305,
+        "mm_other": 61.52,
+        "distance": 96.05971492825375,
+        "Route": "070A"
+      }
+    ]
+  },
+  {
+    "Route": "006M_DEC",
+    "MMin": 62.305,
+    "MMax": 88.895,
+    "intersections": []
+  },
+  {
+    "Route": "006N",
+    "MMin": 141.818,
+    "MMax": 141.993,
+    "intersections": [
+      {
+        "mm": 141.818,
+        "mm_other": 139.483,
+        "distance": 82.72293793256372,
+        "Route": "070A"
+      }
+    ]
+  },
+  {
+    "Route": "006N_DEC",
+    "MMin": 141.818,
+    "MMax": 141.993,
+    "intersections": []
+  },
+  {
+    "Route": "007A",
+    "MMin": 0,
+    "MMax": 33.08,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 0.381,
+        "distance": 74.12024445377274,
+        "Route": "036B"
+      },
+      {
+        "mm": 14.884,
+        "mm_other": 0,
+        "distance": 51.99355925486799,
+        "Route": "007E"
+      },
+      {
+        "mm": 19.199,
+        "mm_other": 54.064,
+        "distance": 93.10761751231183,
+        "Route": "072B"
+      }
+    ]
+  },
+  {
+    "Route": "007A_DEC",
+    "MMin": 0,
+    "MMax": 33.08,
+    "intersections": []
+  },
+  {
+    "Route": "007B",
+    "MMin": 49.506,
+    "MMax": 50.639,
+    "intersections": [
+      {
+        "mm": 50.639,
+        "mm_other": 52.29,
+        "distance": 83.11747968082248,
+        "Route": "007C"
+      },
+      {
+        "mm": 50.639,
+        "mm_other": 36.122,
+        "distance": 91.5273978127669,
+        "Route": "036B"
+      },
+      {
+        "mm": 49.506,
+        "mm_other": 18.703,
+        "distance": 93.47888819334507,
+        "Route": "093A"
+      },
+      {
+        "mm": 49.506,
+        "mm_other": 41.892,
+        "distance": 0,
+        "Route": "119A"
+      },
+      {
+        "mm": 50.639,
+        "mm_other": 52.29,
+        "distance": 83.11747968082248,
+        "Route": "007C"
+      },
+      {
+        "mm": 49.506,
+        "mm_other": 18.849,
+        "distance": 5.073518811072644,
+        "Route": "093A"
+      },
+      {
+        "mm": 49.506,
+        "mm_other": 41.892,
+        "distance": 0,
+        "Route": "119A"
+      }
+    ]
+  },
+  {
+    "Route": "007B_DEC",
+    "MMin": 49.506,
+    "MMax": 50.639,
+    "intersections": []
+  },
+  {
+    "Route": "007C",
+    "MMin": 52.29,
+    "MMax": 60.683,
+    "intersections": [
+      {
+        "mm": 52.29,
+        "mm_other": 50.639,
+        "distance": 83.11747968082248,
+        "Route": "007B"
+      },
+      {
+        "mm": 52.29,
+        "mm_other": 50.639,
+        "distance": 83.11747968082248,
+        "Route": "007B"
+      },
+      {
+        "mm": 52.29,
+        "mm_other": 36.306,
+        "distance": 99.87257084198548,
+        "Route": "036B"
+      },
+      {
+        "mm": 60.683,
+        "mm_other": 305.157,
+        "distance": 87.26602609004719,
+        "Route": "287C"
+      },
+      {
+        "mm": 59.27,
+        "mm_other": 0,
+        "distance": 46.74446020137518,
+        "Route": "042A"
+      }
+    ]
+  },
+  {
+    "Route": "007C_DEC",
+    "MMin": 52.29,
+    "MMax": 60.683,
+    "intersections": []
+  },
+  {
+    "Route": "007D",
+    "MMin": 61.877,
+    "MMax": 77.052,
+    "intersections": [
+      {
+        "mm": 77.052,
+        "mm_other": 235.145,
+        "distance": 86.41834317086857,
+        "Route": "085C"
+      },
+      {
+        "mm": 61.877,
+        "mm_other": 304.138,
+        "distance": 59.481198389580626,
+        "Route": "287C"
+      }
+    ]
+  },
+  {
+    "Route": "007D_DEC",
+    "MMin": 61.877,
+    "MMax": 77.052,
+    "intersections": []
+  },
+  {
+    "Route": "007E",
+    "MMin": 0,
+    "MMax": 1.592,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 14.884,
+        "distance": 51.99355925486799,
+        "Route": "007A"
+      }
+    ]
+  },
+  {
+    "Route": "007E_DEC",
+    "MMin": 0,
+    "MMax": 1.592,
+    "intersections": []
+  },
+  {
+    "Route": "008A",
+    "MMin": 0,
+    "MMax": 8.683,
+    "intersections": [
+      {
+        "mm": 8.683,
+        "mm_other": 8.878,
+        "distance": 73.38256194979468,
+        "Route": "121A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 248.419,
+        "distance": 3.9869462194923093,
+        "Route": "285D"
+      },
+      {
+        "mm": 1.952,
+        "mm_other": 18.11,
+        "distance": 86.66534791855253,
+        "Route": "074A"
+      }
+    ]
+  },
+  {
+    "Route": "008A_DEC",
+    "MMin": 0,
+    "MMax": 8.683,
+    "intersections": []
+  },
+  {
+    "Route": "009A",
+    "MMin": 0,
+    "MMax": 46.98,
+    "intersections": [
+      {
+        "mm": 46.98,
+        "mm_other": 239.279,
+        "distance": 80.85091422965209,
+        "Route": "024A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 269.079,
+        "distance": 89.69454808931589,
+        "Route": "050A"
+      }
+    ]
+  },
+  {
+    "Route": "009A_DEC",
+    "MMin": 0,
+    "MMax": 46.98,
+    "intersections": []
+  },
+  {
+    "Route": "009B",
+    "MMin": 47.582,
+    "MMax": 63.732,
+    "intersections": [
+      {
+        "mm": 47.582,
+        "mm_other": 238.19,
+        "distance": 93.7031698902884,
+        "Route": "024A"
+      },
+      {
+        "mm": 63.732,
+        "mm_other": 182.0,
+        "distance": 12.80831753756547,
+        "Route": "285D"
+      }
+    ]
+  },
+  {
+    "Route": "009B_DEC",
+    "MMin": 47.582,
+    "MMax": 63.732,
+    "intersections": []
+  },
+  {
+    "Route": "009C",
+    "MMin": 64.673,
+    "MMax": 97.23,
+    "intersections": [
+      {
+        "mm": 97.23,
+        "mm_other": 202.291,
+        "distance": 44.76707463457925,
+        "Route": "070A"
+      },
+      {
+        "mm": 64.673,
+        "mm_other": 182.861,
+        "distance": 64.58008851256133,
+        "Route": "285D"
+      }
+    ]
+  },
+  {
+    "Route": "009C_DEC",
+    "MMin": 64.673,
+    "MMax": 97.23,
+    "intersections": []
+  },
+  {
+    "Route": "009D",
+    "MMin": 101.562,
+    "MMax": 138.92,
+    "intersections": [
+      {
+        "mm": 101.562,
+        "mm_other": 208.659,
+        "distance": 33.93222064109552,
+        "Route": "006F"
+      },
+      {
+        "mm": 101.562,
+        "mm_other": 208.659,
+        "distance": 33.93222064109552,
+        "Route": "006F"
+      },
+      {
+        "mm": 101.562,
+        "mm_other": 205.408,
+        "distance": 48.19572478912893,
+        "Route": "070A"
+      }
+    ]
+  },
+  {
+    "Route": "009D_DEC",
+    "MMin": 101.562,
+    "MMax": 138.92,
+    "intersections": []
+  },
+  {
+    "Route": "010A",
+    "MMin": 0,
+    "MMax": 71.968,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 49.949,
+        "distance": 97.56020294153113,
+        "Route": "025A"
+      },
+      {
+        "mm": 71.968,
+        "mm_other": 378.389,
+        "distance": 34.53406297827734,
+        "Route": "050B"
+      },
+      {
+        "mm": 0,
+        "mm_other": 306.35,
+        "distance": 0,
+        "Route": "160B"
+      },
+      {
+        "mm": 62.371,
+        "mm_other": 9.032,
+        "distance": 5.27818457359327e-05,
+        "Route": "071A"
+      },
+      {
+        "mm": 62.88,
+        "mm_other": 9.601,
+        "distance": 0.0,
+        "Route": "071B"
+      },
+      {
+        "mm": 0,
+        "mm_other": 306.35,
+        "distance": 0,
+        "Route": "160B"
+      }
+    ]
+  },
+  {
+    "Route": "010A_DEC",
+    "MMin": 0,
+    "MMax": 71.968,
+    "intersections": []
+  },
+  {
+    "Route": "011A",
+    "MMin": 0,
+    "MMax": 1.35,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 56.956,
+        "distance": 12.159194741612694,
+        "Route": "138A"
+      }
+    ]
+  },
+  {
+    "Route": "011A_DEC",
+    "MMin": 0,
+    "MMax": 1.35,
+    "intersections": []
+  },
+  {
+    "Route": "012A",
+    "MMin": 0,
+    "MMax": 70.833,
+    "intersections": [
+      {
+        "mm": 70.833,
+        "mm_other": 13.181,
+        "distance": 75.03593803926968,
+        "Route": "025A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 294.12,
+        "distance": 80.84231729491155,
+        "Route": "160A"
+      }
+    ]
+  },
+  {
+    "Route": "012A_DEC",
+    "MMin": 0,
+    "MMax": 70.833,
+    "intersections": []
+  },
+  {
+    "Route": "013A",
+    "MMin": 1.059,
+    "MMax": 88.635,
+    "intersections": [
+      {
+        "mm": 1.059,
+        "mm_other": 91.24,
+        "distance": 0,
+        "Route": "006L"
+      },
+      {
+        "mm": 1.059,
+        "mm_other": 91.24,
+        "distance": 0,
+        "Route": "006L"
+      },
+      {
+        "mm": 38.967,
+        "mm_other": 73.705,
+        "distance": 78.69178662422527,
+        "Route": "064A"
+      },
+      {
+        "mm": 75.74,
+        "mm_other": 0,
+        "distance": 63.04510250417745,
+        "Route": "317A"
+      },
+      {
+        "mm": 3.95,
+        "mm_other": 0,
+        "distance": 98.27115082048776,
+        "Route": "325A"
+      }
+    ]
+  },
+  {
+    "Route": "013A_DEC",
+    "MMin": 1.059,
+    "MMax": 88.635,
+    "intersections": []
+  },
+  {
+    "Route": "013B",
+    "MMin": 89.58,
+    "MMax": 128.07,
+    "intersections": [
+      {
+        "mm": 89.58,
+        "mm_other": 90.838,
+        "distance": 0.34324463581240267,
+        "Route": "040A"
+      }
+    ]
+  },
+  {
+    "Route": "013B_DEC",
+    "MMin": 89.58,
+    "MMax": 128.07,
+    "intersections": []
+  },
+  {
+    "Route": "013C",
+    "MMin": 0,
+    "MMax": 0.222,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 90.422,
+        "distance": 90.23886077622538,
+        "Route": "070A"
+      }
+    ]
+  },
+  {
+    "Route": "013C_DEC",
+    "MMin": 0,
+    "MMax": 0.222,
+    "intersections": []
+  },
+  {
+    "Route": "014A",
+    "MMin": 0,
+    "MMax": 32.968,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 157.233,
+        "distance": 83.78783603843944,
+        "Route": "040A"
+      },
+      {
+        "mm": 32.968,
+        "mm_other": 52.0,
+        "distance": 13.92625365303185,
+        "Route": "125A"
+      }
+    ]
+  },
+  {
+    "Route": "014A_DEC",
+    "MMin": 0,
+    "MMax": 32.968,
+    "intersections": []
+  },
+  {
+    "Route": "014B",
+    "MMin": 34.09,
+    "MMax": 121.713,
+    "intersections": [
+      {
+        "mm": 34.09,
+        "mm_other": 53.18,
+        "distance": 68.13125275943672,
+        "Route": "125A"
+      },
+      {
+        "mm": 121.713,
+        "mm_other": 355.788,
+        "distance": 76.55624325442055,
+        "Route": "287C"
+      }
+    ]
+  },
+  {
+    "Route": "014B_DEC",
+    "MMin": 34.09,
+    "MMax": 121.713,
+    "intersections": []
+  },
+  {
+    "Route": "014C",
+    "MMin": 134.77,
+    "MMax": 236.724,
+    "intersections": [
+      {
+        "mm": 236.724,
+        "mm_other": 404.251,
+        "distance": 88.75862420263061,
+        "Route": "006J"
+      },
+      {
+        "mm": 134.77,
+        "mm_other": 346.64,
+        "distance": 99.18605011994896,
+        "Route": "287C"
+      },
+      {
+        "mm": 215.828,
+        "mm_other": 201.636,
+        "distance": 5.2296338751345444e-05,
+        "Route": "071E"
+      },
+      {
+        "mm": 144.0,
+        "mm_other": 18.487,
+        "distance": 92.48693971964997,
+        "Route": "257A"
+      },
+      {
+        "mm": 176.145,
+        "mm_other": 141.583,
+        "distance": 93.7242446248767,
+        "Route": "392B"
+      }
+    ]
+  },
+  {
+    "Route": "014C_DEC",
+    "MMin": 134.77,
+    "MMax": 236.724,
+    "intersections": []
+  },
+  {
+    "Route": "015A",
+    "MMin": 0,
+    "MMax": 12.374,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 215.698,
+        "distance": 0.4068270723311727,
+        "Route": "160A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 51.159,
+        "distance": 0,
+        "Route": "285B"
+      },
+      {
+        "mm": 0,
+        "mm_other": 51.159,
+        "distance": 0,
+        "Route": "285B"
+      },
+      {
+        "mm": 10.219,
+        "mm_other": 0,
+        "distance": 85.7543436510372,
+        "Route": "370A"
+      }
+    ]
+  },
+  {
+    "Route": "015A_DEC",
+    "MMin": 0,
+    "MMax": 12.374,
+    "intersections": []
+  },
+  {
+    "Route": "015B",
+    "MMin": 20.398,
+    "MMax": 30.915,
+    "intersections": [
+      {
+        "mm": 30.915,
+        "mm_other": 20.263,
+        "distance": 93.64897751487541,
+        "Route": "285A"
+      },
+      {
+        "mm": 26.562,
+        "mm_other": 0,
+        "distance": 0.0,
+        "Route": "371A"
+      }
+    ]
+  },
+  {
+    "Route": "015B_DEC",
+    "MMin": 20.398,
+    "MMax": 30.915,
+    "intersections": []
+  },
+  {
+    "Route": "016A",
+    "MMin": 0,
+    "MMax": 3.118,
+    "intersections": [
+      {
+        "mm": 3.118,
+        "mm_other": 131.813,
+        "distance": 0,
+        "Route": "021A"
+      },
+      {
+        "mm": 3.118,
+        "mm_other": 131.813,
+        "distance": 0,
+        "Route": "021A"
+      }
+    ]
+  },
+  {
+    "Route": "016A_DEC",
+    "MMin": 0,
+    "MMax": 3.118,
+    "intersections": []
+  },
+  {
+    "Route": "017A",
+    "MMin": 0,
+    "MMax": 39.052,
+    "intersections": [
+      {
+        "mm": 39.052,
+        "mm_other": 5.178,
+        "distance": 70.66298575334126,
+        "Route": "285A"
+      }
+    ]
+  },
+  {
+    "Route": "017A_DEC",
+    "MMin": 0,
+    "MMax": 39.052,
+    "intersections": []
+  },
+  {
+    "Route": "017B",
+    "MMin": 69.024,
+    "MMax": 118.864,
+    "intersections": [
+      {
+        "mm": 69.024,
+        "mm_other": 233.966,
+        "distance": 48.941714264613836,
+        "Route": "160A"
+      },
+      {
+        "mm": 118.864,
+        "mm_other": 100.344,
+        "distance": 90.06127154278984,
+        "Route": "285B"
+      },
+      {
+        "mm": 88.0,
+        "mm_other": 27.802,
+        "distance": 31.729139110860164,
+        "Route": "112A"
+      }
+    ]
+  },
+  {
+    "Route": "017B_DEC",
+    "MMin": 69.024,
+    "MMax": 118.864,
+    "intersections": []
+  },
+  {
+    "Route": "021A",
+    "MMin": 131.813,
+    "MMax": 139.582,
+    "intersections": [
+      {
+        "mm": 131.813,
+        "mm_other": 3.118,
+        "distance": 0,
+        "Route": "016A"
+      },
+      {
+        "mm": 131.813,
+        "mm_other": 3.118,
+        "distance": 0,
+        "Route": "016A"
+      },
+      {
+        "mm": 139.582,
+        "mm_other": 308.216,
+        "distance": 24.054613028099904,
+        "Route": "024H"
+      }
+    ]
+  },
+  {
+    "Route": "021A_DEC",
+    "MMin": 131.813,
+    "MMax": 139.582,
+    "intersections": []
+  },
+  {
+    "Route": "021B",
+    "MMin": 141.738,
+    "MMax": 154.112,
+    "intersections": [
+      {
+        "mm": 141.738,
+        "mm_other": 310.878,
+        "distance": 26.503590433670144,
+        "Route": "024G"
+      },
+      {
+        "mm": 141.738,
+        "mm_other": 310.878,
+        "distance": 0,
+        "Route": "024H"
+      },
+      {
+        "mm": 154.112,
+        "mm_other": 20.368,
+        "distance": 0,
+        "Route": "083A"
+      },
+      {
+        "mm": 141.738,
+        "mm_other": 310.878,
+        "distance": 26.503590433670144,
+        "Route": "024G"
+      },
+      {
+        "mm": 141.738,
+        "mm_other": 310.878,
+        "distance": 0,
+        "Route": "024H"
+      },
+      {
+        "mm": 154.112,
+        "mm_other": 20.368,
+        "distance": 0,
+        "Route": "083A"
+      }
+    ]
+  },
+  {
+    "Route": "021B_DEC",
+    "MMin": 141.738,
+    "MMax": 154.112,
+    "intersections": []
+  },
+  {
+    "Route": "022A",
+    "MMin": 0,
+    "MMax": 2.476,
+    "intersections": []
+  },
+  {
+    "Route": "022A_DEC",
+    "MMin": 0,
+    "MMax": 2.476,
+    "intersections": []
+  },
+  {
+    "Route": "023A",
+    "MMin": 0,
+    "MMax": 17.507,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 279.758,
+        "distance": 56.784844615063406,
+        "Route": "385D"
+      }
+    ]
+  },
+  {
+    "Route": "023A_DEC",
+    "MMin": 0,
+    "MMax": 17.507,
+    "intersections": []
+  },
+  {
+    "Route": "024A",
+    "MMin": 143.4,
+    "MMax": 303.84,
+    "intersections": [
+      {
+        "mm": 143.4,
+        "mm_other": 174.541,
+        "distance": 0,
+        "Route": "006E"
+      },
+      {
+        "mm": 239.279,
+        "mm_other": 46.98,
+        "distance": 80.85091422965209,
+        "Route": "009A"
+      },
+      {
+        "mm": 238.19,
+        "mm_other": 47.582,
+        "distance": 93.7031698902884,
+        "Route": "009B"
+      },
+      {
+        "mm": 143.4,
+        "mm_other": 174.541,
+        "distance": 0,
+        "Route": "006E"
+      },
+      {
+        "mm": 303.84,
+        "mm_other": 141.272,
+        "distance": 97.01231926451892,
+        "Route": "025A"
+      },
+      {
+        "mm": 143.4,
+        "mm_other": 171.089,
+        "distance": 71.13879224397617,
+        "Route": "070A"
+      },
+      {
+        "mm": 296.922,
+        "mm_other": 0,
+        "distance": 87.71670900640339,
+        "Route": "024E"
+      },
+      {
+        "mm": 300.437,
+        "mm_other": 4.196,
+        "distance": 82.37994928372218,
+        "Route": "024I"
+      },
+      {
+        "mm": 284.762,
+        "mm_other": 76.92,
+        "distance": 67.1014607590869,
+        "Route": "067D"
+      },
+      {
+        "mm": 278.087,
+        "mm_other": 69.652,
+        "distance": 63.504599068801156,
+        "Route": "067F"
+      },
+      {
+        "mm": 191.121,
+        "mm_other": 85.293,
+        "distance": 55.371511967350905,
+        "Route": "082A"
+      },
+      {
+        "mm": 174.606,
+        "mm_other": 0,
+        "distance": 90.00347312537237,
+        "Route": "091A"
+      },
+      {
+        "mm": 212.9,
+        "mm_other": 148.065,
+        "distance": 0.0,
+        "Route": "285C"
+      },
+      {
+        "mm": 226.55,
+        "mm_other": 161.789,
+        "distance": 0.0,
+        "Route": "285D"
+      },
+      {
+        "mm": 179.835,
+        "mm_other": 0,
+        "distance": 98.48881756416887,
+        "Route": "300A"
+      }
+    ]
+  },
+  {
+    "Route": "024A_DEC",
+    "MMin": 143.4,
+    "MMax": 303.84,
+    "intersections": []
+  },
+  {
+    "Route": "024B",
+    "MMin": 419.95,
+    "MMax": 437.2,
+    "intersections": [
+      {
+        "mm": 437.2,
+        "mm_other": 437.2,
+        "distance": 0,
+        "Route": "024C"
+      },
+      {
+        "mm": 437.2,
+        "mm_other": 0.534,
+        "distance": 0,
+        "Route": "057A"
+      },
+      {
+        "mm": 419.95,
+        "mm_other": 401.7,
+        "distance": 75.13870502810602,
+        "Route": "070A"
+      },
+      {
+        "mm": 437.2,
+        "mm_other": 437.2,
+        "distance": 0,
+        "Route": "024C"
+      },
+      {
+        "mm": 437.2,
+        "mm_other": 0.534,
+        "distance": 0,
+        "Route": "057A"
+      },
+      {
+        "mm": 429.604,
+        "mm_other": 0.528,
+        "distance": 0.0,
+        "Route": "070P"
+      }
+    ]
+  },
+  {
+    "Route": "024B_DEC",
+    "MMin": 419.95,
+    "MMax": 437.2,
+    "intersections": []
+  },
+  {
+    "Route": "024C",
+    "MMin": 437.2,
+    "MMax": 454.828,
+    "intersections": [
+      {
+        "mm": 437.2,
+        "mm_other": 437.2,
+        "distance": 0,
+        "Route": "024B"
+      },
+      {
+        "mm": 437.2,
+        "mm_other": 437.2,
+        "distance": 0,
+        "Route": "024B"
+      },
+      {
+        "mm": 437.2,
+        "mm_other": 0.534,
+        "distance": 0,
+        "Route": "057A"
+      },
+      {
+        "mm": 454.828,
+        "mm_other": 187.706,
+        "distance": 60.15608607537562,
+        "Route": "385C"
+      },
+      {
+        "mm": 437.2,
+        "mm_other": 0.534,
+        "distance": 0,
+        "Route": "057A"
+      }
+    ]
+  },
+  {
+    "Route": "024C_DEC",
+    "MMin": 437.2,
+    "MMax": 454.828,
+    "intersections": []
+  },
+  {
+    "Route": "024D",
+    "MMin": 455.882,
+    "MMax": 457.29,
+    "intersections": [
+      {
+        "mm": 455.882,
+        "mm_other": 437.868,
+        "distance": 84.90971949835468,
+        "Route": "070A"
+      },
+      {
+        "mm": 455.882,
+        "mm_other": 188.847,
+        "distance": 19.739511279679792,
+        "Route": "385C"
+      },
+      {
+        "mm": 455.991,
+        "mm_other": 0.137,
+        "distance": 62.33944246971804,
+        "Route": "070Q"
+      }
+    ]
+  },
+  {
+    "Route": "024D_DEC",
+    "MMin": 455.882,
+    "MMax": 457.29,
+    "intersections": []
+  },
+  {
+    "Route": "024E",
+    "MMin": 0,
+    "MMax": 2.826,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 296.922,
+        "distance": 87.71670900640339,
+        "Route": "024A"
+      }
+    ]
+  },
+  {
+    "Route": "024E_DEC",
+    "MMin": 0,
+    "MMax": 2.826,
+    "intersections": []
+  },
+  {
+    "Route": "024F",
+    "MMin": 0,
+    "MMax": 0.548,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 376.697,
+        "distance": 88.74400530283906,
+        "Route": "024G"
+      },
+      {
+        "mm": 0,
+        "mm_other": 382.184,
+        "distance": 0,
+        "Route": "040G"
+      },
+      {
+        "mm": 0.548,
+        "mm_other": 359.467,
+        "distance": 69.12546063533817,
+        "Route": "070A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 382.184,
+        "distance": 0,
+        "Route": "040G"
+      }
+    ]
+  },
+  {
+    "Route": "024F_DEC",
+    "MMin": 0,
+    "MMax": 0.548,
+    "intersections": []
+  },
+  {
+    "Route": "024G",
+    "MMin": 310.878,
+    "MMax": 380.464,
+    "intersections": [
+      {
+        "mm": 310.878,
+        "mm_other": 141.738,
+        "distance": 26.503590433670144,
+        "Route": "021B"
+      },
+      {
+        "mm": 376.697,
+        "mm_other": 0,
+        "distance": 88.74400530283906,
+        "Route": "024F"
+      },
+      {
+        "mm": 310.878,
+        "mm_other": 141.738,
+        "distance": 26.503590433670144,
+        "Route": "021B"
+      },
+      {
+        "mm": 310.878,
+        "mm_other": 310.583,
+        "distance": 78.971618510464,
+        "Route": "024H"
+      },
+      {
+        "mm": 380.464,
+        "mm_other": 386.01,
+        "distance": 0,
+        "Route": "040H"
+      },
+      {
+        "mm": 380.464,
+        "mm_other": 363.021,
+        "distance": 21.277049012103454,
+        "Route": "070A"
+      },
+      {
+        "mm": 310.878,
+        "mm_other": 310.878,
+        "distance": 26.503590433670144,
+        "Route": "024H"
+      },
+      {
+        "mm": 376.697,
+        "mm_other": 382.184,
+        "distance": 88.74400530283906,
+        "Route": "040G"
+      },
+      {
+        "mm": 380.464,
+        "mm_other": 386.01,
+        "distance": 0,
+        "Route": "040H"
+      },
+      {
+        "mm": 377.668,
+        "mm_other": 101.063,
+        "distance": 0.00033462499702430405,
+        "Route": "071C"
+      },
+      {
+        "mm": 378.795,
+        "mm_other": 101.973,
+        "distance": 3.6543708597724556,
+        "Route": "071D"
+      },
+      {
+        "mm": 312.43,
+        "mm_other": 0.548,
+        "distance": 21.852458772753828,
+        "Route": "094A"
+      }
+    ]
+  },
+  {
+    "Route": "024G_DEC",
+    "MMin": 310.878,
+    "MMax": 380.464,
+    "intersections": []
+  },
+  {
+    "Route": "024H",
+    "MMin": 303.412,
+    "MMax": 310.878,
+    "intersections": [
+      {
+        "mm": 308.216,
+        "mm_other": 139.582,
+        "distance": 24.054613028099904,
+        "Route": "021A"
+      },
+      {
+        "mm": 310.878,
+        "mm_other": 141.738,
+        "distance": 0,
+        "Route": "021B"
+      },
+      {
+        "mm": 310.583,
+        "mm_other": 310.878,
+        "distance": 78.971618510464,
+        "Route": "024G"
+      },
+      {
+        "mm": 310.878,
+        "mm_other": 141.738,
+        "distance": 0,
+        "Route": "021B"
+      },
+      {
+        "mm": 310.878,
+        "mm_other": 310.878,
+        "distance": 26.503590433670144,
+        "Route": "024G"
+      },
+      {
+        "mm": 303.412,
+        "mm_other": 138.788,
+        "distance": 96.3983647753176,
+        "Route": "025A"
+      }
+    ]
+  },
+  {
+    "Route": "024H_DEC",
+    "MMin": 303.412,
+    "MMax": 310.878,
+    "intersections": []
+  },
+  {
+    "Route": "024I",
+    "MMin": 4.196,
+    "MMax": 4.323,
+    "intersections": [
+      {
+        "mm": 4.196,
+        "mm_other": 300.437,
+        "distance": 82.37994928372218,
+        "Route": "024A"
+      }
+    ]
+  },
+  {
+    "Route": "024I_DEC",
+    "MMin": 4.196,
+    "MMax": 4.323,
+    "intersections": []
+  },
+  {
+    "Route": "025A",
+    "MMin": 0,
+    "MMax": 298.879,
+    "intersections": [
+      {
+        "mm": 49.949,
+        "mm_other": 0,
+        "distance": 97.56020294153113,
+        "Route": "010A"
+      },
+      {
+        "mm": 13.181,
+        "mm_other": 70.833,
+        "distance": 75.03593803926968,
+        "Route": "012A"
+      },
+      {
+        "mm": 141.272,
+        "mm_other": 303.84,
+        "distance": 97.01231926451892,
+        "Route": "024A"
+      },
+      {
+        "mm": 138.788,
+        "mm_other": 303.412,
+        "distance": 96.3983647753176,
+        "Route": "024H"
+      },
+      {
+        "mm": 34.0,
+        "mm_other": 0,
+        "distance": 52.901546830320825,
+        "Route": "025B"
+      },
+      {
+        "mm": 48.813,
+        "mm_other": 0,
+        "distance": 80.60190063139844,
+        "Route": "025C"
+      },
+      {
+        "mm": 207.813,
+        "mm_other": 14.14,
+        "distance": 75.00796496793734,
+        "Route": "026B"
+      },
+      {
+        "mm": 201.299,
+        "mm_other": 0.083,
+        "distance": 99.82970371144262,
+        "Route": "030A"
+      },
+      {
+        "mm": 101.346,
+        "mm_other": 0,
+        "distance": 24.311812660388366,
+        "Route": "047A"
+      },
+      {
+        "mm": 101.346,
+        "mm_other": 314.598,
+        "distance": 23.07521684148401,
+        "Route": "050A"
+      },
+      {
+        "mm": 99.981,
+        "mm_other": 315.709,
+        "distance": 6.515323495138049,
+        "Route": "050B"
+      },
+      {
+        "mm": 253.0,
+        "mm_other": 4.968,
+        "distance": 85.1907556110384,
+        "Route": "060A"
+      },
+      {
+        "mm": 252.119,
+        "mm_other": 5.823,
+        "distance": 94.17874871090633,
+        "Route": "060B"
+      },
+      {
+        "mm": 136.298,
+        "mm_other": 137.04,
+        "distance": 72.83518136607422,
+        "Route": "085A"
+      },
+      {
+        "mm": 184.144,
+        "mm_other": 184.667,
+        "distance": 58.62245642812887,
+        "Route": "085B"
+      },
+      {
+        "mm": 184.144,
+        "mm_other": 100,
+        "distance": 66.5967928196752,
+        "Route": "086B"
+      },
+      {
+        "mm": 199.215,
+        "mm_other": 14.77,
+        "distance": 94.66161605272019,
+        "Route": "088A"
+      },
+      {
+        "mm": 197.375,
+        "mm_other": 16.827,
+        "distance": 77.41929366616766,
+        "Route": "088B"
+      },
+      {
+        "mm": 139.747,
+        "mm_other": 47.496,
+        "distance": 14.650137392200383,
+        "Route": "115A"
+      },
+      {
+        "mm": 223.227,
+        "mm_other": 14.113,
+        "distance": 76.0022537777776,
+        "Route": "128B"
+      },
+      {
+        "mm": 49.949,
+        "mm_other": 306.35,
+        "distance": 97.56020294153113,
+        "Route": "160B"
+      },
+      {
+        "mm": 14.709,
+        "mm_other": 344.572,
+        "distance": 89.0354699661631,
+        "Route": "160C"
+      },
+      {
+        "mm": 200.291,
+        "mm_other": 0,
+        "distance": 54.045899475225696,
+        "Route": "225A"
+      },
+      {
+        "mm": 14.834,
+        "mm_other": 0,
+        "distance": 92.52421281967402,
+        "Route": "239A"
+      },
+      {
+        "mm": 201.299,
+        "mm_other": 263.947,
+        "distance": 99.82970371144262,
+        "Route": "285D"
+      },
+      {
+        "mm": 194.109,
+        "mm_other": 26.195,
+        "distance": 99.50319451935574,
+        "Route": "470A"
+      },
+      {
+        "mm": 194.109,
+        "mm_other": 0,
+        "distance": 99.50319451935574,
+        "Route": "470B"
+      },
+      {
+        "mm": 227.537,
+        "mm_other": 46.398,
+        "distance": 87.19116382308216,
+        "Route": "470N"
+      }
+    ]
+  },
+  {
+    "Route": "025A_DEC",
+    "MMin": 0,
+    "MMax": 298.879,
+    "intersections": []
+  },
+  {
+    "Route": "025B",
+    "MMin": 0,
+    "MMax": 1.948,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 34.0,
+        "distance": 52.901546830320825,
+        "Route": "025A"
+      }
+    ]
+  },
+  {
+    "Route": "025B_DEC",
+    "MMin": 0,
+    "MMax": 1.948,
+    "intersections": []
+  },
+  {
+    "Route": "025C",
+    "MMin": 0,
+    "MMax": 4.039,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 48.813,
+        "distance": 80.60190063139844,
+        "Route": "025A"
+      },
+      {
+        "mm": 3.643,
+        "mm_other": 0,
+        "distance": 0.0,
+        "Route": "069A"
+      },
+      {
+        "mm": 1.294,
+        "mm_other": 305.38,
+        "distance": 60.934766760523985,
+        "Route": "160A"
+      },
+      {
+        "mm": 1.439,
+        "mm_other": 305.526,
+        "distance": 63.41460117257617,
+        "Route": "160B"
+      }
+    ]
+  },
+  {
+    "Route": "025C_DEC",
+    "MMin": 0,
+    "MMax": 4.039,
+    "intersections": []
+  },
+  {
+    "Route": "026B",
+    "MMin": 11.17,
+    "MMax": 14.14,
+    "intersections": [
+      {
+        "mm": 14.14,
+        "mm_other": 207.813,
+        "distance": 75.00796496793734,
+        "Route": "025A"
+      },
+      {
+        "mm": 11.17,
+        "mm_other": 3.836,
+        "distance": 77.03590424608473,
+        "Route": "095A"
+      }
+    ]
+  },
+  {
+    "Route": "026B_DEC",
+    "MMin": 11.17,
+    "MMax": 14.14,
+    "intersections": []
+  },
+  {
+    "Route": "030A",
+    "MMin": 0.083,
+    "MMax": 20.416,
+    "intersections": [
+      {
+        "mm": 0.083,
+        "mm_other": 201.299,
+        "distance": 99.82970371144262,
+        "Route": "025A"
+      },
+      {
+        "mm": 0.083,
+        "mm_other": 263.947,
+        "distance": 0,
+        "Route": "285D"
+      },
+      {
+        "mm": 0.083,
+        "mm_other": 263.947,
+        "distance": 0,
+        "Route": "285D"
+      }
+    ]
+  },
+  {
+    "Route": "030A_DEC",
+    "MMin": 0.083,
+    "MMax": 20.416,
+    "intersections": []
+  },
+  {
+    "Route": "034A",
+    "MMin": 0,
+    "MMax": 149.633,
+    "intersections": [
+      {
+        "mm": 149.633,
+        "mm_other": 346.402,
+        "distance": 63.12890426609374,
+        "Route": "006I"
+      },
+      {
+        "mm": 0,
+        "mm_other": 211.032,
+        "distance": 91.44003410409411,
+        "Route": "040A"
+      },
+      {
+        "mm": 62.359,
+        "mm_other": 1.69,
+        "distance": 83.99961790394286,
+        "Route": "034C"
+      },
+      {
+        "mm": 102.0,
+        "mm_other": 0,
+        "distance": 59.910270688563415,
+        "Route": "034D"
+      },
+      {
+        "mm": 60.922,
+        "mm_other": 0,
+        "distance": 71.37556780670495,
+        "Route": "034F"
+      },
+      {
+        "mm": 53.713,
+        "mm_other": 0,
+        "distance": 89.23067455396135,
+        "Route": "036A"
+      },
+      {
+        "mm": 62.359,
+        "mm_other": 0,
+        "distance": 83.99961790394286,
+        "Route": "036B"
+      },
+      {
+        "mm": 112.647,
+        "mm_other": 265.763,
+        "distance": 84.46079183984071,
+        "Route": "085C"
+      },
+      {
+        "mm": 113.014,
+        "mm_other": 265.849,
+        "distance": 65.9877509391003,
+        "Route": "085L"
+      }
+    ]
+  },
+  {
+    "Route": "034A_DEC",
+    "MMin": 0,
+    "MMax": 149.633,
+    "intersections": []
+  },
+  {
+    "Route": "034B",
+    "MMin": 158.485,
+    "MMax": 259.529,
+    "intersections": [
+      {
+        "mm": 173.932,
+        "mm_other": 0,
+        "distance": 0.0,
+        "Route": "034E"
+      },
+      {
+        "mm": 162.962,
+        "mm_other": 86.481,
+        "distance": 0.008211768841870247,
+        "Route": "052B"
+      },
+      {
+        "mm": 209.305,
+        "mm_other": 0,
+        "distance": 0.0,
+        "Route": "061A"
+      },
+      {
+        "mm": 173.543,
+        "mm_other": 174.357,
+        "distance": 53.26504030697044,
+        "Route": "071D"
+      },
+      {
+        "mm": 172.414,
+        "mm_other": 175.486,
+        "distance": 0.012366630658005077,
+        "Route": "071E"
+      }
+    ]
+  },
+  {
+    "Route": "034B_DEC",
+    "MMin": 158.485,
+    "MMax": 259.529,
+    "intersections": []
+  },
+  {
+    "Route": "034C",
+    "MMin": 1.306,
+    "MMax": 1.69,
+    "intersections": [
+      {
+        "mm": 1.69,
+        "mm_other": 62.359,
+        "distance": 83.99961790394286,
+        "Route": "034A"
+      },
+      {
+        "mm": 1.306,
+        "mm_other": 6.44,
+        "distance": 98.89242224999198,
+        "Route": "036A"
+      },
+      {
+        "mm": 1.69,
+        "mm_other": 0,
+        "distance": 0,
+        "Route": "036B"
+      },
+      {
+        "mm": 1.306,
+        "mm_other": 6.982,
+        "distance": 0.000555975074268078,
+        "Route": "036A"
+      },
+      {
+        "mm": 1.69,
+        "mm_other": 0,
+        "distance": 0,
+        "Route": "036B"
+      }
+    ]
+  },
+  {
+    "Route": "034C_DEC",
+    "MMin": 1.306,
+    "MMax": 1.69,
+    "intersections": []
+  },
+  {
+    "Route": "034D",
+    "MMin": 0,
+    "MMax": 14.711,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 102.0,
+        "distance": 59.910270688563415,
+        "Route": "034A"
+      },
+      {
+        "mm": 10.0,
+        "mm_other": 0,
+        "distance": 0.2541531714696627,
+        "Route": "034Z"
+      },
+      {
+        "mm": 10.88,
+        "mm_other": 1.629,
+        "distance": 77.27538323771982,
+        "Route": "085G"
+      },
+      {
+        "mm": 10.194,
+        "mm_other": 0,
+        "distance": 0.0,
+        "Route": "085H"
+      },
+      {
+        "mm": 1.752,
+        "mm_other": 1.146,
+        "distance": 0.0,
+        "Route": "257B"
+      }
+    ]
+  },
+  {
+    "Route": "034D_DEC",
+    "MMin": 0,
+    "MMax": 14.711,
+    "intersections": []
+  },
+  {
+    "Route": "034E",
+    "MMin": 0,
+    "MMax": 0.932,
+    "intersections": [
+      {
+        "mm": 0.932,
+        "mm_other": 371.69,
+        "distance": 0,
+        "Route": "006J"
+      },
+      {
+        "mm": 0.932,
+        "mm_other": 371.69,
+        "distance": 0,
+        "Route": "006J"
+      },
+      {
+        "mm": 0,
+        "mm_other": 173.932,
+        "distance": 0.0,
+        "Route": "034B"
+      },
+      {
+        "mm": 0.932,
+        "mm_other": 91.693,
+        "distance": 23.911282050835705,
+        "Route": "076A"
+      }
+    ]
+  },
+  {
+    "Route": "034E_DEC",
+    "MMin": 0,
+    "MMax": 0.932,
+    "intersections": []
+  },
+  {
+    "Route": "034F",
+    "MMin": 0,
+    "MMax": 0.031,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 60.922,
+        "distance": 71.37556780670495,
+        "Route": "034A"
+      }
+    ]
+  },
+  {
+    "Route": "034F_DEC",
+    "MMin": 0,
+    "MMax": 0.031,
+    "intersections": []
+  },
+  {
+    "Route": "034Z",
+    "MMin": 0,
+    "MMax": 1.301,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 10.0,
+        "distance": 0.2541531714696627,
+        "Route": "034D"
+      }
+    ]
+  },
+  {
+    "Route": "034Z_DEC",
+    "MMin": 0,
+    "MMax": 1.301,
+    "intersections": []
+  },
+  {
+    "Route": "035A",
+    "MMin": 8.435,
+    "MMax": 9.704,
+    "intersections": [
+      {
+        "mm": 8.435,
+        "mm_other": 278.548,
+        "distance": 57.03111572759727,
+        "Route": "070A"
+      }
+    ]
+  },
+  {
+    "Route": "035A_DEC",
+    "MMin": 8.435,
+    "MMax": 9.704,
+    "intersections": []
+  },
+  {
+    "Route": "036A",
+    "MMin": 0,
+    "MMax": 6.982,
+    "intersections": [
+      {
+        "mm": 6.44,
+        "mm_other": 1.306,
+        "distance": 98.89242224999198,
+        "Route": "034C"
+      },
+      {
+        "mm": 0,
+        "mm_other": 53.713,
+        "distance": 89.23067455396135,
+        "Route": "034A"
+      },
+      {
+        "mm": 6.982,
+        "mm_other": 1.306,
+        "distance": 0.000555975074268078,
+        "Route": "034C"
+      }
+    ]
+  },
+  {
+    "Route": "036A_DEC",
+    "MMin": 0,
+    "MMax": 6.982,
+    "intersections": []
+  },
+  {
+    "Route": "036B",
+    "MMin": 0,
+    "MMax": 57.418,
+    "intersections": [
+      {
+        "mm": 0.381,
+        "mm_other": 0,
+        "distance": 74.12024445377274,
+        "Route": "007A"
+      },
+      {
+        "mm": 36.122,
+        "mm_other": 50.639,
+        "distance": 91.5273978127669,
+        "Route": "007B"
+      },
+      {
+        "mm": 36.306,
+        "mm_other": 52.29,
+        "distance": 99.87257084198548,
+        "Route": "007C"
+      },
+      {
+        "mm": 0,
+        "mm_other": 1.69,
+        "distance": 0,
+        "Route": "034C"
+      },
+      {
+        "mm": 0,
+        "mm_other": 62.359,
+        "distance": 83.99961790394286,
+        "Route": "034A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 1.69,
+        "distance": 0,
+        "Route": "034C"
+      },
+      {
+        "mm": 57.418,
+        "mm_other": 0.177,
+        "distance": 0,
+        "Route": "270B"
+      },
+      {
+        "mm": 37.599,
+        "mm_other": 0.357,
+        "distance": 93.22902338697571,
+        "Route": "036E"
+      },
+      {
+        "mm": 21.73,
+        "mm_other": 28.693,
+        "distance": 69.43962265811568,
+        "Route": "066B"
+      },
+      {
+        "mm": 52.558,
+        "mm_other": 14.376,
+        "distance": 72.7137437858389,
+        "Route": "095A"
+      },
+      {
+        "mm": 34.819,
+        "mm_other": 44.237,
+        "distance": 79.05638297531263,
+        "Route": "119B"
+      },
+      {
+        "mm": 39.522,
+        "mm_other": 0,
+        "distance": 4.126466439085363,
+        "Route": "157A"
+      },
+      {
+        "mm": 43.198,
+        "mm_other": 6.978,
+        "distance": 34.77769964292168,
+        "Route": "170A"
+      },
+      {
+        "mm": 56.979,
+        "mm_other": 0,
+        "distance": 88.19121718609854,
+        "Route": "224A"
+      },
+      {
+        "mm": 57.418,
+        "mm_other": 0.177,
+        "distance": 0,
+        "Route": "270B"
+      }
+    ]
+  },
+  {
+    "Route": "036B_DEC",
+    "MMin": 0,
+    "MMax": 57.418,
+    "intersections": []
+  },
+  {
+    "Route": "036C",
+    "MMin": 76.394,
+    "MMax": 89.21,
+    "intersections": [
+      {
+        "mm": 89.21,
+        "mm_other": 89.21,
+        "distance": 0,
+        "Route": "036D"
+      },
+      {
+        "mm": 76.394,
+        "mm_other": 292.128,
+        "distance": 33.41981381495465,
+        "Route": "070A"
+      },
+      {
+        "mm": 89.21,
+        "mm_other": 1.58,
+        "distance": 0,
+        "Route": "079B"
+      },
+      {
+        "mm": 89.21,
+        "mm_other": 89.21,
+        "distance": 0,
+        "Route": "036D"
+      },
+      {
+        "mm": 79.73,
+        "mm_other": 0.4,
+        "distance": 0.0818147434705047,
+        "Route": "070L"
+      },
+      {
+        "mm": 88.836,
+        "mm_other": 1.24,
+        "distance": 0.0,
+        "Route": "079A"
+      },
+      {
+        "mm": 89.21,
+        "mm_other": 1.58,
+        "distance": 0,
+        "Route": "079B"
+      }
+    ]
+  },
+  {
+    "Route": "036C_DEC",
+    "MMin": 76.394,
+    "MMax": 89.21,
+    "intersections": []
+  },
+  {
+    "Route": "036D",
+    "MMin": 89.21,
+    "MMax": 224.718,
+    "intersections": [
+      {
+        "mm": 89.21,
+        "mm_other": 89.21,
+        "distance": 0,
+        "Route": "036C"
+      },
+      {
+        "mm": 89.21,
+        "mm_other": 89.21,
+        "distance": 0,
+        "Route": "036C"
+      },
+      {
+        "mm": 89.21,
+        "mm_other": 1.58,
+        "distance": 0,
+        "Route": "079B"
+      },
+      {
+        "mm": 100.937,
+        "mm_other": 338.57,
+        "distance": 0.0,
+        "Route": "040D"
+      },
+      {
+        "mm": 178.0,
+        "mm_other": 67.142,
+        "distance": 70.5027262019048,
+        "Route": "059A"
+      },
+      {
+        "mm": 185.382,
+        "mm_other": 74.474,
+        "distance": 0.03520945283836384,
+        "Route": "059B"
+      },
+      {
+        "mm": 155.614,
+        "mm_other": 0,
+        "distance": 0.07527939497947198,
+        "Route": "063A"
+      },
+      {
+        "mm": 95.0,
+        "mm_other": 0.348,
+        "distance": 0.13631848368104826,
+        "Route": "070M"
+      },
+      {
+        "mm": 89.21,
+        "mm_other": 1.58,
+        "distance": 0,
+        "Route": "079B"
+      },
+      {
+        "mm": 210.965,
+        "mm_other": 216.661,
+        "distance": 0.0,
+        "Route": "385C"
+      },
+      {
+        "mm": 213.482,
+        "mm_other": 219.448,
+        "distance": 59.24728908472476,
+        "Route": "385D"
+      }
+    ]
+  },
+  {
+    "Route": "036D_DEC",
+    "MMin": 89.21,
+    "MMax": 224.718,
+    "intersections": []
+  },
+  {
+    "Route": "036E",
+    "MMin": 0,
+    "MMax": 0.357,
+    "intersections": [
+      {
+        "mm": 0.357,
+        "mm_other": 37.599,
+        "distance": 93.22902338697571,
+        "Route": "036B"
+      },
+      {
+        "mm": 0,
+        "mm_other": 17.304,
+        "distance": 99.9325037334088,
+        "Route": "093A"
+      }
+    ]
+  },
+  {
+    "Route": "036E_DEC",
+    "MMin": 0,
+    "MMax": 0.357,
+    "intersections": []
+  },
+  {
+    "Route": "036Z",
+    "MMin": 0,
+    "MMax": 0.299,
+    "intersections": []
+  },
+  {
+    "Route": "039A",
+    "MMin": 0,
+    "MMax": 7.571,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 345.928,
+        "distance": 0.0,
+        "Route": "006I"
+      },
+      {
+        "mm": 0,
+        "mm_other": 72.581,
+        "distance": 0,
+        "Route": "052A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 66.099,
+        "distance": 95.56492597116875,
+        "Route": "076A"
+      },
+      {
+        "mm": 7.571,
+        "mm_other": 10.449,
+        "distance": 85.16975780303395,
+        "Route": "144A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 72.581,
+        "distance": 0,
+        "Route": "052A"
+      }
+    ]
+  },
+  {
+    "Route": "039A_DEC",
+    "MMin": 0,
+    "MMax": 7.571,
+    "intersections": []
+  },
+  {
+    "Route": "040A",
+    "MMin": 0,
+    "MMax": 258.258,
+    "intersections": [
+      {
+        "mm": 90.838,
+        "mm_other": 89.58,
+        "distance": 0.34324463581240267,
+        "Route": "013B"
+      },
+      {
+        "mm": 157.233,
+        "mm_other": 0,
+        "distance": 83.78783603843944,
+        "Route": "014A"
+      },
+      {
+        "mm": 211.032,
+        "mm_other": 0,
+        "distance": 91.44003410409411,
+        "Route": "034A"
+      },
+      {
+        "mm": 258.258,
+        "mm_other": 232.078,
+        "distance": 16.849709331845446,
+        "Route": "070A"
+      },
+      {
+        "mm": 2.913,
+        "mm_other": 0,
+        "distance": 0.0,
+        "Route": "064A"
+      },
+      {
+        "mm": 209.165,
+        "mm_other": 0,
+        "distance": 0.36917973793442094,
+        "Route": "125A"
+      },
+      {
+        "mm": 136.371,
+        "mm_other": 68.721,
+        "distance": 95.32698149659787,
+        "Route": "131B"
+      },
+      {
+        "mm": 178.153,
+        "mm_other": 27.163,
+        "distance": 92.86232744819137,
+        "Route": "134A"
+      },
+      {
+        "mm": 59.735,
+        "mm_other": 60.697,
+        "distance": 92.1524646029284,
+        "Route": "318A"
+      },
+      {
+        "mm": 90.501,
+        "mm_other": 0,
+        "distance": 89.16974317244312,
+        "Route": "394A"
+      }
+    ]
+  },
+  {
+    "Route": "040A_DEC",
+    "MMin": 0,
+    "MMax": 258.258,
+    "intersections": []
+  },
+  {
+    "Route": "040B",
+    "MMin": 269.441,
+    "MMax": 276.92,
+    "intersections": [
+      {
+        "mm": 269.441,
+        "mm_other": 257.694,
+        "distance": 71.31834893654357,
+        "Route": "006G"
+      },
+      {
+        "mm": 276.92,
+        "mm_other": 251.152,
+        "distance": 95.46398412869804,
+        "Route": "070A"
+      },
+      {
+        "mm": 276.92,
+        "mm_other": 0.31,
+        "distance": 98.45034209038538,
+        "Route": "074A"
+      }
+    ]
+  },
+  {
+    "Route": "040B_DEC",
+    "MMin": 269.441,
+    "MMax": 276.92,
+    "intersections": []
+  },
+  {
+    "Route": "040C",
+    "MMin": 279.208,
+    "MMax": 312.142,
+    "intersections": [
+      {
+        "mm": 279.208,
+        "mm_other": 253.506,
+        "distance": 24.30196163956581,
+        "Route": "070A"
+      },
+      {
+        "mm": 296.123,
+        "mm_other": 0,
+        "distance": 79.19892593085932,
+        "Route": "088A"
+      },
+      {
+        "mm": 296.123,
+        "mm_other": 282.7,
+        "distance": 61.93551921217993,
+        "Route": "287C"
+      }
+    ]
+  },
+  {
+    "Route": "040C_DEC",
+    "MMin": 279.208,
+    "MMax": 312.142,
+    "intersections": []
+  },
+  {
+    "Route": "040D",
+    "MMin": 338.57,
+    "MMax": 340.381,
+    "intersections": [
+      {
+        "mm": 338.57,
+        "mm_other": 100.937,
+        "distance": 0.0,
+        "Route": "036D"
+      },
+      {
+        "mm": 340.381,
+        "mm_other": 317.702,
+        "distance": 94.10947591498181,
+        "Route": "070A"
+      }
+    ]
+  },
+  {
+    "Route": "040D_DEC",
+    "MMin": 338.57,
+    "MMax": 340.381,
+    "intersections": []
+  },
+  {
+    "Route": "040E",
+    "MMin": 346.29,
+    "MMax": 352.245,
+    "intersections": [
+      {
+        "mm": 346.29,
+        "mm_other": 323.658,
+        "distance": 50.75887824521821,
+        "Route": "070A"
+      },
+      {
+        "mm": 350.767,
+        "mm_other": 0,
+        "distance": 90.19804151288615,
+        "Route": "070N"
+      }
+    ]
+  },
+  {
+    "Route": "040E_DEC",
+    "MMin": 346.29,
+    "MMax": 352.245,
+    "intersections": []
+  },
+  {
+    "Route": "040F",
+    "MMin": 360.201,
+    "MMax": 362.999,
+    "intersections": [
+      {
+        "mm": 360.201,
+        "mm_other": 338.066,
+        "distance": 95.32222322362989,
+        "Route": "070A"
+      },
+      {
+        "mm": 362.999,
+        "mm_other": 0,
+        "distance": 0,
+        "Route": "070O"
+      },
+      {
+        "mm": 362.999,
+        "mm_other": 0,
+        "distance": 0,
+        "Route": "070O"
+      }
+    ]
+  },
+  {
+    "Route": "040F_DEC",
+    "MMin": 360.201,
+    "MMax": 362.999,
+    "intersections": []
+  },
+  {
+    "Route": "040G",
+    "MMin": 380.689,
+    "MMax": 382.184,
+    "intersections": [
+      {
+        "mm": 382.184,
+        "mm_other": 0,
+        "distance": 0,
+        "Route": "024F"
+      },
+      {
+        "mm": 382.184,
+        "mm_other": 0,
+        "distance": 0,
+        "Route": "024F"
+      },
+      {
+        "mm": 382.184,
+        "mm_other": 376.697,
+        "distance": 88.74400530283906,
+        "Route": "024G"
+      },
+      {
+        "mm": 380.689,
+        "mm_other": 357.848,
+        "distance": 54.5900123193413,
+        "Route": "070A"
+      }
+    ]
+  },
+  {
+    "Route": "040G_DEC",
+    "MMin": 380.689,
+    "MMax": 382.184,
+    "intersections": []
+  },
+  {
+    "Route": "040H",
+    "MMin": 386.01,
+    "MMax": 486.924,
+    "intersections": [
+      {
+        "mm": 386.01,
+        "mm_other": 380.464,
+        "distance": 0,
+        "Route": "024G"
+      },
+      {
+        "mm": 386.01,
+        "mm_other": 380.464,
+        "distance": 0,
+        "Route": "024G"
+      },
+      {
+        "mm": 386.01,
+        "mm_other": 363.021,
+        "distance": 21.277049012103454,
+        "Route": "070A"
+      },
+      {
+        "mm": 445.105,
+        "mm_other": 0,
+        "distance": 98.37665843309338,
+        "Route": "059A"
+      },
+      {
+        "mm": 425.432,
+        "mm_other": 86.174,
+        "distance": 50.24342759302302,
+        "Route": "094A"
+      },
+      {
+        "mm": 446.043,
+        "mm_other": 133.24,
+        "distance": 70.44566626902932,
+        "Route": "287B"
+      },
+      {
+        "mm": 470.852,
+        "mm_other": 149.701,
+        "distance": 59.88303113301777,
+        "Route": "385B"
+      },
+      {
+        "mm": 470.311,
+        "mm_other": 150.251,
+        "distance": 0.0003369573787895183,
+        "Route": "385C"
+      }
+    ]
+  },
+  {
+    "Route": "040H_DEC",
+    "MMin": 386.01,
+    "MMax": 486.924,
+    "intersections": []
+  },
+  {
+    "Route": "040Z",
+    "MMin": 0,
+    "MMax": 0.73,
+    "intersections": []
+  },
+  {
+    "Route": "041A",
+    "MMin": 0,
+    "MMax": 9.505,
+    "intersections": []
+  },
+  {
+    "Route": "041A_DEC",
+    "MMin": 0,
+    "MMax": 9.505,
+    "intersections": []
+  },
+  {
+    "Route": "042A",
+    "MMin": 0,
+    "MMax": 4.876,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 59.27,
+        "distance": 46.74446020137518,
+        "Route": "007C"
+      },
+      {
+        "mm": 4.876,
+        "mm_other": 301.734,
+        "distance": 40.93596623276762,
+        "Route": "287C"
+      }
+    ]
+  },
+  {
+    "Route": "042A_DEC",
+    "MMin": 0,
+    "MMax": 4.876,
+    "intersections": []
+  },
+  {
+    "Route": "044A",
+    "MMin": 0,
+    "MMax": 4.958,
+    "intersections": []
+  },
+  {
+    "Route": "044A_DEC",
+    "MMin": 0,
+    "MMax": 4.958,
+    "intersections": []
+  },
+  {
+    "Route": "045A",
+    "MMin": 0,
+    "MMax": 8.734,
+    "intersections": [
+      {
+        "mm": 2.971,
+        "mm_other": 33.272,
+        "distance": 73.10737828323595,
+        "Route": "078A"
+      }
+    ]
+  },
+  {
+    "Route": "045A_DEC",
+    "MMin": 0,
+    "MMax": 8.734,
+    "intersections": []
+  },
+  {
+    "Route": "046A",
+    "MMin": 0,
+    "MMax": 6.61,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 12.399,
+        "distance": 60.96202346989066,
+        "Route": "119A"
+      }
+    ]
+  },
+  {
+    "Route": "046A_DEC",
+    "MMin": 0,
+    "MMax": 6.61,
+    "intersections": []
+  },
+  {
+    "Route": "047A",
+    "MMin": 0,
+    "MMax": 4.635,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 101.346,
+        "distance": 24.311812660388366,
+        "Route": "025A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 314.598,
+        "distance": 4.0379339694721414,
+        "Route": "050A"
+      },
+      {
+        "mm": 4.635,
+        "mm_other": 318.707,
+        "distance": 28.52534598106935,
+        "Route": "050B"
+      },
+      {
+        "mm": 4.635,
+        "mm_other": 58.812,
+        "distance": 0,
+        "Route": "096A"
+      },
+      {
+        "mm": 0.0,
+        "mm_other": 314.598,
+        "distance": 4.0379339694721414,
+        "Route": "050A"
+      },
+      {
+        "mm": 4.635,
+        "mm_other": 58.812,
+        "distance": 0,
+        "Route": "096A"
+      }
+    ]
+  },
+  {
+    "Route": "047A_DEC",
+    "MMin": 0,
+    "MMax": 4.635,
+    "intersections": []
+  },
+  {
+    "Route": "050A",
+    "MMin": 31.76,
+    "MMax": 314.598,
+    "intersections": [
+      {
+        "mm": 269.079,
+        "mm_other": 0,
+        "distance": 89.69454808931589,
+        "Route": "009A"
+      },
+      {
+        "mm": 314.598,
+        "mm_other": 0,
+        "distance": 4.0379339694721414,
+        "Route": "047A"
+      },
+      {
+        "mm": 314.598,
+        "mm_other": 101.346,
+        "distance": 23.07521684148401,
+        "Route": "025A"
+      },
+      {
+        "mm": 314.598,
+        "mm_other": 0.0,
+        "distance": 4.0379339694721414,
+        "Route": "047A"
+      },
+      {
+        "mm": 31.76,
+        "mm_other": 5.62,
+        "distance": 91.7593416696154,
+        "Route": "070B"
+      },
+      {
+        "mm": 81.431,
+        "mm_other": 0,
+        "distance": 62.80341981755771,
+        "Route": "050D"
+      },
+      {
+        "mm": 285.633,
+        "mm_other": 15.074,
+        "distance": 31.392381713596986,
+        "Route": "067B"
+      },
+      {
+        "mm": 252.632,
+        "mm_other": 82.664,
+        "distance": 61.202055540803116,
+        "Route": "069A"
+      },
+      {
+        "mm": 70.833,
+        "mm_other": 0,
+        "distance": 79.39006710109099,
+        "Route": "092A"
+      },
+      {
+        "mm": 165.581,
+        "mm_other": 0,
+        "distance": 38.68923753788171,
+        "Route": "114A"
+      },
+      {
+        "mm": 278.659,
+        "mm_other": 0,
+        "distance": 81.73749172323895,
+        "Route": "115A"
+      },
+      {
+        "mm": 294.339,
+        "mm_other": 7.186,
+        "distance": 13.389360841739066,
+        "Route": "120A"
+      },
+      {
+        "mm": 157.394,
+        "mm_other": 0,
+        "distance": 0.5602756103834118,
+        "Route": "135A"
+      },
+      {
+        "mm": 41.137,
+        "mm_other": 154.109,
+        "distance": 0.5411887578421086,
+        "Route": "141A"
+      },
+      {
+        "mm": 38.452,
+        "mm_other": 156.746,
+        "distance": 86.49304980750792,
+        "Route": "141B"
+      },
+      {
+        "mm": 148.052,
+        "mm_other": 117.522,
+        "distance": 0.5255321429881255,
+        "Route": "149A"
+      },
+      {
+        "mm": 217.23,
+        "mm_other": 126.48,
+        "distance": 72.78743785822012,
+        "Route": "285B"
+      },
+      {
+        "mm": 216.766,
+        "mm_other": 126.853,
+        "distance": 30.21805549357447,
+        "Route": "285C"
+      },
+      {
+        "mm": 222.358,
+        "mm_other": 0,
+        "distance": 70.34540299377917,
+        "Route": "291A"
+      },
+      {
+        "mm": 100.499,
+        "mm_other": 0,
+        "distance": 94.91500717757941,
+        "Route": "347A"
+      },
+      {
+        "mm": 71.244,
+        "mm_other": 0,
+        "distance": 90.29658570819271,
+        "Route": "348A"
+      },
+      {
+        "mm": 91.916,
+        "mm_other": 130.219,
+        "distance": 73.02370285348137,
+        "Route": "550B"
+      }
+    ]
+  },
+  {
+    "Route": "050A_DEC",
+    "MMin": 31.76,
+    "MMax": 314.598,
+    "intersections": []
+  },
+  {
+    "Route": "050B",
+    "MMin": 315.709,
+    "MMax": 467.583,
+    "intersections": [
+      {
+        "mm": 378.389,
+        "mm_other": 71.968,
+        "distance": 34.53406297827734,
+        "Route": "010A"
+      },
+      {
+        "mm": 318.707,
+        "mm_other": 4.635,
+        "distance": 28.52534598106935,
+        "Route": "047A"
+      },
+      {
+        "mm": 315.709,
+        "mm_other": 99.981,
+        "distance": 6.515323495138049,
+        "Route": "025A"
+      },
+      {
+        "mm": 332.244,
+        "mm_other": 16.948,
+        "distance": 20.207310023918577,
+        "Route": "050C"
+      },
+      {
+        "mm": 366.939,
+        "mm_other": 16.157,
+        "distance": 68.11737895283788,
+        "Route": "071C"
+      },
+      {
+        "mm": 463.472,
+        "mm_other": 34.34,
+        "distance": 56.62979475160954,
+        "Route": "089A"
+      },
+      {
+        "mm": 318.707,
+        "mm_other": 58.812,
+        "distance": 28.52534598106935,
+        "Route": "096A"
+      },
+      {
+        "mm": 329.334,
+        "mm_other": 69.499,
+        "distance": 0.3648970153027124,
+        "Route": "096B"
+      },
+      {
+        "mm": 398.776,
+        "mm_other": 0,
+        "distance": 12.225824580864685,
+        "Route": "101A"
+      },
+      {
+        "mm": 380.2,
+        "mm_other": 0,
+        "distance": 59.127942434049395,
+        "Route": "109B"
+      },
+      {
+        "mm": 404.627,
+        "mm_other": 0,
+        "distance": 9.125563548183745,
+        "Route": "183A"
+      },
+      {
+        "mm": 400.448,
+        "mm_other": 20.327,
+        "distance": 5.084452757478695e-05,
+        "Route": "194A"
+      },
+      {
+        "mm": 420.771,
+        "mm_other": 0,
+        "distance": 53.894887119114834,
+        "Route": "196A"
+      },
+      {
+        "mm": 368.109,
+        "mm_other": 0,
+        "distance": 84.7498227057456,
+        "Route": "202A"
+      },
+      {
+        "mm": 359.712,
+        "mm_other": 0,
+        "distance": 2.6649177314687444e-05,
+        "Route": "207A"
+      },
+      {
+        "mm": 335.709,
+        "mm_other": 0,
+        "distance": 92.7923203028223,
+        "Route": "209A"
+      },
+      {
+        "mm": 324.229,
+        "mm_other": 2.05,
+        "distance": 5.171602559113034,
+        "Route": "231A"
+      },
+      {
+        "mm": 435.141,
+        "mm_other": 77.639,
+        "distance": 86.38550429226011,
+        "Route": "287A"
+      },
+      {
+        "mm": 427.956,
+        "mm_other": 85.188,
+        "distance": 48.93017136342584,
+        "Route": "287B"
+      },
+      {
+        "mm": 378.765,
+        "mm_other": 72.718,
+        "distance": 93.1566757922847,
+        "Route": "350A"
+      },
+      {
+        "mm": 452.769,
+        "mm_other": 95,
+        "distance": 2.3707254974863904e-05,
+        "Route": "385A"
+      }
+    ]
+  },
+  {
+    "Route": "050B_DEC",
+    "MMin": 315.709,
+    "MMax": 467.583,
+    "intersections": []
+  },
+  {
+    "Route": "050C",
+    "MMin": 0,
+    "MMax": 16.948,
+    "intersections": [
+      {
+        "mm": 16.948,
+        "mm_other": 332.244,
+        "distance": 20.207310023918577,
+        "Route": "050B"
+      },
+      {
+        "mm": 0,
+        "mm_other": 56.091,
+        "distance": 0.15801029129653943,
+        "Route": "096A"
+      },
+      {
+        "mm": 2.321,
+        "mm_other": 0,
+        "distance": 72.14411258541844,
+        "Route": "227A"
+      },
+      {
+        "mm": 9.449,
+        "mm_other": 0,
+        "distance": 0.0,
+        "Route": "231A"
+      }
+    ]
+  },
+  {
+    "Route": "050C_DEC",
+    "MMin": 0,
+    "MMax": 16.948,
+    "intersections": []
+  },
+  {
+    "Route": "050D",
+    "MMin": 0,
+    "MMax": 1.539,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 81.431,
+        "distance": 62.80341981755771,
+        "Route": "050A"
+      }
+    ]
+  },
+  {
+    "Route": "050D_DEC",
+    "MMin": 0,
+    "MMax": 1.539,
+    "intersections": []
+  },
+  {
+    "Route": "050Z",
+    "MMin": 0,
+    "MMax": 2.603,
+    "intersections": []
+  },
+  {
+    "Route": "052A",
+    "MMin": 0,
+    "MMax": 72.581,
+    "intersections": [
+      {
+        "mm": 72.581,
+        "mm_other": 0,
+        "distance": 0,
+        "Route": "039A"
+      },
+      {
+        "mm": 72.581,
+        "mm_other": 345.928,
+        "distance": 0.0,
+        "Route": "006I"
+      },
+      {
+        "mm": 72.581,
+        "mm_other": 0,
+        "distance": 0,
+        "Route": "039A"
+      },
+      {
+        "mm": 72.581,
+        "mm_other": 66.099,
+        "distance": 95.56492597116875,
+        "Route": "076A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 49.543,
+        "distance": 17.865569749941038,
+        "Route": "119B"
+      },
+      {
+        "mm": 41.939,
+        "mm_other": 23.892,
+        "distance": 0.0,
+        "Route": "079B"
+      },
+      {
+        "mm": 20.452,
+        "mm_other": 0,
+        "distance": 0.0,
+        "Route": "085E"
+      }
+    ]
+  },
+  {
+    "Route": "052A_DEC",
+    "MMin": 0,
+    "MMax": 72.581,
+    "intersections": []
+  },
+  {
+    "Route": "052B",
+    "MMin": 86.481,
+    "MMax": 111.569,
+    "intersections": [
+      {
+        "mm": 86.481,
+        "mm_other": 162.962,
+        "distance": 0.008211768841870247,
+        "Route": "034B"
+      },
+      {
+        "mm": 86.765,
+        "mm_other": 28.796,
+        "distance": 82.05465239413421,
+        "Route": "144A"
+      }
+    ]
+  },
+  {
+    "Route": "052B_DEC",
+    "MMin": 86.481,
+    "MMax": 111.569,
+    "intersections": []
+  },
+  {
+    "Route": "053A",
+    "MMin": 0,
+    "MMax": 1.663,
+    "intersections": [
+      {
+        "mm": 1.663,
+        "mm_other": 0.079,
+        "distance": 90.89895917835703,
+        "Route": "224A"
+      }
+    ]
+  },
+  {
+    "Route": "053A_DEC",
+    "MMin": 0,
+    "MMax": 1.663,
+    "intersections": []
+  },
+  {
+    "Route": "055A",
+    "MMin": 0,
+    "MMax": 5.659,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 27.446,
+        "distance": 82.31249756940811,
+        "Route": "138A"
+      }
+    ]
+  },
+  {
+    "Route": "055A_DEC",
+    "MMin": 0,
+    "MMax": 5.659,
+    "intersections": []
+  },
+  {
+    "Route": "056B",
+    "MMin": 2.821,
+    "MMax": 9.529,
+    "intersections": [
+      {
+        "mm": 2.821,
+        "mm_other": 325.379,
+        "distance": 75.286115360092,
+        "Route": "287C"
+      }
+    ]
+  },
+  {
+    "Route": "056B_DEC",
+    "MMin": 2.821,
+    "MMax": 9.529,
+    "intersections": []
+  },
+  {
+    "Route": "057A",
+    "MMin": 0,
+    "MMax": 0.534,
+    "intersections": [
+      {
+        "mm": 0.534,
+        "mm_other": 437.2,
+        "distance": 0,
+        "Route": "024B"
+      },
+      {
+        "mm": 0.534,
+        "mm_other": 437.2,
+        "distance": 0,
+        "Route": "024C"
+      },
+      {
+        "mm": 0.534,
+        "mm_other": 437.2,
+        "distance": 0,
+        "Route": "024B"
+      },
+      {
+        "mm": 0.534,
+        "mm_other": 437.2,
+        "distance": 0,
+        "Route": "024C"
+      },
+      {
+        "mm": 0,
+        "mm_other": 419.308,
+        "distance": 20.6323629214384,
+        "Route": "070A"
+      }
+    ]
+  },
+  {
+    "Route": "057A_DEC",
+    "MMin": 0,
+    "MMax": 0.534,
+    "intersections": []
+  },
+  {
+    "Route": "058A",
+    "MMin": 0,
+    "MMax": 5.627,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 271.602,
+        "distance": 0.00011119375071365752,
+        "Route": "006G"
+      },
+      {
+        "mm": 5.627,
+        "mm_other": 265.489,
+        "distance": 74.74979909266351,
+        "Route": "070A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 0.014,
+        "distance": 7.19180766328795,
+        "Route": "093A"
+      },
+      {
+        "mm": 0.0,
+        "mm_other": 0,
+        "distance": 0.00011119375071365752,
+        "Route": "093A"
+      }
+    ]
+  },
+  {
+    "Route": "058A_DEC",
+    "MMin": 0,
+    "MMax": 5.627,
+    "intersections": []
+  },
+  {
+    "Route": "059A",
+    "MMin": 0,
+    "MMax": 67.142,
+    "intersections": [
+      {
+        "mm": 67.142,
+        "mm_other": 178.0,
+        "distance": 70.5027262019048,
+        "Route": "036D"
+      },
+      {
+        "mm": 0,
+        "mm_other": 445.105,
+        "distance": 98.37665843309338,
+        "Route": "040H"
+      }
+    ]
+  },
+  {
+    "Route": "059A_DEC",
+    "MMin": 0,
+    "MMax": 67.142,
+    "intersections": []
+  },
+  {
+    "Route": "059B",
+    "MMin": 74.474,
+    "MMax": 173.337,
+    "intersections": [
+      {
+        "mm": 74.474,
+        "mm_other": 185.382,
+        "distance": 0.03520945283836384,
+        "Route": "036D"
+      }
+    ]
+  },
+  {
+    "Route": "059B_DEC",
+    "MMin": 74.474,
+    "MMax": 173.337,
+    "intersections": []
+  },
+  {
+    "Route": "060A",
+    "MMin": 0,
+    "MMax": 4.968,
+    "intersections": [
+      {
+        "mm": 4.968,
+        "mm_other": 253.0,
+        "distance": 85.1907556110384,
+        "Route": "025A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 329.856,
+        "distance": 74.01687213309386,
+        "Route": "287C"
+      }
+    ]
+  },
+  {
+    "Route": "060A_DEC",
+    "MMin": 0,
+    "MMax": 4.968,
+    "intersections": []
+  },
+  {
+    "Route": "060B",
+    "MMin": 5.823,
+    "MMax": 20.203,
+    "intersections": [
+      {
+        "mm": 5.823,
+        "mm_other": 252.119,
+        "distance": 94.17874871090633,
+        "Route": "025A"
+      },
+      {
+        "mm": 20.203,
+        "mm_other": 253.809,
+        "distance": 20.180305930174057,
+        "Route": "085C"
+      },
+      {
+        "mm": 11.853,
+        "mm_other": 0,
+        "distance": 0.0,
+        "Route": "257A"
+      }
+    ]
+  },
+  {
+    "Route": "060B_DEC",
+    "MMin": 5.823,
+    "MMax": 20.203,
+    "intersections": []
+  },
+  {
+    "Route": "061A",
+    "MMin": 0,
+    "MMax": 40.993,
+    "intersections": [
+      {
+        "mm": 40.993,
+        "mm_other": 406.794,
+        "distance": 0.0,
+        "Route": "006J"
+      },
+      {
+        "mm": 0,
+        "mm_other": 209.305,
+        "distance": 0.0,
+        "Route": "034B"
+      }
+    ]
+  },
+  {
+    "Route": "061A_DEC",
+    "MMin": 0,
+    "MMax": 40.993,
+    "intersections": []
+  },
+  {
+    "Route": "062A",
+    "MMin": 0,
+    "MMax": 23.414,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 84.188,
+        "distance": 86.57976444844684,
+        "Route": "145A"
+      },
+      {
+        "mm": 23.414,
+        "mm_other": 103.683,
+        "distance": 25.104283862641303,
+        "Route": "550B"
+      }
+    ]
+  },
+  {
+    "Route": "062A_DEC",
+    "MMin": 0,
+    "MMax": 23.414,
+    "intersections": []
+  },
+  {
+    "Route": "063A",
+    "MMin": 0,
+    "MMax": 56.412,
+    "intersections": [
+      {
+        "mm": 56.412,
+        "mm_other": 397.955,
+        "distance": 0.0,
+        "Route": "006J"
+      },
+      {
+        "mm": 0,
+        "mm_other": 155.614,
+        "distance": 0.07527939497947198,
+        "Route": "036D"
+      }
+    ]
+  },
+  {
+    "Route": "063A_DEC",
+    "MMin": 0,
+    "MMax": 56.412,
+    "intersections": []
+  },
+  {
+    "Route": "064A",
+    "MMin": 0,
+    "MMax": 73.705,
+    "intersections": [
+      {
+        "mm": 73.705,
+        "mm_other": 38.967,
+        "distance": 78.69178662422527,
+        "Route": "013A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 2.913,
+        "distance": 0.0,
+        "Route": "040A"
+      },
+      {
+        "mm": 19.753,
+        "mm_other": 72.065,
+        "distance": 79.72124625386603,
+        "Route": "139A"
+      }
+    ]
+  },
+  {
+    "Route": "064A_DEC",
+    "MMin": 0,
+    "MMax": 73.705,
+    "intersections": []
+  },
+  {
+    "Route": "065A",
+    "MMin": 0,
+    "MMax": 61.377,
+    "intersections": [
+      {
+        "mm": 61.377,
+        "mm_other": 48.95,
+        "distance": 59.812782574269384,
+        "Route": "070A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 3.814,
+        "distance": 8.237189404016782,
+        "Route": "092A"
+      },
+      {
+        "mm": 51.0,
+        "mm_other": 0,
+        "distance": 99.66516117335527,
+        "Route": "330A"
+      }
+    ]
+  },
+  {
+    "Route": "065A_DEC",
+    "MMin": 0,
+    "MMax": 61.377,
+    "intersections": []
+  },
+  {
+    "Route": "066B",
+    "MMin": 28.693,
+    "MMax": 51.386,
+    "intersections": [
+      {
+        "mm": 28.693,
+        "mm_other": 21.73,
+        "distance": 69.43962265811568,
+        "Route": "036B"
+      },
+      {
+        "mm": 51.386,
+        "mm_other": 250.411,
+        "distance": 60.714052806143066,
+        "Route": "085C"
+      }
+    ]
+  },
+  {
+    "Route": "066B_DEC",
+    "MMin": 28.693,
+    "MMax": 51.386,
+    "intersections": []
+  },
+  {
+    "Route": "067A",
+    "MMin": 0,
+    "MMax": 11.047,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 26.192,
+        "distance": 96.479812468353,
+        "Route": "096A"
+      },
+      {
+        "mm": 11.047,
+        "mm_other": 8.985,
+        "distance": 0.16838926666717585,
+        "Route": "115A"
+      }
+    ]
+  },
+  {
+    "Route": "067A_DEC",
+    "MMin": 0,
+    "MMax": 11.047,
+    "intersections": []
+  },
+  {
+    "Route": "067B",
+    "MMin": 11.562,
+    "MMax": 15.074,
+    "intersections": [
+      {
+        "mm": 15.074,
+        "mm_other": 285.633,
+        "distance": 31.392381713596986,
+        "Route": "050A"
+      }
+    ]
+  },
+  {
+    "Route": "067B_DEC",
+    "MMin": 11.562,
+    "MMax": 15.074,
+    "intersections": []
+  },
+  {
+    "Route": "067C",
+    "MMin": 45.867,
+    "MMax": 50.73,
+    "intersections": []
+  },
+  {
+    "Route": "067C_DEC",
+    "MMin": 45.867,
+    "MMax": 50.73,
+    "intersections": []
+  },
+  {
+    "Route": "067D",
+    "MMin": 76.92,
+    "MMax": 100.036,
+    "intersections": [
+      {
+        "mm": 76.92,
+        "mm_other": 284.762,
+        "distance": 67.1014607590869,
+        "Route": "024A"
+      }
+    ]
+  },
+  {
+    "Route": "067D_DEC",
+    "MMin": 76.92,
+    "MMax": 100.036,
+    "intersections": []
+  },
+  {
+    "Route": "067E",
+    "MMin": 117.349,
+    "MMax": 127.449,
+    "intersections": [
+      {
+        "mm": 127.449,
+        "mm_other": 190.351,
+        "distance": 25.9834886121409,
+        "Route": "085B"
+      },
+      {
+        "mm": 126.727,
+        "mm_other": 32.628,
+        "distance": 14.137106513030519,
+        "Route": "105B"
+      }
+    ]
+  },
+  {
+    "Route": "067E_DEC",
+    "MMin": 117.349,
+    "MMax": 127.449,
+    "intersections": []
+  },
+  {
+    "Route": "067F",
+    "MMin": 52.304,
+    "MMax": 69.652,
+    "intersections": [
+      {
+        "mm": 69.652,
+        "mm_other": 278.087,
+        "distance": 63.504599068801156,
+        "Route": "024A"
+      }
+    ]
+  },
+  {
+    "Route": "067F_DEC",
+    "MMin": 52.304,
+    "MMax": 69.652,
+    "intersections": []
+  },
+  {
+    "Route": "069A",
+    "MMin": 0,
+    "MMax": 82.664,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 3.643,
+        "distance": 0.0,
+        "Route": "025C"
+      },
+      {
+        "mm": 82.664,
+        "mm_other": 252.632,
+        "distance": 61.202055540803116,
+        "Route": "050A"
+      },
+      {
+        "mm": 58.577,
+        "mm_other": 0,
+        "distance": 68.86204740526763,
+        "Route": "096A"
+      }
+    ]
+  },
+  {
+    "Route": "069A_DEC",
+    "MMin": 0,
+    "MMax": 82.664,
+    "intersections": []
+  },
+  {
+    "Route": "070A",
+    "MMin": 0,
+    "MMax": 449.589,
+    "intersections": [
+      {
+        "mm": 10.961,
+        "mm_other": 11.08,
+        "distance": 85.86271910274267,
+        "Route": "006A"
+      },
+      {
+        "mm": 43.909,
+        "mm_other": 46.058,
+        "distance": 98.38467412753793,
+        "Route": "006C"
+      },
+      {
+        "mm": 108.988,
+        "mm_other": 110.806,
+        "distance": 60.158026090312276,
+        "Route": "006D"
+      },
+      {
+        "mm": 171.089,
+        "mm_other": 174.541,
+        "distance": 71.13879224397617,
+        "Route": "006E"
+      },
+      {
+        "mm": 205.408,
+        "mm_other": 208.659,
+        "distance": 82.03920025442697,
+        "Route": "006F"
+      },
+      {
+        "mm": 244.172,
+        "mm_other": 257.079,
+        "distance": 93.15548444126308,
+        "Route": "006G"
+      },
+      {
+        "mm": 276.043,
+        "mm_other": 290.98,
+        "distance": 92.55191329550168,
+        "Route": "006H"
+      },
+      {
+        "mm": 116.174,
+        "mm_other": 0,
+        "distance": 94.74420179139419,
+        "Route": "006K"
+      },
+      {
+        "mm": 86.85,
+        "mm_other": 88.895,
+        "distance": 13.819314144329624,
+        "Route": "006L"
+      },
+      {
+        "mm": 61.52,
+        "mm_other": 62.305,
+        "distance": 96.05971492825375,
+        "Route": "006M"
+      },
+      {
+        "mm": 139.483,
+        "mm_other": 141.818,
+        "distance": 82.72293793256372,
+        "Route": "006N"
+      },
+      {
+        "mm": 202.291,
+        "mm_other": 97.23,
+        "distance": 44.76707463457925,
+        "Route": "009C"
+      },
+      {
+        "mm": 205.408,
+        "mm_other": 101.562,
+        "distance": 48.19572478912893,
+        "Route": "009D"
+      },
+      {
+        "mm": 90.422,
+        "mm_other": 0,
+        "distance": 90.23886077622538,
+        "Route": "013C"
+      },
+      {
+        "mm": 171.089,
+        "mm_other": 143.4,
+        "distance": 71.13879224397617,
+        "Route": "024A"
+      },
+      {
+        "mm": 401.7,
+        "mm_other": 419.95,
+        "distance": 75.13870502810602,
+        "Route": "024B"
+      },
+      {
+        "mm": 437.868,
+        "mm_other": 455.882,
+        "distance": 84.90971949835468,
+        "Route": "024D"
+      },
+      {
+        "mm": 359.467,
+        "mm_other": 0.548,
+        "distance": 69.12546063533817,
+        "Route": "024F"
+      },
+      {
+        "mm": 363.021,
+        "mm_other": 380.464,
+        "distance": 21.277049012103454,
+        "Route": "024G"
+      },
+      {
+        "mm": 278.548,
+        "mm_other": 8.435,
+        "distance": 57.03111572759727,
+        "Route": "035A"
+      },
+      {
+        "mm": 292.128,
+        "mm_other": 76.394,
+        "distance": 33.41981381495465,
+        "Route": "036C"
+      },
+      {
+        "mm": 232.078,
+        "mm_other": 258.258,
+        "distance": 16.849709331845446,
+        "Route": "040A"
+      },
+      {
+        "mm": 251.152,
+        "mm_other": 276.92,
+        "distance": 95.46398412869804,
+        "Route": "040B"
+      },
+      {
+        "mm": 253.506,
+        "mm_other": 279.208,
+        "distance": 24.30196163956581,
+        "Route": "040C"
+      },
+      {
+        "mm": 317.702,
+        "mm_other": 340.381,
+        "distance": 94.10947591498181,
+        "Route": "040D"
+      },
+      {
+        "mm": 323.658,
+        "mm_other": 346.29,
+        "distance": 50.75887824521821,
+        "Route": "040E"
+      },
+      {
+        "mm": 338.066,
+        "mm_other": 360.201,
+        "distance": 95.32222322362989,
+        "Route": "040F"
+      },
+      {
+        "mm": 357.848,
+        "mm_other": 380.689,
+        "distance": 54.5900123193413,
+        "Route": "040G"
+      },
+      {
+        "mm": 363.021,
+        "mm_other": 386.01,
+        "distance": 21.277049012103454,
+        "Route": "040H"
+      },
+      {
+        "mm": 419.308,
+        "mm_other": 0,
+        "distance": 20.6323629214384,
+        "Route": "057A"
+      },
+      {
+        "mm": 265.489,
+        "mm_other": 5.627,
+        "distance": 74.74979909266351,
+        "Route": "058A"
+      },
+      {
+        "mm": 48.95,
+        "mm_other": 61.377,
+        "distance": 59.812782574269384,
+        "Route": "065A"
+      },
+      {
+        "mm": 25.563,
+        "mm_other": 0,
+        "distance": 6.9106200476087984,
+        "Route": "070B"
+      },
+      {
+        "mm": 97.427,
+        "mm_other": 0,
+        "distance": 37.558076731366235,
+        "Route": "070E"
+      },
+      {
+        "mm": 146.648,
+        "mm_other": 0.346,
+        "distance": 47.251077957256626,
+        "Route": "070F"
+      },
+      {
+        "mm": 162.748,
+        "mm_other": 0,
+        "distance": 94.42761094477487,
+        "Route": "070G"
+      },
+      {
+        "mm": 238.841,
+        "mm_other": 0,
+        "distance": 57.07230351498948,
+        "Route": "070K"
+      },
+      {
+        "mm": 295.256,
+        "mm_other": 0,
+        "distance": 80.96913878667323,
+        "Route": "070L"
+      },
+      {
+        "mm": 310.165,
+        "mm_other": 0,
+        "distance": 26.681759742108568,
+        "Route": "070M"
+      },
+      {
+        "mm": 328.329,
+        "mm_other": 0.396,
+        "distance": 73.54263523731781,
+        "Route": "070N"
+      },
+      {
+        "mm": 340.381,
+        "mm_other": 0.353,
+        "distance": 64.71600808364414,
+        "Route": "070O"
+      },
+      {
+        "mm": 412.0,
+        "mm_other": 0,
+        "distance": 65.61107576155177,
+        "Route": "070P"
+      },
+      {
+        "mm": 438.387,
+        "mm_other": 0.377,
+        "distance": 35.0024334647091,
+        "Route": "070Q"
+      },
+      {
+        "mm": 240.927,
+        "mm_other": 2.188,
+        "distance": 67.32470897571712,
+        "Route": "070R"
+      },
+      {
+        "mm": 265.709,
+        "mm_other": 0,
+        "distance": 66.63964630361704,
+        "Route": "072A"
+      },
+      {
+        "mm": 251.668,
+        "mm_other": 0,
+        "distance": 8.185190117075651,
+        "Route": "074A"
+      },
+      {
+        "mm": 269.259,
+        "mm_other": 0,
+        "distance": 99.2344351728518,
+        "Route": "076A"
+      },
+      {
+        "mm": 304.36,
+        "mm_other": 0,
+        "distance": 68.03899194829384,
+        "Route": "079A"
+      },
+      {
+        "mm": 116.316,
+        "mm_other": 0,
+        "distance": 84.79909319423766,
+        "Route": "082A"
+      },
+      {
+        "mm": 352.34,
+        "mm_other": 59.279,
+        "distance": 93.47542598774722,
+        "Route": "086A"
+      },
+      {
+        "mm": 195.17,
+        "mm_other": 22.605,
+        "distance": 96.06586398500754,
+        "Route": "091A"
+      },
+      {
+        "mm": 239.652,
+        "mm_other": 0.082,
+        "distance": 75.37197738830328,
+        "Route": "103A"
+      },
+      {
+        "mm": 156.505,
+        "mm_other": 0,
+        "distance": 94.90074687302905,
+        "Route": "131A"
+      },
+      {
+        "mm": 156.167,
+        "mm_other": 0.053,
+        "distance": 91.92289824802137,
+        "Route": "131B"
+      },
+      {
+        "mm": 15.0,
+        "mm_other": 0,
+        "distance": 44.366165180015095,
+        "Route": "139A"
+      },
+      {
+        "mm": 282.214,
+        "mm_other": 12.431,
+        "distance": 84.91133028019067,
+        "Route": "225A"
+      },
+      {
+        "mm": 275.22,
+        "mm_other": 0.034,
+        "distance": 58.90682689665358,
+        "Route": "265B"
+      },
+      {
+        "mm": 279.733,
+        "mm_other": 5.986,
+        "distance": 48.87517296596071,
+        "Route": "270A"
+      },
+      {
+        "mm": 267.402,
+        "mm_other": 9.641,
+        "distance": 36.86391838215221,
+        "Route": "391A"
+      },
+      {
+        "mm": 259.803,
+        "mm_other": 0,
+        "distance": 91.92593701631887,
+        "Route": "470A"
+      },
+      {
+        "mm": 259.641,
+        "mm_other": 0,
+        "distance": 70.93505302390778,
+        "Route": "470W"
+      }
+    ]
+  },
+  {
+    "Route": "070A_DEC",
+    "MMin": 0,
+    "MMax": 449.589,
+    "intersections": []
+  },
+  {
+    "Route": "070B",
+    "MMin": 0,
+    "MMax": 13.265,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 26.08,
+        "distance": 0,
+        "Route": "006A"
+      },
+      {
+        "mm": 4.358,
+        "mm_other": 30.123,
+        "distance": 87.71179522354487,
+        "Route": "006B"
+      },
+      {
+        "mm": 12.0,
+        "mm_other": 37.161,
+        "distance": 56.7602740547207,
+        "Route": "006C"
+      },
+      {
+        "mm": 5.62,
+        "mm_other": 31.76,
+        "distance": 91.7593416696154,
+        "Route": "050A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 26.08,
+        "distance": 0,
+        "Route": "006A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 25.563,
+        "distance": 6.9106200476087984,
+        "Route": "070A"
+      },
+      {
+        "mm": 11.716,
+        "mm_other": 162.297,
+        "distance": 14.054374464277922,
+        "Route": "141B"
+      },
+      {
+        "mm": 4.856,
+        "mm_other": 13.341,
+        "distance": 98.28513603373442,
+        "Route": "340A"
+      }
+    ]
+  },
+  {
+    "Route": "070B_DEC",
+    "MMin": 0,
+    "MMax": 13.265,
+    "intersections": []
+  },
+  {
+    "Route": "070E",
+    "MMin": 0,
+    "MMax": 0.222,
+    "intersections": [
+      {
+        "mm": 0.222,
+        "mm_other": 99.216,
+        "distance": 50.751947885606114,
+        "Route": "006D"
+      },
+      {
+        "mm": 0,
+        "mm_other": 97.427,
+        "distance": 37.558076731366235,
+        "Route": "070A"
+      }
+    ]
+  },
+  {
+    "Route": "070E_DEC",
+    "MMin": 0,
+    "MMax": 0.222,
+    "intersections": []
+  },
+  {
+    "Route": "070F",
+    "MMin": 0,
+    "MMax": 0.346,
+    "intersections": [
+      {
+        "mm": 0.0,
+        "mm_other": 149.718,
+        "distance": 63.88357973999497,
+        "Route": "006E"
+      },
+      {
+        "mm": 0,
+        "mm_other": 149.718,
+        "distance": 63.88357973999497,
+        "Route": "006E"
+      },
+      {
+        "mm": 0.346,
+        "mm_other": 146.648,
+        "distance": 47.251077957256626,
+        "Route": "070A"
+      }
+    ]
+  },
+  {
+    "Route": "070F_DEC",
+    "MMin": 0,
+    "MMax": 0.346,
+    "intersections": []
+  },
+  {
+    "Route": "070G",
+    "MMin": 0,
+    "MMax": 0.577,
+    "intersections": [
+      {
+        "mm": 0.577,
+        "mm_other": 165.951,
+        "distance": 73.27035887963353,
+        "Route": "006E"
+      },
+      {
+        "mm": 0,
+        "mm_other": 162.748,
+        "distance": 94.42761094477487,
+        "Route": "070A"
+      }
+    ]
+  },
+  {
+    "Route": "070G_DEC",
+    "MMin": 0,
+    "MMax": 0.577,
+    "intersections": []
+  },
+  {
+    "Route": "070K",
+    "MMin": 0,
+    "MMax": 0.212,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 238.841,
+        "distance": 57.07230351498948,
+        "Route": "070A"
+      }
+    ]
+  },
+  {
+    "Route": "070K_DEC",
+    "MMin": 0,
+    "MMax": 0.212,
+    "intersections": []
+  },
+  {
+    "Route": "070L",
+    "MMin": 0,
+    "MMax": 0.4,
+    "intersections": [
+      {
+        "mm": 0.4,
+        "mm_other": 79.73,
+        "distance": 0.0818147434705047,
+        "Route": "036C"
+      },
+      {
+        "mm": 0,
+        "mm_other": 295.256,
+        "distance": 80.96913878667323,
+        "Route": "070A"
+      }
+    ]
+  },
+  {
+    "Route": "070L_DEC",
+    "MMin": 0,
+    "MMax": 0.4,
+    "intersections": []
+  },
+  {
+    "Route": "070M",
+    "MMin": 0,
+    "MMax": 0.348,
+    "intersections": [
+      {
+        "mm": 0.348,
+        "mm_other": 95.0,
+        "distance": 0.13631848368104826,
+        "Route": "036D"
+      },
+      {
+        "mm": 0,
+        "mm_other": 310.165,
+        "distance": 26.681759742108568,
+        "Route": "070A"
+      }
+    ]
+  },
+  {
+    "Route": "070M_DEC",
+    "MMin": 0,
+    "MMax": 0.348,
+    "intersections": []
+  },
+  {
+    "Route": "070N",
+    "MMin": 0,
+    "MMax": 0.396,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 350.767,
+        "distance": 90.19804151288615,
+        "Route": "040E"
+      },
+      {
+        "mm": 0.396,
+        "mm_other": 328.329,
+        "distance": 73.54263523731781,
+        "Route": "070A"
+      }
+    ]
+  },
+  {
+    "Route": "070N_DEC",
+    "MMin": 0,
+    "MMax": 0.396,
+    "intersections": []
+  },
+  {
+    "Route": "070O",
+    "MMin": 0,
+    "MMax": 0.353,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 362.999,
+        "distance": 0,
+        "Route": "040F"
+      },
+      {
+        "mm": 0,
+        "mm_other": 362.999,
+        "distance": 0,
+        "Route": "040F"
+      },
+      {
+        "mm": 0.353,
+        "mm_other": 340.381,
+        "distance": 64.71600808364414,
+        "Route": "070A"
+      }
+    ]
+  },
+  {
+    "Route": "070O_DEC",
+    "MMin": 0,
+    "MMax": 0.353,
+    "intersections": []
+  },
+  {
+    "Route": "070P",
+    "MMin": 0,
+    "MMax": 0.528,
+    "intersections": [
+      {
+        "mm": 0.528,
+        "mm_other": 429.604,
+        "distance": 0.0,
+        "Route": "024B"
+      },
+      {
+        "mm": 0,
+        "mm_other": 412.0,
+        "distance": 65.61107576155177,
+        "Route": "070A"
+      }
+    ]
+  },
+  {
+    "Route": "070P_DEC",
+    "MMin": 0,
+    "MMax": 0.528,
+    "intersections": []
+  },
+  {
+    "Route": "070Q",
+    "MMin": 0.137,
+    "MMax": 0.377,
+    "intersections": [
+      {
+        "mm": 0.137,
+        "mm_other": 455.991,
+        "distance": 62.33944246971804,
+        "Route": "024D"
+      },
+      {
+        "mm": 0.377,
+        "mm_other": 438.387,
+        "distance": 35.0024334647091,
+        "Route": "070A"
+      }
+    ]
+  },
+  {
+    "Route": "070Q_DEC",
+    "MMin": 0.137,
+    "MMax": 0.377,
+    "intersections": []
+  },
+  {
+    "Route": "070R",
+    "MMin": 2.188,
+    "MMax": 2.711,
+    "intersections": [
+      {
+        "mm": 2.188,
+        "mm_other": 240.927,
+        "distance": 67.32470897571712,
+        "Route": "070A"
+      }
+    ]
+  },
+  {
+    "Route": "070R_DEC",
+    "MMin": 2.188,
+    "MMax": 2.711,
+    "intersections": []
+  },
+  {
+    "Route": "070Z",
+    "MMin": 0,
+    "MMax": 1.338,
+    "intersections": []
+  },
+  {
+    "Route": "071A",
+    "MMin": 0,
+    "MMax": 9.032,
+    "intersections": [
+      {
+        "mm": 9.032,
+        "mm_other": 62.371,
+        "distance": 5.27818457359327e-05,
+        "Route": "010A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 59.407,
+        "distance": 6.062269530554013,
+        "Route": "350A"
+      }
+    ]
+  },
+  {
+    "Route": "071A_DEC",
+    "MMin": 0,
+    "MMax": 9.032,
+    "intersections": []
+  },
+  {
+    "Route": "071B",
+    "MMin": 9.601,
+    "MMax": 14.539,
+    "intersections": [
+      {
+        "mm": 9.601,
+        "mm_other": 62.88,
+        "distance": 0.0,
+        "Route": "010A"
+      },
+      {
+        "mm": 14.539,
+        "mm_other": 0,
+        "distance": 0,
+        "Route": "266A"
+      },
+      {
+        "mm": 14.539,
+        "mm_other": 0,
+        "distance": 0,
+        "Route": "266A"
+      }
+    ]
+  },
+  {
+    "Route": "071B_DEC",
+    "MMin": 9.601,
+    "MMax": 14.539,
+    "intersections": []
+  },
+  {
+    "Route": "071C",
+    "MMin": 16.157,
+    "MMax": 101.063,
+    "intersections": [
+      {
+        "mm": 101.063,
+        "mm_other": 377.668,
+        "distance": 0.00033462499702430405,
+        "Route": "024G"
+      },
+      {
+        "mm": 16.157,
+        "mm_other": 366.939,
+        "distance": 68.11737895283788,
+        "Route": "050B"
+      },
+      {
+        "mm": 26.642,
+        "mm_other": 105.83,
+        "distance": 0.21794225230726955,
+        "Route": "096B"
+      },
+      {
+        "mm": 26.642,
+        "mm_other": 106.036,
+        "distance": 86.09074616574459,
+        "Route": "096C"
+      }
+    ]
+  },
+  {
+    "Route": "071C_DEC",
+    "MMin": 16.157,
+    "MMax": 101.063,
+    "intersections": []
+  },
+  {
+    "Route": "071D",
+    "MMin": 101.973,
+    "MMax": 174.357,
+    "intersections": [
+      {
+        "mm": 101.973,
+        "mm_other": 378.795,
+        "distance": 3.6543708597724556,
+        "Route": "024G"
+      },
+      {
+        "mm": 174.357,
+        "mm_other": 173.543,
+        "distance": 53.26504030697044,
+        "Route": "034B"
+      }
+    ]
+  },
+  {
+    "Route": "071D_DEC",
+    "MMin": 101.973,
+    "MMax": 174.357,
+    "intersections": []
+  },
+  {
+    "Route": "071E",
+    "MMin": 175.486,
+    "MMax": 201.636,
+    "intersections": [
+      {
+        "mm": 201.636,
+        "mm_other": 215.828,
+        "distance": 5.2296338751345444e-05,
+        "Route": "014C"
+      },
+      {
+        "mm": 175.486,
+        "mm_other": 172.414,
+        "distance": 0.012366630658005077,
+        "Route": "034B"
+      }
+    ]
+  },
+  {
+    "Route": "071E_DEC",
+    "MMin": 175.486,
+    "MMax": 201.636,
+    "intersections": []
+  },
+  {
+    "Route": "071F",
+    "MMin": 205.525,
+    "MMax": 232.899,
+    "intersections": []
+  },
+  {
+    "Route": "071F_DEC",
+    "MMin": 205.525,
+    "MMax": 232.899,
+    "intersections": []
+  },
+  {
+    "Route": "072A",
+    "MMin": 0,
+    "MMax": 29.378,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 265.709,
+        "distance": 66.63964630361704,
+        "Route": "070A"
+      },
+      {
+        "mm": 29.378,
+        "mm_other": 22.443,
+        "distance": 96.51099414710133,
+        "Route": "119A"
+      }
+    ]
+  },
+  {
+    "Route": "072A_DEC",
+    "MMin": 0,
+    "MMax": 29.378,
+    "intersections": []
+  },
+  {
+    "Route": "072B",
+    "MMin": 32.369,
+    "MMax": 54.064,
+    "intersections": [
+      {
+        "mm": 54.064,
+        "mm_other": 19.199,
+        "distance": 93.10761751231183,
+        "Route": "007A"
+      },
+      {
+        "mm": 32.369,
+        "mm_other": 25.552,
+        "distance": 91.03391427099689,
+        "Route": "119A"
+      }
+    ]
+  },
+  {
+    "Route": "072B_DEC",
+    "MMin": 32.369,
+    "MMax": 54.064,
+    "intersections": []
+  },
+  {
+    "Route": "074A",
+    "MMin": 0,
+    "MMax": 18.11,
+    "intersections": [
+      {
+        "mm": 0.31,
+        "mm_other": 276.92,
+        "distance": 98.45034209038538,
+        "Route": "040B"
+      },
+      {
+        "mm": 18.11,
+        "mm_other": 1.952,
+        "distance": 86.66534791855253,
+        "Route": "008A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 251.668,
+        "distance": 8.185190117075651,
+        "Route": "070A"
+      }
+    ]
+  },
+  {
+    "Route": "074A_DEC",
+    "MMin": 0,
+    "MMax": 18.11,
+    "intersections": []
+  },
+  {
+    "Route": "075B",
+    "MMin": 5.287,
+    "MMax": 8.524,
+    "intersections": [
+      {
+        "mm": 8.524,
+        "mm_other": 15.42,
+        "distance": 10.210109556724115,
+        "Route": "470A"
+      }
+    ]
+  },
+  {
+    "Route": "075B_DEC",
+    "MMin": 5.287,
+    "MMax": 8.524,
+    "intersections": []
+  },
+  {
+    "Route": "076A",
+    "MMin": 0,
+    "MMax": 184.135,
+    "intersections": [
+      {
+        "mm": 16.454,
+        "mm_other": 19.944,
+        "distance": 35.67910198598691,
+        "Route": "002D"
+      },
+      {
+        "mm": 9.771,
+        "mm_other": 296.32,
+        "distance": 58.375288331115655,
+        "Route": "006H"
+      },
+      {
+        "mm": 63.762,
+        "mm_other": 343.519,
+        "distance": 6.127589149474177,
+        "Route": "006I"
+      },
+      {
+        "mm": 91.693,
+        "mm_other": 371.69,
+        "distance": 23.911282050835705,
+        "Route": "006J"
+      },
+      {
+        "mm": 91.693,
+        "mm_other": 0.932,
+        "distance": 23.911282050835705,
+        "Route": "034E"
+      },
+      {
+        "mm": 66.099,
+        "mm_other": 0,
+        "distance": 95.56492597116875,
+        "Route": "039A"
+      },
+      {
+        "mm": 66.099,
+        "mm_other": 72.581,
+        "distance": 95.56492597116875,
+        "Route": "052A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 269.259,
+        "distance": 99.2344351728518,
+        "Route": "070A"
+      },
+      {
+        "mm": 12.301,
+        "mm_other": 226.797,
+        "distance": 85.67716186369418,
+        "Route": "085C"
+      },
+      {
+        "mm": 61.827,
+        "mm_other": 0,
+        "distance": 16.813945675087286,
+        "Route": "144A"
+      },
+      {
+        "mm": 6.803,
+        "mm_other": 0,
+        "distance": 53.706489670723286,
+        "Route": "270A"
+      },
+      {
+        "mm": 6.803,
+        "mm_other": 1.1,
+        "distance": 53.706489670723286,
+        "Route": "270B"
+      }
+    ]
+  },
+  {
+    "Route": "076A_DEC",
+    "MMin": 0,
+    "MMax": 184.135,
+    "intersections": []
+  },
+  {
+    "Route": "078A",
+    "MMin": 0,
+    "MMax": 33.272,
+    "intersections": [
+      {
+        "mm": 33.272,
+        "mm_other": 2.971,
+        "distance": 73.10737828323595,
+        "Route": "045A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 15.231,
+        "distance": 70.0454466522605,
+        "Route": "165A"
+      },
+      {
+        "mm": 12.666,
+        "mm_other": 0.006,
+        "distance": 79.95313398053014,
+        "Route": "078B"
+      }
+    ]
+  },
+  {
+    "Route": "078A_DEC",
+    "MMin": 0,
+    "MMax": 33.272,
+    "intersections": []
+  },
+  {
+    "Route": "078B",
+    "MMin": 0.006,
+    "MMax": 1.493,
+    "intersections": [
+      {
+        "mm": 0.006,
+        "mm_other": 12.666,
+        "distance": 79.95313398053014,
+        "Route": "078A"
+      }
+    ]
+  },
+  {
+    "Route": "078B_DEC",
+    "MMin": 0.006,
+    "MMax": 1.493,
+    "intersections": []
+  },
+  {
+    "Route": "079A",
+    "MMin": 0,
+    "MMax": 1.24,
+    "intersections": [
+      {
+        "mm": 1.24,
+        "mm_other": 88.836,
+        "distance": 0.0,
+        "Route": "036C"
+      },
+      {
+        "mm": 0,
+        "mm_other": 304.36,
+        "distance": 68.03899194829384,
+        "Route": "070A"
+      }
+    ]
+  },
+  {
+    "Route": "079A_DEC",
+    "MMin": 0,
+    "MMax": 1.24,
+    "intersections": []
+  },
+  {
+    "Route": "079B",
+    "MMin": 1.58,
+    "MMax": 23.892,
+    "intersections": [
+      {
+        "mm": 1.58,
+        "mm_other": 89.21,
+        "distance": 0,
+        "Route": "036C"
+      },
+      {
+        "mm": 1.58,
+        "mm_other": 89.21,
+        "distance": 0,
+        "Route": "036D"
+      },
+      {
+        "mm": 1.58,
+        "mm_other": 89.21,
+        "distance": 0,
+        "Route": "036C"
+      },
+      {
+        "mm": 1.58,
+        "mm_other": 89.21,
+        "distance": 0,
+        "Route": "036D"
+      },
+      {
+        "mm": 23.892,
+        "mm_other": 41.939,
+        "distance": 0.0,
+        "Route": "052A"
+      }
+    ]
+  },
+  {
+    "Route": "079B_DEC",
+    "MMin": 1.58,
+    "MMax": 23.892,
+    "intersections": []
+  },
+  {
+    "Route": "082A",
+    "MMin": 0,
+    "MMax": 85.293,
+    "intersections": [
+      {
+        "mm": 0.034,
+        "mm_other": 0.338,
+        "distance": 98.39245853839584,
+        "Route": "006K"
+      },
+      {
+        "mm": 0,
+        "mm_other": 0.195,
+        "distance": 87.11435461456371,
+        "Route": "006K"
+      },
+      {
+        "mm": 85.293,
+        "mm_other": 191.121,
+        "distance": 55.371511967350905,
+        "Route": "024A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 116.316,
+        "distance": 84.79909319423766,
+        "Route": "070A"
+      },
+      {
+        "mm": 11.695,
+        "mm_other": 68.821,
+        "distance": 0.00011596482753234583,
+        "Route": "133A"
+      }
+    ]
+  },
+  {
+    "Route": "082A_DEC",
+    "MMin": 0,
+    "MMax": 85.293,
+    "intersections": []
+  },
+  {
+    "Route": "083A",
+    "MMin": 20.368,
+    "MMax": 77.267,
+    "intersections": [
+      {
+        "mm": 20.368,
+        "mm_other": 154.112,
+        "distance": 0,
+        "Route": "021B"
+      },
+      {
+        "mm": 77.267,
+        "mm_other": 4.144,
+        "distance": 90.07232175967782,
+        "Route": "002A"
+      },
+      {
+        "mm": 20.368,
+        "mm_other": 154.112,
+        "distance": 0,
+        "Route": "021B"
+      },
+      {
+        "mm": 65.209,
+        "mm_other": 21.734,
+        "distance": 78.66747777401629,
+        "Route": "088B"
+      }
+    ]
+  },
+  {
+    "Route": "083A_DEC",
+    "MMin": 20.368,
+    "MMax": 77.267,
+    "intersections": []
+  },
+  {
+    "Route": "084A",
+    "MMin": 0,
+    "MMax": 27.924,
+    "intersections": [
+      {
+        "mm": 27.924,
+        "mm_other": 144.436,
+        "distance": 58.39405205972038,
+        "Route": "160A"
+      }
+    ]
+  },
+  {
+    "Route": "084A_DEC",
+    "MMin": 0,
+    "MMax": 27.924,
+    "intersections": []
+  },
+  {
+    "Route": "085A",
+    "MMin": 127.651,
+    "MMax": 137.04,
+    "intersections": [
+      {
+        "mm": 137.04,
+        "mm_other": 136.298,
+        "distance": 72.83518136607422,
+        "Route": "025A"
+      }
+    ]
+  },
+  {
+    "Route": "085A_DEC",
+    "MMin": 127.651,
+    "MMax": 137.04,
+    "intersections": []
+  },
+  {
+    "Route": "085B",
+    "MMin": 184.667,
+    "MMax": 210.864,
+    "intersections": [
+      {
+        "mm": 190.351,
+        "mm_other": 127.449,
+        "distance": 25.9834886121409,
+        "Route": "067E"
+      },
+      {
+        "mm": 184.667,
+        "mm_other": 184.144,
+        "distance": 58.62245642812887,
+        "Route": "025A"
+      },
+      {
+        "mm": 184.667,
+        "mm_other": 100.0,
+        "distance": 7.978405494216725,
+        "Route": "086B"
+      },
+      {
+        "mm": 184.667,
+        "mm_other": 100,
+        "distance": 7.978405494216725,
+        "Route": "086B"
+      }
+    ]
+  },
+  {
+    "Route": "085B_DEC",
+    "MMin": 184.667,
+    "MMax": 210.864,
+    "intersections": []
+  },
+  {
+    "Route": "085C",
+    "MMin": 226.797,
+    "MMax": 265.763,
+    "intersections": [
+      {
+        "mm": 235.145,
+        "mm_other": 77.052,
+        "distance": 86.41834317086857,
+        "Route": "007D"
+      },
+      {
+        "mm": 253.809,
+        "mm_other": 20.203,
+        "distance": 20.180305930174057,
+        "Route": "060B"
+      },
+      {
+        "mm": 250.411,
+        "mm_other": 51.386,
+        "distance": 60.714052806143066,
+        "Route": "066B"
+      },
+      {
+        "mm": 265.763,
+        "mm_other": 112.647,
+        "distance": 84.46079183984071,
+        "Route": "034A"
+      },
+      {
+        "mm": 226.797,
+        "mm_other": 12.301,
+        "distance": 85.67716186369418,
+        "Route": "076A"
+      },
+      {
+        "mm": 265.763,
+        "mm_other": 0.212,
+        "distance": 58.728366662727716,
+        "Route": "085G"
+      },
+      {
+        "mm": 243.048,
+        "mm_other": 1.515,
+        "distance": 88.90627748130655,
+        "Route": "085E"
+      },
+      {
+        "mm": 249.173,
+        "mm_other": 0,
+        "distance": 57.690591116667385,
+        "Route": "085F"
+      },
+      {
+        "mm": 265.383,
+        "mm_other": 0,
+        "distance": 11.620254864817557,
+        "Route": "085G"
+      }
+    ]
+  },
+  {
+    "Route": "085C_DEC",
+    "MMin": 226.797,
+    "MMax": 265.763,
+    "intersections": []
+  },
+  {
+    "Route": "085E",
+    "MMin": 0,
+    "MMax": 1.515,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 20.452,
+        "distance": 0.0,
+        "Route": "052A"
+      },
+      {
+        "mm": 1.515,
+        "mm_other": 243.048,
+        "distance": 88.90627748130655,
+        "Route": "085C"
+      }
+    ]
+  },
+  {
+    "Route": "085E_DEC",
+    "MMin": 0,
+    "MMax": 1.515,
+    "intersections": []
+  },
+  {
+    "Route": "085F",
+    "MMin": 0,
+    "MMax": 2.69,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 249.173,
+        "distance": 57.690591116667385,
+        "Route": "085C"
+      }
+    ]
+  },
+  {
+    "Route": "085F_DEC",
+    "MMin": 0,
+    "MMax": 2.69,
+    "intersections": []
+  },
+  {
+    "Route": "085G",
+    "MMin": 0,
+    "MMax": 1.629,
+    "intersections": [
+      {
+        "mm": 0.212,
+        "mm_other": 265.763,
+        "distance": 58.728366662727716,
+        "Route": "085C"
+      },
+      {
+        "mm": 1.629,
+        "mm_other": 10.88,
+        "distance": 77.27538323771982,
+        "Route": "034D"
+      },
+      {
+        "mm": 0,
+        "mm_other": 265.383,
+        "distance": 11.620254864817557,
+        "Route": "085C"
+      }
+    ]
+  },
+  {
+    "Route": "085G_DEC",
+    "MMin": 0,
+    "MMax": 1.629,
+    "intersections": []
+  },
+  {
+    "Route": "085H",
+    "MMin": 0,
+    "MMax": 2.239,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 10.194,
+        "distance": 0.0,
+        "Route": "034D"
+      },
+      {
+        "mm": 2.239,
+        "mm_other": 270.296,
+        "distance": 93.3082945445084,
+        "Route": "085L"
+      }
+    ]
+  },
+  {
+    "Route": "085H_DEC",
+    "MMin": 0,
+    "MMax": 2.239,
+    "intersections": []
+  },
+  {
+    "Route": "085L",
+    "MMin": 265.849,
+    "MMax": 309.542,
+    "intersections": [
+      {
+        "mm": 270.296,
+        "mm_other": 2.239,
+        "distance": 93.3082945445084,
+        "Route": "085H"
+      },
+      {
+        "mm": 265.849,
+        "mm_other": 113.014,
+        "distance": 65.9877509391003,
+        "Route": "034A"
+      }
+    ]
+  },
+  {
+    "Route": "085L_DEC",
+    "MMin": 265.849,
+    "MMax": 309.542,
+    "intersections": []
+  },
+  {
+    "Route": "086A",
+    "MMin": 1.854,
+    "MMax": 59.279,
+    "intersections": [
+      {
+        "mm": 59.279,
+        "mm_other": 352.34,
+        "distance": 93.47542598774722,
+        "Route": "070A"
+      },
+      {
+        "mm": 1.854,
+        "mm_other": 104.348,
+        "distance": 0,
+        "Route": "086B"
+      },
+      {
+        "mm": 1.854,
+        "mm_other": 104.348,
+        "distance": 0,
+        "Route": "086B"
+      }
+    ]
+  },
+  {
+    "Route": "086A_DEC",
+    "MMin": 1.854,
+    "MMax": 59.279,
+    "intersections": []
+  },
+  {
+    "Route": "086B",
+    "MMin": 100,
+    "MMax": 104.348,
+    "intersections": [
+      {
+        "mm": 100.0,
+        "mm_other": 184.667,
+        "distance": 7.978405494216725,
+        "Route": "085B"
+      },
+      {
+        "mm": 104.348,
+        "mm_other": 1.854,
+        "distance": 0,
+        "Route": "086A"
+      },
+      {
+        "mm": 100,
+        "mm_other": 184.144,
+        "distance": 66.5967928196752,
+        "Route": "025A"
+      },
+      {
+        "mm": 100,
+        "mm_other": 184.667,
+        "distance": 7.978405494216725,
+        "Route": "085B"
+      },
+      {
+        "mm": 104.348,
+        "mm_other": 1.854,
+        "distance": 0,
+        "Route": "086A"
+      }
+    ]
+  },
+  {
+    "Route": "086B_DEC",
+    "MMin": 100,
+    "MMax": 104.348,
+    "intersections": []
+  },
+  {
+    "Route": "088A",
+    "MMin": 0,
+    "MMax": 14.77,
+    "intersections": [
+      {
+        "mm": 14.77,
+        "mm_other": 199.215,
+        "distance": 94.66161605272019,
+        "Route": "025A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 296.123,
+        "distance": 79.19892593085932,
+        "Route": "040C"
+      },
+      {
+        "mm": 0,
+        "mm_other": 282.7,
+        "distance": 17.301861536764456,
+        "Route": "287C"
+      },
+      {
+        "mm": 0.0,
+        "mm_other": 282.7,
+        "distance": 17.301861536764456,
+        "Route": "287C"
+      }
+    ]
+  },
+  {
+    "Route": "088A_DEC",
+    "MMin": 0,
+    "MMax": 14.77,
+    "intersections": []
+  },
+  {
+    "Route": "088B",
+    "MMin": 16.827,
+    "MMax": 21.734,
+    "intersections": [
+      {
+        "mm": 16.827,
+        "mm_other": 197.375,
+        "distance": 77.41929366616766,
+        "Route": "025A"
+      },
+      {
+        "mm": 21.734,
+        "mm_other": 65.209,
+        "distance": 78.66747777401629,
+        "Route": "083A"
+      }
+    ]
+  },
+  {
+    "Route": "088B_DEC",
+    "MMin": 16.827,
+    "MMax": 21.734,
+    "intersections": []
+  },
+  {
+    "Route": "089A",
+    "MMin": 0,
+    "MMax": 34.34,
+    "intersections": [
+      {
+        "mm": 34.34,
+        "mm_other": 463.472,
+        "distance": 56.62979475160954,
+        "Route": "050B"
+      },
+      {
+        "mm": 0,
+        "mm_other": 27.0,
+        "distance": 29.916570975921353,
+        "Route": "116A"
+      }
+    ]
+  },
+  {
+    "Route": "089A_DEC",
+    "MMin": 0,
+    "MMax": 34.34,
+    "intersections": []
+  },
+  {
+    "Route": "090A",
+    "MMin": 0,
+    "MMax": 33.874,
+    "intersections": [
+      {
+        "mm": 33.874,
+        "mm_other": 62.379,
+        "distance": 95.74814191007177,
+        "Route": "141A"
+      }
+    ]
+  },
+  {
+    "Route": "090A_DEC",
+    "MMin": 0,
+    "MMax": 33.874,
+    "intersections": []
+  },
+  {
+    "Route": "090B",
+    "MMin": 81.533,
+    "MMax": 89.858,
+    "intersections": [
+      {
+        "mm": 89.858,
+        "mm_other": 129.19,
+        "distance": 86.63353390295303,
+        "Route": "550B"
+      }
+    ]
+  },
+  {
+    "Route": "090B_DEC",
+    "MMin": 81.533,
+    "MMax": 89.858,
+    "intersections": []
+  },
+  {
+    "Route": "091A",
+    "MMin": 0,
+    "MMax": 22.605,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 174.606,
+        "distance": 90.00347312537237,
+        "Route": "024A"
+      },
+      {
+        "mm": 22.605,
+        "mm_other": 195.17,
+        "distance": 96.06586398500754,
+        "Route": "070A"
+      }
+    ]
+  },
+  {
+    "Route": "091A_DEC",
+    "MMin": 0,
+    "MMax": 22.605,
+    "intersections": []
+  },
+  {
+    "Route": "092A",
+    "MMin": 0,
+    "MMax": 73.259,
+    "intersections": [
+      {
+        "mm": 3.814,
+        "mm_other": 0,
+        "distance": 8.237189404016782,
+        "Route": "065A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 70.833,
+        "distance": 79.39006710109099,
+        "Route": "050A"
+      },
+      {
+        "mm": 20.644,
+        "mm_other": 0,
+        "distance": 98.0509308631113,
+        "Route": "133A"
+      }
+    ]
+  },
+  {
+    "Route": "092A_DEC",
+    "MMin": 0,
+    "MMax": 73.259,
+    "intersections": []
+  },
+  {
+    "Route": "093A",
+    "MMin": 0,
+    "MMax": 18.849,
+    "intersections": [
+      {
+        "mm": 18.703,
+        "mm_other": 49.506,
+        "distance": 93.47888819334507,
+        "Route": "007B"
+      },
+      {
+        "mm": 17.304,
+        "mm_other": 0,
+        "distance": 99.9325037334088,
+        "Route": "036E"
+      },
+      {
+        "mm": 0.014,
+        "mm_other": 0,
+        "distance": 7.19180766328795,
+        "Route": "058A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 271.602,
+        "distance": 0.0,
+        "Route": "006G"
+      },
+      {
+        "mm": 18.849,
+        "mm_other": 49.506,
+        "distance": 5.073518811072644,
+        "Route": "007B"
+      },
+      {
+        "mm": 0,
+        "mm_other": 0.0,
+        "distance": 0.00011119375071365752,
+        "Route": "058A"
+      },
+      {
+        "mm": 18.703,
+        "mm_other": 41.892,
+        "distance": 93.47888819334507,
+        "Route": "119A"
+      },
+      {
+        "mm": 11.541,
+        "mm_other": 0,
+        "distance": 95.28508887927636,
+        "Route": "128A"
+      }
+    ]
+  },
+  {
+    "Route": "093A_DEC",
+    "MMin": 0,
+    "MMax": 18.849,
+    "intersections": []
+  },
+  {
+    "Route": "094A",
+    "MMin": 0.548,
+    "MMax": 86.174,
+    "intersections": [
+      {
+        "mm": 0.548,
+        "mm_other": 312.43,
+        "distance": 21.852458772753828,
+        "Route": "024G"
+      },
+      {
+        "mm": 86.174,
+        "mm_other": 425.432,
+        "distance": 50.24342759302302,
+        "Route": "040H"
+      }
+    ]
+  },
+  {
+    "Route": "094A_DEC",
+    "MMin": 0.548,
+    "MMax": 86.174,
+    "intersections": []
+  },
+  {
+    "Route": "095A",
+    "MMin": 0,
+    "MMax": 14.376,
+    "intersections": [
+      {
+        "mm": 3.836,
+        "mm_other": 11.17,
+        "distance": 77.03590424608473,
+        "Route": "026B"
+      },
+      {
+        "mm": 14.376,
+        "mm_other": 52.558,
+        "distance": 72.7137437858389,
+        "Route": "036B"
+      },
+      {
+        "mm": 0,
+        "mm_other": 256.547,
+        "distance": 45.816980098484876,
+        "Route": "285D"
+      }
+    ]
+  },
+  {
+    "Route": "095A_DEC",
+    "MMin": 0,
+    "MMax": 14.376,
+    "intersections": []
+  },
+  {
+    "Route": "096A",
+    "MMin": 0,
+    "MMax": 58.812,
+    "intersections": [
+      {
+        "mm": 58.812,
+        "mm_other": 4.635,
+        "distance": 0,
+        "Route": "047A"
+      },
+      {
+        "mm": 56.091,
+        "mm_other": 0,
+        "distance": 0.15801029129653943,
+        "Route": "050C"
+      },
+      {
+        "mm": 26.192,
+        "mm_other": 0,
+        "distance": 96.479812468353,
+        "Route": "067A"
+      },
+      {
+        "mm": 58.812,
+        "mm_other": 4.635,
+        "distance": 0,
+        "Route": "047A"
+      },
+      {
+        "mm": 58.812,
+        "mm_other": 318.707,
+        "distance": 28.52534598106935,
+        "Route": "050B"
+      },
+      {
+        "mm": 0,
+        "mm_other": 58.577,
+        "distance": 68.86204740526763,
+        "Route": "069A"
+      },
+      {
+        "mm": 16.562,
+        "mm_other": 0,
+        "distance": 81.3569716899925,
+        "Route": "165A"
+      }
+    ]
+  },
+  {
+    "Route": "096A_DEC",
+    "MMin": 0,
+    "MMax": 58.812,
+    "intersections": []
+  },
+  {
+    "Route": "096B",
+    "MMin": 69.499,
+    "MMax": 105.83,
+    "intersections": [
+      {
+        "mm": 69.499,
+        "mm_other": 329.334,
+        "distance": 0.3648970153027124,
+        "Route": "050B"
+      },
+      {
+        "mm": 105.83,
+        "mm_other": 26.642,
+        "distance": 0.21794225230726955,
+        "Route": "071C"
+      },
+      {
+        "mm": 105.83,
+        "mm_other": 106.036,
+        "distance": 86.08161896221083,
+        "Route": "096C"
+      },
+      {
+        "mm": 105.83,
+        "mm_other": 106.036,
+        "distance": 86.08161896221083,
+        "Route": "096C"
+      },
+      {
+        "mm": 90.0,
+        "mm_other": 0,
+        "distance": 65.27974936947001,
+        "Route": "167A"
+      },
+      {
+        "mm": 99.58,
+        "mm_other": 5.935,
+        "distance": 0.03175371497428073,
+        "Route": "207A"
+      },
+      {
+        "mm": 75.496,
+        "mm_other": 1.528,
+        "distance": 0.0,
+        "Route": "209A"
+      }
+    ]
+  },
+  {
+    "Route": "096B_DEC",
+    "MMin": 69.499,
+    "MMax": 105.83,
+    "intersections": []
+  },
+  {
+    "Route": "096C",
+    "MMin": 106.036,
+    "MMax": 166.114,
+    "intersections": [
+      {
+        "mm": 106.036,
+        "mm_other": 105.83,
+        "distance": 86.08161896221083,
+        "Route": "096B"
+      },
+      {
+        "mm": 106.036,
+        "mm_other": 26.642,
+        "distance": 86.09074616574459,
+        "Route": "071C"
+      },
+      {
+        "mm": 106.036,
+        "mm_other": 105.83,
+        "distance": 86.08161896221083,
+        "Route": "096B"
+      },
+      {
+        "mm": 166.114,
+        "mm_other": 113.335,
+        "distance": 6.06430476678694,
+        "Route": "287B"
+      }
+    ]
+  },
+  {
+    "Route": "096C_DEC",
+    "MMin": 106.036,
+    "MMax": 166.114,
+    "intersections": []
+  },
+  {
+    "Route": "096D",
+    "MMin": 168.992,
+    "MMax": 207.454,
+    "intersections": [
+      {
+        "mm": 168.992,
+        "mm_other": 110.39,
+        "distance": 87.82495327308158,
+        "Route": "287B"
+      },
+      {
+        "mm": 193.0,
+        "mm_other": 122.879,
+        "distance": 96.90881582174751,
+        "Route": "385A"
+      },
+      {
+        "mm": 193.85,
+        "mm_other": 123.682,
+        "distance": 0.0,
+        "Route": "385B"
+      }
+    ]
+  },
+  {
+    "Route": "096D_DEC",
+    "MMin": 168.992,
+    "MMax": 207.454,
+    "intersections": []
+  },
+  {
+    "Route": "097A",
+    "MMin": 0,
+    "MMax": 4.584,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 60.404,
+        "distance": 98.3505924341906,
+        "Route": "141A"
+      }
+    ]
+  },
+  {
+    "Route": "097A_DEC",
+    "MMin": 0,
+    "MMax": 4.584,
+    "intersections": []
+  },
+  {
+    "Route": "100A",
+    "MMin": 0,
+    "MMax": 0.419,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 473.654,
+        "distance": 0.0001198355768738857,
+        "Route": "160C"
+      }
+    ]
+  },
+  {
+    "Route": "100A_DEC",
+    "MMin": 0,
+    "MMax": 0.419,
+    "intersections": []
+  },
+  {
+    "Route": "101A",
+    "MMin": 0,
+    "MMax": 21.413,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 398.776,
+        "distance": 12.225824580864685,
+        "Route": "050B"
+      }
+    ]
+  },
+  {
+    "Route": "101A_DEC",
+    "MMin": 0,
+    "MMax": 21.413,
+    "intersections": []
+  },
+  {
+    "Route": "103A",
+    "MMin": 0.082,
+    "MMax": 22.488,
+    "intersections": [
+      {
+        "mm": 13.236,
+        "mm_other": 0,
+        "distance": 67.40388212065012,
+        "Route": "005A"
+      },
+      {
+        "mm": 0.082,
+        "mm_other": 239.652,
+        "distance": 75.37197738830328,
+        "Route": "070A"
+      }
+    ]
+  },
+  {
+    "Route": "103A_DEC",
+    "MMin": 0.082,
+    "MMax": 22.488,
+    "intersections": []
+  },
+  {
+    "Route": "105A",
+    "MMin": 4.731,
+    "MMax": 9.48,
+    "intersections": []
+  },
+  {
+    "Route": "105A_DEC",
+    "MMin": 4.731,
+    "MMax": 9.48,
+    "intersections": []
+  },
+  {
+    "Route": "105B",
+    "MMin": 28.16,
+    "MMax": 32.628,
+    "intersections": [
+      {
+        "mm": 32.628,
+        "mm_other": 126.727,
+        "distance": 14.137106513030519,
+        "Route": "067E"
+      }
+    ]
+  },
+  {
+    "Route": "105B_DEC",
+    "MMin": 28.16,
+    "MMax": 32.628,
+    "intersections": []
+  },
+  {
+    "Route": "109A",
+    "MMin": 0,
+    "MMax": 65.327,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 416.415,
+        "distance": 59.83827306045494,
+        "Route": "160C"
+      },
+      {
+        "mm": 55.78,
+        "mm_other": 0.184,
+        "distance": 91.49457558181024,
+        "Route": "109B"
+      },
+      {
+        "mm": 57.186,
+        "mm_other": 0,
+        "distance": 92.77846852059305,
+        "Route": "194A"
+      },
+      {
+        "mm": 63.0,
+        "mm_other": 11.516,
+        "distance": 32.00731797344015,
+        "Route": "266A"
+      }
+    ]
+  },
+  {
+    "Route": "109A_DEC",
+    "MMin": 0,
+    "MMax": 65.327,
+    "intersections": []
+  },
+  {
+    "Route": "109B",
+    "MMin": 0,
+    "MMax": 0.184,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 380.2,
+        "distance": 59.127942434049395,
+        "Route": "050B"
+      },
+      {
+        "mm": 0.184,
+        "mm_other": 55.78,
+        "distance": 91.49457558181024,
+        "Route": "109A"
+      }
+    ]
+  },
+  {
+    "Route": "109B_DEC",
+    "MMin": 0,
+    "MMax": 0.184,
+    "intersections": []
+  },
+  {
+    "Route": "110A",
+    "MMin": 0,
+    "MMax": 0.14,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 70.3,
+        "distance": 83.63409275025893,
+        "Route": "550B"
+      }
+    ]
+  },
+  {
+    "Route": "110A_DEC",
+    "MMin": 0,
+    "MMax": 0.14,
+    "intersections": []
+  },
+  {
+    "Route": "112A",
+    "MMin": 0,
+    "MMax": 27.802,
+    "intersections": [
+      {
+        "mm": 27.802,
+        "mm_other": 88.0,
+        "distance": 31.729139110860164,
+        "Route": "017B"
+      },
+      {
+        "mm": 0,
+        "mm_other": 202.082,
+        "distance": 0.5416520058420725,
+        "Route": "160A"
+      }
+    ]
+  },
+  {
+    "Route": "112A_DEC",
+    "MMin": 0,
+    "MMax": 27.802,
+    "intersections": []
+  },
+  {
+    "Route": "113A",
+    "MMin": 0,
+    "MMax": 18.83,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 8.97,
+        "distance": 0.11849231367022671,
+        "Route": "138A"
+      }
+    ]
+  },
+  {
+    "Route": "113A_DEC",
+    "MMin": 0,
+    "MMax": 18.83,
+    "intersections": []
+  },
+  {
+    "Route": "114A",
+    "MMin": 0,
+    "MMax": 61.697,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 165.581,
+        "distance": 38.68923753788171,
+        "Route": "050A"
+      },
+      {
+        "mm": 61.697,
+        "mm_other": 86.262,
+        "distance": 95.51995843650808,
+        "Route": "285B"
+      }
+    ]
+  },
+  {
+    "Route": "114A_DEC",
+    "MMin": 0,
+    "MMax": 61.697,
+    "intersections": []
+  },
+  {
+    "Route": "115A",
+    "MMin": 0,
+    "MMax": 47.496,
+    "intersections": [
+      {
+        "mm": 8.985,
+        "mm_other": 11.047,
+        "distance": 0.16838926666717585,
+        "Route": "067A"
+      },
+      {
+        "mm": 47.496,
+        "mm_other": 139.747,
+        "distance": 14.650137392200383,
+        "Route": "025A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 278.659,
+        "distance": 81.73749172323895,
+        "Route": "050A"
+      },
+      {
+        "mm": 11.0,
+        "mm_other": 0,
+        "distance": 92.04250859377755,
+        "Route": "120A"
+      }
+    ]
+  },
+  {
+    "Route": "115A_DEC",
+    "MMin": 0,
+    "MMax": 47.496,
+    "intersections": []
+  },
+  {
+    "Route": "116A",
+    "MMin": 0,
+    "MMax": 32.322,
+    "intersections": [
+      {
+        "mm": 27.0,
+        "mm_other": 0,
+        "distance": 29.916570975921353,
+        "Route": "089A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 41.0,
+        "distance": 74.90721475719513,
+        "Route": "287A"
+      }
+    ]
+  },
+  {
+    "Route": "116A_DEC",
+    "MMin": 0,
+    "MMax": 32.322,
+    "intersections": []
+  },
+  {
+    "Route": "119A",
+    "MMin": 0,
+    "MMax": 41.892,
+    "intersections": [
+      {
+        "mm": 41.892,
+        "mm_other": 49.506,
+        "distance": 0,
+        "Route": "007B"
+      },
+      {
+        "mm": 12.399,
+        "mm_other": 0,
+        "distance": 60.96202346989066,
+        "Route": "046A"
+      },
+      {
+        "mm": 22.443,
+        "mm_other": 29.378,
+        "distance": 96.51099414710133,
+        "Route": "072A"
+      },
+      {
+        "mm": 25.552,
+        "mm_other": 32.369,
+        "distance": 91.03391427099689,
+        "Route": "072B"
+      },
+      {
+        "mm": 0,
+        "mm_other": 260.191,
+        "distance": 79.31624551448124,
+        "Route": "006G"
+      },
+      {
+        "mm": 41.892,
+        "mm_other": 49.506,
+        "distance": 0,
+        "Route": "007B"
+      },
+      {
+        "mm": 41.892,
+        "mm_other": 18.703,
+        "distance": 93.47888819334507,
+        "Route": "093A"
+      }
+    ]
+  },
+  {
+    "Route": "119A_DEC",
+    "MMin": 0,
+    "MMax": 41.892,
+    "intersections": []
+  },
+  {
+    "Route": "119B",
+    "MMin": 44.237,
+    "MMax": 59.089,
+    "intersections": [
+      {
+        "mm": 49.543,
+        "mm_other": 0,
+        "distance": 17.865569749941038,
+        "Route": "052A"
+      },
+      {
+        "mm": 44.237,
+        "mm_other": 34.819,
+        "distance": 79.05638297531263,
+        "Route": "036B"
+      },
+      {
+        "mm": 59.089,
+        "mm_other": 59.089,
+        "distance": 0,
+        "Route": "119C"
+      },
+      {
+        "mm": 59.089,
+        "mm_other": 59.089,
+        "distance": 0,
+        "Route": "119C"
+      },
+      {
+        "mm": 45.681,
+        "mm_other": 4.53,
+        "distance": 98.839468435071,
+        "Route": "157A"
+      }
+    ]
+  },
+  {
+    "Route": "119B_DEC",
+    "MMin": 44.237,
+    "MMax": 59.089,
+    "intersections": []
+  },
+  {
+    "Route": "119C",
+    "MMin": 59.089,
+    "MMax": 63.7,
+    "intersections": [
+      {
+        "mm": 59.089,
+        "mm_other": 59.089,
+        "distance": 0,
+        "Route": "119B"
+      },
+      {
+        "mm": 59.089,
+        "mm_other": 59.089,
+        "distance": 0,
+        "Route": "119B"
+      }
+    ]
+  },
+  {
+    "Route": "119C_DEC",
+    "MMin": 59.089,
+    "MMax": 63.7,
+    "intersections": []
+  },
+  {
+    "Route": "120A",
+    "MMin": 0,
+    "MMax": 7.186,
+    "intersections": [
+      {
+        "mm": 7.186,
+        "mm_other": 294.339,
+        "distance": 13.389360841739066,
+        "Route": "050A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 11.0,
+        "distance": 92.04250859377755,
+        "Route": "115A"
+      }
+    ]
+  },
+  {
+    "Route": "120A_DEC",
+    "MMin": 0,
+    "MMax": 7.186,
+    "intersections": []
+  },
+  {
+    "Route": "121A",
+    "MMin": 0,
+    "MMax": 26.452,
+    "intersections": [
+      {
+        "mm": 8.878,
+        "mm_other": 8.683,
+        "distance": 73.38256194979468,
+        "Route": "008A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 4.413,
+        "distance": 0,
+        "Route": "121B"
+      },
+      {
+        "mm": 26.452,
+        "mm_other": 298.176,
+        "distance": 95.12181257999954,
+        "Route": "287C"
+      },
+      {
+        "mm": 0,
+        "mm_other": 13.85,
+        "distance": 99.65793000660965,
+        "Route": "470A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 4.413,
+        "distance": 0,
+        "Route": "121B"
+      }
+    ]
+  },
+  {
+    "Route": "121A_DEC",
+    "MMin": 0,
+    "MMax": 26.452,
+    "intersections": []
+  },
+  {
+    "Route": "121B",
+    "MMin": 0,
+    "MMax": 4.413,
+    "intersections": [
+      {
+        "mm": 4.413,
+        "mm_other": 0,
+        "distance": 0,
+        "Route": "121A"
+      },
+      {
+        "mm": 4.413,
+        "mm_other": 0,
+        "distance": 0,
+        "Route": "121A"
+      },
+      {
+        "mm": 4.413,
+        "mm_other": 13.85,
+        "distance": 99.65793000660965,
+        "Route": "470A"
+      }
+    ]
+  },
+  {
+    "Route": "121B_DEC",
+    "MMin": 0,
+    "MMax": 4.413,
+    "intersections": []
+  },
+  {
+    "Route": "125A",
+    "MMin": 0,
+    "MMax": 75.406,
+    "intersections": [
+      {
+        "mm": 52.0,
+        "mm_other": 32.968,
+        "distance": 13.92625365303185,
+        "Route": "014A"
+      },
+      {
+        "mm": 53.18,
+        "mm_other": 34.09,
+        "distance": 68.13125275943672,
+        "Route": "014B"
+      },
+      {
+        "mm": 0,
+        "mm_other": 209.165,
+        "distance": 0.36917973793442094,
+        "Route": "040A"
+      },
+      {
+        "mm": 66.374,
+        "mm_other": 0,
+        "distance": 94.81345561315145,
+        "Route": "127A"
+      }
+    ]
+  },
+  {
+    "Route": "125A_DEC",
+    "MMin": 0,
+    "MMax": 75.406,
+    "intersections": []
+  },
+  {
+    "Route": "127A",
+    "MMin": 0,
+    "MMax": 9.202,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 66.374,
+        "distance": 94.81345561315145,
+        "Route": "125A"
+      }
+    ]
+  },
+  {
+    "Route": "127A_DEC",
+    "MMin": 0,
+    "MMax": 9.202,
+    "intersections": []
+  },
+  {
+    "Route": "128A",
+    "MMin": 0,
+    "MMax": 9.014,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 11.541,
+        "distance": 95.28508887927636,
+        "Route": "093A"
+      },
+      {
+        "mm": 9.014,
+        "mm_other": 297.396,
+        "distance": 97.83002690125463,
+        "Route": "287C"
+      }
+    ]
+  },
+  {
+    "Route": "128A_DEC",
+    "MMin": 0,
+    "MMax": 9.014,
+    "intersections": []
+  },
+  {
+    "Route": "128B",
+    "MMin": 12.168,
+    "MMax": 14.113,
+    "intersections": [
+      {
+        "mm": 14.113,
+        "mm_other": 223.227,
+        "distance": 76.0022537777776,
+        "Route": "025A"
+      },
+      {
+        "mm": 12.168,
+        "mm_other": 294.495,
+        "distance": 72.35687118011619,
+        "Route": "287C"
+      }
+    ]
+  },
+  {
+    "Route": "128B_DEC",
+    "MMin": 12.168,
+    "MMax": 14.113,
+    "intersections": []
+  },
+  {
+    "Route": "131A",
+    "MMin": 0,
+    "MMax": 0.323,
+    "intersections": [
+      {
+        "mm": 0.323,
+        "mm_other": 159.573,
+        "distance": 0.1983786317323008,
+        "Route": "006E"
+      },
+      {
+        "mm": 0,
+        "mm_other": 156.505,
+        "distance": 94.90074687302905,
+        "Route": "070A"
+      }
+    ]
+  },
+  {
+    "Route": "131A_DEC",
+    "MMin": 0,
+    "MMax": 0.323,
+    "intersections": []
+  },
+  {
+    "Route": "131B",
+    "MMin": 0.053,
+    "MMax": 68.721,
+    "intersections": [
+      {
+        "mm": 0.053,
+        "mm_other": 159.184,
+        "distance": 0.0,
+        "Route": "006E"
+      },
+      {
+        "mm": 68.721,
+        "mm_other": 136.371,
+        "distance": 95.32698149659787,
+        "Route": "040A"
+      },
+      {
+        "mm": 0.053,
+        "mm_other": 156.167,
+        "distance": 91.92289824802137,
+        "Route": "070A"
+      },
+      {
+        "mm": 32.955,
+        "mm_other": 0,
+        "distance": 6.086346938212448,
+        "Route": "134A"
+      }
+    ]
+  },
+  {
+    "Route": "131B_DEC",
+    "MMin": 0.053,
+    "MMax": 68.721,
+    "intersections": []
+  },
+  {
+    "Route": "133A",
+    "MMin": 0,
+    "MMax": 68.821,
+    "intersections": [
+      {
+        "mm": 68.821,
+        "mm_other": 11.695,
+        "distance": 0.00011596482753234583,
+        "Route": "082A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 20.644,
+        "distance": 98.0509308631113,
+        "Route": "092A"
+      },
+      {
+        "mm": 12.106,
+        "mm_other": 12.159,
+        "distance": 87.7930917531872,
+        "Route": "133B"
+      }
+    ]
+  },
+  {
+    "Route": "133A_DEC",
+    "MMin": 0,
+    "MMax": 68.821,
+    "intersections": []
+  },
+  {
+    "Route": "133B",
+    "MMin": 12.159,
+    "MMax": 16.076,
+    "intersections": [
+      {
+        "mm": 12.159,
+        "mm_other": 12.106,
+        "distance": 87.7930917531872,
+        "Route": "133A"
+      }
+    ]
+  },
+  {
+    "Route": "133B_DEC",
+    "MMin": 12.159,
+    "MMax": 16.076,
+    "intersections": []
+  },
+  {
+    "Route": "134A",
+    "MMin": 0,
+    "MMax": 27.163,
+    "intersections": [
+      {
+        "mm": 27.163,
+        "mm_other": 178.153,
+        "distance": 92.86232744819137,
+        "Route": "040A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 32.955,
+        "distance": 6.086346938212448,
+        "Route": "131B"
+      }
+    ]
+  },
+  {
+    "Route": "134A_DEC",
+    "MMin": 0,
+    "MMax": 27.163,
+    "intersections": []
+  },
+  {
+    "Route": "135A",
+    "MMin": 0,
+    "MMax": 27.484,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 157.394,
+        "distance": 0.5602756103834118,
+        "Route": "050A"
+      }
+    ]
+  },
+  {
+    "Route": "135A_DEC",
+    "MMin": 0,
+    "MMax": 27.484,
+    "intersections": []
+  },
+  {
+    "Route": "136A",
+    "MMin": 0,
+    "MMax": 4.469,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 19.672,
+        "distance": 87.10993613470814,
+        "Route": "285A"
+      }
+    ]
+  },
+  {
+    "Route": "136A_DEC",
+    "MMin": 0,
+    "MMax": 4.469,
+    "intersections": []
+  },
+  {
+    "Route": "138A",
+    "MMin": 0,
+    "MMax": 59.823,
+    "intersections": [
+      {
+        "mm": 56.956,
+        "mm_other": 0,
+        "distance": 12.159194741612694,
+        "Route": "011A"
+      },
+      {
+        "mm": 27.446,
+        "mm_other": 0,
+        "distance": 82.31249756940811,
+        "Route": "055A"
+      },
+      {
+        "mm": 8.97,
+        "mm_other": 0,
+        "distance": 0.11849231367022671,
+        "Route": "113A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 404.602,
+        "distance": 96.83046406171678,
+        "Route": "006J"
+      },
+      {
+        "mm": 58.51,
+        "mm_other": 310.996,
+        "distance": 19.46564833605411,
+        "Route": "385D"
+      },
+      {
+        "mm": 54.774,
+        "mm_other": 313.849,
+        "distance": 32.439385739647456,
+        "Route": "385E"
+      }
+    ]
+  },
+  {
+    "Route": "138A_DEC",
+    "MMin": 0,
+    "MMax": 59.823,
+    "intersections": []
+  },
+  {
+    "Route": "139A",
+    "MMin": 0,
+    "MMax": 72.065,
+    "intersections": [
+      {
+        "mm": 72.065,
+        "mm_other": 19.753,
+        "distance": 79.72124625386603,
+        "Route": "064A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 15.0,
+        "distance": 44.366165180015095,
+        "Route": "070A"
+      }
+    ]
+  },
+  {
+    "Route": "139A_DEC",
+    "MMin": 0,
+    "MMax": 72.065,
+    "intersections": []
+  },
+  {
+    "Route": "140A",
+    "MMin": 0,
+    "MMax": 23.435,
+    "intersections": [
+      {
+        "mm": 23.435,
+        "mm_other": 72.755,
+        "distance": 0.34122267176237014,
+        "Route": "160A"
+      }
+    ]
+  },
+  {
+    "Route": "140A_DEC",
+    "MMin": 0,
+    "MMax": 23.435,
+    "intersections": []
+  },
+  {
+    "Route": "141A",
+    "MMin": 0,
+    "MMax": 154.109,
+    "intersections": [
+      {
+        "mm": 62.379,
+        "mm_other": 33.874,
+        "distance": 95.74814191007177,
+        "Route": "090A"
+      },
+      {
+        "mm": 60.404,
+        "mm_other": 0,
+        "distance": 98.3505924341906,
+        "Route": "097A"
+      },
+      {
+        "mm": 154.109,
+        "mm_other": 41.137,
+        "distance": 0.5411887578421086,
+        "Route": "050A"
+      },
+      {
+        "mm": 56.581,
+        "mm_other": 116.879,
+        "distance": 72.20558362189497,
+        "Route": "145A"
+      }
+    ]
+  },
+  {
+    "Route": "141A_DEC",
+    "MMin": 0,
+    "MMax": 154.109,
+    "intersections": []
+  },
+  {
+    "Route": "141B",
+    "MMin": 156.746,
+    "MMax": 162.297,
+    "intersections": [
+      {
+        "mm": 156.746,
+        "mm_other": 38.452,
+        "distance": 86.49304980750792,
+        "Route": "050A"
+      },
+      {
+        "mm": 162.297,
+        "mm_other": 11.716,
+        "distance": 14.054374464277922,
+        "Route": "070B"
+      }
+    ]
+  },
+  {
+    "Route": "141B_DEC",
+    "MMin": 156.746,
+    "MMax": 162.297,
+    "intersections": []
+  },
+  {
+    "Route": "142A",
+    "MMin": 0,
+    "MMax": 33.84,
+    "intersections": [
+      {
+        "mm": 33.84,
+        "mm_other": 17.797,
+        "distance": 94.5788278660674,
+        "Route": "159A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 12.563,
+        "distance": 86.89083208152609,
+        "Route": "285A"
+      }
+    ]
+  },
+  {
+    "Route": "142A_DEC",
+    "MMin": 0,
+    "MMax": 33.84,
+    "intersections": []
+  },
+  {
+    "Route": "144A",
+    "MMin": 0,
+    "MMax": 28.796,
+    "intersections": [
+      {
+        "mm": 10.449,
+        "mm_other": 7.571,
+        "distance": 85.16975780303395,
+        "Route": "039A"
+      },
+      {
+        "mm": 28.796,
+        "mm_other": 86.765,
+        "distance": 82.05465239413421,
+        "Route": "052B"
+      },
+      {
+        "mm": 0,
+        "mm_other": 61.827,
+        "distance": 16.813945675087286,
+        "Route": "076A"
+      }
+    ]
+  },
+  {
+    "Route": "144A_DEC",
+    "MMin": 0,
+    "MMax": 28.796,
+    "intersections": []
+  },
+  {
+    "Route": "145A",
+    "MMin": 0,
+    "MMax": 116.879,
+    "intersections": [
+      {
+        "mm": 84.188,
+        "mm_other": 0,
+        "distance": 86.57976444844684,
+        "Route": "062A"
+      },
+      {
+        "mm": 116.879,
+        "mm_other": 56.581,
+        "distance": 72.20558362189497,
+        "Route": "141A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 40.254,
+        "distance": 65.15778272128442,
+        "Route": "160A"
+      },
+      {
+        "mm": 7.696,
+        "mm_other": 8.159,
+        "distance": 93.91358352656931,
+        "Route": "184A"
+      },
+      {
+        "mm": 8.683,
+        "mm_other": 8.9,
+        "distance": 87.8811014230519,
+        "Route": "184B"
+      }
+    ]
+  },
+  {
+    "Route": "145A_DEC",
+    "MMin": 0,
+    "MMax": 116.879,
+    "intersections": []
+  },
+  {
+    "Route": "149A",
+    "MMin": 0,
+    "MMax": 117.522,
+    "intersections": [
+      {
+        "mm": 117.522,
+        "mm_other": 148.052,
+        "distance": 0.5255321429881255,
+        "Route": "050A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 186.0,
+        "distance": 85.36022047031773,
+        "Route": "160A"
+      }
+    ]
+  },
+  {
+    "Route": "149A_DEC",
+    "MMin": 0,
+    "MMax": 117.522,
+    "intersections": []
+  },
+  {
+    "Route": "150A",
+    "MMin": 0,
+    "MMax": 16.114,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 247.928,
+        "distance": 0.20529192685328237,
+        "Route": "160A"
+      }
+    ]
+  },
+  {
+    "Route": "150A_DEC",
+    "MMin": 0,
+    "MMax": 16.114,
+    "intersections": []
+  },
+  {
+    "Route": "151A",
+    "MMin": 0,
+    "MMax": 33.96,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 8.677,
+        "distance": 94.37792489284648,
+        "Route": "172A"
+      }
+    ]
+  },
+  {
+    "Route": "151A_DEC",
+    "MMin": 0,
+    "MMax": 33.96,
+    "intersections": []
+  },
+  {
+    "Route": "157A",
+    "MMin": 0,
+    "MMax": 4.53,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 39.522,
+        "distance": 4.126466439085363,
+        "Route": "036B"
+      },
+      {
+        "mm": 4.53,
+        "mm_other": 45.681,
+        "distance": 98.839468435071,
+        "Route": "119B"
+      }
+    ]
+  },
+  {
+    "Route": "157A_DEC",
+    "MMin": 0,
+    "MMax": 4.53,
+    "intersections": []
+  },
+  {
+    "Route": "159A",
+    "MMin": 0,
+    "MMax": 33.661,
+    "intersections": [
+      {
+        "mm": 17.797,
+        "mm_other": 33.84,
+        "distance": 94.5788278660674,
+        "Route": "142A"
+      },
+      {
+        "mm": 33.661,
+        "mm_other": 258.261,
+        "distance": 21.822718830214054,
+        "Route": "160A"
+      }
+    ]
+  },
+  {
+    "Route": "159A_DEC",
+    "MMin": 0,
+    "MMax": 33.661,
+    "intersections": []
+  },
+  {
+    "Route": "160A",
+    "MMin": 0,
+    "MMax": 305.38,
+    "intersections": [
+      {
+        "mm": 85.941,
+        "mm_other": 0,
+        "distance": 52.08446660147028,
+        "Route": "003A"
+      },
+      {
+        "mm": 294.12,
+        "mm_other": 0,
+        "distance": 80.84231729491155,
+        "Route": "012A"
+      },
+      {
+        "mm": 215.698,
+        "mm_other": 0,
+        "distance": 0.4068270723311727,
+        "Route": "015A"
+      },
+      {
+        "mm": 233.966,
+        "mm_other": 69.024,
+        "distance": 48.941714264613836,
+        "Route": "017B"
+      },
+      {
+        "mm": 144.436,
+        "mm_other": 27.924,
+        "distance": 58.39405205972038,
+        "Route": "084A"
+      },
+      {
+        "mm": 202.082,
+        "mm_other": 0,
+        "distance": 0.5416520058420725,
+        "Route": "112A"
+      },
+      {
+        "mm": 72.755,
+        "mm_other": 23.435,
+        "distance": 0.34122267176237014,
+        "Route": "140A"
+      },
+      {
+        "mm": 40.254,
+        "mm_other": 0,
+        "distance": 65.15778272128442,
+        "Route": "145A"
+      },
+      {
+        "mm": 186.0,
+        "mm_other": 0,
+        "distance": 85.36022047031773,
+        "Route": "149A"
+      },
+      {
+        "mm": 247.928,
+        "mm_other": 0,
+        "distance": 0.20529192685328237,
+        "Route": "150A"
+      },
+      {
+        "mm": 258.261,
+        "mm_other": 33.661,
+        "distance": 21.822718830214054,
+        "Route": "159A"
+      },
+      {
+        "mm": 305.38,
+        "mm_other": 1.294,
+        "distance": 60.934766760523985,
+        "Route": "025C"
+      },
+      {
+        "mm": 305.38,
+        "mm_other": 305.626,
+        "distance": 92.83386268049074,
+        "Route": "160B"
+      },
+      {
+        "mm": 305.288,
+        "mm_other": 305.526,
+        "distance": 98.12357157331354,
+        "Route": "160B"
+      },
+      {
+        "mm": 54.728,
+        "mm_other": 0,
+        "distance": 0.0,
+        "Route": "160D"
+      },
+      {
+        "mm": 91.446,
+        "mm_other": 24.499,
+        "distance": 49.69606654464096,
+        "Route": "172A"
+      },
+      {
+        "mm": 56.065,
+        "mm_other": 26.599,
+        "distance": 81.32841999409894,
+        "Route": "184B"
+      },
+      {
+        "mm": 232.769,
+        "mm_other": 34.102,
+        "distance": 33.40357855337081,
+        "Route": "285A"
+      },
+      {
+        "mm": 215.698,
+        "mm_other": 51.159,
+        "distance": 0.4068270723311727,
+        "Route": "285B"
+      },
+      {
+        "mm": 18.275,
+        "mm_other": 6.422,
+        "distance": 84.6860167452905,
+        "Route": "491A"
+      },
+      {
+        "mm": 37.651,
+        "mm_other": 26.217,
+        "distance": 87.45697404884021,
+        "Route": "491B"
+      },
+      {
+        "mm": 38.196,
+        "mm_other": 0,
+        "distance": 0.0,
+        "Route": "491C"
+      },
+      {
+        "mm": 88.273,
+        "mm_other": 16.561,
+        "distance": 74.78174731872383,
+        "Route": "550A"
+      },
+      {
+        "mm": 83.207,
+        "mm_other": 20.916,
+        "distance": 0.0,
+        "Route": "550B"
+      }
+    ]
+  },
+  {
+    "Route": "160A_DEC",
+    "MMin": 0,
+    "MMax": 305.38,
+    "intersections": []
+  },
+  {
+    "Route": "160B",
+    "MMin": 305.526,
+    "MMax": 306.35,
+    "intersections": [
+      {
+        "mm": 306.35,
+        "mm_other": 0,
+        "distance": 0,
+        "Route": "010A"
+      },
+      {
+        "mm": 305.626,
+        "mm_other": 305.38,
+        "distance": 92.83386268049074,
+        "Route": "160A"
+      },
+      {
+        "mm": 306.35,
+        "mm_other": 0,
+        "distance": 0,
+        "Route": "010A"
+      },
+      {
+        "mm": 306.35,
+        "mm_other": 49.949,
+        "distance": 97.56020294153113,
+        "Route": "025A"
+      },
+      {
+        "mm": 305.526,
+        "mm_other": 1.439,
+        "distance": 63.41460117257617,
+        "Route": "025C"
+      },
+      {
+        "mm": 305.526,
+        "mm_other": 305.288,
+        "distance": 98.12357157331354,
+        "Route": "160A"
+      }
+    ]
+  },
+  {
+    "Route": "160B_DEC",
+    "MMin": 305.526,
+    "MMax": 306.35,
+    "intersections": []
+  },
+  {
+    "Route": "160C",
+    "MMin": 344.572,
+    "MMax": 497.223,
+    "intersections": [
+      {
+        "mm": 473.654,
+        "mm_other": 0,
+        "distance": 0.0001198355768738857,
+        "Route": "100A"
+      },
+      {
+        "mm": 416.415,
+        "mm_other": 0,
+        "distance": 59.83827306045494,
+        "Route": "109A"
+      },
+      {
+        "mm": 344.572,
+        "mm_other": 14.709,
+        "distance": 89.0354699661631,
+        "Route": "025A"
+      },
+      {
+        "mm": 344.612,
+        "mm_other": 0,
+        "distance": 60.875340092197696,
+        "Route": "239A"
+      },
+      {
+        "mm": 350.769,
+        "mm_other": 0,
+        "distance": 0.0,
+        "Route": "350A"
+      },
+      {
+        "mm": 382.923,
+        "mm_other": 12.803,
+        "distance": 97.84752874712852,
+        "Route": "389A"
+      }
+    ]
+  },
+  {
+    "Route": "160C_DEC",
+    "MMin": 344.572,
+    "MMax": 497.223,
+    "intersections": []
+  },
+  {
+    "Route": "160D",
+    "MMin": 0,
+    "MMax": 2.488,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 54.728,
+        "distance": 0.0,
+        "Route": "160A"
+      },
+      {
+        "mm": 1.457,
+        "mm_other": 26.599,
+        "distance": 0.0,
+        "Route": "184B"
+      }
+    ]
+  },
+  {
+    "Route": "160D_DEC",
+    "MMin": 0,
+    "MMax": 2.488,
+    "intersections": []
+  },
+  {
+    "Route": "160Z",
+    "MMin": 0,
+    "MMax": 0.929,
+    "intersections": []
+  },
+  {
+    "Route": "165A",
+    "MMin": 0,
+    "MMax": 36.894,
+    "intersections": [
+      {
+        "mm": 15.231,
+        "mm_other": 0,
+        "distance": 70.0454466522605,
+        "Route": "078A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 16.562,
+        "distance": 81.3569716899925,
+        "Route": "096A"
+      }
+    ]
+  },
+  {
+    "Route": "165A_DEC",
+    "MMin": 0,
+    "MMax": 36.894,
+    "intersections": []
+  },
+  {
+    "Route": "167A",
+    "MMin": 0,
+    "MMax": 4.86,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 90.0,
+        "distance": 65.27974936947001,
+        "Route": "096B"
+      }
+    ]
+  },
+  {
+    "Route": "167A_DEC",
+    "MMin": 0,
+    "MMax": 4.86,
+    "intersections": []
+  },
+  {
+    "Route": "170A",
+    "MMin": 0,
+    "MMax": 6.978,
+    "intersections": [
+      {
+        "mm": 6.978,
+        "mm_other": 43.198,
+        "distance": 34.77769964292168,
+        "Route": "036B"
+      }
+    ]
+  },
+  {
+    "Route": "170A_DEC",
+    "MMin": 0,
+    "MMax": 6.978,
+    "intersections": []
+  },
+  {
+    "Route": "172A",
+    "MMin": 0,
+    "MMax": 24.499,
+    "intersections": [
+      {
+        "mm": 8.677,
+        "mm_other": 0,
+        "distance": 94.37792489284648,
+        "Route": "151A"
+      },
+      {
+        "mm": 24.499,
+        "mm_other": 91.446,
+        "distance": 49.69606654464096,
+        "Route": "160A"
+      }
+    ]
+  },
+  {
+    "Route": "172A_DEC",
+    "MMin": 0,
+    "MMax": 24.499,
+    "intersections": []
+  },
+  {
+    "Route": "177A",
+    "MMin": 0,
+    "MMax": 6.111,
+    "intersections": [
+      {
+        "mm": 6.111,
+        "mm_other": 261.683,
+        "distance": 69.54737335030026,
+        "Route": "285D"
+      },
+      {
+        "mm": 0,
+        "mm_other": 21.069,
+        "distance": 32.153309229211345,
+        "Route": "470A"
+      }
+    ]
+  },
+  {
+    "Route": "177A_DEC",
+    "MMin": 0,
+    "MMax": 6.111,
+    "intersections": []
+  },
+  {
+    "Route": "183A",
+    "MMin": 0,
+    "MMax": 1,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 404.627,
+        "distance": 9.125563548183745,
+        "Route": "050B"
+      }
+    ]
+  },
+  {
+    "Route": "183A_DEC",
+    "MMin": 0,
+    "MMax": 1,
+    "intersections": []
+  },
+  {
+    "Route": "184A",
+    "MMin": 0,
+    "MMax": 8.159,
+    "intersections": [
+      {
+        "mm": 8.159,
+        "mm_other": 7.696,
+        "distance": 93.91358352656931,
+        "Route": "145A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 36.682,
+        "distance": 90.05071214811186,
+        "Route": "491B"
+      }
+    ]
+  },
+  {
+    "Route": "184A_DEC",
+    "MMin": 0,
+    "MMax": 8.159,
+    "intersections": []
+  },
+  {
+    "Route": "184B",
+    "MMin": 8.9,
+    "MMax": 26.599,
+    "intersections": [
+      {
+        "mm": 8.9,
+        "mm_other": 8.683,
+        "distance": 87.8811014230519,
+        "Route": "145A"
+      },
+      {
+        "mm": 26.599,
+        "mm_other": 56.065,
+        "distance": 81.32841999409894,
+        "Route": "160A"
+      },
+      {
+        "mm": 26.599,
+        "mm_other": 1.457,
+        "distance": 0.0,
+        "Route": "160D"
+      }
+    ]
+  },
+  {
+    "Route": "184B_DEC",
+    "MMin": 8.9,
+    "MMax": 26.599,
+    "intersections": []
+  },
+  {
+    "Route": "194A",
+    "MMin": 0,
+    "MMax": 20.327,
+    "intersections": [
+      {
+        "mm": 20.327,
+        "mm_other": 400.448,
+        "distance": 5.084452757478695e-05,
+        "Route": "050B"
+      },
+      {
+        "mm": 0,
+        "mm_other": 57.186,
+        "distance": 92.77846852059305,
+        "Route": "109A"
+      }
+    ]
+  },
+  {
+    "Route": "194A_DEC",
+    "MMin": 0,
+    "MMax": 20.327,
+    "intersections": []
+  },
+  {
+    "Route": "196A",
+    "MMin": 0,
+    "MMax": 8.922,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 420.771,
+        "distance": 53.894887119114834,
+        "Route": "050B"
+      },
+      {
+        "mm": 8.922,
+        "mm_other": 87.12,
+        "distance": 90.03262617710735,
+        "Route": "287B"
+      }
+    ]
+  },
+  {
+    "Route": "196A_DEC",
+    "MMin": 0,
+    "MMax": 8.922,
+    "intersections": []
+  },
+  {
+    "Route": "202A",
+    "MMin": 0,
+    "MMax": 3.228,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 368.109,
+        "distance": 84.7498227057456,
+        "Route": "050B"
+      }
+    ]
+  },
+  {
+    "Route": "202A_DEC",
+    "MMin": 0,
+    "MMax": 3.228,
+    "intersections": []
+  },
+  {
+    "Route": "207A",
+    "MMin": 0,
+    "MMax": 5.935,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 359.712,
+        "distance": 2.6649177314687444e-05,
+        "Route": "050B"
+      },
+      {
+        "mm": 5.935,
+        "mm_other": 99.58,
+        "distance": 0.03175371497428073,
+        "Route": "096B"
+      }
+    ]
+  },
+  {
+    "Route": "207A_DEC",
+    "MMin": 0,
+    "MMax": 5.935,
+    "intersections": []
+  },
+  {
+    "Route": "209A",
+    "MMin": 0,
+    "MMax": 1.528,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 335.709,
+        "distance": 92.7923203028223,
+        "Route": "050B"
+      },
+      {
+        "mm": 1.528,
+        "mm_other": 75.496,
+        "distance": 0.0,
+        "Route": "096B"
+      }
+    ]
+  },
+  {
+    "Route": "209A_DEC",
+    "MMin": 0,
+    "MMax": 1.528,
+    "intersections": []
+  },
+  {
+    "Route": "224A",
+    "MMin": 0,
+    "MMax": 3.634,
+    "intersections": [
+      {
+        "mm": 0.079,
+        "mm_other": 1.663,
+        "distance": 90.89895917835703,
+        "Route": "053A"
+      },
+      {
+        "mm": 3.634,
+        "mm_other": 294.814,
+        "distance": 93.3525676119985,
+        "Route": "006H"
+      },
+      {
+        "mm": 0,
+        "mm_other": 56.979,
+        "distance": 88.19121718609854,
+        "Route": "036B"
+      }
+    ]
+  },
+  {
+    "Route": "224A_DEC",
+    "MMin": 0,
+    "MMax": 3.634,
+    "intersections": []
+  },
+  {
+    "Route": "225A",
+    "MMin": 0,
+    "MMax": 12.431,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 200.291,
+        "distance": 54.045899475225696,
+        "Route": "025A"
+      },
+      {
+        "mm": 12.431,
+        "mm_other": 282.214,
+        "distance": 84.91133028019067,
+        "Route": "070A"
+      }
+    ]
+  },
+  {
+    "Route": "225A_DEC",
+    "MMin": 0,
+    "MMax": 12.431,
+    "intersections": []
+  },
+  {
+    "Route": "227A",
+    "MMin": 0,
+    "MMax": 0.332,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 2.321,
+        "distance": 72.14411258541844,
+        "Route": "050C"
+      }
+    ]
+  },
+  {
+    "Route": "227A_DEC",
+    "MMin": 0,
+    "MMax": 0.332,
+    "intersections": []
+  },
+  {
+    "Route": "231A",
+    "MMin": 0,
+    "MMax": 2.05,
+    "intersections": [
+      {
+        "mm": 2.05,
+        "mm_other": 324.229,
+        "distance": 5.171602559113034,
+        "Route": "050B"
+      },
+      {
+        "mm": 0,
+        "mm_other": 9.449,
+        "distance": 0.0,
+        "Route": "050C"
+      }
+    ]
+  },
+  {
+    "Route": "231A_DEC",
+    "MMin": 0,
+    "MMax": 2.05,
+    "intersections": []
+  },
+  {
+    "Route": "239A",
+    "MMin": 0,
+    "MMax": 3.345,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 14.834,
+        "distance": 92.52421281967402,
+        "Route": "025A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 344.612,
+        "distance": 60.875340092197696,
+        "Route": "160C"
+      }
+    ]
+  },
+  {
+    "Route": "239A_DEC",
+    "MMin": 0,
+    "MMax": 3.345,
+    "intersections": []
+  },
+  {
+    "Route": "257A",
+    "MMin": 0,
+    "MMax": 18.487,
+    "intersections": [
+      {
+        "mm": 18.487,
+        "mm_other": 144.0,
+        "distance": 92.48693971964997,
+        "Route": "014C"
+      },
+      {
+        "mm": 0,
+        "mm_other": 11.853,
+        "distance": 0.0,
+        "Route": "060B"
+      },
+      {
+        "mm": 6.194,
+        "mm_other": 0.037,
+        "distance": 62.61104053091197,
+        "Route": "257B"
+      },
+      {
+        "mm": 11.58,
+        "mm_other": 104.455,
+        "distance": 0.0,
+        "Route": "392A"
+      },
+      {
+        "mm": 10.404,
+        "mm_other": 105.439,
+        "distance": 78.99611989082871,
+        "Route": "392B"
+      }
+    ]
+  },
+  {
+    "Route": "257A_DEC",
+    "MMin": 0,
+    "MMax": 18.487,
+    "intersections": []
+  },
+  {
+    "Route": "257B",
+    "MMin": 0.037,
+    "MMax": 1.146,
+    "intersections": [
+      {
+        "mm": 1.146,
+        "mm_other": 1.752,
+        "distance": 0.0,
+        "Route": "034D"
+      },
+      {
+        "mm": 0.037,
+        "mm_other": 6.194,
+        "distance": 62.61104053091197,
+        "Route": "257A"
+      }
+    ]
+  },
+  {
+    "Route": "257B_DEC",
+    "MMin": 0.037,
+    "MMax": 1.146,
+    "intersections": []
+  },
+  {
+    "Route": "265A",
+    "MMin": 1.177,
+    "MMax": 3.621,
+    "intersections": [
+      {
+        "mm": 3.621,
+        "mm_other": 294.122,
+        "distance": 93.37748005688756,
+        "Route": "006H"
+      }
+    ]
+  },
+  {
+    "Route": "265A_DEC",
+    "MMin": 1.177,
+    "MMax": 3.621,
+    "intersections": []
+  },
+  {
+    "Route": "265B",
+    "MMin": 0.034,
+    "MMax": 0.147,
+    "intersections": [
+      {
+        "mm": 0.034,
+        "mm_other": 275.22,
+        "distance": 58.90682689665358,
+        "Route": "070A"
+      }
+    ]
+  },
+  {
+    "Route": "265B_DEC",
+    "MMin": 0.034,
+    "MMax": 0.147,
+    "intersections": []
+  },
+  {
+    "Route": "266A",
+    "MMin": 0,
+    "MMax": 11.516,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 14.539,
+        "distance": 0,
+        "Route": "071B"
+      },
+      {
+        "mm": 0,
+        "mm_other": 14.539,
+        "distance": 0,
+        "Route": "071B"
+      },
+      {
+        "mm": 11.516,
+        "mm_other": 63.0,
+        "distance": 32.00731797344015,
+        "Route": "109A"
+      }
+    ]
+  },
+  {
+    "Route": "266A_DEC",
+    "MMin": 0,
+    "MMax": 11.516,
+    "intersections": []
+  },
+  {
+    "Route": "270A",
+    "MMin": 0,
+    "MMax": 5.986,
+    "intersections": [
+      {
+        "mm": 5.986,
+        "mm_other": 279.733,
+        "distance": 48.87517296596071,
+        "Route": "070A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 6.803,
+        "distance": 53.706489670723286,
+        "Route": "076A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 1.1,
+        "distance": 0,
+        "Route": "270B"
+      },
+      {
+        "mm": 0,
+        "mm_other": 1.1,
+        "distance": 0,
+        "Route": "270B"
+      }
+    ]
+  },
+  {
+    "Route": "270A_DEC",
+    "MMin": 0,
+    "MMax": 5.986,
+    "intersections": []
+  },
+  {
+    "Route": "270B",
+    "MMin": 0.177,
+    "MMax": 1.1,
+    "intersections": [
+      {
+        "mm": 0.177,
+        "mm_other": 57.418,
+        "distance": 0,
+        "Route": "036B"
+      },
+      {
+        "mm": 1.1,
+        "mm_other": 0,
+        "distance": 0,
+        "Route": "270A"
+      },
+      {
+        "mm": 0.177,
+        "mm_other": 57.418,
+        "distance": 0,
+        "Route": "036B"
+      },
+      {
+        "mm": 1.1,
+        "mm_other": 6.803,
+        "distance": 53.706489670723286,
+        "Route": "076A"
+      },
+      {
+        "mm": 1.1,
+        "mm_other": 0,
+        "distance": 0,
+        "Route": "270A"
+      }
+    ]
+  },
+  {
+    "Route": "270B_DEC",
+    "MMin": 0.177,
+    "MMax": 1.1,
+    "intersections": []
+  },
+  {
+    "Route": "285A",
+    "MMin": 0,
+    "MMax": 34.102,
+    "intersections": [
+      {
+        "mm": 20.263,
+        "mm_other": 30.915,
+        "distance": 93.64897751487541,
+        "Route": "015B"
+      },
+      {
+        "mm": 5.178,
+        "mm_other": 39.052,
+        "distance": 70.66298575334126,
+        "Route": "017A"
+      },
+      {
+        "mm": 19.672,
+        "mm_other": 0,
+        "distance": 87.10993613470814,
+        "Route": "136A"
+      },
+      {
+        "mm": 12.563,
+        "mm_other": 0,
+        "distance": 86.89083208152609,
+        "Route": "142A"
+      },
+      {
+        "mm": 34.102,
+        "mm_other": 232.769,
+        "distance": 33.40357855337081,
+        "Route": "160A"
+      },
+      {
+        "mm": 26.773,
+        "mm_other": 12.329,
+        "distance": 71.78318840732261,
+        "Route": "368A"
+      },
+      {
+        "mm": 31.252,
+        "mm_other": 14.115,
+        "distance": 29.92856997668416,
+        "Route": "370A"
+      }
+    ]
+  },
+  {
+    "Route": "285A_DEC",
+    "MMin": 0,
+    "MMax": 34.102,
+    "intersections": []
+  },
+  {
+    "Route": "285B",
+    "MMin": 51.159,
+    "MMax": 126.48,
+    "intersections": [
+      {
+        "mm": 51.159,
+        "mm_other": 0,
+        "distance": 0,
+        "Route": "015A"
+      },
+      {
+        "mm": 100.344,
+        "mm_other": 118.864,
+        "distance": 90.06127154278984,
+        "Route": "017B"
+      },
+      {
+        "mm": 86.262,
+        "mm_other": 61.697,
+        "distance": 95.51995843650808,
+        "Route": "114A"
+      },
+      {
+        "mm": 51.159,
+        "mm_other": 0,
+        "distance": 0,
+        "Route": "015A"
+      },
+      {
+        "mm": 126.48,
+        "mm_other": 217.23,
+        "distance": 72.78743785822012,
+        "Route": "050A"
+      },
+      {
+        "mm": 51.159,
+        "mm_other": 215.698,
+        "distance": 0.4068270723311727,
+        "Route": "160A"
+      }
+    ]
+  },
+  {
+    "Route": "285B_DEC",
+    "MMin": 51.159,
+    "MMax": 126.48,
+    "intersections": []
+  },
+  {
+    "Route": "285C",
+    "MMin": 126.853,
+    "MMax": 148.065,
+    "intersections": [
+      {
+        "mm": 148.065,
+        "mm_other": 212.9,
+        "distance": 0.0,
+        "Route": "024A"
+      },
+      {
+        "mm": 126.853,
+        "mm_other": 216.766,
+        "distance": 30.21805549357447,
+        "Route": "050A"
+      },
+      {
+        "mm": 133.883,
+        "mm_other": 9.135,
+        "distance": 0.0,
+        "Route": "291A"
+      }
+    ]
+  },
+  {
+    "Route": "285C_DEC",
+    "MMin": 126.853,
+    "MMax": 148.065,
+    "intersections": []
+  },
+  {
+    "Route": "285D",
+    "MMin": 161.789,
+    "MMax": 263.947,
+    "intersections": [
+      {
+        "mm": 262.674,
+        "mm_other": 0,
+        "distance": 29.200028540737055,
+        "Route": "002A"
+      },
+      {
+        "mm": 248.419,
+        "mm_other": 0,
+        "distance": 3.9869462194923093,
+        "Route": "008A"
+      },
+      {
+        "mm": 182.0,
+        "mm_other": 63.732,
+        "distance": 12.80831753756547,
+        "Route": "009B"
+      },
+      {
+        "mm": 182.861,
+        "mm_other": 64.673,
+        "distance": 64.58008851256133,
+        "Route": "009C"
+      },
+      {
+        "mm": 263.947,
+        "mm_other": 0.083,
+        "distance": 0,
+        "Route": "030A"
+      },
+      {
+        "mm": 256.547,
+        "mm_other": 0,
+        "distance": 45.816980098484876,
+        "Route": "095A"
+      },
+      {
+        "mm": 261.683,
+        "mm_other": 6.111,
+        "distance": 69.54737335030026,
+        "Route": "177A"
+      },
+      {
+        "mm": 161.789,
+        "mm_other": 226.55,
+        "distance": 0.0,
+        "Route": "024A"
+      },
+      {
+        "mm": 263.947,
+        "mm_other": 201.299,
+        "distance": 99.82970371144262,
+        "Route": "025A"
+      },
+      {
+        "mm": 263.947,
+        "mm_other": 0.083,
+        "distance": 0,
+        "Route": "030A"
+      },
+      {
+        "mm": 253.496,
+        "mm_other": 0,
+        "distance": 37.832295407517414,
+        "Route": "391A"
+      }
+    ]
+  },
+  {
+    "Route": "285D_DEC",
+    "MMin": 161.789,
+    "MMax": 263.947,
+    "intersections": []
+  },
+  {
+    "Route": "287A",
+    "MMin": 0,
+    "MMax": 77.639,
+    "intersections": [
+      {
+        "mm": 41.0,
+        "mm_other": 0,
+        "distance": 74.90721475719513,
+        "Route": "116A"
+      },
+      {
+        "mm": 77.639,
+        "mm_other": 435.141,
+        "distance": 86.38550429226011,
+        "Route": "050B"
+      }
+    ]
+  },
+  {
+    "Route": "287A_DEC",
+    "MMin": 0,
+    "MMax": 77.639,
+    "intersections": []
+  },
+  {
+    "Route": "287B",
+    "MMin": 85.188,
+    "MMax": 133.24,
+    "intersections": [
+      {
+        "mm": 113.335,
+        "mm_other": 166.114,
+        "distance": 6.06430476678694,
+        "Route": "096C"
+      },
+      {
+        "mm": 110.39,
+        "mm_other": 168.992,
+        "distance": 87.82495327308158,
+        "Route": "096D"
+      },
+      {
+        "mm": 87.12,
+        "mm_other": 8.922,
+        "distance": 90.03262617710735,
+        "Route": "196A"
+      },
+      {
+        "mm": 133.24,
+        "mm_other": 446.043,
+        "distance": 70.44566626902932,
+        "Route": "040H"
+      },
+      {
+        "mm": 85.188,
+        "mm_other": 427.956,
+        "distance": 48.93017136342584,
+        "Route": "050B"
+      }
+    ]
+  },
+  {
+    "Route": "287B_DEC",
+    "MMin": 85.188,
+    "MMax": 133.24,
+    "intersections": []
+  },
+  {
+    "Route": "287C",
+    "MMin": 282.7,
+    "MMax": 385.223,
+    "intersections": [
+      {
+        "mm": 348.511,
+        "mm_other": 0,
+        "distance": 90.87484515395859,
+        "Route": "001A"
+      },
+      {
+        "mm": 305.157,
+        "mm_other": 60.683,
+        "distance": 87.26602609004719,
+        "Route": "007C"
+      },
+      {
+        "mm": 304.138,
+        "mm_other": 61.877,
+        "distance": 59.481198389580626,
+        "Route": "007D"
+      },
+      {
+        "mm": 355.788,
+        "mm_other": 121.713,
+        "distance": 76.55624325442055,
+        "Route": "014B"
+      },
+      {
+        "mm": 346.64,
+        "mm_other": 134.77,
+        "distance": 99.18605011994896,
+        "Route": "014C"
+      },
+      {
+        "mm": 301.734,
+        "mm_other": 4.876,
+        "distance": 40.93596623276762,
+        "Route": "042A"
+      },
+      {
+        "mm": 325.379,
+        "mm_other": 2.821,
+        "distance": 75.286115360092,
+        "Route": "056B"
+      },
+      {
+        "mm": 329.856,
+        "mm_other": 0,
+        "distance": 74.01687213309386,
+        "Route": "060A"
+      },
+      {
+        "mm": 282.7,
+        "mm_other": 0,
+        "distance": 17.301861536764456,
+        "Route": "088A"
+      },
+      {
+        "mm": 298.176,
+        "mm_other": 26.452,
+        "distance": 95.12181257999954,
+        "Route": "121A"
+      },
+      {
+        "mm": 297.396,
+        "mm_other": 9.014,
+        "distance": 97.83002690125463,
+        "Route": "128A"
+      },
+      {
+        "mm": 294.495,
+        "mm_other": 12.168,
+        "distance": 72.35687118011619,
+        "Route": "128B"
+      },
+      {
+        "mm": 282.7,
+        "mm_other": 296.123,
+        "distance": 61.93551921217993,
+        "Route": "040C"
+      },
+      {
+        "mm": 282.7,
+        "mm_other": 0.0,
+        "distance": 17.301861536764456,
+        "Route": "088A"
+      },
+      {
+        "mm": 338.946,
+        "mm_other": 95.305,
+        "distance": 70.54038702654422,
+        "Route": "392A"
+      },
+      {
+        "mm": 331.823,
+        "mm_other": 0,
+        "distance": 90.12404855884881,
+        "Route": "402A"
+      }
+    ]
+  },
+  {
+    "Route": "287C_DEC",
+    "MMin": 282.7,
+    "MMax": 385.223,
+    "intersections": []
+  },
+  {
+    "Route": "287Z",
+    "MMin": 0,
+    "MMax": 1.763,
+    "intersections": []
+  },
+  {
+    "Route": "291A",
+    "MMin": 0,
+    "MMax": 9.135,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 222.358,
+        "distance": 70.34540299377917,
+        "Route": "050A"
+      },
+      {
+        "mm": 9.135,
+        "mm_other": 133.883,
+        "distance": 0.0,
+        "Route": "285C"
+      }
+    ]
+  },
+  {
+    "Route": "291A_DEC",
+    "MMin": 0,
+    "MMax": 9.135,
+    "intersections": []
+  },
+  {
+    "Route": "300A",
+    "MMin": 0,
+    "MMax": 3.356,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 179.835,
+        "distance": 98.48881756416887,
+        "Route": "024A"
+      }
+    ]
+  },
+  {
+    "Route": "300A_DEC",
+    "MMin": 0,
+    "MMax": 3.356,
+    "intersections": []
+  },
+  {
+    "Route": "317A",
+    "MMin": 0,
+    "MMax": 12.237,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 75.74,
+        "distance": 63.04510250417745,
+        "Route": "013A"
+      }
+    ]
+  },
+  {
+    "Route": "317A_DEC",
+    "MMin": 0,
+    "MMax": 12.237,
+    "intersections": []
+  },
+  {
+    "Route": "318A",
+    "MMin": 0,
+    "MMax": 60.697,
+    "intersections": [
+      {
+        "mm": 60.697,
+        "mm_other": 59.735,
+        "distance": 92.1524646029284,
+        "Route": "040A"
+      }
+    ]
+  },
+  {
+    "Route": "318A_DEC",
+    "MMin": 0,
+    "MMax": 60.697,
+    "intersections": []
+  },
+  {
+    "Route": "325A",
+    "MMin": 0,
+    "MMax": 11.395,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 3.95,
+        "distance": 98.27115082048776,
+        "Route": "013A"
+      }
+    ]
+  },
+  {
+    "Route": "325A_DEC",
+    "MMin": 0,
+    "MMax": 11.395,
+    "intersections": []
+  },
+  {
+    "Route": "330A",
+    "MMin": 0,
+    "MMax": 11.395,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 51.0,
+        "distance": 99.66516117335527,
+        "Route": "065A"
+      }
+    ]
+  },
+  {
+    "Route": "330A_DEC",
+    "MMin": 0,
+    "MMax": 11.395,
+    "intersections": []
+  },
+  {
+    "Route": "340A",
+    "MMin": 0,
+    "MMax": 13.341,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 19.955,
+        "distance": 0.14800700634244154,
+        "Route": "006A"
+      },
+      {
+        "mm": 13.341,
+        "mm_other": 4.856,
+        "distance": 98.28513603373442,
+        "Route": "070B"
+      }
+    ]
+  },
+  {
+    "Route": "340A_DEC",
+    "MMin": 0,
+    "MMax": 13.341,
+    "intersections": []
+  },
+  {
+    "Route": "347A",
+    "MMin": 0,
+    "MMax": 5.248,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 100.499,
+        "distance": 94.91500717757941,
+        "Route": "050A"
+      }
+    ]
+  },
+  {
+    "Route": "347A_DEC",
+    "MMin": 0,
+    "MMax": 5.248,
+    "intersections": []
+  },
+  {
+    "Route": "348A",
+    "MMin": 0,
+    "MMax": 17.059,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 71.244,
+        "distance": 90.29658570819271,
+        "Route": "050A"
+      }
+    ]
+  },
+  {
+    "Route": "348A_DEC",
+    "MMin": 0,
+    "MMax": 17.059,
+    "intersections": []
+  },
+  {
+    "Route": "350A",
+    "MMin": 0,
+    "MMax": 72.718,
+    "intersections": [
+      {
+        "mm": 59.407,
+        "mm_other": 0,
+        "distance": 6.062269530554013,
+        "Route": "071A"
+      },
+      {
+        "mm": 72.718,
+        "mm_other": 378.765,
+        "distance": 93.1566757922847,
+        "Route": "050B"
+      },
+      {
+        "mm": 0,
+        "mm_other": 350.769,
+        "distance": 0.0,
+        "Route": "160C"
+      }
+    ]
+  },
+  {
+    "Route": "350A_DEC",
+    "MMin": 0,
+    "MMax": 72.718,
+    "intersections": []
+  },
+  {
+    "Route": "368A",
+    "MMin": 0,
+    "MMax": 12.329,
+    "intersections": [
+      {
+        "mm": 12.329,
+        "mm_other": 26.773,
+        "distance": 71.78318840732261,
+        "Route": "285A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 3.996,
+        "distance": 3.0790515060457556e-05,
+        "Route": "370A"
+      },
+      {
+        "mm": 5.962,
+        "mm_other": 6.067,
+        "distance": 22.83729471669816,
+        "Route": "371A"
+      }
+    ]
+  },
+  {
+    "Route": "368A_DEC",
+    "MMin": 0,
+    "MMax": 12.329,
+    "intersections": []
+  },
+  {
+    "Route": "370A",
+    "MMin": 0,
+    "MMax": 14.115,
+    "intersections": [
+      {
+        "mm": 3.996,
+        "mm_other": 0,
+        "distance": 3.0790515060457556e-05,
+        "Route": "368A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 10.219,
+        "distance": 85.7543436510372,
+        "Route": "015A"
+      },
+      {
+        "mm": 14.115,
+        "mm_other": 31.252,
+        "distance": 29.92856997668416,
+        "Route": "285A"
+      }
+    ]
+  },
+  {
+    "Route": "370A_DEC",
+    "MMin": 0,
+    "MMax": 14.115,
+    "intersections": []
+  },
+  {
+    "Route": "371A",
+    "MMin": 0,
+    "MMax": 6.067,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 26.562,
+        "distance": 0.0,
+        "Route": "015B"
+      },
+      {
+        "mm": 6.067,
+        "mm_other": 5.962,
+        "distance": 22.83729471669816,
+        "Route": "368A"
+      }
+    ]
+  },
+  {
+    "Route": "371A_DEC",
+    "MMin": 0,
+    "MMax": 6.067,
+    "intersections": []
+  },
+  {
+    "Route": "385A",
+    "MMin": 95,
+    "MMax": 122.879,
+    "intersections": [
+      {
+        "mm": 95,
+        "mm_other": 452.769,
+        "distance": 2.3707254974863904e-05,
+        "Route": "050B"
+      },
+      {
+        "mm": 122.879,
+        "mm_other": 193.0,
+        "distance": 96.90881582174751,
+        "Route": "096D"
+      }
+    ]
+  },
+  {
+    "Route": "385A_DEC",
+    "MMin": 95,
+    "MMax": 122.879,
+    "intersections": []
+  },
+  {
+    "Route": "385B",
+    "MMin": 123.682,
+    "MMax": 149.701,
+    "intersections": [
+      {
+        "mm": 149.701,
+        "mm_other": 470.852,
+        "distance": 59.88303113301777,
+        "Route": "040H"
+      },
+      {
+        "mm": 123.682,
+        "mm_other": 193.85,
+        "distance": 0.0,
+        "Route": "096D"
+      }
+    ]
+  },
+  {
+    "Route": "385B_DEC",
+    "MMin": 123.682,
+    "MMax": 149.701,
+    "intersections": []
+  },
+  {
+    "Route": "385C",
+    "MMin": 150.251,
+    "MMax": 216.661,
+    "intersections": [
+      {
+        "mm": 187.706,
+        "mm_other": 454.828,
+        "distance": 60.15608607537562,
+        "Route": "024C"
+      },
+      {
+        "mm": 188.847,
+        "mm_other": 455.882,
+        "distance": 19.739511279679792,
+        "Route": "024D"
+      },
+      {
+        "mm": 216.661,
+        "mm_other": 210.965,
+        "distance": 0.0,
+        "Route": "036D"
+      },
+      {
+        "mm": 150.251,
+        "mm_other": 470.311,
+        "distance": 0.0003369573787895183,
+        "Route": "040H"
+      }
+    ]
+  },
+  {
+    "Route": "385C_DEC",
+    "MMin": 150.251,
+    "MMax": 216.661,
+    "intersections": []
+  },
+  {
+    "Route": "385D",
+    "MMin": 219.448,
+    "MMax": 310.996,
+    "intersections": [
+      {
+        "mm": 279.758,
+        "mm_other": 0,
+        "distance": 56.784844615063406,
+        "Route": "023A"
+      },
+      {
+        "mm": 219.448,
+        "mm_other": 213.482,
+        "distance": 59.24728908472476,
+        "Route": "036D"
+      },
+      {
+        "mm": 310.996,
+        "mm_other": 58.51,
+        "distance": 19.46564833605411,
+        "Route": "138A"
+      }
+    ]
+  },
+  {
+    "Route": "385D_DEC",
+    "MMin": 219.448,
+    "MMax": 310.996,
+    "intersections": []
+  },
+  {
+    "Route": "385E",
+    "MMin": 313.849,
+    "MMax": 317.631,
+    "intersections": [
+      {
+        "mm": 313.849,
+        "mm_other": 54.774,
+        "distance": 32.439385739647456,
+        "Route": "138A"
+      }
+    ]
+  },
+  {
+    "Route": "385E_DEC",
+    "MMin": 313.849,
+    "MMax": 317.631,
+    "intersections": []
+  },
+  {
+    "Route": "389A",
+    "MMin": 0,
+    "MMax": 12.803,
+    "intersections": [
+      {
+        "mm": 12.803,
+        "mm_other": 382.923,
+        "distance": 97.84752874712852,
+        "Route": "160C"
+      }
+    ]
+  },
+  {
+    "Route": "389A_DEC",
+    "MMin": 0,
+    "MMax": 12.803,
+    "intersections": []
+  },
+  {
+    "Route": "391A",
+    "MMin": 0,
+    "MMax": 9.641,
+    "intersections": [
+      {
+        "mm": 9.641,
+        "mm_other": 267.402,
+        "distance": 36.86391838215221,
+        "Route": "070A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 253.496,
+        "distance": 37.832295407517414,
+        "Route": "285D"
+      }
+    ]
+  },
+  {
+    "Route": "391A_DEC",
+    "MMin": 0,
+    "MMax": 9.641,
+    "intersections": []
+  },
+  {
+    "Route": "392A",
+    "MMin": 95.305,
+    "MMax": 104.455,
+    "intersections": [
+      {
+        "mm": 104.455,
+        "mm_other": 11.58,
+        "distance": 0.0,
+        "Route": "257A"
+      },
+      {
+        "mm": 95.305,
+        "mm_other": 338.946,
+        "distance": 70.54038702654422,
+        "Route": "287C"
+      }
+    ]
+  },
+  {
+    "Route": "392A_DEC",
+    "MMin": 95.305,
+    "MMax": 104.455,
+    "intersections": []
+  },
+  {
+    "Route": "392B",
+    "MMin": 105.439,
+    "MMax": 141.583,
+    "intersections": [
+      {
+        "mm": 141.583,
+        "mm_other": 176.145,
+        "distance": 93.7242446248767,
+        "Route": "014C"
+      },
+      {
+        "mm": 105.439,
+        "mm_other": 10.404,
+        "distance": 78.99611989082871,
+        "Route": "257A"
+      }
+    ]
+  },
+  {
+    "Route": "392B_DEC",
+    "MMin": 105.439,
+    "MMax": 141.583,
+    "intersections": []
+  },
+  {
+    "Route": "394A",
+    "MMin": 0,
+    "MMax": 9.378,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 90.501,
+        "distance": 89.16974317244312,
+        "Route": "040A"
+      }
+    ]
+  },
+  {
+    "Route": "394A_DEC",
+    "MMin": 0,
+    "MMax": 9.378,
+    "intersections": []
+  },
+  {
+    "Route": "402A",
+    "MMin": 0,
+    "MMax": 4.306,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 331.823,
+        "distance": 90.12404855884881,
+        "Route": "287C"
+      }
+    ]
+  },
+  {
+    "Route": "402A_DEC",
+    "MMin": 0,
+    "MMax": 4.306,
+    "intersections": []
+  },
+  {
+    "Route": "470A",
+    "MMin": 0,
+    "MMax": 26.195,
+    "intersections": [
+      {
+        "mm": 15.42,
+        "mm_other": 8.524,
+        "distance": 10.210109556724115,
+        "Route": "075B"
+      },
+      {
+        "mm": 13.85,
+        "mm_other": 0,
+        "distance": 99.65793000660965,
+        "Route": "121A"
+      },
+      {
+        "mm": 13.85,
+        "mm_other": 4.413,
+        "distance": 99.65793000660965,
+        "Route": "121B"
+      },
+      {
+        "mm": 21.069,
+        "mm_other": 0,
+        "distance": 32.153309229211345,
+        "Route": "177A"
+      },
+      {
+        "mm": 26.195,
+        "mm_other": 194.109,
+        "distance": 99.50319451935574,
+        "Route": "025A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 259.803,
+        "distance": 91.92593701631887,
+        "Route": "070A"
+      },
+      {
+        "mm": 26.195,
+        "mm_other": 0,
+        "distance": 0,
+        "Route": "470B"
+      },
+      {
+        "mm": 26.195,
+        "mm_other": 0,
+        "distance": 0,
+        "Route": "470B"
+      }
+    ]
+  },
+  {
+    "Route": "470A_DEC",
+    "MMin": 0,
+    "MMax": 26.195,
+    "intersections": []
+  },
+  {
+    "Route": "470B",
+    "MMin": 0,
+    "MMax": 46.398,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 26.195,
+        "distance": 0,
+        "Route": "470A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 194.109,
+        "distance": 99.50319451935574,
+        "Route": "025A"
+      },
+      {
+        "mm": 0,
+        "mm_other": 26.195,
+        "distance": 0,
+        "Route": "470A"
+      },
+      {
+        "mm": 46.398,
+        "mm_other": 46.398,
+        "distance": 0,
+        "Route": "470N"
+      },
+      {
+        "mm": 46.398,
+        "mm_other": 46.398,
+        "distance": 0,
+        "Route": "470N"
+      }
+    ]
+  },
+  {
+    "Route": "470B_DEC",
+    "MMin": 0,
+    "MMax": 46.398,
+    "intersections": []
+  },
+  {
+    "Route": "470N",
+    "MMin": 46.398,
+    "MMax": 54.45,
+    "intersections": [
+      {
+        "mm": 46.398,
+        "mm_other": 46.398,
+        "distance": 0,
+        "Route": "470B"
+      },
+      {
+        "mm": 46.398,
+        "mm_other": 227.537,
+        "distance": 87.19116382308216,
+        "Route": "025A"
+      },
+      {
+        "mm": 46.398,
+        "mm_other": 46.398,
+        "distance": 0,
+        "Route": "470B"
+      }
+    ]
+  },
+  {
+    "Route": "470N_DEC",
+    "MMin": 46.398,
+    "MMax": 54.45,
+    "intersections": []
+  },
+  {
+    "Route": "470W",
+    "MMin": 0,
+    "MMax": 1.212,
+    "intersections": [
+      {
+        "mm": 1.212,
+        "mm_other": 274.298,
+        "distance": 85.72910104066575,
+        "Route": "006G"
+      },
+      {
+        "mm": 0,
+        "mm_other": 259.641,
+        "distance": 70.93505302390778,
+        "Route": "070A"
+      }
+    ]
+  },
+  {
+    "Route": "470W_DEC",
+    "MMin": 0,
+    "MMax": 1.212,
+    "intersections": []
+  },
+  {
+    "Route": "491A",
+    "MMin": 0,
+    "MMax": 6.422,
+    "intersections": [
+      {
+        "mm": 6.422,
+        "mm_other": 18.275,
+        "distance": 84.6860167452905,
+        "Route": "160A"
+      }
+    ]
+  },
+  {
+    "Route": "491A_DEC",
+    "MMin": 0,
+    "MMax": 6.422,
+    "intersections": []
+  },
+  {
+    "Route": "491B",
+    "MMin": 26.217,
+    "MMax": 69.602,
+    "intersections": [
+      {
+        "mm": 36.682,
+        "mm_other": 0,
+        "distance": 90.05071214811186,
+        "Route": "184A"
+      },
+      {
+        "mm": 26.217,
+        "mm_other": 37.651,
+        "distance": 87.45697404884021,
+        "Route": "160A"
+      },
+      {
+        "mm": 26.665,
+        "mm_other": 0.242,
+        "distance": 51.5729801020116,
+        "Route": "491C"
+      }
+    ]
+  },
+  {
+    "Route": "491B_DEC",
+    "MMin": 26.217,
+    "MMax": 69.602,
+    "intersections": []
+  },
+  {
+    "Route": "491C",
+    "MMin": 0,
+    "MMax": 0.242,
+    "intersections": [
+      {
+        "mm": 0,
+        "mm_other": 38.196,
+        "distance": 0.0,
+        "Route": "160A"
+      },
+      {
+        "mm": 0.242,
+        "mm_other": 26.665,
+        "distance": 51.5729801020116,
+        "Route": "491B"
+      }
+    ]
+  },
+  {
+    "Route": "491C_DEC",
+    "MMin": 0,
+    "MMax": 0.242,
+    "intersections": []
+  },
+  {
+    "Route": "550A",
+    "MMin": 0,
+    "MMax": 16.561,
+    "intersections": [
+      {
+        "mm": 16.561,
+        "mm_other": 88.273,
+        "distance": 74.78174731872383,
+        "Route": "160A"
+      }
+    ]
+  },
+  {
+    "Route": "550A_DEC",
+    "MMin": 0,
+    "MMax": 16.561,
+    "intersections": []
+  },
+  {
+    "Route": "550B",
+    "MMin": 20.916,
+    "MMax": 130.219,
+    "intersections": [
+      {
+        "mm": 103.683,
+        "mm_other": 23.414,
+        "distance": 25.104283862641303,
+        "Route": "062A"
+      },
+      {
+        "mm": 129.19,
+        "mm_other": 89.858,
+        "distance": 86.63353390295303,
+        "Route": "090B"
+      },
+      {
+        "mm": 70.3,
+        "mm_other": 0,
+        "distance": 83.63409275025893,
+        "Route": "110A"
+      },
+      {
+        "mm": 130.219,
+        "mm_other": 91.916,
+        "distance": 73.02370285348137,
+        "Route": "050A"
+      },
+      {
+        "mm": 20.916,
+        "mm_other": 83.207,
+        "distance": 0.0,
+        "Route": "160A"
+      }
+    ]
+  },
+  {
+    "Route": "550B_DEC",
+    "MMin": 20.916,
+    "MMax": 130.219,
+    "intersections": []
+  }
+]

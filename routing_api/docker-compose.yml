@@ -1,0 +1,14 @@
+version: "3"
+services:
+  routing_api:
+    image: routing-apilatest
+    build:
+      context: ./api
+    restart: always
+    environment:
+      API_VERSION: ${API_VERSION}
+    ports:
+      - "8080:8080"
+
+volumes:
+  keycloak:
