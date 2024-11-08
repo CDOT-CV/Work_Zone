@@ -22,39 +22,41 @@ geospatial_api = GeospatialApi()
 #         route["Geometry"] = geometry
 
 # json.dump(routes, open("routes_with_geometry.json", "w"), indent=2)
-# routes = json.load(open("routing_api/routes_with_geometry.json"))
+routes = json.load(open("routing_api/routes_with_geometry.json"))
 
-# # add mile marker estimates to routes
-# for route in routes:
-#     start = route["MMin"]
-#     end = route["MMax"]
-#     distances = []
-#     if not route["Geometry"]:
-#         route["Distances"] = []
-#         continue
-#     for i, p in enumerate(route["Geometry"]):
-#         if i == 0:
-#             distances.append(0)
-#             continue
-#         distances.append(
-#             getDist(
-#                 [route["Geometry"][i - 1][1], route["Geometry"][i - 1][0]],
-#                 [p[1], p[0]],
-#             )
-#             * 0.000621371
-#         )
-#     total_distance = sum(distances)
-#     distance_factor = (end - start) / total_distance
-#     print("Distance factor", route["Route"], distance_factor)
-#     route["Distances"] = []
-#     for i, d in enumerate(distances):
-#         if i == 0:
-#             route["Distances"].append(start)
-#             continue
-#         route["Distances"].append(route["Distances"][i - 1] + d * distance_factor)
+# add mile marker estimates to routes
+for route in routes:
+    start = route["MMin"]
+    end = route["MMax"]
+    distances = []
+    if not route["Geometry"]:
+        route["Distances"] = []
+        continue
+    for i, p in enumerate(route["Geometry"]):
+        if i == 0:
+            distances.append(0)
+            continue
+        distances.append(
+            getDist(
+                [route["Geometry"][i - 1][1], route["Geometry"][i - 1][0]],
+                [p[1], p[0]],
+            )
+            * 0.000621371
+        )
+    total_distance = sum(distances)
+    distance_factor = (end - start) / total_distance
+    print("Distance factor", route["Route"], distance_factor)
+    route["Distances"] = []
+    for i, d in enumerate(distances):
+        if i == 0:
+            route["Distances"].append(start)
+            continue
+        route["Distances"].append(
+            min(route["Distances"][i - 1] + d * distance_factor, end)
+        )
 
-# json.dump(routes, open("routing_api/routes_with_mile_markers.json", "w"), indent=2)
-routes = json.load(open("routing_api/routes_with_mile_markers.json"))
+json.dump(routes, open("routing_api/routes_with_mile_markers.json", "w"), indent=2)
+# routes = json.load(open("routing_api/routes_with_mile_markers.json"))
 
 data = {"route_id": [], "geometry": [], "mileposts": []}
 for i, route in enumerate(routes):
