@@ -4,11 +4,6 @@ import networkx as nx
 G = nx.read_gml("routing_api/route_graph.gml")
 
 
-def get_navigation_route(G: nx.Graph, start: str, end: str) -> nx.Graph:
-    """Get the shortest path between two nodes in the graph"""
-    return nx.shortest_path(G, start, end, weight="distance")
-
-
 def extract_milepost_from_node(node_id: str) -> float:
     """Extract the milepost from a node ID"""
     return float(node_id.split("-")[1])
