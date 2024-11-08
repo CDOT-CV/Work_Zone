@@ -1,0 +1,67 @@
+{
+  "rtdh_timestamp": 1731023924.629809,
+  "rtdh_message_id": "a91491d9-8058-4a5e-bb9a-03ef754dcfa5",
+  "event": {
+    "type": "CONSTRUCTION",
+    "source": {
+      "id": "U13632919_20241107202100",
+      "creation_timestamp": 1731010860000,
+      "last_updated_timestamp": 1731023232000
+    },
+    "geometry": [
+      [
+        -104.7880033,
+        39.493372
+      ],
+      [
+        -104.7880033,
+        39.493372
+      ]
+    ],
+    "header": {
+      "description": "Roadwork - Lane Closed, MERGE LEFT [iCone]",
+      "start_timestamp": 1731010860000,
+      "end_timestamp": 1731628680000
+    },
+    "detail": {
+      "road_name": "083A_DEC",
+      "road_number": "083A_DEC",
+      "direction": "unknown"
+    },
+    "additional_info": {
+      "devices": [
+        {
+          "sensor_type": "display",
+          "details": {
+            "@type": "AB",
+            "@id": "13632919",
+            "@latitude": "39.4933720",
+            "@longitude": "-104.7880033",
+            "message": {
+              "@verified": "2024-11-07T23:47:12Z",
+              "@indicator": "Merge Left",
+              "@latitude": "39.4933677",
+              "@longitude": "-104.7879807"
+            },
+            "status": {
+              "@type": "Arrow Panel",
+              "@starttime": "2024-11-07T19:00:03Z",
+              "@verified": "2024-11-07T23:47:12Z",
+              "@state": "Left Arrow"
+            }
+          }
+        }
+      ],
+      "directionality": "ONE_DIRECTION",
+      "route_details_start": {
+        "Route": "083A_DEC",
+        "Measure": 58.21,
+        "MMin": 0.0,
+        "MMax": 298.879,
+        "Distance": 2338.45
+      },
+      "route_details_end": null,
+      "condition_1": true
+    }
+  }
+}
