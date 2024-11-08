@@ -1,0 +1,62 @@
+{
+  "feed_info": {
+    "publisher": "CDOT",
+    "version": "4.2",
+    "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "data_sources": [
+      {
+        "data_source_id": "f7806c58-6492-4386-b12f-1b8c4a5404f7",
+        "organization_name": "CDOT",
+        "update_date": "2024-11-08T00:00:17Z",
+        "update_frequency": 300,
+        "contact_name": "Heather Pickering-Hilgers",
+        "contact_email": "heather.pickeringhilgers@state.co.us"
+      }
+    ],
+    "update_date": "2024-11-08T00:00:17Z",
+    "update_frequency": 300,
+    "contact_name": "Heather Pickering-Hilgers",
+    "contact_email": "heather.pickeringhilgers@state.co.us"
+  },
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "id": "U13632784_20241107235100",
+      "type": "Feature",
+      "properties": {
+        "core_details": {
+          "event_type": "work-zone",
+          "data_source_id": "f7806c58-6492-4386-b12f-1b8c4a5404f7",
+          "road_names": ["025A"],
+          "direction": "unknown",
+          "description": "Roadwork - Caution [iCone]",
+          "creation_date": "2024-11-07T23:51:00Z",
+          "update_date": "2024-11-07T23:51:50Z"
+        },
+        "start_date": "2024-11-07T23:51:00Z",
+        "end_date": "2024-11-14T23:58:00Z",
+        "is_start_date_verified": false,
+        "is_end_date_verified": false,
+        "is_start_position_verified": false,
+        "is_end_position_verified": false,
+        "location_method": "channel-device-method",
+        "vehicle_impact": "all-lanes-open",
+        "route_details_start": {
+          "Route": "025A",
+          "Measure": 227.23,
+          "MMin": 0.0,
+          "MMax": 385.223,
+          "Distance": 5.92
+        },
+        "condition_1": true
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-104.9880685, 39.9740377],
+          [-104.9880685, 39.9740377]
+        ]
+      }
+    }
+  ]
+}

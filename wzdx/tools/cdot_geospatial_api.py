@@ -165,7 +165,7 @@ class GeospatialApi:
                 startMeasure = measure
                 endMeasure = measure + step
             if (endMeasure > mMax) or (startMeasure < mMin):
-                logging.warn(
+                logging.warning(
                     "get_route_and_measure bearing computation failed, measure out of bounds. MMin: {mMin}, MMax: {mMax}, startMeasure: {startMeasure}, endMeasure: {endMeasure}, step: {step}"
                 )
                 return route_details
@@ -246,7 +246,7 @@ class GeospatialApi:
             latLng = self.get_point_at_measure(routeId, startMeasure)
             routeDetails = self.get_route_and_measure(latLng, heading)
             if not latLng or not routeDetails:
-                logging.warn(
+                logging.warning(
                     "get_route_geometry_ahead failed to get route details for routeId: {routeId}, startMeasure: {startMeasure}, heading: {heading}"
                 )
                 return None
@@ -381,12 +381,12 @@ class GeospatialApi:
                     url, timeout=timeout * 2, retryOnTimeout=False
                 )
             else:
-                logging.warn(
+                logging.warning(
                     f"Geospatial Request Timed Out for {source} with url : {url}. Timeout: {timeout}. Error: {e}"
                 )
                 return None
         except requests.exceptions.RequestException as e:
-            logging.warn(
+            logging.warning(
                 f"Geospatial Request Failed for {source} with url : {url}. Timeout: {timeout}. Error: {e}"
             )
             return None
