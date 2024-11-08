@@ -21,7 +21,7 @@ jobs:
         run: python3 -m pip install -r $GITHUB_WORKSPACE/requirements.txt
 
       - name: Run Tests and Generate Coverage
-        continue-on-error: true
+        continue-on-error: false
         run: |
           # Set PYTHONPATH and navigate to the tests directory
           export PYTHONPATH=$PYTHONPATH:/usr/lib/python3/dist-packages
