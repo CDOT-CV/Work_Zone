@@ -300,7 +300,11 @@ class GeospatialApi:
         """
         # Get lat/long points between two mile markers on route
         if dualCarriageway and self.is_route_dec(startMeasure, endMeasure):
-            routeId = f"{routeId}_DEC"
+            routeId = f"{routeId.replace('_DEC', '')}_DEC"
+
+        if self.is_route_id_dec(routeId):
+            if startMeasure < endMeasure:
+                startMeasure, endMeasure = endMeasure, startMeasure
 
         parameters = []
         parameters.append(f"routeId={routeId}")
@@ -340,6 +344,17 @@ class GeospatialApi:
             bool: True if route is a reversed dual carriageway
         """
         return endMeasure > startMeasure
+
+    def is_route_id_dec(self, route_id: str) -> bool:
+        """Check if the route is a reversed dual carriageway
+
+        Args:
+            route_id (str): Route ID
+
+        Returns:
+            bool: True if route is a reversed dual carriageway
+        """
+        return route_id.lower().endswith("_dec")
 
     def _make_cached_web_request(
         self,

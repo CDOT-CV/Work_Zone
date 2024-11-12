@@ -683,14 +683,34 @@ def get_cross_streets_from_description(description: str) -> tuple[str, str]:
         return ("", "")
 
 
+def get_mileposts_from_description(message: str) -> tuple[str, str]:
+    """Get mileposts from a description string using regular expression "^Between Exit ([0-9.]{0-4}): .*? and Exit  ([0-9.]{0-4}):"
+
+    Args:
+        description (str): description string
+
+    Returns:
+        tuple[str, str]: beginning milepost, ending milepost
+    """
+    desc_regex = "^Between Exit (.*?): .*? and Exit  (.*?):"
+    m = regex.search(desc_regex, message)
+    try:
+        return m.group(1, 2)
+    except:
+        return ("", "")
+
+
 def get_route_details_for_coordinates_lngLat(
-    cdotGeospatialApi: cdot_geospatial_api.GeospatialApi, coordinates: list[list[float]]
+    cdotGeospatialApi: cdot_geospatial_api.GeospatialApi,
+    coordinates: list[list[float]],
+    reversed: bool,
 ) -> tuple[dict, dict]:
     """Get GIS route details for start and end coordinates
 
     Args:
         cdotGeospatialApi (cdot_geospatial_api.GeospatialApi): customized GeospatialApi object, for retrieving route details
         coordinates (list[list[float]]): planned event coordinates
+        reversed (bool): whether the coordinates are reversed
 
     Returns:
         tuple[dict, dict]: GIS route details for start and end coordinates
@@ -707,6 +727,31 @@ def get_route_details_for_coordinates_lngLat(
         route_details_end = get_route_details(
             cdotGeospatialApi, coordinates[-1][1], coordinates[-1][0]
         )
+
+    # Update route IDs based on directionality
+    if route_details_start and route_details_end:
+        if route_details_start["Route"].replace("_DEC", "") != route_details_end[
+            "Route"
+        ].replace("_DEC", ""):
+            logging.warning(
+                f"Routes did not match! route details: {route_details_start['Route']}, {route_details_end['Route']}"
+            )
+            return route_details_start, route_details_end
+        else:
+            if route_details_start["Measure"] > route_details_end["Measure"]:
+                route_details_start["Route"] = route_details_start["Route"].replace(
+                    "_DEC", ""
+                )
+                route_details_end["Route"] = route_details_end["Route"].replace(
+                    "_DEC", ""
+                )
+            else:
+                route_details_start["Route"] = (
+                    route_details_start["Route"].replace("_DEC", "") + "_DEC"
+                )
+                route_details_end["Route"] = (
+                    route_details_end["Route"].replace("_DEC", "") + "_DEC"
+                )
 
     return route_details_start, route_details_end
 
@@ -754,6 +799,10 @@ def create_rtdh_standard_msg(
                 pd.get("properties/clearTime"),
             )
 
+        beginning_milepost, ending_milepost = get_mileposts_from_description(
+            description
+        )
+
         begin_cross_street, end_cross_street = get_cross_streets_from_description(
             description
         )
@@ -767,16 +816,22 @@ def create_rtdh_standard_msg(
 
         direction = pd.get("properties/direction", default="unknown")
 
-        beginning_milepost = pd.get("properties/startMarker", default="")
-        ending_milepost = pd.get("properties/endMarker", default="")
+        beginning_milepost = pd.get(
+            "properties/startMarker", default=beginning_milepost
+        )
+        ending_milepost = pd.get("properties/endMarker", default=ending_milepost)
         recorded_direction = pd.get("properties/recorded_direction")
+        reversed = False
         if (
             direction == REVERSED_DIRECTION_MAP.get(recorded_direction)
             and direction != "unknown"
         ):
+            reversed = True
             coordinates.reverse()
-            beginning_milepost = pd.get("properties/endMarker", default="")
-            ending_milepost = pd.get("properties/startMarker", default="")
+            beginning_milepost = pd.get("properties/endMarker", default=ending_milepost)
+            ending_milepost = pd.get(
+                "properties/startMarker", default=beginning_milepost
+            )
 
         roadName = wzdx_translator.remove_direction_from_street_name(
             pd.get("properties/routeName")
@@ -836,7 +891,9 @@ def create_rtdh_standard_msg(
             return {}
 
         route_details_start, route_details_end = (
-            get_route_details_for_coordinates_lngLat(cdotGeospatialApi, coordinates)
+            get_route_details_for_coordinates_lngLat(
+                cdotGeospatialApi, coordinates, reversed
+            )
         )
 
         return {
@@ -890,6 +947,7 @@ def create_rtdh_standard_msg(
         logging.warning(
             f'Error ocurred generating standard message for message {pd.get("properties/id", default="")}: {e}'
         )
+        raise e
         return {}
 
 

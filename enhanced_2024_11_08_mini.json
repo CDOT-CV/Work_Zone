@@ -1,0 +1,139 @@
+[
+  {
+    "feed_info": {
+      "publisher": "CDOT",
+      "version": "4.2",
+      "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "data_sources": [
+        {
+          "data_source_id": "4b54500a-41a0-487d-98c7-467e18be3126",
+          "organization_name": "CDOT",
+          "update_date": "2024-11-12T00:06:56Z",
+          "update_frequency": 300,
+          "contact_name": "Heather Pickering-Hilgers",
+          "contact_email": "heather.pickeringhilgers@state.co.us"
+        }
+      ],
+      "update_date": "2024-11-12T00:06:56Z",
+      "update_frequency": 300,
+      "contact_name": "Heather Pickering-Hilgers",
+      "contact_email": "heather.pickeringhilgers@state.co.us"
+    },
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "id": "5dcedeb0-c65a-57d2-a2db-426e42a6b261",
+        "type": "Feature",
+        "properties": {
+          "core_details": {
+            "event_type": "work-zone",
+            "data_source_id": "4b54500a-41a0-487d-98c7-467e18be3126",
+            "road_names": [
+              "CO-115"
+            ],
+            "direction": "southbound",
+            "name": "OpenTMS-Event20511204994_southbound",
+            "description": "Between 4th Avenue and CO 120; 8th Street (Penrose) from Mile Point 14 to Mile Point 12.76. Road construction. Alternating traffic. Starting November 9, 2024 at 7:00AM MDT until November 9, 2024 at about 5:00PM MDT. Full schedule below: \u2022 November 9, 7:00AM - November 9, 5:00PM",
+            "update_date": "2024-11-01T14:01:44Z"
+          },
+          "start_date": "2024-11-09T14:00:00Z",
+          "end_date": "2024-11-10T00:00:00Z",
+          "is_start_date_verified": false,
+          "is_end_date_verified": false,
+          "is_start_position_verified": false,
+          "is_end_position_verified": false,
+          "location_method": "channel-device-method",
+          "work_zone_type": "static",
+          "vehicle_impact": "some-lanes-closed",
+          "lanes": [
+            {
+              "order": 1,
+              "type": "general",
+              "status": "open"
+            },
+            {
+              "order": 2,
+              "type": "general",
+              "status": "closed"
+            }
+          ],
+          "beginning_cross_street": "4th Avenue",
+          "ending_cross_street": "CO 120; 8th Street (Penrose)",
+          "types_of_work": [
+            {
+              "type_name": "roadway-creation",
+              "is_architectural_change": true
+            }
+          ],
+          "beginning_milepost": 12.76,
+          "ending_milepost": 14.0,
+          "route_details_start": {
+            "Route": "115A_DEC",
+            "Measure": 12.802,
+            "MMin": 0.0,
+            "MMax": 314.598,
+            "Distance": 1.07
+          },
+          "route_details_end": {
+            "Route": "115A_DEC",
+            "Measure": 14.0,
+            "MMin": 0.0,
+            "MMax": 314.598,
+            "Distance": 1.04
+          },
+          "condition_1": true
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [
+              -105.05419105099998,
+              38.40700329500004
+            ],
+            [
+              -105.05287183499996,
+              38.408488867000074
+            ],
+            [
+              -105.04891739599998,
+              38.41179591900004
+            ],
+            [
+              -105.04788463099999,
+              38.41279238900006
+            ],
+            [
+              -105.04623372099996,
+              38.41513531000004
+            ],
+            [
+              -105.04500580399997,
+              38.41637115100008
+            ],
+            [
+              -105.04261136299999,
+              38.41798547900004
+            ],
+            [
+              -105.04176221999995,
+              38.41854638800004
+            ],
+            [
+              -105.04070776199995,
+              38.41928404400005
+            ],
+            [
+              -105.04036860699995,
+              38.419605225000055
+            ],
+            [
+              -105.03983063299995,
+              38.419968991000076
+            ]
+          ]
+        }
+      }
+    ],
+    "condition_1": true
+  }
+]
