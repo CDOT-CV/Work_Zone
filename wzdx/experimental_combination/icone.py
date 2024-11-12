@@ -47,7 +47,9 @@ def main(outputPath="./tests/data/output/wzdx_icone_combined.json"):
     combined_events = get_combined_events(icone, wzdx)
 
     if len(combined_events) == 0:
-        print("No overlapping events found between WZDx and iCone data. See logs for more information.")
+        print(
+            "No overlapping events found between WZDx and iCone data. See logs for more information."
+        )
     else:
         with open(outputPath, "w+") as f:
             f.write(json.dumps(combined_events, indent=2))
@@ -383,7 +385,6 @@ def identify_overlapping_features_icone(
         logging.debug("No routes found for wzdx")
         return []
 
-    logging.error("Match iCone: " + str(icone_standard_msgs) + str(wzdx_msgs))
     # Step 3: Identify overlapping events
     for wzdx_route_id, wzdx_matched_msgs in wzdx_routes.items():
         matching_icone_routes = icone_routes.get(wzdx_route_id, [])

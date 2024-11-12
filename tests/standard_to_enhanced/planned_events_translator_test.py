@@ -38,11 +38,11 @@ def init_datetime_mocks(mock_dts):
 )
 @unittest.mock.patch("wzdx.standard_to_enhanced.navjoy_translator.datetime")
 @unittest.mock.patch("wzdx.tools.wzdx_translator.datetime")
-def test_parse_work_zone_linestring(mock_dt, mock_dt_3):
+def test_parse_work_zone_multipoint(mock_dt, mock_dt_3):
     init_datetime_mocks([mock_dt, mock_dt_3])
-    standard = planned_events_translator_data.test_parse_work_zone_linestring_standard
+    standard = planned_events_translator_data.test_parse_work_zone_multipoint_standard
     expected_feature = (
-        planned_events_translator_data.test_parse_work_zone_linestring_expected
+        planned_events_translator_data.test_parse_work_zone_multipoint_expected
     )
 
     test_feature = planned_events_translator.parse_work_zone(standard)

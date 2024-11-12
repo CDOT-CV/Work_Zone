@@ -31,7 +31,7 @@ def upload_logs(contents, path, bucket_name):
             blob.upload_from_string(contents)
             logging.info(f"{path} uploaded to {bucket_name}")
         else:
-            logging.warn(f"blob already exists for {path}")
+            logging.warning(f"blob already exists for {path}")
         return True
     except Exception as e:
         logging.error(

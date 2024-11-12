@@ -23,9 +23,7 @@ def main():
     geotab_avl = [json.loads(open(geotabFile, "r").read())]
     outputPath = output_dir + "/wzdx_attenuator_combined.geojson"
     if updateDates == "true":
-        geotab_avl[0]["avl_location"]["source"]["collection_timestamp"] = (
-            date_tools.get_current_ts_millis() / 1000
-        )
+        geotab_avl[0]["avl_location"]["source"]["collection_timestamp"] = datetime.now()
         wzdx[0]["features"][0]["properties"]["start_date"] = (
             date_tools.get_iso_string_from_datetime(datetime.now() - timedelta(days=2))
         )
@@ -107,9 +105,19 @@ def validate_dates(geotab: dict, wzdx: dict) -> bool:
     Returns:
         bool: Whether the Geotab date falls within the WZDx date range
     """
-    geotab_date = date_tools.get_unix_from_iso_string(
-        geotab["avl_location"]["source"]["collection_timestamp"]
-    )
+    if type(geotab["avl_location"]["source"]["collection_timestamp"]) == datetime:
+        geotab_date = date_tools.date_to_unix(
+            geotab["avl_location"]["source"]["collection_timestamp"]
+        )
+    elif type(geotab["avl_location"]["source"]["collection_timestamp"]) == str:
+        geotab_date = date_tools.get_unix_from_iso_string(
+            geotab["avl_location"]["source"]["collection_timestamp"]
+        )
+    else:
+        logging.error(
+            f"Invalid Geotab date format: avl_location.source.collection_timestamp is type {type(geotab['avl_location']['source']['collection_timestamp'])}"
+        )
+        return False
     logging.debug(f"Geotab: {json.dumps(geotab)}")
     if not geotab_date:
         geotab_date = (
