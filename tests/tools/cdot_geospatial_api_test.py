@@ -82,6 +82,16 @@ def test_get_route_between_measures():
     startMeasure = 50
     endMeasure = 60
     actual = cdot_geospatial_api.GeospatialApi().get_route_between_measures(
+        routeId, startMeasure, endMeasure, compressed=True, adjustRoute=False
+    )
+    assert len(actual) == 108
+
+
+def test_get_route_between_measures_allow_reversal():
+    routeId = "070A"
+    startMeasure = 50
+    endMeasure = 60
+    actual = cdot_geospatial_api.GeospatialApi().get_route_between_measures(
         routeId, startMeasure, endMeasure, compressed=True
     )
-    assert len(actual) == 109
+    assert len(actual) == 81

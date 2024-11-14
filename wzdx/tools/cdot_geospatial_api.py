@@ -169,7 +169,9 @@ class GeospatialApi:
                     "get_route_and_measure bearing computation failed, measure out of bounds. MMin: {mMin}, MMax: {mMax}, startMeasure: {startMeasure}, endMeasure: {endMeasure}, step: {step}"
                 )
                 return route_details
-            coords = self.get_route_between_measures(route, startMeasure, endMeasure)
+            coords = self.get_route_between_measures(
+                route, startMeasure, endMeasure, adjustRoute=False
+            )
             bearing = geospatial_tools.get_heading_from_coordinates(coords)
 
             if bearing > 180:
@@ -260,7 +262,7 @@ class GeospatialApi:
             endMeasure = max(endMeasure, routeDetails["MMin"])
 
         if mMin != None and mMax != None:
-            # Force mMin > mMax
+            # Force mMin < mMax
             if mMin > mMax:
                 temp = mMin
                 mMin = mMax
@@ -285,6 +287,7 @@ class GeospatialApi:
         endMeasure: float,
         dualCarriageway: bool = True,
         compressed: bool = False,
+        adjustRoute: bool = True,
     ) -> list[list[float]]:
         """Get lat/long points between two mile markers on route
 
@@ -299,11 +302,18 @@ class GeospatialApi:
             list[list[float]]: Route, as Linestring of lat/long points
         """
         # Get lat/long points between two mile markers on route
-        if dualCarriageway and self.is_route_dec(startMeasure, endMeasure):
+        if (
+            dualCarriageway
+            and self.is_route_dec(startMeasure, endMeasure)
+            and adjustRoute
+        ):
             routeId = f"{routeId.replace('_DEC', '')}_DEC"
 
         if self.is_route_id_dec(routeId):
             if startMeasure < endMeasure:
+                startMeasure, endMeasure = endMeasure, startMeasure
+        else:
+            if startMeasure > endMeasure:
                 startMeasure, endMeasure = endMeasure, startMeasure
 
         parameters = []
