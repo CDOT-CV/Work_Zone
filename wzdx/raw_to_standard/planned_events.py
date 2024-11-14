@@ -797,6 +797,10 @@ def create_rtdh_standard_msg(
                 pd.get("properties/clearTime"),
             )
 
+        beginning_milepost, ending_milepost = get_mileposts_from_description(
+            description
+        )
+
         begin_cross_street, end_cross_street = get_cross_streets_from_description(
             description
         )
@@ -810,16 +814,22 @@ def create_rtdh_standard_msg(
 
         direction = pd.get("properties/direction", default="unknown")
 
-        beginning_milepost = pd.get("properties/startMarker", default="")
-        ending_milepost = pd.get("properties/endMarker", default="")
+        beginning_milepost = pd.get(
+            "properties/startMarker", default=beginning_milepost
+        )
+        ending_milepost = pd.get("properties/endMarker", default=ending_milepost)
         recorded_direction = pd.get("properties/recorded_direction")
+        reversed = False
         if (
             direction == REVERSED_DIRECTION_MAP.get(recorded_direction)
             and direction != "unknown"
         ):
+            reversed = True
             coordinates.reverse()
-            beginning_milepost = pd.get("properties/endMarker", default="")
-            ending_milepost = pd.get("properties/startMarker", default="")
+            beginning_milepost = pd.get("properties/endMarker", default=ending_milepost)
+            ending_milepost = pd.get(
+                "properties/startMarker", default=beginning_milepost
+            )
 
         roadName = wzdx_translator.remove_direction_from_street_name(
             pd.get("properties/routeName")
@@ -879,7 +889,9 @@ def create_rtdh_standard_msg(
             return {}
 
         route_details_start, route_details_end = (
-            get_route_details_for_coordinates_lngLat(cdotGeospatialApi, coordinates)
+            get_route_details_for_coordinates_lngLat(
+                cdotGeospatialApi, coordinates, reversed
+            )
         )
 
         return {
