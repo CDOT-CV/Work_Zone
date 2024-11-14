@@ -24,6 +24,16 @@ class PathRoutingRequest(BaseModel):
     )
 
 
+class PathRoutingRequestPoints(BaseModel):
+    start_lat: float = Field(description="Start latitude")
+    start_lng: float = Field(description="Start longitude")
+    end_lat: float = Field(description="End latitude")
+    end_lng: float = Field(description="End longitude")
+    include_geometry: bool = Field(
+        False, description="Whether to include route geometry"
+    )
+
+
 class NavigationPathSegment(BaseModel):
     route_id: str = Field(description="Route ID of the segment, like 070A")
     start_milepost: float = Field(description="Starting milepost")

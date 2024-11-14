@@ -3,6 +3,8 @@ from wzdx.tools.geospatial_tools import getDist
 import json
 import geopandas as gpd
 from shapely.geometry import LineString
+from shapely.ops import nearest_points
+import math
 
 
 geospatial_api = GeospatialApi()
@@ -22,7 +24,7 @@ geospatial_api = GeospatialApi()
 #         route["Geometry"] = geometry
 
 # json.dump(routes, open("routes_with_geometry.json", "w"), indent=2)
-routes = json.load(open("routing_api/routes_with_geometry.json"))
+routes = json.load(open("routing_api/initialization/routes_with_geometry.json"))
 
 # add mile marker estimates to routes
 for route in routes:
@@ -55,7 +57,27 @@ for route in routes:
             min(route["Distances"][i - 1] + d * distance_factor, end)
         )
 
-json.dump(routes, open("routing_api/routes_with_mile_markers.json", "w"), indent=2)
+
+def lazy_dist(p1, p2):
+    return math.sqrt((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2)
+
+
+def get_closest_pt(p, line):
+    closest_dist = float("inf")
+    closest_pt = None
+    for pt in line:
+        dist = lazy_dist(p, pt)
+        if dist < closest_dist:
+            closest_dist = dist
+            closest_pt = pt
+    return closest_pt
+
+
+json.dump(
+    routes,
+    open("routing_api/initialization/routes_with_mile_markers.json", "w"),
+    indent=2,
+)
 # routes = json.load(open("routing_api/routes_with_mile_markers.json"))
 
 data = {"route_id": [], "geometry": [], "mileposts": []}
@@ -89,8 +111,8 @@ intersections = intersections[
 intersection_data_array = []
 
 for idx, row in intersections.iterrows():
-    line1 = gdf.loc[row["route_id_index_left"], "geometry"]
-    line2 = gdf.loc[row["route_id_index_right"], "geometry"]
+    line1: LineString = gdf.loc[row["route_id_index_left"], "geometry"]
+    line2: LineString = gdf.loc[row["route_id_index_right"], "geometry"]
     intersection_point = line1.intersection(line2)
 
     # Access mileposts and geometries for each intersecting route
@@ -98,17 +120,12 @@ for idx, row in intersections.iterrows():
     mileposts_2 = gdf.loc[row["route_id_index_right"], "mileposts"]
 
     if intersection_point.geom_type == "Point":
-        # Calculate the distance along each LineString to the intersection point
-        distance_along_1_meters = line1.project(intersection_point)
-        distance_along_2_meters = line2.project(intersection_point)
+        # find the closest point on each route to the intersection point
+        closest_point_1 = get_closest_pt(intersection_point.coords[0], line1.coords)
+        closest_point_2 = get_closest_pt(intersection_point.coords[0], line2.coords)
 
-        # Convert distances to miles (1 mile ≈ 1609.34 meters)
-        distance_along_1 = distance_along_1_meters / 1609.34
-        distance_along_2 = distance_along_2_meters / 1609.34
-
-        # Find the closest milepost for each route based on calculated distance
-        closest_milepost_1 = min(mileposts_1, key=lambda mp: abs(mp - distance_along_1))
-        closest_milepost_2 = min(mileposts_2, key=lambda mp: abs(mp - distance_along_2))
+        idx_1 = list(line1.coords).index(closest_point_1)
+        idx_2 = list(line2.coords).index(closest_point_2)
 
         # Collect data as dictionary for array
         intersection_info = {
@@ -118,8 +135,8 @@ for idx, row in intersections.iterrows():
             "route_id_2": routes[gdf.loc[row["route_id_index_right"], "route_id"]][
                 "Route"
             ],
-            "milepost_1": closest_milepost_1,
-            "milepost_2": closest_milepost_2,
+            "milepost_1": mileposts_1[idx_1],
+            "milepost_2": mileposts_2[idx_2],
             "coordinates": gpd.GeoSeries([intersection_point], crs="EPSG:3857")
             .to_crs("EPSG:4326")
             .iloc[0]
@@ -130,7 +147,7 @@ for idx, row in intersections.iterrows():
 # Convert to JSON string for output or save to file
 json.dump(
     intersection_data_array,
-    open("routing_api/intersection_data_array.json", "w"),
+    open("routing_api/initialization/intersection_data_array.json", "w"),
     indent=2,
     default=str,
 )

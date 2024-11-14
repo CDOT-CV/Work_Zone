@@ -1,8 +1,10 @@
 import networkx as nx
 import json
 
-routes = json.load(open("routing_api/routes_with_mile_markers.json"))
-intersections = json.load(open("routing_api/intersection_data_array.json"))
+routes = json.load(open("routing_api/initialization/routes_with_mile_markers.json"))
+intersections = json.load(
+    open("routing_api/initialization/intersection_data_array.json")
+)
 
 
 def get_node_id(route_id, milepost):
@@ -100,7 +102,7 @@ print("Graph nodes:", list(G.nodes(data=True)))
 print("Graph edges:", list(G.edges(data=True)))
 
 # # Save the graph in a binary format (e.g., for easy reloading within Python)
-nx.write_gml(G, "routing_api/route_graph.gml")
+nx.write_gml(G, "routing_api/initialization/route_graph.gml")
 
 # Alternatively, save in GraphML format (for use in other tools)
 # nx.write_graphml(G, "routing_api/route_graph.graphml")
