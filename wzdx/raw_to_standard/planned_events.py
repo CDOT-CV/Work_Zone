@@ -666,6 +666,27 @@ def get_improved_geometry(
     return newCoordinates
 
 
+def _get_street_name_from_substring(substring: str) -> str:
+    """Get street name from a substring
+    Examples:
+    - Exit 263: Colorado Mills Parkway (West Pleasant View) -> Colorado Mills Parkway
+    - Exit 260: C-470 (1 mile west of Golden) -> C-470
+    - C-470 (Golden) -> C-470
+    - Exit 254: US 40; Genesee (Genesee) -> US 40
+
+    Args:
+        substring (str): substring containing street name
+
+    Returns:
+        str: street name
+    """
+    if ":" in substring:
+        substring = substring.split(":")[1]
+    substring = substring.split("(")[0]
+    substring = substring.split(";")[0]
+    return substring.strip()
+
+
 def get_cross_streets_from_description(description: str) -> tuple[str, str]:
     """Get cross streets from a description string using regular expression "^Between (.*?) and (.*?)(?= from)"
 
@@ -675,27 +696,31 @@ def get_cross_streets_from_description(description: str) -> tuple[str, str]:
     Returns:
         tuple[str, str]: beginning cross street, ending cross street
     """
-    desc_regex = "^Between (.*?) and (.*?)(?= from)"
+    desc_regex = "^Between (.*?) and (.*?)(?= from | at )"
     m = regex.search(desc_regex, description)
     try:
-        return m.group(1, 2)
+        return (_get_street_name_from_substring(s) for s in m.group(1, 2))
     except:
         return ("", "")
 
 
-def get_mileposts_from_description(message: str) -> tuple[str, str]:
-    """Get mileposts from a description string using regular expression "^Between Exit ([0-9.]{0-4}): .*? and Exit  ([0-9.]{0-4}):"
+def get_mileposts_from_description(description: str) -> tuple[str, str]:
+    """Get mileposts from a description string using regular expression "^from Mile Point ([0-9.]{0-6}) to Mile Point ([0-9.]{0-6})."
     Args:
         description (str): description string
     Returns:
         tuple[str, str]: beginning milepost, ending milepost
     """
-    desc_regex = "^Between Exit (.*?): .*? and Exit  (.*?):"
-    m = regex.search(desc_regex, message)
+    start_regex = "( from | at )Mile Point ([0-9.]+)( to|\\. )"
+    end_regex = "( to | at )Mile Point ([0-9.]+)\\."
+    start_m = regex.search(start_regex, description)
+    end_m = regex.search(end_regex, description)
     try:
-        return m.group(1, 2)
+        m1 = start_m.group(2)
+        m2 = end_m.group(2)
+        return float(m1), float(m2)
     except:
-        return ("", "")
+        return (None, None)
 
 
 def get_route_details_for_coordinates_lngLat(
@@ -797,10 +822,6 @@ def create_rtdh_standard_msg(
                 pd.get("properties/clearTime"),
             )
 
-        beginning_milepost, ending_milepost = get_mileposts_from_description(
-            description
-        )
-
         begin_cross_street, end_cross_street = get_cross_streets_from_description(
             description
         )
@@ -814,10 +835,8 @@ def create_rtdh_standard_msg(
 
         direction = pd.get("properties/direction", default="unknown")
 
-        beginning_milepost = pd.get(
-            "properties/startMarker", default=beginning_milepost
-        )
-        ending_milepost = pd.get("properties/endMarker", default=ending_milepost)
+        beginning_milepost = pd.get("properties/startMarker")
+        ending_milepost = pd.get("properties/endMarker")
         recorded_direction = pd.get("properties/recorded_direction")
         reversed = False
         if (
@@ -826,10 +845,8 @@ def create_rtdh_standard_msg(
         ):
             reversed = True
             coordinates.reverse()
-            beginning_milepost = pd.get("properties/endMarker", default=ending_milepost)
-            ending_milepost = pd.get(
-                "properties/startMarker", default=beginning_milepost
-            )
+            beginning_milepost = pd.get("properties/endMarker")
+            ending_milepost = pd.get("properties/startMarker")
 
         roadName = wzdx_translator.remove_direction_from_street_name(
             pd.get("properties/routeName")
@@ -893,6 +910,26 @@ def create_rtdh_standard_msg(
                 cdotGeospatialApi, coordinates, reversed
             )
         )
+
+        # Milepost Priority:
+        # 1. Route Details (only if start and end are on the same route)
+        # 2. properties/startMarker and properties/endMarker
+        # 3. Description parsing
+        beginning_milepost_from_description, ending_milepost_description = (
+            get_mileposts_from_description(description)
+        )
+        if (
+            route_details_start
+            and route_details_end
+            and route_details_start["Route"] == route_details_end["Route"]
+        ):
+            beginning_milepost = route_details_start["Measure"]
+            ending_milepost = route_details_end["Measure"]
+
+        if not beginning_milepost:
+            beginning_milepost = beginning_milepost_from_description
+        if not ending_milepost:
+            ending_milepost = ending_milepost_description
 
         return {
             "rtdh_timestamp": time.time(),

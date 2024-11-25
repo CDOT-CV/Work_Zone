@@ -1,5 +1,7 @@
+import math
 from wzdx.raw_to_standard import planned_events
 from tests.data.raw_to_standard import (
+    description_arsenal,
     planned_events_test_expected_results as expected_results,
 )
 from wzdx.tools import cdot_geospatial_api, geospatial_tools
@@ -371,3 +373,37 @@ def test_get_improved_geometry(mock1, mock2):
     assert actual == expected
 
     assert set(tuple(x) for x in actual) == set(tuple(x) for x in expected)
+
+
+# Go through all descriptions from production_sample.json, and verify that a valid route name is returned
+# There are 2 invalid descriptions in the list, which are expected to be empty
+def test_get_cross_streets_from_description_all():
+    descriptions = description_arsenal.planned_event_descriptions
+    roads = description_arsenal.planned_events_roads
+    for description in descriptions:
+        print(description)  # This makes it easy to debug if the test fails
+        v1, v2 = planned_events.get_cross_streets_from_description(description)
+        if description in description_arsenal.invalid_descriptions:
+            assert v1 == ""
+            assert v2 == ""
+        else:
+            assert v1 in roads
+            assert v2 in roads
+
+
+def test_get_mileposts_from_description_all():
+    descriptions = description_arsenal.planned_event_descriptions
+    for description in descriptions:
+        print(description)  # This makes it easy to debug if the test fails
+        m1, m2 = planned_events.get_mileposts_from_description(description)
+        print(m1, m2)
+        if description in description_arsenal.invalid_descriptions:
+            assert m1 is None
+            assert m2 is None
+        else:
+            assert m1 is not None
+            assert m2 is not None
+            assert isinstance(m1, float)
+            assert isinstance(m2, float)
+            assert not math.isnan(m1)
+            assert not math.isnan(m2)
