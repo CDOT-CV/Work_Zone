@@ -254,7 +254,7 @@ test_wzdx_creator_expected_road_restriction = {
                 ],
             },
             "geometry": {
-                "type": "LineString",
+                "type": "MultiPoint",
                 "coordinates": [[-108.279106, 39.195663], [-108.218549, 39.302392]],
             },
         }
