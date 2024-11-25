@@ -726,14 +726,12 @@ def get_mileposts_from_description(description: str) -> tuple[str, str]:
 def get_route_details_for_coordinates_lngLat(
     cdotGeospatialApi: cdot_geospatial_api.GeospatialApi,
     coordinates: list[list[float]],
-    reversed: bool,
 ) -> tuple[dict, dict]:
     """Get GIS route details for start and end coordinates
 
     Args:
         cdotGeospatialApi (cdot_geospatial_api.GeospatialApi): customized GeospatialApi object, for retrieving route details
         coordinates (list[list[float]]): planned event coordinates
-        reversed (bool): whether the coordinates are reversed
 
     Returns:
         tuple[dict, dict]: GIS route details for start and end coordinates
@@ -838,12 +836,10 @@ def create_rtdh_standard_msg(
         beginning_milepost = pd.get("properties/startMarker")
         ending_milepost = pd.get("properties/endMarker")
         recorded_direction = pd.get("properties/recorded_direction")
-        reversed = False
         if (
             direction == REVERSED_DIRECTION_MAP.get(recorded_direction)
             and direction != "unknown"
         ):
-            reversed = True
             coordinates.reverse()
             beginning_milepost = pd.get("properties/endMarker")
             ending_milepost = pd.get("properties/startMarker")
@@ -906,9 +902,7 @@ def create_rtdh_standard_msg(
             return {}
 
         route_details_start, route_details_end = (
-            get_route_details_for_coordinates_lngLat(
-                cdotGeospatialApi, coordinates, reversed
-            )
+            get_route_details_for_coordinates_lngLat(cdotGeospatialApi, coordinates)
         )
 
         # Milepost Priority:
