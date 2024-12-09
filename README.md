@@ -70,7 +70,7 @@ python -m wzdx.raw_to_standard.{raw translator} inputfile.json --outputDir outpu
 Example usage:
 
 ```
-python -m wzdx.raw_to_standard.planned_events 'wzdx/sample_files/raw/planned_events/hwy_50.json'
+python -m wzdx.raw_to_standard.planned_events 'wzdx/sample_files/raw/planned_events/I70_resurfacing_2024_11_07.json'
 ```
 
 #### Standard to WZDx Conversion
@@ -82,7 +82,7 @@ python -m wzdx.standard_to_enhanced.{standard translator} inputfile.json --outpu
 Example usage:
 
 ```
-python -m wzdx.standard_to_enhanced.planned_events_translator 'wzdx/sample_files/standard/planned_events/standard_planned_event_OpenTMS-Event2702170538_eastbound.json'
+python -m wzdx.standard_to_enhanced.planned_events_translator 'wzdx/sample_files/standard/planned_events/standard_planned_event_OpenTMS-Event20643308360_westbound.json'
 ```
 
 ### Execution for iCone translator
@@ -96,7 +96,7 @@ python -m wzdx.raw_to_standard.icone inputfile.json --outputDir outputDirectory
 Example usage:
 
 ```
-python -m wzdx.raw_to_standard.icone 'wzdx/sample_files/raw/icone/incident_short.xml'
+python -m wzdx.raw_to_standard.icone 'wzdx/sample_files/raw/icone/icone_ftp_20241107-235100.xml'
 ```
 
 #### Standard to WZDx Conversion
@@ -108,7 +108,7 @@ python -m wzdx.standard_to_enhanced.icone_translator inputfile.json --outputFile
 Example usage:
 
 ```
-python -m wzdx.standard_to_enhanced.icone_translator 'wzdx/sample_files/standard/icone/standard_icone_1245_1633444335.json'
+python -m wzdx.standard_to_enhanced.icone_translator 'wzdx/sample_files/standard/icone/standard_icone_U13632784_20241107235100_1731023924_unknown.json'
 ```
 
 ### Execution for NavJoy 568 translator

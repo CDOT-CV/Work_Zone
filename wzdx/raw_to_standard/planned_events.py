@@ -460,7 +460,7 @@ def map_event_type(event_type: str) -> tuple[str, list[dict], str]:
     try:
         return EVENT_TYPE_MAPPING[event_type]
     except KeyError as e:
-        logging.error(f"Unrecognized event type: {e}")
+        logging.warning(f"Unrecognized event type: {e}")
         return DEFAULT_EVENT_TYPE
 
 
@@ -666,6 +666,27 @@ def get_improved_geometry(
     return newCoordinates
 
 
+def _get_street_name_from_substring(substring: str) -> str:
+    """Get street name from a substring
+    Examples:
+    - Exit 263: Colorado Mills Parkway (West Pleasant View) -> Colorado Mills Parkway
+    - Exit 260: C-470 (1 mile west of Golden) -> C-470
+    - C-470 (Golden) -> C-470
+    - Exit 254: US 40; Genesee (Genesee) -> US 40
+
+    Args:
+        substring (str): substring containing street name
+
+    Returns:
+        str: street name
+    """
+    if ":" in substring:
+        substring = substring.split(":")[1]
+    substring = substring.split("(")[0]
+    substring = substring.split(";")[0]
+    return substring.strip()
+
+
 def get_cross_streets_from_description(description: str) -> tuple[str, str]:
     """Get cross streets from a description string using regular expression "^Between (.*?) and (.*?)(?= from)"
 
@@ -675,16 +696,36 @@ def get_cross_streets_from_description(description: str) -> tuple[str, str]:
     Returns:
         tuple[str, str]: beginning cross street, ending cross street
     """
-    desc_regex = "^Between (.*?) and (.*?)(?= from)"
+    desc_regex = "^Between (.*?) and (.*?)(?= from | at )"
     m = regex.search(desc_regex, description)
     try:
-        return m.group(1, 2)
+        return (_get_street_name_from_substring(s) for s in m.group(1, 2))
     except:
         return ("", "")
 
 
+def get_mileposts_from_description(description: str) -> tuple[str, str]:
+    """Get mileposts from a description string using regular expression "^from Mile Point ([0-9.]{0-6}) to Mile Point ([0-9.]{0-6})."
+    Args:
+        description (str): description string
+    Returns:
+        tuple[str, str]: beginning milepost, ending milepost
+    """
+    start_regex = "( from | at )Mile Point ([0-9.]+)( to|\\. )"
+    end_regex = "( to | at )Mile Point ([0-9.]+)\\."
+    start_m = regex.search(start_regex, description)
+    end_m = regex.search(end_regex, description)
+    try:
+        m1 = start_m.group(2)
+        m2 = end_m.group(2)
+        return float(m1), float(m2)
+    except:
+        return (None, None)
+
+
 def get_route_details_for_coordinates_lngLat(
-    cdotGeospatialApi: cdot_geospatial_api.GeospatialApi, coordinates: list[list[float]]
+    cdotGeospatialApi: cdot_geospatial_api.GeospatialApi,
+    coordinates: list[list[float]],
 ) -> tuple[dict, dict]:
     """Get GIS route details for start and end coordinates
 
@@ -707,6 +748,31 @@ def get_route_details_for_coordinates_lngLat(
         route_details_end = get_route_details(
             cdotGeospatialApi, coordinates[-1][1], coordinates[-1][0]
         )
+
+    # Update route IDs based on directionality
+    if route_details_start and route_details_end:
+        if route_details_start["Route"].replace("_DEC", "") != route_details_end[
+            "Route"
+        ].replace("_DEC", ""):
+            logging.warning(
+                f"Routes did not match! route details: {route_details_start['Route']}, {route_details_end['Route']}"
+            )
+            return route_details_start, route_details_end
+        else:
+            if route_details_start["Measure"] > route_details_end["Measure"]:
+                route_details_start["Route"] = route_details_start["Route"].replace(
+                    "_DEC", ""
+                )
+                route_details_end["Route"] = route_details_end["Route"].replace(
+                    "_DEC", ""
+                )
+            else:
+                route_details_start["Route"] = (
+                    route_details_start["Route"].replace("_DEC", "") + "_DEC"
+                )
+                route_details_end["Route"] = (
+                    route_details_end["Route"].replace("_DEC", "") + "_DEC"
+                )
 
     return route_details_start, route_details_end
 
@@ -767,16 +833,16 @@ def create_rtdh_standard_msg(
 
         direction = pd.get("properties/direction", default="unknown")
 
-        beginning_milepost = pd.get("properties/startMarker", default="")
-        ending_milepost = pd.get("properties/endMarker", default="")
+        beginning_milepost = pd.get("properties/startMarker")
+        ending_milepost = pd.get("properties/endMarker")
         recorded_direction = pd.get("properties/recorded_direction")
         if (
             direction == REVERSED_DIRECTION_MAP.get(recorded_direction)
             and direction != "unknown"
         ):
             coordinates.reverse()
-            beginning_milepost = pd.get("properties/endMarker", default="")
-            ending_milepost = pd.get("properties/startMarker", default="")
+            beginning_milepost = pd.get("properties/endMarker")
+            ending_milepost = pd.get("properties/startMarker")
 
         roadName = wzdx_translator.remove_direction_from_street_name(
             pd.get("properties/routeName")
@@ -838,6 +904,26 @@ def create_rtdh_standard_msg(
         route_details_start, route_details_end = (
             get_route_details_for_coordinates_lngLat(cdotGeospatialApi, coordinates)
         )
+
+        # Milepost Priority:
+        # 1. Route Details (only if start and end are on the same route)
+        # 2. properties/startMarker and properties/endMarker
+        # 3. Description parsing
+        beginning_milepost_from_description, ending_milepost_description = (
+            get_mileposts_from_description(description)
+        )
+        if (
+            route_details_start
+            and route_details_end
+            and route_details_start["Route"] == route_details_end["Route"]
+        ):
+            beginning_milepost = route_details_start["Measure"]
+            ending_milepost = route_details_end["Measure"]
+
+        if not beginning_milepost:
+            beginning_milepost = beginning_milepost_from_description
+        if not ending_milepost:
+            ending_milepost = ending_milepost_description
 
         return {
             "rtdh_timestamp": time.time(),
@@ -948,12 +1034,12 @@ def validate_closure(obj: dict | OrderedDict) -> bool:
         start_time = date_tools.parse_datetime_from_iso_string(starttime_string)
         end_time = date_tools.parse_datetime_from_iso_string(endtime_string)
         if not start_time:
-            logging.error(
+            logging.warning(
                 f"Invalid incident with id = {id}. Unsupported start time format: {start_time}"
             )
             return False
         elif endtime_string and not end_time:
-            logging.error(
+            logging.warning(
                 f"Invalid incident with id = {id}. Unsupported end time format: {end_time}"
             )
             return False

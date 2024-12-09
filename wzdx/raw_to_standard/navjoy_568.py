@@ -433,12 +433,12 @@ def validate_closure(obj: dict | OrderedDict) -> bool:
     start_time = date_tools.parse_datetime_from_iso_string(starttime_string)
     end_time = date_tools.parse_datetime_from_iso_string(endtime_string)
     if not start_time:
-        logging.error(
+        logging.warning(
             f"Invalid incident with id = {id}. Unsupported start time format: {start_time}"
         )
         return False
     elif endtime_string and not end_time:
-        logging.error(
+        logging.warning(
             f"Invalid incident with id = {id}. Unsupported end time format: {end_time}"
         )
         return False

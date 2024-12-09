@@ -75,7 +75,7 @@ class GeospatialApi:
         if not resp:
             return None
         # response = [{'routeID': '070A', 'MMin': 0, 'MMax': 499}]
-        return resp
+        return resp["routes"]
 
     def get_route_details(self, routeId: str) -> dict | None:
         """Get route details from route ID
@@ -165,11 +165,13 @@ class GeospatialApi:
                 startMeasure = measure
                 endMeasure = measure + step
             if (endMeasure > mMax) or (startMeasure < mMin):
-                logging.warn(
+                logging.warning(
                     "get_route_and_measure bearing computation failed, measure out of bounds. MMin: {mMin}, MMax: {mMax}, startMeasure: {startMeasure}, endMeasure: {endMeasure}, step: {step}"
                 )
                 return route_details
-            coords = self.get_route_between_measures(route, startMeasure, endMeasure)
+            coords = self.get_route_between_measures(
+                route, startMeasure, endMeasure, adjustRoute=False
+            )
             bearing = geospatial_tools.get_heading_from_coordinates(coords)
 
             if bearing > 180:
@@ -246,7 +248,7 @@ class GeospatialApi:
             latLng = self.get_point_at_measure(routeId, startMeasure)
             routeDetails = self.get_route_and_measure(latLng, heading)
             if not latLng or not routeDetails:
-                logging.warn(
+                logging.warning(
                     "get_route_geometry_ahead failed to get route details for routeId: {routeId}, startMeasure: {startMeasure}, heading: {heading}"
                 )
                 return None
@@ -260,7 +262,7 @@ class GeospatialApi:
             endMeasure = max(endMeasure, routeDetails["MMin"])
 
         if mMin != None and mMax != None:
-            # Force mMin > mMax
+            # Force mMin < mMax
             if mMin > mMax:
                 temp = mMin
                 mMin = mMax
@@ -285,6 +287,7 @@ class GeospatialApi:
         endMeasure: float,
         dualCarriageway: bool = True,
         compressed: bool = False,
+        adjustRoute: bool = True,
     ) -> list[list[float]]:
         """Get lat/long points between two mile markers on route
 
@@ -299,8 +302,19 @@ class GeospatialApi:
             list[list[float]]: Route, as Linestring of lat/long points
         """
         # Get lat/long points between two mile markers on route
-        if dualCarriageway and self.is_route_dec(startMeasure, endMeasure):
-            routeId = f"{routeId}_DEC"
+        if (
+            dualCarriageway
+            and self.is_route_dec(startMeasure, endMeasure)
+            and adjustRoute
+        ):
+            routeId = f"{routeId.replace('_DEC', '')}_DEC"
+
+        if self.is_route_id_dec(routeId):
+            if startMeasure < endMeasure:
+                startMeasure, endMeasure = endMeasure, startMeasure
+        else:
+            if startMeasure > endMeasure:
+                startMeasure, endMeasure = endMeasure, startMeasure
 
         parameters = []
         parameters.append(f"routeId={routeId}")
@@ -340,6 +354,15 @@ class GeospatialApi:
             bool: True if route is a reversed dual carriageway
         """
         return endMeasure > startMeasure
+
+    def is_route_id_dec(self, route_id: str) -> bool:
+        """Check if the route is a reversed dual carriageway
+        Args:
+            route_id (str): Route ID
+        Returns:
+            bool: True if route is a reversed dual carriageway
+        """
+        return route_id.lower().endswith("_dec")
 
     def _make_cached_web_request(
         self,
@@ -381,12 +404,12 @@ class GeospatialApi:
                     url, timeout=timeout * 2, retryOnTimeout=False
                 )
             else:
-                logging.warn(
+                logging.warning(
                     f"Geospatial Request Timed Out for {source} with url : {url}. Timeout: {timeout}. Error: {e}"
                 )
                 return None
         except requests.exceptions.RequestException as e:
-            logging.warn(
+            logging.warning(
                 f"Geospatial Request Failed for {source} with url : {url}. Timeout: {timeout}. Error: {e}"
             )
             return None

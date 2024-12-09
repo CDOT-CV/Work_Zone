@@ -20,9 +20,8 @@ def main():
     generated_messages = generate_standard_messages_from_string(input_file_contents)
 
     generated_files_list = []
-    features = json.loads(open(f"{output_dir}/icone_feature_collection.geojson").read())
+    features = []
 
-    wzdx_msg = {}
     for message in generated_messages:
         output_path = f"{output_dir}/icone_{message['event']['source']['id']}_{round(message['rtdh_timestamp'])}_{message['event']['detail']['direction']}.json"
         open(output_path, "w+").write(json.dumps(message, indent=2))

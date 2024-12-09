@@ -144,9 +144,12 @@ def parse_road_restriction(incident: dict) -> dict:
     detail = event.get("detail")
     additional_info = event.get("additional_info", {})
 
-    geometry = {}
-    geometry["type"] = "LineString"
-    geometry["coordinates"] = event.get("geometry")
+    geometry = {
+        "type": "LineString",
+        "coordinates": event.get("geometry", []),
+    }
+    if len(event.get("geometry", [])) <= 2:
+        geometry["type"] = "MultiPoint"
     properties = {}
 
     # I included a skeleton of the message, fill out all required fields and as many optional fields as you can. Below is a link to the spec page for a road event
@@ -231,9 +234,13 @@ def parse_work_zone(incident: dict) -> dict:
     detail = event.get("detail")
     additional_info = event.get("additional_info", {})
 
-    geometry = {}
-    geometry["type"] = "LineString"
-    geometry["coordinates"] = event.get("geometry")
+    # Use MultiPoint if just 2 points, LineString if > 2 points
+    geometry = {
+        "type": "LineString",
+        "coordinates": event.get("geometry", []),
+    }
+    if len(event.get("geometry", [])) <= 2:
+        geometry["type"] = "MultiPoint"
     properties = wzdx_translator.initialize_feature_properties()
 
     # I included a skeleton of the message, fill out all required fields and as many optional fields as you can. Below is a link to the spec page for a road event

@@ -8,8 +8,6 @@ WZDx feed schemas, pulled directly from the USDOT repository:
 
 [WZDx 4.2 Schema](https://raw.githubusercontent.com/usdot-jpo-ode/wzdx/main/schemas/4.2/WorkZoneFeed.json)
 
-[WZDx 4.1 Schema](https://raw.githubusercontent.com/usdot-jpo-ode/wzdx/main/schemas/4.1/WorkZoneFeed.json)
-
 ## Road Restriction Feed
 
 WZDx Road Restriction feed schemas, pulled directly from the USDOT repository:
