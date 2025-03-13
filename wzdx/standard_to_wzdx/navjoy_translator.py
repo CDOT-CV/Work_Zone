@@ -6,13 +6,13 @@ from datetime import datetime
 import uuid  # This is necessary for unit test mocking
 from ..tools import date_tools, wzdx_translator, units
 
-PROGRAM_NAME = "NavJoy568Translator"
+PROGRAM_NAME = "WZDxNavJoy568Translator"
 PROGRAM_VERSION = "1.0"
 
 
 def main():
     inputfile, outputfile = parse_navjoy_arguments()
-    
+
     navjoy_obj = json.loads(open(inputfile).read())
     wzdx = wzdx_creator(navjoy_obj)
 

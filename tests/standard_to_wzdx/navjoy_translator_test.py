@@ -8,7 +8,7 @@ from tests.data.standard_to_enhanced import navjoy_translator_data
 from wzdx.tools import wzdx_translator
 
 import time_machine
-from wzdx.standard_to_enhanced import navjoy_translator
+from wzdx.standard_to_wzdx import navjoy_translator
 
 
 @patch.object(argparse, "ArgumentParser")
@@ -22,6 +22,7 @@ def init_datetime_mocks(mock_dts):
         i.utcnow = MagicMock(return_value=datetime(2021, 4, 13, tzinfo=timezone.utc))
         i.now = MagicMock(return_value=datetime(2021, 4, 13))
         i.strptime = datetime.strptime
+
 
 @patch.dict(
     os.environ,

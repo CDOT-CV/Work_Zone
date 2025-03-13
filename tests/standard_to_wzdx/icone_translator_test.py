@@ -6,7 +6,7 @@ from unittest.mock import Mock, patch
 
 import time_machine
 import xmltodict
-from wzdx.standard_to_enhanced import icone_translator
+from wzdx.standard_to_wzdx import icone_translator
 from wzdx.tools import wzdx_translator
 
 from tests.data.standard_to_enhanced import icone_translator_data

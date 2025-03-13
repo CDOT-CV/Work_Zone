@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 from unittest.mock import MagicMock, patch
 
 import time_machine
-from wzdx.standard_to_enhanced import planned_events_translator
+from wzdx.standard_to_wzdx import planned_events_translator
 from wzdx.tools import wzdx_translator
 
 from tests.data.standard_to_enhanced import planned_events_translator_data

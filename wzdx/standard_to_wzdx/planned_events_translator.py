@@ -10,7 +10,7 @@ from ..sample_files.validation_schema import (
 
 from ..tools import date_tools, wzdx_translator, uuid_tools
 
-PROGRAM_NAME = "PlannedEventsTranslator"
+PROGRAM_NAME = "WZDxPlannedEventsTranslator"
 PROGRAM_VERSION = "1.0"
 
 

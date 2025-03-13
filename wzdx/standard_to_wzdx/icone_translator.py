@@ -7,7 +7,7 @@ import uuid
 
 from ..tools import date_tools, wzdx_translator
 
-PROGRAM_NAME = "IconeTranslator"
+PROGRAM_NAME = "WZDxIconeTranslator"
 PROGRAM_VERSION = "1.0"
 
 
