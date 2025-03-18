@@ -3,14 +3,11 @@ import json
 import logging
 import copy
 
-from ..sample_files.validation_schema import (
-    work_zone_feed_v42,
-    road_restriction_v40_feed,
-)
+from ..sample_files.validation_schema import connected_work_zone_feed_v10
 
-from ..tools import date_tools, wzdx_translator, uuid_tools
+from ..tools import date_tools, cwz_translator, uuid_tools
 
-PROGRAM_NAME = "WZDxPlannedEventsTranslator"
+PROGRAM_NAME = "CWZPlannedEventsTranslator"
 PROGRAM_VERSION = "1.0"
 
 
@@ -18,15 +15,15 @@ def main():
     input_file, output_file = parse_planned_events_arguments()
 
     planned_events_obj = json.loads(open(input_file, "r").read())
-    wzdx = wzdx_creator(planned_events_obj)
+    cwz_feed = cwz_creator(planned_events_obj)
 
-    if not wzdx:
-        print("Error: WZDx message generation failed, see logs for more information.")
+    if not cwz_feed:
+        print("Error: CWZ message generation failed, see logs for more information.")
     else:
-        with open(output_file, "w") as fWzdx:
-            fWzdx.write(json.dumps(wzdx, indent=2))
+        with open(output_file, "w") as f:
+            f.write(json.dumps(cwz_feed, indent=2))
             print(
-                "Your wzdx message was successfully generated and is located here: "
+                "Your connected work zone message was successfully generated and is located here: "
                 + str(output_file)
             )
 
@@ -38,7 +35,7 @@ def parse_planned_events_arguments() -> tuple[str, str]:
     Returns:
         tuple[str, str]: Planned Event file path, output file path
     """
-    parser = argparse.ArgumentParser(description="Translate Planned Event data to WZDx")
+    parser = argparse.ArgumentParser(description="Translate Planned Event data to CWZ")
     parser.add_argument(
         "--version", action="version", version=f"{PROGRAM_NAME} {PROGRAM_VERSION}"
     )
@@ -46,7 +43,7 @@ def parse_planned_events_arguments() -> tuple[str, str]:
     parser.add_argument(
         "--outputFile",
         required=False,
-        default="planned_events_wzdx_translated_output_message.geojson",
+        default="planned_events_cwz_translated_output_message.geojson",
         help="output file path",
     )
 
@@ -54,15 +51,15 @@ def parse_planned_events_arguments() -> tuple[str, str]:
     return args.plannedEventsFile, args.outputFile
 
 
-def wzdx_creator(message: dict, info: dict = None) -> dict:
-    """Translate Planned Event data to WZDx, separating Work Zones and Road Restrictions
+def cwz_creator(message: dict, info: dict | None = None) -> dict | None:
+    """Translate Planned Event data to CWZ
 
     Args:
         message (dict): Planned Event data
-        info (dict, optional): WZDx info object. Defaults to None.
+        info (dict, optional): CWZ info object. Defaults to None.
 
     Returns:
-        dict: WZDx object
+        dict: CWZ object
     """
     if not message:
         return None
@@ -70,16 +67,13 @@ def wzdx_creator(message: dict, info: dict = None) -> dict:
 
     # verify info obj
     if not info:
-        info = wzdx_translator.initialize_info()
-    if not wzdx_translator.validate_info(info):
+        info = cwz_translator.initialize_info()
+    if not cwz_translator.validate_info(info):
         return None
 
     if event_type == "work-zone":
-        wzd = wzdx_translator.initialize_wzdx_object(info)
+        wzd = cwz_translator.initialize_feed_object(info)
         feature = parse_work_zone(message)
-    elif event_type == "restriction":
-        wzd = wzdx_translator.initialize_wzdx_object_restriction(info)
-        feature = parse_road_restriction(message)
     else:
         logging.warning(f"Unrecognized event type: {message['event']['type']}")
         return None
@@ -88,15 +82,12 @@ def wzdx_creator(message: dict, info: dict = None) -> dict:
         wzd.get("features", []).append(feature)
     if not wzd.get("features"):
         return None
-    wzd = wzdx_translator.add_ids(wzd, event_type)
+    wzd = cwz_translator.add_ids(wzd, event_type)
 
-    schemas = {
-        "work-zone": work_zone_feed_v42.wzdx_v42_schema_string,
-        "restriction": road_restriction_v40_feed.road_restriction_v40_schema_string,
-    }
-
-    if not wzdx_translator.validate_wzdx(wzd, schemas[event_type]):
-        logging.warning("WZDx message failed validation")
+    if not cwz_translator.validate_feed(
+        wzd, connected_work_zone_feed_v10.connected_work_zone_feed_v10_schema_string
+    ):
+        logging.warning("CWZ message failed validation")
         return None
 
     return wzd
@@ -124,17 +115,17 @@ def get_vehicle_impact(lanes: list[dict]) -> str:
         return "some-lanes-closed"
 
 
-# Parse Icone Incident to WZDx
-def parse_road_restriction(incident: dict) -> dict:
-    """Translate Planned Events RTDH standard road restriction to WZDx
+# Parse Icone Incident to CWZ
+def parse_work_zone(incident: dict) -> dict | None:
+    """Translate Planned Events RTDH standard work zone to CWZ
 
     Args:
         incident (dict): Planned event event data
 
     Returns:
-        dict: WZDx object
+        dict: CWZ object
     """
-    if not incident or type(incident) != dict:
+    if not incident or type(incident) is not dict:
         return None
 
     event = incident.get("event")
@@ -148,100 +139,7 @@ def parse_road_restriction(incident: dict) -> dict:
         "type": "LineString",
         "coordinates": event.get("geometry", []),
     }
-    if len(event.get("geometry", [])) <= 2:
-        geometry["type"] = "MultiPoint"
-    properties = {}
-
-    # I included a skeleton of the message, fill out all required fields and as many optional fields as you can. Below is a link to the spec page for a road event
-    # https://github.com/usdot-jpo-ode/jpo-wzdx/blob/master/spec-content/objects/RoadEvent.md
-
-    core_details = {}
-
-    # data_source_id - Leave this empty, it will be populated by add_ids
-    core_details["data_source_id"] = ""
-
-    # Event Type ['work-zone', 'detour']
-    core_details["event_type"] = event.get("type")
-
-    # road_name
-    road_names = [detail.get("road_name")]
-    core_details["road_names"] = road_names
-
-    # direction
-    core_details["direction"] = detail.get("direction", "unknown")
-
-    # description
-    core_details["description"] = header.get("description")
-
-    # # creation_date
-    # core_details['creation_date'] = date_tools.get_iso_string_from_unix(
-    #     source.get('creation_timestamp'))
-
-    # update_date
-    core_details["update_date"] = date_tools.get_iso_string_from_unix(
-        source.get("last_updated_timestamp")
-    )
-
-    properties["core_details"] = core_details
-
-    properties["lanes"] = additional_info.get("lanes", [])
-
-    # restrictions
-    properties["restrictions"] = additional_info.get("restrictions", [])
-
-    properties["route_details_start"] = additional_info.get("route_details_start")
-    properties["route_details_end"] = additional_info.get("route_details_end")
-
-    properties["condition_1"] = additional_info.get("condition_1", True)
-
-    filtered_properties = copy.deepcopy(properties)
-
-    for key, value in properties.items():
-        if not value and key not in ["road_event_id", "data_source_id"]:
-            del filtered_properties[key]
-
-    feature = {}
-    feature["type"] = "Feature"
-    feature["properties"] = filtered_properties
-    feature["geometry"] = geometry
-    feature["id"] = uuid_tools.named_uuid_string(
-        event.get("source", {}).get("id", None)
-    )
-
-    return feature
-
-
-# Parse Icone Incident to WZDx
-def parse_work_zone(incident: dict) -> dict:
-    """Translate Planned Events RTDH standard work zone to WZDx
-
-    Args:
-        incident (dict): Planned event event data
-
-    Returns:
-        dict: WZDx object
-    """
-    if not incident or type(incident) != dict:
-        return None
-
-    event = incident.get("event")
-
-    source = event.get("source")
-    header = event.get("header")
-    detail = event.get("detail")
-    additional_info = event.get("additional_info", {})
-
-    # Use MultiPoint if just 2 points, LineString if > 2 points
-    geometry = {
-        "type": "LineString",
-        "coordinates": event.get("geometry", []),
-    }
-    if len(event.get("geometry", [])) <= 2:
-        geometry["type"] = "MultiPoint"
-    properties = wzdx_translator.initialize_feature_properties()
-
-    # I included a skeleton of the message, fill out all required fields and as many optional fields as you can. Below is a link to the spec page for a road event
-    # https://github.com/usdot-jpo-ode/jpo-wzdx/blob/master/spec-content/objects/RoadEvent.md
+    properties = cwz_translator.initialize_feature_properties()
 
     core_details = properties["core_details"]
 
@@ -324,8 +222,12 @@ def parse_work_zone(incident: dict) -> dict:
     properties["ending_milepost"] = additional_info.get("ending_milepost")
 
     # type_of_work
-    # maintenance, minor-road-defect-repair, roadside-work, overhead-work, below-road-work, barrier-work, surface-work, painting, roadway-relocation, roadway-creation
-    properties["types_of_work"] = event.get("types_of_work", [])
+    # non-encroachment, minor-road-defect-repair, roadside-work, overhead-work, below-road-work, barrier-work, surface-work, painting, roadway-relocation, roadway-creation
+    types_of_work = event.get("types_of_work", [])
+    for type_of_work in types_of_work:
+        if type_of_work.get("type_name") == "maintenance":
+            type_of_work["type_name"] = "non-encroachment"
+    properties["types_of_work"] = types_of_work
 
     # worker_presence - not available
 
@@ -341,7 +243,7 @@ def parse_work_zone(incident: dict) -> dict:
 
     filtered_properties = copy.deepcopy(properties)
 
-    INVALID_PROPERTIES = [None, "", []]
+    INVALID_PROPERTIES: list = [None, "", []]
 
     for key, value in properties.items():
         if value in INVALID_PROPERTIES:

@@ -310,7 +310,7 @@ def parse_incident(incident: dict) -> dict:
     # direction
     core_details["direction"] = detail.get("direction")
 
-    # relationship
+    # related_road_events
     core_details["related_road_events"] = []
 
     # description
