@@ -4,7 +4,7 @@ import uuid
 from datetime import datetime, timezone
 from unittest.mock import MagicMock, Mock, patch
 import argparse
-from tests.data.standard_to_enhanced import navjoy_translator_data
+from tests.data.standard_to_wzdx import navjoy_translator_data
 from wzdx.tools import wzdx_translator
 
 import time_machine
@@ -30,7 +30,7 @@ def init_datetime_mocks(mock_dts):
         "NAMESPACE_UUID": "3f0bce7b-1e59-4be0-80cd-b5f1f3801708",
     },
 )
-@unittest.mock.patch("wzdx.standard_to_enhanced.navjoy_translator.datetime")
+@unittest.mock.patch("wzdx.standard_to_wzdx.navjoy_translator.datetime")
 @unittest.mock.patch("wzdx.tools.wzdx_translator.datetime")
 def test_parse_reduction_zone_linestring(mock_dt, mock_dt_3):
     init_datetime_mocks([mock_dt, mock_dt_3])
@@ -90,7 +90,7 @@ def test_get_vehicle_impact_all_lanes_open():
     },
 )
 @patch("uuid.uuid4")
-@unittest.mock.patch("wzdx.standard_to_enhanced.navjoy_translator.datetime")
+@unittest.mock.patch("wzdx.standard_to_wzdx.navjoy_translator.datetime")
 @unittest.mock.patch("wzdx.tools.wzdx_translator.datetime")
 def test_wzdx_creator(mock_dt, mock_dt_3, mockUuid):
     init_datetime_mocks([mock_dt, mock_dt_3])
