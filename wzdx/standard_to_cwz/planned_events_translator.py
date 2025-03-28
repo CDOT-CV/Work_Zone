@@ -82,7 +82,7 @@ def cwz_creator(message: dict, info: dict | None = None) -> dict | None:
         wzd.get("features", []).append(feature)
     if not wzd.get("features"):
         return None
-    wzd = cwz_translator.add_ids(wzd, event_type)
+    wzd = cwz_translator.add_ids(wzd)
 
     if not cwz_translator.validate_feed(
         wzd, connected_work_zone_feed_v10.connected_work_zone_feed_v10_schema_string
