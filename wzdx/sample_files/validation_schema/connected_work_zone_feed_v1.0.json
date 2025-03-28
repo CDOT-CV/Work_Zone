@@ -1,14 +1,10 @@
 {
-  "$id": "WorkZoneFeed.json",
-  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "CWZ v1.0 Work Zone Feed",
   "description": "The GeoJSON output of a CWZ Work Zone Feed v1.0.",
   "type": "object",
   "required": ["feed_info", "type", "features"],
   "properties": {
     "feed_info": {
-      "$id": "FeedInfo.json",
-      "$schema": "http://json-schema.org/draft-07/schema#",
       "title": "CWZ Feed Information",
       "description": "Describes CWZ feed header information such as metadata, contact information, and data sources.",
       "type": "object",
@@ -121,8 +117,6 @@
             "required": ["properties"]
           },
           {
-            "$id": "RoadEventFeature.json",
-            "$schema": "http://json-schema.org/draft-07/schema#",
             "title": "Road Event Feature (GeoJSON Feature)",
             "description": "The container object for a specific CWZ road event; an instance of a GeoJSON Feature.",
             "type": "object",
@@ -156,8 +150,6 @@
               "geometry": {
                 "oneOf": [
                   {
-                    "$schema": "http://json-schema.org/draft-07/schema#",
-                    "$id": "https://geojson.org/schema/LineString.json",
                     "title": "GeoJSON LineString",
                     "type": "object",
                     "required": ["type", "coordinates"],
@@ -187,8 +179,6 @@
                     }
                   },
                   {
-                    "$schema": "http://json-schema.org/draft-07/schema#",
-                    "$id": "https://geojson.org/schema/Point.json",
                     "title": "GeoJSON Point",
                     "type": "object",
                     "required": ["type", "coordinates"],
@@ -216,8 +206,6 @@
                 ]
               },
               "bbox": {
-                "$id": "BoundingBox.json",
-                "$schema": "http://json-schema.org/draft-07/schema#",
                 "title": "GeoJSON Bounding Box",
                 "description": "Information on the coordinate range for a Geometry, Feature, or FeatureCollection.",
                 "type": "array",
@@ -469,8 +457,6 @@
                     }
                   },
                   "direction": {
-                    "$id": "Direction.json",
-                    "$schema": "http://json-schema.org/draft-07/schema#",
                     "title": "Direction Enumerated Type",
                     "description": "The direction of a road based on standard naming for US roads; indicates the direction the traffic flow not the real heading angle.",
                     "enum": [
