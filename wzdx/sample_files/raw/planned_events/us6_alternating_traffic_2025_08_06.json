@@ -1,0 +1,43 @@
+{
+  "type": "Feature",
+  "geometry": {
+    "srid": 4326,
+    "type": "MultiPoint",
+    "coordinates": [
+      [-108.45338, 39.091773],
+      [-108.445973, 39.091771]
+    ]
+  },
+  "properties": {
+    "additionalImpacts": ["Alternating traffic", "Alternating Lanes"],
+    "clearTime": "2025-08-08T01:00:00Z",
+    "startMarker": 37.2,
+    "project": {
+      "description": "Traffic  and Pedestrian Safety improvements in Clifton, CO",
+      "status": "project inactive",
+      "owningGroup": "LaneAware",
+      "startTime": "2022-11-07T07:00:00Z",
+      "endTime": "2024-10-07T05:59:59Z"
+    },
+    "type": "Road Construction",
+    "laneImpacts": [
+      { "direction": "east", "laneCount": 3, "laneClosures": "0", "closedLaneTypes": [] },
+      { "direction": "west", "laneCount": 3, "laneClosures": "0", "closedLaneTypes": [] }
+    ],
+    "routeName": "US-6E",
+    "isOversizedLoadsProhibited": false,
+    "lastUpdated": "2025-08-06T20:29:30.764Z",
+    "schedule": [{ "startTime": "2025-08-07T13:00:00.000Z", "endTime": "2025-08-08T01:00:00.000Z" }],
+    "endMarker": 37.9,
+    "hasRampRestriction": false,
+    "name": "US 6 Clifton Improvements Project-108228",
+    "startTime": "2025-08-07T13:00:00Z",
+    "id": "OpenTMS-Event26566970102",
+    "travelerInformationMessage": "Between I-70 Business and 5th Street (Clifton) from Mile Point 37.2 to Mile Point 37.9. Road construction. Alternating traffic. Starting tomorrow at 7:00AM MDT until tomorrow at about 7:00PM MDT. Full schedule below: • August 7, 7:00AM - August 7, 7:00PM",
+    "category": "Construction",
+    "owningGroup": "LaneAware",
+    "jurisdictions": ["MESA (COUNTY)"],
+    "direction": "east"
+  },
+  "attributes": {}
+}

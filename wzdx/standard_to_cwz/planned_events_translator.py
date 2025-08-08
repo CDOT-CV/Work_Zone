@@ -93,17 +93,22 @@ def cwz_creator(message: dict, info: dict | None = None) -> dict | None:
     return wzd
 
 
-def get_vehicle_impact(lanes: list[dict]) -> str:
-    """Determine the impact of lane closures on vehicle traffic
+def get_vehicle_impact(lanes: list[dict], description: str) -> str:
+    """Determine the impact of lane closures on vehicle traffic and possible alternating traffic indicated by description
 
     Args:
         lanes (list[dict]): List of lane objects
+        description (str): Description of the event
 
     Returns:
         str: Vehicle impact status
     """
     num_lanes = len(lanes)
     num_closed_lanes = 0
+
+    if "alternating traffic" in description.lower():
+        return "alternating-one-way"
+
     for i in lanes:
         if i["status"] != "open":
             num_closed_lanes += 1
@@ -204,7 +209,7 @@ def parse_work_zone(incident: dict) -> dict | None:
 
     # vehicle impact
     lanes = additional_info.get("lanes", [])
-    properties["vehicle_impact"] = get_vehicle_impact(lanes)
+    properties["vehicle_impact"] = get_vehicle_impact(lanes, header.get("description"))
 
     # lanes
     properties["lanes"] = lanes

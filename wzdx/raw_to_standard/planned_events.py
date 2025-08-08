@@ -563,8 +563,8 @@ def get_lane_impacts(
             )
 
 
-def all_lanes_open(lanes: list[dict]) -> bool:
-    """Check if all lanes are open
+def all_lanes_open(lanes: list[dict], description: str) -> bool:
+    """Check if all lanes are open, or if the description indicates alternating traffic
 
     Args:
         lanes (list[dict]): WZDx lanes list
@@ -572,6 +572,8 @@ def all_lanes_open(lanes: list[dict]) -> bool:
     Returns:
         bool: whether all lanes are open
     """
+    if "alternating traffic" in description.lower():
+        return False
     for i in lanes:
         if i["status"] != "open":
             return False
@@ -748,6 +750,8 @@ def get_route_details_for_coordinates_lngLat(
         route_details_end = get_route_details(
             cdotGeospatialApi, coordinates[-1][1], coordinates[-1][0]
         )
+    print("Route details start:", route_details_start)
+    print("Route details end:", route_details_end)
 
     # Update route IDs based on directionality
     if route_details_start and route_details_end:
@@ -759,7 +763,7 @@ def get_route_details_for_coordinates_lngLat(
             )
             return route_details_start, route_details_end
         else:
-            if route_details_start["Measure"] > route_details_end["Measure"]:
+            if route_details_start["Measure"] < route_details_end["Measure"]:
                 route_details_start["Route"] = route_details_start["Route"].replace(
                     "_DEC", ""
                 )
@@ -836,14 +840,31 @@ def create_rtdh_standard_msg(
         beginning_milepost = pd.get("properties/startMarker")
         ending_milepost = pd.get("properties/endMarker")
         recorded_direction = pd.get("properties/recorded_direction")
+        geometry_direction = geospatial_tools.get_road_direction_from_coordinates(
+            coordinates
+        )
+
+        lane_impacts = get_lane_impacts(
+            pd.get("properties/laneImpacts"), pd.get("properties/direction")
+        )
+        if direction != recorded_direction and all_lanes_open(
+            lane_impacts, description
+        ):
+            logging.info(
+                f'Unable to retrieve geometry coordinates for event: {pd.get("properties/id", default="")}'
+            )
+            return {}
+
+        print(f"{direction}, {recorded_direction}, {geometry_direction}")
         if (
-            direction == REVERSED_DIRECTION_MAP.get(recorded_direction)
+            direction == REVERSED_DIRECTION_MAP.get(geometry_direction)
             and direction != "unknown"
         ):
+            print("reversing coordinates")
             coordinates.reverse()
             beginning_milepost = pd.get("properties/endMarker")
             ending_milepost = pd.get("properties/startMarker")
-
+        print(f"{beginning_milepost}, {ending_milepost}")
         roadName = wzdx_translator.remove_direction_from_street_name(
             pd.get("properties/routeName")
         )
@@ -891,15 +912,6 @@ def create_rtdh_standard_msg(
         event_status = date_tools.get_event_status(start_date, end_date)
 
         condition_1 = event_status in ["active", "pending", "planned"]
-
-        lane_impacts = get_lane_impacts(
-            pd.get("properties/laneImpacts"), pd.get("properties/direction")
-        )
-        if direction != recorded_direction and all_lanes_open(lane_impacts):
-            logging.info(
-                f'Unable to retrieve geometry coordinates for event: {pd.get("properties/id", default="")}'
-            )
-            return {}
 
         route_details_start, route_details_end = (
             get_route_details_for_coordinates_lngLat(cdotGeospatialApi, coordinates)

@@ -1,0 +1,57 @@
+{
+  "type": "Feature",
+  "geometry": {
+    "srid": 4326,
+    "type": "MultiPoint",
+    "coordinates": [
+      [-105.02553, 39.784372],
+      [-105.02278, 39.784186]
+    ]
+  },
+  "properties": {
+    "clearTime": "2025-08-08T11:30:00Z",
+    "startMarker": 272.0,
+    "project": {
+      "description": "I-70 Noise Wall Replacement  I-76 to Pecos Street",
+      "status": "project active",
+      "owningGroup": "LaneAware",
+      "startTime": "2024-03-11T06:00:00Z",
+      "endTime": "2026-03-31T05:59:59Z"
+    },
+    "type": "Wall Maintenance",
+    "laneImpacts": [
+      {
+        "direction": "east",
+        "laneCount": 3,
+        "laneClosures": "0",
+        "closedLaneTypes": []
+      },
+      {
+        "direction": "west",
+        "laneCount": 3,
+        "laneClosures": "0",
+        "closedLaneTypes": ["right exit ramp"]
+      }
+    ],
+    "routeName": "I-70W",
+    "isOversizedLoadsProhibited": false,
+    "lastUpdated": "2025-08-07T21:13:29.322Z",
+    "schedule": [
+      {
+        "startTime": "2025-08-08T00:00:00.000Z",
+        "endTime": "2025-08-08T11:30:00.000Z"
+      }
+    ],
+    "endMarker": 272.1,
+    "hasRampRestriction": false,
+    "name": "I-70 Noise Wall: I-76 to Pecos Street -108366",
+    "startTime": "2025-08-08T00:00:00Z",
+    "id": "OpenTMS-Event26569868512",
+    "travelerInformationMessage": "Between Exit 273: Pecos Street and Exit 271B: Lowell Boulevard (Denver) from Mile Point 272.1 to Mile Point 272. Wall maintenance. Starting today at 6:00PM MDT until tomorrow at about 5:30AM MDT. Full schedule below: • August 7, 6:00PM - August 8, 5:30AM Comment: WB I-70 off-ramp closure with detour route in place",
+    "category": "Construction",
+    "owningGroup": "LaneAware",
+    "jurisdictions": ["DENVER (COUNTY)"],
+    "direction": "west"
+  },
+  "attributes": {}
+}
