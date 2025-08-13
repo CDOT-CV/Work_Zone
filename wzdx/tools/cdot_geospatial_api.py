@@ -18,7 +18,7 @@ class GeospatialApi:
         setCachedRequest: Callable[[str, str], None] = lambda url, response: None,
         BASE_URL: str = os.getenv(
             "CDOT_GEOSPATIAL_API_BASE_URL",
-            "https://dtdapps.colorado.gov/server/rest/services/LRS/Routes_withDEC/MapServer/exts/CdotLrsAccessRounded",
+            "https://dtdapps.codot.gov/server/rest/services/LRS/Routes_withDEC/MapServer/exts/CdotLrsAccessRounded",
         ),
     ):
         """Initialize the Geospatial API
@@ -353,7 +353,7 @@ class GeospatialApi:
         Returns:
             bool: True if route is a reversed dual carriageway
         """
-        return endMeasure > startMeasure
+        return endMeasure < startMeasure
 
     def is_route_id_dec(self, route_id: str) -> bool:
         """Check if the route is a reversed dual carriageway

@@ -71,7 +71,9 @@ def test_get_vehicle_impact_some_lanes_closed():
         {"order": 3, "type": "general", "status": "closed"},
         {"order": 4, "type": "shoulder", "status": "open"},
     ]
-    test_vehicle_impact = planned_events_translator.get_vehicle_impact(lanes)
+    test_vehicle_impact = planned_events_translator.get_vehicle_impact(
+        lanes, "description"
+    )
     expected_vehicle_impact = "some-lanes-closed"
     assert test_vehicle_impact == expected_vehicle_impact
 
@@ -83,7 +85,9 @@ def test_get_vehicle_impact_all_lanes_closed():
         {"order": 3, "type": "general", "status": "closed"},
         {"order": 4, "type": "shoulder", "status": "closed"},
     ]
-    test_vehicle_impact = planned_events_translator.get_vehicle_impact(lanes)
+    test_vehicle_impact = planned_events_translator.get_vehicle_impact(
+        lanes, "description"
+    )
     expected_vehicle_impact = "all-lanes-closed"
     assert test_vehicle_impact == expected_vehicle_impact
 
@@ -95,8 +99,49 @@ def test_get_vehicle_impact_all_lanes_open():
         {"order": 3, "type": "general", "status": "open"},
         {"order": 4, "type": "shoulder", "status": "open"},
     ]
-    test_vehicle_impact = planned_events_translator.get_vehicle_impact(lanes)
+    test_vehicle_impact = planned_events_translator.get_vehicle_impact(
+        lanes, "description"
+    )
     expected_vehicle_impact = "all-lanes-open"
+    assert test_vehicle_impact == expected_vehicle_impact
+
+
+def test_get_vehicle_impact_alternating_description_valid():
+    lanes = [
+        {"order": 1, "type": "shoulder", "status": "open"},
+        {"order": 2, "type": "general", "status": "closed"},
+        {"order": 3, "type": "general", "status": "open"},
+        {"order": 4, "type": "shoulder", "status": "closed"},
+    ]
+    test_vehicle_impact = planned_events_translator.get_vehicle_impact(
+        lanes,
+        "Between Utopia Place and CO 14 (Laporte) from Mile Point 354.5 to Mile Point 355.7. Paving operations. Alternating traffic. "
+        "Starting June 5, 2025 at 7:00AM MDT until June 5, 2025 at about 5:00PM MDT. Full schedule below: \u2022 June 5, 7:00AM - "
+        "June 5, 5:00PM Comment: Delays of up to 15 minutes can be anticipated. The speed limit will be reduced to 40 mph through the "
+        "work zone. More project information is available at 970-632-7440 or sherry@sawpr.com.",
+    )
+    expected_vehicle_impact = "alternating-one-way"
+    assert test_vehicle_impact == expected_vehicle_impact
+
+
+def test_get_vehicle_impact_alternating_comment_invalid():
+    lanes = [
+        {"order": 1, "type": "shoulder", "status": "open"},
+        {"order": 2, "type": "general", "status": "closed"},
+        {"order": 3, "type": "general", "status": "open"},
+        {"order": 4, "type": "shoulder", "status": "closed"},
+    ]
+    test_vehicle_impact = planned_events_translator.get_vehicle_impact(
+        lanes,
+        "Between 3300 Road and Pleasure Park Road (1 to 4 miles west of Hotchkiss) from Mile Point 18.9 to Mile Point 15.6. "
+        "Road construction. Starting June 5, 2025 at 6:01AM MDT until June 5, 2025 at about 6:00PM MDT. Full schedule below: "
+        "\u2022 June 5, 6:01AM - June 5, 6:00PM Comment: Shoulder widening will start on the north side. Crews continue pipe "
+        "installation and waterline work between Mile Point 15-16 in both the eastbound and westbound direction. Alternating "
+        "single lane traffic under flagger control will be implemented throughout the work zone and delays are expected during "
+        "peak commuter times. Motorists should expect delays through the work zone. There will be one lane alternating traffic "
+        "during the majority of the project and shoulder closures as needed and periodic traffic stops in order to move equipment.",
+    )
+    expected_vehicle_impact = "some-lanes-closed"
     assert test_vehicle_impact == expected_vehicle_impact
 
 

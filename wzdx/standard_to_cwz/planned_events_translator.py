@@ -93,33 +93,6 @@ def cwz_creator(message: dict, info: dict | None = None) -> dict | None:
     return wzd
 
 
-def get_vehicle_impact(lanes: list[dict], description: str) -> str:
-    """Determine the impact of lane closures on vehicle traffic and possible alternating traffic indicated by description
-
-    Args:
-        lanes (list[dict]): List of lane objects
-        description (str): Description of the event
-
-    Returns:
-        str: Vehicle impact status
-    """
-    num_lanes = len(lanes)
-    num_closed_lanes = 0
-
-    if "alternating traffic" in description.lower():
-        return "alternating-one-way"
-
-    for i in lanes:
-        if i["status"] != "open":
-            num_closed_lanes += 1
-    if num_closed_lanes == num_lanes:
-        return "all-lanes-closed"
-    elif num_closed_lanes == 0:
-        return "all-lanes-open"
-    else:
-        return "some-lanes-closed"
-
-
 # Parse Icone Incident to CWZ
 def parse_work_zone(incident: dict) -> dict | None:
     """Translate Planned Events RTDH standard work zone to CWZ
@@ -208,11 +181,10 @@ def parse_work_zone(incident: dict) -> dict | None:
     properties["work_zone_type"] = event.get("work_zone_type", "static")
 
     # vehicle impact
-    lanes = additional_info.get("lanes", [])
-    properties["vehicle_impact"] = get_vehicle_impact(lanes, header.get("description"))
+    properties["vehicle_impact"] = additional_info.get("vehicle_impact")
 
     # lanes
-    properties["lanes"] = lanes
+    properties["lanes"] = additional_info.get("lanes", [])
 
     # beginning_cross_street
     properties["beginning_cross_street"] = additional_info.get("beginning_cross_street")
