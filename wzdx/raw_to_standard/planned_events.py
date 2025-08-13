@@ -558,7 +558,7 @@ def update_lanes_alternating_traffic(lanes: list[dict]) -> list[dict]:
     return lanes
 
 
-def detect_alternating_traffic(lane_impacts: list[dict]) -> bool:
+def detect_alternating_traffic(additional_impacts: list[dict]) -> bool:
     """Check if there are any lane impacts indicating alternating traffic
 
     Args:
@@ -567,9 +567,9 @@ def detect_alternating_traffic(lane_impacts: list[dict]) -> bool:
     Returns:
         bool: whether there are any alternating traffic impacts
     """
-    if not lane_impacts:
+    if not additional_impacts:
         return False
-    return "Alternating traffic" in lane_impacts
+    return "Alternating traffic" in additional_impacts
 
 
 def get_lane_impacts(

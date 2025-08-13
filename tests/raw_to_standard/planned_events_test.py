@@ -224,6 +224,55 @@ def test_get_lanes_list_2():
     )
 
 
+# --------------------------------------------------------------------------------Unit test for get_vehicle_impact function--------------------------------------------------------------------------------
+def test_get_vehicle_impact_some_lanes_closed():
+    lanes = [
+        {"order": 1, "type": "shoulder", "status": "open"},
+        {"order": 2, "type": "general", "status": "closed"},
+        {"order": 3, "type": "general", "status": "closed"},
+        {"order": 4, "type": "shoulder", "status": "open"},
+    ]
+    test_vehicle_impact = planned_events.get_vehicle_impact(lanes, False)
+    expected_vehicle_impact = "some-lanes-closed"
+    assert test_vehicle_impact == expected_vehicle_impact
+
+
+def test_get_vehicle_impact_all_lanes_closed():
+    lanes = [
+        {"order": 1, "type": "shoulder", "status": "closed"},
+        {"order": 2, "type": "general", "status": "closed"},
+        {"order": 3, "type": "general", "status": "closed"},
+        {"order": 4, "type": "shoulder", "status": "closed"},
+    ]
+    test_vehicle_impact = planned_events.get_vehicle_impact(lanes, False)
+    expected_vehicle_impact = "all-lanes-closed"
+    assert test_vehicle_impact == expected_vehicle_impact
+
+
+def test_get_vehicle_impact_all_lanes_open():
+    lanes = [
+        {"order": 1, "type": "shoulder", "status": "open"},
+        {"order": 2, "type": "general", "status": "open"},
+        {"order": 3, "type": "general", "status": "open"},
+        {"order": 4, "type": "shoulder", "status": "open"},
+    ]
+    test_vehicle_impact = planned_events.get_vehicle_impact(lanes, False)
+    expected_vehicle_impact = "all-lanes-open"
+    assert test_vehicle_impact == expected_vehicle_impact
+
+
+def test_get_vehicle_impact_alternating_description_valid():
+    lanes = [
+        {"order": 1, "type": "shoulder", "status": "open"},
+        {"order": 2, "type": "general", "status": "closed"},
+        {"order": 3, "type": "general", "status": "open"},
+        {"order": 4, "type": "shoulder", "status": "closed"},
+    ]
+    test_vehicle_impact = planned_events.get_vehicle_impact(lanes, True)
+    expected_vehicle_impact = "alternating-one-way"
+    assert test_vehicle_impact == expected_vehicle_impact
+
+
 def test_is_incident_true_true():
     msg = {
         "properties": {"id": "OpenTMS-Incident2028603626", "type": "Emergency Roadwork"}
@@ -311,6 +360,25 @@ def test_is_incident_wz_false_2():
     actual = planned_events.is_incident_wz(msg)
 
     assert actual == (False, False)
+
+
+def test_detect_alternating_traffic_true():
+    additional_impacts = ["Alternating traffic", "Alternating Lanes"]
+    assert planned_events.detect_alternating_traffic(additional_impacts)
+
+    additional_impacts = ["Alternating traffic"]
+    assert planned_events.detect_alternating_traffic(additional_impacts)
+
+
+def test_detect_alternating_traffic_false():
+    additional_impacts = None
+    assert not planned_events.detect_alternating_traffic(additional_impacts)
+
+    additional_impacts = []
+    assert not planned_events.detect_alternating_traffic(additional_impacts)
+
+    additional_impacts = ["other impact"]
+    assert not planned_events.detect_alternating_traffic(additional_impacts)
 
 
 class MockGeospatialApi:

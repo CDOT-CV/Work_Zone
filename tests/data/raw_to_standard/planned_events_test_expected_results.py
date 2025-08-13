@@ -345,6 +345,7 @@ test_generate_standard_messages_from_string_expected = [
                 "beginning_cross_street": "CO 65",
                 "ending_cross_street": "US 6",
                 "valid": False,
+                "vehicle_impact": "all-lanes-closed",
             },
         },
     }

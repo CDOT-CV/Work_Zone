@@ -32,6 +32,7 @@ test_parse_work_zone_multipoint_standard = {
             "types_of_work": [
                 {"type_name": "below-road-work", "is_architectural_change": True}
             ],
+            "vehicle_impact": "some-lanes-closed",
         },
     },
 }
@@ -108,6 +109,7 @@ test_wzdx_creator_standard = {
             "restrictions": [],
             "beginning_milepost": 50.0,
             "ending_milepost": 60.0,
+            "vehicle_impact": "some-lanes-closed",
         },
     },
 }
