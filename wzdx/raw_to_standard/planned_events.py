@@ -574,16 +574,14 @@ def detect_alternating_traffic(additional_impacts: list[dict]) -> bool:
 
 def get_lane_impacts(
     lane_impacts: list[dict],
-    direction: Literal[
-        "undefined", "eastbound", "westbound", "northbound", "southbound"
-    ],
+    direction: Literal["undefined", "east", "west", "north", "south"],
     has_alternating_traffic: bool,
 ) -> list[dict]:
     """Get WZDx lane list from list of lane impacts and direction. If has_alternating_traffic is True, one lane will show alternating-flow while all other lanes will be closed
 
     Args:
         lane_impacts (list[dict]): Planned event lane impacts
-        direction (Literal["undefined", "eastbound", "westbound", "northbound", "southbound"]): Planned event direction
+        direction (Literal["undefined", "east", "west", "north", "south"]): Planned event direction
 
     Returns:
         list[dict]: _description_

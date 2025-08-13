@@ -224,6 +224,134 @@ def test_get_lanes_list_2():
     )
 
 
+def test_get_lane_impacts_santa_fe():
+    lane_impacts = [
+        {
+            "direction": "north",
+            "laneCount": 2,
+            "laneClosures": "6000",
+            "closedLaneTypes": ["left lane", "right lane"],
+        },
+        {
+            "direction": "south",
+            "laneCount": 2,
+            "laneClosures": "0",
+            "closedLaneTypes": [],
+        },
+    ]
+    direction = "north"
+    has_alternating_traffic = False
+    expected = [
+        {"order": 1, "type": "general", "status": "closed"},
+        {"order": 2, "type": "general", "status": "closed"},
+    ]
+    actual = planned_events.get_lane_impacts(
+        lane_impacts, direction, has_alternating_traffic
+    )
+    assert actual == expected
+
+    direction = "south"
+    expected = [
+        {"order": 1, "type": "general", "status": "open"},
+        {"order": 2, "type": "general", "status": "open"},
+    ]
+    actual = planned_events.get_lane_impacts(
+        lane_impacts, direction, has_alternating_traffic
+    )
+    assert actual == expected
+
+    # Alternating traffic
+    has_alternating_traffic = True
+
+    direction = "north"
+    expected = [
+        {"order": 1, "type": "general", "status": "alternating-flow"},
+        {"order": 2, "type": "general", "status": "closed"},
+    ]
+    actual = planned_events.get_lane_impacts(
+        lane_impacts, direction, has_alternating_traffic
+    )
+    assert actual == expected
+
+    direction = "south"
+    expected = [
+        {"order": 1, "type": "general", "status": "alternating-flow"},
+        {"order": 2, "type": "general", "status": "closed"},
+    ]
+    actual = planned_events.get_lane_impacts(
+        lane_impacts, direction, has_alternating_traffic
+    )
+    assert actual == expected
+
+
+def test_get_lane_impacts_el_paso():
+    lane_impacts = [
+        {
+            "direction": "north",
+            "laneCount": 4,
+            "laneClosures": "800",
+            "closedLaneTypes": ["right lane"],
+        },
+        {
+            "direction": "south",
+            "laneCount": 4,
+            "laneClosures": "800",
+            "closedLaneTypes": ["right lane"],
+        },
+    ]
+    direction = "north"
+    has_alternating_traffic = False
+    expected = [
+        {"order": 1, "type": "general", "status": "open"},
+        {"order": 2, "type": "general", "status": "open"},
+        {"order": 3, "type": "general", "status": "open"},
+        {"order": 4, "type": "general", "status": "closed"},
+    ]
+    actual = planned_events.get_lane_impacts(
+        lane_impacts, direction, has_alternating_traffic
+    )
+    assert actual == expected
+
+    direction = "south"
+    expected = [
+        {"order": 1, "type": "general", "status": "open"},
+        {"order": 2, "type": "general", "status": "open"},
+        {"order": 3, "type": "general", "status": "open"},
+        {"order": 4, "type": "general", "status": "closed"},
+    ]
+    actual = planned_events.get_lane_impacts(
+        lane_impacts, direction, has_alternating_traffic
+    )
+    assert actual == expected
+
+    # Alternating traffic
+    has_alternating_traffic = True
+
+    direction = "north"
+    expected = [
+        {"order": 1, "type": "general", "status": "alternating-flow"},
+        {"order": 2, "type": "general", "status": "closed"},
+        {"order": 3, "type": "general", "status": "closed"},
+        {"order": 4, "type": "general", "status": "closed"},
+    ]
+    actual = planned_events.get_lane_impacts(
+        lane_impacts, direction, has_alternating_traffic
+    )
+    assert actual == expected
+
+    direction = "south"
+    expected = [
+        {"order": 1, "type": "general", "status": "alternating-flow"},
+        {"order": 2, "type": "general", "status": "closed"},
+        {"order": 3, "type": "general", "status": "closed"},
+        {"order": 4, "type": "general", "status": "closed"},
+    ]
+    actual = planned_events.get_lane_impacts(
+        lane_impacts, direction, has_alternating_traffic
+    )
+    assert actual == expected
+
+
 # --------------------------------------------------------------------------------Unit test for get_vehicle_impact function--------------------------------------------------------------------------------
 def test_get_vehicle_impact_some_lanes_closed():
     lanes = [
