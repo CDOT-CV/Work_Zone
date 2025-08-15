@@ -819,21 +819,22 @@ def get_route_details_for_coordinates_lngLat(
                 f"Routes did not match! route details: {route_details_start['Route']}, {route_details_end['Route']}"
             )
             return route_details_start, route_details_end
+
+        # Update route suffixes based on directionality
+        if not cdot_geospatial_api.GeospatialApi.is_route_dec(
+            route_details_start["Measure"], route_details_end["Measure"]
+        ):
+            route_details_start["Route"] = route_details_start["Route"].replace(
+                "_DEC", ""
+            )
+            route_details_end["Route"] = route_details_end["Route"].replace("_DEC", "")
         else:
-            if route_details_start["Measure"] < route_details_end["Measure"]:
-                route_details_start["Route"] = route_details_start["Route"].replace(
-                    "_DEC", ""
-                )
-                route_details_end["Route"] = route_details_end["Route"].replace(
-                    "_DEC", ""
-                )
-            else:
-                route_details_start["Route"] = (
-                    route_details_start["Route"].replace("_DEC", "") + "_DEC"
-                )
-                route_details_end["Route"] = (
-                    route_details_end["Route"].replace("_DEC", "") + "_DEC"
-                )
+            route_details_start["Route"] = (
+                route_details_start["Route"].replace("_DEC", "") + "_DEC"
+            )
+            route_details_end["Route"] = (
+                route_details_end["Route"].replace("_DEC", "") + "_DEC"
+            )
 
     return route_details_start, route_details_end
 

@@ -343,8 +343,8 @@ class GeospatialApi:
 
         return linestring
 
-    def is_route_dec(self, startMeasure: float, endMeasure: float) -> bool:
-        """Check if the route is a reversed dual carriageway
+    def is_route_dec(startMeasure: float, endMeasure: float) -> bool:
+        """Check if the route is a reversed dual carriageway (mileposts are decreasing)
 
         Args:
             startMeasure (float): Start mile marker
