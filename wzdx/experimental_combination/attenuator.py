@@ -105,11 +105,11 @@ def validate_dates(geotab: dict, wzdx: dict) -> bool:
     Returns:
         bool: Whether the Geotab date falls within the WZDx date range
     """
-    if type(geotab["avl_location"]["source"]["collection_timestamp"]) == datetime:
+    if type(geotab["avl_location"]["source"]["collection_timestamp"]) is datetime:
         geotab_date = date_tools.date_to_unix(
             geotab["avl_location"]["source"]["collection_timestamp"]
         )
-    elif type(geotab["avl_location"]["source"]["collection_timestamp"]) == str:
+    elif type(geotab["avl_location"]["source"]["collection_timestamp"]) is str:
         geotab_date = date_tools.get_unix_from_iso_string(
             geotab["avl_location"]["source"]["collection_timestamp"]
         )
@@ -126,7 +126,7 @@ def validate_dates(geotab: dict, wzdx: dict) -> bool:
             else None
         )
     if not geotab_date:
-        logging.debug(f"No geotab date found")
+        logging.debug("No geotab date found")
         return False
 
     wzdx_start_date = date_tools.get_unix_from_iso_string(
@@ -156,7 +156,7 @@ def get_combined_events(geotab_msgs: list[dict], wzdx_msgs: list[dict]) -> list[
     combined_events = []
     for i in identify_overlapping_features(geotab_msgs, active_wzdx_msgs):
         geotab_msg, wzdx_msg = i
-        event_status = wzdx_translator.get_event_status(wzdx_msg["features"][0])
+        event_status = date_tools.get_event_status(wzdx_msg["features"][0])
         if event_status in ["active"]:
             wzdx = combine_geotab_with_wzdx(geotab_msg, wzdx_msg)
             combined_events.append(wzdx)

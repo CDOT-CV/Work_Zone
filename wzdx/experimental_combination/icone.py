@@ -1,6 +1,5 @@
 import argparse
 import json
-from datetime import datetime
 import logging
 from datetime import datetime, timedelta
 import glob
@@ -143,7 +142,7 @@ def get_combined_events(
         icone_standard_msgs, filtered_wzdx_msgs
     ):
         icone_msg, wzdx_msg = i
-        event_status = wzdx_translator.get_event_status(wzdx_msg["features"][0])
+        event_status = date_tools.get_event_status(wzdx_msg["features"][0])
         if event_status in ["pending", "completed_recently"]:
             wzdx = combine_icone_with_wzdx(icone_msg, wzdx_msg, event_status)
             if wzdx:
@@ -278,7 +277,7 @@ def validate_dates(icone: dict, wzdx: dict) -> bool:
         else None
     )
     return wzdx_start_date - icone_start_date < START_TIME_THRESHOLD_MILLISECONDS or (
-        icone_end_date == None
+        icone_end_date is None
         or icone_end_date - wzdx_end_date < END_TIME_THRESHOLD_MILLISECONDS
     )
 
