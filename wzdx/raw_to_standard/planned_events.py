@@ -11,6 +11,16 @@ from collections import OrderedDict
 
 import regex
 
+from wzdx.models.enums import (
+    Direction,
+    EventType,
+    LaneStatus,
+    LaneType,
+    VehicleImpact,
+    WorkZoneType,
+)
+from wzdx.models.type_of_work import TypeOfWork
+
 from ..tools import (
     cdot_geospatial_api,
     date_tools,
@@ -24,17 +34,17 @@ PROGRAM_NAME = "PlannedEventsRawToStandard"
 PROGRAM_VERSION = "1.0"
 
 STRING_DIRECTION_MAP = {
-    "north": "northbound",
-    "south": "southbound",
-    "west": "westbound",
-    "east": "eastbound",
+    "north": Direction.NORTHBOUND,
+    "south": Direction.SOUTHBOUND,
+    "west": Direction.WESTBOUND,
+    "east": Direction.EASTBOUND,
 }
 
 REVERSED_DIRECTION_MAP = {
-    "northbound": "southbound",
-    "southbound": "northbound",
-    "eastbound": "westbound",
-    "westbound": "eastbound",
+    Direction.NORTHBOUND: Direction.SOUTHBOUND,
+    Direction.SOUTHBOUND: Direction.NORTHBOUND,
+    Direction.EASTBOUND: Direction.WESTBOUND,
+    Direction.WESTBOUND: Direction.EASTBOUND,
 }
 
 WORK_ZONE_INCIDENT_TYPES = {
@@ -126,7 +136,7 @@ def is_incident_wz(msg: dict) -> tuple[bool, bool]:
     id = msg.get("properties", {}).get("id", "")
     type = msg.get("properties", {}).get("type", "")
     # category = msg.get('properties', {}).get('Category')
-    is_incident = re.match(INCIDENT_ID_REGEX, id) != None
+    is_incident = re.match(INCIDENT_ID_REGEX, id) is not None
     # is_wz = WORK_ZONE_INCIDENT_TYPES.get(type, {}).get(category)
     is_wz = WORK_ZONE_INCIDENT_TYPES.get(type, {}) != {}
     return is_incident, is_wz
@@ -261,178 +271,12 @@ def hex_to_binary(hex_string: str) -> str:
     return bin(int(hex_string, hexidecimal_scale))[2:].zfill(num_of_bits)
 
 
-# (event_type, types of work, work_zone_type)
-DEFAULT_EVENT_TYPE = ("work-zone", [], "static")
-EVENT_TYPE_MAPPING = {
-    # Work Zones
-    "Bridge Construction": (
-        "work-zone",
-        [{"type_name": "below-road-work", "is_architectural_change": True}],
-        "static",
-    ),
-    "Road Construction": (
-        "work-zone",
-        [{"type_name": "roadway-creation", "is_architectural_change": True}],
-        "static",
-    ),
-    "Bridge Maintenance Operations": (
-        "work-zone",
-        [{"type_name": "below-road-work", "is_architectural_change": False}],
-        "static",
-    ),
-    "Bridge Repair": (
-        "work-zone",
-        [{"type_name": "below-road-work", "is_architectural_change": False}],
-        "static",
-    ),
-    "Chip Seal Operations": (
-        "work-zone",
-        [{"type_name": "minor-road-defect-repair", "is_architectural_change": False}],
-        "static",
-    ),
-    "Concrete Slab Replacement": (
-        "work-zone",
-        [{"type_name": "surface-work", "is_architectural_change": False}],
-        "static",
-    ),
-    "Crack Sealing": (
-        "work-zone",
-        [{"type_name": "minor-road-defect-repair", "is_architectural_change": False}],
-        "static",
-    ),
-    "Culvert Maintenance": (
-        "work-zone",
-        [{"type_name": "roadside-work", "is_architectural_change": False}],
-        "static",
-    ),
-    "Electrical or Lighting": (
-        "work-zone",
-        [{"type_name": "roadside-work", "is_architectural_change": False}],
-        "static",
-    ),
-    "Emergency Maintenance": (
-        "work-zone",
-        [{"type_name": "roadside-work", "is_architectural_change": False}],
-        "static",
-    ),
-    "Fiber Optics Installation": (
-        "work-zone",
-        [{"type_name": "surface-work", "is_architectural_change": False}],
-        "static",
-    ),
-    "Guardrail": (
-        "work-zone",
-        [{"type_name": "barrier-work", "is_architectural_change": False}],
-        "static",
-    ),
-    "IT or Fiber Optics": (
-        "work-zone",
-        [{"type_name": "surface-work", "is_architectural_change": False}],
-        "static",
-    ),
-    "Paving Operations": (
-        "work-zone",
-        [{"type_name": "surface-work", "is_architectural_change": True}],
-        "static",
-    ),
-    "Road Maintenance Operations": (
-        "work-zone",
-        [{"type_name": "surface-work", "is_architectural_change": False}],
-        "static",
-    ),
-    "Rock Work": (
-        "work-zone",
-        [{"type_name": "roadside-work", "is_architectural_change": False}],
-        "static",
-    ),
-    "Sign Work": (
-        "work-zone",
-        [{"type_name": "roadside-work", "is_architectural_change": False}],
-        "static",
-    ),
-    "Striping Operations": (
-        "work-zone",
-        [{"type_name": "painting", "is_architectural_change": True}],
-        "planned-moving-area",
-    ),
-    "Traffic Sign Installation": (
-        "work-zone",
-        [{"type_name": "roadside-work", "is_architectural_change": False}],
-        "static",
-    ),
-    "Traffic Sign Maintenance": (
-        "work-zone",
-        [{"type_name": "roadside-work", "is_architectural_change": False}],
-        "static",
-    ),
-    "Traffic Signal Installation": (
-        "work-zone",
-        [{"type_name": "roadside-work", "is_architectural_change": False}],
-        "static",
-    ),
-    "Traffic Signal Maintenance": (
-        "work-zone",
-        [{"type_name": "roadside-work", "is_architectural_change": False}],
-        "static",
-    ),
-    "Tunnel Maintenance": (
-        "work-zone",
-        [{"type_name": "surface-work", "is_architectural_change": False}],
-        "static",
-    ),
-    "Utility Work": (
-        "work-zone",
-        [{"type_name": "roadside-work", "is_architectural_change": False}],
-        "static",
-    ),
-    "Utility Installation": (
-        "work-zone",
-        [{"type_name": "roadside-work", "is_architectural_change": False}],
-        "static",
-    ),
-    "Wall Maintenance": (
-        "work-zone",
-        [{"type_name": "barrier-work", "is_architectural_change": False}],
-        "static",
-    ),
-    # Road Closures
-    "BAN Message": ("restriction", [], "static"),
-    "Safety Campaign": ("restriction", [], "static"),
-    "Smoke/Control Burn": ("restriction", [], "static"),
-    "Avalanche Control": ("restriction", [], "static"),
-    "Closed for the Season": ("restriction", [], "static"),
-    "Funeral Procession": ("restriction", [], "static"),
-    "Presidential Visit": ("restriction", [], "static"),
-    "Race Event": ("restriction", [], "static"),
-    "Local Event": ("restriction", [], "static"),
-    "Military Movement": ("restriction", [], "static"),
-    "OS/OW Limit": ("restriction", [], "static"),
-    "Geological Drilling": ("restriction", [], "static"),
-    # Incidents (work zones): *\(.]n
-    "Emergency Roadwork": ("work-zone", [], "static"),
-    "Maintenance Operations": ("work-zone", [], "static"),
-}
-
-LANE_TYPE_MAPPING = {
-    "left shoulder": "shoulder",
-    "left lane": "general",
-    "center lane": "general",
-    "middle two lanes": "general",
-    "general": "general",
-    "middle lanes": "general",  # this is a weird one
-    "right lane": "general",
-    "right shoulder": "shoulder",
-    "through lanes": "general",
-    "right entrance ramp": "exit-ramp",
-    "right exit ramp": "exit-ramp",
-}
-
 INVALID_EVENT_DESCRIPTION = (
     "511 event cannot be created in CARS because route does not exist."
 )
 
 
-def map_lane_type(lane_type: str) -> str:
+def map_lane_type(lane_type: str) -> LaneType:
     """Map a planned event lane type to a standard lane type, using `LANE_TYPE_MAPPING`
 
     Args:
@@ -441,27 +285,134 @@ def map_lane_type(lane_type: str) -> str:
     Returns:
         str: standard lane type
     """
-    try:
-        return LANE_TYPE_MAPPING[lane_type]
-    except KeyError as e:
-        logging.warning(f"Unrecognized lane type: {e}")
-        return "general"
+    match lane_type:
+        case "left shoulder" | "right shoulder":
+            return LaneType.SHOULDER
+        case (
+            "left lane"
+            | "center lane"
+            | "middle two lanes"
+            | "general"
+            | "middle lanes"
+            | "right lane"
+            | "through lanes"
+        ):
+            return LaneType.GENERAL
+        case "right entrance ramp" | "right exit ramp":
+            return LaneType.EXIT_RAMP
+        case _:
+            logging.warning(f"Unrecognized lane type: {lane_type}")
+            return LaneType.GENERAL
 
 
-def map_event_type(event_type: str) -> tuple[str, list[dict], str]:
+def map_event_type(event_type: str) -> tuple[list[TypeOfWork], WorkZoneType]:
     """Map a planned event type to a standard event type, using `EVENT_TYPE_MAPPING`
 
     Args:
         event_type (str): planned event type
 
     Returns:
-        tuple[str, list[dict], str]: work zone/restriction classification, types of work, planned-moving-area/static work zone type
+        tuple[str, list[TypeOfWork], WorkZoneType]: work zone/restriction classification, types of work, planned-moving-area/static work zone type
     """
-    try:
-        return EVENT_TYPE_MAPPING[event_type]
-    except KeyError as e:
-        logging.warning(f"Unrecognized event type: {e}")
-        return DEFAULT_EVENT_TYPE
+
+    match event_type:
+        case "Bridge Construction" | "Bridge Maintenance Operations" | "Bridge Repair":
+            return (
+                [TypeOfWork(type_name="below-road-work", is_architectural_change=True)],
+                WorkZoneType.STATIC,
+            )
+        case "Road Construction":
+            return (
+                [
+                    TypeOfWork(
+                        type_name="roadway-creation", is_architectural_change=True
+                    )
+                ],
+                WorkZoneType.STATIC,
+            )
+        case "Chip Seal Operations" | "Crack Sealing":
+            return (
+                [
+                    TypeOfWork(
+                        type_name="minor-road-defect-repair",
+                        is_architectural_change=False,
+                    )
+                ],
+                WorkZoneType.PLANNED_MOVING_AREA,
+            )
+        case (
+            "Concrete Slab Replacement"
+            | "Fiber Optics Installation"
+            | "IT or Fiber Optics"
+            | "Paving Operations"
+            | "Road Maintenance Operations"
+            | "Guardrail"
+        ):
+            return (
+                [TypeOfWork(type_name="barrier-work", is_architectural_change=False)],
+                WorkZoneType.STATIC,
+            )
+        case (
+            "Culvert Maintenance"
+            | "Electrical or Lighting"
+            | "Emergency Maintenance"
+            | "Rock Work"
+            | "Sign Work"
+            | "Traffic Sign Installation"
+            | "Traffic Sign Maintenance"
+            | "Traffic Signal Installation"
+            | "Traffic Signal Maintenance"
+            | "Utility Work"
+            | "Utility Installation"
+        ):
+            return (
+                [TypeOfWork(type_name="roadside-work", is_architectural_change=False)],
+                WorkZoneType.STATIC,
+            )
+        case "Striping Operations":
+            return (
+                [TypeOfWork(type_name="painting", is_architectural_change=True)],
+                WorkZoneType.PLANNED_MOVING_AREA,
+            )
+        case "Tunnel Maintenance":
+            return (
+                [TypeOfWork(type_name="surface-work", is_architectural_change=False)],
+                WorkZoneType.STATIC,
+            )
+        case "Wall Maintenance":
+            return (
+                [TypeOfWork(type_name="barrier-work", is_architectural_change=False)],
+                WorkZoneType.STATIC,
+            )
+        # Road Closures
+        case (
+            "BAN Message"
+            | "Safety Campaign"
+            | "Smoke/Control Burn"
+            | "Avalanche Control"
+            | "Closed for the Season"
+            | "Funeral Procession"
+            | "Presidential Visit"
+            | "Race Event"
+            | "Local Event"
+            | "Military Movement"
+            | "OS/OW Limit"
+            | "Geological Drilling"
+        ):
+            return None
+
+        # Incidents (work zones): *\(.]n
+        case "Emergency Roadwork" | "Maintenance Operations":
+            return (
+                [],
+                WorkZoneType.STATIC,
+            )
+        case _:
+            logging.warning(f"Unrecognized event type: {event_type}")
+            return (
+                [],
+                WorkZoneType.STATIC,
+            )
 
 
 def map_lane_status(lane_status_bit: Literal["1", "0"]) -> str:
@@ -478,16 +429,16 @@ def map_lane_status(lane_status_bit: Literal["1", "0"]) -> str:
 
 def map_direction_string(
     direction_string: str,
-) -> Literal["undefined", "eastbound", "westbound", "northbound", "southbound"]:
+) -> Direction:
     """Map a direction string to a standard direction string
 
     Args:
         direction_string (str): direction string, like 'north', 'south', 'east', 'west'
 
     Returns:
-        Literal["undefined", "eastbound", "westbound", "northbound", "southbound"]: standard direction string
+        Direction: standard direction enum
     """
-    return STRING_DIRECTION_MAP.get(direction_string, "undefined")
+    return STRING_DIRECTION_MAP.get(direction_string, Direction.UNDEFINED)
 
 
 # This method parses a hex string and list of closed lane names into a WZDx lanes list. The hex string, lane_closures_hex,
@@ -512,7 +463,7 @@ def get_lanes_list(lane_closures_hex: str, num_lanes: int, closedLaneTypes: list
         lanes.append(
             {
                 "order": order,
-                "type": "shoulder",
+                "type": LaneType.SHOULDER,
                 "status": map_lane_status(lanes_affected[0]),
             }
         )
@@ -523,7 +474,9 @@ def get_lanes_list(lane_closures_hex: str, num_lanes: int, closedLaneTypes: list
             {
                 "order": order,
                 "type": map_lane_type(
-                    closedLaneTypes[i] if (len(closedLaneTypes) > i) else "general"
+                    closedLaneTypes[i]
+                    if (len(closedLaneTypes) > i)
+                    else LaneType.GENERAL
                 ),
                 "status": map_lane_status(bit),
             }
@@ -533,7 +486,7 @@ def get_lanes_list(lane_closures_hex: str, num_lanes: int, closedLaneTypes: list
         lanes.append(
             {
                 "order": order,
-                "type": "shoulder",
+                "type": LaneType.SHOULDER,
                 "status": map_lane_status(lanes_affected[15]),
             }
         )
@@ -552,9 +505,9 @@ def update_lanes_alternating_traffic(lanes: list[dict]) -> list[dict]:
     """
     for lane in lanes:
         if lane["order"] == 1:
-            lane["status"] = "alternating-flow"
+            lane["status"] = LaneStatus.ALTERNATING_FLOW
         else:
-            lane["status"] = "closed"
+            lane["status"] = LaneStatus.CLOSED
     return lanes
 
 
@@ -596,7 +549,9 @@ def get_lane_impacts(
             return lanes
 
 
-def get_vehicle_impact(lanes: list[dict], has_alternating_traffic: bool) -> str:
+def get_vehicle_impact(
+    lanes: list[dict], has_alternating_traffic: bool
+) -> VehicleImpact:
     """Determine the impact of lane closures on vehicle traffic and possible alternating traffic indicated by description
 
     Args:
@@ -611,17 +566,17 @@ def get_vehicle_impact(lanes: list[dict], has_alternating_traffic: bool) -> str:
 
     # Specific phrase injected into descriptions. Want to match contents of auto-generated message, not the comment
     if has_alternating_traffic:
-        return "alternating-one-way"
+        return VehicleImpact.ALTERNATING_ONE_WAY
 
     for i in lanes:
         if i["status"] != "open":
             num_closed_lanes += 1
     if num_closed_lanes == num_lanes:
-        return "all-lanes-closed"
+        return VehicleImpact.ALL_LANES_CLOSED
     elif num_closed_lanes == 0:
-        return "all-lanes-open"
+        return VehicleImpact.ALL_LANES_OPEN
     else:
-        return "some-lanes-closed"
+        return VehicleImpact.SOME_LANES_CLOSED
 
 
 def all_lanes_open(lanes: list[dict]) -> bool:
@@ -761,7 +716,7 @@ def get_cross_streets_from_description(description: str) -> tuple[str, str]:
     m = regex.search(desc_regex, description)
     try:
         return (_get_street_name_from_substring(s) for s in m.group(1, 2))
-    except:
+    except (AttributeError, IndexError):
         return ("", "")
 
 
@@ -780,7 +735,7 @@ def get_mileposts_from_description(description: str) -> tuple[str, str]:
         m1 = start_m.group(2)
         m2 = end_m.group(2)
         return float(m1), float(m2)
-    except:
+    except (AttributeError, IndexError):
         return (None, None)
 
 
@@ -959,7 +914,7 @@ def create_rtdh_standard_msg(
 
             end_date = end_date.replace(second=0, microsecond=0)
 
-        event_type, types_of_work, work_zone_type = map_event_type(
+        types_of_work, work_zone_type = map_event_type(
             pd.get("properties/type", default="")
         )
 
@@ -999,7 +954,7 @@ def create_rtdh_standard_msg(
             "rtdh_timestamp": time.time(),
             "rtdh_message_id": str(uuid.uuid4()),
             "event": {
-                "type": event_type,
+                "type": EventType.WORK_ZONE,
                 "types_of_work": types_of_work,
                 "work_zone_type": work_zone_type,
                 "source": {
@@ -1047,7 +1002,7 @@ def create_rtdh_standard_msg(
         }
     except Exception as e:
         logging.error(
-            f'Error ocurred generating standard message for message {pd.get("properties/id", default="")}: {e}'
+            f'Error occurred generating standard message for message {pd.get("properties/id", default="")}: {e}'
         )
         return {}
 
@@ -1075,7 +1030,7 @@ def validate_closure(obj: dict | OrderedDict) -> bool:
     - obj must have a properties.type
 
     """
-    if not obj or (type(obj) != dict and type(obj) != OrderedDict):
+    if not obj or (type(obj) is not dict and type(obj) is not OrderedDict):
         logging.warning("alert is empty or has invalid type")
         return False
     id = obj.get("sys_gUid")
@@ -1118,7 +1073,7 @@ def validate_closure(obj: dict | OrderedDict) -> bool:
             return False
     except Exception as e:
         logging.error(
-            f"Invalid event with id = {id}. Error ocurred while validating: {e}"
+            f"Invalid event with id = {id}. Error occurred while validating: {e}"
         )
         return False
 

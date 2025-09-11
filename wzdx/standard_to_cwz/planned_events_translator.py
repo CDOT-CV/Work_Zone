@@ -3,6 +3,8 @@ import json
 import logging
 import copy
 
+from wzdx.models.enums import LocationMethod
+
 from ..sample_files.validation_schema import connected_work_zone_feed_v10
 
 from ..tools import date_tools, cwz_translator, uuid_tools
@@ -175,7 +177,7 @@ def parse_work_zone(incident: dict) -> dict | None:
     properties["is_end_position_verified"] = False
 
     # location_method
-    properties["location_method"] = "channel-device-method"
+    properties["location_method"] = LocationMethod.CHANNEL_DEVICE_METHOD
 
     # work_zone_type
     properties["work_zone_type"] = event.get("work_zone_type", "static")
