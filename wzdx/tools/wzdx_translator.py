@@ -1,14 +1,13 @@
 import logging
 import os
-import os.path
 import random
-import re
 import string
 import uuid
 from collections import OrderedDict
 from datetime import datetime, timezone
+
+from wzdx.models.enums import Direction, EventType
 from ..sample_files.validation_schema import work_zone_feed_v42
-from . import date_tools
 
 import jsonschema
 import xmltodict
@@ -51,7 +50,7 @@ def initialize_feature_properties():
 
 def validate_info(info):
 
-    if (not info) or (type(info) != dict and type(info) != OrderedDict):
+    if (not info) or (type(info) is not dict and type(info) is not OrderedDict):
         logging.warning("invalid type")
         return False
 
@@ -98,56 +97,17 @@ def initialize_info():
 
 # Add ids to message
 # This function may fail if some optional fields are not present (lanes, types_of_work, relationship, ...)
-def add_ids(message, event_type="work-zone"):
-    if not message or type(message) != dict:
+def add_ids(message: dict, event_type=EventType.WORK_ZONE):
+    if not message or type(message) is not dict:
         return None
 
-    if event_type == "work-zone":
+    if event_type == EventType.WORK_ZONE:
         data_source_id = (
             message.get("feed_info").get("data_sources")[0].get("data_source_id")
         )
-    elif event_type == "restriction":
-        data_source_id = (
-            message.get("feed_info").get("data_sources")[0].get("data_source_id")
-        )
-
-    road_event_length = len(message.get("features"))
-    road_event_ids = []
-    for i in range(road_event_length):
-        road_event_ids.append(str(uuid.uuid4()))
-
-    for i in range(road_event_length):
-        feature = message.get("features")[i]
-        id = road_event_ids[i]
-        feature["properties"]["core_details"]["data_source_id"] = data_source_id
-
-        # TODO: Implement related_road_events
-        # if feature['properties']['core_details'].get('related_road_events'):
-        #     related_road_events = feature['properties']['core_details']['related_road_events']
-        #     road_event = {}
-        #     feature['properties']['core_details']['related_road_events']['relationship_id'] = str(
-        #         uuid.uuid4())
-        #     feature['properties']['core_details']['related_road_events']['road_event_id'] = feature.get(
-        #         'id', id)
-    return message
-
-
-# Add ids to message
-# This function may fail if some optional fields are not present (lanes, types_of_work, relationship, ...)
-
-
-def add_ids(message, event_type="work-zone"):
-    if not message or type(message) != dict:
+    else:
+        logging.warning("Unsupported event type for add_ids: %s", event_type)
         return None
-
-    if event_type == "work-zone":
-        data_source_id = (
-            message.get("feed_info").get("data_sources")[0].get("data_source_id")
-        )
-    elif event_type == "restriction":
-        data_source_id = (
-            message.get("feed_info").get("data_sources")[0].get("data_source_id")
-        )
 
     road_event_length = len(message.get("features"))
     road_event_ids = []
@@ -168,7 +128,7 @@ def add_ids(message, event_type="work-zone"):
     return message
 
 
-def initialize_wzdx_object(info):
+def initialize_wzdx_object(info: dict):
     wzd = {}
     wzd["feed_info"] = {}
     wzd["feed_info"]["publisher"] = info.get("publisher")
@@ -200,7 +160,7 @@ def initialize_wzdx_object(info):
     return wzd
 
 
-def initialize_wzdx_object_restriction(info):
+def initialize_wzdx_object_restriction(info: dict):
     wzd = {}
     wzd["feed_info"] = {}
     # hardcode
@@ -255,23 +215,21 @@ def string_to_number(field):
 
 
 # function to parse direction from street name
-def parse_direction_from_street_name(street):
-    if not street or type(street) != str:
+def parse_direction_from_street_name(street: str) -> Direction:
+    if not street or type(street) is not str:
         return None
     street_char = street[-1]
     street_chars = street[-2:]
     if street_char == "N" or street_chars == "NB":
-        direction = "northbound"
+        return Direction.NORTHBOUND
     elif street_char == "S" or street_chars == "SB":
-        direction = "southbound"
+        return Direction.SOUTHBOUND
     elif street_char == "W" or street_chars == "WB":
-        direction = "westbound"
+        return Direction.WESTBOUND
     elif street_char == "E" or street_chars == "EB":
-        direction = "eastbound"
+        return Direction.EASTBOUND
     else:
-        direction = "unknown"
-
-    return direction
+        return Direction.UNKNOWN
 
 
 # function to remove direction from street name
@@ -279,7 +237,7 @@ def remove_direction_from_street_name(street):
     SINGLE_CHARACTER_DIRECTIONS = ["N", "E", "S", "W"]
     MULTIPLE_CHARACTER_DIRECTIONS = ["NB", "EB", "SB", "WB"]
 
-    if not street or type(street) != str:
+    if not street or type(street) is not str:
         return None
     street_char = street[-1]
     street_chars = street[-2:]
@@ -289,70 +247,3 @@ def remove_direction_from_street_name(street):
         street = street[:-2]
 
     return street
-
-
-# function to parse polyline to geometry line string
-def parse_polyline_from_linestring(poly):
-    if not poly or type(poly) != str:
-        return None
-    poly = poly[len("LINESTRING (") : -1]
-    polyline = poly.split(", ")
-    coordinates = []
-    for i in polyline:
-        coords = i.split(" ")
-
-        # the regular expression '^-?([0-9]*[.])?[0-9]+$ matches an integer or decimals
-        if (
-            len(coords) >= 2
-            and re.match("^-?([0-9]*[.])?[0-9]+$", coords[0])
-            and re.match("^-?([0-9]*[.])?[0-9]+$", coords[1])
-        ):
-            coordinates.append([float(coords[0]), float(coords[1])])
-    return coordinates
-
-
-# Remove additional fields added for internal processing, if they are present
-def remove_unnecessary_fields(wzdx):
-    for feature in wzdx["features"]:
-        if "route_details_start" in feature.get("properties", {}):
-            del feature["properties"]["route_details_start"]
-        if "route_details_end" in feature.get("properties", {}):
-            del feature["properties"]["route_details_end"]
-        if "condition_1" in feature.get("properties", {}):
-            del feature["properties"]["condition_1"]
-    return wzdx
-
-
-# Remove additional fields added for internal processing, if they are present
-def remove_unnecessary_fields_feature(feature):
-    if "route_details_start" in feature.get("properties", {}):
-        del feature["properties"]["route_details_start"]
-    if "route_details_end" in feature.get("properties", {}):
-        del feature["properties"]["route_details_end"]
-    if "condition_1" in feature.get("properties", {}):
-        del feature["properties"]["condition_1"]
-    return feature
-
-
-def get_event_status(feature):
-    start_date = date_tools.parse_datetime_from_iso_string(
-        feature["properties"]["start_date"]
-    )
-    end_date = date_tools.parse_datetime_from_iso_string(
-        feature["properties"]["end_date"]
-    )
-    return date_tools.get_event_status(start_date, end_date)
-
-
-def filter_active_wzdx(wzdx_msgs):
-    return list(
-        filter(lambda x: get_event_status(x["features"][0]) == "active", wzdx_msgs)
-    )
-
-
-def filter_wzdx_by_event_status(wzdx_msgs, event_status_list):
-    return list(
-        filter(
-            lambda x: get_event_status(x["features"][0]) in event_status_list, wzdx_msgs
-        )
-    )

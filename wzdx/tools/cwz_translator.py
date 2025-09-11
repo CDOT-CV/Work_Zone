@@ -1,17 +1,12 @@
 import logging
 import os
-import os.path
-import random
-import re
-import string
 import uuid
 from collections import OrderedDict
 from datetime import datetime, timezone
+
 from ..sample_files.validation_schema import connected_work_zone_feed_v10
-from . import date_tools
 
 import jsonschema
-import xmltodict
 
 
 def initialize_feature_properties():
@@ -52,9 +47,11 @@ def initialize_feature_properties():
 
 
 def validate_info(info):
-
     if (not info) or (type(info) is not dict and type(info) is not OrderedDict):
-        logging.warning("invalid type")
+        logging.warning(
+            "Unable to validate info object if not of type dict or OrderedDict. Type: %s",
+            type(info),
+        )
         return False
 
     contact_name = info.get("contact_name")
@@ -69,11 +66,6 @@ def validate_info(info):
             return False
 
     return True
-
-
-def parse_xml_to_dict(xml_string):
-    d = xmltodict.parse(xml_string)
-    return d
 
 
 def validate_feed(
@@ -151,113 +143,3 @@ def initialize_feed_object(info):
     wzd["features"] = []
 
     return wzd
-
-
-def string_to_number(field):
-    try:
-        return int(field)
-    except ValueError:
-        try:
-            return float(field)
-        except ValueError:
-            return None
-
-
-# function to parse direction from street name
-def parse_direction_from_street_name(street):
-    if not street or type(street) is not str:
-        return None
-    street_char = street[-1]
-    street_chars = street[-2:]
-    if street_char == "N" or street_chars == "NB":
-        direction = "northbound"
-    elif street_char == "S" or street_chars == "SB":
-        direction = "southbound"
-    elif street_char == "W" or street_chars == "WB":
-        direction = "westbound"
-    elif street_char == "E" or street_chars == "EB":
-        direction = "eastbound"
-    else:
-        direction = "unknown"
-
-    return direction
-
-
-# function to remove direction from street name
-def remove_direction_from_street_name(street):
-    SINGLE_CHARACTER_DIRECTIONS = ["N", "E", "S", "W"]
-    MULTIPLE_CHARACTER_DIRECTIONS = ["NB", "EB", "SB", "WB"]
-
-    if not street or type(street) is not str:
-        return None
-    street_char = street[-1]
-    street_chars = street[-2:]
-    if street_char in SINGLE_CHARACTER_DIRECTIONS:
-        street = street[:-1]
-    if street_chars in MULTIPLE_CHARACTER_DIRECTIONS:
-        street = street[:-2]
-
-    return street
-
-
-# function to parse polyline to geometry line string
-def parse_polyline_from_linestring(poly):
-    if not poly or type(poly) is not str:
-        return None
-    poly = poly[len("LINESTRING (") : -1]
-    polyline = poly.split(", ")
-    coordinates = []
-    for i in polyline:
-        coords = i.split(" ")
-
-        # the regular expression '^-?([0-9]*[.])?[0-9]+$ matches an integer or decimals
-        if (
-            len(coords) >= 2
-            and re.match("^-?([0-9]*[.])?[0-9]+$", coords[0])
-            and re.match("^-?([0-9]*[.])?[0-9]+$", coords[1])
-        ):
-            coordinates.append([float(coords[0]), float(coords[1])])
-    return coordinates
-
-
-# Remove additional fields added for internal processing, if they are present
-def remove_unnecessary_fields(feed):
-    for feature in feed["features"]:
-        if "route_details_start" in feature.get("properties", {}):
-            del feature["properties"]["route_details_start"]
-        if "route_details_end" in feature.get("properties", {}):
-            del feature["properties"]["route_details_end"]
-        if "condition_1" in feature.get("properties", {}):
-            del feature["properties"]["condition_1"]
-    return feed
-
-
-# Remove additional fields added for internal processing, if they are present
-def remove_unnecessary_fields_feature(feature):
-    if "route_details_start" in feature.get("properties", {}):
-        del feature["properties"]["route_details_start"]
-    if "route_details_end" in feature.get("properties", {}):
-        del feature["properties"]["route_details_end"]
-    if "condition_1" in feature.get("properties", {}):
-        del feature["properties"]["condition_1"]
-    return feature
-
-
-def get_event_status(feature):
-    start_date = date_tools.parse_datetime_from_iso_string(
-        feature["properties"]["start_date"]
-    )
-    end_date = date_tools.parse_datetime_from_iso_string(
-        feature["properties"]["end_date"]
-    )
-    return date_tools.get_event_status(start_date, end_date)
-
-
-def filter_active_features(feed):
-    return list(filter(lambda x: get_event_status(x["features"][0]) == "active", feed))
-
-
-def filter_features_by_event_status(feed, event_status_list):
-    return list(
-        filter(lambda x: get_event_status(x["features"][0]) in event_status_list, feed)
-    )
