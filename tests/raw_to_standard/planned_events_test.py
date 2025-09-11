@@ -1,4 +1,5 @@
 import math
+from wzdx.models.enums import VehicleImpact
 from wzdx.raw_to_standard import planned_events
 from tests.data.raw_to_standard import (
     description_arsenal,
@@ -14,7 +15,7 @@ from unittest.mock import MagicMock, patch
 @patch.object(argparse, "ArgumentParser")
 def test_parse_navjoy_arguments(argparse_mock):
     navjoyFile, outputFile = planned_events.parse_rtdh_arguments()
-    assert navjoyFile != None and outputFile != None
+    assert navjoyFile is not None and outputFile is not None
 
 
 # --------------------------------------------------------------------------------Unit test for validate_closure function--------------------------------------------------------------------------------
@@ -25,7 +26,7 @@ def test_validate_closure_valid_data():
         planned_events.validate_closure(
             expected_results.test_validate_closure_valid_data_input
         )
-        == True
+        is True
     )
 
 
@@ -34,7 +35,7 @@ def test_validate_closure_missing_required_field_description():
         planned_events.validate_closure(
             expected_results.test_validate_closure_missing_required_field_description_input
         )
-        == False
+        is False
     )
 
 
@@ -43,18 +44,18 @@ def test_validate_closure_invalid_start_time():
         planned_events.validate_closure(
             expected_results.test_validate_closure_invalid_start_time_input
         )
-        == False
+        is False
     )
 
 
 def test_validate_closure_invalid():
     event = "invalid output"
-    assert planned_events.validate_closure(event) == False
+    assert planned_events.validate_closure(event) is False
 
 
 def test_validate_closure_no_data():
     event = None
-    assert planned_events.validate_closure(event) == False
+    assert planned_events.validate_closure(event) is False
 
 
 def test_validate_closure_no_coordinates():
@@ -62,7 +63,7 @@ def test_validate_closure_no_coordinates():
         planned_events.validate_closure(
             expected_results.test_validate_closure_no_coordinates_input
         )
-        == False
+        is False
     )
 
 
@@ -397,7 +398,7 @@ def test_get_vehicle_impact_alternating_description_valid():
         {"order": 4, "type": "shoulder", "status": "closed"},
     ]
     test_vehicle_impact = planned_events.get_vehicle_impact(lanes, True)
-    expected_vehicle_impact = "alternating-one-way"
+    expected_vehicle_impact = VehicleImpact.ALTERNATING_ONE_WAY
     assert test_vehicle_impact == expected_vehicle_impact
 
 

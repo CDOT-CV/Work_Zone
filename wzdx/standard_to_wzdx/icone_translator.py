@@ -312,7 +312,7 @@ def parse_incident(incident: dict) -> dict:
     # direction
     core_details["direction"] = detail.get("direction")
 
-    # related_road_events
+    # related_road_events - current approach generates a individual disconnected events, so no links are generated
     core_details["related_road_events"] = []
 
     # description

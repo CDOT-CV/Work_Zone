@@ -11,7 +11,7 @@ from datetime import datetime
 @patch.object(argparse, "ArgumentParser")
 def test_parse_navjoy_arguments(argparse_mock):
     navjoyFile, outputFile = icone.parse_rtdh_arguments()
-    assert navjoyFile != None and outputFile != None
+    assert navjoyFile is not None and outputFile is not None
 
 
 # --------------------------------------------------------------------------------Unit test for parse_polyline_from_linestring function--------------------------------------------------------------------------------

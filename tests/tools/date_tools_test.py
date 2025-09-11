@@ -58,13 +58,13 @@ def test_parse_datetime_from_iso_string_with_decimal():
 def test_parse_datetime_from_iso_string_invalid_none():
     time_string = None
     actual = date_tools.parse_datetime_from_iso_string(time_string)
-    assert actual == None
+    assert actual is None
 
 
 def test_parse_datetime_from_iso_string_invalid_num():
     time_string = 12
     actual = date_tools.parse_datetime_from_iso_string(time_string)
-    assert actual == None
+    assert actual is None
 
 
 # --------------------------------------------------------------------------------unit test for get_iso_string_from_datetime function--------------------------------------------------------------------------------
@@ -78,13 +78,13 @@ def test_get_iso_string_from_datetime_valid():
 def test_get_iso_string_from_datetime_invalid_none():
     time_string = None
     actual = date_tools.get_iso_string_from_datetime(time_string)
-    assert actual == None
+    assert actual is None
 
 
 def test_get_iso_string_from_datetime_invalid_string():
     time_string = "2020-12-31T07:00:00Z"
     actual = date_tools.get_iso_string_from_datetime(time_string)
-    assert actual == None
+    assert actual is None
 
 
 # --------------------------------------------------------------------------------Unit test for get_event_status function--------------------------------------------------------------------------------

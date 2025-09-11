@@ -24,7 +24,7 @@ def compare_lists(list1, list2):
 @patch.object(argparse, "ArgumentParser")
 def test_parse_navjoy_arguments(argparse_mock):
     navjoyFile, outputFile = navjoy_568.parse_rtdh_arguments()
-    assert navjoyFile != None and outputFile != None
+    assert navjoyFile is not None and outputFile is not None
 
 
 # --------------------------------------------------------------------------------Unit test for validate_closure function--------------------------------------------------------------------------------

@@ -14,7 +14,7 @@ from wzdx.standard_to_wzdx import navjoy_translator
 @patch.object(argparse, "ArgumentParser")
 def test_parse_navjoy_arguments(argparse_mock):
     navjoyFile, outputFile = navjoy_translator.parse_navjoy_arguments()
-    assert navjoyFile != None and outputFile != None
+    assert navjoyFile is not None and outputFile is not None
 
 
 def init_datetime_mocks(mock_dts):
@@ -55,7 +55,7 @@ def test_parse_reduction_zone_no_data():
 def test_parse_reduction_zone_invalid_data():
     test_var = "a,b,c,d"
     test_feature = navjoy_translator.parse_reduction_zone(test_var)
-    assert test_feature == None
+    assert test_feature is None
 
 
 # --------------------------------------------------------------------------------Unit test for get_vehicle_impact function--------------------------------------------------------------------------------
@@ -108,13 +108,13 @@ def test_wzdx_creator(mock_dt, mock_dt_3, mockUuid):
 def test_wzdx_creator_empty_object():
     obj = None
     test_wzdx = navjoy_translator.wzdx_creator(obj)
-    assert test_wzdx == None
+    assert test_wzdx is None
 
 
 def test_wzdx_creator_no_incidents():
     obj = []
     test_wzdx = navjoy_translator.wzdx_creator(obj)
-    assert test_wzdx == None
+    assert test_wzdx is None
 
 
 def test_wzdx_creator_invalid_info_object():
@@ -151,7 +151,7 @@ def test_wzdx_creator_invalid_info_object():
     }
 
     test_wzdx = navjoy_translator.wzdx_creator(standard, test_invalid_info_object)
-    assert test_wzdx == None
+    assert test_wzdx is None
 
 
 # ----------------------------------------- get_types_of_work -----------------------------------------

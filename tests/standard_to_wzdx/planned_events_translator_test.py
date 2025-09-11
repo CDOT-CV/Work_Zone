@@ -17,7 +17,7 @@ def test_parse_planned_events_arguments(argparse_mock):
     plannedEventsFile, outputFile = (
         planned_events_translator.parse_planned_events_arguments()
     )
-    assert plannedEventsFile != None and outputFile != None
+    assert plannedEventsFile is not None and outputFile is not None
 
 
 def init_datetime_mocks(mock_dts):
@@ -60,7 +60,7 @@ def test_parse_work_zone_no_data():
 def test_parse_work_zone_invalid_data():
     test_var = "a,b,c,d"
     test_feature = planned_events_translator.parse_work_zone(test_var)
-    assert test_feature == None
+    assert test_feature is None
 
 
 # --------------------------------------------------------------------------------Unit test for wzdx_creator function--------------------------------------------------------------------------------
@@ -124,13 +124,13 @@ def test_wzdx_creator_road_restriction(mock_dt, mock_dt_3, _):
 def test_wzdx_creator_empty_object():
     obj = None
     test_wzdx = planned_events_translator.wzdx_creator(obj)
-    assert test_wzdx == None
+    assert test_wzdx is None
 
 
 def test_wzdx_creator_no_incidents():
     obj = []
     test_wzdx = planned_events_translator.wzdx_creator(obj)
-    assert test_wzdx == None
+    assert test_wzdx is None
 
 
 def test_wzdx_creator_invalid_info_object():
@@ -170,4 +170,4 @@ def test_wzdx_creator_invalid_info_object():
     test_wzdx = planned_events_translator.wzdx_creator(
         standard, test_invalid_info_object
     )
-    assert test_wzdx == None
+    assert test_wzdx is None
