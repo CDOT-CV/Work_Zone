@@ -286,12 +286,12 @@ def create_rtdh_standard_msg(pd: PathDict) -> dict:
     """
     map = pd.get("data/srzmap", default=[])
     index = get_linestring_index(map)
-    if index != None:
+    if index is not None:
         coordinates = map[index].get("coordinates")
         coordinates = array_tools.get_2d_list(coordinates)
     else:
         index = get_polygon_index(map)
-        if index != None:
+        if index is not None:
             polygon = map[index].get("coordinates")
             coordinates = array_tools.get_2d_list(polygon)
             if coordinates:
@@ -399,11 +399,11 @@ def validate_closure(obj: dict | OrderedDict) -> bool:
 
     # TODO: Support MultiPoint
     index = get_linestring_index(map)
-    if index != None:
+    if index is not None:
         coordinates = map[index].get("coordinates", [None])[0]
     else:
         index = get_polygon_index(map)
-        if index != None:
+        if index is not None:
             polygon = map[index].get("coordinates", [None])[0]
             coordinates = polygon_tools.polygon_to_polyline_center(polygon)
         else:

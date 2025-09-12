@@ -1,4 +1,5 @@
 import math
+from wzdx.models.enums import VehicleImpact
 from wzdx.raw_to_standard import planned_events
 from tests.data.raw_to_standard import (
     description_arsenal,
@@ -14,7 +15,7 @@ from unittest.mock import MagicMock, patch
 @patch.object(argparse, "ArgumentParser")
 def test_parse_navjoy_arguments(argparse_mock):
     navjoyFile, outputFile = planned_events.parse_rtdh_arguments()
-    assert navjoyFile != None and outputFile != None
+    assert navjoyFile is not None and outputFile is not None
 
 
 # --------------------------------------------------------------------------------Unit test for validate_closure function--------------------------------------------------------------------------------
@@ -25,7 +26,7 @@ def test_validate_closure_valid_data():
         planned_events.validate_closure(
             expected_results.test_validate_closure_valid_data_input
         )
-        == True
+        is True
     )
 
 
@@ -34,7 +35,7 @@ def test_validate_closure_missing_required_field_description():
         planned_events.validate_closure(
             expected_results.test_validate_closure_missing_required_field_description_input
         )
-        == False
+        is False
     )
 
 
@@ -43,18 +44,18 @@ def test_validate_closure_invalid_start_time():
         planned_events.validate_closure(
             expected_results.test_validate_closure_invalid_start_time_input
         )
-        == False
+        is False
     )
 
 
 def test_validate_closure_invalid():
     event = "invalid output"
-    assert planned_events.validate_closure(event) == False
+    assert planned_events.validate_closure(event) is False
 
 
 def test_validate_closure_no_data():
     event = None
-    assert planned_events.validate_closure(event) == False
+    assert planned_events.validate_closure(event) is False
 
 
 def test_validate_closure_no_coordinates():
@@ -62,7 +63,7 @@ def test_validate_closure_no_coordinates():
         planned_events.validate_closure(
             expected_results.test_validate_closure_no_coordinates_input
         )
-        == False
+        is False
     )
 
 
@@ -224,6 +225,183 @@ def test_get_lanes_list_2():
     )
 
 
+def test_get_lane_impacts_santa_fe():
+    lane_impacts = [
+        {
+            "direction": "north",
+            "laneCount": 2,
+            "laneClosures": "6000",
+            "closedLaneTypes": ["left lane", "right lane"],
+        },
+        {
+            "direction": "south",
+            "laneCount": 2,
+            "laneClosures": "0",
+            "closedLaneTypes": [],
+        },
+    ]
+    direction = "north"
+    has_alternating_traffic = False
+    expected = [
+        {"order": 1, "type": "general", "status": "closed"},
+        {"order": 2, "type": "general", "status": "closed"},
+    ]
+    actual = planned_events.get_lane_impacts(
+        lane_impacts, direction, has_alternating_traffic
+    )
+    assert actual == expected
+
+    direction = "south"
+    expected = [
+        {"order": 1, "type": "general", "status": "open"},
+        {"order": 2, "type": "general", "status": "open"},
+    ]
+    actual = planned_events.get_lane_impacts(
+        lane_impacts, direction, has_alternating_traffic
+    )
+    assert actual == expected
+
+    # Alternating traffic
+    has_alternating_traffic = True
+
+    direction = "north"
+    expected = [
+        {"order": 1, "type": "general", "status": "alternating-flow"},
+        {"order": 2, "type": "general", "status": "closed"},
+    ]
+    actual = planned_events.get_lane_impacts(
+        lane_impacts, direction, has_alternating_traffic
+    )
+    assert actual == expected
+
+    direction = "south"
+    expected = [
+        {"order": 1, "type": "general", "status": "alternating-flow"},
+        {"order": 2, "type": "general", "status": "closed"},
+    ]
+    actual = planned_events.get_lane_impacts(
+        lane_impacts, direction, has_alternating_traffic
+    )
+    assert actual == expected
+
+
+def test_get_lane_impacts_el_paso():
+    lane_impacts = [
+        {
+            "direction": "north",
+            "laneCount": 4,
+            "laneClosures": "800",
+            "closedLaneTypes": ["right lane"],
+        },
+        {
+            "direction": "south",
+            "laneCount": 4,
+            "laneClosures": "800",
+            "closedLaneTypes": ["right lane"],
+        },
+    ]
+    direction = "north"
+    has_alternating_traffic = False
+    expected = [
+        {"order": 1, "type": "general", "status": "open"},
+        {"order": 2, "type": "general", "status": "open"},
+        {"order": 3, "type": "general", "status": "open"},
+        {"order": 4, "type": "general", "status": "closed"},
+    ]
+    actual = planned_events.get_lane_impacts(
+        lane_impacts, direction, has_alternating_traffic
+    )
+    assert actual == expected
+
+    direction = "south"
+    expected = [
+        {"order": 1, "type": "general", "status": "open"},
+        {"order": 2, "type": "general", "status": "open"},
+        {"order": 3, "type": "general", "status": "open"},
+        {"order": 4, "type": "general", "status": "closed"},
+    ]
+    actual = planned_events.get_lane_impacts(
+        lane_impacts, direction, has_alternating_traffic
+    )
+    assert actual == expected
+
+    # Alternating traffic
+    has_alternating_traffic = True
+
+    direction = "north"
+    expected = [
+        {"order": 1, "type": "general", "status": "alternating-flow"},
+        {"order": 2, "type": "general", "status": "closed"},
+        {"order": 3, "type": "general", "status": "closed"},
+        {"order": 4, "type": "general", "status": "closed"},
+    ]
+    actual = planned_events.get_lane_impacts(
+        lane_impacts, direction, has_alternating_traffic
+    )
+    assert actual == expected
+
+    direction = "south"
+    expected = [
+        {"order": 1, "type": "general", "status": "alternating-flow"},
+        {"order": 2, "type": "general", "status": "closed"},
+        {"order": 3, "type": "general", "status": "closed"},
+        {"order": 4, "type": "general", "status": "closed"},
+    ]
+    actual = planned_events.get_lane_impacts(
+        lane_impacts, direction, has_alternating_traffic
+    )
+    assert actual == expected
+
+
+# --------------------------------------------------------------------------------Unit test for get_vehicle_impact function--------------------------------------------------------------------------------
+def test_get_vehicle_impact_some_lanes_closed():
+    lanes = [
+        {"order": 1, "type": "shoulder", "status": "open"},
+        {"order": 2, "type": "general", "status": "closed"},
+        {"order": 3, "type": "general", "status": "closed"},
+        {"order": 4, "type": "shoulder", "status": "open"},
+    ]
+    test_vehicle_impact = planned_events.get_vehicle_impact(lanes, False)
+    expected_vehicle_impact = "some-lanes-closed"
+    assert test_vehicle_impact == expected_vehicle_impact
+
+
+def test_get_vehicle_impact_all_lanes_closed():
+    lanes = [
+        {"order": 1, "type": "shoulder", "status": "closed"},
+        {"order": 2, "type": "general", "status": "closed"},
+        {"order": 3, "type": "general", "status": "closed"},
+        {"order": 4, "type": "shoulder", "status": "closed"},
+    ]
+    test_vehicle_impact = planned_events.get_vehicle_impact(lanes, False)
+    expected_vehicle_impact = "all-lanes-closed"
+    assert test_vehicle_impact == expected_vehicle_impact
+
+
+def test_get_vehicle_impact_all_lanes_open():
+    lanes = [
+        {"order": 1, "type": "shoulder", "status": "open"},
+        {"order": 2, "type": "general", "status": "open"},
+        {"order": 3, "type": "general", "status": "open"},
+        {"order": 4, "type": "shoulder", "status": "open"},
+    ]
+    test_vehicle_impact = planned_events.get_vehicle_impact(lanes, False)
+    expected_vehicle_impact = "all-lanes-open"
+    assert test_vehicle_impact == expected_vehicle_impact
+
+
+def test_get_vehicle_impact_alternating_description_valid():
+    lanes = [
+        {"order": 1, "type": "shoulder", "status": "open"},
+        {"order": 2, "type": "general", "status": "closed"},
+        {"order": 3, "type": "general", "status": "open"},
+        {"order": 4, "type": "shoulder", "status": "closed"},
+    ]
+    test_vehicle_impact = planned_events.get_vehicle_impact(lanes, True)
+    expected_vehicle_impact = VehicleImpact.ALTERNATING_ONE_WAY
+    assert test_vehicle_impact == expected_vehicle_impact
+
+
 def test_is_incident_true_true():
     msg = {
         "properties": {"id": "OpenTMS-Incident2028603626", "type": "Emergency Roadwork"}
@@ -311,6 +489,25 @@ def test_is_incident_wz_false_2():
     actual = planned_events.is_incident_wz(msg)
 
     assert actual == (False, False)
+
+
+def test_detect_alternating_traffic_true():
+    additional_impacts = ["Alternating traffic", "Alternating Lanes"]
+    assert planned_events.detect_alternating_traffic(additional_impacts)
+
+    additional_impacts = ["Alternating traffic"]
+    assert planned_events.detect_alternating_traffic(additional_impacts)
+
+
+def test_detect_alternating_traffic_false():
+    additional_impacts = None
+    assert not planned_events.detect_alternating_traffic(additional_impacts)
+
+    additional_impacts = []
+    assert not planned_events.detect_alternating_traffic(additional_impacts)
+
+    additional_impacts = ["other impact"]
+    assert not planned_events.detect_alternating_traffic(additional_impacts)
 
 
 class MockGeospatialApi:

@@ -11,6 +11,17 @@ from collections import OrderedDict
 
 import regex
 
+from wzdx.models.enums import (
+    Direction,
+    EventType,
+    LaneStatus,
+    LaneType,
+    VehicleImpact,
+    WorkTypeName,
+    WorkZoneType,
+)
+from wzdx.models.type_of_work import TypeOfWork
+
 from ..tools import (
     cdot_geospatial_api,
     date_tools,
@@ -24,17 +35,17 @@ PROGRAM_NAME = "PlannedEventsRawToStandard"
 PROGRAM_VERSION = "1.0"
 
 STRING_DIRECTION_MAP = {
-    "north": "northbound",
-    "south": "southbound",
-    "west": "westbound",
-    "east": "eastbound",
+    "north": Direction.NORTHBOUND,
+    "south": Direction.SOUTHBOUND,
+    "west": Direction.WESTBOUND,
+    "east": Direction.EASTBOUND,
 }
 
 REVERSED_DIRECTION_MAP = {
-    "northbound": "southbound",
-    "southbound": "northbound",
-    "eastbound": "westbound",
-    "westbound": "eastbound",
+    Direction.NORTHBOUND: Direction.SOUTHBOUND,
+    Direction.SOUTHBOUND: Direction.NORTHBOUND,
+    Direction.EASTBOUND: Direction.WESTBOUND,
+    Direction.WESTBOUND: Direction.EASTBOUND,
 }
 
 WORK_ZONE_INCIDENT_TYPES = {
@@ -126,7 +137,7 @@ def is_incident_wz(msg: dict) -> tuple[bool, bool]:
     id = msg.get("properties", {}).get("id", "")
     type = msg.get("properties", {}).get("type", "")
     # category = msg.get('properties', {}).get('Category')
-    is_incident = re.match(INCIDENT_ID_REGEX, id) != None
+    is_incident = re.match(INCIDENT_ID_REGEX, id) is not None
     # is_wz = WORK_ZONE_INCIDENT_TYPES.get(type, {}).get(category)
     is_wz = WORK_ZONE_INCIDENT_TYPES.get(type, {}) != {}
     return is_incident, is_wz
@@ -261,178 +272,12 @@ def hex_to_binary(hex_string: str) -> str:
     return bin(int(hex_string, hexidecimal_scale))[2:].zfill(num_of_bits)
 
 
-# (event_type, types of work, work_zone_type)
-DEFAULT_EVENT_TYPE = ("work-zone", [], "static")
-EVENT_TYPE_MAPPING = {
-    # Work Zones
-    "Bridge Construction": (
-        "work-zone",
-        [{"type_name": "below-road-work", "is_architectural_change": True}],
-        "static",
-    ),
-    "Road Construction": (
-        "work-zone",
-        [{"type_name": "roadway-creation", "is_architectural_change": True}],
-        "static",
-    ),
-    "Bridge Maintenance Operations": (
-        "work-zone",
-        [{"type_name": "below-road-work", "is_architectural_change": False}],
-        "static",
-    ),
-    "Bridge Repair": (
-        "work-zone",
-        [{"type_name": "below-road-work", "is_architectural_change": False}],
-        "static",
-    ),
-    "Chip Seal Operations": (
-        "work-zone",
-        [{"type_name": "minor-road-defect-repair", "is_architectural_change": False}],
-        "static",
-    ),
-    "Concrete Slab Replacement": (
-        "work-zone",
-        [{"type_name": "surface-work", "is_architectural_change": False}],
-        "static",
-    ),
-    "Crack Sealing": (
-        "work-zone",
-        [{"type_name": "minor-road-defect-repair", "is_architectural_change": False}],
-        "static",
-    ),
-    "Culvert Maintenance": (
-        "work-zone",
-        [{"type_name": "roadside-work", "is_architectural_change": False}],
-        "static",
-    ),
-    "Electrical or Lighting": (
-        "work-zone",
-        [{"type_name": "roadside-work", "is_architectural_change": False}],
-        "static",
-    ),
-    "Emergency Maintenance": (
-        "work-zone",
-        [{"type_name": "roadside-work", "is_architectural_change": False}],
-        "static",
-    ),
-    "Fiber Optics Installation": (
-        "work-zone",
-        [{"type_name": "surface-work", "is_architectural_change": False}],
-        "static",
-    ),
-    "Guardrail": (
-        "work-zone",
-        [{"type_name": "barrier-work", "is_architectural_change": False}],
-        "static",
-    ),
-    "IT or Fiber Optics": (
-        "work-zone",
-        [{"type_name": "surface-work", "is_architectural_change": False}],
-        "static",
-    ),
-    "Paving Operations": (
-        "work-zone",
-        [{"type_name": "surface-work", "is_architectural_change": True}],
-        "static",
-    ),
-    "Road Maintenance Operations": (
-        "work-zone",
-        [{"type_name": "surface-work", "is_architectural_change": False}],
-        "static",
-    ),
-    "Rock Work": (
-        "work-zone",
-        [{"type_name": "roadside-work", "is_architectural_change": False}],
-        "static",
-    ),
-    "Sign Work": (
-        "work-zone",
-        [{"type_name": "roadside-work", "is_architectural_change": False}],
-        "static",
-    ),
-    "Striping Operations": (
-        "work-zone",
-        [{"type_name": "painting", "is_architectural_change": True}],
-        "planned-moving-area",
-    ),
-    "Traffic Sign Installation": (
-        "work-zone",
-        [{"type_name": "roadside-work", "is_architectural_change": False}],
-        "static",
-    ),
-    "Traffic Sign Maintenance": (
-        "work-zone",
-        [{"type_name": "roadside-work", "is_architectural_change": False}],
-        "static",
-    ),
-    "Traffic Signal Installation": (
-        "work-zone",
-        [{"type_name": "roadside-work", "is_architectural_change": False}],
-        "static",
-    ),
-    "Traffic Signal Maintenance": (
-        "work-zone",
-        [{"type_name": "roadside-work", "is_architectural_change": False}],
-        "static",
-    ),
-    "Tunnel Maintenance": (
-        "work-zone",
-        [{"type_name": "surface-work", "is_architectural_change": False}],
-        "static",
-    ),
-    "Utility Work": (
-        "work-zone",
-        [{"type_name": "roadside-work", "is_architectural_change": False}],
-        "static",
-    ),
-    "Utility Installation": (
-        "work-zone",
-        [{"type_name": "roadside-work", "is_architectural_change": False}],
-        "static",
-    ),
-    "Wall Maintenance": (
-        "work-zone",
-        [{"type_name": "barrier-work", "is_architectural_change": False}],
-        "static",
-    ),
-    # Road Closures
-    "BAN Message": ("restriction", [], "static"),
-    "Safety Campaign": ("restriction", [], "static"),
-    "Smoke/Control Burn": ("restriction", [], "static"),
-    "Avalanche Control": ("restriction", [], "static"),
-    "Closed for the Season": ("restriction", [], "static"),
-    "Funeral Procession": ("restriction", [], "static"),
-    "Presidential Visit": ("restriction", [], "static"),
-    "Race Event": ("restriction", [], "static"),
-    "Local Event": ("restriction", [], "static"),
-    "Military Movement": ("restriction", [], "static"),
-    "OS/OW Limit": ("restriction", [], "static"),
-    "Geological Drilling": ("restriction", [], "static"),
-    # Incidents (work zones): *\(.]n
-    "Emergency Roadwork": ("work-zone", [], "static"),
-    "Maintenance Operations": ("work-zone", [], "static"),
-}
-
-LANE_TYPE_MAPPING = {
-    "left shoulder": "shoulder",
-    "left lane": "general",
-    "center lane": "general",
-    "middle two lanes": "general",
-    "general": "general",
-    "middle lanes": "general",  # this is a weird one
-    "right lane": "general",
-    "right shoulder": "shoulder",
-    "through lanes": "general",
-    "right entrance ramp": "exit-ramp",
-    "right exit ramp": "exit-ramp",
-}
-
 INVALID_EVENT_DESCRIPTION = (
     "511 event cannot be created in CARS because route does not exist."
 )
 
 
-def map_lane_type(lane_type: str) -> str:
+def map_lane_type(lane_type: str) -> LaneType:
     """Map a planned event lane type to a standard lane type, using `LANE_TYPE_MAPPING`
 
     Args:
@@ -441,27 +286,164 @@ def map_lane_type(lane_type: str) -> str:
     Returns:
         str: standard lane type
     """
-    try:
-        return LANE_TYPE_MAPPING[lane_type]
-    except KeyError as e:
-        logging.warning(f"Unrecognized lane type: {e}")
-        return "general"
+    match lane_type:
+        case "left shoulder" | "right shoulder":
+            return LaneType.SHOULDER
+        case (
+            "left lane"
+            | "center lane"
+            | "middle two lanes"
+            | "general"
+            | "middle lanes"
+            | "right lane"
+            | "through lanes"
+        ):
+            return LaneType.GENERAL
+        case "right entrance ramp" | "right exit ramp":
+            return LaneType.EXIT_RAMP
+        case _:
+            logging.warning(f"Unrecognized lane type: {lane_type}")
+            return LaneType.GENERAL
 
 
-def map_event_type(event_type: str) -> tuple[str, list[dict], str]:
+def map_event_type(event_type: str) -> tuple[list[TypeOfWork], WorkZoneType]:
     """Map a planned event type to a standard event type, using `EVENT_TYPE_MAPPING`
 
     Args:
         event_type (str): planned event type
 
     Returns:
-        tuple[str, list[dict], str]: work zone/restriction classification, types of work, planned-moving-area/static work zone type
+        tuple[str, list[TypeOfWork], WorkZoneType]: work zone/restriction classification, types of work, planned-moving-area/static work zone type
     """
-    try:
-        return EVENT_TYPE_MAPPING[event_type]
-    except KeyError as e:
-        logging.warning(f"Unrecognized event type: {e}")
-        return DEFAULT_EVENT_TYPE
+
+    match event_type:
+        case "Bridge Construction" | "Bridge Maintenance Operations" | "Bridge Repair":
+            return (
+                [
+                    TypeOfWork(
+                        type_name=WorkTypeName.BELOW_ROAD_WORK,
+                        is_architectural_change=True,
+                    )
+                ],
+                WorkZoneType.STATIC,
+            )
+        case "Road Construction":
+            return (
+                [
+                    TypeOfWork(
+                        type_name=WorkTypeName.ROADWAY_CREATION,
+                        is_architectural_change=True,
+                    )
+                ],
+                WorkZoneType.STATIC,
+            )
+        case "Chip Seal Operations" | "Crack Sealing":
+            return (
+                [
+                    TypeOfWork(
+                        type_name=WorkTypeName.MINOR_ROAD_DEFECT_REPAIR,
+                        is_architectural_change=False,
+                    )
+                ],
+                WorkZoneType.PLANNED_MOVING_AREA,
+            )
+        case (
+            "Concrete Slab Replacement"
+            | "Fiber Optics Installation"
+            | "IT or Fiber Optics"
+            | "Paving Operations"
+            | "Road Maintenance Operations"
+            | "Guardrail"
+        ):
+            return (
+                [
+                    TypeOfWork(
+                        type_name=WorkTypeName.BARRIER_WORK,
+                        is_architectural_change=False,
+                    )
+                ],
+                WorkZoneType.STATIC,
+            )
+        case (
+            "Culvert Maintenance"
+            | "Electrical or Lighting"
+            | "Emergency Maintenance"
+            | "Rock Work"
+            | "Sign Work"
+            | "Traffic Sign Installation"
+            | "Traffic Sign Maintenance"
+            | "Traffic Signal Installation"
+            | "Traffic Signal Maintenance"
+            | "Utility Work"
+            | "Utility Installation"
+        ):
+            return (
+                [
+                    TypeOfWork(
+                        type_name=WorkTypeName.ROADSIDE_WORK,
+                        is_architectural_change=False,
+                    )
+                ],
+                WorkZoneType.STATIC,
+            )
+        case "Striping Operations":
+            return (
+                [
+                    TypeOfWork(
+                        type_name=WorkTypeName.PAINTING, is_architectural_change=True
+                    )
+                ],
+                WorkZoneType.PLANNED_MOVING_AREA,
+            )
+        case "Tunnel Maintenance":
+            return (
+                [
+                    TypeOfWork(
+                        type_name=WorkTypeName.SURFACE_WORK,
+                        is_architectural_change=False,
+                    )
+                ],
+                WorkZoneType.STATIC,
+            )
+        case "Wall Maintenance":
+            return (
+                [
+                    TypeOfWork(
+                        type_name=WorkTypeName.BARRIER_WORK,
+                        is_architectural_change=False,
+                    )
+                ],
+                WorkZoneType.STATIC,
+            )
+        # Road Closures
+        case (
+            "BAN Message"
+            | "Safety Campaign"
+            | "Smoke/Control Burn"
+            | "Avalanche Control"
+            | "Closed for the Season"
+            | "Funeral Procession"
+            | "Presidential Visit"
+            | "Race Event"
+            | "Local Event"
+            | "Military Movement"
+            | "OS/OW Limit"
+            | "Geological Drilling"
+        ):
+            return None
+
+        # Incidents (work zones): *\(.]n
+        case "Emergency Roadwork" | "Maintenance Operations":
+            return (
+                [],
+                WorkZoneType.STATIC,
+            )
+        case _:
+            logging.warning(f"Unrecognized event type: {event_type}")
+            return (
+                [],
+                WorkZoneType.STATIC,
+            )
 
 
 def map_lane_status(lane_status_bit: Literal["1", "0"]) -> str:
@@ -478,16 +460,16 @@ def map_lane_status(lane_status_bit: Literal["1", "0"]) -> str:
 
 def map_direction_string(
     direction_string: str,
-) -> Literal["undefined", "eastbound", "westbound", "northbound", "southbound"]:
+) -> Direction:
     """Map a direction string to a standard direction string
 
     Args:
         direction_string (str): direction string, like 'north', 'south', 'east', 'west'
 
     Returns:
-        Literal["undefined", "eastbound", "westbound", "northbound", "southbound"]: standard direction string
+        Direction: standard direction enum
     """
-    return STRING_DIRECTION_MAP.get(direction_string, "undefined")
+    return STRING_DIRECTION_MAP.get(direction_string, Direction.UNDEFINED)
 
 
 # This method parses a hex string and list of closed lane names into a WZDx lanes list. The hex string, lane_closures_hex,
@@ -512,7 +494,7 @@ def get_lanes_list(lane_closures_hex: str, num_lanes: int, closedLaneTypes: list
         lanes.append(
             {
                 "order": order,
-                "type": "shoulder",
+                "type": LaneType.SHOULDER,
                 "status": map_lane_status(lanes_affected[0]),
             }
         )
@@ -523,8 +505,10 @@ def get_lanes_list(lane_closures_hex: str, num_lanes: int, closedLaneTypes: list
             {
                 "order": order,
                 "type": map_lane_type(
-                    closedLaneTypes[i] if (len(closedLaneTypes) > i) else "general"
-                ),
+                    closedLaneTypes[i]
+                    if (len(closedLaneTypes) > i)
+                    else LaneType.GENERAL
+                ).value,
                 "status": map_lane_status(bit),
             }
         )
@@ -533,7 +517,7 @@ def get_lanes_list(lane_closures_hex: str, num_lanes: int, closedLaneTypes: list
         lanes.append(
             {
                 "order": order,
-                "type": "shoulder",
+                "type": LaneType.SHOULDER,
                 "status": map_lane_status(lanes_affected[15]),
             }
         )
@@ -541,30 +525,93 @@ def get_lanes_list(lane_closures_hex: str, num_lanes: int, closedLaneTypes: list
     return lanes
 
 
-def get_lane_impacts(
-    lane_impacts: list[dict],
-    direction: Literal[
-        "undefined", "eastbound", "westbound", "northbound", "southbound"
-    ],
-) -> list[dict]:
-    """Get WZDx lane list from list of lane impacts and direction
+def update_lanes_alternating_traffic(lanes: list[dict]) -> list[dict]:
+    """Update lanes to indicate alternating traffic. Lane order 1 should be "alternating-flow", all other lanes should be "closed".
+
+    Args:
+        lanes (list[dict]): WZDx lanes list
+
+    Returns:
+        list[dict]: updated WZDx lanes list with alternating traffic
+    """
+    for lane in lanes:
+        if lane["order"] == 1:
+            lane["status"] = LaneStatus.ALTERNATING_FLOW.value
+        else:
+            lane["status"] = LaneStatus.CLOSED.value
+    return lanes
+
+
+def detect_alternating_traffic(additional_impacts: list[dict]) -> bool:
+    """Check if there are any lane impacts indicating alternating traffic
 
     Args:
         lane_impacts (list[dict]): Planned event lane impacts
-        direction (Literal["undefined", "eastbound", "westbound", "northbound", "southbound"]): Planned event direction
+
+    Returns:
+        bool: whether there are any alternating traffic impacts
+    """
+    if not additional_impacts:
+        return False
+    return "Alternating traffic" in additional_impacts
+
+
+def get_lane_impacts(
+    lane_impacts: list[dict],
+    direction: Literal["undefined", "east", "west", "north", "south"],
+    has_alternating_traffic: bool,
+) -> list[dict]:
+    """Get WZDx lane list from list of lane impacts and direction. If has_alternating_traffic is True, one lane will show alternating-flow while all other lanes will be closed
+
+    Args:
+        lane_impacts (list[dict]): Planned event lane impacts
+        direction (Literal["undefined", "east", "west", "north", "south"]): Planned event direction
 
     Returns:
         list[dict]: _description_
     """
     for impact in lane_impacts:
         if impact["direction"] == direction:
-            return get_lanes_list(
+            lanes = get_lanes_list(
                 impact["laneClosures"], impact["laneCount"], impact["closedLaneTypes"]
             )
+            if has_alternating_traffic:
+                lanes = update_lanes_alternating_traffic(lanes)
+            return lanes
+
+
+def get_vehicle_impact(
+    lanes: list[dict], has_alternating_traffic: bool
+) -> VehicleImpact:
+    """Determine the impact of lane closures on vehicle traffic and possible alternating traffic indicated by description
+
+    Args:
+        lanes (list[dict]): List of lane objects
+        has_alternating_traffic (bool): Whether the event has alternating traffic
+
+    Returns:
+        str: Vehicle impact status
+    """
+    num_lanes = len(lanes)
+    num_closed_lanes = 0
+
+    # Specific phrase injected into descriptions. Want to match contents of auto-generated message, not the comment
+    if has_alternating_traffic:
+        return VehicleImpact.ALTERNATING_ONE_WAY
+
+    for i in lanes:
+        if i["status"] != "open":
+            num_closed_lanes += 1
+    if num_closed_lanes == num_lanes:
+        return VehicleImpact.ALL_LANES_CLOSED
+    elif num_closed_lanes == 0:
+        return VehicleImpact.ALL_LANES_OPEN
+    else:
+        return VehicleImpact.SOME_LANES_CLOSED
 
 
 def all_lanes_open(lanes: list[dict]) -> bool:
-    """Check if all lanes are open
+    """Check if all lanes are open, or if the description indicates alternating traffic
 
     Args:
         lanes (list[dict]): WZDx lanes list
@@ -700,7 +747,7 @@ def get_cross_streets_from_description(description: str) -> tuple[str, str]:
     m = regex.search(desc_regex, description)
     try:
         return (_get_street_name_from_substring(s) for s in m.group(1, 2))
-    except:
+    except (AttributeError, IndexError):
         return ("", "")
 
 
@@ -719,7 +766,7 @@ def get_mileposts_from_description(description: str) -> tuple[str, str]:
         m1 = start_m.group(2)
         m2 = end_m.group(2)
         return float(m1), float(m2)
-    except:
+    except (AttributeError, IndexError):
         return (None, None)
 
 
@@ -758,21 +805,22 @@ def get_route_details_for_coordinates_lngLat(
                 f"Routes did not match! route details: {route_details_start['Route']}, {route_details_end['Route']}"
             )
             return route_details_start, route_details_end
+
+        # Update route suffixes based on directionality
+        if not cdot_geospatial_api.GeospatialApi.is_route_dec(
+            route_details_start["Measure"], route_details_end["Measure"]
+        ):
+            route_details_start["Route"] = route_details_start["Route"].replace(
+                "_DEC", ""
+            )
+            route_details_end["Route"] = route_details_end["Route"].replace("_DEC", "")
         else:
-            if route_details_start["Measure"] > route_details_end["Measure"]:
-                route_details_start["Route"] = route_details_start["Route"].replace(
-                    "_DEC", ""
-                )
-                route_details_end["Route"] = route_details_end["Route"].replace(
-                    "_DEC", ""
-                )
-            else:
-                route_details_start["Route"] = (
-                    route_details_start["Route"].replace("_DEC", "") + "_DEC"
-                )
-                route_details_end["Route"] = (
-                    route_details_end["Route"].replace("_DEC", "") + "_DEC"
-                )
+            route_details_start["Route"] = (
+                route_details_start["Route"].replace("_DEC", "") + "_DEC"
+            )
+            route_details_end["Route"] = (
+                route_details_end["Route"].replace("_DEC", "") + "_DEC"
+            )
 
     return route_details_start, route_details_end
 
@@ -807,176 +855,187 @@ def create_rtdh_standard_msg(
     Returns:
         dict: RTDH standard message
     """
-    try:
-        description = pd.get("properties/travelerInformationMessage", "")
-        if description == INVALID_EVENT_DESCRIPTION:
-            description = create_description(
-                pd.get("properties/name"),
-                pd.get("properties/routeName"),
-                pd.get("properties/startMarker"),
-                pd.get("properties/endMarker"),
-                pd.get("properties/type"),
-                pd.get("properties/startTime"),
-                pd.get("properties/clearTime"),
-            )
-
-        begin_cross_street, end_cross_street = get_cross_streets_from_description(
-            description
+    # try:
+    description = pd.get("properties/travelerInformationMessage", "")
+    if description == INVALID_EVENT_DESCRIPTION:
+        description = create_description(
+            pd.get("properties/name"),
+            pd.get("properties/routeName"),
+            pd.get("properties/startMarker"),
+            pd.get("properties/endMarker"),
+            pd.get("properties/type"),
+            pd.get("properties/startTime"),
+            pd.get("properties/clearTime"),
         )
 
-        coordinates = get_linestring(pd.get("geometry"))
-        if not coordinates:
-            logging.warning(
-                f'Unable to retrieve geometry coordinates for event: {pd.get("properties/id", default="")}'
-            )
-            return {}
+    begin_cross_street, end_cross_street = get_cross_streets_from_description(
+        description
+    )
 
-        direction = pd.get("properties/direction", default="unknown")
-
-        beginning_milepost = pd.get("properties/startMarker")
-        ending_milepost = pd.get("properties/endMarker")
-        recorded_direction = pd.get("properties/recorded_direction")
-        if (
-            direction == REVERSED_DIRECTION_MAP.get(recorded_direction)
-            and direction != "unknown"
-        ):
-            coordinates.reverse()
-            beginning_milepost = pd.get("properties/endMarker")
-            ending_milepost = pd.get("properties/startMarker")
-
-        roadName = wzdx_translator.remove_direction_from_street_name(
-            pd.get("properties/routeName")
-        )
-
-        now = datetime.datetime.now(datetime.timezone.utc)
-        start_date = pd.get(
-            "properties/startTime", date_tools.parse_datetime_from_iso_string
-        )
-        end_date = pd.get(
-            "properties/clearTime", date_tools.parse_datetime_from_iso_string
-        )
-
-        if not start_date and isIncident:
-            start_date = now
-
-        if not start_date:
-            logging.warning(
-                f'Unable to process event, no start date for event: {pd.get("properties/id", default="")}'
-            )
-            return {}
-        if not end_date:
-            end_date = pd.get(
-                "properties/estimatedClearTime",
-                date_tools.parse_datetime_from_iso_string,
-            )
-
-        if not end_date:
-            # Since there is no end date, assume still active, set end date in future (12 hours + n days until after current time)
-            end_date = start_date + datetime.timedelta(hours=12)
-
-            delta_days = (now - end_date).days
-            if delta_days > 0:
-                end_date = end_date + datetime.timedelta(days=delta_days)
-
-            end_date = end_date.replace(second=0, microsecond=0)
-
-        event_type, types_of_work, work_zone_type = map_event_type(
-            pd.get("properties/type", default="")
-        )
-
-        restrictions = []
-        if pd.get("properties/isOversizedLoadsProhibited"):
-            restrictions.append({"type": "permitted-oversize-loads-prohibited"})
-
-        event_status = date_tools.get_event_status(start_date, end_date)
-
-        condition_1 = event_status in ["active", "pending", "planned"]
-
-        lane_impacts = get_lane_impacts(
-            pd.get("properties/laneImpacts"), pd.get("properties/direction")
-        )
-        if direction != recorded_direction and all_lanes_open(lane_impacts):
-            logging.info(
-                f'Unable to retrieve geometry coordinates for event: {pd.get("properties/id", default="")}'
-            )
-            return {}
-
-        route_details_start, route_details_end = (
-            get_route_details_for_coordinates_lngLat(cdotGeospatialApi, coordinates)
-        )
-
-        # Milepost Priority:
-        # 1. Route Details (only if start and end are on the same route)
-        # 2. properties/startMarker and properties/endMarker
-        # 3. Description parsing
-        beginning_milepost_from_description, ending_milepost_description = (
-            get_mileposts_from_description(description)
-        )
-        if (
-            route_details_start
-            and route_details_end
-            and route_details_start["Route"] == route_details_end["Route"]
-        ):
-            beginning_milepost = route_details_start["Measure"]
-            ending_milepost = route_details_end["Measure"]
-
-        if not beginning_milepost:
-            beginning_milepost = beginning_milepost_from_description
-        if not ending_milepost:
-            ending_milepost = ending_milepost_description
-
-        return {
-            "rtdh_timestamp": time.time(),
-            "rtdh_message_id": str(uuid.uuid4()),
-            "event": {
-                "type": event_type,
-                "types_of_work": types_of_work,
-                "work_zone_type": work_zone_type,
-                "source": {
-                    "id": pd.get("properties/id", default="") + "_" + direction,
-                    "last_updated_timestamp": pd.get(
-                        "properties/lastUpdated",
-                        date_tools.get_unix_from_iso_string,
-                        default=0,
-                    ),
-                },
-                "geometry": get_improved_geometry(
-                    cdotGeospatialApi,
-                    coordinates,
-                    event_status,
-                    route_details_start,
-                    route_details_end,
-                    pd.get("properties/id", default="") + "_" + direction,
-                ),
-                "header": {
-                    "description": description,
-                    "start_timestamp": date_tools.date_to_unix(start_date),
-                    "end_timestamp": date_tools.date_to_unix(end_date),
-                },
-                "detail": {
-                    "road_name": roadName,
-                    "road_number": roadName,
-                    "direction": direction,
-                },
-                "additional_info": {
-                    "lanes": lane_impacts,
-                    "restrictions": restrictions,
-                    "beginning_milepost": beginning_milepost,
-                    "ending_milepost": ending_milepost,
-                    "beginning_cross_street": begin_cross_street,
-                    "ending_cross_street": end_cross_street,
-                    "valid": False,
-                    "route_details_start": route_details_start,
-                    "route_details_end": route_details_end,
-                    "condition_1": condition_1,
-                },
-            },
-        }
-    except Exception as e:
+    coordinates = get_linestring(pd.get("geometry"))
+    if not coordinates:
         logging.warning(
-            f'Error ocurred generating standard message for message {pd.get("properties/id", default="")}: {e}'
+            f'Unable to retrieve geometry coordinates for event: {pd.get("properties/id", default="")}'
         )
         return {}
+
+    direction = pd.get("properties/direction", default="unknown")
+
+    beginning_milepost = pd.get("properties/startMarker")
+    ending_milepost = pd.get("properties/endMarker")
+    recorded_direction = pd.get("properties/recorded_direction")
+    geometry_direction = geospatial_tools.get_road_direction_from_coordinates(
+        coordinates
+    )
+
+    additional_impacts = pd.get("properties/additionalImpacts", [])
+    has_alternating_traffic = detect_alternating_traffic(additional_impacts)
+    lane_impacts = get_lane_impacts(
+        pd.get("properties/laneImpacts"),
+        pd.get("properties/direction"),
+        has_alternating_traffic,
+    )
+    if direction != recorded_direction and all_lanes_open(lane_impacts):
+        logging.info(
+            f'Unable to retrieve geometry coordinates for event: {pd.get("properties/id", default="")}'
+        )
+        return {}
+
+    if (
+        direction == REVERSED_DIRECTION_MAP.get(geometry_direction)
+        and direction != "unknown"
+    ):
+        coordinates.reverse()
+        beginning_milepost = pd.get("properties/endMarker")
+        ending_milepost = pd.get("properties/startMarker")
+
+    roadName = wzdx_translator.remove_direction_from_street_name(
+        pd.get("properties/routeName")
+    )
+
+    now = datetime.datetime.now(datetime.timezone.utc)
+    start_date = pd.get(
+        "properties/startTime", date_tools.parse_datetime_from_iso_string
+    )
+    end_date = pd.get("properties/clearTime", date_tools.parse_datetime_from_iso_string)
+
+    if not start_date and isIncident:
+        start_date = now
+
+    if not start_date:
+        logging.warning(
+            f'Unable to process event, no start date for event: {pd.get("properties/id", default="")}'
+        )
+        return {}
+    if not end_date:
+        end_date = pd.get(
+            "properties/estimatedClearTime",
+            date_tools.parse_datetime_from_iso_string,
+        )
+
+    if not end_date:
+        # Since there is no end date, assume still active, set end date in future (12 hours + n days until after current time)
+        end_date = start_date + datetime.timedelta(hours=12)
+
+        delta_days = (now - end_date).days
+        if delta_days > 0:
+            end_date = end_date + datetime.timedelta(days=delta_days)
+
+        end_date = end_date.replace(second=0, microsecond=0)
+
+    types_of_work, work_zone_type = map_event_type(
+        pd.get("properties/type", default="")
+    )
+
+    restrictions = []
+    if pd.get("properties/isOversizedLoadsProhibited"):
+        restrictions.append({"type": "permitted-oversize-loads-prohibited"})
+
+    event_status = date_tools.get_event_status(start_date, end_date)
+
+    condition_1 = event_status in ["active", "pending", "planned"]
+
+    route_details_start, route_details_end = get_route_details_for_coordinates_lngLat(
+        cdotGeospatialApi, coordinates
+    )
+
+    # Milepost Priority:
+    # 1. Route Details (only if start and end are on the same route)
+    # 2. properties/startMarker and properties/endMarker
+    # 3. Description parsing
+    beginning_milepost_from_description, ending_milepost_description = (
+        get_mileposts_from_description(description)
+    )
+    if (
+        route_details_start
+        and route_details_end
+        and route_details_start["Route"] == route_details_end["Route"]
+    ):
+        beginning_milepost = route_details_start["Measure"]
+        ending_milepost = route_details_end["Measure"]
+
+    if not beginning_milepost:
+        beginning_milepost = beginning_milepost_from_description
+    if not ending_milepost:
+        ending_milepost = ending_milepost_description
+
+    return {
+        "rtdh_timestamp": time.time(),
+        "rtdh_message_id": str(uuid.uuid4()),
+        "event": {
+            "type": EventType.WORK_ZONE.value,
+            "types_of_work": [tow.to_dict() for tow in types_of_work],
+            "work_zone_type": (
+                work_zone_type.value if work_zone_type is not None else None
+            ),
+            "source": {
+                "id": pd.get("properties/id", default="") + "_" + direction,
+                "last_updated_timestamp": pd.get(
+                    "properties/lastUpdated",
+                    date_tools.get_unix_from_iso_string,
+                    default=0,
+                ),
+            },
+            "geometry": get_improved_geometry(
+                cdotGeospatialApi,
+                coordinates,
+                event_status,
+                route_details_start,
+                route_details_end,
+                pd.get("properties/id", default="") + "_" + direction,
+            ),
+            "header": {
+                "description": description,
+                "start_timestamp": date_tools.date_to_unix(start_date),
+                "end_timestamp": date_tools.date_to_unix(end_date),
+            },
+            "detail": {
+                "road_name": roadName,
+                "road_number": roadName,
+                "direction": direction,
+            },
+            "additional_info": {
+                "lanes": lane_impacts,
+                "restrictions": restrictions,
+                "vehicle_impact": get_vehicle_impact(
+                    lane_impacts, has_alternating_traffic
+                ).value,
+                "beginning_milepost": beginning_milepost,
+                "ending_milepost": ending_milepost,
+                "beginning_cross_street": begin_cross_street,
+                "ending_cross_street": end_cross_street,
+                "valid": False,
+                "route_details_start": route_details_start,
+                "route_details_end": route_details_end,
+                "condition_1": condition_1,
+            },
+        },
+    }
+    # except Exception as e:
+    #     logging.error(
+    #         f'Error occurred generating standard message for message {pd.get("properties/id", default="")}: {e}'
+    #     )
+    #     return {}
 
 
 def validate_closure(obj: dict | OrderedDict) -> bool:
@@ -1002,7 +1061,7 @@ def validate_closure(obj: dict | OrderedDict) -> bool:
     - obj must have a properties.type
 
     """
-    if not obj or (type(obj) != dict and type(obj) != OrderedDict):
+    if not obj or (type(obj) is not dict and type(obj) is not OrderedDict):
         logging.warning("alert is empty or has invalid type")
         return False
     id = obj.get("sys_gUid")
@@ -1045,7 +1104,7 @@ def validate_closure(obj: dict | OrderedDict) -> bool:
             return False
     except Exception as e:
         logging.error(
-            f"Invalid event with id = {id}. Error ocurred while validating: {e}"
+            f"Invalid event with id = {id}. Error occurred while validating: {e}"
         )
         return False
 

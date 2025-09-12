@@ -138,7 +138,7 @@ def parse_icone_polyline(polylineString: list[float]):
     Args:
         polylineString: iCone polyline string
     """
-    if not polylineString or type(polylineString) != str:
+    if not polylineString or type(polylineString) is not str:
         return None
     # polyline right now is a list which has an empty string in it.
     polyline = polylineString.split(",")
@@ -146,7 +146,7 @@ def parse_icone_polyline(polylineString: list[float]):
     for i in range(0, len(polyline) - 1, 2):
         try:
             coordinates.append([float(polyline[i + 1]), float(polyline[i])])
-        except ValueError as e:
+        except ValueError:
             logging.warning("failed to parse polyline!")
             return []
     return coordinates
@@ -163,7 +163,7 @@ def get_sensor_list(incident: dict | OrderedDict):
         obj = incident.get(f"{key}")
         if type(obj) in [dict, OrderedDict]:
             devices.append({"sensor_type": key, "details": obj})
-        elif type(obj) == list:
+        elif type(obj) is list:
             for i in obj:
                 devices.append({"sensor_type": key, "details": i})
     return devices
@@ -175,7 +175,7 @@ def create_rtdh_standard_msg(pd: PathDict):
     Args:
         pd: iCone incident pathDict
     """
-    devices = get_sensor_list(pd.get(f"incident"))
+    devices = get_sensor_list(pd.get("incident"))
     start_time = pd.get(
         "incident/starttime", date_tools.parse_datetime_from_iso_string, default=None
     )
@@ -309,7 +309,9 @@ def validate_incident(incident: dict | OrderedDict):
     - Incident must have a valid start time (parsable from ISO string)
     - Incident must have a valid end time (parsable from ISO string)
     """
-    if not incident or (type(incident) != dict and type(incident) != OrderedDict):
+    if not incident or (
+        type(incident) is not dict and type(incident) is not OrderedDict
+    ):
         logging.warning("incident is empty or has invalid type")
         return False
 

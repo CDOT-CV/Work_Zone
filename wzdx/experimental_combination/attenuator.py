@@ -1,5 +1,7 @@
 import argparse
 import json
+
+from wzdx.models.enums import Direction
 from ..tools import (
     cdot_geospatial_api,
     geospatial_tools,
@@ -86,7 +88,9 @@ def validate_directionality(geotab: dict, wzdx: dict) -> bool:
         bool: Whether the directionality of the Geotab and WZDx objects match
     """
     geotab_bearing = geotab["avl_location"]["position"]["bearing"]
-    wzdx_direction = wzdx["features"][0]["properties"]["core_details"]["direction"]
+    wzdx_direction = Direction(
+        wzdx["features"][0]["properties"]["core_details"]["direction"] or "unknown"
+    )
 
     geotab_direction = geospatial_tools.get_closest_direction_from_bearing(
         geotab_bearing, wzdx_direction
@@ -105,11 +109,11 @@ def validate_dates(geotab: dict, wzdx: dict) -> bool:
     Returns:
         bool: Whether the Geotab date falls within the WZDx date range
     """
-    if type(geotab["avl_location"]["source"]["collection_timestamp"]) == datetime:
+    if type(geotab["avl_location"]["source"]["collection_timestamp"]) is datetime:
         geotab_date = date_tools.date_to_unix(
             geotab["avl_location"]["source"]["collection_timestamp"]
         )
-    elif type(geotab["avl_location"]["source"]["collection_timestamp"]) == str:
+    elif type(geotab["avl_location"]["source"]["collection_timestamp"]) is str:
         geotab_date = date_tools.get_unix_from_iso_string(
             geotab["avl_location"]["source"]["collection_timestamp"]
         )
@@ -126,7 +130,7 @@ def validate_dates(geotab: dict, wzdx: dict) -> bool:
             else None
         )
     if not geotab_date:
-        logging.debug(f"No geotab date found")
+        logging.debug("No geotab date found")
         return False
 
     wzdx_start_date = date_tools.get_unix_from_iso_string(

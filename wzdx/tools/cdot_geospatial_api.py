@@ -18,7 +18,7 @@ class GeospatialApi:
         setCachedRequest: Callable[[str, str], None] = lambda url, response: None,
         BASE_URL: str = os.getenv(
             "CDOT_GEOSPATIAL_API_BASE_URL",
-            "https://dtdapps.colorado.gov/server/rest/services/LRS/Routes_withDEC/MapServer/exts/CdotLrsAccessRounded",
+            "https://dtdapps.codot.gov/server/rest/services/LRS/Routes_withDEC/MapServer/exts/CdotLrsAccessRounded",
         ),
     ):
         """Initialize the Geospatial API
@@ -26,7 +26,7 @@ class GeospatialApi:
         Args:
             getCachedRequest ((url: str) => cached_response: str, optional): Optional method to enable custom caching. This method is called with a request url to retrieve the cached result.
             setCachedRequest ((url: str, response: str) => None, optional): Optional method to enable custom caching. This method is called with a request url and response to write the cached result.
-            BASE_URL (str, optional): Optional override of GIS server base url, should end with CdotLrsAccessRounded. Defaults first to the env variable CDOT_GEOSPATIAL_API_BASE_URL, then to https://dtdapps.colorado.gov/server/rest/services/LRS/Routes_withDEC/MapServer/exts/CdotLrsAccessRounded.
+            BASE_URL (str, optional): Optional override of GIS server base url, should end with CdotLrsAccessRounded. Defaults first to the env variable CDOT_GEOSPATIAL_API_BASE_URL, then to https://dtdapps.codot.gov/server/rest/services/LRS/Routes_withDEC/MapServer/exts/CdotLrsAccessRounded.
         """
         self.getCachedRequest = getCachedRequest
         self.setCachedRequest = setCachedRequest
@@ -61,7 +61,7 @@ class GeospatialApi:
             list[dict | None]: List of routes
         """
         parameters = []
-        parameters.append(f"f=pjson")
+        parameters.append("f=pjson")
 
         url = f"{self.BASE_URL}/{self.GET_ROUTES_API}?{'&'.join(parameters)}"
         logging.debug(
@@ -89,7 +89,7 @@ class GeospatialApi:
         parameters = []
         parameters.append(f"routeId={routeId}")
         parameters.append(f"outSR={self.SR}")
-        parameters.append(f"f=pjson")
+        parameters.append("f=pjson")
 
         url = f"{self.BASE_URL}/{self.GET_ROUTE_API}?{'&'.join(parameters)}"
         logging.debug(url)
@@ -132,7 +132,7 @@ class GeospatialApi:
         parameters.append(f"tolerance={tolerance}")
         parameters.append(f"inSR={self.SR}")
         parameters.append(f"outSR={self.SR}")
-        parameters.append(f"f=pjson")
+        parameters.append("f=pjson")
 
         url = f"{self.BASE_URL}/{self.GET_ROUTE_AND_MEASURE_API}?{'&'.join(parameters)}"
         logging.debug(url)
@@ -201,7 +201,7 @@ class GeospatialApi:
         parameters.append(f"routeId={routeId}")
         parameters.append(f"measure={measure}")
         parameters.append(f"outSR={self.SR}")
-        parameters.append(f"f=pjson")
+        parameters.append("f=pjson")
 
         url = f"{self.BASE_URL}/{self.GET_POINT_AT_MEASURE_API}?{'&'.join(parameters)}"
         logging.debug(url)
@@ -261,7 +261,7 @@ class GeospatialApi:
             endMeasure = startMeasure - distanceAhead
             endMeasure = max(endMeasure, routeDetails["MMin"])
 
-        if mMin != None and mMax != None:
+        if mMin is not None and mMax is not None:
             # Force mMin < mMax
             if mMin > mMax:
                 temp = mMin
@@ -321,7 +321,7 @@ class GeospatialApi:
         parameters.append(f"fromMeasure={startMeasure}")
         parameters.append(f"toMeasure={endMeasure}")
         parameters.append(f"outSR={self.SR}")
-        parameters.append(f"f=pjson")
+        parameters.append("f=pjson")
 
         url = (
             f"{self.BASE_URL}/{self.ROUTE_BETWEEN_MEASURES_API}?{'&'.join(parameters)}"
@@ -343,8 +343,9 @@ class GeospatialApi:
 
         return linestring
 
-    def is_route_dec(self, startMeasure: float, endMeasure: float) -> bool:
-        """Check if the route is a reversed dual carriageway
+    @staticmethod
+    def is_route_dec(startMeasure: float, endMeasure: float) -> bool:
+        """Check if the route is a reversed dual carriageway (mileposts are decreasing)
 
         Args:
             startMeasure (float): Start mile marker
@@ -353,9 +354,10 @@ class GeospatialApi:
         Returns:
             bool: True if route is a reversed dual carriageway
         """
-        return endMeasure > startMeasure
+        return endMeasure < startMeasure
 
-    def is_route_id_dec(self, route_id: str) -> bool:
+    @staticmethod
+    def is_route_id_dec(route_id: str) -> bool:
         """Check if the route is a reversed dual carriageway
         Args:
             route_id (str): Route ID

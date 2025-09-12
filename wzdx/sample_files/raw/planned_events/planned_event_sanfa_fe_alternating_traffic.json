@@ -1,0 +1,43 @@
+{
+  "type": "Feature",
+  "geometry": {
+    "srid": 4326,
+    "type": "MultiPoint",
+    "coordinates": [
+      [-104.480512, 36.994492],
+      [-104.5197, 37.091658]
+    ]
+  },
+  "properties": {
+    "additionalImpacts": ["Alternating traffic", "Alternating Lanes"],
+    "clearTime": "2025-08-08T01:00:00Z",
+    "startMarker": 0.0,
+    "project": {
+      "description": "I-25 Raton Pass Surface Treatment on I-25 from MP 1 to 7.6.",
+      "status": "project active",
+      "owningGroup": "LaneAware",
+      "startTime": "2025-04-07T06:00:00Z",
+      "endTime": "2025-11-25T06:59:59Z"
+    },
+    "type": "Road Construction",
+    "laneImpacts": [
+      { "direction": "north", "laneCount": 2, "laneClosures": "6000", "closedLaneTypes": ["left lane", "right lane"] },
+      { "direction": "south", "laneCount": 2, "laneClosures": "0", "closedLaneTypes": [] }
+    ],
+    "routeName": "I-25N",
+    "isOversizedLoadsProhibited": false,
+    "lastUpdated": "2025-07-31T21:51:11.344Z",
+    "schedule": [{ "startTime": "2025-08-07T13:00:00.000Z", "endTime": "2025-08-08T01:00:00.000Z" }],
+    "endMarker": 8.0,
+    "hasRampRestriction": false,
+    "name": "I-25 Raton Pass-107847",
+    "startTime": "2025-08-07T13:00:00Z",
+    "id": "OpenTMS-Event26437796024",
+    "travelerInformationMessage": "Between the start of I-25 and Exit 11: Santa Fe Trail (3 to 11 miles south of Trinidad) from Mile Point 0 to Mile Point 8. Road construction. Alternating traffic. Starting August 7, 2025 at 7:00AM MDT until August 7, 2025 at about 7:00PM MDT. Full schedule below: • August 7, 7:00AM - August 7, 7:00PM",
+    "category": "Construction",
+    "owningGroup": "LaneAware",
+    "jurisdictions": ["LAS ANIMAS (COUNTY)"],
+    "direction": "north"
+  },
+  "attributes": {}
+}

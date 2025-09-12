@@ -6,16 +6,16 @@ from unittest.mock import Mock, patch
 
 import time_machine
 import xmltodict
-from wzdx.standard_to_enhanced import icone_translator
+from wzdx.standard_to_wzdx import icone_translator
 from wzdx.tools import wzdx_translator
 
-from tests.data.standard_to_enhanced import icone_translator_data
+from tests.data.standard_to_wzdx import icone_translator_data
 
 
 @patch.object(argparse, "ArgumentParser")
 def test_parse_planned_events_arguments(argparse_mock):
     iconeFile, outputFile = icone_translator.parse_icone_arguments()
-    assert iconeFile != None and outputFile != None
+    assert iconeFile is not None and outputFile is not None
 
 
 # --------------------------------------------------------------------------------Unit test for get_vehicle_impact function--------------------------------------------------------------------------------
@@ -39,7 +39,7 @@ def test_get_vehicle_impact_all_lanes_open():
 def test_wzdx_creator_empty_icone_object():
     icone_obj = None
     test_wzdx = icone_translator.wzdx_creator(icone_obj)
-    assert test_wzdx == None
+    assert test_wzdx is None
 
 
 def test_wzdx_creator_invalid_info_object():
@@ -83,7 +83,7 @@ def test_wzdx_creator_invalid_info_object():
     }
 
     test_wzdx = icone_translator.wzdx_creator(icone_obj, test_invalid_info_object)
-    assert test_wzdx == None
+    assert test_wzdx is None
 
 
 @patch.dict(

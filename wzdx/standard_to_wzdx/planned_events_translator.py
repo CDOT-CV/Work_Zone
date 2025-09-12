@@ -3,14 +3,14 @@ import json
 import logging
 import copy
 
-from ..sample_files.validation_schema import (
-    work_zone_feed_v42,
-    road_restriction_v40_feed,
-)
+from wzdx.models.enums import EventType, LocationMethod
+
+from ..sample_files.validation_schema import work_zone_feed_v42
+
 
 from ..tools import date_tools, wzdx_translator, uuid_tools
 
-PROGRAM_NAME = "PlannedEventsTranslator"
+PROGRAM_NAME = "WZDxPlannedEventsTranslator"
 PROGRAM_VERSION = "1.0"
 
 
@@ -74,12 +74,9 @@ def wzdx_creator(message: dict, info: dict = None) -> dict:
     if not wzdx_translator.validate_info(info):
         return None
 
-    if event_type == "work-zone":
+    if event_type == EventType.WORK_ZONE.value:
         wzd = wzdx_translator.initialize_wzdx_object(info)
         feature = parse_work_zone(message)
-    elif event_type == "restriction":
-        wzd = wzdx_translator.initialize_wzdx_object_restriction(info)
-        feature = parse_road_restriction(message)
     else:
         logging.warning(f"Unrecognized event type: {message['event']['type']}")
         return None
@@ -90,128 +87,13 @@ def wzdx_creator(message: dict, info: dict = None) -> dict:
         return None
     wzd = wzdx_translator.add_ids(wzd, event_type)
 
-    schemas = {
-        "work-zone": work_zone_feed_v42.wzdx_v42_schema_string,
-        "restriction": road_restriction_v40_feed.road_restriction_v40_schema_string,
-    }
-
-    if not wzdx_translator.validate_wzdx(wzd, schemas[event_type]):
+    if not wzdx_translator.validate_wzdx(
+        wzd, work_zone_feed_v42.wzdx_v42_schema_string
+    ):
         logging.warning("WZDx message failed validation")
         return None
 
     return wzd
-
-
-def get_vehicle_impact(lanes: list[dict]) -> str:
-    """Determine the impact of lane closures on vehicle traffic
-
-    Args:
-        lanes (list[dict]): List of lane objects
-
-    Returns:
-        str: Vehicle impact status
-    """
-    num_lanes = len(lanes)
-    num_closed_lanes = 0
-    for i in lanes:
-        if i["status"] != "open":
-            num_closed_lanes += 1
-    if num_closed_lanes == num_lanes:
-        return "all-lanes-closed"
-    elif num_closed_lanes == 0:
-        return "all-lanes-open"
-    else:
-        return "some-lanes-closed"
-
-
-# Parse Icone Incident to WZDx
-def parse_road_restriction(incident: dict) -> dict:
-    """Translate Planned Events RTDH standard road restriction to WZDx
-
-    Args:
-        incident (dict): Planned event event data
-
-    Returns:
-        dict: WZDx object
-    """
-    if not incident or type(incident) != dict:
-        return None
-
-    event = incident.get("event")
-
-    source = event.get("source")
-    header = event.get("header")
-    detail = event.get("detail")
-    additional_info = event.get("additional_info", {})
-
-    geometry = {
-        "type": "LineString",
-        "coordinates": event.get("geometry", []),
-    }
-    if len(event.get("geometry", [])) <= 2:
-        geometry["type"] = "MultiPoint"
-    properties = {}
-
-    # I included a skeleton of the message, fill out all required fields and as many optional fields as you can. Below is a link to the spec page for a road event
-    # https://github.com/usdot-jpo-ode/jpo-wzdx/blob/master/spec-content/objects/RoadEvent.md
-
-    core_details = {}
-
-    # data_source_id - Leave this empty, it will be populated by add_ids
-    core_details["data_source_id"] = ""
-
-    # Event Type ['work-zone', 'detour']
-    core_details["event_type"] = event.get("type")
-
-    # road_name
-    road_names = [detail.get("road_name")]
-    core_details["road_names"] = road_names
-
-    # direction
-    core_details["direction"] = detail.get("direction", "unknown")
-
-    # Relationship
-    core_details["relationship"] = {}
-
-    # description
-    core_details["description"] = header.get("description")
-
-    # # creation_date
-    # core_details['creation_date'] = date_tools.get_iso_string_from_unix(
-    #     source.get('creation_timestamp'))
-
-    # update_date
-    core_details["update_date"] = date_tools.get_iso_string_from_unix(
-        source.get("last_updated_timestamp")
-    )
-
-    properties["core_details"] = core_details
-
-    properties["lanes"] = additional_info.get("lanes", [])
-
-    # restrictions
-    properties["restrictions"] = additional_info.get("restrictions", [])
-
-    properties["route_details_start"] = additional_info.get("route_details_start")
-    properties["route_details_end"] = additional_info.get("route_details_end")
-
-    properties["condition_1"] = additional_info.get("condition_1", True)
-
-    filtered_properties = copy.deepcopy(properties)
-
-    for key, value in properties.items():
-        if not value and key not in ["road_event_id", "data_source_id"]:
-            del filtered_properties[key]
-
-    feature = {}
-    feature["type"] = "Feature"
-    feature["properties"] = filtered_properties
-    feature["geometry"] = geometry
-    feature["id"] = uuid_tools.named_uuid_string(
-        event.get("source", {}).get("id", None)
-    )
-
-    return feature
 
 
 # Parse Icone Incident to WZDx
@@ -224,7 +106,7 @@ def parse_work_zone(incident: dict) -> dict:
     Returns:
         dict: WZDx object
     """
-    if not incident or type(incident) != dict:
+    if not incident or type(incident) is not dict:
         return None
 
     event = incident.get("event")
@@ -302,17 +184,16 @@ def parse_work_zone(incident: dict) -> dict:
     properties["is_end_position_verified"] = False
 
     # location_method
-    properties["location_method"] = "channel-device-method"
+    properties["location_method"] = LocationMethod.CHANNEL_DEVICE_METHOD.value
 
     # work_zone_type
     properties["work_zone_type"] = event.get("work_zone_type", "static")
 
     # vehicle impact
-    lanes = additional_info.get("lanes", [])
-    properties["vehicle_impact"] = get_vehicle_impact(lanes)
+    properties["vehicle_impact"] = additional_info.get("vehicle_impact")
 
     # lanes
-    properties["lanes"] = lanes
+    properties["lanes"] = additional_info.get("lanes", [])
 
     # beginning_cross_street
     properties["beginning_cross_street"] = additional_info.get("beginning_cross_street")

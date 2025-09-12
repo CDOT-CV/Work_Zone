@@ -1,6 +1,5 @@
 import argparse
 import json
-from datetime import datetime
 import logging
 from datetime import datetime, timedelta
 import glob
@@ -278,7 +277,7 @@ def validate_dates(icone: dict, wzdx: dict) -> bool:
         else None
     )
     return wzdx_start_date - icone_start_date < START_TIME_THRESHOLD_MILLISECONDS or (
-        icone_end_date == None
+        icone_end_date is None
         or icone_end_date - wzdx_end_date < END_TIME_THRESHOLD_MILLISECONDS
     )
 

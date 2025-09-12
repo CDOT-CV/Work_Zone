@@ -2,17 +2,21 @@ import argparse
 import copy
 import json
 import logging
-from datetime import datetime
-import uuid  # This is necessary for unit test mocking
+import uuid
+
+from wzdx.models.enums import (
+    EventType,
+    LocationMethod,
+)  # This is necessary for unit test mocking
 from ..tools import date_tools, wzdx_translator, units
 
-PROGRAM_NAME = "NavJoy568Translator"
+PROGRAM_NAME = "WZDxNavJoy568Translator"
 PROGRAM_VERSION = "1.0"
 
 
 def main():
     inputfile, outputfile = parse_navjoy_arguments()
-    
+
     navjoy_obj = json.loads(open(inputfile).read())
     wzdx = wzdx_creator(navjoy_obj)
 
@@ -94,7 +98,7 @@ def parse_reduction_zone(incident: dict) -> dict:
     Returns:
         dict: WZDx object
     """
-    if not incident or type(incident) != dict:
+    if not incident or type(incident) is not dict:
         return None
 
     event = incident.get("event")
@@ -112,7 +116,7 @@ def parse_reduction_zone(incident: dict) -> dict:
     core_details = properties["core_details"]
 
     # Event Type ['work-zone', 'detour']
-    core_details["event_type"] = "work-zone"
+    core_details["event_type"] = EventType.WORK_ZONE.value
 
     # data_source_id
     # Leave this empty, it will be populated by add_ids
@@ -165,7 +169,7 @@ def parse_reduction_zone(incident: dict) -> dict:
     properties["is_end_position_verified"] = False
 
     # location_method
-    properties["location_method"] = "channel-device-method"
+    properties["location_method"] = LocationMethod.CHANNEL_DEVICE_METHOD.value
 
     # vehicle impact
     properties["vehicle_impact"] = get_vehicle_impact(header.get("justification"))
@@ -199,7 +203,7 @@ def parse_reduction_zone(incident: dict) -> dict:
         )
 
     # location_method
-    properties["location_method"] = "channel-device-method"
+    properties["location_method"] = LocationMethod.CHANNEL_DEVICE_METHOD.value
 
     # restrictions
     properties["restrictions"] = []
@@ -240,7 +244,7 @@ def get_vehicle_impact(travelRestriction: str) -> str:
     Returns:
         str: Vehicle impact
     """
-    if not travelRestriction or type(travelRestriction) != str:
+    if not travelRestriction or type(travelRestriction) is not str:
         return None
     travelRestriction = travelRestriction.lower()
     vehicle_impact = "all-lanes-open"
@@ -262,7 +266,7 @@ def get_types_of_work(field: str) -> list[dict]:
     Returns:
         list[dict]: Types of work
     """
-    if not field or type(field) != str:
+    if not field or type(field) is not str:
         return None
     field = field.lower()
     # valid_types_of_work = ['maintenance',
@@ -276,7 +280,7 @@ def get_types_of_work(field: str) -> list[dict]:
     #                        'roadway-relocation',
     #                        'roadway-creation']
 
-    if not field or type(field) != str:
+    if not field or type(field) is not str:
         return []
 
     types_of_work = []

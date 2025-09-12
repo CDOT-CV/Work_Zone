@@ -32,7 +32,7 @@ jobs:
           python3 -m coverage xml --omit="/opt/*,/root/*,/tmp/*,/usr/*,/var/*,**/__init__.py"
 
       - name: Archive Code Coverage Results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: build_api
           path: cov.xml

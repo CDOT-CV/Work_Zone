@@ -25,30 +25,30 @@ def test_does_route_overlap_invalid():
     obj1 = {"route_details_start": None, "route_details_end": None}
     obj2 = {"route_details_start": None, "route_details_end": None}
     actual = combination.does_route_overlap(obj1, obj2)
-    assert actual == None
+    assert actual is None
     actual = combination.does_route_overlap(obj2, obj1)
-    assert actual == None
+    assert actual is None
 
     obj1 = {"route_details_start": {"Measure": 1}, "route_details_end": None}
     obj2 = {"route_details_start": None, "route_details_end": None}
     actual = combination.does_route_overlap(obj1, obj2)
-    assert actual == None
+    assert actual is None
     actual = combination.does_route_overlap(obj2, obj1)
-    assert actual == None
+    assert actual is None
 
     obj1 = {"route_details_start": {"Measure": 1}, "route_details_end": {"Measure": 2}}
     obj2 = {"route_details_start": None, "route_details_end": None}
     actual = combination.does_route_overlap(obj1, obj2)
-    assert actual == None
+    assert actual is None
     actual = combination.does_route_overlap(obj2, obj1)
-    assert actual == None
+    assert actual is None
 
     obj1 = {"route_details_start": None, "route_details_end": {"Measure": 2}}
     obj2 = {"route_details_start": None, "route_details_end": None}
     actual = combination.does_route_overlap(obj1, obj2)
-    assert actual == None
+    assert actual is None
     actual = combination.does_route_overlap(obj2, obj1)
-    assert actual == None
+    assert actual is None
 
 
 def test_does_route_overlap_2():

@@ -4,17 +4,17 @@ import uuid
 from datetime import datetime, timezone
 from unittest.mock import MagicMock, Mock, patch
 import argparse
-from tests.data.standard_to_enhanced import navjoy_translator_data
+from tests.data.standard_to_wzdx import navjoy_translator_data
 from wzdx.tools import wzdx_translator
 
 import time_machine
-from wzdx.standard_to_enhanced import navjoy_translator
+from wzdx.standard_to_wzdx import navjoy_translator
 
 
 @patch.object(argparse, "ArgumentParser")
 def test_parse_navjoy_arguments(argparse_mock):
     navjoyFile, outputFile = navjoy_translator.parse_navjoy_arguments()
-    assert navjoyFile != None and outputFile != None
+    assert navjoyFile is not None and outputFile is not None
 
 
 def init_datetime_mocks(mock_dts):
@@ -23,16 +23,16 @@ def init_datetime_mocks(mock_dts):
         i.now = MagicMock(return_value=datetime(2021, 4, 13))
         i.strptime = datetime.strptime
 
+
 @patch.dict(
     os.environ,
     {
         "NAMESPACE_UUID": "3f0bce7b-1e59-4be0-80cd-b5f1f3801708",
     },
 )
-@unittest.mock.patch("wzdx.standard_to_enhanced.navjoy_translator.datetime")
 @unittest.mock.patch("wzdx.tools.wzdx_translator.datetime")
-def test_parse_reduction_zone_linestring(mock_dt, mock_dt_3):
-    init_datetime_mocks([mock_dt, mock_dt_3])
+def test_parse_reduction_zone_linestring(mock_dt):
+    init_datetime_mocks([mock_dt])
 
     test_feature = navjoy_translator.parse_reduction_zone(
         navjoy_translator_data.test_parse_reduction_zone_linestring_standard
@@ -54,7 +54,7 @@ def test_parse_reduction_zone_no_data():
 def test_parse_reduction_zone_invalid_data():
     test_var = "a,b,c,d"
     test_feature = navjoy_translator.parse_reduction_zone(test_var)
-    assert test_feature == None
+    assert test_feature is None
 
 
 # --------------------------------------------------------------------------------Unit test for get_vehicle_impact function--------------------------------------------------------------------------------
@@ -89,10 +89,9 @@ def test_get_vehicle_impact_all_lanes_open():
     },
 )
 @patch("uuid.uuid4")
-@unittest.mock.patch("wzdx.standard_to_enhanced.navjoy_translator.datetime")
 @unittest.mock.patch("wzdx.tools.wzdx_translator.datetime")
-def test_wzdx_creator(mock_dt, mock_dt_3, mockUuid):
-    init_datetime_mocks([mock_dt, mock_dt_3])
+def test_wzdx_creator(mock_dt, _):
+    init_datetime_mocks([mock_dt])
     uuid.uuid4 = Mock()
     uuid.uuid4.side_effect = "we234de"
 
@@ -107,13 +106,13 @@ def test_wzdx_creator(mock_dt, mock_dt_3, mockUuid):
 def test_wzdx_creator_empty_object():
     obj = None
     test_wzdx = navjoy_translator.wzdx_creator(obj)
-    assert test_wzdx == None
+    assert test_wzdx is None
 
 
 def test_wzdx_creator_no_incidents():
     obj = []
     test_wzdx = navjoy_translator.wzdx_creator(obj)
-    assert test_wzdx == None
+    assert test_wzdx is None
 
 
 def test_wzdx_creator_invalid_info_object():
@@ -150,7 +149,7 @@ def test_wzdx_creator_invalid_info_object():
     }
 
     test_wzdx = navjoy_translator.wzdx_creator(standard, test_invalid_info_object)
-    assert test_wzdx == None
+    assert test_wzdx is None
 
 
 # ----------------------------------------- get_types_of_work -----------------------------------------

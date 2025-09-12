@@ -5,9 +5,11 @@ import copy
 from typing import Literal
 import uuid
 
+from wzdx.models.enums import EventType, LocationMethod
+
 from ..tools import date_tools, wzdx_translator
 
-PROGRAM_NAME = "IconeTranslator"
+PROGRAM_NAME = "WZDxIconeTranslator"
 PROGRAM_VERSION = "1.0"
 
 
@@ -298,7 +300,7 @@ def parse_incident(incident: dict) -> dict:
     core_details = properties["core_details"]
 
     # Event Type ['work-zone', 'detour']
-    core_details["event_type"] = "work-zone"
+    core_details["event_type"] = EventType.WORK_ZONE.value
 
     # data_source_id - Leave this empty, it will be populated by add_ids
     core_details["data_source_id"] = ""
@@ -310,7 +312,7 @@ def parse_incident(incident: dict) -> dict:
     # direction
     core_details["direction"] = detail.get("direction")
 
-    # relationship
+    # related_road_events - current approach generates a individual disconnected events, so no links are generated
     core_details["related_road_events"] = []
 
     # description
@@ -354,7 +356,7 @@ def parse_incident(incident: dict) -> dict:
     properties["is_end_position_verified"] = False
 
     # location_method
-    properties["location_method"] = "channel-device-method"
+    properties["location_method"] = LocationMethod.CHANNEL_DEVICE_METHOD.value
 
     # vehicle impact
     properties["vehicle_impact"] = get_vehicle_impact(header.get("description"))
@@ -421,7 +423,7 @@ def validate_standard_msg(msg: dict) -> bool:
     Returns:
         bool: True if event is valid, False otherwise
     """
-    if not msg or type(msg) != dict:
+    if not msg or type(msg) is not dict:
         logging.warning("event is empty or has invalid type")
         return False
 
@@ -451,33 +453,33 @@ def validate_standard_msg(msg: dict) -> bool:
         update_time = source.get("last_updated_timestamp")
         direction = detail.get("direction")
 
-        if not (type(geometry) == list and len(geometry) >= 0):
+        if not (type(geometry) is list and len(geometry) >= 0):
             logging.warning(
                 f"""Invalid event with id = {id}. Invalid geometry: {geometry}"""
             )
             return False
-        if not (type(road_name) == str and len(road_name) >= 0):
+        if not (type(road_name) is str and len(road_name) >= 0):
             logging.warning(
                 f"""Invalid event with id = {id}. Invalid road_name: {road_name}"""
             )
             return False
-        if not (type(start_time) == float or type(start_time) == int):
+        if not (type(start_time) is float or type(start_time) is int):
             logging.warning(
                 f"""Invalid event with id = {id}. Invalid start_time: {start_time}"""
             )
             return False
-        if not (type(end_time) == float or type(end_time) == int or end_time == None):
+        if not (type(end_time) is float or type(end_time) is int or end_time is None):
             logging.warning(
                 f"""Invalid event with id = {id}. Invalid end_time: {end_time}"""
             )
             return False
-        if not (type(update_time) == float or type(update_time) == int):
+        if not (type(update_time) is float or type(update_time) is int):
             logging.warning(
                 f"""Invalid event with id = {id}. Invalid update_time: {update_time}"""
             )
             return False
         if not (
-            type(direction) == str
+            type(direction) is str
             and direction
             in [
                 "unknown",
@@ -492,7 +494,7 @@ def validate_standard_msg(msg: dict) -> bool:
                 f"""Invalid event with id = {id}. Invalid direction: {direction}"""
             )
             return False
-        if not (type(description) == str and len(description) >= 0):
+        if not (type(description) is str and len(description) >= 0):
             logging.warning(
                 f"""Invalid event with id = {id}. Invalid description: {description}"""
             )

@@ -22,7 +22,9 @@
     "dateutil",
     "ellps",
     "endtime",
+    "Genesee",
     "geopy",
+    "geospatial",
     "Geotab",
     "hexidecimal",
     "Hilgers",
@@ -51,6 +53,7 @@
     "Trafficade",
     "updatetime",
     "USDOT",
+    "wzdx",
     "xmltodict"
   ]
 }

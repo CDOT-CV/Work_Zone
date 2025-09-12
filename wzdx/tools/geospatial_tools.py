@@ -1,65 +1,74 @@
 import math
-from typing import Literal
 
 import pyproj
 
+from wzdx.models.enums import Direction
+
 
 # Helper mappings for road directions and orientations
-ROAD_DIRECTIONS_MAP = {0: "northbound", 1: "eastbound", 2: "southbound", 3: "westbound"}
 ROAD_ORIENTATIONS_MAP = {
-    "northbound": 0,
-    "eastbound": 90,
-    "southbound": 0,
-    "westbound": 90,
+    Direction.NORTHBOUND: 0,
+    Direction.EASTBOUND: 90,
+    Direction.SOUTHBOUND: 0,
+    Direction.WESTBOUND: 90,
 }
 ROAD_ORIENTATIONS_DIRECTIONS_MAP = {
-    0: ["northbound", "southbound", "southbound", "northbound"],
-    90: ["eastbound", "westbound", "westbound", "eastbound"],
+    0: [
+        Direction.NORTHBOUND,
+        Direction.SOUTHBOUND,
+        Direction.SOUTHBOUND,
+        Direction.NORTHBOUND,
+    ],
+    90: [
+        Direction.EASTBOUND,
+        Direction.WESTBOUND,
+        Direction.WESTBOUND,
+        Direction.EASTBOUND,
+    ],
 }
 
 
 # function to get road direction by using geometry coordinates
 def get_road_direction_from_coordinates(
     coordinates: list[list[float]],
-) -> Literal["unknown", "northbound", "eastbound", "southbound", "westbound"]:
+) -> Direction:
     """Return the direction of the road based on the coordinates of the road
 
     Args:
         coordinates (list[list[float]]): List of coordinates of the road
 
     Returns:
-        Literal["unknown", "northbound", "eastbound", "southbound", "westbound"]: Direction of the road
+        Direction: Direction of the road
     """
-    if not coordinates or type(coordinates) != list or len(coordinates) < 2:
-        return "unknown"
+    if not coordinates or type(coordinates) is not list or len(coordinates) < 2:
+        return Direction.UNKNOWN
 
     try:
         long_dif = coordinates[-1][0] - coordinates[0][0]
         lat_dif = coordinates[-1][1] - coordinates[0][1]
-    except ValueError as e:
-        return "unknown"
-    except IndexError as e:
-        return "unknown"
+    except ValueError:
+        return Direction.UNKNOWN
+    except IndexError:
+        return Direction.UNKNOWN
 
     if abs(long_dif) > abs(lat_dif):
         if long_dif > 0:
-            direction = "eastbound"
+            return Direction.EASTBOUND
         else:
-            direction = "westbound"
-    elif lat_dif > 0:
-        direction = "northbound"
-    else:
-        direction = "southbound"
+            return Direction.WESTBOUND
+    elif abs(long_dif) < abs(lat_dif):
+        if lat_dif > 0:
+            return Direction.NORTHBOUND
+        else:
+            return Direction.SOUTHBOUND
 
-    if lat_dif == 0 and long_dif == 0:
-        direction = "unknown"
-
-    return direction
+    # lat_dif == 0 and long_dif == 0:
+    return Direction.UNKNOWN
 
 
 def get_heading_from_coordinates(coordinates: list[list[float]]) -> float:
     """Return the heading between two long/lat coordinates"""
-    if not coordinates or type(coordinates) != list or len(coordinates) < 2:
+    if not coordinates or type(coordinates) is not list or len(coordinates) < 2:
         return None
 
     geodesic_pyproj = pyproj.Geod(ellps="WGS84")
@@ -74,17 +83,19 @@ def get_heading_from_coordinates(coordinates: list[list[float]]) -> float:
 # This method is very condensed
 def get_closest_direction_from_bearing(
     bearing: float,
-    road_orientation: Literal["northbound", "eastbound", "southbound", "westbound"],
-) -> Literal["northbound", "eastbound", "southbound", "westbound"]:
+    road_orientation: Direction,
+) -> Direction:
     """Return the direction of the object, by snapping the bearing to the road orientation (allows reversals, e.g. northbound or southbound can be returned for a northbound road orientation)
 
     Args:
         bearing (float): bearing/heading of the object
-        road_orientation (Literal["northbound", "eastbound", "southbound", "westbound"]):
+        road_orientation (Direction):
 
     Returns:
-        Literal["northbound", "eastbound", "southbound", "westbound"]: direction of the object snapped to the roadway orientation
+        Direction: direction of the object snapped to the roadway orientation
     """
+    if type(road_orientation) is str:
+        road_orientation = Direction(road_orientation)
     orientation = ROAD_ORIENTATIONS_MAP[road_orientation]
     return ROAD_ORIENTATIONS_DIRECTIONS_MAP[orientation][
         math.floor(abs(orientation - (bearing % 360)) / 90)
