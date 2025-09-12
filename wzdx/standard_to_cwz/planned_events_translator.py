@@ -86,8 +86,6 @@ def cwz_creator(message: dict, info: dict | None = None) -> dict | None:
         return None
     wzd = cwz_translator.add_ids(wzd)
 
-    logging.warning(wzd)
-
     if not cwz_translator.validate_feed(
         wzd, connected_work_zone_feed_v10.connected_work_zone_feed_v10_schema_string
     ):
