@@ -3,7 +3,7 @@ import json
 import logging
 import copy
 
-from wzdx.models.enums import LocationMethod
+from wzdx.models.enums import EventType, LocationMethod
 
 from ..sample_files.validation_schema import connected_work_zone_feed_v10
 
@@ -73,7 +73,7 @@ def cwz_creator(message: dict, info: dict | None = None) -> dict | None:
     if not cwz_translator.validate_info(info):
         return None
 
-    if event_type == "work-zone":
+    if event_type == EventType.WORK_ZONE.value:
         wzd = cwz_translator.initialize_feed_object(info)
         feature = parse_work_zone(message)
     else:
@@ -85,6 +85,8 @@ def cwz_creator(message: dict, info: dict | None = None) -> dict | None:
     if not wzd.get("features"):
         return None
     wzd = cwz_translator.add_ids(wzd)
+
+    logging.warning(wzd)
 
     if not cwz_translator.validate_feed(
         wzd, connected_work_zone_feed_v10.connected_work_zone_feed_v10_schema_string
@@ -115,6 +117,7 @@ def parse_work_zone(incident: dict) -> dict | None:
     detail = event.get("detail")
     additional_info = event.get("additional_info", {})
 
+    # Use MultiPoint if just 2 points, LineString if > 2 points
     geometry = {
         "type": "LineString",
         "coordinates": event.get("geometry", []),
@@ -177,7 +180,7 @@ def parse_work_zone(incident: dict) -> dict | None:
     properties["is_end_position_verified"] = False
 
     # location_method
-    properties["location_method"] = LocationMethod.CHANNEL_DEVICE_METHOD
+    properties["location_method"] = LocationMethod.CHANNEL_DEVICE_METHOD.value
 
     # work_zone_type
     properties["work_zone_type"] = event.get("work_zone_type", "static")

@@ -1,18 +1,18 @@
 from enum import Enum
 
 
-class EventType(Enum):
+class EventType(str, Enum):
     WORK_ZONE = "work-zone"
     DETOUR = "detour"
 
 
-class WorkZoneType(Enum):
+class WorkZoneType(str, Enum):
     STATIC = "static"
     MOVING = "moving"
     PLANNED_MOVING_AREA = "planned-moving-area"
 
 
-class LocationMethod(Enum):
+class LocationMethod(str, Enum):
     CHANNEL_DEVICE_METHOD = "channel-device-method"
     SIGN_METHOD = "sign-method"
     JUNCTION_METHOD = "junction-method"
@@ -20,7 +20,7 @@ class LocationMethod(Enum):
     UNKNOWN = "unknown"
 
 
-class VehicleImpact(Enum):
+class VehicleImpact(str, Enum):
     ALL_LANES_CLOSED = "all-lanes-closed"
     SOME_LANES_CLOSED = "some-lanes-closed"
     ALL_LANES_OPEN = "all-lanes-open"
@@ -35,7 +35,7 @@ class VehicleImpact(Enum):
     UNKNOWN = "unknown"
 
 
-class RestrictionType(Enum):
+class RestrictionType(str, Enum):
     LOCAL_ACCESS_ONLY = "local-access-only"
     NO_TRUCKS = "no-trucks"
     TRAVEL_PEAK_HOURS_ONLY = "travel-peak-hours-only"
@@ -53,7 +53,7 @@ class RestrictionType(Enum):
     NO_PASSING = "no-passing"
 
 
-class WorkTypeName(Enum):
+class WorkTypeName(str, Enum):
     NON_ENCROACHMENT = "non-encroachment"
     MINOR_ROAD_DEFECT_REPAIR = "minor-road-defect-repair"
     ROADSIDE_WORK = "roadside-work"
@@ -66,7 +66,7 @@ class WorkTypeName(Enum):
     ROADWAY_CREATION = "roadway-creation"
 
 
-class LaneStatus(Enum):
+class LaneStatus(str, Enum):
     OPEN = "open"
     CLOSED = "closed"
     SHIFT_LEFT = "shift-left"
@@ -76,7 +76,7 @@ class LaneStatus(Enum):
     ALTERNATING_FLOW = "alternating-flow"
 
 
-class LaneType(Enum):
+class LaneType(str, Enum):
     GENERAL = "general"
     EXIT_LANE = "exit-lane"
     EXIT_RAMP = "exit-ramp"
@@ -90,7 +90,7 @@ class LaneType(Enum):
     TWO_WAY_CENTER_TURN_LANE = "two-way-center-turn-lane"
 
 
-class UnitOfMeasurement(Enum):
+class UnitOfMeasurement(str, Enum):
     FEET = "feet"
     INCHES = "inches"
     CENTIMETERS = "centimeters"
@@ -101,7 +101,7 @@ class UnitOfMeasurement(Enum):
     KILOMETERS = "kilometers"
 
 
-class WorkerPresenceMethod(Enum):
+class WorkerPresenceMethod(str, Enum):
     CAMERA_MONITORING = "camera-monitoring"
     ARROW_BOARD_PRESENT = "arrow-board-present"
     CONES_PRESENT = "cones-present"
@@ -113,7 +113,7 @@ class WorkerPresenceMethod(Enum):
     SCHEDULED = "scheduled"
 
 
-class WorkerPresenceDefinition(Enum):
+class WorkerPresenceDefinition(str, Enum):
     WORKERS_IN_WORK_ZONE_WORKING = "workers-in-work-zone-working"
     WORKERS_IN_WORK_ZONE_NOT_WORKING = "workers-in-work-zone-not-working"
     MOBILE_EQUIPMENT_IN_WORK_ZONE_MOVING = "mobile-equipment-in-work-zone-moving"
@@ -125,13 +125,13 @@ class WorkerPresenceDefinition(Enum):
     HUMANS_IN_RIGHT_OF_WAY = "humans-in-right-of-way"
 
 
-class WorkerPresenceConfidence(Enum):
+class WorkerPresenceConfidence(str, Enum):
     LOW = "low"
     MEDIUM = "medium"
     HIGH = "high"
 
 
-class RelatedRoadEventType(Enum):
+class RelatedRoadEventType(str, Enum):
     FIRST_IN_SEQUENCE = "first-in-sequence"
     NEXT_IN_SEQUENCE = "next-in-sequence"
     FIRST_OCCURRENCE = "first-occurrence"
@@ -142,7 +142,7 @@ class RelatedRoadEventType(Enum):
     ACTIVE_MOVING_OPERATION = "active-moving-operation"
 
 
-class Direction(Enum):
+class Direction(str, Enum):
     NORTHBOUND = "northbound"
     EASTBOUND = "eastbound"
     SOUTHBOUND = "southbound"

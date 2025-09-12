@@ -30,10 +30,9 @@ def init_datetime_mocks(mock_dts):
         "NAMESPACE_UUID": "3f0bce7b-1e59-4be0-80cd-b5f1f3801708",
     },
 )
-@unittest.mock.patch("wzdx.standard_to_wzdx.navjoy_translator.datetime")
 @unittest.mock.patch("wzdx.tools.wzdx_translator.datetime")
-def test_parse_reduction_zone_linestring(mock_dt, mock_dt_3):
-    init_datetime_mocks([mock_dt, mock_dt_3])
+def test_parse_reduction_zone_linestring(mock_dt):
+    init_datetime_mocks([mock_dt])
 
     test_feature = navjoy_translator.parse_reduction_zone(
         navjoy_translator_data.test_parse_reduction_zone_linestring_standard
@@ -90,10 +89,9 @@ def test_get_vehicle_impact_all_lanes_open():
     },
 )
 @patch("uuid.uuid4")
-@unittest.mock.patch("wzdx.standard_to_wzdx.navjoy_translator.datetime")
 @unittest.mock.patch("wzdx.tools.wzdx_translator.datetime")
-def test_wzdx_creator(mock_dt, mock_dt_3, mockUuid):
-    init_datetime_mocks([mock_dt, mock_dt_3])
+def test_wzdx_creator(mock_dt, _):
+    init_datetime_mocks([mock_dt])
     uuid.uuid4 = Mock()
     uuid.uuid4.side_effect = "we234de"
 

@@ -142,7 +142,7 @@ def get_combined_events(
         icone_standard_msgs, filtered_wzdx_msgs
     ):
         icone_msg, wzdx_msg = i
-        event_status = date_tools.get_event_status(wzdx_msg["features"][0])
+        event_status = wzdx_translator.get_event_status(wzdx_msg["features"][0])
         if event_status in ["pending", "completed_recently"]:
             wzdx = combine_icone_with_wzdx(icone_msg, wzdx_msg, event_status)
             if wzdx:

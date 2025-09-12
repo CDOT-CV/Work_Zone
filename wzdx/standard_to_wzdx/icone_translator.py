@@ -5,7 +5,7 @@ import copy
 from typing import Literal
 import uuid
 
-from wzdx.models.enums import LocationMethod
+from wzdx.models.enums import EventType, LocationMethod
 
 from ..tools import date_tools, wzdx_translator
 
@@ -300,7 +300,7 @@ def parse_incident(incident: dict) -> dict:
     core_details = properties["core_details"]
 
     # Event Type ['work-zone', 'detour']
-    core_details["event_type"] = "work-zone"
+    core_details["event_type"] = EventType.WORK_ZONE.value
 
     # data_source_id - Leave this empty, it will be populated by add_ids
     core_details["data_source_id"] = ""
@@ -356,7 +356,7 @@ def parse_incident(incident: dict) -> dict:
     properties["is_end_position_verified"] = False
 
     # location_method
-    properties["location_method"] = LocationMethod.CHANNEL_DEVICE_METHOD
+    properties["location_method"] = LocationMethod.CHANNEL_DEVICE_METHOD.value
 
     # vehicle impact
     properties["vehicle_impact"] = get_vehicle_impact(header.get("description"))

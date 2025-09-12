@@ -36,10 +36,9 @@ def init_datetime_mocks(mock_dts):
         "NAMESPACE_UUID": "3f0bce7b-1e59-4be0-80cd-b5f1f3801708",
     },
 )
-@unittest.mock.patch("wzdx.standard_to_wzdx.navjoy_translator.datetime")
 @unittest.mock.patch("wzdx.tools.wzdx_translator.datetime")
-def test_parse_work_zone_multipoint(mock_dt, mock_dt_3):
-    init_datetime_mocks([mock_dt, mock_dt_3])
+def test_parse_work_zone_multipoint(mock_dt):
+    init_datetime_mocks([mock_dt])
     standard = planned_events_translator_data.test_parse_work_zone_multipoint_standard
     expected_feature = (
         planned_events_translator_data.test_parse_work_zone_multipoint_expected
@@ -75,10 +74,9 @@ def test_parse_work_zone_invalid_data():
 )
 # first is for data source id, second is for a default id that is not used in this example, and the third is the road_event_id
 @patch.object(uuid, "uuid4", side_effect=["w", "", "3"])
-@unittest.mock.patch("wzdx.standard_to_wzdx.navjoy_translator.datetime")
 @unittest.mock.patch("wzdx.tools.wzdx_translator.datetime")
-def test_wzdx_creator(mock_dt, mock_dt_3, _):
-    init_datetime_mocks([mock_dt, mock_dt_3])
+def test_wzdx_creator(mock_dt, _):
+    init_datetime_mocks([mock_dt])
 
     standard = planned_events_translator_data.test_wzdx_creator_standard
 
@@ -86,37 +84,6 @@ def test_wzdx_creator(mock_dt, mock_dt_3, _):
 
     with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
         test_wzdx = planned_events_translator.wzdx_creator(standard)
-    test_wzdx = wzdx_translator.remove_unnecessary_fields(test_wzdx)
-    assert expected_wzdx == test_wzdx
-
-
-@patch.dict(
-    os.environ,
-    {
-        "contact_name": "Heather Pickering-Hilgers",
-        "contact_email": "heather.pickeringhilgers@state.co.us",
-        "publisher": "CDOT",
-        "NAMESPACE_UUID": "3f0bce7b-1e59-4be0-80cd-b5f1f3801708",
-    },
-)
-# first is for data source id, second is for a default id that is not used in this example, and the third is the road_event_id
-@patch.object(uuid, "uuid4", side_effect=["w", "", "3", "4", "5"])
-@unittest.mock.patch("wzdx.standard_to_wzdx.navjoy_translator.datetime")
-@unittest.mock.patch("wzdx.tools.wzdx_translator.datetime")
-def test_wzdx_creator_road_restriction(mock_dt, mock_dt_3, _):
-    init_datetime_mocks([mock_dt, mock_dt_3])
-
-    standard = (
-        planned_events_translator_data.test_wzdx_creator_standard_road_restriction
-    )
-
-    expected_wzdx = (
-        planned_events_translator_data.test_wzdx_creator_expected_road_restriction
-    )
-
-    with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
-        test_wzdx = planned_events_translator.wzdx_creator(standard)
-
     test_wzdx = wzdx_translator.remove_unnecessary_fields(test_wzdx)
     assert expected_wzdx == test_wzdx
 

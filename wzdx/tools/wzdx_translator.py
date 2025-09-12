@@ -7,6 +7,7 @@ from collections import OrderedDict
 from datetime import datetime, timezone
 
 from wzdx.models.enums import Direction, EventType
+from wzdx.tools import date_tools
 from ..sample_files.validation_schema import work_zone_feed_v42
 
 import jsonschema
@@ -97,11 +98,11 @@ def initialize_info():
 
 # Add ids to message
 # This function may fail if some optional fields are not present (lanes, types_of_work, relationship, ...)
-def add_ids(message: dict, event_type=EventType.WORK_ZONE):
+def add_ids(message: dict, event_type=EventType.WORK_ZONE.value):
     if not message or type(message) is not dict:
         return None
 
-    if event_type == EventType.WORK_ZONE:
+    if event_type == EventType.WORK_ZONE.value:
         data_source_id = (
             message.get("feed_info").get("data_sources")[0].get("data_source_id")
         )
@@ -247,3 +248,54 @@ def remove_direction_from_street_name(street):
         street = street[:-2]
 
     return street
+
+
+# Remove additional fields added for internal processing, if they are present
+def remove_unnecessary_fields(wzdx):
+    for feature in wzdx["features"]:
+        if "route_details_start" in feature.get("properties", {}):
+            del feature["properties"]["route_details_start"]
+        if "route_details_end" in feature.get("properties", {}):
+            del feature["properties"]["route_details_end"]
+        if "condition_1" in feature.get("properties", {}):
+            del feature["properties"]["condition_1"]
+    return wzdx
+
+
+# Remove additional fields added for internal processing, if they are present
+def remove_unnecessary_fields_feature(feature):
+    if "route_details_start" in feature.get("properties", {}):
+        del feature["properties"]["route_details_start"]
+    if "route_details_end" in feature.get("properties", {}):
+        del feature["properties"]["route_details_end"]
+    if "condition_1" in feature.get("properties", {}):
+        del feature["properties"]["condition_1"]
+    return feature
+
+
+def get_event_status(feature):
+    start_date = date_tools.parse_datetime_from_iso_string(
+        feature["properties"]["start_date"]
+    )
+    end_date = date_tools.parse_datetime_from_iso_string(
+        feature["properties"]["end_date"]
+    )
+    return date_tools.get_event_status(start_date, end_date)
+
+
+def filter_active_wzdx(wzdx_msgs):
+    return list(
+        filter(
+            lambda x: get_event_status(x["features"][0]) == "active",
+            wzdx_msgs,
+        )
+    )
+
+
+def filter_wzdx_by_event_status(wzdx_msgs, event_status_list):
+    return list(
+        filter(
+            lambda x: get_event_status(x["features"][0]) in event_status_list,
+            wzdx_msgs,
+        )
+    )

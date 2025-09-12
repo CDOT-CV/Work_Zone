@@ -6,8 +6,6 @@ import time_machine
 from wzdx.experimental_combination import attenuator
 from wzdx.tools import cdot_geospatial_api, combination
 import json
-import os
-import os.path
 
 
 def test_validate_directionality_valid():
@@ -18,7 +16,7 @@ def test_validate_directionality_valid():
 
     actual = attenuator.validate_directionality(geotab, planned_event)
 
-    assert actual == True
+    assert actual is True
 
 
 def test_validate_directionality_invalid():
@@ -29,7 +27,7 @@ def test_validate_directionality_invalid():
 
     actual = attenuator.validate_directionality(geotab, planned_event)
 
-    assert actual == False
+    assert actual is False
 
 
 def test_get_combined_events_valid():

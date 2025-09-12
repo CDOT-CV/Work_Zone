@@ -4,7 +4,10 @@ import json
 import logging
 import uuid
 
-from wzdx.models.enums import LocationMethod  # This is necessary for unit test mocking
+from wzdx.models.enums import (
+    EventType,
+    LocationMethod,
+)  # This is necessary for unit test mocking
 from ..tools import date_tools, wzdx_translator, units
 
 PROGRAM_NAME = "WZDxNavJoy568Translator"
@@ -113,7 +116,7 @@ def parse_reduction_zone(incident: dict) -> dict:
     core_details = properties["core_details"]
 
     # Event Type ['work-zone', 'detour']
-    core_details["event_type"] = "work-zone"
+    core_details["event_type"] = EventType.WORK_ZONE.value
 
     # data_source_id
     # Leave this empty, it will be populated by add_ids
@@ -166,7 +169,7 @@ def parse_reduction_zone(incident: dict) -> dict:
     properties["is_end_position_verified"] = False
 
     # location_method
-    properties["location_method"] = LocationMethod.CHANNEL_DEVICE_METHOD
+    properties["location_method"] = LocationMethod.CHANNEL_DEVICE_METHOD.value
 
     # vehicle impact
     properties["vehicle_impact"] = get_vehicle_impact(header.get("justification"))
@@ -200,7 +203,7 @@ def parse_reduction_zone(incident: dict) -> dict:
         )
 
     # location_method
-    properties["location_method"] = LocationMethod.CHANNEL_DEVICE_METHOD
+    properties["location_method"] = LocationMethod.CHANNEL_DEVICE_METHOD.value
 
     # restrictions
     properties["restrictions"] = []

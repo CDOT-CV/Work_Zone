@@ -92,7 +92,7 @@ def get_combined_events(
         active_navjoy_wzdx_msgs, active_wzdx_msgs
     ):
         navjoy_msg, wzdx_msg = i
-        event_status = date_tools.get_event_status(wzdx_msg["features"][0])
+        event_status = wzdx_translator.get_event_status(wzdx_msg["features"][0])
         if event_status in ["active"]:
             combined = combine_navjoy_with_wzdx(navjoy_msg, wzdx_msg)
             wzdx_msg["features"] = combined["features"]

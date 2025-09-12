@@ -7,7 +7,7 @@ from unittest.mock import MagicMock, patch
 
 import time_machine
 from wzdx.standard_to_cwz import planned_events_translator
-from wzdx.tools import cwz_translator
+from wzdx.tools import wzdx_translator
 
 from tests.data.standard_to_cwz import planned_events_translator_data
 
@@ -36,17 +36,16 @@ def init_datetime_mocks(mock_dts):
         "NAMESPACE_UUID": "3f0bce7b-1e59-4be0-80cd-b5f1f3801708",
     },
 )
-@unittest.mock.patch("wzdx.standard_to_cwz.navjoy_translator.datetime")
 @unittest.mock.patch("wzdx.tools.cwz_translator.datetime")
-def test_parse_work_zone_multipoint(mock_dt, mock_dt_3):
-    init_datetime_mocks([mock_dt, mock_dt_3])
-    standard = planned_events_translator_data.test_parse_work_zone_multipoint_standard
+def test_parse_work_zone_multipoint(mock_dt):
+    init_datetime_mocks([mock_dt])
+    standard = planned_events_translator_data.test_parse_work_zone_linestring_standard
     expected_feature = (
-        planned_events_translator_data.test_parse_work_zone_multipoint_expected
+        planned_events_translator_data.test_parse_work_zone_linestring_expected
     )
 
     test_feature = planned_events_translator.parse_work_zone(standard)
-    test_feature = cwz_translator.remove_unnecessary_fields_feature(test_feature)
+    test_feature = wzdx_translator.remove_unnecessary_fields_feature(test_feature)
 
     assert test_feature == expected_feature
 
@@ -63,43 +62,6 @@ def test_parse_work_zone_invalid_data():
     assert test_feature is None
 
 
-# --------------------------------------------------------------------------------Unit test for get_vehicle_impact function--------------------------------------------------------------------------------
-def test_get_vehicle_impact_some_lanes_closed():
-    lanes = [
-        {"order": 1, "type": "shoulder", "status": "open"},
-        {"order": 2, "type": "general", "status": "closed"},
-        {"order": 3, "type": "general", "status": "closed"},
-        {"order": 4, "type": "shoulder", "status": "open"},
-    ]
-    test_vehicle_impact = planned_events_translator.get_vehicle_impact(lanes)
-    expected_vehicle_impact = "some-lanes-closed"
-    assert test_vehicle_impact == expected_vehicle_impact
-
-
-def test_get_vehicle_impact_all_lanes_closed():
-    lanes = [
-        {"order": 1, "type": "shoulder", "status": "closed"},
-        {"order": 2, "type": "general", "status": "closed"},
-        {"order": 3, "type": "general", "status": "closed"},
-        {"order": 4, "type": "shoulder", "status": "closed"},
-    ]
-    test_vehicle_impact = planned_events_translator.get_vehicle_impact(lanes)
-    expected_vehicle_impact = "all-lanes-closed"
-    assert test_vehicle_impact == expected_vehicle_impact
-
-
-def test_get_vehicle_impact_all_lanes_open():
-    lanes = [
-        {"order": 1, "type": "shoulder", "status": "open"},
-        {"order": 2, "type": "general", "status": "open"},
-        {"order": 3, "type": "general", "status": "open"},
-        {"order": 4, "type": "shoulder", "status": "open"},
-    ]
-    test_vehicle_impact = planned_events_translator.get_vehicle_impact(lanes)
-    expected_vehicle_impact = "all-lanes-open"
-    assert test_vehicle_impact == expected_vehicle_impact
-
-
 # --------------------------------------------------------------------------------Unit test for wzdx_creator function--------------------------------------------------------------------------------
 @patch.dict(
     os.environ,
@@ -112,10 +74,9 @@ def test_get_vehicle_impact_all_lanes_open():
 )
 # first is for data source id, second is for a default id that is not used in this example, and the third is the road_event_id
 @patch.object(uuid, "uuid4", side_effect=["w", "", "3"])
-@unittest.mock.patch("wzdx.standard_to_cwz.navjoy_translator.datetime")
 @unittest.mock.patch("wzdx.tools.cwz_translator.datetime")
-def test_cwz_creator(mock_dt, mock_dt_3, _):
-    init_datetime_mocks([mock_dt, mock_dt_3])
+def test_cwz_creator(mock_dt, _):
+    init_datetime_mocks([mock_dt])
 
     standard = planned_events_translator_data.test_cwz_creator_standard
 
@@ -123,19 +84,19 @@ def test_cwz_creator(mock_dt, mock_dt_3, _):
 
     with time_machine.travel(datetime(2021, 4, 13, 0, 0, 0)):
         test_cwz = planned_events_translator.cwz_creator(standard)
-    test_cwz = cwz_translator.remove_unnecessary_fields(test_cwz)
+    test_cwz = wzdx_translator.remove_unnecessary_fields(test_cwz)
     assert expected_cwz == test_cwz
 
 
 def test_cwz_creator_empty_object():
     obj = None
-    test_cwz = planned_events_translator.wzdx_creator(obj)
+    test_cwz = planned_events_translator.cwz_creator(obj)
     assert test_cwz is None
 
 
 def test_cwz_creator_no_incidents():
     obj = []
-    test_cwz = planned_events_translator.wzdx_creator(obj)
+    test_cwz = planned_events_translator.cwz_creator(obj)
     assert test_cwz is None
 
 
@@ -173,7 +134,5 @@ def test_cwz_creator_invalid_info_object():
         "publisher": "iCone",
     }
 
-    test_cwz = planned_events_translator.wzdx_creator(
-        standard, test_invalid_info_object
-    )
+    test_cwz = planned_events_translator.cwz_creator(standard, test_invalid_info_object)
     assert test_cwz is None

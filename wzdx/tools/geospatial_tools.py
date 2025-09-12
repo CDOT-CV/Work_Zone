@@ -6,12 +6,6 @@ from wzdx.models.enums import Direction
 
 
 # Helper mappings for road directions and orientations
-ROAD_DIRECTIONS_MAP = {
-    0: Direction.NORTHBOUND,
-    1: Direction.EASTBOUND,
-    2: Direction.SOUTHBOUND,
-    3: Direction.WESTBOUND,
-}
 ROAD_ORIENTATIONS_MAP = {
     Direction.NORTHBOUND: 0,
     Direction.EASTBOUND: 90,
@@ -100,6 +94,8 @@ def get_closest_direction_from_bearing(
     Returns:
         Direction: direction of the object snapped to the roadway orientation
     """
+    if type(road_orientation) is str:
+        road_orientation = Direction(road_orientation)
     orientation = ROAD_ORIENTATIONS_MAP[road_orientation]
     return ROAD_ORIENTATIONS_DIRECTIONS_MAP[orientation][
         math.floor(abs(orientation - (bearing % 360)) / 90)

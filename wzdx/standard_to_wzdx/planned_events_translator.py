@@ -5,10 +5,8 @@ import copy
 
 from wzdx.models.enums import EventType, LocationMethod
 
-from ..sample_files.validation_schema import (
-    work_zone_feed_v42,
-    road_restriction_v40_feed,
-)
+from ..sample_files.validation_schema import work_zone_feed_v42
+
 
 from ..tools import date_tools, wzdx_translator, uuid_tools
 
@@ -76,7 +74,7 @@ def wzdx_creator(message: dict, info: dict = None) -> dict:
     if not wzdx_translator.validate_info(info):
         return None
 
-    if event_type == EventType.WORK_ZONE:
+    if event_type == EventType.WORK_ZONE.value:
         wzd = wzdx_translator.initialize_wzdx_object(info)
         feature = parse_work_zone(message)
     else:
@@ -89,12 +87,9 @@ def wzdx_creator(message: dict, info: dict = None) -> dict:
         return None
     wzd = wzdx_translator.add_ids(wzd, event_type)
 
-    schemas = {
-        "work-zone": work_zone_feed_v42.wzdx_v42_schema_string,
-        "restriction": road_restriction_v40_feed.road_restriction_v40_schema_string,
-    }
-
-    if not wzdx_translator.validate_wzdx(wzd, schemas[event_type]):
+    if not wzdx_translator.validate_wzdx(
+        wzd, work_zone_feed_v42.wzdx_v42_schema_string
+    ):
         logging.warning("WZDx message failed validation")
         return None
 
@@ -189,7 +184,7 @@ def parse_work_zone(incident: dict) -> dict:
     properties["is_end_position_verified"] = False
 
     # location_method
-    properties["location_method"] = LocationMethod.CHANNEL_DEVICE_METHOD
+    properties["location_method"] = LocationMethod.CHANNEL_DEVICE_METHOD.value
 
     # work_zone_type
     properties["work_zone_type"] = event.get("work_zone_type", "static")

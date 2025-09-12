@@ -77,7 +77,7 @@ def test_get_route_between_measures():
     assert len(actual) == 221
 
 
-def test_get_route_between_measures():
+def test_get_route_between_measures_compressed():
     routeId = "070A"
     startMeasure = 50
     endMeasure = 60
@@ -87,7 +87,7 @@ def test_get_route_between_measures():
     assert len(actual) == 108
 
 
-def test_get_route_between_measures_allow_reversal():
+def test_get_route_between_measures_compressed_allow_reversal():
     routeId = "070A"
     startMeasure = 60
     endMeasure = 50

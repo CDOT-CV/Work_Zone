@@ -1,5 +1,7 @@
 import argparse
 import json
+
+from wzdx.models.enums import Direction
 from ..tools import (
     cdot_geospatial_api,
     geospatial_tools,
@@ -86,7 +88,9 @@ def validate_directionality(geotab: dict, wzdx: dict) -> bool:
         bool: Whether the directionality of the Geotab and WZDx objects match
     """
     geotab_bearing = geotab["avl_location"]["position"]["bearing"]
-    wzdx_direction = wzdx["features"][0]["properties"]["core_details"]["direction"]
+    wzdx_direction = Direction(
+        wzdx["features"][0]["properties"]["core_details"]["direction"] or "unknown"
+    )
 
     geotab_direction = geospatial_tools.get_closest_direction_from_bearing(
         geotab_bearing, wzdx_direction
@@ -156,7 +160,7 @@ def get_combined_events(geotab_msgs: list[dict], wzdx_msgs: list[dict]) -> list[
     combined_events = []
     for i in identify_overlapping_features(geotab_msgs, active_wzdx_msgs):
         geotab_msg, wzdx_msg = i
-        event_status = date_tools.get_event_status(wzdx_msg["features"][0])
+        event_status = wzdx_translator.get_event_status(wzdx_msg["features"][0])
         if event_status in ["active"]:
             wzdx = combine_geotab_with_wzdx(geotab_msg, wzdx_msg)
             combined_events.append(wzdx)
