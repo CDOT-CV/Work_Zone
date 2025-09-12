@@ -26,7 +26,7 @@ class GeospatialApi:
         Args:
             getCachedRequest ((url: str) => cached_response: str, optional): Optional method to enable custom caching. This method is called with a request url to retrieve the cached result.
             setCachedRequest ((url: str, response: str) => None, optional): Optional method to enable custom caching. This method is called with a request url and response to write the cached result.
-            BASE_URL (str, optional): Optional override of GIS server base url, should end with CdotLrsAccessRounded. Defaults first to the env variable CDOT_GEOSPATIAL_API_BASE_URL, then to https://dtdapps.colorado.gov/server/rest/services/LRS/Routes_withDEC/MapServer/exts/CdotLrsAccessRounded.
+            BASE_URL (str, optional): Optional override of GIS server base url, should end with CdotLrsAccessRounded. Defaults first to the env variable CDOT_GEOSPATIAL_API_BASE_URL, then to https://dtdapps.codot.gov/server/rest/services/LRS/Routes_withDEC/MapServer/exts/CdotLrsAccessRounded.
         """
         self.getCachedRequest = getCachedRequest
         self.setCachedRequest = setCachedRequest
