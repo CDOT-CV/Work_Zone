@@ -351,7 +351,6 @@ def create_rtdh_standard_msg(pd: PathDict) -> dict:
                 "normal_speed_limit": pd.get("data/currentPostedSpeed"),
                 "mileMarkerStart": pd.get("data/mileMarkerStart"),
                 "mileMarkerEnd": pd.get("data/mileMarkerEnd"),
-                "mileMarkerEnd": pd.get("data/mileMarkerEnd"),
                 "route_details_start": route_details_start,
                 "route_details_end": route_details_end,
                 "condition_1": condition_1,
