@@ -49,7 +49,7 @@ pip install -r requirements.txt
 _Note_ This requirements.txt was generated using
 
 ```
-poetry export --format requirements.txt --output requirements.txt --without-hashes
+poetry export --format requirements.txt --output requirements.txt --without-hashes --with dev
 ```
 
 #### Environment variable

@@ -12,27 +12,26 @@ jobs:
       - name: Checkout ${{ github.event.repository.name }}
         uses: actions/checkout@v3
 
-      - name: Install Dependencies
+      - name: Install Poetry
         run: |
-          apt-get update
-          apt-get -y install python3-coverage python3-pip python3-pytest
+          python3 -m pip install --upgrade pip
+          python3 -m pip install poetry
 
-      - name: Install Python Requirements
-        run: python3 -m pip install -r $GITHUB_WORKSPACE/requirements.txt
+      - name: Install Main Dependencies
+        run: |
+          poetry install --only main
+
+      - name: Install Dev Dependencies
+        run: |
+          poetry install --only dev
 
       - name: Run Tests and Generate Coverage
         continue-on-error: false
         run: |
-          # Set PYTHONPATH and navigate to the tests directory
-          export PYTHONPATH=$PYTHONPATH:/usr/lib/python3/dist-packages
-          cd $GITHUB_WORKSPACE
-
-          # Run tests and generate coverage report
-          python3 -m coverage run -m pytest
-          python3 -m coverage xml --omit="/opt/*,/root/*,/tmp/*,/usr/*,/var/*,**/__init__.py"
+          poetry run pytest --cov=wzdx --cov-report=xml:cov.xml
 
       - name: Archive Code Coverage Results
         uses: actions/upload-artifact@v4
         with:
-          name: build_api
+          name: code-coverage
           path: cov.xml
