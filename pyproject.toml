@@ -20,6 +20,7 @@ numpy = "^2.3.4"
 requests = "^2.32.5"
 pytz = "^2025.2"
 regex = "^2025.11.3"
+pyproj = "^3.7.2"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^9.0.1"
