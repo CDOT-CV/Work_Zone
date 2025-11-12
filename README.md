@@ -15,9 +15,9 @@ The Google CloudPlatform deployment for the CDOT WZDx combination workflow is ou
 This project is set up to be built into a python package, using python 3.8 and above. Use the following script to build the package:
 
 ```
-pip install wheel==0.43.0 setuptools==70.1.1
-pip install -r requirements.txt
-python setup.py sdist bdist_wheel
+pip install poetry
+poetry install
+poetry build
 ```
 
 The build package tar.gz file will be located in the dist folder.
@@ -37,7 +37,19 @@ Requires:
 This code requires Python 3.12 or a higher version. If you haven’t already, download Python and pip. You can install the required packages by running the following command:
 
 ```
+poetry install
+```
+
+Or, if you prefer to use the generated requirements.txt:
+
+```
 pip install -r requirements.txt
+```
+
+_Note_ This requirements.txt was generated using
+
+```
+poetry export --format requirements.txt --output requirements.txt --without-hashes
 ```
 
 #### Environment variable
@@ -219,7 +231,13 @@ Warnings for the protobuf library exist, created by the currently available vers
 
 ### Unit Test Warnings
 
-There are a few warnings shown by pypi, based on old package versions. These can be resolved by re-installing these packages from the requirements.txt:
+There are a few warnings shown by pypi, based on old package versions. These can be resolved by re-installing the required packages:
+
+```sh
+poetry install
+```
+
+Or, using the requirements.txt:
 
 ```sh
 pip install -r requirements.txt
