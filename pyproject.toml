@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cdot-wzdx-translator"
-version = "1.4.4-rc1"
+version = "1.4.4-rc2"
 description = "CDOT Work Zone WZDx Translators"
 authors = ["CDOT <CDOT_rtdh_prod@state.co.us>"]
 license = "MIT"
@@ -10,7 +10,7 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "^3.11"
 xmltodict = "^1.0.2"
 jsonschema = "^4.25.1"
 python-dateutil = "^2.9.0"

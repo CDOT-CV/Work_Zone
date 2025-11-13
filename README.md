@@ -30,11 +30,11 @@ This set of CWZ and WZDx message translators is set up to be implemented in GCP 
 
 Requires:
 
-- Python 3.12 (or higher)
+- Python 3.11 (or higher)
 
 ### Environment Setup
 
-This code requires Python 3.12 or a higher version. If you haven’t already, download Python and pip. You can install the required packages by running the following command:
+This code requires Python 3.11 or a higher version. If you haven’t already, download Python and pip. You can install the required packages by running the following command:
 
 ```
 poetry install
