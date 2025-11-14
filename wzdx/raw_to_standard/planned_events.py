@@ -857,7 +857,7 @@ def create_rtdh_standard_msg(
     """
     # try:
     description = pd.get("properties/travelerInformationMessage", "")
-    if description == INVALID_EVENT_DESCRIPTION:
+    if not description or description == INVALID_EVENT_DESCRIPTION:
         description = create_description(
             pd.get("properties/name"),
             pd.get("properties/routeName"),
@@ -949,7 +949,7 @@ def create_rtdh_standard_msg(
     if not work_zone_type:
         # Event type is not mapped to a work zone type, cannot be processed
         logging.info(
-            f'Event type not mapped to work zone type: {pd.get("properties/id", default="")}'
+            f'Event type not mapped to work zone type: {pd.get("properties/type", default="")} for event id: {pd.get("properties/id", default="")}'
         )
         return {}
 
