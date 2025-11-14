@@ -6,7 +6,7 @@ jobs:
   build_wzdx:
     runs-on: ubuntu-latest
     container:
-      image: python:3.12.2
+      image: python:3.11.14-slim
       options: --user root
     steps:
       - name: Checkout ${{ github.event.repository.name }}
