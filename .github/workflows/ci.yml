@@ -17,36 +17,18 @@ jobs:
           python3 -m pip install --upgrade pip
           python3 -m pip install poetry
 
-      - name: Install minimum versions
+      - name: Install Main Dependencies
         run: |
-          pip install \
-            xmltodict==0.13.0 \
-            jsonschema==4.18.0 \
-            python-dateutil==2.8.1 \
-            shapely==2.0.4 \
-            geopy==2.3.0 \
-            requests==2.27.0 \
-            pytz==2024.1 \
-            regex==2024.4.16 \
-            pyproj==3.4.0 \
-            google-cloud-monitoring==2.13.0 \
-            google-cloud-storage==2.7.0 \
-            pytest==7.0.0 \
-            pytest-cov==5.0.0 \
-            time-machine==2.10.0
+          poetry install --only main
 
-      #   - name: Install Main Dependencies
-      #     run: |
-      #       poetry install --only main
-
-      #   - name: Install Dev Dependencies
-      #     run: |
-      #       poetry install --only dev
+      - name: Install Dev Dependencies
+        run: |
+          poetry install --only dev
 
       - name: Run Tests and Generate Coverage
         continue-on-error: false
         run: |
-          python -m pytest --cov=wzdx --cov-report=xml:cov.xml
+          poetry run pytest --cov=wzdx --cov-report=xml:cov.xml
 
       - name: Archive Code Coverage Results
         uses: actions/upload-artifact@v4
