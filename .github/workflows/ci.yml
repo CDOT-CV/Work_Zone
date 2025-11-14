@@ -46,7 +46,7 @@ jobs:
       - name: Run Tests and Generate Coverage
         continue-on-error: false
         run: |
-          poetry run pytest --cov=wzdx --cov-report=xml:cov.xml
+          python -m pytest --cov=wzdx --cov-report=xml:cov.xml
 
       - name: Archive Code Coverage Results
         uses: actions/upload-artifact@v4
