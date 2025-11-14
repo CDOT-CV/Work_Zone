@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cdot-wzdx-translator"
-version = "1.4.4-rc3"
+version = "1.4.4"
 description = "CDOT Work Zone WZDx Translators"
 authors = ["CDOT <CDOT_rtdh_prod@state.co.us>"]
 license = "MIT"
