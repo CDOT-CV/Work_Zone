@@ -1,5 +1,5 @@
 # device_feed/properties/field_device_properties.py
-from typing import Annotated, Union
+from typing import Annotated
 
 from pydantic import Discriminator, Tag
 from .arrow_board import ArrowBoard
@@ -7,7 +7,7 @@ from .camera import Camera
 from .dynamic_message_sign import DynamicMessageSign
 from .flashing_beacon import FlashingBeacon
 from .hybrid_sign import HybridSign
-from .marked_location import MarkedLocation
+from .location_marker import LocationMarker
 from .traffic_sensor import TrafficSensor
 from .traffic_signal import TrafficSignal
 
@@ -19,13 +19,13 @@ def get_device_type(v):
 
 # Discriminated union based on core_details.device_type
 FieldDeviceProperties = Annotated[
-    Annotated[ArrowBoard, Tag("arrow-board")] | 
-    Annotated[Camera, Tag("camera")] | 
-    Annotated[DynamicMessageSign, Tag("dynamic-message-sign")] | 
-    Annotated[FlashingBeacon, Tag("flashing-beacon")] | 
-    Annotated[HybridSign, Tag("hybrid-sign")] | 
-    Annotated[MarkedLocation, Tag("location-marker")] | 
-    Annotated[TrafficSensor, Tag("traffic-sensor")] | 
-    Annotated[TrafficSignal, Tag("traffic-signal")],
+    Annotated[ArrowBoard, Tag("arrow-board")]
+    | Annotated[Camera, Tag("camera")]
+    | Annotated[DynamicMessageSign, Tag("dynamic-message-sign")]
+    | Annotated[FlashingBeacon, Tag("flashing-beacon")]
+    | Annotated[HybridSign, Tag("hybrid-sign")]
+    | Annotated[LocationMarker, Tag("location-marker")]
+    | Annotated[TrafficSensor, Tag("traffic-sensor")]
+    | Annotated[TrafficSignal, Tag("traffic-signal")],
     Discriminator(get_device_type),
 ]

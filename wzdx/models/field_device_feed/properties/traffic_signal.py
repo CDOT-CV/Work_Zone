@@ -1,5 +1,5 @@
 # device_feed/properties/traffic_signal.py
-from typing import Literal, Optional
+from typing import Literal
 from pydantic import BaseModel, Field
 from enum import Enum
 from ..field_device_core_details import FieldDeviceCoreDetails
@@ -19,4 +19,4 @@ class TrafficSignalCoreDetails(FieldDeviceCoreDetails):
 
 class TrafficSignal(BaseModel):
     core_details: TrafficSignalCoreDetails = Field(alias="core_details")
-    mode: Optional[TrafficSignalMode] = None
+    mode: TrafficSignalMode = None

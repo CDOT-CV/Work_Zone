@@ -1,8 +1,10 @@
+from pydantic import TypeAdapter
 from wzdx.models.field_device_feed.device_feed import DeviceFeed
 
 def test_deserialization():
     # Deserialize from JSON string
-    json_string = '''
+    json_string = """
+    [
     {
         "feed_info": {
             "update_date": "2025-12-18T20:34:51.1500000Z",
@@ -95,17 +97,24 @@ def test_deserialization():
             }
         ]
     }
-    '''
+    ]
+    """
 
-    device_feed: DeviceFeed = DeviceFeed.model_validate_json(json_string)
+    adapter = TypeAdapter(list[DeviceFeed])
+    device_feed_list: list[DeviceFeed] = adapter.validate_json(json_string)
 
     # Serialize to JSON
-    json_output = device_feed.model_dump_json(by_alias=True, exclude_none=True)
+    json_output = adapter.dump_json(device_feed_list, by_alias=True, exclude_none=True)
 
     # Access properties
-    for feature in device_feed.features:
-        print(f"Device ID: {feature.id}")
-        print(f"Status: {feature.properties.core_details.device_status}")
+    if device_feed_list and len(device_feed_list) > 0:
+        device_feed = device_feed_list[0]
+        for feature in device_feed.features:
+            print(f"Device ID: {feature.id}")
+            print(f"Status: {feature.properties.core_details.device_status}")
+            print(
+                f"Update Date: {feature.properties.core_details.update_date}, {type(feature.properties.core_details.update_date)}"
+            )
 
-    print("JSON Output", json_output)
-    assert False
+        print("JSON Output", json_output)
+        assert False

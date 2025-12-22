@@ -7,6 +7,11 @@ import uuid
 import xml.etree.ElementTree as ET
 from collections import OrderedDict
 
+from pydantic import TypeAdapter
+
+from wzdx.models.field_device_feed.device_feed import DeviceFeed
+from wzdx.models.field_device_feed.field_device_feature import FieldDeviceFeature
+
 from ..tools import date_tools, geospatial_tools, wzdx_translator, combination
 from ..util.collections import PathDict
 
@@ -55,56 +60,47 @@ def main():
         )
 
 
-def generate_standard_messages_from_string(input_file_contents: str):
+def generate_standard_messages_from_string(field_device_feed_json: str):
     """Generate RTDH standard messages from iCone XML string
 
     Args:
         input_file_contents: iCone XML string data
     """
-    raw_messages = generate_raw_messages(input_file_contents)
+    device_feed = parse_device_feed(field_device_feed_json)
     standard_messages = []
-    for message in raw_messages:
-        standard_messages.append(
-            generate_rtdh_standard_message_from_raw_single(message)
-        )
+    for feature in device_feed.features:
+        standard_messages.append(create_rtdh_standard_msg(feature))
     return standard_messages
 
 
-def generate_raw_messages(message: str):
+def retrieve_device_feed(auth_token: str, url: str) -> DeviceFeed:
+    """Retrieve Device Feed from URL with authentication token
+
+    Args:
+        auth_token: Authentication token for accessing the device feed
+        url: URL of the device feed
+    """
+    import requests
+
+    headers = {"Authorization": f"Bearer {auth_token}"}
+    response = requests.get(url, headers=headers)
+    response.raise_for_status()
+    json_string = response.text
+
+    return parse_device_feed(json_string)
+
+
+def parse_device_feed(json_string: str) -> DeviceFeed:
     """Parse iCone XML string and return list of validated xml incidents
 
     Args:
         message: iCone XML string data
     """
-    response_xml = ET.fromstring(message)
-    msg_lst = response_xml.findall("incident")
-    messages = []
+    adapter = TypeAdapter(list[DeviceFeed])
+    device_feed: list[DeviceFeed] = adapter.validate_json(json_string)
 
-    # Loop through all elements and print each element to PubSub
-    for msg in msg_lst:
-        incident = ET.tostring(msg, encoding="utf8")
-        obj = wzdx_translator.parse_xml_to_dict(incident)
-        if validate_incident(obj.get("incident", {})):
-            messages.append(incident)
-        else:
-            logging.warning("Invalid message")
-
-    return messages
-
-
-def generate_rtdh_standard_message_from_raw_single(raw_message_xml: str) -> dict:
-    """Generate RTDH standard message from iCone XML string
-
-    Args:
-        raw_message_xml: xml string iCone incident
-
-    Returns:
-        dict: RTDH standard message
-    """
-    obj = wzdx_translator.parse_xml_to_dict(raw_message_xml)
-    pd = PathDict(obj)
-    standard_message = create_rtdh_standard_msg(pd)
-    return standard_message
+    if device_feed:
+        return device_feed[0]
 
 
 # parse script command line arguments

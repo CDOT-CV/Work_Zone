@@ -9,24 +9,12 @@ class FlashingBeaconFunction(str, Enum):
     QUEUE_WARNING = "queue-warning"
     REDUCED_SPEED = "reduced-speed"
     WORKERS_PRESENT = "workers-present"
-    FLAGGER_PRESENT = "flagger-present"
-    ROAD_WORK = "road-work"
-    UTILITY_WORK = "utility-work"
-    MAINTENANCE_WORK = "maintenance-work"
-    CONSTRUCTION = "construction"
-    INCIDENT = "incident"
-    EMERGENCY = "emergency"
-    CONGESTION = "congestion"
-    WEATHER = "weather"
-    SCHOOL_ZONE = "school-zone"
-    PEDESTRIAN_CROSSING = "pedestrian-crossing"
-    OTHER = "other"
-    UNKNOWN = "unknown"
 
 class FlashingBeaconCoreDetails(FieldDeviceCoreDetails):
     device_type: Literal["flashing-beacon"] = "flashing-beacon"
 
 class FlashingBeacon(BaseModel):
     core_details: FlashingBeaconCoreDetails = Field(alias="core_details")
-    function: Optional[FlashingBeaconFunction] = None
+    function: FlashingBeaconFunction = None
     is_flashing: Optional[bool] = Field(None, alias="is_flashing")
+    sign_text: Optional[str] = Field(None, alias="sign_text")

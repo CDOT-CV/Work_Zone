@@ -6,6 +6,7 @@ from ..field_device_core_details import FieldDeviceCoreDetails
 
 class MarkedLocationType(str, Enum):
     AFAD = "afad"
+    DELINEATOR = "delineator"
     FLAGGER = "flagger"
     LANE_SHIFT = "lane-shift"
     LANE_CLOSURE = "lane-closure"
@@ -18,13 +19,13 @@ class MarkedLocationType(str, Enum):
     WORK_ZONE_START = "work-zone-start"
     WORK_ZONE_END = "work-zone-end"
 
-class LocationMarker(BaseModel):
+class MarkedLocation(BaseModel):
     type: MarkedLocationType
-    description: Optional[str] = None
+    road_event_id: Optional[str] = None
 
 class MarkedLocationCoreDetails(FieldDeviceCoreDetails):
     device_type: Literal["location-marker"] = "location-marker"
 
-class MarkedLocation(BaseModel):
+class LocationMarker(BaseModel):
     core_details: MarkedLocationCoreDetails = Field(alias="core_details")
-    marked_locations: Optional[list[LocationMarker]] = Field(None, alias="marked_locations")
+    marked_locations: Optional[list[MarkedLocation]] = Field(None, alias="marked_locations")
