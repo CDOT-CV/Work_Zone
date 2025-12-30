@@ -5,6 +5,7 @@ from pydantic import BaseModel
 from ..geometry.geojson_geometry import GeoJsonGeometry
 from .properties.field_device_properties import FieldDeviceProperties
 
+
 class FieldDeviceFeature(BaseModel):
     id: str
     type: str
