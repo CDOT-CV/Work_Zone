@@ -221,8 +221,10 @@ python attenuator.py wzdxFile.geojson geotabFile.json --outputDir ./ --updateDat
 
 ### Run the unit test for translator script (from root directory)
 
+(Include a "-vv" to see debug prints and precise diffs of objects)
+
 ```
-python -m pytest 'tests/' -v
+poetry run pytest
 ```
 
 #### Protobuf Warnings
@@ -246,7 +248,7 @@ pip install -r requirements.txt
 ### Unit Test Coverage
 
 ```
-coverage run --source=wzdx -m pytest -v tests; coverage report -m
+poetry run coverage report -m
 ```
 
 ## Message Combination Logic:
