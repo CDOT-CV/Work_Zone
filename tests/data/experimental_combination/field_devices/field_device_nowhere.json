@@ -1,0 +1,19 @@
+{
+  "id": "04435BD5-83C9-44C5-968A-7CF54C089530",
+  "type": "Feature",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [-106.94366455078125, 39.455546939606066]
+  },
+  "properties": {
+    "core_details": {
+      "device_type": "arrow-board",
+      "data_source_id": "67899A97-0F3E-4683-B169-75C09C3B8F67",
+      "device_status": "ok",
+      "update_date": "2022-07-27T20:00:00Z",
+      "has_automatic_location": true,
+      "description": "Roadwork - Caution"
+    },
+    "pattern": "four-corners-flashing"
+  }
+}

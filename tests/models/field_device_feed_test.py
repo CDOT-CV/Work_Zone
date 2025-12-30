@@ -1,6 +1,7 @@
 from pydantic import TypeAdapter
 from wzdx.models.field_device_feed.device_feed import DeviceFeed
 
+
 def test_deserialization():
     # Deserialize from JSON string
     json_string = """
@@ -117,4 +118,66 @@ def test_deserialization():
             )
 
         print("JSON Output", json_output)
-        assert False
+
+    expected_object = {
+        "feed_info": {
+            "update_date": "2025-12-18T20:34:51.150000Z",
+            "publisher": "iCone Products LLC",
+            "contact_email": "support@iconeproducts.com",
+            "version": "4.2",
+            "data_sources": [
+                {
+                    "data_source_id": "67899A97-0F3E-4683-B169-75C09C3B8F67",
+                    "update_date": "2025-12-18T20:34:51.150000Z",
+                    "organization_name": "iCone Products LLC",
+                    "contact_email": "support@iconeproducts.com",
+                }
+            ],
+        },
+        "type": "FeatureCollection",
+        "features": [
+            {
+                "id": "E595E296-B1DE-4911-9454-1F2D54AC2EBD",
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [-104.7752009, 39.4983242],
+                },
+                "properties": {
+                    "core_details": {
+                        "device_type": "arrow-board",
+                        "data_source_id": "67899A97-0F3E-4683-B169-75C09C3B8F67",
+                        "device_status": "ok",
+                        "update_date": "2025-12-18T20:30:27Z",
+                        "has_automatic_location": True,
+                        "description": "Roadwork - Caution",
+                    },
+                    "pattern": "four-corners-flashing",
+                },
+            },
+            {
+                "id": "0E1E3B5B-D06E-4390-ABB3-C89091E246F0",
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [-106.0079266, 39.6531149],
+                },
+                "properties": {
+                    "core_details": {
+                        "device_type": "location-marker",
+                        "data_source_id": "67899A97-0F3E-4683-B169-75C09C3B8F67",
+                        "device_status": "ok",
+                        "update_date": "2025-12-18T20:19:13Z",
+                        "has_automatic_location": True,
+                        "description": "Roadwork Active",
+                    },
+                    "marked_locations": [{"type": "work-truck-with-lights-flashing"}],
+                },
+            },
+        ],
+    }
+
+    assert (
+        device_feed_list[0].model_dump(by_alias=True, exclude_none=True, mode="json")
+        == expected_object
+    )
