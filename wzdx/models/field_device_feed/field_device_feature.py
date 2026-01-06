@@ -11,3 +11,7 @@ class FieldDeviceFeature(BaseModel):
     properties: FieldDeviceProperties
     geometry: GeoJsonGeometry
     bbox: Optional[list[float]] = None
+
+    # Custom Fields
+    route_details_start: Optional[dict] = None
+    route_details_end: Optional[dict] = None

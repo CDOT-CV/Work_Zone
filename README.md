@@ -24,7 +24,7 @@ The build package tar.gz file will be located in the dist folder.
 
 ## Running the Translators Locally
 
-This set of CWZ and WZDx message translators is set up to be implemented in GCP with App Engines and Dataflows. It is also set up with raw, standard, and enhanced data feeds. This means that to take a raw icone document and generate a CWZ or WZDx message, the raw icone xml document must first be converted to 1 or multiple standard json messages (based on CDOT RTDH specification), and then each standard message may be converted into a single enhanced message. At this point, this data can be combined with other CWZ/WZDx messages, through the [combination scripts](wzdx/experimental_combination/)
+This set of CWZ and WZDx message translators is set up to be implemented in GCP with App Engines and Dataflows. It is also set up with raw, standard, and enhanced data feeds. This means that to take a CDOT planned events document and generate a CWZ or WZDx message, the raw planned event document must first be converted to 1 or multiple standard json messages (based on CDOT RTDH specification), and then each standard message may be converted into a single enhanced message. At this point, this data can be combined with other CWZ/WZDx messages, through the [combination scripts](wzdx/experimental_combination/)
 
 ### Prerequisites
 
@@ -109,44 +109,6 @@ Example usage:
 python -m wzdx.standard_to_wzdx.planned_events_translator 'wzdx/sample_files/standard/planned_events/standard_planned_event_OpenTMS-Event20643308360_westbound.json'
 ```
 
-### Execution for iCone translator
-
-#### Raw to Standard Conversion
-
-```
-python -m wzdx.raw_to_standard.icone inputfile.json --outputDir outputDirectory
-```
-
-Example usage:
-
-```
-python -m wzdx.raw_to_standard.icone 'wzdx/sample_files/raw/icone/icone_ftp_20241107-235100.xml'
-```
-
-#### Standard to CWZ Conversion
-
-```
-python -m wzdx.standard_to_cwz.icone_translator inputfile.json --outputFile outputfile.geojson
-```
-
-Example usage:
-
-```
-python -m wzdx.standard_to_cwz.icone_translator 'wzdx/sample_files/standard/icone/standard_icone_U13632784_20241107235100_1731023924_unknown.json'
-```
-
-#### Standard to WZDx Conversion
-
-```
-python -m wzdx.standard_to_wzdx.icone_translator inputfile.json --outputFile outputfile.geojson
-```
-
-Example usage:
-
-```
-python -m wzdx.standard_to_wzdx.icone_translator 'wzdx/sample_files/standard/icone/standard_icone_U13632784_20241107235100_1731023924_unknown.json'
-```
-
 ### Execution for NavJoy 568 translator
 
 This translator reads in a NavJoy 568 speed reduction form and translates it into a WZDx message. Many of the 568 messages cover 2 directions of traffic, and are thus expanded into 2 WZDx messages, one for each direction.
@@ -191,19 +153,19 @@ python -m wzdx.standard_to_wzdx.navjoy_translator 'wzdx/sample_files/standard/na
 
 ### Combine WZDx Messages
 
-These combination scripts take in a base WZDx message and an additional icone/navjoy WZDx or Geotab JSON message, and generate an enhanced WZDx message as output.
+These combination scripts take in a base WZDx message and an additional field device/navjoy WZDx or Geotab JSON message, and generate an enhanced WZDx message as output.
 
-### iCone
+### Field Device Feed
 
-Edit the files read in for iCone and WZDx messages in the main method, then run the combination script:
+Insert names for the files read in for field device feed and WZDx messages in the below combination script and then run:
 
 ```
-python icone.py wzdxFile.geojson ./iconeDirectory --outputDir ./ --updateDates true
+python -m wzdx.experimental_combination.field_devices wzdxFile.geojson deviceFeedFile.geojson --outputDir ./ --updateDates false
 ```
 
 ### Navjoy 568 form
 
-Edit the files read in for navjoy and WZDx messages in the main method, then run the combination script:
+Insert names for the files read in for navjoy-568 and WZDx messages in the below combination script and then run:
 
 ```
 python navjoy.py wzdxFile.geojson navjoyWzdxFile.geojson --outputDir ./ --updateDates true
@@ -211,7 +173,7 @@ python navjoy.py wzdxFile.geojson navjoyWzdxFile.geojson --outputDir ./ --update
 
 ### Geotab Vehicle (ATMA)
 
-Edit the files read in for geotab_avl and WZDx messages in the main method, then run the combination script:
+Insert names for the files read in for geotab_avl and WZDx messages in the below combination script and then run:
 
 ```
 python attenuator.py wzdxFile.geojson geotabFile.json --outputDir ./ --updateDates true
