@@ -1,4 +1,3 @@
-# device_feed/properties/traffic_signal.py
 from typing import Literal
 from pydantic import BaseModel, Field
 from enum import Enum

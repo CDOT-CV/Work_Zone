@@ -1,4 +1,3 @@
-# wzdx/geometry/geojson_geometry.py
 from typing import Annotated, Union
 
 from pydantic import Field

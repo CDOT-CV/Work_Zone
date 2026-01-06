@@ -1,4 +1,3 @@
-# device_feed/properties/field_device_properties.py
 from typing import Annotated
 
 from pydantic import Discriminator, Tag

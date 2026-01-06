@@ -1,4 +1,3 @@
-# wzdx/geometry/geojson_point.py
 from typing import Literal
 from pydantic import BaseModel
 

@@ -1,13 +1,8 @@
-# wzdx/feed_info.py
 from typing import Optional
 from pydantic import BaseModel, Field, EmailStr
 from .feed_data_source import FeedDataSource
 from datetime import datetime
 
-class FeedInfoIconeCustom(BaseModel):
-    """Custom iCone properties"""
-    # Add iCone custom fields here based on FeedInfoIconeCustom.java
-    pass
 
 class FeedInfo(BaseModel):
     """
