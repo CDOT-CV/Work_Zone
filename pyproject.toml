@@ -1,15 +1,35 @@
-[build-system]
-requires = [
-    "setuptools>=42",
-    "wheel",
-    "xmltodict",
-    "jsonschema",
-    "python-dateutil",
-    "shapely",
-    "geopy",
-    "pyproj",
-    "numpy",
-    "requests",
-    "pytz"
+[tool.poetry]
+name = "cdot-wzdx-translator"
+version = "1.4.5"
+description = "CDOT Work Zone WZDx Translators"
+authors = ["CDOT <CDOT_rtdh_prod@state.co.us>"]
+license = "MIT"
+readme = "README.md"
+packages = [
+    { include = "wzdx" }
 ]
-build-backend = "setuptools.build_meta"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+xmltodict = ">=0.13.0,<2.0.0"
+jsonschema = "^4.18.0"
+python-dateutil = "^2.8.1"
+shapely = "^2.0.4"
+geopy = "^2.3.0"
+requests = "^2.27.0"
+pytz = ">=2024.1,<2026.0"
+regex = ">=2024.4.16,<2026.0.0"
+pyproj = "^3.4.0"
+google-cloud-monitoring = "^2.13.0"
+google-cloud-storage = ">=2.7.0,<4.0.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = ">=7.0.0,<10.0.0"
+pytest-cov = ">=5.0.0,<8.0.0"
+time-machine = "^2.10.0"
+poetry-plugin-export = "^1.6.0"
+twine = ">=5.0.0,<7.0.0"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

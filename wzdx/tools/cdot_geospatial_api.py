@@ -18,7 +18,7 @@ class GeospatialApi:
         setCachedRequest: Callable[[str, str], None] = lambda url, response: None,
         BASE_URL: str = os.getenv(
             "CDOT_GEOSPATIAL_API_BASE_URL",
-            "https://dtdapps.codot.gov/server/rest/services/LRS/Routes_withDEC/MapServer/exts/CdotLrsAccessRounded",
+            "https://dtdapps.codot.gov/server/rest/services/LRS/Routes_withDEC/MapServer/exts/LrsServerRounded",
         ),
     ):
         """Initialize the Geospatial API

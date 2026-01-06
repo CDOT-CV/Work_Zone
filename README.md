@@ -15,9 +15,9 @@ The Google CloudPlatform deployment for the CDOT WZDx combination workflow is ou
 This project is set up to be built into a python package, using python 3.8 and above. Use the following script to build the package:
 
 ```
-pip install wheel==0.43.0 setuptools==70.1.1
-pip install -r requirements.txt
-python setup.py sdist bdist_wheel
+pip install poetry
+poetry install
+poetry build
 ```
 
 The build package tar.gz file will be located in the dist folder.
@@ -30,14 +30,26 @@ This set of CWZ and WZDx message translators is set up to be implemented in GCP 
 
 Requires:
 
-- Python 3.12 (or higher)
+- Python 3.11 (or higher)
 
 ### Environment Setup
 
-This code requires Python 3.12 or a higher version. If you haven’t already, download Python and pip. You can install the required packages by running the following command:
+This code requires Python 3.11 or a higher version. If you haven’t already, download Python and pip. You can install the required packages by running the following command:
+
+```
+poetry install
+```
+
+Or, if you prefer to use the generated requirements.txt:
 
 ```
 pip install -r requirements.txt
+```
+
+_Note_ This requirements.txt was generated using
+
+```
+poetry export --format requirements.txt --output requirements.txt --without-hashes --with dev
 ```
 
 #### Environment variable
@@ -46,13 +58,13 @@ Please set up the following environment variable for your local computer before 
 
 Runtime Environment Variables:
 
-| Name                         |                                                 Value                                                 |                                          Description |
-| :--------------------------- | :---------------------------------------------------------------------------------------------------: | ---------------------------------------------------: |
-| contact_name                 |                                       Heather Pickering-Hilgers                                       |                            name of WZDx feed contact |
-| contact_email                |                                 heather.pickeringhilgers@state.co.us                                  |                           email of WZDx feed contact |
-| publisher                    |                                                 CDOT                                                  |       name of the organization issuing the WZDx feed |
-| CDOT_GEOSPATIAL_API_BASE_URL | https://dtdapps.codot.gov/server/rest/services/LRS/Routes_withDEC/MapServer/exts/CdotLrsAccessRounded |          GIS server endpoint used for geospatial api |
-| NAMESPACE_UUID               |                                 00000000-0000-0000-0000-000000000000                                  | UUID used to pseudo-randomly tag all UUIDs generated |
+| Name                         |                                               Value                                               |                                          Description |
+| :--------------------------- | :-----------------------------------------------------------------------------------------------: | ---------------------------------------------------: |
+| contact_name                 |                                     Heather Pickering-Hilgers                                     |                            name of WZDx feed contact |
+| contact_email                |                               heather.pickeringhilgers@state.co.us                                |                           email of WZDx feed contact |
+| publisher                    |                                               CDOT                                                |       name of the organization issuing the WZDx feed |
+| CDOT_GEOSPATIAL_API_BASE_URL | https://dtdapps.codot.gov/server/rest/services/LRS/Routes_withDEC/MapServer/exts/LrsServerRounded |          GIS server endpoint used for geospatial api |
+| NAMESPACE_UUID               |                               00000000-0000-0000-0000-000000000000                                | UUID used to pseudo-randomly tag all UUIDs generated |
 
 Example usage:
 for mac computer run the following script to initialize the environment variable:
@@ -209,8 +221,10 @@ python attenuator.py wzdxFile.geojson geotabFile.json --outputDir ./ --updateDat
 
 ### Run the unit test for translator script (from root directory)
 
+(Include a "-vv" to see debug prints and precise diffs of objects)
+
 ```
-python -m pytest 'tests/' -v
+poetry run pytest
 ```
 
 #### Protobuf Warnings
@@ -219,7 +233,13 @@ Warnings for the protobuf library exist, created by the currently available vers
 
 ### Unit Test Warnings
 
-There are a few warnings shown by pypi, based on old package versions. These can be resolved by re-installing these packages from the requirements.txt:
+There are a few warnings shown by pypi, based on old package versions. These can be resolved by re-installing the required packages:
+
+```sh
+poetry install
+```
+
+Or, using the requirements.txt:
 
 ```sh
 pip install -r requirements.txt
@@ -228,7 +248,7 @@ pip install -r requirements.txt
 ### Unit Test Coverage
 
 ```
-coverage run --source=wzdx -m pytest -v tests; coverage report -m
+poetry run coverage report -m
 ```
 
 ## Message Combination Logic:
