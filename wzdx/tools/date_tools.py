@@ -48,8 +48,8 @@ def parse_datetime_from_unix(time):
 
 
 def datetime_from_unix(time):
-    # Maximum unix value of 32536850400 due to windows 32-bit signed integer (max valid date is 3001, 1, 19, 21, 59, 59)
-    if time >= 32536850400:
+    # Maximum unix value of 32536850399 due to windows 32-bit signed integer (max valid date is 3001, 1, 19, 21, 59, 59)
+    if time > 32536850399:
         return datetime.fromtimestamp(time / 1000, tz=timezone.utc)
     else:
         return datetime.fromtimestamp(time, tz=timezone.utc)

@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Literal, Optional
 from pydantic import BaseModel, Field
 
 from ..geometry.geojson_geometry import GeoJsonGeometry
@@ -18,7 +18,8 @@ class FieldDeviceFeature(BaseModel):
         alias="id",
         description="A unique identifier issued by the data feed provider to identify the field device. It is recommended that this identifier is a Universally Unique IDentifier (UUID) as defined in RFC 4122 to guarantee uniqueness between feeds and over time.",
     )
-    type: str = Field(
+    type: Literal["Feature"] = Field(
+        default="Feature",
         alias="type",
         description="The GeoJSON object type. This MUST be the string Feature.",
     )

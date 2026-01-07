@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Literal, Optional
 from pydantic import BaseModel, Field
 
 from ..feed_info.feed_info import FeedInfo
@@ -18,7 +18,8 @@ class DeviceFeed(BaseModel):
     feed_info: FeedInfo = Field(
         alias="feed_info", description="Information about the data feed."
     )
-    type: str = Field(
+    type: Literal["FeatureCollection"] = Field(
+        default="FeatureCollection",
         alias="type",
         description="The GeoJSON object type. For WZDx, this must be the string FeatureCollection.",
     )

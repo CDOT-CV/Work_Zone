@@ -1,7 +1,9 @@
 from typing import Literal
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+
 
 class GeoJsonLineString(BaseModel):
     """GeoJSON LineString geometry"""
-    type: Literal["LineString"]
-    coordinates: list[list[float]]  # Array of positions
+
+    type: Literal["LineString"] = Field(default="LineString", alias="type")
+    coordinates: list[list[float]] = Field(alias="coordinates")
