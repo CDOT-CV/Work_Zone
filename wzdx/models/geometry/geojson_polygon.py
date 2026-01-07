@@ -5,7 +5,12 @@ from pydantic import BaseModel, Field
 class GeoJsonPolygon(BaseModel):
     """GeoJSON Polygon geometry"""
 
-    type: Literal["Polygon"] = Field(default="Polygon", alias="type")
+    type: Literal["Polygon"] = Field(
+        default="Polygon",
+        alias="type",
+        description="The GeoJSON object type. This MUST be the string Polygon.",
+    )
     coordinates: list[list[list[float]]] = Field(
-        alias="coordinates"
-    )  # Array of linear rings
+        alias="coordinates",
+        description="A list of linear rings that make up the Polygon.",
+    )
