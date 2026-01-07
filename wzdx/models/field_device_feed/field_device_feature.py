@@ -16,7 +16,7 @@ class FieldDeviceFeature(BaseModel):
 
     id: str = Field(
         alias="id",
-        description="A unique identifier issued by the data feed provider to identify the field device. It is recommended that this identifier is a Universally Unique IDentifier (UUID) as defined in RFC 4122 to guarantee uniqueness between feeds and over time.",
+        description="A unique identifier issued by the data feed provider to identify the field device. It is recommended that this identifier is a Universally Unique Identifier (UUID) as defined in RFC 4122 to guarantee uniqueness between feeds and over time.",
     )
     type: Literal["Feature"] = Field(
         default="Feature",

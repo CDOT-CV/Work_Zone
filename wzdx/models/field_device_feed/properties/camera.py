@@ -17,7 +17,10 @@ class Camera(BaseModel):
     Documentation: https://github.com/usdot-jpo-ode/wzdx/blob/develop/spec-content/objects/Camera.md
     """
 
-    core_details: CameraCoreDetails = Field(alias="core_details", description="")
+    core_details: CameraCoreDetails = Field(
+        alias="core_details",
+        description="The core details of the field device that are shared by all types of field devices, not specific to cameras.",
+    )
     image_url: Optional[HttpUrl] = Field(
         None,
         alias="image_url",

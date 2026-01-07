@@ -1,6 +1,6 @@
 from typing import Optional
 from datetime import datetime
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, EmailStr, Field
 
 
 class FeedDataSource(BaseModel):
@@ -12,7 +12,7 @@ class FeedDataSource(BaseModel):
 
     data_source_id: str = Field(
         alias="data_source_id",
-        description="A unique identifier for the data source organization providing work zone data. It is recommended that this identifier is a Universally Unique IDentifier (UUID) as defined in RFC 4122 to guarantee uniqueness between feeds and over time.",
+        description="A unique identifier for the data source organization providing work zone data. It is recommended that this identifier is a Universally Unique Identifier (UUID) as defined in RFC 4122 to guarantee uniqueness between feeds and over time.",
     )
     organization_name: str = Field(
         alias="organization_name",
@@ -33,7 +33,7 @@ class FeedDataSource(BaseModel):
         alias="contact_name",
         description="The name of the individual or group responsible for the data source.",
     )
-    contact_email: Optional[str] = Field(
+    contact_email: Optional[EmailStr] = Field(
         default=None,
         alias="contact_email",
         description="The email address of the individual or group responsible for the data source.",
