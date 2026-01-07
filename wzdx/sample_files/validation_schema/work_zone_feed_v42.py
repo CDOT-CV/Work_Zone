@@ -14,53 +14,44 @@ wzdx_v42_schema_string = {
             "properties": {
                 "publisher": {
                     "description": "The organization responsible for publishing the feed",
-                    "type": "string"
+                    "type": "string",
                 },
                 "contact_name": {
                     "description": "The name of the individual or group responsible for the data feed",
-                    "type": "string"
+                    "type": "string",
                 },
                 "contact_email": {
                     "description": "The email address of the individual or group responsible for the data feed",
                     "type": "string",
-                    "format": "email"
+                    "format": "email",
                 },
                 "update_frequency": {
                     "description": "The frequency in seconds at which the data feed is updated",
                     "type": "integer",
-                    "minimum": 1
+                    "minimum": 1,
                 },
                 "update_date": {
                     "description": "The UTC date and time when the GeoJSON file (representing the instance of the feed) was generated",
                     "type": "string",
-                    "format": "date-time"
+                    "format": "date-time",
                 },
                 "version": {
                     "description": "The WZDx specification version used to create the data feed, in 'major.minor' format",
                     "type": "string",
-                    "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+                    "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$",
                 },
                 "license": {
-                    "description": "The URL of the license that applies to the data in the WZDx feed. This *must* be the string \"https://creativecommons.org/publicdomain/zero/1.0/\"",
-                    "enum": [
-                        "https://creativecommons.org/publicdomain/zero/1.0/"
-                    ]
+                    "description": 'The URL of the license that applies to the data in the WZDx feed. This *must* be the string "https://creativecommons.org/publicdomain/zero/1.0/"',
+                    "enum": ["https://creativecommons.org/publicdomain/zero/1.0/"],
                 },
                 "data_sources": {
                     "description": "A list of specific data sources for the road event data in the feed",
                     "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/FeedDataSource"
-                    },
-                    "minItems": 1
-                }
+                    "items": {"$ref": "#/definitions/FeedDataSource"},
+                    "minItems": 1,
+                },
             },
-            "required": [
-                "update_date",
-                "version",
-                "publisher",
-                "data_sources"
-            ],
+            "required": ["update_date", "version", "publisher", "data_sources"],
             "definitions": {
                 "FeedDataSource": {
                     "title": "WZDx Feed Data Source",
@@ -68,59 +59,51 @@ wzdx_v42_schema_string = {
                     "type": "object",
                     "properties": {
                         "data_source_id": {
-                            "description": "Unique identifier for the organization providing work zone data. It is recommended that this identifier is a Universally Unique IDentifier (UUID) as defined in [RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122).",
-                            "type": "string"
+                            "description": "Unique identifier for the organization providing work zone data. It is recommended that this identifier is a Universally Unique Identifier (UUID) as defined in [RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122).",
+                            "type": "string",
                         },
                         "organization_name": {
                             "description": "The name of the organization for the authoritative source of the work zone data",
-                            "type": "string"
+                            "type": "string",
                         },
                         "contact_name": {
                             "description": "The name of the individual or group responsible for the data source",
-                            "type": "string"
+                            "type": "string",
                         },
                         "contact_email": {
                             "description": "The email address of the individual or group responsible for the data source",
                             "type": "string",
-                            "format": "email"
+                            "format": "email",
                         },
                         "update_frequency": {
                             "description": "The frequency in seconds at which the data source is updated",
                             "type": "integer",
-                            "minimum": 1
+                            "minimum": 1,
                         },
                         "update_date": {
                             "description": "The UTC date and time when the data source was last updated",
                             "type": "string",
-                            "format": "date-time"
+                            "format": "date-time",
                         },
                         "lrs_type": {
                             "description": "**DEPRECATED** Describes the type of linear referencing system used for the milepost measurements",
-                            "type": "string"
+                            "type": "string",
                         },
                         "lrs_url": {
                             "description": "**DEPRECATED** A URL where additional information on the LRS information and transformation information is stored",
                             "type": "string",
-                            "format": "uri"
+                            "format": "uri",
                         },
                         "location_verify_method": {
                             "description": "***DEPRECATED***The method used to verify the accuracy of the location information",
-                            "type": "string"
-                        }
+                            "type": "string",
+                        },
                     },
-                    "required": [
-                        "data_source_id",
-                        "organization_name"
-                    ]
+                    "required": ["data_source_id", "organization_name"],
                 }
-            }
+            },
         },
-        "type": {
-            "description": "The GeoJSON type",
-            "enum": [
-                "FeatureCollection"
-            ]
-        },
+        "type": {"description": "The GeoJSON type", "enum": ["FeatureCollection"]},
         "features": {
             "description": "An array of GeoJSON Feature objects which represent WZDx road events",
             "type": "array",
@@ -133,25 +116,16 @@ wzdx_v42_schema_string = {
                                     "core_details": {
                                         "properties": {
                                             "event_type": {
-                                                "enum": [
-                                                    "work-zone",
-                                                    "detour"
-                                                ]
+                                                "enum": ["work-zone", "detour"]
                                             }
                                         },
-                                        "required": [
-                                            "event_type"
-                                        ]
+                                        "required": ["event_type"],
                                     }
                                 },
-                                "required": [
-                                    "core_details"
-                                ]
+                                "required": ["core_details"],
                             }
                         },
-                        "required": [
-                            "properties"
-                        ]
+                        "required": ["properties"],
                     },
                     {
                         "$id": "https://raw.githubusercontent.com/usdot-jpo-ode/wzdx/main/schemas/4.2/RoadEventFeature.json",
@@ -161,14 +135,12 @@ wzdx_v42_schema_string = {
                         "type": "object",
                         "properties": {
                             "id": {
-                                "description": "A unique identifier issued by the data feed provider to identify the WZDx road event. It is recommended that this identifier is a Universally Unique IDentifier (UUID) as defined in [RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122).",
-                                "type": "string"
+                                "description": "A unique identifier issued by the data feed provider to identify the WZDx road event. It is recommended that this identifier is a Universally Unique Identifier (UUID) as defined in [RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122).",
+                                "type": "string",
                             },
                             "type": {
                                 "description": "The GeoJSON object type; must be 'Feature'",
-                                "enum": [
-                                    "Feature"
-                                ]
+                                "enum": ["Feature"],
                             },
                             "properties": {
                                 "type": "object",
@@ -177,17 +149,11 @@ wzdx_v42_schema_string = {
                                         "$ref": "#/definitions/RoadEventCoreDetails"
                                     }
                                 },
-                                "required": [
-                                    "core_details"
-                                ],
+                                "required": ["core_details"],
                                 "oneOf": [
-                                    {
-                                        "$ref": "#/definitions/WorkZoneRoadEvent"
-                                    },
-                                    {
-                                        "$ref": "#/definitions/DetourRoadEvent"
-                                    }
-                                ]
+                                    {"$ref": "#/definitions/WorkZoneRoadEvent"},
+                                    {"$ref": "#/definitions/DetourRoadEvent"},
+                                ],
                             },
                             "geometry": {
                                 "oneOf": [
@@ -196,16 +162,11 @@ wzdx_v42_schema_string = {
                                         "$id": "https://geojson.org/schema/LineString.json",
                                         "title": "GeoJSON LineString",
                                         "type": "object",
-                                        "required": [
-                                            "type",
-                                            "coordinates"
-                                        ],
+                                        "required": ["type", "coordinates"],
                                         "properties": {
                                             "type": {
                                                 "type": "string",
-                                                "enum": [
-                                                    "LineString"
-                                                ]
+                                                "enum": ["LineString"],
                                             },
                                             "coordinates": {
                                                 "type": "array",
@@ -213,55 +174,42 @@ wzdx_v42_schema_string = {
                                                 "items": {
                                                     "type": "array",
                                                     "minItems": 2,
-                                                    "items": {
-                                                        "type": "number"
-                                                    }
-                                                }
+                                                    "items": {"type": "number"},
+                                                },
                                             },
                                             "bbox": {
                                                 "type": "array",
                                                 "minItems": 4,
-                                                "items": {
-                                                    "type": "number"
-                                                }
-                                            }
-                                        }
+                                                "items": {"type": "number"},
+                                            },
+                                        },
                                     },
                                     {
                                         "$schema": "http://json-schema.org/draft-07/schema#",
                                         "$id": "https://geojson.org/schema/MultiPoint.json",
                                         "title": "GeoJSON MultiPoint",
                                         "type": "object",
-                                        "required": [
-                                            "type",
-                                            "coordinates"
-                                        ],
+                                        "required": ["type", "coordinates"],
                                         "properties": {
                                             "type": {
                                                 "type": "string",
-                                                "enum": [
-                                                    "MultiPoint"
-                                                ]
+                                                "enum": ["MultiPoint"],
                                             },
                                             "coordinates": {
                                                 "type": "array",
                                                 "items": {
                                                     "type": "array",
                                                     "minItems": 2,
-                                                    "items": {
-                                                        "type": "number"
-                                                    }
-                                                }
+                                                    "items": {"type": "number"},
+                                                },
                                             },
                                             "bbox": {
                                                 "type": "array",
                                                 "minItems": 4,
-                                                "items": {
-                                                    "type": "number"
-                                                }
-                                            }
-                                        }
-                                    }
+                                                "items": {"type": "number"},
+                                            },
+                                        },
+                                    },
                                 ]
                             },
                             "bbox": {
@@ -271,17 +219,10 @@ wzdx_v42_schema_string = {
                                 "description": "Information on the coordinate range for a Geometry, Feature, or FeatureCollection",
                                 "type": "array",
                                 "minItems": 4,
-                                "items": {
-                                    "type": "number"
-                                }
-                            }
+                                "items": {"type": "number"},
+                            },
                         },
-                        "required": [
-                            "id",
-                            "type",
-                            "properties",
-                            "geometry"
-                        ],
+                        "required": ["id", "type", "properties", "geometry"],
                         "definitions": {
                             "WorkZoneRoadEvent": {
                                 "title": "Work Zone Road Event",
@@ -292,18 +233,12 @@ wzdx_v42_schema_string = {
                                         "properties": {
                                             "core_details": {
                                                 "properties": {
-                                                    "event_type": {
-                                                        "const": "work-zone"
-                                                    }
+                                                    "event_type": {"const": "work-zone"}
                                                 },
-                                                "required": [
-                                                    "event_type"
-                                                ]
+                                                "required": ["event_type"],
                                             }
                                         },
-                                        "required": [
-                                            "core_details"
-                                        ]
+                                        "required": ["core_details"],
                                     },
                                     {
                                         "properties": {
@@ -312,51 +247,51 @@ wzdx_v42_schema_string = {
                                             },
                                             "beginning_cross_street": {
                                                 "description": "Name or number of the nearest cross street along the roadway where the event begins",
-                                                "type": "string"
+                                                "type": "string",
                                             },
                                             "ending_cross_street": {
                                                 "description": "Name or number of the nearest cross street along the roadway where the event ends",
-                                                "type": "string"
+                                                "type": "string",
                                             },
                                             "beginning_milepost": {
                                                 "description": "The linear distance measured against a milepost marker along a roadway where the event begins",
                                                 "type": "number",
-                                                "minimum": 0
+                                                "minimum": 0,
                                             },
                                             "ending_milepost": {
                                                 "description": "The linear distance measured against a milepost marker along a roadway where the event ends",
                                                 "type": "number",
-                                                "minimum": 0
+                                                "minimum": 0,
                                             },
                                             "is_start_position_verified": {
                                                 "description": "Indicates if the start position (first geometric coordinate pair) is based on actual reported data from a GPS-equipped device that measured the location of the start of the work zone.",
-                                                "type": "boolean"
+                                                "type": "boolean",
                                             },
                                             "is_end_position_verified": {
                                                 "description": "Indicates if the end position (last geometric coordinate pair) is based on actual reported data from a GPS-equipped device that measured the location of the end of the work zone.",
-                                                "type": "boolean"
+                                                "type": "boolean",
                                             },
                                             "start_date": {
                                                 "description": "The UTC date and time (formatted according to RFC 3339, Section 5.6) when the road event begins (e.g. 2020-11-03T19:37:00Z)",
                                                 "type": "string",
-                                                "format": "date-time"
+                                                "format": "date-time",
                                             },
                                             "end_date": {
                                                 "description": "The UTC date and time (formatted according to RFC 3339, Section 5.6) when the road event ends (e.g. 2020-11-03T19:37:00Z)",
                                                 "type": "string",
-                                                "format": "date-time"
+                                                "format": "date-time",
                                             },
                                             "is_start_date_verified": {
                                                 "description": "Indicates if work has been confirmed to have started, such as from a person or field device",
-                                                "type": "boolean"
+                                                "type": "boolean",
                                             },
                                             "is_end_date_verified": {
                                                 "description": "Indicates if work has been confirmed to have ended, such as from a person or field device",
-                                                "type": "boolean"
+                                                "type": "boolean",
                                             },
                                             "work_zone_type": {
                                                 "description": "The type of work zone road event",
-                                                "$ref": "#/definitions/WorkZoneType"
+                                                "$ref": "#/definitions/WorkZoneType",
                                             },
                                             "vehicle_impact": {
                                                 "$ref": "#/definitions/VehicleImpact"
@@ -370,63 +305,61 @@ wzdx_v42_schema_string = {
                                             "reduced_speed_limit_kph": {
                                                 "description": "If applicable, the reduced speed limit posted within the road event, in kilometers per hour",
                                                 "type": "number",
-                                                "minimum": 0
+                                                "minimum": 0,
                                             },
                                             "restrictions": {
                                                 "description": "A list of zero or more restrictions applying to the road event",
                                                 "type": "array",
                                                 "items": {
                                                     "$ref": "#/definitions/Restriction"
-                                                }
+                                                },
                                             },
                                             "types_of_work": {
                                                 "description": "A list of the types of work being done in a road event",
                                                 "type": "array",
                                                 "items": {
                                                     "$ref": "#/definitions/TypeOfWork"
-                                                }
+                                                },
                                             },
                                             "lanes": {
                                                 "description": "A list of individual lanes within a road event (roadway segment)",
                                                 "type": "array",
-                                                "items": {
-                                                    "$ref": "#/definitions/Lane"
-                                                }
+                                                "items": {"$ref": "#/definitions/Lane"},
                                             },
                                             "impacted_cds_curb_zones": {
                                                 "description": "A list of references to external CDS Curb Zones impacted by the work zone",
                                                 "type": "array",
                                                 "items": {
                                                     "$ref": "#/definitions/CdsCurbZonesReference"
-                                                }
+                                                },
                                             },
                                             "event_status": {
                                                 "description": "**DEPRECATED**",
-                                                "$ref": "#/definitions/EventStatus"
+                                                "$ref": "#/definitions/EventStatus",
                                             },
                                             "start_date_accuracy": {
                                                 "description": "**DEPRECATED** Use is_start_date_verified instead",
-                                                "$ref": "#/definitions/TimeVerification"
+                                                "$ref": "#/definitions/TimeVerification",
                                             },
                                             "end_date_accuracy": {
                                                 "description": "**DEPRECATED** Use is_end_date_verified instead",
-                                                "$ref": "#/definitions/TimeVerification"
+                                                "$ref": "#/definitions/TimeVerification",
                                             },
                                             "beginning_accuracy": {
                                                 "description": "**DEPRECATED** Use is_start_position_verified instead.",
-                                                "$ref": "#/definitions/SpatialVerification"
+                                                "$ref": "#/definitions/SpatialVerification",
                                             },
                                             "ending_accuracy": {
                                                 "description": "**DEPRECATED** Use is_end_position_verified instead.",
-                                                "$ref": "#/definitions/SpatialVerification"
-                                            }
+                                                "$ref": "#/definitions/SpatialVerification",
+                                            },
                                         },
                                         "required": [
                                             "core_details",
                                             "start_date",
                                             "end_date",
                                             "vehicle_impact",
-                                            "location_method"
+                                            "location_method",
                                         ],
                                         "allOf": [
                                             {
@@ -440,7 +373,7 @@ wzdx_v42_schema_string = {
                                                         "required": [
                                                             "start_date_accuracy"
                                                         ]
-                                                    }
+                                                    },
                                                 ]
                                             },
                                             {
@@ -454,7 +387,7 @@ wzdx_v42_schema_string = {
                                                         "required": [
                                                             "beginning_accuracy"
                                                         ]
-                                                    }
+                                                    },
                                                 ]
                                             },
                                             {
@@ -464,11 +397,7 @@ wzdx_v42_schema_string = {
                                                             "is_end_date_verified"
                                                         ]
                                                     },
-                                                    {
-                                                        "required": [
-                                                            "end_date_accuracy"
-                                                        ]
-                                                    }
+                                                    {"required": ["end_date_accuracy"]},
                                                 ]
                                             },
                                             {
@@ -478,16 +407,12 @@ wzdx_v42_schema_string = {
                                                             "is_end_position_verified"
                                                         ]
                                                     },
-                                                    {
-                                                        "required": [
-                                                            "ending_accuracy"
-                                                        ]
-                                                    }
+                                                    {"required": ["ending_accuracy"]},
                                                 ]
-                                            }
-                                        ]
-                                    }
-                                ]
+                                            },
+                                        ],
+                                    },
+                                ],
                             },
                             "DetourRoadEvent": {
                                 "title": "Detour Road Event",
@@ -498,18 +423,12 @@ wzdx_v42_schema_string = {
                                         "properties": {
                                             "core_details": {
                                                 "properties": {
-                                                    "event_type": {
-                                                        "const": "detour"
-                                                    }
+                                                    "event_type": {"const": "detour"}
                                                 },
-                                                "required": [
-                                                    "event_type"
-                                                ]
+                                                "required": ["event_type"],
                                             }
                                         },
-                                        "required": [
-                                            "core_details"
-                                        ]
+                                        "required": ["core_details"],
                                     },
                                     {
                                         "properties": {
@@ -518,57 +437,57 @@ wzdx_v42_schema_string = {
                                             },
                                             "beginning_cross_street": {
                                                 "description": "Name or number of the nearest cross street along the roadway where the event begins",
-                                                "type": "string"
+                                                "type": "string",
                                             },
                                             "ending_cross_street": {
                                                 "description": "Name or number of the nearest cross street along the roadway where the event ends",
-                                                "type": "string"
+                                                "type": "string",
                                             },
                                             "beginning_milepost": {
                                                 "description": "The linear distance measured against a milepost marker along a roadway where the event begins",
                                                 "type": "number",
-                                                "minimum": 0
+                                                "minimum": 0,
                                             },
                                             "ending_milepost": {
                                                 "description": "The linear distance measured against a milepost marker along a roadway where the event ends",
                                                 "type": "number",
-                                                "minimum": 0
+                                                "minimum": 0,
                                             },
                                             "start_date": {
                                                 "description": "The UTC date and time (formatted according to RFC 3339, Section 5.6) when the road event begins (e.g. 2020-11-03T19:37:00Z)",
                                                 "type": "string",
-                                                "format": "date-time"
+                                                "format": "date-time",
                                             },
                                             "end_date": {
                                                 "description": "The UTC date and time (formatted according to RFC 3339, Section 5.6) when the road event ends (e.g. 2020-11-03T19:37:00Z)",
                                                 "type": "string",
-                                                "format": "date-time"
+                                                "format": "date-time",
                                             },
                                             "is_start_date_verified": {
                                                 "description": "Indicates if the detour has been confirmed to have started, such as from a person or device in the field or a report from a traffic management center",
-                                                "type": "boolean"
+                                                "type": "boolean",
                                             },
                                             "is_end_date_verified": {
                                                 "description": "Indicates if the detour has been confirmed to have ended, such as from a person or device in the field or a report from a traffic management center",
-                                                "type": "boolean"
+                                                "type": "boolean",
                                             },
                                             "event_status": {
                                                 "description": "**DEPRECATED**",
-                                                "$ref": "#/definitions/EventStatus"
+                                                "$ref": "#/definitions/EventStatus",
                                             },
                                             "start_date_accuracy": {
                                                 "description": "**DEPRECATED** Use is_start_date_verified instead",
-                                                "$ref": "#/definitions/TimeVerification"
+                                                "$ref": "#/definitions/TimeVerification",
                                             },
                                             "end_date_accuracy": {
                                                 "description": "**DEPRECATED** Use is_end_date_verified instead",
-                                                "$ref": "#/definitions/TimeVerification"
-                                            }
+                                                "$ref": "#/definitions/TimeVerification",
+                                            },
                                         },
                                         "required": [
                                             "core_details",
                                             "start_date",
-                                            "end_date"
+                                            "end_date",
                                         ],
                                         "allOf": [
                                             {
@@ -582,7 +501,7 @@ wzdx_v42_schema_string = {
                                                         "required": [
                                                             "start_date_accuracy"
                                                         ]
-                                                    }
+                                                    },
                                                 ]
                                             },
                                             {
@@ -592,16 +511,12 @@ wzdx_v42_schema_string = {
                                                             "is_end_date_verified"
                                                         ]
                                                     },
-                                                    {
-                                                        "required": [
-                                                            "end_date_accuracy"
-                                                        ]
-                                                    }
+                                                    {"required": ["end_date_accuracy"]},
                                                 ]
-                                            }
-                                        ]
-                                    }
-                                ]
+                                            },
+                                        ],
+                                    },
+                                ],
                             },
                             "RoadEventCoreDetails": {
                                 "title": "Road Event Core Details",
@@ -610,25 +525,21 @@ wzdx_v42_schema_string = {
                                 "properties": {
                                     "data_source_id": {
                                         "description": "Identifies the data source from which the road event data is sourced from",
-                                        "type": "string"
+                                        "type": "string",
                                     },
-                                    "event_type": {
-                                        "$ref": "#/definitions/EventType"
-                                    },
+                                    "event_type": {"$ref": "#/definitions/EventType"},
                                     "related_road_events": {
                                         "description": "A list describing one or more road events which are related to this road event, such as a work zone project it is part of or another road event that occurs before or after it in sequence.",
                                         "type": "array",
                                         "items": {
                                             "$ref": "#/definitions/RelatedRoadEvent"
-                                        }
+                                        },
                                     },
                                     "road_names": {
                                         "description": "A list of publicly known names of the road on which the event occurs. This may include the road number designated by a jurisdiction such as a county, state or interstate (e.g. I-5, VT 133)",
                                         "type": "array",
                                         "minItems": 1,
-                                        "items": {
-                                            "type": "string"
-                                        }
+                                        "items": {"type": "string"},
                                     },
                                     "direction": {
                                         "$id": "https://raw.githubusercontent.com/usdot-jpo-ode/wzdx/main/schemas/4.2/Direction.json",
@@ -643,38 +554,38 @@ wzdx_v42_schema_string = {
                                             "undefined",
                                             "unknown",
                                             "inner-loop",
-                                            "outer-loop"
-                                        ]
+                                            "outer-loop",
+                                        ],
                                     },
                                     "name": {
                                         "description": "A human-readable name for the road event",
-                                        "type": "string"
+                                        "type": "string",
                                     },
                                     "description": {
                                         "description": "Short free text description of the road event",
-                                        "type": "string"
+                                        "type": "string",
                                     },
                                     "creation_date": {
                                         "description": "The UTC date and time (formatted according to RFC 3339, Section 5.6) when the road event was created (e.g. 2020-11-03T19:37:00Z)",
                                         "type": "string",
-                                        "format": "date-time"
+                                        "format": "date-time",
                                     },
                                     "update_date": {
                                         "description": "The UTC date and time (formatted according to RFC 3339, Section 5.6) when any information in the RoadEventFeature (including child objects) that the RoadEventCoreDetails applies to was most recently updated or confirmed as up to date",
                                         "type": "string",
-                                        "format": "date-time"
+                                        "format": "date-time",
                                     },
                                     "relationship": {
                                         "description": "**DEPRECATED**",
-                                        "$ref": "#/definitions/Relationship"
-                                    }
+                                        "$ref": "#/definitions/Relationship",
+                                    },
                                 },
                                 "required": [
                                     "event_type",
                                     "data_source_id",
                                     "direction",
-                                    "road_names"
-                                ]
+                                    "road_names",
+                                ],
                             },
                             "LocationMethod": {
                                 "title": "Location Method Enumerated Type",
@@ -684,8 +595,8 @@ wzdx_v42_schema_string = {
                                     "sign-method",
                                     "junction-method",
                                     "other",
-                                    "unknown"
-                                ]
+                                    "unknown",
+                                ],
                             },
                             "Relationship": {
                                 "title": "Relationship",
@@ -696,35 +607,27 @@ wzdx_v42_schema_string = {
                                         "description": "Indicates the first (can be multiple) road event in a sequence of road events by RoadEventFeature 'id'",
                                         "type": "array",
                                         "minItems": 1,
-                                        "items": {
-                                            "type": "string"
-                                        }
+                                        "items": {"type": "string"},
                                     },
                                     "next": {
                                         "description": "Indicates the next (can be multiple) road event in a sequence of road events by RoadEventFeature 'id'",
                                         "type": "array",
                                         "minItems": 1,
-                                        "items": {
-                                            "type": "string"
-                                        }
+                                        "items": {"type": "string"},
                                     },
                                     "parents": {
                                         "description": "Indicates entities that the road event with this relationship is a part of, such as a work zone project or phase. Values can but do not have to correspond to a WZDx entity",
                                         "type": "array",
                                         "minItems": 1,
-                                        "items": {
-                                            "type": "string"
-                                        }
+                                        "items": {"type": "string"},
                                     },
                                     "children": {
                                         "description": "Indicates entities that are part of the road event with this relationship, such as a detour or piece of equipment. Values can but do not have to correspond to a WZDx entity",
                                         "type": "array",
                                         "minItems": 1,
-                                        "items": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
+                                        "items": {"type": "string"},
+                                    },
+                                },
                             },
                             "RelatedRoadEvent": {
                                 "title": "RelatedRoadEvent",
@@ -733,34 +636,27 @@ wzdx_v42_schema_string = {
                                 "properties": {
                                     "type": {
                                         "description": "The type of road event being identified, such as another sequence of related work zones, a detour, or next road event in sequence.",
-                                        "$ref": "#/definitions/RelatedRoadEventType"
+                                        "$ref": "#/definitions/RelatedRoadEventType",
                                     },
                                     "id": {
                                         "description": "An identifier for the related road event by the type property.",
-                                        "type": "string"
-                                    }
+                                        "type": "string",
+                                    },
                                 },
-                                "required": [
-                                    "type",
-                                    "id"
-                                ]
+                                "required": ["type", "id"],
                             },
                             "TypeOfWork": {
                                 "title": "Type of Work",
                                 "description": "A description of the type of work being done in a road event and an indication of if that work will result in an architectural change to the roadway",
                                 "type": "object",
                                 "properties": {
-                                    "type_name": {
-                                        "$ref": "#/definitions/WorkTypeName"
-                                    },
+                                    "type_name": {"$ref": "#/definitions/WorkTypeName"},
                                     "is_architectural_change": {
                                         "description": "A flag indicating whether the type of work will result in an architectural change to the roadway",
-                                        "type": "boolean"
-                                    }
+                                        "type": "boolean",
+                                    },
                                 },
-                                "required": [
-                                    "type_name"
-                                ]
+                                "required": ["type_name"],
                             },
                             "Lane": {
                                 "title": "Lane",
@@ -770,56 +666,34 @@ wzdx_v42_schema_string = {
                                     "order": {
                                         "description": "The position (index) of the lane in sequence on the roadway, where '1' represents the left-most lane",
                                         "type": "integer",
-                                        "minimum": 1
+                                        "minimum": 1,
                                     },
-                                    "status": {
-                                        "$ref": "#/definitions/LaneStatus"
-                                    },
-                                    "type": {
-                                        "$ref": "#/definitions/LaneType"
-                                    },
+                                    "status": {"$ref": "#/definitions/LaneStatus"},
+                                    "type": {"$ref": "#/definitions/LaneType"},
                                     "lane_number": {
                                         "description": "***DEPRECATED*** The number assigned to the lane to help identify its position. Flexible, but usually used for regular, drivable lanes",
                                         "type": "integer",
-                                        "minimum": 1
+                                        "minimum": 1,
                                     },
                                     "restrictions": {
                                         "description": "A list of zero or more restrictions specific to the lane",
                                         "type": "array",
-                                        "items": {
-                                            "$ref": "#/definitions/Restriction"
-                                        }
-                                    }
+                                        "items": {"$ref": "#/definitions/Restriction"},
+                                    },
                                 },
-                                "required": [
-                                    "status",
-                                    "type",
-                                    "order"
-                                ]
+                                "required": ["status", "type", "order"],
                             },
                             "Restriction": {
                                 "title": "Restriction",
                                 "description": "A restriction on a roadway or lane, including type and value",
                                 "type": "object",
                                 "properties": {
-                                    "type": {
-                                        "$ref": "#/definitions/RestrictionType"
-                                    },
-                                    "value": {
-                                        "type": "number"
-                                    },
-                                    "unit": {
-                                        "$ref": "#/definitions/UnitOfMeasurement"
-                                    }
+                                    "type": {"$ref": "#/definitions/RestrictionType"},
+                                    "value": {"type": "number"},
+                                    "unit": {"$ref": "#/definitions/UnitOfMeasurement"},
                                 },
-                                "required": [
-                                    "type"
-                                ],
-                                "dependencies": {
-                                    "value": [
-                                        "unit"
-                                    ]
-                                }
+                                "required": ["type"],
+                                "dependencies": {"value": ["unit"]},
                             },
                             "CdsCurbZonesReference": {
                                 "title": "CdsCurbZonesReference",
@@ -829,20 +703,15 @@ wzdx_v42_schema_string = {
                                     "cds_curb_zone_ids": {
                                         "description": "A list of CDS Curb Zone ids",
                                         "type": "array",
-                                        "items": {
-                                            "type": "string"
-                                        }
+                                        "items": {"type": "string"},
                                     },
                                     "cds_curbs_api_url": {
                                         "description": "An identifier for the source of the requested CDS Curbs API",
                                         "type": "string",
-                                        "format": "uri"
-                                    }
+                                        "format": "uri",
+                                    },
                                 },
-                                "required": [
-                                    "cds_curb_zone_ids",
-                                    "cds_curbs_api_url"
-                                ]
+                                "required": ["cds_curb_zone_ids", "cds_curbs_api_url"],
                             },
                             "WorkerPresence": {
                                 "title": "Worker Presence",
@@ -851,7 +720,7 @@ wzdx_v42_schema_string = {
                                 "properties": {
                                     "are_workers_present": {
                                         "description": "Whether workers are present in the work zone event area, following the definition provided in the \u2018definition\u2019 property on the WorkerPresence object",
-                                        "type": "boolean"
+                                        "type": "boolean",
                                     },
                                     "method": {
                                         "$ref": "#/definitions/WorkerPresenceMethod"
@@ -859,7 +728,7 @@ wzdx_v42_schema_string = {
                                     "worker_presence_last_confirmed_date": {
                                         "description": "The UTC date and time at which the presence of workers was last confirmed",
                                         "type": "string",
-                                        "format": "date-time"
+                                        "format": "date-time",
                                     },
                                     "confidence": {
                                         "$ref": "#/definitions/WorkerPresenceConfidence"
@@ -870,37 +739,25 @@ wzdx_v42_schema_string = {
                                         "items": {
                                             "$ref": "#/definitions/WorkerPresenceDefinition"
                                         },
-                                        "uniqueItems": True
-                                    }
+                                        "uniqueItems": True,
+                                    },
                                 },
-                                "required": [
-                                    "are_workers_present"
-                                ]
+                                "required": ["are_workers_present"],
                             },
                             "EventType": {
                                 "title": "Road Event Type Enumerated Type",
                                 "description": "The type of WZDx road event",
-                                "enum": [
-                                    "work-zone",
-                                    "detour",
-                                    "restriction"
-                                ]
+                                "enum": ["work-zone", "detour", "restriction"],
                             },
                             "SpatialVerification": {
                                 "title": "Spatial Verification Enumerated Type",
                                 "description": "An indication of how a geographical coordinate was defined",
-                                "enum": [
-                                    "estimated",
-                                    "verified"
-                                ]
+                                "enum": ["estimated", "verified"],
                             },
                             "TimeVerification": {
                                 "title": "Time Verification Enumerated Type",
                                 "description": "A measure of how accurate a date-time is",
-                                "enum": [
-                                    "estimated",
-                                    "verified"
-                                ]
+                                "enum": ["estimated", "verified"],
                             },
                             "EventStatus": {
                                 "title": "Event Status Enumerated Type",
@@ -910,17 +767,13 @@ wzdx_v42_schema_string = {
                                     "pending",
                                     "active",
                                     "completed",
-                                    "cancelled"
-                                ]
+                                    "cancelled",
+                                ],
                             },
                             "WorkZoneType": {
                                 "title": "Work Zone Type Enumerated Type",
                                 "description": "The type of work zone road event",
-                                "enum": [
-                                    "static",
-                                    "moving",
-                                    "planned-moving-area"
-                                ]
+                                "enum": ["static", "moving", "planned-moving-area"],
                             },
                             "VehicleImpact": {
                                 "title": "Vehicle Impact Enumerated Type",
@@ -937,8 +790,8 @@ wzdx_v42_schema_string = {
                                     "some-lanes-closed-split",
                                     "flagging",
                                     "temporary-traffic-signal",
-                                    "unknown"
-                                ]
+                                    "unknown",
+                                ],
                             },
                             "RestrictionType": {
                                 "title": "Restriction Type Enumerated Type",
@@ -958,8 +811,8 @@ wzdx_v42_schema_string = {
                                     "towing-prohibited",
                                     "permitted-oversize-loads-prohibited",
                                     "local-access-only",
-                                    "no-passing"
-                                ]
+                                    "no-passing",
+                                ],
                             },
                             "WorkTypeName": {
                                 "title": "Work Type Name Enumerated Type",
@@ -974,8 +827,8 @@ wzdx_v42_schema_string = {
                                     "surface-work",
                                     "painting",
                                     "roadway-relocation",
-                                    "roadway-creation"
-                                ]
+                                    "roadway-creation",
+                                ],
                             },
                             "LaneStatus": {
                                 "title": "Lane Status Enumerated Type",
@@ -987,8 +840,8 @@ wzdx_v42_schema_string = {
                                     "shift-right",
                                     "merge-left",
                                     "merge-right",
-                                    "alternating-flow"
-                                ]
+                                    "alternating-flow",
+                                ],
                             },
                             "LaneType": {
                                 "title": "Lane Type Enumerated Type",
@@ -1005,8 +858,8 @@ wzdx_v42_schema_string = {
                                     "parking",
                                     "median",
                                     "two-way-center-turn-lane",
-                                    "center-left-turn-lane"
-                                ]
+                                    "center-left-turn-lane",
+                                ],
                             },
                             "UnitOfMeasurement": {
                                 "title": "Unit of Measurement Enumerated Type",
@@ -1017,8 +870,8 @@ wzdx_v42_schema_string = {
                                     "centimeters",
                                     "pounds",
                                     "tons",
-                                    "kilograms"
-                                ]
+                                    "kilograms",
+                                ],
                             },
                             "WorkerPresenceMethod": {
                                 "title": "Worker Presence Method Enumerated Type",
@@ -1032,8 +885,8 @@ wzdx_v42_schema_string = {
                                     "mobile-device-present",
                                     "check-in-app",
                                     "check-in-verbal",
-                                    "scheduled"
-                                ]
+                                    "scheduled",
+                                ],
                             },
                             "WorkerPresenceDefinition": {
                                 "title": "Worker Presence Definition Enumerated Type",
@@ -1045,17 +898,13 @@ wzdx_v42_schema_string = {
                                     "mobile-equipment-in-work-zone-not-moving",
                                     "fixed-equipment-in-work-zone",
                                     "humans-behind-barrier",
-                                    "humans-in-right-of-way"
-                                ]
+                                    "humans-in-right-of-way",
+                                ],
                             },
                             "WorkerPresenceConfidence": {
                                 "title": "Worker Presence Confidence Enumerated Type",
                                 "description": "A high-level description of the feed publisher's confidence in the reported WorkerPresence value of are_workers_present",
-                                "enum": [
-                                    "low",
-                                    "medium",
-                                    "high"
-                                ]
+                                "enum": ["low", "medium", "high"],
                             },
                             "RelatedRoadEventType": {
                                 "title": "Related Road Event Type Enumerated Type",
@@ -1068,13 +917,13 @@ wzdx_v42_schema_string = {
                                     "related-work-zone",
                                     "related-detour",
                                     "planned-moving-operation",
-                                    "active-moving-operation"
-                                ]
-                            }
-                        }
-                    }
+                                    "active-moving-operation",
+                                ],
+                            },
+                        },
+                    },
                 ]
-            }
+            },
         },
         "bbox": {
             "$id": "https://raw.githubusercontent.com/usdot-jpo-ode/wzdx/main/schemas/4.2/BoundingBox.json",
@@ -1083,9 +932,7 @@ wzdx_v42_schema_string = {
             "description": "Information on the coordinate range for a Geometry, Feature, or FeatureCollection",
             "type": "array",
             "minItems": 4,
-            "items": {
-                "type": "number"
-            }
+            "items": {"type": "number"},
         },
         "road_event_feed_info": {
             "$id": "https://raw.githubusercontent.com/usdot-jpo-ode/wzdx/main/schemas/4.2/FeedInfo.json",
@@ -1096,53 +943,44 @@ wzdx_v42_schema_string = {
             "properties": {
                 "publisher": {
                     "description": "The organization responsible for publishing the feed",
-                    "type": "string"
+                    "type": "string",
                 },
                 "contact_name": {
                     "description": "The name of the individual or group responsible for the data feed",
-                    "type": "string"
+                    "type": "string",
                 },
                 "contact_email": {
                     "description": "The email address of the individual or group responsible for the data feed",
                     "type": "string",
-                    "format": "email"
+                    "format": "email",
                 },
                 "update_frequency": {
                     "description": "The frequency in seconds at which the data feed is updated",
                     "type": "integer",
-                    "minimum": 1
+                    "minimum": 1,
                 },
                 "update_date": {
                     "description": "The UTC date and time when the GeoJSON file (representing the instance of the feed) was generated",
                     "type": "string",
-                    "format": "date-time"
+                    "format": "date-time",
                 },
                 "version": {
                     "description": "The WZDx specification version used to create the data feed, in 'major.minor' format",
                     "type": "string",
-                    "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+                    "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$",
                 },
                 "license": {
-                    "description": "The URL of the license that applies to the data in the WZDx feed. This *must* be the string \"https://creativecommons.org/publicdomain/zero/1.0/\"",
-                    "enum": [
-                        "https://creativecommons.org/publicdomain/zero/1.0/"
-                    ]
+                    "description": 'The URL of the license that applies to the data in the WZDx feed. This *must* be the string "https://creativecommons.org/publicdomain/zero/1.0/"',
+                    "enum": ["https://creativecommons.org/publicdomain/zero/1.0/"],
                 },
                 "data_sources": {
                     "description": "A list of specific data sources for the road event data in the feed",
                     "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/FeedDataSource"
-                    },
-                    "minItems": 1
-                }
+                    "items": {"$ref": "#/definitions/FeedDataSource"},
+                    "minItems": 1,
+                },
             },
-            "required": [
-                "update_date",
-                "version",
-                "publisher",
-                "data_sources"
-            ],
+            "required": ["update_date", "version", "publisher", "data_sources"],
             "definitions": {
                 "FeedDataSource": {
                     "title": "WZDx Feed Data Source",
@@ -1150,68 +988,51 @@ wzdx_v42_schema_string = {
                     "type": "object",
                     "properties": {
                         "data_source_id": {
-                            "description": "Unique identifier for the organization providing work zone data. It is recommended that this identifier is a Universally Unique IDentifier (UUID) as defined in [RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122).",
-                            "type": "string"
+                            "description": "Unique identifier for the organization providing work zone data. It is recommended that this identifier is a Universally Unique Identifier (UUID) as defined in [RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122).",
+                            "type": "string",
                         },
                         "organization_name": {
                             "description": "The name of the organization for the authoritative source of the work zone data",
-                            "type": "string"
+                            "type": "string",
                         },
                         "contact_name": {
                             "description": "The name of the individual or group responsible for the data source",
-                            "type": "string"
+                            "type": "string",
                         },
                         "contact_email": {
                             "description": "The email address of the individual or group responsible for the data source",
                             "type": "string",
-                            "format": "email"
+                            "format": "email",
                         },
                         "update_frequency": {
                             "description": "The frequency in seconds at which the data source is updated",
                             "type": "integer",
-                            "minimum": 1
+                            "minimum": 1,
                         },
                         "update_date": {
                             "description": "The UTC date and time when the data source was last updated",
                             "type": "string",
-                            "format": "date-time"
+                            "format": "date-time",
                         },
                         "lrs_type": {
                             "description": "**DEPRECATED** Describes the type of linear referencing system used for the milepost measurements",
-                            "type": "string"
+                            "type": "string",
                         },
                         "lrs_url": {
                             "description": "**DEPRECATED** A URL where additional information on the LRS information and transformation information is stored",
                             "type": "string",
-                            "format": "uri"
+                            "format": "uri",
                         },
                         "location_verify_method": {
                             "description": "***DEPRECATED***The method used to verify the accuracy of the location information",
-                            "type": "string"
-                        }
+                            "type": "string",
+                        },
                     },
-                    "required": [
-                        "data_source_id",
-                        "organization_name"
-                    ]
+                    "required": ["data_source_id", "organization_name"],
                 }
-            }
-        }
-    },
-    "required": [
-        "type",
-        "features"
-    ],
-    "anyOf": [
-        {
-            "required": [
-                "feed_info"
-            ]
+            },
         },
-        {
-            "required": [
-                "road_event_feed_info"
-            ]
-        }
-    ]
+    },
+    "required": ["type", "features"],
+    "anyOf": [{"required": ["feed_info"]}, {"required": ["road_event_feed_info"]}],
 }

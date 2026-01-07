@@ -40,6 +40,28 @@ def test_parse_datetime_from_unix_invalid_dict():
     assert actual == expected
 
 
+# --------------------------------------------------------------------------------unit test for datetime_from_unix function--------------------------------------------------------------------------------
+def test_datetime_from_unix_valid():
+    time = 1609398000
+    expected = datetime(2020, 12, 31, 7, tzinfo=timezone.utc)
+    actual = date_tools.datetime_from_unix(time)
+    assert actual == expected
+
+
+def test_datetime_from_unix_decimal():
+    time = 1615866698.393723
+    expected = datetime(2021, 3, 16, 3, 51, 38, tzinfo=timezone.utc)
+    actual = date_tools.datetime_from_unix(time)
+    assert abs(actual - expected) < timedelta(seconds=1)
+
+
+def test_datetime_from_unix_too_large():
+    time = 32536850400
+    expected = datetime(1971, 1, 12, 14, 0, 50, tzinfo=timezone.utc)
+    actual = date_tools.datetime_from_unix(time)
+    assert abs(actual - expected) < timedelta(seconds=1)
+
+
 # --------------------------------------------------------------------------------unit test for parse_datetime_from_iso_string function--------------------------------------------------------------------------------
 def test_parse_datetime_from_iso_string_valid():
     time_string = "2020-12-31T07:00:00Z"

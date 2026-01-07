@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cdot-wzdx-translator"
-version = "1.4.5"
+version = "1.4.6rc1"
 description = "CDOT Work Zone WZDx Translators"
 authors = ["CDOT <CDOT_rtdh_prod@state.co.us>"]
 license = "MIT"
@@ -22,6 +22,8 @@ regex = ">=2024.4.16,<2026.0.0"
 pyproj = "^3.4.0"
 google-cloud-monitoring = "^2.13.0"
 google-cloud-storage = ">=2.7.0,<4.0.0"
+pydantic = {extras = ["email"], version = "^2.12.5"}
+email-validator = "^2.3.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = ">=7.0.0,<10.0.0"

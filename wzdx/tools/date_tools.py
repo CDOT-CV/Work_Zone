@@ -17,14 +17,14 @@ def get_iso_string_from_unix(time_string):
 
 def get_iso_string_from_datetime(date):
     # This is added for unit test mocking (dt.datetime instead of just datetime)
-    if not date or type(date) != dt.datetime:
+    if not date or type(date) is not dt.datetime:
         return None
     return date.astimezone(timezone.utc).strftime(ISO_8601_FORMAT_STRING)
 
 
 def parse_datetime_from_iso_string(time_string):
     """Parse ISO string to datetime. Handles many different datetime formats"""
-    if not time_string or type(time_string) != str:
+    if not time_string or type(time_string) is not str:
         return None
 
     try:
@@ -38,17 +38,17 @@ def parse_datetime_from_unix(time):
     if not time:
         return None
 
-    if type(time) == str:
+    if type(time) is str:
         try:
             return datetime_from_unix(float(time))
         except ValueError:
             return None
-    elif type(time) == int or type(time) == float:
+    elif type(time) is int or type(time) is float:
         return datetime_from_unix(time)
 
 
 def datetime_from_unix(time):
-    # I tested this method, and this value makes it fail (3001, 1, 19, 21, 59, 59)
+    # Maximum unix value of 32536850399 due to windows 32-bit signed integer (max valid date is 3001, 1, 19, 21, 59, 59)
     if time > 32536850399:
         return datetime.fromtimestamp(time / 1000, tz=timezone.utc)
     else:
@@ -56,7 +56,7 @@ def datetime_from_unix(time):
 
 
 def date_to_unix(time: datetime):
-    if not time or type(time) != datetime:
+    if not time or type(time) is not datetime:
         return None
 
     return round(time.timestamp() * 1000)
@@ -64,7 +64,7 @@ def date_to_unix(time: datetime):
 
 # function to get event status from start and end datetimes
 def get_event_status(start_time, end_time):
-    if not start_time or type(start_time) != dt.datetime:
+    if not start_time or type(start_time) is not dt.datetime:
         return None
 
     event_status = "active"
@@ -86,7 +86,7 @@ def get_event_status(start_time, end_time):
             event_status = "pending"
         else:
             event_status = "planned"
-    elif end_time and type(end_time) == dt.datetime and end_time < current_time:
+    elif end_time and type(end_time) is dt.datetime and end_time < current_time:
         if end_time > past_date_2weeks_ago:
             event_status = "completed_recently"
         else:
