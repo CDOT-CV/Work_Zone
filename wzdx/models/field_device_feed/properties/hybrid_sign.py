@@ -1,4 +1,3 @@
-# device_feed/properties/hybrid_sign.py
 from typing import Literal, Optional
 from pydantic import BaseModel, Field
 from enum import Enum

@@ -1,4 +1,3 @@
-# wzdx/__init__.py
 from .feed_info import FeedInfo
 from .feed_data_source import FeedDataSource
 

@@ -1,4 +1,3 @@
-# device_feed/field_device_feature.py
 from typing import Optional
 from pydantic import BaseModel
 
@@ -10,7 +9,7 @@ class FieldDeviceFeature(BaseModel):
     id: str
     type: str
     properties: FieldDeviceProperties
-    geometry: GeoJsonGeometry  # GeoJSON geometry object
+    geometry: GeoJsonGeometry
     bbox: Optional[list[float]] = None
 
     # Custom Fields

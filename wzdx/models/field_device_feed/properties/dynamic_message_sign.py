@@ -1,4 +1,3 @@
-# device_feed/properties/dynamic_message_sign.py
 from typing import Literal
 from pydantic import BaseModel, Field
 from ..field_device_core_details import FieldDeviceCoreDetails

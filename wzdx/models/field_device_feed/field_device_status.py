@@ -1,4 +1,3 @@
-# device_feed/field_device_status.py
 from enum import Enum
 
 class FieldDeviceStatus(str, Enum):

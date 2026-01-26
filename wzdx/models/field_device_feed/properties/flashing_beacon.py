@@ -1,4 +1,3 @@
-# device_feed/properties/flashing_beacon.py
 from typing import Literal, Optional
 from pydantic import BaseModel, Field
 from enum import Enum

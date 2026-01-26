@@ -1,4 +1,3 @@
-# device_feed/properties/camera.py
 from typing import Literal, Optional
 from datetime import datetime
 from pydantic import BaseModel, Field, HttpUrl

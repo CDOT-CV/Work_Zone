@@ -1,4 +1,3 @@
-# device_feed/__init__.py
 from .device_feed import DeviceFeed
 from .field_device_feature import FieldDeviceFeature
 from .field_device_core_details import FieldDeviceCoreDetails

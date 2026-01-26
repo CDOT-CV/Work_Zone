@@ -1,4 +1,3 @@
-# device_feed/properties/__init__.py
 from .field_device_properties import FieldDeviceProperties
 from .arrow_board import ArrowBoard, ArrowBoardPattern
 from .camera import Camera

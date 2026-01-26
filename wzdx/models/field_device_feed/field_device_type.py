@@ -1,4 +1,3 @@
-# device_feed/field_device_type.py
 from typing_extensions import Literal
 
 FieldDeviceType = Literal[

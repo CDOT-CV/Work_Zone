@@ -1,4 +1,3 @@
-# device_feed/properties/traffic_sensor.py
 from typing import Literal, Optional
 from pydantic import BaseModel, Field
 from ..field_device_core_details import FieldDeviceCoreDetails
