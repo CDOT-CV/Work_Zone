@@ -36,7 +36,7 @@ twine = ">=5.0.0,<7.0.0"
 [tool.poetry.group.security.dependencies]
 urllib3 = "^2.6.3"
 protobuf = "^6.33.6"
-cryptography = { version = "^46.0.6", markers = "sys_platform == 'linux'" }
+cryptography = "^46.0.6"
 pyasn1 = "^0.6.3"
 filelock = "^3.25.2"
 virtualenv = "^20.39.1"
