@@ -32,6 +32,7 @@ time-machine = "^2.10.0"
 poetry-plugin-export = "^1.6.0"
 twine = ">=5.0.0,<7.0.0"
 
+# These dependencies are transitive, but we want to explicitly specify them here to ensure they are avoiding vulnerabilities
 [tool.poetry.group.security.dependencies]
 urllib3 = "^2.6.3"
 protobuf = "^6.33.5"
