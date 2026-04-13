@@ -73,7 +73,7 @@ connected_work_zone_feed_v10_schema_string = {
                     ],
                     "properties": {
                         "data_source_id": {
-                            "description": "Unique identifier for the organization providing work zone data. This identifier is a Universally Unique IDentifier (UUID) as defined in [RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122).",
+                            "description": "Unique identifier for the organization providing work zone data. This identifier is a Universally Unique Identifier (UUID) as defined in [RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122).",
                             "type": "string",
                         },
                         "organization_name": {
@@ -136,7 +136,7 @@ connected_work_zone_feed_v10_schema_string = {
                         "required": ["id", "type", "properties", "geometry"],
                         "properties": {
                             "id": {
-                                "description": "A unique identifier issued by the data feed provider to identify the CWZ road event. This identifier is a Universally Unique IDentifier (UUID) as defined in [RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122).",
+                                "description": "A unique identifier issued by the data feed provider to identify the CWZ road event. This identifier is a Universally Unique Identifier (UUID) as defined in [RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122).",
                                 "type": "string",
                             },
                             "type": {

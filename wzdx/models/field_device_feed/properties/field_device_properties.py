@@ -10,11 +10,30 @@ from .location_marker import LocationMarker
 from .traffic_sensor import TrafficSensor
 from .traffic_signal import TrafficSignal
 
+
 def get_device_type(v):
-    """Discriminator function to get device_type from core_details"""
+    """
+    Extract the ``device_type`` discriminator value from a field device object.
+
+    This helper is used by the Pydantic ``Discriminator`` on ``FieldDeviceProperties``
+    to implement a discriminated union based on ``core_details.device_type``.
+    It supports both raw dictionaries and model instances that expose a
+    ``core_details`` attribute.
+
+    Args:
+        v: Either a mapping-like object (typically a ``dict``) containing a
+           ``"core_details"`` key, or a model instance with a ``core_details``
+           attribute that in turn has a ``device_type`` attribute.
+
+    Returns:
+        The value of ``device_type`` used to select the appropriate concrete
+        field device model in the ``FieldDeviceProperties`` union, or ``None``
+        if it cannot be determined.
+    """
     if isinstance(v, dict):
         return v.get("core_details", {}).get("device_type")
     return getattr(v.core_details, "device_type", None)
+
 
 # Discriminated union based on core_details.device_type
 FieldDeviceProperties = Annotated[
