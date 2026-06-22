@@ -18,11 +18,11 @@ class GeospatialApi:
         setCachedRequest: Callable[[str, str], None] = lambda url, response: None,
         BASE_URL: str = os.getenv(
             "CDOT_GEOSPATIAL_API_BASE_URL",
-            "https://dtdapps.codot.gov/arcgis/rest/services/LRS/Routes_withDEC/MapServer/exts/LrsServerRounded",
+            "https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes_withDEC/MapServer/exts/LrsServerRounded",
         ),
         BACKUP_BASE_URL: str = os.getenv(
             "CDOT_GEOSPATIAL_API_BACKUP_BASE_URL",
-            "https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/LrsServerRounded",
+            "https://dtdapps.codot.gov/arcgis/rest/services/LRS/Routes_withDEC/MapServer/exts/LrsServerRounded",
         ),
     ):
         """Initialize the Geospatial API
@@ -258,6 +258,7 @@ class GeospatialApi:
                 )
                 return None
 
+        print("Route Details: ", routeDetails)
         # process direction here
         if routeDetails.get("Direction", "+") == "+":
             endMeasure = startMeasure + distanceAhead
@@ -266,6 +267,7 @@ class GeospatialApi:
             endMeasure = startMeasure - distanceAhead
             endMeasure = max(endMeasure, routeDetails["MMin"])
 
+        print("End Measure: ", endMeasure)
         if mMin is not None and mMax is not None:
             # Force mMin < mMax
             if mMin > mMax:
@@ -277,6 +279,8 @@ class GeospatialApi:
             startMeasure = min(max(startMeasure, mMin), mMax)
             endMeasure = min(max(endMeasure, mMin), mMax)
 
+        print("Final Start Measure: ", startMeasure)
+        print("Final End Measure: ", endMeasure)
         return {
             "start_measure": startMeasure,
             "end_measure": endMeasure,
@@ -327,6 +331,7 @@ class GeospatialApi:
         parameters.append(f"toMeasure={endMeasure}")
         parameters.append(f"outSR={self.SR}")
         parameters.append("f=pjson")
+        print("Parameters: ", parameters)
 
         url = (
             f"{self.BASE_URL}/{self.ROUTE_BETWEEN_MEASURES_API}?{'&'.join(parameters)}"

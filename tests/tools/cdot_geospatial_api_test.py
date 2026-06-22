@@ -21,8 +21,7 @@ def test_get_route_and_measure():
         "Distance": 0.89,
     }
     pos = (37.1957245, -105.428146)
-    result = cdot_geospatial_api.GeospatialApi().get_route_and_measure(pos)
-    assert result == pytest.approx(expected, abs=0.005)
+    assert cdot_geospatial_api.GeospatialApi().get_route_and_measure(pos) == expected
 
 
 def test_get_route_and_measure_heading():
@@ -35,8 +34,9 @@ def test_get_route_and_measure_heading():
         "Direction": "-",
     }
     pos = (37.1957245, -105.428146)
-    result = cdot_geospatial_api.GeospatialApi().get_route_and_measure(pos, 225)
-    assert result == pytest.approx(expected, abs=0.005)
+    assert (
+        cdot_geospatial_api.GeospatialApi().get_route_and_measure(pos, 225) == expected
+    )
 
 
 def test_get_point_at_measure():
