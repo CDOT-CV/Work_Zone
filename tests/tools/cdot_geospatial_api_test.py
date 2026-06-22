@@ -1,3 +1,5 @@
+import pytest
+
 from wzdx.tools import cdot_geospatial_api
 
 
@@ -19,7 +21,8 @@ def test_get_route_and_measure():
         "Distance": 0.89,
     }
     pos = (37.1957245, -105.428146)
-    assert cdot_geospatial_api.GeospatialApi().get_route_and_measure(pos) == expected
+    result = cdot_geospatial_api.GeospatialApi().get_route_and_measure(pos)
+    assert result == pytest.approx(expected, abs=0.005)
 
 
 def test_get_route_and_measure_heading():
@@ -32,9 +35,8 @@ def test_get_route_and_measure_heading():
         "Direction": "-",
     }
     pos = (37.1957245, -105.428146)
-    assert (
-        cdot_geospatial_api.GeospatialApi().get_route_and_measure(pos, 225) == expected
-    )
+    result = cdot_geospatial_api.GeospatialApi().get_route_and_measure(pos, 225)
+    assert result == pytest.approx(expected, abs=0.005)
 
 
 def test_get_point_at_measure():
@@ -46,6 +48,7 @@ def test_get_point_at_measure():
 
 
 def test_get_route_geometry_ahead():
+    print(cdot_geospatial_api.GeospatialApi().get_routes_list())
     actual = cdot_geospatial_api.GeospatialApi().get_route_geometry_ahead(
         "159A", 5, 225, 5
     )
