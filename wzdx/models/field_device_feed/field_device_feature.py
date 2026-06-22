@@ -36,3 +36,7 @@ class FieldDeviceFeature(BaseModel):
         alias="bbox",
         description="Information on the coordinate range for this field device. Must be an array of length 2n where n is the number of dimensions represented in the geometry property, with all axes of the most southwesterly point followed by all axes of the more northeasterly point. The axes order of a bbox follows the axes order of the geometry.",
     )
+
+    # Custom Fields
+    route_details_start: Optional[dict] = None
+    route_details_end: Optional[dict] = None
