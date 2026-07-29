@@ -18,11 +18,11 @@ class GeospatialApi:
         setCachedRequest: Callable[[str, str], None] = lambda url, response: None,
         BASE_URL: str = os.getenv(
             "CDOT_GEOSPATIAL_API_BASE_URL",
-            "https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes_withDEC/MapServer/exts/LrsServerRounded",
+            "https://dtdapps.codot.gov/server/rest/services/LRS/Routes_withDEC/MapServer/exts/LrsServerRounded",
         ),
         BACKUP_BASE_URL: str = os.getenv(
             "CDOT_GEOSPATIAL_API_BACKUP_BASE_URL",
-            "https://dtdapps.codot.gov/arcgis/rest/services/LRS/Routes_withDEC/MapServer/exts/LrsServerRounded",
+            "https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes_withDEC/MapServer/exts/LrsServerRounded",
         ),
     ):
         """Initialize the Geospatial API
@@ -30,8 +30,8 @@ class GeospatialApi:
         Args:
             getCachedRequest ((url: str) => cached_response: str, optional): Optional method to enable custom caching. This method is called with a request url to retrieve the cached result.
             setCachedRequest ((url: str, response: str) => None, optional): Optional method to enable custom caching. This method is called with a request url and response to write the cached result.
-            BASE_URL (str, optional): Optional override of GIS server base url, should end with CdotLrsAccessRounded. Defaults first to the env variable CDOT_GEOSPATIAL_API_BASE_URL, then to https://dtdapps.codot.gov/server/rest/services/LRS/Routes_withDEC/MapServer/exts/CdotLrsAccessRounded.
-            BACKUP_BASE_URL (str, optional): Optional override of GIS server backup base url, should end with CdotLrsAccessRounded. Defaults first to the env variable CDOT_GEOSPATIAL_API_BACKUP_BASE_URL, then to https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded.
+            BASE_URL (str, optional): Optional override of GIS server base url, should end with CdotLrsAccessRounded. Defaults first to the env variable CDOT_GEOSPATIAL_API_BASE_URL, then to https://dtdapps.codot.gov/server/rest/services/LRS/Routes_withDEC/MapServer/exts/LrsServerRounded.
+            BACKUP_BASE_URL (str, optional): Optional override of GIS server backup base url, should end with CdotLrsAccessRounded. Defaults first to the env variable CDOT_GEOSPATIAL_API_BACKUP_BASE_URL, then to https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes_withDEC/MapServer/exts/LrsServerRounded.
         """
         self.getCachedRequest = getCachedRequest
         self.setCachedRequest = setCachedRequest
@@ -98,7 +98,6 @@ class GeospatialApi:
         parameters.append("f=pjson")
 
         url = f"{self.BASE_URL}/{self.GET_ROUTE_API}?{'&'.join(parameters)}"
-        logging.debug(url)
 
         # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded/Routes?f=pjson
         # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded/Route?routeId=070A&outSR=4326&f=pjson
@@ -129,6 +128,7 @@ class GeospatialApi:
         Returns:
             dict | None: Route details (Route, Measure, MMin, MMax, Distance)
         """
+
         # Get route ID and mile marker from lat/long and heading
         lat, lng = latLng
 
@@ -141,8 +141,10 @@ class GeospatialApi:
         parameters.append("f=pjson")
 
         url = f"{self.BASE_URL}/{self.GET_ROUTE_AND_MEASURE_API}?{'&'.join(parameters)}"
+        logging.debug(url)
 
-        # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded/MeasureAtPoint?x=-105&y=39.5&inSR=4326&tolerance=10000&outSR=&f=html
+        # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded/MeasureAtPoint?x=-105&y=39.5&inSR=4326&tolerance=1000&outSR=&f=html
+        # https://dtdapps.codot.gov/server/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded/MeasureAtPoint?x=-105&y=39.5&inSR=4326&tolerance=1000&outSR=&f=html
         resp = self._make_cached_web_request(url)
         if not resp:
             return None
@@ -258,7 +260,6 @@ class GeospatialApi:
                 )
                 return None
 
-        print("Route Details: ", routeDetails)
         # process direction here
         if routeDetails.get("Direction", "+") == "+":
             endMeasure = startMeasure + distanceAhead
@@ -267,7 +268,6 @@ class GeospatialApi:
             endMeasure = startMeasure - distanceAhead
             endMeasure = max(endMeasure, routeDetails["MMin"])
 
-        print("End Measure: ", endMeasure)
         if mMin is not None and mMax is not None:
             # Force mMin < mMax
             if mMin > mMax:
@@ -279,8 +279,6 @@ class GeospatialApi:
             startMeasure = min(max(startMeasure, mMin), mMax)
             endMeasure = min(max(endMeasure, mMin), mMax)
 
-        print("Final Start Measure: ", startMeasure)
-        print("Final End Measure: ", endMeasure)
         return {
             "start_measure": startMeasure,
             "end_measure": endMeasure,
@@ -331,7 +329,6 @@ class GeospatialApi:
         parameters.append(f"toMeasure={endMeasure}")
         parameters.append(f"outSR={self.SR}")
         parameters.append("f=pjson")
-        print("Parameters: ", parameters)
 
         url = (
             f"{self.BASE_URL}/{self.ROUTE_BETWEEN_MEASURES_API}?{'&'.join(parameters)}"
