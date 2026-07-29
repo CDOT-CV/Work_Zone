@@ -30,8 +30,8 @@ class GeospatialApi:
         Args:
             getCachedRequest ((url: str) => cached_response: str, optional): Optional method to enable custom caching. This method is called with a request url to retrieve the cached result.
             setCachedRequest ((url: str, response: str) => None, optional): Optional method to enable custom caching. This method is called with a request url and response to write the cached result.
-            BASE_URL (str, optional): Optional override of GIS server base url, should end with CdotLrsAccessRounded. Defaults first to the env variable CDOT_GEOSPATIAL_API_BASE_URL, then to https://dtdapps.codot.gov/server/rest/services/LRS/Routes_withDEC/MapServer/exts/LrsServerRounded.
-            BACKUP_BASE_URL (str, optional): Optional override of GIS server backup base url, should end with CdotLrsAccessRounded. Defaults first to the env variable CDOT_GEOSPATIAL_API_BACKUP_BASE_URL, then to https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes_withDEC/MapServer/exts/LrsServerRounded.
+            BASE_URL (str, optional): Optional override of GIS server base url, should end with LrsServerRounded. Defaults first to the env variable CDOT_GEOSPATIAL_API_BASE_URL, then to https://dtdapps.codot.gov/server/rest/services/LRS/Routes_withDEC/MapServer/exts/LrsServerRounded.
+            BACKUP_BASE_URL (str, optional): Optional override of GIS server backup base url, should end with LrsServerRounded. Defaults first to the env variable CDOT_GEOSPATIAL_API_BACKUP_BASE_URL, then to https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes_withDEC/MapServer/exts/LrsServerRounded.
         """
         self.getCachedRequest = getCachedRequest
         self.setCachedRequest = setCachedRequest
@@ -74,8 +74,8 @@ class GeospatialApi:
             f"Making GET request to GIS server for get_routes_list with url {url}"
         )
 
-        # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded/Routes?f=pjson
-        # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded/Route?routeId=070A&outSR=4326&f=pjson
+        # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes_withDEC/MapServer/exts/LrsServerRounded/Routes?f=pjson
+        # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes_withDEC/MapServer/exts/LrsServerRounded/Route?routeId=070A&outSR=4326&f=pjson
 
         resp = self._make_cached_web_request(url, source="get_routes_list")
         if not resp:
@@ -99,8 +99,8 @@ class GeospatialApi:
 
         url = f"{self.BASE_URL}/{self.GET_ROUTE_API}?{'&'.join(parameters)}"
 
-        # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded/Routes?f=pjson
-        # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded/Route?routeId=070A&outSR=4326&f=pjson
+        # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes_withDEC/MapServer/exts/LrsServerRounded/Routes?f=pjson
+        # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes_withDEC/MapServer/exts/LrsServerRounded/Route?routeId=070A&outSR=4326&f=pjson
 
         resp = self._make_cached_web_request(url)
         if not resp:
@@ -143,8 +143,8 @@ class GeospatialApi:
         url = f"{self.BASE_URL}/{self.GET_ROUTE_AND_MEASURE_API}?{'&'.join(parameters)}"
         logging.debug(url)
 
-        # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded/MeasureAtPoint?x=-105&y=39.5&inSR=4326&tolerance=1000&outSR=&f=html
-        # https://dtdapps.codot.gov/server/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded/MeasureAtPoint?x=-105&y=39.5&inSR=4326&tolerance=1000&outSR=&f=html
+        # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes_withDEC/MapServer/exts/LrsServerRounded/MeasureAtPoint?x=-105&y=39.5&inSR=4326&tolerance=1000&outSR=&f=html
+        # https://dtdapps.codot.gov/server/rest/services/LRS/Routes_withDEC/MapServer/exts/LrsServerRounded/MeasureAtPoint?x=-105&y=39.5&inSR=4326&tolerance=1000&outSR=&f=html
         resp = self._make_cached_web_request(url)
         if not resp:
             return None
