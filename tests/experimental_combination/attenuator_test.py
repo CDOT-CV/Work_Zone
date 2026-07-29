@@ -64,6 +64,22 @@ def test_get_combined_events_valid_multiple():
     assert len(combined_events[0]["features"][0]["geometry"]["coordinates"]) > 2
 
 
+def test_get_combined_events_no_regeneration():
+    geotab_msgs = json.loads(
+        open(
+            "./tests/data/experimental_combination/geotab/geotab_msgs_double.json"
+        ).read()
+    )
+    wzdx_msgs = [json.loads(open("./tests/data/wzdx.json").read())]
+
+    with time_machine.travel(
+        datetime.datetime(2022, 7, 27, 20, 0, 0, 0, tzinfo=datetime.timezone.utc)
+    ):
+        combined_events = attenuator.get_combined_events(geotab_msgs, wzdx_msgs, generate_missing_route_details=False)
+
+    assert len(combined_events) == 0
+
+
 def test_identify_overlapping_features_valid():
     geotab_msgs = json.loads(
         open(

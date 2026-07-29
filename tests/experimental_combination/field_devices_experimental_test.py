@@ -89,6 +89,31 @@ def test_get_combined_events_invalid():
     assert len(expected) == 0
 
 
+def test_get_combined_events_invalid_no_regeneration():
+    icone_msgs = [
+        field_devices.pre_process_field_device_feature(
+            FieldDeviceFeature.model_validate_json(
+                open(
+                    "./tests/data/experimental_combination/field_devices/field_device_hwy-159.json"
+                ).read()
+            )
+        )
+    ]
+    wzdx = [
+        json.loads(
+            open(
+                "./tests/data/experimental_combination/field_devices/wzdx_combination_hwy-159.json"
+            ).read()
+        )
+    ]
+
+    with time_machine.travel(
+        datetime.datetime(2022, 7, 27, 22, 0, 0, 0, tzinfo=datetime.timezone.utc)
+    ):
+        expected = field_devices.get_combined_events(icone_msgs, wzdx, generate_missing_route_details=False)
+    assert len(expected) == 0
+
+
 def test_get_combined_events_invalid_different_routes():
     icone_msgs = [
         field_devices.pre_process_field_device_feature(
