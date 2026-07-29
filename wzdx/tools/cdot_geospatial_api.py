@@ -20,9 +20,17 @@ class GeospatialApi:
             "CDOT_GEOSPATIAL_API_BASE_URL",
             "https://dtdapps.codot.gov/server/rest/services/LRS/Routes_withDEC/MapServer/exts/LrsServerRounded",
         ),
+        BASE_URL_FORMAT: str = os.getenv(
+            "CDOT_GEOSPATIAL_API_BASE_URL_FORMAT",
+            "json",
+        ),
         BACKUP_BASE_URL: str = os.getenv(
             "CDOT_GEOSPATIAL_API_BACKUP_BASE_URL",
             "https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes_withDEC/MapServer/exts/LrsServerRounded",
+        ),
+        BACKUP_BASE_URL_FORMAT: str = os.getenv(
+            "CDOT_GEOSPATIAL_API_BACKUP_BASE_URL_FORMAT",
+            "pjson",
         ),
     ):
         """Initialize the Geospatial API
@@ -36,7 +44,9 @@ class GeospatialApi:
         self.getCachedRequest = getCachedRequest
         self.setCachedRequest = setCachedRequest
         self.BASE_URL = BASE_URL
+        self.BASE_URL_FORMAT = BASE_URL_FORMAT
         self.BACKUP_BASE_URL = BACKUP_BASE_URL
+        self.BACKUP_BASE_URL_FORMAT = BACKUP_BASE_URL_FORMAT
         self.ROUTE_BETWEEN_MEASURES_API = "RouteBetweenMeasures"
         self.GET_ROUTE_AND_MEASURE_API = "MeasureAtPoint"
         self.GET_POINT_AT_MEASURE_API = "PointAtMeasure"
@@ -436,6 +446,12 @@ class GeospatialApi:
                     f"Geospatial Request Failed for {source} with url: {url}. Timeout: {timeout}. Error: {e}. Retrying with backup endpoint."
                 )
                 backup_url = url.replace(self.BASE_URL, self.BACKUP_BASE_URL)
+                if (self.BASE_URL_FORMAT and self.BACKUP_BASE_URL_FORMAT
+                    and self.BASE_URL_FORMAT != self.BACKUP_BASE_URL_FORMAT
+                ):
+                    backup_url = backup_url.replace(
+                        f"f={self.BASE_URL_FORMAT}", f"f={self.BACKUP_BASE_URL_FORMAT}"
+                    )
                 return self._make_cached_web_request(
                     backup_url,
                     timeout=timeout,

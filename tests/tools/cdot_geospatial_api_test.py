@@ -1,3 +1,5 @@
+from unittest.mock import MagicMock
+
 import pytest
 
 from wzdx.tools import cdot_geospatial_api
@@ -98,3 +100,52 @@ def test_get_route_between_measures_compressed_allow_reversal():
         routeId, startMeasure, endMeasure, compressed=True
     )
     assert len(actual) == 81
+
+
+def test_make_cached_web_request_retries_with_backup_url_and_format():
+    api = cdot_geospatial_api.GeospatialApi(
+        BASE_URL="https://primary.example/arcgis/rest/services/LRS/Routes/MapServer/exts/LrsServerRounded",
+        BASE_URL_FORMAT="json",
+        BACKUP_BASE_URL="https://backup.example/arcgis/rest/services/LRS/Routes/MapServer/exts/LrsServerRounded",
+        BACKUP_BASE_URL_FORMAT="pjson",
+    )
+    api._make_web_request = MagicMock(
+        side_effect=[RuntimeError("boom"), '{"status": "ok"}']
+    )
+
+    actual = api._make_cached_web_request(
+        "https://primary.example/arcgis/rest/services/LRS/Routes/MapServer/exts/LrsServerRounded/Route?routeId=070A&f=json",
+        timeout=5,
+    )
+
+    assert actual == {"status": "ok"}
+    assert api._make_web_request.call_count == 2
+    assert api._make_web_request.call_args_list[0].args[0].endswith("f=json")
+    assert api._make_web_request.call_args_list[1].args[0].startswith(
+        "https://backup.example"
+    )
+    assert "f=pjson" in api._make_web_request.call_args_list[1].args[0]
+
+
+def test_make_cached_web_request_keeps_format_when_backup_format_matches():
+    api = cdot_geospatial_api.GeospatialApi(
+        BASE_URL="https://primary.example/arcgis/rest/services/LRS/Routes/MapServer/exts/LrsServerRounded",
+        BASE_URL_FORMAT="json",
+        BACKUP_BASE_URL="https://backup.example/arcgis/rest/services/LRS/Routes/MapServer/exts/LrsServerRounded",
+        BACKUP_BASE_URL_FORMAT="json",
+    )
+    api._make_web_request = MagicMock(
+        side_effect=[RuntimeError("boom"), '{"status": "ok"}']
+    )
+
+    api._make_cached_web_request(
+        "https://primary.example/arcgis/rest/services/LRS/Routes/MapServer/exts/LrsServerRounded/Route?routeId=070A&f=json",
+        timeout=5,
+    )
+
+    assert api._make_web_request.call_count == 2
+    assert api._make_web_request.call_args_list[1].args[0].startswith(
+        "https://backup.example"
+    )
+    assert api._make_web_request.call_args_list[1].args[0].endswith("f=json")
+
