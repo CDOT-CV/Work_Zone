@@ -1,3 +1,5 @@
+import pytest
+
 from wzdx.tools import cdot_geospatial_api
 
 
@@ -46,6 +48,7 @@ def test_get_point_at_measure():
 
 
 def test_get_route_geometry_ahead():
+    print(cdot_geospatial_api.GeospatialApi().get_routes_list())
     actual = cdot_geospatial_api.GeospatialApi().get_route_geometry_ahead(
         "159A", 5, 225, 5
     )
