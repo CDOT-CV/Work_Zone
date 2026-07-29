@@ -67,7 +67,7 @@ class GeospatialApi:
             list[dict | None]: List of routes
         """
         parameters = []
-        parameters.append("f=pjson")
+        parameters.append("f=json")
 
         url = f"{self.BASE_URL}/{self.GET_ROUTES_API}?{'&'.join(parameters)}"
         logging.debug(
@@ -95,7 +95,7 @@ class GeospatialApi:
         parameters = []
         parameters.append(f"routeId={routeId}")
         parameters.append(f"outSR={self.SR}")
-        parameters.append("f=pjson")
+        parameters.append("f=json")
 
         url = f"{self.BASE_URL}/{self.GET_ROUTE_API}?{'&'.join(parameters)}"
 
@@ -138,7 +138,7 @@ class GeospatialApi:
         parameters.append(f"tolerance={tolerance}")
         parameters.append(f"inSR={self.SR}")
         parameters.append(f"outSR={self.SR}")
-        parameters.append("f=pjson")
+        parameters.append("f=json")
 
         url = f"{self.BASE_URL}/{self.GET_ROUTE_AND_MEASURE_API}?{'&'.join(parameters)}"
         logging.debug(url)
@@ -208,7 +208,7 @@ class GeospatialApi:
         parameters.append(f"routeId={routeId}")
         parameters.append(f"measure={measure}")
         parameters.append(f"outSR={self.SR}")
-        parameters.append("f=pjson")
+        parameters.append("f=json")
 
         url = f"{self.BASE_URL}/{self.GET_POINT_AT_MEASURE_API}?{'&'.join(parameters)}"
         logging.debug(url)
@@ -328,7 +328,7 @@ class GeospatialApi:
         parameters.append(f"fromMeasure={startMeasure}")
         parameters.append(f"toMeasure={endMeasure}")
         parameters.append(f"outSR={self.SR}")
-        parameters.append("f=pjson")
+        parameters.append("f=json")
 
         url = (
             f"{self.BASE_URL}/{self.ROUTE_BETWEEN_MEASURES_API}?{'&'.join(parameters)}"
