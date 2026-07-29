@@ -145,20 +145,29 @@ def validate_dates(geotab: dict, wzdx: dict) -> bool:
     return wzdx_start_date <= geotab_date <= wzdx_end_date
 
 
-def get_combined_events(geotab_msgs: list[dict], wzdx_msgs: list[dict]) -> list[dict]:
+def get_combined_events(
+    geotab_msgs: list[dict],
+    wzdx_msgs: list[dict],
+    generate_missing_route_details: bool = True,
+) -> list[dict]:
     """Combine/integrate overlapping Geotab AVL ATMA messages into WZDx messages
 
     Args:
-        icone_standard_msgs (list[dict]): iCone RTDH standard messages
+        geotab_msgs (list[dict]): Geotab AVL ATMA messages
         wzdx_msgs (list[dict]): WZDx messages
 
     Returns:
         list[dict]: Combined WZDx messages
     """
+
     active_wzdx_msgs = wzdx_translator.filter_active_wzdx(wzdx_msgs)
 
     combined_events = []
-    for i in identify_overlapping_features(geotab_msgs, active_wzdx_msgs):
+    for i in identify_overlapping_features(
+        geotab_msgs,
+        active_wzdx_msgs,
+        generate_missing_route_details=generate_missing_route_details,
+    ):
         geotab_msg, wzdx_msg = i
         event_status = wzdx_translator.get_event_status(wzdx_msg["features"][0])
         if event_status in ["active"]:
@@ -168,7 +177,9 @@ def get_combined_events(geotab_msgs: list[dict], wzdx_msgs: list[dict]) -> list[
 
 
 def identify_overlapping_features(
-    geotab_msgs: list[dict], wzdx_msgs: list[dict]
+    geotab_msgs: list[dict],
+    wzdx_msgs: list[dict],
+    generate_missing_route_details: bool = True,
 ) -> list[tuple[dict, dict]]:
     """Identify overlapping Geotab AVL ATMA and WZDx messages
 
@@ -181,6 +192,9 @@ def identify_overlapping_features(
     """
     geotab_routes = {}
     matching_routes = []
+
+    if not geotab_msgs or not wzdx_msgs:
+        return matching_routes
 
     for geotab_msg in geotab_msgs:
         geometry = geotab_msg["avl_location"]["position"]
@@ -221,6 +235,12 @@ def identify_overlapping_features(
             )
             continue
         if not wzdx.get("route_details_start") or not wzdx.get("route_details_end"):
+            if not generate_missing_route_details:
+                logging.debug(
+                    f"Missing route_details for WZDx object: {wzdx['features'][0]['id']}"
+                )
+                continue
+
             route_details_start, route_details_end = (
                 combination.get_route_details_for_wzdx(wzdx["features"][0])
             )
