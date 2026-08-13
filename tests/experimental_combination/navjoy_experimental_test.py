@@ -27,3 +27,22 @@ def test_get_combined_events_valid():
         expected[0]["features"][0]["properties"]["reduced_speed_limit_kph"]
         == navjoy_msgs[0]["features"][0]["properties"]["reduced_speed_limit_kph"]
     )
+
+
+def test_get_combined_events_invalid_no_regeneration():
+    navjoy_msgs = [
+        json.loads(
+            open("./tests/data/experimental_combination/navjoy/wzdx_navjoy.json").read()
+        )
+    ]
+    wzdx = [
+        json.loads(
+            open("./tests/data/experimental_combination/navjoy/wzdx.json").read()
+        )
+    ]
+
+    with time_machine.travel(
+        datetime.datetime(2022, 7, 27, 20, 0, 0, 0, tzinfo=datetime.timezone.utc)
+    ):
+        expected = navjoy.get_combined_events(navjoy_msgs, wzdx, generate_missing_route_details=False)
+    assert len(expected) == 0

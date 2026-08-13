@@ -169,9 +169,16 @@ def get_route_details_for_wzdx(wzdx_feature):
     return route_details_start, route_details_end
 
 
-def identify_overlapping_features_wzdx(wzdx_msgs_1, wzdx_msgs_2):
+def identify_overlapping_features_wzdx(
+    wzdx_msgs_1,
+    wzdx_msgs_2,
+    generate_missing_route_details: bool = True,
+):
     wzdx_routes_1 = {}
     wzdx_routes_2 = {}
+
+    if not wzdx_msgs_1 or not wzdx_msgs_2:
+        return []
 
     # Step 1: Add route info to iCone messages
     for wzdx_1 in wzdx_msgs_1:
@@ -193,6 +200,12 @@ def identify_overlapping_features_wzdx(wzdx_msgs_1, wzdx_msgs_2):
             )
             continue
         if not wzdx_1.get("route_details_start") or not wzdx_1.get("route_details_end"):
+            if not generate_missing_route_details:
+                logging.debug(
+                    f"Missing route_details for WZDx object: {wzdx_1['features'][0]['id']}"
+                )
+                continue
+
             route_details_start, route_details_end = get_route_details_for_wzdx(
                 wzdx_1["features"][0]
             )
@@ -239,6 +252,12 @@ def identify_overlapping_features_wzdx(wzdx_msgs_1, wzdx_msgs_2):
             )
             continue
         if not wzdx_2.get("route_details_start") or not wzdx_2.get("route_details_end"):
+            if not generate_missing_route_details:
+                logging.debug(
+                    f"Missing route_details for WZDx object: {wzdx_2['features'][0]['id']}"
+                )
+                continue
+
             route_details_start, route_details_end = get_route_details_for_wzdx(
                 wzdx_2["features"][0]
             )

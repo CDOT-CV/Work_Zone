@@ -150,7 +150,9 @@ def get_direction(
 
 
 def get_combined_events(
-    field_device_features: list[FieldDeviceFeature], wzdx_msgs: list[dict]
+    field_device_features: list[FieldDeviceFeature],
+    wzdx_msgs: list[dict],
+    generate_missing_route_details: bool = True,
 ) -> list[dict]:
     """Combine/integrate overlapping iCone messages into WZDx messages
 
@@ -166,7 +168,11 @@ def get_combined_events(
         wzdx_msgs, ["pending", "completed_recently"]
     )
 
-    for i in identify_overlapping_features(field_device_features, filtered_wzdx_msgs):
+    for i in identify_overlapping_features(
+        field_device_features,
+        filtered_wzdx_msgs,
+        generate_missing_route_details=generate_missing_route_details,
+    ):
         icone_msg, wzdx_msg = i
         event_status = wzdx_translator.get_event_status(wzdx_msg["features"][0])
         wzdx = combine_field_device_with_wzdx(icone_msg, wzdx_msg, event_status)
@@ -313,7 +319,9 @@ def verify_recent(field_device: FieldDeviceFeature) -> bool:
 
 
 def identify_overlapping_features(
-    field_device_features: list[FieldDeviceFeature], wzdx_msgs: list[dict]
+    field_device_features: list[FieldDeviceFeature],
+    wzdx_msgs: list[dict],
+    generate_missing_route_details: bool = True,
 ) -> list[tuple[dict, dict]]:
     """Identify overlapping WZDx events and field devices
 
@@ -327,6 +335,9 @@ def identify_overlapping_features(
     field_device_routes: dict[str, list[FieldDeviceFeature]] = {}
     wzdx_event_routes: dict[str, list[dict]] = {}
     matching_routes: list[tuple[dict, dict]] = []
+
+    if not field_device_features or not wzdx_msgs:
+        return matching_routes
 
     recent_field_device_features = [
         i for i in field_device_features if verify_recent(i)
@@ -378,6 +389,12 @@ def identify_overlapping_features(
             )
             continue
         if not wzdx.get("route_details_start") and not wzdx.get("route_details_end"):
+            if not generate_missing_route_details:
+                logging.debug(
+                    f"Missing route_details for WZDx object: {wzdx['features'][0]['id']}"
+                )
+                continue
+
             route_details_start, route_details_end = (
                 combination.get_route_details_for_wzdx(wzdx["features"][0])
             )

@@ -74,7 +74,9 @@ def parse_rtdh_arguments() -> tuple[str, str, str, str]:
 
 
 def get_combined_events(
-    navjoy_wzdx_msgs: list[dict], wzdx_msgs: list[dict]
+    navjoy_wzdx_msgs: list[dict],
+    wzdx_msgs: list[dict],
+    generate_missing_route_details: bool = True,
 ) -> list[dict]:
     """Combine/integrate overlapping Navjoy 568 messages into WZDx messages
 
@@ -89,7 +91,9 @@ def get_combined_events(
     active_navjoy_wzdx_msgs = wzdx_translator.filter_active_wzdx(navjoy_wzdx_msgs)
     active_wzdx_msgs = wzdx_translator.filter_active_wzdx(wzdx_msgs)
     for i in combination.identify_overlapping_features_wzdx(
-        active_navjoy_wzdx_msgs, active_wzdx_msgs
+        active_navjoy_wzdx_msgs,
+        active_wzdx_msgs,
+        generate_missing_route_details=generate_missing_route_details,
     ):
         navjoy_msg, wzdx_msg = i
         event_status = wzdx_translator.get_event_status(wzdx_msg["features"][0])
