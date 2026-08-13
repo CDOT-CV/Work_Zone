@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cdot-wzdx-translator"
-version = "1.4.7rc1"
+version = "1.4.10"
 description = "CDOT Work Zone WZDx Translators"
 authors = ["CDOT <CDOT_rtdh_prod@state.co.us>"]
 license = "MIT"
@@ -26,7 +26,7 @@ pydantic = {extras = ["email"], version = "^2.12.5"}
 email-validator = "^2.3.0"
 
 [tool.poetry.group.dev.dependencies]
-pytest = ">=7.0.0,<10.0.0"
+pytest = ">=9.0.3,<10.0.0"
 pytest-cov = ">=5.0.0,<8.0.0"
 time-machine = "^2.10.0"
 poetry-plugin-export = "^1.6.0"
@@ -34,14 +34,16 @@ twine = ">=5.0.0,<7.0.0"
 
 # These dependencies are transitive, but we explicitly specify them here to ensure we use non-vulnerable versions
 [tool.poetry.group.security.dependencies]
-urllib3 = "^2.6.3"
+urllib3 = "^2.7.0"
 protobuf = "^6.33.6"
-cryptography = "^46.0.6"
+cryptography = "^48.0.1"
 pyasn1 = "^0.6.3"
 filelock = "^3.25.2"
 virtualenv = "^20.39.1"
-pygments = "^2.19.2"
+pygments = "^2.20.0"
+dulwich = "^1.2.5"
+idna = "^3.15"
 
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
+requires = ["poetry-core>=2.3.4,<3.0.0"]
 build-backend = "poetry.core.masonry.api"

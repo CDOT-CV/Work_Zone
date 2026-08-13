@@ -20,17 +20,29 @@ class GeospatialApi:
             "CDOT_GEOSPATIAL_API_BASE_URL",
             "https://dtdapps.codot.gov/server/rest/services/LRS/Routes_withDEC/MapServer/exts/LrsServerRounded",
         ),
+        BASE_URL_FORMAT: str = os.getenv(
+            "CDOT_GEOSPATIAL_API_BASE_URL_FORMAT",
+            "pjson",
+        ),
+        BACKUP_BASE_URL: str = os.getenv("CDOT_GEOSPATIAL_API_BACKUP_BASE_URL"),
+        BACKUP_BASE_URL_FORMAT: str = os.getenv(
+            "CDOT_GEOSPATIAL_API_BACKUP_BASE_URL_FORMAT"
+        ),
     ):
         """Initialize the Geospatial API
 
         Args:
             getCachedRequest ((url: str) => cached_response: str, optional): Optional method to enable custom caching. This method is called with a request url to retrieve the cached result.
             setCachedRequest ((url: str, response: str) => None, optional): Optional method to enable custom caching. This method is called with a request url and response to write the cached result.
-            BASE_URL (str, optional): Optional override of GIS server base url, should end with CdotLrsAccessRounded. Defaults first to the env variable CDOT_GEOSPATIAL_API_BASE_URL, then to https://dtdapps.codot.gov/server/rest/services/LRS/Routes_withDEC/MapServer/exts/CdotLrsAccessRounded.
+            BASE_URL (str, optional): Optional override of GIS server base url, should end with LrsServerRounded. Defaults first to the env variable CDOT_GEOSPATIAL_API_BASE_URL, then to https://dtdapps.codot.gov/server/rest/services/LRS/Routes_withDEC/MapServer/exts/LrsServerRounded.
+            BACKUP_BASE_URL (str, optional): Optional override of GIS server backup base url, should end with LrsServerRounded. Defaults first to the env variable CDOT_GEOSPATIAL_API_BACKUP_BASE_URL, then to https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes_withDEC/MapServer/exts/LrsServerRounded.
         """
         self.getCachedRequest = getCachedRequest
         self.setCachedRequest = setCachedRequest
         self.BASE_URL = BASE_URL
+        self.BASE_URL_FORMAT = BASE_URL_FORMAT
+        self.BACKUP_BASE_URL = BACKUP_BASE_URL
+        self.BACKUP_BASE_URL_FORMAT = BACKUP_BASE_URL_FORMAT
         self.ROUTE_BETWEEN_MEASURES_API = "RouteBetweenMeasures"
         self.GET_ROUTE_AND_MEASURE_API = "MeasureAtPoint"
         self.GET_POINT_AT_MEASURE_API = "PointAtMeasure"
@@ -61,15 +73,15 @@ class GeospatialApi:
             list[dict | None]: List of routes
         """
         parameters = []
-        parameters.append("f=pjson")
+        parameters.append(f"f={self.BASE_URL_FORMAT}")
 
         url = f"{self.BASE_URL}/{self.GET_ROUTES_API}?{'&'.join(parameters)}"
         logging.debug(
             f"Making GET request to GIS server for get_routes_list with url {url}"
         )
 
-        # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded/Routes?f=pjson
-        # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded/Route?routeId=070A&outSR=4326&f=pjson
+        # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes_withDEC/MapServer/exts/LrsServerRounded/Routes?f=pjson
+        # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes_withDEC/MapServer/exts/LrsServerRounded/Route?routeId=070A&outSR=4326&f=pjson
 
         resp = self._make_cached_web_request(url, source="get_routes_list")
         if not resp:
@@ -89,13 +101,12 @@ class GeospatialApi:
         parameters = []
         parameters.append(f"routeId={routeId}")
         parameters.append(f"outSR={self.SR}")
-        parameters.append("f=pjson")
+        parameters.append(f"f={self.BASE_URL_FORMAT}")
 
         url = f"{self.BASE_URL}/{self.GET_ROUTE_API}?{'&'.join(parameters)}"
-        logging.debug(url)
 
-        # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded/Routes?f=pjson
-        # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded/Route?routeId=070A&outSR=4326&f=pjson
+        # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes_withDEC/MapServer/exts/LrsServerRounded/Routes?f=pjson
+        # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes_withDEC/MapServer/exts/LrsServerRounded/Route?routeId=070A&outSR=4326&f=pjson
 
         resp = self._make_cached_web_request(url)
         if not resp:
@@ -123,6 +134,7 @@ class GeospatialApi:
         Returns:
             dict | None: Route details (Route, Measure, MMin, MMax, Distance)
         """
+
         # Get route ID and mile marker from lat/long and heading
         lat, lng = latLng
 
@@ -132,12 +144,13 @@ class GeospatialApi:
         parameters.append(f"tolerance={tolerance}")
         parameters.append(f"inSR={self.SR}")
         parameters.append(f"outSR={self.SR}")
-        parameters.append("f=pjson")
+        parameters.append(f"f={self.BASE_URL_FORMAT}")
 
         url = f"{self.BASE_URL}/{self.GET_ROUTE_AND_MEASURE_API}?{'&'.join(parameters)}"
         logging.debug(url)
 
-        # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes/MapServer/exts/CdotLrsAccessRounded/MeasureAtPoint?x=-105&y=39.5&inSR=4326&tolerance=10000&outSR=&f=html
+        # https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes_withDEC/MapServer/exts/LrsServerRounded/MeasureAtPoint?x=-105&y=39.5&inSR=4326&tolerance=1000&outSR=&f=html
+        # https://dtdapps.codot.gov/server/rest/services/LRS/Routes_withDEC/MapServer/exts/LrsServerRounded/MeasureAtPoint?x=-105&y=39.5&inSR=4326&tolerance=1000&outSR=&f=html
         resp = self._make_cached_web_request(url)
         if not resp:
             return None
@@ -201,7 +214,7 @@ class GeospatialApi:
         parameters.append(f"routeId={routeId}")
         parameters.append(f"measure={measure}")
         parameters.append(f"outSR={self.SR}")
-        parameters.append("f=pjson")
+        parameters.append(f"f={self.BASE_URL_FORMAT}")
 
         url = f"{self.BASE_URL}/{self.GET_POINT_AT_MEASURE_API}?{'&'.join(parameters)}"
         logging.debug(url)
@@ -321,7 +334,7 @@ class GeospatialApi:
         parameters.append(f"fromMeasure={startMeasure}")
         parameters.append(f"toMeasure={endMeasure}")
         parameters.append(f"outSR={self.SR}")
-        parameters.append("f=pjson")
+        parameters.append(f"f={self.BASE_URL_FORMAT}")
 
         url = (
             f"{self.BASE_URL}/{self.ROUTE_BETWEEN_MEASURES_API}?{'&'.join(parameters)}"
@@ -372,6 +385,7 @@ class GeospatialApi:
         timeout: int = 15,
         retryOnTimeout: bool = False,
         source: str = "cdot_geospatial_api",
+        use_backup_endpoint: bool = True,
     ) -> Any:
         """Make a GET request and cache the response
 
@@ -396,22 +410,53 @@ class GeospatialApi:
                 f"Average Response Time: {sum(self.responseTimes)/len(self.responseTimes)}"
             )
             logging.debug("Max Response Time: " + str(max(self.responseTimes)))
-            return json.loads(response)
+
+            try:
+                return json.loads(response)
+            except json.JSONDecodeError as e:
+                logging.error(
+                    f"Failed to decode JSON response for {source} with url: {url}. Timeout: {timeout}. Error: {e}. Response content: {response}"
+                )
+                raise e
         except requests.exceptions.Timeout as e:
             if retryOnTimeout:
                 logging.debug(
-                    f"Geospatial Request Timed Out for {source} with url : {url}. Timeout: {timeout}. Retrying with double timeout"
+                    f"Geospatial Request Timed Out for {source} with url: {url}. Timeout: {timeout}. Retrying with double timeout"
                 )
                 return self._make_cached_web_request(
                     url, timeout=timeout * 2, retryOnTimeout=False
                 )
             else:
-                logging.warning(
-                    f"Geospatial Request Timed Out for {source} with url : {url}. Timeout: {timeout}. Error: {e}"
+                logging.error(
+                    f"Geospatial Request Timed Out for {source} with url: {url}. Timeout: {timeout}. Error: {e}"
                 )
                 return None
         except requests.exceptions.RequestException as e:
-            logging.warning(
-                f"Geospatial Request Failed for {source} with url : {url}. Timeout: {timeout}. Error: {e}"
+            logging.error(
+                f"Geospatial Request Failed for {source} with url: {url}. Timeout: {timeout}. RequestException Error: {e}"
             )
+            return None
+        except Exception as e:
+            if use_backup_endpoint and self.BACKUP_BASE_URL:
+                logging.warning(
+                    f"Geospatial Request Failed for {source} with url: {url}. Timeout: {timeout}. Error: {e}. Retrying with backup endpoint."
+                )
+                backup_url = url.replace(self.BASE_URL, self.BACKUP_BASE_URL)
+                if (self.BASE_URL_FORMAT and self.BACKUP_BASE_URL_FORMAT
+                    and self.BASE_URL_FORMAT != self.BACKUP_BASE_URL_FORMAT
+                ):
+                    backup_url = backup_url.replace(
+                        f"f={self.BASE_URL_FORMAT}", f"f={self.BACKUP_BASE_URL_FORMAT}"
+                    )
+                return self._make_cached_web_request(
+                    backup_url,
+                    timeout=timeout,
+                    retryOnTimeout=retryOnTimeout,
+                    source=source + "_backup",
+                    use_backup_endpoint=False,
+                )
+            else:
+                logging.error(
+                    f"Geospatial Request Failed for {source} with url: {url}. Timeout: {timeout}. Unknown Error: {e}. No backup endpoint available or already tried."
+                )
             return None
