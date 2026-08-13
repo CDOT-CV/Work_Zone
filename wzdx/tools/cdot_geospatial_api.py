@@ -22,15 +22,11 @@ class GeospatialApi:
         ),
         BASE_URL_FORMAT: str = os.getenv(
             "CDOT_GEOSPATIAL_API_BASE_URL_FORMAT",
-            "json",
-        ),
-        BACKUP_BASE_URL: str = os.getenv(
-            "CDOT_GEOSPATIAL_API_BACKUP_BASE_URL",
-            "https://dtdapps.coloradodot.info/arcgis/rest/services/LRS/Routes_withDEC/MapServer/exts/LrsServerRounded",
-        ),
-        BACKUP_BASE_URL_FORMAT: str = os.getenv(
-            "CDOT_GEOSPATIAL_API_BACKUP_BASE_URL_FORMAT",
             "pjson",
+        ),
+        BACKUP_BASE_URL: str = os.getenv("CDOT_GEOSPATIAL_API_BACKUP_BASE_URL"),
+        BACKUP_BASE_URL_FORMAT: str = os.getenv(
+            "CDOT_GEOSPATIAL_API_BACKUP_BASE_URL_FORMAT"
         ),
     ):
         """Initialize the Geospatial API
